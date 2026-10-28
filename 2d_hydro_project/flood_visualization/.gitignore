@@ -1,0 +1,39 @@
+# 数据与运行产物：不提交二进制/大文件，只保留说明与固定抽样索引
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# 发布包与运行产物
+outputs/web_bundle/
+outputs/build/
+outputs/*.zip
+logs/
+*.log
+
+# standalone：656 MB/版的发布内容不入库；只保留启动器真源 standalone/_launcher/
+standalone/*
+!standalone/_launcher/
+
+# 大体积数据目录：只保留 README/.gitkeep 与 splits
+data/raw/*
+!data/raw/README.md
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/README.md
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/README.md
+!data/processed/.gitkeep
+data/external/*
+!data/external/README.md
+!data/external/.gitkeep
+!data/external/licenses/
+
+# 秘密与凭证
+.env
+*.token
+secrets.

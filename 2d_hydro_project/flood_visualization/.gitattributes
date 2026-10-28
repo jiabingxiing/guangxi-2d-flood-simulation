@@ -1,0 +1,6 @@
+# 行尾策略
+#
+# standalone/_launcher/ 下的启动器已在 Windows 上实测可用（LF 行尾，229/4591/1310 B）。
+# 这里用 -text 关闭行尾转换，保证 git 检出后与本机实测版本逐字节一致，
+# 避免 core.autocrlf=true 把 .cmd/.ps1 改成 CRLF 后出现未预期的行为差异。
+standalone/_launcher/* -text
