@@ -1,0 +1,59 @@
+# 案例：崇左宁明（阶段0 —— 河道—漫滩与喀斯特适用性验证案例；久隆闭环后进入）
+case: ningming
+priority: 2
+status: stage4-degraded
+
+aoi:
+  provisional_bbox_wgs84: [106.90, 21.95, 107.60, 22.45]
+  anchor: "宁明县城（明江沿岸，约 107.07E, 22.14N），暂定框外扩"
+  domain_rule: "按明江河段、控制站、支流汇入和实际淹没范围划定（终稿 1.1）"
+  confirm_pending: "明江建模河段范围、控制站位置、实际淹没范围（SAR/灾报）"
+
+crs:
+  epsg: 32648                   # UTM 48N —— pyproj 按 AOI 核验
+  note: "AOI 暂定框核验结果；AOI 变更后复跑核验脚本"
+
+vertical_datum:
+  target: "待确认"
+  datum_offset_m: null
+
+grid:
+  first_resolution_m: 25.0
+  sensitivity_candidates_m: [25.0, 12.5]   # 先做敏感性试验再定版
+  cell_estimate_note: "100–300 km² @25m 约 0.16–0.48 百万单元（终稿 1.2）；冻结 AOI 后重估并实测内存"
+
+implementation:                     # 实际执行（降级模式），与计划值分开记录
+  mode: "degraded-public-data"
+  resolution_m: 100
+  dt_s: 1.5
+  saveint_s: 21600
+  run_ids: ["scen_q4000_100m", "scen_q2500_n35_100m", "scen_q6000_n100_100m"]
+  note: "100 m 走廊；25/12.5 m 计划未执行；验证为 2026-08-24 时刻切片，非 res.max"
+
+terrain:
+  primary: {id: dem_gx_local, path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif", resolution_m: 12.5, crs: "EPSG:32648", note: "本案例同为 32648，可直接裁切对齐；来源/垂直基准待查证"}
+
+events:
+  candidates:
+    - id: "2026-08-zitan"
+      window: ["2026-08-18", "2026-08-27"]
+      status: "首选验证事件；本地数据齐全，已解包登记"
+      evidence: "2026年第19号台风紫檀：8/24 县城河段 122.96m 超警 6.96m、8/25 凌晨洪峰（央视/新华社）；GF-3 08-06 灾前/08-24 近洪峰两期水体；4 站 7月基期+8月峰值水位（站基面）；ERA5 8月 529.4mm（21–23日 263mm）"
+      pending: ["站水位与 DEM 基准关系（ADR-0004 情景带）", "淹没 shp 栅格化与模型网格对齐", "上游那堪站位于 AOI 东缘（107.6E），必要时外扩"]
+    - id: "2024-09-yagi"
+      window: ["2024-09-05", "2024-09-16"]
+      status: "候选，资料未核验"
+      evidence: "台风摩羯过后广西13条河流超警（央视 2024-09-11）；公开报道称宁明县城全城被淹、明江流经县为重灾区；宁明（或明江控制站）水位/流量过程未取得"
+      pending: ["明江控制站 Q(t)/Z(t) 过程", "宁明县域雨量过程", "SAR 过境检索", "淹没范围灾报/现场资料"]
+
+boundaries:
+  upstream: {type: "待确认", note: "明江上游控制站 Q(t) 或 Z(t)；与区间产流分开计量，防重复"}
+  downstream: {type: "待确认", note: "明江/左江汇合方向控制；位置随冻结河段确定"}
+
+special_risks:                  # 宁明特有（终稿 7.2 / 十五）
+  - "喀斯特落水洞/地下排泄：不得凭假设增加确定性入渗率；须观测/地质依据支持的有界情景，并明示地表 2D 模型适用性限制"
+  - "稀疏观测区降雨：再分析作背景并校正，评估累计量与站点偏差"
+
+model:
+  solver: "LISFLOOD-FP（版本待获取核验）"
+  role: "河道—漫滩独立验证 + 喀斯特适用性评估"

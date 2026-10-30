@@ -1,0 +1,111 @@
+{
+  "case": "jiulong",
+  "path": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\jiulong\\dem_12p5m_32649.tif",
+  "sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d",
+  "read_only": true,
+  "status": "diagnostic_only",
+  "metadata": {
+    "crs": "EPSG:32649",
+    "width": 3247,
+    "height": 2843,
+    "resolution_m": [
+      12.502400540255383,
+      12.504113316969685
+    ],
+    "nodata": -9999.0,
+    "bounds": [
+      244911.3219104323,
+      2423456.5964475074,
+      285506.6164646415,
+      2459005.790607652
+    ]
+  },
+  "qa": {
+    "valid_px": 9231221,
+    "nodata_px": 0,
+    "zero_px": 11494,
+    "negative_px": 2742932,
+    "zero_fraction_valid": 0.00124512,
+    "negative_fraction_valid": 0.29713642,
+    "elevation_m": {
+      "n": 9231221,
+      "min": -38.0,
+      "p50": 10.0,
+      "p95": 86.0,
+      "max": 472.0
+    }
+  },
+  "axis_profiles": {
+    "rows": {
+      "n_profile": 2843,
+      "valid_profile_count": 2843,
+      "median_valid_count": 3247,
+      "trend_slope_per_index": -0.00749678,
+      "residual": {
+        "n": 2843,
+        "min": -9.0829,
+        "p50": -0.2031,
+        "p95": 10.464,
+        "max": 14.1274
+      },
+      "residual_mad": 3.711258,
+      "flag_threshold_m": 22.2675,
+      "flagged_profile_count": 0,
+      "flagged_profile_fraction": 0.0,
+      "adjacent_jump": {
+        "n": 2842,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 1.0,
+        "max": 2.0
+      }
+    },
+    "columns": {
+      "n_profile": 3247,
+      "valid_profile_count": 3247,
+      "median_valid_count": 2843,
+      "trend_slope_per_index": 0.0083998,
+      "residual": {
+        "n": 3247,
+        "min": -13.1195,
+        "p50": 1.072,
+        "p95": 7.4892,
+        "max": 10.5982
+      },
+      "residual_mad": 4.022231,
+      "flag_threshold_m": 24.1334,
+      "flagged_profile_count": 0,
+      "flagged_profile_fraction": 0.0,
+      "adjacent_jump": {
+        "n": 3246,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 1.0,
+        "max": 2.0
+      }
+    },
+    "direction_energy_ratio": 1.3972,
+    "gradient_m_per_px": {
+      "n": 9231221,
+      "min": 0.0,
+      "p50": 1.4142,
+      "p95": 4.7434,
+      "max": 22.1416
+    }
+  },
+  "points": [],
+  "profiles": [],
+  "source_points": [],
+  "thresholds_recommended_not_frozen": {
+    "seam_jump_p95_m": 0.2,
+    "profile_residual_p95_m": 0.3,
+    "affected_area_fraction": 0.01,
+    "direction_energy_ratio": 1.5
+  },
+  "notes": [
+    "行列剖面只用于诊断，不能单独证明条带是错误。",
+    "真实河谷、堤顶、道路、建筑和河槽刻蚀必须单独核查。",
+    "源 DEM 的 0 值语义仍未闭合。"
+  ],
+  "generated_utc": "2026-10-28T04:56:59.551997+00:00"
+}

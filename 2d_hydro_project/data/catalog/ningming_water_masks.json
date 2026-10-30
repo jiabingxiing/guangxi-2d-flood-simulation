@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-10-24T05:21:26.000527+00:00",
+  "grid": [
+    6161,
+    4835
+  ],
+  "cell_m": 12.5,
+  "water_0806_km2": 25.4,
+  "water_0824_km2": 83.88,
+  "new_inundation_km2": 83.88,
+  "persistent_water_km2": 0.0,
+  "receded_km2": 25.4,
+  "dem_zero_px_total": 644490,
+  "dem_zero_in_0824_water": 130,
+  "dem_zero_in_never_water": 644109,
+  "note": "矢量属性面积合计 130.14 km2 为图斑面积；栅格化后按 12.5m 网格统计"
+}

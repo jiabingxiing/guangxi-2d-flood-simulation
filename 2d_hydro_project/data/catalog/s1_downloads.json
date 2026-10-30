@@ -1,0 +1,48 @@
+{
+  "verified_utc": "2026-10-24T15:43:56.025943+00:00",
+  "scenes": {
+    "ningming/S1A_IW_GRDH_1SDV_20240910T105833_20240910T105858_055602_06C990_104D.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\ningming\\S1A_IW_GRDH_1SDV_20240910T105833_20240910T105858_055602_06C990_104D.SAFE.zip",
+      "size_gb": 1.73,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    },
+    "ningming/S1A_IW_GRDH_1SDV_20240912T225045_20240912T225114_055638_06CAF6_AE7D.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\ningming\\S1A_IW_GRDH_1SDV_20240912T225045_20240912T225114_055638_06CAF6_AE7D.SAFE.zip",
+      "size_gb": 1.971,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    },
+    "guigang/S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\guigang\\S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip",
+      "size_gb": 1.704,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    },
+    "guigang/S1A_IW_GRDH_1SDV_20240912T104222_20240912T104247_055631_06CAB0_5344.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\guigang\\S1A_IW_GRDH_1SDV_20240912T104222_20240912T104247_055631_06CAB0_5344.SAFE.zip",
+      "size_gb": 1.726,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    },
+    "jiulong/S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\jiulong\\S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip",
+      "size_gb": 1.704,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    },
+    "jiulong/S1A_IW_GRDH_1SDV_20240917T105023_20240917T105048_055704_06CD90_3527.SAFE.zip": {
+      "path": "E:\\S1_gxhydro\\sentinel1\\jiulong\\S1A_IW_GRDH_1SDV_20240917T105023_20240917T105048_055704_06CD90_3527.SAFE.zip",
+      "size_gb": 1.703,
+      "n_members": 26,
+      "has_manifest": true,
+      "crc_ok": true
+    }
+  },
+  "all_ok": true
+}

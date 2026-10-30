@@ -1,0 +1,151 @@
+{
+  "generated_utc": "2026-10-26T23:07:07.435323+00:00",
+  "algorithm": "sha256",
+  "files": {
+    "dem_ningming_interim": {
+      "path": "data/interim/ningming/dem_filled_12p5m_32648.tif",
+      "bytes": 46104711,
+      "sha256": "e07a878627b33837debbd353430b9ae30ea02b62d88974ad6be5825ac8ac471f"
+    },
+    "dem_ningming_raw_clip": {
+      "path": "data/interim/ningming/dem_12p5m_32648.tif",
+      "bytes": 44483089,
+      "sha256": "fb5ad57e20c0196299e3ef9d3d48a9d6b3753cb3f9a889adf3c4829fbf9849fd"
+    },
+    "mannings_ningming": {
+      "path": "data/interim/ningming/mannings_12p5m_32648.tif",
+      "bytes": 10162300,
+      "sha256": "a85085604523d0246527402f5de162835e56c0a85150e05355bfe797e5d93649"
+    },
+    "water_0806_ningming": {
+      "path": "data/interim/ningming/water_0806.tif",
+      "bytes": 719306,
+      "sha256": "c8939a91934bd669d5b1b19a3da53da05ec505a833a1a5b36c964c320ac9af0c"
+    },
+    "water_new_0824_ningming": {
+      "path": "data/interim/ningming/water_new_0824.tif",
+      "bytes": 803583,
+      "sha256": "dd46f149a32d8a9aaed9ecea7a45c9b67c0c4ce31cdb7a6568bdbd1b037a6522"
+    },
+    "era5_ningming_aug2026": {
+      "path": "data/catalog/probes/ningming_aug2026_era5.json",
+      "bytes": 1024,
+      "sha256": "49f726548f01b615d50991ff77b324504b77a3af8aa4d4e81230881051b9cf40"
+    },
+    "era5_jiulong_sep2024": {
+      "path": "data/catalog/probes/jiulong_sep2024_era5_hourly.json",
+      "bytes": 3018,
+      "sha256": "fb190a73670fe1905428e05b7bf220cacf76fd11439888106202c11397d1589e"
+    },
+    "era5_jiulong_sep2024_ext": {
+      "path": "data/catalog/probes/jiulong_sep2024_era5_hourly_ext.json",
+      "bytes": 4818,
+      "sha256": "68f561b5ce3b5818d624c5abed2a170f07ddc5d9a9371994e948c3012bfb9168"
+    },
+    "era5_guigang_sep2024": {
+      "path": "data/catalog/probes/guigang_sep2024_era5_hourly.json",
+      "bytes": 7817,
+      "sha256": "d61fcd6db131bccdcbd06cee1d1114653b70da9a70a1a04d0a6e3875a5131ebd"
+    },
+    "lisflood_exe": {
+      "path": "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe",
+      "bytes": 1336106,
+      "sha256": "651306080e20529dc6a72c8113037a4333c943c7d6adad712457d41f4d321ee8"
+    },
+    "dem_source_guangxi": {
+      "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
+      "bytes": 2051269376,
+      "sha256": "c621f4681a65cb2c288d769f8edff5463fa150062940fe71a19df27ee69aadbf"
+    },
+    "dem_source_jiulong_clip": {
+      "path": "data/interim/jiulong/dem_12p5m_32649.tif",
+      "bytes": 10618040,
+      "sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d"
+    },
+    "dem_guigang_clip": {
+      "path": "data/interim/guigang/dem_12p5m_32649.tif",
+      "bytes": 39025055,
+      "sha256": "5366f01bdaf32cca5f7cc7f1f4968d5a1b7f6d363b323800497293f0678ad94a"
+    },
+    "mannings_jiulong": {
+      "path": "data/interim/jiulong/mannings_12p5m_32649.tif",
+      "bytes": 3338822,
+      "sha256": "a4bac29c34b298d12c2cffe9632f5caa08cd6e855f8028c1d9c776c93bed571e"
+    },
+    "mannings_guigang": {
+      "path": "data/interim/guigang/mannings_12p5m_32649.tif",
+      "bytes": 11217231,
+      "sha256": "245cf091747b61e25dabd7d694ca42490e556e07cf0d5e6a0ac5b4ec09863197"
+    },
+    "s1_guigang_0905_water": {
+      "path": "data/processed/s1_water/guigang_20240905T105022_water20m.tif",
+      "bytes": 175636,
+      "sha256": "791369d96623a660847d25eb57236e0dba9287f472bbae732d6924466e303391"
+    },
+    "s1_guigang_0912_water": {
+      "path": "data/processed/s1_water/guigang_20240912T104222_water20m.tif",
+      "bytes": 150182,
+      "sha256": "573c32d25267bf07bd501c1865d78f8d39ac78dc03878594290ff921aeab18ab"
+    },
+    "s1_guigang_0912_sigma": {
+      "path": "data/processed/s1_water/guigang_20240912T104222_sigma20m.tif",
+      "bytes": 27986594,
+      "sha256": "50e6bbfc552fb87a98bfaab970b1605da0f27112fc819409c67e84fb146fef58"
+    },
+    "s1_jiulong_0905_water": {
+      "path": "data/processed/s1_water/jiulong_20240905T105022_water20m.tif",
+      "bytes": 187636,
+      "sha256": "76d0ce69bf70b615fa8070ba1554fd983cb9780b850bf1f68471797f08790cc9"
+    },
+    "s1_jiulong_0917_water": {
+      "path": "data/processed/s1_water/jiulong_20240917T105023_water20m.tif",
+      "bytes": 185181,
+      "sha256": "3ce3abfb25216ba6eb079992ab4c5b5ae01a17d571d61ecf94b3272e3f4c76b2"
+    },
+    "gf3_water_0806": {
+      "path": "data/interim/ningming/water_0806.tif",
+      "bytes": 719306,
+      "sha256": "c8939a91934bd669d5b1b19a3da53da05ec505a833a1a5b36c964c320ac9af0c"
+    },
+    "gf3_water_0824": {
+      "path": "data/interim/ningming/water_0824.tif",
+      "bytes": 803583,
+      "sha256": "dd46f149a32d8a9aaed9ecea7a45c9b67c0c4ce31cdb7a6568bdbd1b037a6522"
+    },
+    "gf3_new_0824": {
+      "path": "data/interim/ningming/water_new_0824.tif",
+      "bytes": 803583,
+      "sha256": "dd46f149a32d8a9aaed9ecea7a45c9b67c0c4ce31cdb7a6568bdbd1b037a6522"
+    },
+    "gf3_sar_0824": {
+      "path": "data/raw/ningming_validation/淹没深度验证数据-崇左宁明县/宁明县8月24日SAR.tif",
+      "bytes": 122689344,
+      "sha256": "1f1db36ca81498556f6c7be6e8635493746e5aa46dc37295d3691f9d7f748a9c"
+    },
+    "config_base": {
+      "path": "configs/base.yaml",
+      "bytes": 3615,
+      "sha256": "b2363820bbf848bc101c530d82dabc0b3e23e33610a6a59bcf7aa9992ba383fe"
+    },
+    "config_jiulong": {
+      "path": "configs/cases/jiulong.yaml",
+      "bytes": 4075,
+      "sha256": "00228bbcf27b0da0dd957d83a3a9bde6f92fd1650116c257f4d4082f22840ce4"
+    },
+    "config_ningming": {
+      "path": "configs/cases/ningming.yaml",
+      "bytes": 3333,
+      "sha256": "8b18a7732fa108c283b1272943261e78a62f385d0c45d51e9eca25d3c55d2b90"
+    },
+    "config_guigang": {
+      "path": "configs/cases/guigang.yaml",
+      "bytes": 3199,
+      "sha256": "1f44ee8471df9abaad0f088291c2f949f67d2b426b08c190d8583de08c4cbfb7"
+    },
+    "config_model_manifest": {
+      "path": "configs/model_manifest.yaml",
+      "bytes": 4336,
+      "sha256": "77a6872361fa5910d97a167424bee72f2dc312b5e91887e264ed6d3978066613"
+    }
+  }
+}

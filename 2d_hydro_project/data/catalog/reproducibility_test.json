@@ -1,0 +1,42 @@
+{
+  "generated_utc": "2026-10-26T23:03:57.954050+00:00",
+  "note": "终稿 13.4 可复现门：同冻结输入重跑比对；jiulong 条目口径沿用首版（逐位一致）",
+  "cases": {
+    "jiulong": {
+      "baseline": "scen_free_200m",
+      "repro": "scen_free_200m_repro",
+      "bit_identical_resmax": true,
+      "max_abs_diff_m": 0.0,
+      "mass_last_row_identical": true,
+      "wet_area_base_km2": 263.24,
+      "wet_area_repro_km2": 263.24,
+      "e_mass_base": 0.0004893,
+      "e_mass_repro": 0.0004893,
+      "verdict": "PASS（bit-identical）"
+    },
+    "ningming": {
+      "baseline": "scen_q6000_n100_100m",
+      "repro": "scen_q6000_n100_100m_repro",
+      "bit_identical_resmax": true,
+      "max_abs_diff_m": 0.0,
+      "mass_last_row_identical": true,
+      "wet_area_base_km2": 126.22,
+      "wet_area_repro_km2": 126.22,
+      "e_mass_base": 5.802e-05,
+      "e_mass_repro": 5.802e-05,
+      "verdict": "PASS（bit-identical）"
+    },
+    "guigang": {
+      "baseline": "scen_yagi_q11500_200m",
+      "repro": "scen_yagi_q11500_200m_repro",
+      "bit_identical_resmax": true,
+      "max_abs_diff_m": 0.0,
+      "mass_last_row_identical": true,
+      "wet_area_base_km2": 540.16,
+      "wet_area_repro_km2": 540.16,
+      "e_mass_base": 2.411e-05,
+      "e_mass_repro": 2.411e-05,
+      "verdict": "PASS（bit-identical）"
+    }
+  }
+}

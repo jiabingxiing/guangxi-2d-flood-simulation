@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-10-25T02:18:52.779620+00:00",
+  "thr_db": -17.0,
+  "guigang_change": {
+    "delta_db_brightness": 1.34,
+    "n_land_ref_px": 2101907,
+    "water_0905_km2_in_aoi": 3.55,
+    "water_0912_km2_in_aoi": 4.2,
+    "new_water_km2": 1.61,
+    "lost_water_km2": 0.97,
+    "cover_in_aoi": 0.164,
+    "legend": "0 陆-陆 1 水-水(常水) 2 新增水(洪涝候选) 3 失水 255 无覆盖",
+    "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_flood_change_0912vs0905.tif",
+    "note": "贵港站 09-12T14 洪峰段 43.09m/10500m3/s，景 09-12T10:42 略前于峰"
+  },
+  "jiulong_dem_consistency": {
+    "ref_water_km2_200m": 1.08,
+    "obs_20240905": {
+      "obs_water_km2": 11.08,
+      "iou": 0.041,
+      "pod": 0.444,
+      "far": 0.957
+    },
+    "obs_20240917": {
+      "obs_water_km2": 7.88,
+      "iou": 0.032,
+      "pod": 0.259,
+      "far": 0.964
+    }
+  },
+  "coverage_in_aoi": {
+    "ningming_20240910": {
+      "cover_in_aoi": 1.0,
+      "water_km2_in_aoi": 44.28
+    },
+    "ningming_20240912": {
+      "cover_in_aoi": 1.0,
+      "water_km2_in_aoi": 19.08
+    },
+    "guigang_20240905": {
+      "cover_in_aoi": 0.578,
+      "water_km2_in_aoi": 25.11
+    },
+    "guigang_20240912": {
+      "cover_in_aoi": 0.743,
+      "water_km2_in_aoi": 16.67
+    },
+    "jiulong_20240905": {
+      "cover_in_aoi": 1.0,
+      "water_km2_in_aoi": 10.82
+    },
+    "jiulong_20240917": {
+      "cover_in_aoi": 1.0,
+      "water_km2_in_aoi": 8.0
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "generated_utc": "2026-10-25T01:49:12.648353+00:00",
+  "v2_note": "首版 Otsu 在陆域单峰直方图失效（全图过提），本版改定标+固定阈值 -17dB",
+  "scenes": [
+    {
+      "site": "ningming",
+      "scene": "S1A_IW_GRDH_1SDV_20240910T105833_20240910T105858_055602_06C990_104D.SAFE.zip",
+      "sensing_utc": "20240910T105833",
+      "aoi_bbox_wgs84": [
+        106.96,
+        22.06,
+        107.2,
+        22.26
+      ],
+      "epsg": 32648,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -21.8,
+        -18.1,
+        -11.5,
+        -8.6,
+        -6.2,
+        -2.4
+      ],
+      "water_km2_20m": 75.68,
+      "cover_frac": 0.719,
+      "window_rows_cols": [
+        4026,
+        3871
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\ningming_20240910T105833_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\ningming_20240910T105833_sigma20m.tif"
+    },
+    {
+      "site": "ningming",
+      "scene": "S1A_IW_GRDH_1SDV_20240912T225045_20240912T225114_055638_06CAF6_AE7D.SAFE.zip",
+      "sensing_utc": "20240912T225045",
+      "aoi_bbox_wgs84": [
+        106.96,
+        22.06,
+        107.2,
+        22.26
+      ],
+      "epsg": 32648,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -20.4,
+        -16.3,
+        -11.2,
+        -8.4,
+        -5.8,
+        -2.0
+      ],
+      "water_km2_20m": 75.76,
+      "cover_frac": 0.731,
+      "window_rows_cols": [
+        6049,
+        5045
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\ningming_20240912T225045_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\ningming_20240912T225045_sigma20m.tif"
+    },
+    {
+      "site": "guigang",
+      "scene": "S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip",
+      "sensing_utc": "20240905T105022",
+      "aoi_bbox_wgs84": [
+        109.2,
+        22.95,
+        110.0,
+        23.4
+      ],
+      "epsg": 32649,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -21.0,
+        -16.2,
+        -12.0,
+        -9.8,
+        -7.7,
+        -4.3
+      ],
+      "water_km2_20m": 63.49,
+      "cover_frac": 0.572,
+      "window_rows_cols": [
+        2681,
+        11404
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240905T105022_sigma20m.tif"
+    },
+    {
+      "site": "guigang",
+      "scene": "S1A_IW_GRDH_1SDV_20240912T104222_20240912T104247_055631_06CAB0_5344.SAFE.zip",
+      "sensing_utc": "20240912T104222",
+      "aoi_bbox_wgs84": [
+        109.2,
+        22.95,
+        110.0,
+        23.4
+      ],
+      "epsg": 32649,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -19.9,
+        -15.6,
+        -11.4,
+        -9.0,
+        -6.8,
+        -3.0
+      ],
+      "water_km2_20m": 55.62,
+      "cover_frac": 0.67,
+      "window_rows_cols": [
+        8042,
+        3860
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240912T104222_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240912T104222_sigma20m.tif"
+    },
+    {
+      "site": "jiulong",
+      "scene": "S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE.zip",
+      "sensing_utc": "20240905T105022",
+      "aoi_bbox_wgs84": [
+        108.55,
+        21.92,
+        108.9,
+        22.2
+      ],
+      "epsg": 32649,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -21.0,
+        -16.6,
+        -11.6,
+        -9.3,
+        -7.2,
+        -3.8
+      ],
+      "water_km2_20m": 106.47,
+      "cover_frac": 0.743,
+      "window_rows_cols": [
+        6040,
+        5074
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\jiulong_20240905T105022_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\jiulong_20240905T105022_sigma20m.tif"
+    },
+    {
+      "site": "jiulong",
+      "scene": "S1A_IW_GRDH_1SDV_20240917T105023_20240917T105048_055704_06CD90_3527.SAFE.zip",
+      "sensing_utc": "20240917T105023",
+      "aoi_bbox_wgs84": [
+        108.55,
+        21.92,
+        108.9,
+        22.2
+      ],
+      "epsg": 32649,
+      "sigma0_thr_db": -17.0,
+      "sigma0_pcts_1_5_25_50_75_95": [
+        -19.4,
+        -16.0,
+        -11.6,
+        -9.3,
+        -7.1,
+        -3.7
+      ],
+      "water_km2_20m": 55.7,
+      "cover_frac": 0.743,
+      "window_rows_cols": [
+        6040,
+        5074
+      ],
+      "geoloc": "annotation geolocationGridPointList 10x21 双线性（椭球定位，无地形校正，定位误差约百米级）",
+      "calibration": "sigma0=20log10(DN)-20log10(K)，K=calibration LUT",
+      "out": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\jiulong_20240917T105023_water20m.tif",
+      "out_sigma": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\jiulong_20240917T105023_sigma20m.tif"
+    }
+  ]
+}

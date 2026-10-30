@@ -1,0 +1,18 @@
+{
+  "generated_utc": "2026-10-24T03:26:36.325940+00:00",
+  "zenodo_record": "https://zenodo.org/api/records/6912932",
+  "title": "LISFLOOD-FP 8.1 hydrodynamic model",
+  "version": "8.1",
+  "license": "gpl-2.0",
+  "doi": "10.5281/zenodo.6912932",
+  "files": [
+    {
+      "name": "LISFLOOD-FP v8.1.zip",
+      "size": 63901522,
+      "md5": "77fa78a9c074d7baf9fbb2157fac4090",
+      "url": "https://zenodo.org/api/records/6912932/files/LISFLOOD-FP%20v8.1.zip/content"
+    }
+  ],
+  "downloaded_file": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\raw\\lisflood-fp\\LISFLOOD-FP_v8.1.zip",
+  "verified_md5": "77fa78a9c074d7baf9fbb2157fac4090"
+}

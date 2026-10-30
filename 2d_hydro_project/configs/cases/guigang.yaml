@@ -1,0 +1,56 @@
+# 案例：贵港（阶段0 —— 区域模型 + 重点站区独立局部模型；最后进入）
+case: guigang
+priority: 3
+status: stage5-degraded
+
+aoi:
+  provisional_bbox_wgs84: [109.20, 22.95, 110.00, 23.40]
+  anchor: "贵港市区郁江段（约 109.60E, 23.11N），暂定框外扩"
+  domain_rule: "按郁江/支流、控制站、目标资产和可闭合边界划定，不默认全行政区（终稿 1.1）"
+  confirm_pending: "目标站区清单与精确坐标、郁江建模河段、支流汇入、可闭合边界"
+
+crs:
+  epsg: 32649                   # UTM 49N —— pyproj 按 AOI 核验（109°E 落 49 带，已核实不照抄）
+  note: "AOI 暂定框核验结果；AOI 变更后复跑核验脚本"
+
+vertical_datum:
+  target: "待确认"
+  datum_offset_m: null
+  gauge_note: "贵港水文站水位为其站基面（公开报道洪峰 44.00 m），与 DEM 垂直基准的关系待查证，不得直接混用"
+
+grid:
+  regional_resolution_m: 30.0
+  station_local_resolution_m: null  # ADR-0005：站区局部 5 m 模型推迟，变电站按整体处理
+  station_local_note: "围墙/建筑以 DEM+影像近似并明示误差；设备级/房间级推演留待未来任务"
+  cell_estimate_note: "1000–2000 km² @30m 约 1.11–2.22 百万单元；须先实测内存/耗时（本机 16GB 内存为硬约束）"
+
+implementation:                     # 实际执行（降级模式），与计划值分开记录
+  mode: "degraded-public-data"
+  resolution_m: 200
+  dt_s: 5.0
+  saveint_s: 21600
+  run_ids: ["scen_yagi_q8000_200m", "scen_yagi_q11500_200m", "scen_yagi_q15000_200m"]
+  note: "200 m 走廊 + 600 m 直线参数化河槽；30 m 区域与 5 m 局部未执行；WSE 仅湿像元诊断，不作基准率定"
+
+terrain:
+  primary: {id: dem_gx_local, path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif", resolution_m: 12.5, crs: "EPSG:32648", note: "裁切后重投影至本案例 32649；来源/垂直基准待查证（ADR-0004）"}
+
+events:
+  candidates:
+    - id: "2024-09-yagi"
+      window: ["2024-09-05", "2024-09-16"]
+      status: "候选；洪峰特征有公开报道，逐时过程未取得"
+      evidence: "郁江2024年第1号洪水（台风摩羯残余环流）：贵港水文站 2024-09-14T05:00 洪峰 44.00 m（警戒 41.20 m，超警 2.80 m）；09-12T14:00 水位 43.09 m、流量 10500 m3/s；上游南宁站 09-12T19:30 洪峰 76.28 m / 11900 m3/s（广西水文中心，经百科/新华转引）"
+      pending: ["贵港站逐时 Z(t)/Q(t) 原始记录", "郁江/支流区间雨量", "SAR 过境检索", "站区受淹/水痕资料"]
+
+boundaries:
+  upstream: {type: "待确认", note: "郁江及主要支流按断面和控制站设置；流量过程不得按像元均分（终稿 7.1）"}
+  downstream: {type: "待确认", note: "郁江下游控制断面，位置随冻结域确定"}
+
+nesting_policy:                 # 终稿 0.3 / 十二
+  mode: "独立区域模型 + 独立站区局部模型，单向边界传递"
+  constraint: "未经接口与水量守恒验证，不得称耦合或双向嵌套；接口质量报告为阶段5退出门禁"
+
+model:
+  solver: "LISFLOOD-FP（版本待获取核验）"
+  role: "区域趋势 + 局部资产风险"

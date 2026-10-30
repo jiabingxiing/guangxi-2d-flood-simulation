@@ -1,0 +1,234 @@
+{
+  "records": [
+    {
+      "run": "outputs/bench/B1_lake",
+      "status": "written",
+      "run_id": "B1_lake"
+    },
+    {
+      "run": "outputs/bench/B6_bdy_units",
+      "status": "written",
+      "run_id": "B6_bdy_units"
+    },
+    {
+      "run": "outputs/bench/B8_levee/notch",
+      "status": "written",
+      "run_id": "notch"
+    },
+    {
+      "run": "outputs/bench/B8_levee/open",
+      "status": "written",
+      "run_id": "open"
+    },
+    {
+      "run": "outputs/bench/B8_levee/wall",
+      "status": "written",
+      "run_id": "wall"
+    },
+    {
+      "run": "outputs/bench/B8_levee/weir",
+      "status": "written",
+      "run_id": "weir"
+    },
+    {
+      "run": "outputs/bench/B8_pool_on_real",
+      "status": "written",
+      "run_id": "B8_pool_on_real"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_b1",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_100m_b1"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_wfix",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_100m_wfix"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_200m"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_dt2p5_b1",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_200m_dt2p5_b1"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_repro",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_200m_repro"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5",
+      "status": "written",
+      "run_id": "scen_yagi_q11500_30m_b5"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q15000_200m",
+      "status": "written",
+      "run_id": "scen_yagi_q15000_200m"
+    },
+    {
+      "run": "outputs/guigang/2024-09-yagi/scen_yagi_q8000_200m",
+      "status": "written",
+      "run_id": "scen_yagi_q8000_200m"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_100m_b1",
+      "status": "written",
+      "run_id": "scen_free_100m_b1"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_200m",
+      "status": "written",
+      "run_id": "scen_free_200m"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_b1",
+      "status": "written",
+      "run_id": "scen_free_200m_dt2p5_b1"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_200m_repro",
+      "status": "written",
+      "run_id": "scen_free_200m_repro"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+      "status": "written",
+      "run_id": "scen_free_200m_sv6h"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+      "status": "written",
+      "run_id": "scen_free_200m_sv6h_recession"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_z05_200m",
+      "status": "written",
+      "run_id": "scen_z05_200m"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_z0_200m",
+      "status": "written",
+      "run_id": "scen_z0_200m"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_z10_200m",
+      "status": "written",
+      "run_id": "scen_z10_200m"
+    },
+    {
+      "run": "outputs/jiulong/2024-09-yagi/scen_ztide_200m",
+      "status": "written",
+      "run_id": "scen_ztide_200m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/_diag_eclosed",
+      "status": "written",
+      "run_id": "_diag_eclosed"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q2500_n100_100m",
+      "status": "written",
+      "run_id": "scen_q2500_n100_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q2500_n35_100m",
+      "status": "written",
+      "run_id": "scen_q2500_n35_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q2500_n60_100m",
+      "status": "written",
+      "run_id": "scen_q2500_n60_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q4000_100m",
+      "status": "written",
+      "run_id": "scen_q4000_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q4000_n100_100m",
+      "status": "written",
+      "run_id": "scen_q4000_n100_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q4000_n35_100m",
+      "status": "written",
+      "run_id": "scen_q4000_n35_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q4000_n60_100m",
+      "status": "written",
+      "run_id": "scen_q4000_n60_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_nocut-v1",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_choff_nocut-v1"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_dt3p0_b1",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_dt3p0_b1"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_inf1e-6_karst",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_inf1e-6_karst"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_inf5e-6_karst",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_inf5e-6_karst"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_nsp_b0",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_nsp_b0"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r50",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_r50"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r70",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_r70"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r85",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_r85"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_repro",
+      "status": "written",
+      "run_id": "scen_q6000_n100_100m_repro"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_50m_b1",
+      "status": "written",
+      "run_id": "scen_q6000_n100_50m_b1"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n35_100m",
+      "status": "written",
+      "run_id": "scen_q6000_n35_100m"
+    },
+    {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n60_100m",
+      "status": "written",
+      "run_id": "scen_q6000_n60_100m"
+    }
+  ]
+}

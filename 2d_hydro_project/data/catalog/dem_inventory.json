@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-10-24T03:24:04.538756+00:00",
+  "script": "scripts/stage0/inspect_dem.py",
+  "rasters": [
+    {
+      "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
+      "exists": true,
+      "size_mb": 2051.3,
+      "driver": "GTiff",
+      "width": 61834,
+      "height": 49239,
+      "count": 1,
+      "dtype": "int16",
+      "crs": "EPSG:32648",
+      "resolution": [
+        12.5,
+        12.5
+      ],
+      "bounds": [
+        444002.34375,
+        2317060.1201261147,
+        1216927.34375,
+        2932547.6201261147
+      ],
+      "nodata": 0.0,
+      "tags": {
+        "AREA_OR_POINT": "Area"
+      },
+      "sample_stats": {
+        "n": 1960656,
+        "min": -26.0,
+        "p5": 29.0,
+        "median": 268.0,
+        "p95": 1006.0,
+        "max": 2046.0
+      }
+    }
+  ]
+}

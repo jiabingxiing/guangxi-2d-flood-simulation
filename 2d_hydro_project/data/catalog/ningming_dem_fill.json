@@ -1,0 +1,15 @@
+{
+  "generated_utc": "2026-10-24T05:22:27.010373+00:00",
+  "zero_px_total": 644490,
+  "zero_in_water_px": 381,
+  "zero_land_px": 644109,
+  "filled_min": 31.0,
+  "filled_median": 169.0,
+  "fill_value_stats_on_zero_px": {
+    "min": 121.0,
+    "median": 285.38,
+    "max": 754.0
+  },
+  "policy": "0值=疑似NoData；水体区与陆地区统一距离插值填补（max_search=20→200），残留用全域中值兜底；真实洼地未被填平（仅补 0 值空洞）",
+  "output": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\ningming\\dem_filled_12p5m_32648.tif"
+}

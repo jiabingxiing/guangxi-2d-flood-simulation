@@ -1,0 +1,147 @@
+{
+  "generated_utc": "2026-10-26T14:08:00.263983+00:00",
+  "source_code_check": {
+    "infilfile": "input.cpp:884 LoadDistInfil 读取；infevap.cpp:28 只用 Parptr->InfilRate -> 分布式不生效",
+    "infiltration": "pars.cpp:486 标量；作用于 ChanMask==-1 单元（本例无 chanmask = 全域）",
+    "conclusion": "只能用标量有界损失代理，不得宣称分布式喀斯特入渗已建模"
+  },
+  "smoke": {
+    "inf0": {
+      "mean_depth_mm": 36.0,
+      "rain_minus_inf_m3": 144000.0,
+      "vol_m3": 144000.0
+    },
+    "inf5e-6": {
+      "mean_depth_mm": 18.0,
+      "rain_minus_inf_m3": 74000.0,
+      "vol_m3": 74000.0
+    },
+    "checks": {
+      "depth_without_inf_mm": 36.0,
+      "depth_with_inf_mm": 18.0,
+      "expected_without_inf_mm": 36.0,
+      "expected_with_inf_mm": 18.0,
+      "within_tol": true,
+      "inf_loss_m3": 70000.0,
+      "inf_loss_equivalent_mm": 17.5,
+      "inf_loss_expected_mm": 18.0,
+      "status": "PASS"
+    }
+  },
+  "scenarios": {
+    "inf0": {
+      "infiltration_m_s": null,
+      "run": "scen_q6000_n100_100m",
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.32,
+      "station_wd_center_m": 0.018,
+      "e_mass_132": 5.802e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.347,
+          "pod": 0.786,
+          "far": 0.616,
+          "area_sim_km2": 101.43,
+          "area_bias": 2.05
+        },
+        "0.15": {
+          "csi": 0.357,
+          "pod": 0.773,
+          "far": 0.602,
+          "area_sim_km2": 96.02,
+          "area_bias": 1.94
+        },
+        "0.3": {
+          "csi": 0.358,
+          "pod": 0.752,
+          "far": 0.594,
+          "area_sim_km2": 91.6,
+          "area_bias": 1.85
+        }
+      },
+      "rain_minus_inf_m3": 154058061.3,
+      "final_vol_m3": 382486457.3,
+      "qout_final": 1287.847
+    },
+    "inf1e-6": {
+      "infiltration_m_s": 1e-06,
+      "run": "scen_q6000_n100_100m_inf1e-6_karst",
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.7,
+      "station_wd_center_m": 0.001,
+      "e_mass_132": 9.104e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.364,
+          "pod": 0.694,
+          "far": 0.566,
+          "area_sim_km2": 79.21,
+          "area_bias": 1.6
+        },
+        "0.15": {
+          "csi": 0.372,
+          "pod": 0.681,
+          "far": 0.549,
+          "area_sim_km2": 74.81,
+          "area_bias": 1.51
+        },
+        "0.3": {
+          "csi": 0.375,
+          "pod": 0.658,
+          "far": 0.534,
+          "area_sim_km2": 69.92,
+          "area_bias": 1.41
+        }
+      },
+      "rain_minus_inf_m3": 21525238.9,
+      "final_vol_m3": 295627296.7,
+      "qout_final": 1094.184,
+      "delta_vs_inf0": {
+        "csi_0p15": 0.015,
+        "far_0p15": -0.053,
+        "area_0p15_km2": -21.21,
+        "inf_loss_m3": 132532822.4
+      }
+    },
+    "inf5e-6": {
+      "infiltration_m_s": 5e-06,
+      "run": "scen_q6000_n100_100m_inf5e-6_karst",
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.38,
+      "station_wd_center_m": 0.001,
+      "e_mass_132": 7.003e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.472,
+          "pod": 0.622,
+          "far": 0.338,
+          "area_sim_km2": 46.51,
+          "area_bias": 0.94
+        },
+        "0.15": {
+          "csi": 0.471,
+          "pod": 0.613,
+          "far": 0.33,
+          "area_sim_km2": 45.34,
+          "area_bias": 0.92
+        },
+        "0.3": {
+          "csi": 0.465,
+          "pod": 0.598,
+          "far": 0.324,
+          "area_sim_km2": 43.77,
+          "area_bias": 0.88
+        }
+      },
+      "rain_minus_inf_m3": -48875141.1,
+      "final_vol_m3": 245409701.0,
+      "qout_final": 886.369,
+      "delta_vs_inf0": {
+        "csi_0p15": 0.114,
+        "far_0p15": -0.272,
+        "area_0p15_km2": -50.68,
+        "inf_loss_m3": 202933202.4
+      }
+    }
+  }
+}

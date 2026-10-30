@@ -1,0 +1,196 @@
+{
+  "generated_utc": "2026-10-27T05:09:09.140011+00:00",
+  "cases": {
+    "jiulong": {
+      "note": "雨驱动 5 天事件；无实测 Q(t)；站址 500kV 站坐标待业务确认（G12 邻域）",
+      "runs": {
+        "scen_free_200m": {
+          "run_dir": "scen_free_200m",
+          "res_m": 200.0,
+          "dt_s": 5.0,
+          "grid": [
+            182,
+            152
+          ],
+          "wet_area_km2": 263.24,
+          "max_wd_m": 6.03,
+          "station_depth_center_m": 0.008,
+          "station_depth_r200m_m": 0.235,
+          "station_radius_cells": 1,
+          "e_mass": 0.0004893,
+          "frames": 2
+        },
+        "scen_free_100m_b1": {
+          "run_dir": "scen_free_100m_b1",
+          "res_m": 100.0,
+          "dt_s": 5.0,
+          "grid": [
+            365,
+            304
+          ],
+          "wet_area_km2": 271.01,
+          "max_wd_m": 8.25,
+          "station_depth_center_m": 0.37,
+          "station_depth_r200m_m": 0.511,
+          "station_radius_cells": 2,
+          "e_mass": 0.0002242,
+          "frames": 2
+        },
+        "scen_free_200m_dt2p5_b1": {
+          "run_dir": "scen_free_200m_dt2p5_b1",
+          "res_m": 200.0,
+          "dt_s": 2.5,
+          "grid": [
+            182,
+            152
+          ],
+          "wet_area_km2": 263.28,
+          "max_wd_m": 6.03,
+          "station_depth_center_m": 0.008,
+          "station_depth_r200m_m": 0.235,
+          "station_radius_cells": 1,
+          "e_mass": 3.96e-05,
+          "frames": 2
+        }
+      }
+    },
+    "guigang": {
+      "note": "上游三角 Q 情景（峰 11500 m³/s）；河槽为直线参数化（宽度按米：200m=600m、100m_b1 旧口径 300m、100m_wfix≈700m、30m_b5≈630m）；垂直基准未确认（G7）",
+      "runs": {
+        "scen_yagi_q11500_200m": {
+          "run_dir": "scen_yagi_q11500_200m",
+          "res_m": 200.0,
+          "dt_s": 5.0,
+          "grid": [
+            334,
+            185
+          ],
+          "wet_area_km2": 540.16,
+          "max_wd_m": 19.2,
+          "station_depth_center_m": 10.462,
+          "station_depth_r200m_m": 10.499,
+          "station_radius_cells": 1,
+          "e_mass": 2.411e-05,
+          "frames": 57
+        },
+        "scen_yagi_q11500_100m_b1": {
+          "run_dir": "scen_yagi_q11500_100m_b1",
+          "res_m": 100.0,
+          "dt_s": 5.0,
+          "grid": [
+            669,
+            370
+          ],
+          "wet_area_km2": 628.34,
+          "max_wd_m": 16.44,
+          "station_depth_center_m": 15.829,
+          "station_depth_r200m_m": 15.926,
+          "station_radius_cells": 2,
+          "e_mass": 3.087e-05,
+          "frames": 57
+        },
+        "scen_yagi_q11500_100m_wfix": {
+          "run_dir": "scen_yagi_q11500_100m_wfix",
+          "res_m": 100.0,
+          "dt_s": 5.0,
+          "grid": [
+            669,
+            370
+          ],
+          "wet_area_km2": 544.13,
+          "max_wd_m": 15.4,
+          "station_depth_center_m": 9.059,
+          "station_depth_r200m_m": 9.091,
+          "station_radius_cells": 2,
+          "e_mass": 7.549e-05,
+          "frames": 57
+        },
+        "scen_yagi_q11500_200m_dt2p5_b1": {
+          "run_dir": "scen_yagi_q11500_200m_dt2p5_b1",
+          "res_m": 200.0,
+          "dt_s": 2.5,
+          "grid": [
+            334,
+            185
+          ],
+          "wet_area_km2": 540.48,
+          "max_wd_m": 19.21,
+          "station_depth_center_m": 10.462,
+          "station_depth_r200m_m": 10.499,
+          "station_radius_cells": 1,
+          "e_mass": 1.767e-05,
+          "frames": 57
+        },
+        "scen_yagi_q11500_30m_b5": {
+          "run_dir": "scen_yagi_q11500_30m_b5",
+          "res_m": 30.0,
+          "dt_s": 5.0,
+          "grid": [
+            2230,
+            1233
+          ],
+          "wet_area_km2": 493.36,
+          "max_wd_m": 19.44,
+          "station_depth_center_m": 9.074,
+          "station_depth_r200m_m": 9.108,
+          "station_radius_cells": 7,
+          "e_mass": 5.665e-05,
+          "frames": 57
+        }
+      }
+    },
+    "ningming": {
+      "note": "上游三角 Q 情景（峰 6000 m³/s）；喀斯特损失未建模（B3 仅标量代理）",
+      "runs": {
+        "scen_q6000_n100_100m": {
+          "run_dir": "scen_q6000_n100_100m",
+          "res_m": 100.0,
+          "dt_s": 1.5,
+          "grid": [
+            244,
+            224
+          ],
+          "wet_area_km2": 126.22,
+          "max_wd_m": 18.55,
+          "station_depth_center_m": 0.027,
+          "station_depth_r200m_m": 11.883,
+          "station_radius_cells": 2,
+          "e_mass": 5.802e-05,
+          "frames": 19
+        },
+        "scen_q6000_n100_100m_dt3p0_b1": {
+          "run_dir": "scen_q6000_n100_100m_dt3p0_b1",
+          "res_m": 100.0,
+          "dt_s": 3.0,
+          "grid": [
+            244,
+            224
+          ],
+          "wet_area_km2": 126.16,
+          "max_wd_m": 18.51,
+          "station_depth_center_m": 0.027,
+          "station_depth_r200m_m": 11.883,
+          "station_radius_cells": 2,
+          "e_mass": 7.323e-06,
+          "frames": 19
+        },
+        "scen_q6000_n100_50m_b1": {
+          "run_dir": "scen_q6000_n100_50m_b1",
+          "res_m": 50.0,
+          "dt_s": 1.5,
+          "grid": [
+            489,
+            449
+          ],
+          "wet_area_km2": 116.54,
+          "max_wd_m": 19.38,
+          "station_depth_center_m": 0.921,
+          "station_depth_r200m_m": 11.528,
+          "station_radius_cells": 4,
+          "e_mass": 8.493e-05,
+          "frames": 19
+        }
+      }
+    }
+  }
+}

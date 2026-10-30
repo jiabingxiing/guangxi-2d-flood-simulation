@@ -1,0 +1,165 @@
+{
+  "generated_utc": "2026-10-24T02:46:59.887235+00:00",
+  "script": "scripts/stage0/probe_endpoints.py",
+  "env_proxy": "http://127.0.0.1:7897",
+  "endpoints": {
+    "pypi_aliyun": {
+      "url": "https://mirrors.aliyun.com/pypi/simple/numpy/",
+      "purpose": "Python 依赖镜像（国内直连基准）",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 0.3,
+        "bytes": 1340371
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 0.26,
+        "bytes": 1340371
+      }
+    },
+    "open_meteo_docs": {
+      "url": "https://open-meteo.com/en/docs/historical-weather-api",
+      "purpose": "Open-Meteo 历史天气文档",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.22,
+        "bytes": 390937
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.0,
+        "bytes": 390937
+      }
+    },
+    "open_meteo_api": {
+      "url": "https://archive-api.open-meteo.com/v1/archive",
+      "purpose": "Open-Meteo 归档 API（ERA5 再分析）",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.48,
+        "bytes": 0
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.39,
+        "bytes": 0
+      }
+    },
+    "copernicus_dataspace": {
+      "url": "https://dataspace.copernicus.eu",
+      "purpose": "Copernicus Dataspace（COP-DEM / Sentinel-1）",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.84,
+        "bytes": 113412
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.74,
+        "bytes": 113412
+      }
+    },
+    "esa_worldcover": {
+      "url": "https://esa-worldcover.org/en/data-access",
+      "purpose": "ESA WorldCover",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.61,
+        "bytes": 49887
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.94,
+        "bytes": 49887
+      }
+    },
+    "fabdem": {
+      "url": "https://research-information.bris.ac.uk/en/datasets/fabdem-v1-2/",
+      "purpose": "FABDEM v1.2 数据页",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.42,
+        "bytes": 26041
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 1.75,
+        "bytes": 26041
+      }
+    },
+    "seamlesswave": {
+      "url": "https://www.seamlesswave.com/LISFLOOD8.0.html",
+      "purpose": "LISFLOOD-FP 主候选模型",
+      "direct": {
+        "ok": true,
+        "status": 200,
+        "seconds": 0.62,
+        "bytes": 21313
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 0.83,
+        "bytes": 21313
+      }
+    },
+    "hec_usace": {
+      "url": "https://www.hec.usace.army.mil/software/hec-ras/",
+      "purpose": "HEC-RAS 备选模型",
+      "direct": {
+        "ok": false,
+        "status": null,
+        "seconds": 11.12,
+        "error": "ConnectionError: HTTPSConnectionPool(host='www.hec.usace.army.mil', port=443): Max retries exceeded with url: /software/hec-ras/ (Caused by NameResolutionError(\"HTTPSConnection(host='www.hec.usace."
+      },
+      "via_env_proxy": {
+        "ok": true,
+        "status": 200,
+        "seconds": 6.47,
+        "bytes": 21075
+      }
+    },
+    "unspider": {
+      "url": "https://un-spider.org/advisory-support/recommended-practices/flood-mapping/step-by-step",
+      "purpose": "SAR 洪水制图实践",
+      "direct": {
+        "ok": false,
+        "status": 404,
+        "seconds": 1.36,
+        "bytes": 29978
+      },
+      "via_env_proxy": {
+        "ok": false,
+        "status": 404,
+        "seconds": 1.72,
+        "bytes": 29978
+      }
+    }
+  },
+  "open_meteo_api_sample": {
+    "direct": {
+      "ok": true,
+      "status": 200,
+      "seconds": 0.75,
+      "bytes": 2587
+    },
+    "via_env_proxy": {
+      "ok": true,
+      "status": 200,
+      "seconds": 1.08,
+      "bytes": 2587
+    }
+  }
+}

@@ -1,0 +1,62 @@
+# 模型清单与选型过程（终稿 第五章；2026-10-24 第二批修订）
+schema_version: "0.2.0"
+
+selection_process:
+  steps:
+    1: "确认版本、CPU 构建方式、求解器选项、许可、输入输出格式"
+    2: "官方最小案例 + 本项目基准算例：精度/稳定性/守恒/耗时/内存/线程/输出量"
+    3: "必要时以 HEC-RAS 2D 或其他成熟模型独立复核"
+    4: "形成 ADR 定版，锁定版本与配置"
+  rule: "不能仅凭软件名称或未经复现的速度宣传选择；不默认具备变分辨率嵌套能力"
+
+primary_candidate:
+  name: "LISFLOOD-FP"
+  version: "8.1"
+  acquisition: {status: "已下载", file: "data/raw/lisflood-fp/LISFLOOD-FP_v8.1.zip", size_mb: 63.9, md5_verified: true,
+                source: "https://zenodo.org/records/6912932", doi: "10.5281/zenodo.6912932",
+                downloaded_meta: "data/catalog/lisflood_fp_download.json"}
+  build:
+    status: "已构建（2026-10-24，详见 docs/stage2_build_report.md）"
+    toolchain: "w64devkit v2.10.1（MinGW-w64 GCC 16.2.0，D:\\w64devkit）"
+    config: "config/local-mingw（-O3 -fopenmp -static -D_NUMERIC_MODE=1 -D_NETCDF=0）"
+    executable: "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe（1.34MB，静态链接）"
+    banner: "LISFLOOD-FP version 8.1.0 (double), _CALCULATE_Q_MODE 1"
+    patches: ["utility.cpp：_WIN32 对齐内存分支 _aligned_malloc/_aligned_free（MinGW 无 posix_memalign；并规避上游 gcc 分支 memory_free 误写为分配的 bug——已登记）"]
+    smoke_test: "官方 T016c 桥洞算例通过（65s，输出完整含 res.mass 水量账目，outputs/smoke/T016c_run1/）"
+    known_limits: ["make test 单元测试目标在 GCC16 下编译失败（上游接口漂移）", "_NETCDF=0：暂为 ASCII 输出",
+                   "spatial_manning: supported (manningfile), 项目尚未使用（G18 修正，Phase B0）",
+                   "distributed_infiltration: infilfile 被读取但 FPInfiltration 只用标量 InfilRate，分布式入渗未生效"]
+  license: "Zenodo 元数据 gpl-2.0；官网页称 GPLv3 非商业——不一致，以源码文件头为准"
+  license_status: "UNRESOLVED（不得业务化/外发，直至法律确认）"
+  build_options:                 # 包内实测（1482 条目）
+    - "lisflood.sln / lisflood_intel.sln（Visual Studio，Windows）"
+    - "makefile（Linux/gfortran）"
+    - "windep/、dll_intel/、DLL's/（Windows 依赖与运行库）"
+    - "备选：WSL Ubuntu 编译（本机已有 WSL）"
+  docs: ["LISFLOOD-FP-trunk/LISFLOOD-FP user manual.pdf", "LISFLOOD-FP-trunk/README.md"]
+  bundled_cases: ["testing/（562 条目）", "Carlisle 5m 示例数据（postprocess/）", "preprocess 溃坝生成工具"]
+  next_actions:
+    - "已完成：解包、Windows MinGW 构建、T016c 冒烟"
+    - "核验源码许可文件头，回填 license 字段（仍 UNRESOLVED）"
+    - "B1–B5 已跑；B2 质量门 FAIL；B6/B7 诊断；B8 结构定量与案例级敏感性待 Phase B"
+  upgrade_path: {version: "8.2", note: "2024-07，adaptive GPU-MWDG2；CPU 主线可暂不升", url: "https://zenodo.org/records/13121102"}
+
+backup_candidate:
+  name: "HEC-RAS 2D"
+  version: null
+  acquisition_status: "未评估（入口可达，仅代理）"
+
+native_code:
+  name: "自研 Numba 局部惯性求解器"
+  repo_status: "未建仓；前期『淹没分析 7.x/HAND/TVD』代码属另一技术路线（SAR 水深反演，非水动力），不混用"
+  role: "仅研究/对照"
+  gate: "进入对照前须过终稿 5.2 全部数值验证；禁止 fastmath 掩盖数值误差"
+
+benchmarks_required:            # 阶段2执行（终稿 十一章）
+  - {id: lake_at_rest,          desc: "静水湖泊：无非物理系统流动"}
+  - {id: dam_break_1d2d,        desc: "溃坝对照解析解/基准：波前、水深、速度"}
+  - {id: uniform_rain_closed,   desc: "均匀降雨闭域：雨量单位换算与水量账目"}
+  - {id: dry_wet_front,         desc: "干湿界面：稳定性、非负水深、网格敏感性"}
+  - {id: boundary_in_out,       desc: "边界入流/出流：符号、法向、插值、总通量"}
+  - {id: structure_cases,       desc: "结构物：堤防阻水/溢流、开口涵洞连通、桥梁表达"}
+  - {id: grid_timestep_event,   desc: "代表性事件网格与时间步敏感性"}

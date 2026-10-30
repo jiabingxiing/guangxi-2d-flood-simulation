@@ -1,0 +1,71 @@
+{
+  "window": [
+    "2024-09-05T00:00:00.000Z",
+    "2024-10-10T00:00:00.000Z"
+  ],
+  "note": "久隆放宽窗口复检索",
+  "aois": {
+    "jiulong": {
+      "aoi": "jiulong",
+      "bbox": [
+        108.55,
+        21.92,
+        108.9,
+        22.2
+      ],
+      "url": "https://catalogue.dataspace.copernicus.eu/odata/v1/Products?$filter=Collection/Name%20eq%20%27SENTINEL-1%27%20and%20contains%28Name%2C%27IW_GRDH_1S%27%29%20and%20OData.CSC.Intersects%28area%3Dgeography%27SRID%3D4326%3BPOLYGON%28%28108.55%2021.92%2C108.9%2021.92%2C108.9%2022.2%2C108.55%2022.2%2C108.55%2021.92%29%29%27%29%20and%20ContentDate/Start%20gt%202024-09-05T00%3A00%3A00.000Z%20and%20ContentDate/Start%20lt%202024-10-10T00%3A00%3A00.000Z&$top=50&$orderby=ContentDate/Start",
+      "http_status": 200,
+      "n_products": 8,
+      "products": [
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_3DD2.SAFE",
+          "id": "2e40846f-1476-4fc6-b6ac-db3fccab161d",
+          "sensing_start": "2024-09-05T10:50:22.737237Z",
+          "size_gb": 1.7
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240905T105022_20240905T105047_055529_06C6A3_49C8_COG.SAFE",
+          "id": "8d49c7c2-a5fe-401d-9487-55ce1f6097f9",
+          "sensing_start": "2024-09-05T10:50:22.737237Z",
+          "size_gb": 1.25
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240917T105023_20240917T105048_055704_06CD90_3527.SAFE",
+          "id": "5e5d68ef-a0a2-4072-846b-374287e321bf",
+          "sensing_start": "2024-09-17T10:50:23.432017Z",
+          "size_gb": 1.7
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240917T105023_20240917T105048_055704_06CD90_7FA9_COG.SAFE",
+          "id": "be956608-36a9-410e-994a-cd95adf42d64",
+          "sensing_start": "2024-09-17T10:50:23.432017Z",
+          "size_gb": 1.26
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240919T224253_20240919T224322_055740_06CF01_BE17.SAFE",
+          "id": "2c1f3105-fda1-44fa-acca-7517db62aa7d",
+          "sensing_start": "2024-09-19T22:42:53.482271Z",
+          "size_gb": 1.97
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240919T224253_20240919T224322_055740_06CF01_AF6D_COG.SAFE",
+          "id": "53837da9-ecbf-484a-8256-7659a7f0b3f4",
+          "sensing_start": "2024-09-19T22:42:53.482271Z",
+          "size_gb": 1.26
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240929T105023_20240929T105048_055879_06D47F_13DE_COG.SAFE",
+          "id": "22cecad3-1c7c-4fcb-8204-af64736475a2",
+          "sensing_start": "2024-09-29T10:50:23.508709Z",
+          "size_gb": 1.25
+        },
+        {
+          "name": "S1A_IW_GRDH_1SDV_20240929T105023_20240929T105048_055879_06D47F_E5B5.SAFE",
+          "id": "e78c6755-df30-4ea3-ad75-f6818d789989",
+          "sensing_start": "2024-09-29T10:50:23.508709Z",
+          "size_gb": 1.7
+        }
+      ]
+    }
+  }
+}

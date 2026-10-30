@@ -1,0 +1,141 @@
+{
+  "generated_utc": "2026-10-24T05:23:56.154526+00:00",
+  "product": "ESA WorldCover 2021 v200 (10m), CC BY 4.0",
+  "tiles": {
+    "N21E105": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\raw\\worldcover\\N21E105.tif",
+    "N21E108": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\raw\\worldcover\\N21E108.tif"
+  },
+  "cases": {
+    "jiulong": {
+      "tile": "N21E108",
+      "epsg": 32649,
+      "distribution": {
+        "树地 Tree cover": {
+          "code": 10,
+          "px": 10774755,
+          "pct": 74.03
+        },
+        "草地 Grassland": {
+          "code": 30,
+          "px": 347454,
+          "pct": 2.39
+        },
+        "耕地 Cropland": {
+          "code": 40,
+          "px": 2185595,
+          "pct": 15.02
+        },
+        "建筑 Built-up": {
+          "code": 50,
+          "px": 847121,
+          "pct": 5.82
+        },
+        "裸地/稀疏植被": {
+          "code": 60,
+          "px": 117943,
+          "pct": 0.81
+        },
+        "水体": {
+          "code": 80,
+          "px": 281117,
+          "pct": 1.93
+        },
+        "草本湿地": {
+          "code": 90,
+          "px": 93,
+          "pct": 0.0
+        }
+      },
+      "unknown_codes": []
+    },
+    "ningming": {
+      "tile": "N21E105",
+      "epsg": 32648,
+      "distribution": {
+        "树地 Tree cover": {
+          "code": 10,
+          "px": 34110161,
+          "pct": 65.65
+        },
+        "灌木 Shrubland": {
+          "code": 20,
+          "px": 99,
+          "pct": 0.0
+        },
+        "草地 Grassland": {
+          "code": 30,
+          "px": 3856103,
+          "pct": 7.42
+        },
+        "耕地 Cropland": {
+          "code": 40,
+          "px": 11884032,
+          "pct": 22.87
+        },
+        "建筑 Built-up": {
+          "code": 50,
+          "px": 1008467,
+          "pct": 1.94
+        },
+        "裸地/稀疏植被": {
+          "code": 60,
+          "px": 393525,
+          "pct": 0.76
+        },
+        "水体": {
+          "code": 80,
+          "px": 706537,
+          "pct": 1.36
+        }
+      },
+      "unknown_codes": []
+    },
+    "guigang": {
+      "tile": "N21E108",
+      "epsg": 32649,
+      "distribution": {
+        "树地 Tree cover": {
+          "code": 10,
+          "px": 27488932,
+          "pct": 52.3
+        },
+        "灌木 Shrubland": {
+          "code": 20,
+          "px": 2047,
+          "pct": 0.0
+        },
+        "草地 Grassland": {
+          "code": 30,
+          "px": 3744218,
+          "pct": 7.12
+        },
+        "耕地 Cropland": {
+          "code": 40,
+          "px": 16393831,
+          "pct": 31.19
+        },
+        "建筑 Built-up": {
+          "code": 50,
+          "px": 3513486,
+          "pct": 6.68
+        },
+        "裸地/稀疏植被": {
+          "code": 60,
+          "px": 541243,
+          "pct": 1.03
+        },
+        "水体": {
+          "code": 80,
+          "px": 878229,
+          "pct": 1.67
+        },
+        "草本湿地": {
+          "code": 90,
+          "px": 81,
+          "pct": 0.0
+        }
+      },
+      "unknown_codes": []
+    }
+  }
+}

@@ -1,0 +1,59 @@
+# =============================================================
+# 全局约定基线 —— 所有案例继承（阶段0版本，随 ADR 更新）
+# 依据：终稿 第二/六/十/十三/十四章
+# =============================================================
+schema_version: "0.1.0"
+
+project:
+  name: "广西久隆_宁明_贵港_二维水动力模拟"
+  plan_baseline: "../../plans/广西久隆_宁明_贵港_二维水动力模拟技术路线与工程落地方案_终稿.md"
+  current_stage: "5-degraded"
+  status_note: "公开数据降级模式首轮情景已跑（久隆/宁明/贵港）；原阶段0门禁未满足，结果仅情景级；阶段6在线业务化未执行"
+
+conventions:
+  horizontal_crs:
+    rule: "米制投影；每案例按 AOI 经 pyproj 核验（scripts/stage0/check_crs.py，结果 data/catalog/crs_check.json）；AOI 变更后必须复跑核验"
+    jiulong: {epsg: 32649}
+    ningming: {epsg: 32648}
+    guigang: {epsg: 32649}
+  vertical_datum:
+    target: "待确认（候选：1985国家高程基准 / EGM2008 / 椭球高；每输入数据逐项登记）"
+    datum_offset_m: null        # 禁止预填；仅测绘控制点或权威转换成果可写入（终稿 2.1 / 第六章）
+    rule: "垂直基准未统一前，暂停正式回算（终稿 风险表：不得猜偏移量）"
+  time:
+    rule: "所有时间戳显式标注时区；事件时段统一按 Asia/Shanghai (UTC+8) 声明；登记降雨累计区间、卫星过境与观测时刻的定义"
+  raster_alignment:
+    rule: "所有模型输入栅格须与目标网格的 CRS/transform/分辨率/像元对齐一致；不一致时显式重投影并留痕（终稿 2.1）"
+
+run_management:
+  run_id_pattern: "{case}_{event}_{yyyymmddTHHMMZ}"
+  no_overwrite: true            # 禁止覆盖历史运行
+  manifest_required: [config_snapshot, code_version, model_version, input_hashes, run_log, step_stats, threads, peak_memory, disk_output, water_balance, warnings]
+  output_policy: "内部时序采用模型支持的高效格式；发布栅格再生成 COG/GeoTIFF；不将每个内部步写独立 GeoTIFF"
+
+quality_gates:                  # 终稿 十三章：阈值在跑基准前书面确定，不得事后为通过而调参
+  mass_balance:
+    benchmark_target: 1.0e-4    # 基准算例目标 E_mass
+    event_initial_target: 1.0e-3  # 完整事件初始目标（0.1%），按求解器精度审定
+    no_negative_depth: true
+    no_nan: true
+    no_unexplained_warnings: true
+  spatial_validation:
+    first_round_csi_reference: 0.65   # 仅首轮参考目标，非通过条件
+    thresholds_sensitivity_m: [0.1, 0.15, 0.3]  # SAR 淹没阈值敏感性候选
+  sensitivity:
+    required: ["网格分辨率", "时间步"]
+
+compliance:
+  rule: "逐项登记来源/版本/许可/敏感等级；FABDEM CC BY-NC-SA 业务化前须合规审查；站区竣工图/设备台账/防洪设计资料按内部敏感数据管理；凭证不入代码不入仓库"
+
+data_baseline:                    # 2026-10-24 修订（ADR-0004/0005）
+  degraded_mode: true             # 公开/本地数据降级模式；全部结论标注研究性/条件性
+  dem_primary:
+    id: dem_gx_local
+    path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif"
+    resolution_m: 12.5
+    crs: "EPSG:32648"
+    status: "暂定主基底；产品来源与垂直基准待查证（dem_inventory.json）"
+    qa_flags: ["NoData=0 与海岸 0 m 有效值冲突", "久隆/贵港案例须重投影至 32649 并留痕"]
+  rainfall_primary: {id: open_meteo_era5, note: "≤8 天分段请求（月级会超时）；驱动不确定性入验证报告"}

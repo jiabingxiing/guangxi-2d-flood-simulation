@@ -1,0 +1,201 @@
+{
+  "generated_utc": "2026-10-26T12:42:24.134544+00:00",
+  "design": {
+    "q_peak": 6000.0,
+    "fpfric": 0.1,
+    "rain_scales": [
+      0.85,
+      0.7,
+      0.5
+    ],
+    "thresholds_m": [
+      0.05,
+      0.15,
+      0.3
+    ],
+    "semantics": "新增淹没口径（模拟剔除 8/6 常水）",
+    "rationale": "水量维度=ERA5均匀雨高估+喀斯特地下排泄(R6)联合代理；空间化(糙率网格/分布雨)在本 LISFLOOD 8.1 构建不可实现(pars.cpp 仅均匀 fpfric)"
+  },
+  "runs": [
+    {
+      "run_id": "scen_q6000_n100_100m_r85",
+      "q_peak": 6000.0,
+      "fpfric": 0.1,
+      "rain_scale": 0.85,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.2,
+      "station_wd_center_m": 0.017,
+      "station_wd_max_m": 11.82,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.2,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 0.0001504,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.349,
+          "pod": 0.773,
+          "far": 0.612,
+          "area_sim_km2": 98.57,
+          "area_bias": 1.99
+        },
+        "0.15": {
+          "csi": 0.357,
+          "pod": 0.759,
+          "far": 0.598,
+          "area_sim_km2": 93.4,
+          "area_bias": 1.89
+        },
+        "0.3": {
+          "csi": 0.358,
+          "pod": 0.738,
+          "far": 0.59,
+          "area_sim_km2": 89.03,
+          "area_bias": 1.8
+        }
+      }
+    },
+    {
+      "run_id": "scen_q6000_n100_100m_r70",
+      "q_peak": 6000.0,
+      "fpfric": 0.1,
+      "rain_scale": 0.7,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.08,
+      "station_wd_center_m": 0.016,
+      "station_wd_max_m": 11.76,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.08,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 2.819e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.35,
+          "pod": 0.759,
+          "far": 0.606,
+          "area_sim_km2": 95.44,
+          "area_bias": 1.93
+        },
+        "0.15": {
+          "csi": 0.359,
+          "pod": 0.746,
+          "far": 0.591,
+          "area_sim_km2": 90.23,
+          "area_bias": 1.82
+        },
+        "0.3": {
+          "csi": 0.36,
+          "pod": 0.725,
+          "far": 0.583,
+          "area_sim_km2": 86.02,
+          "area_bias": 1.74
+        }
+      }
+    },
+    {
+      "run_id": "scen_q6000_n100_100m_r50",
+      "q_peak": 6000.0,
+      "fpfric": 0.1,
+      "rain_scale": 0.5,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.93,
+      "station_wd_center_m": 0.015,
+      "station_wd_max_m": 11.67,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.93,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 6.391e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.355,
+          "pod": 0.741,
+          "far": 0.595,
+          "area_sim_km2": 90.6,
+          "area_bias": 1.83
+        },
+        "0.15": {
+          "csi": 0.361,
+          "pod": 0.727,
+          "far": 0.582,
+          "area_sim_km2": 85.98,
+          "area_bias": 1.74
+        },
+        "0.3": {
+          "csi": 0.361,
+          "pod": 0.704,
+          "far": 0.574,
+          "area_sim_km2": 81.77,
+          "area_bias": 1.65
+        }
+      }
+    },
+    {
+      "run_id": "scen_q6000_n100_100m(参照 r100)",
+      "q_peak": 6000.0,
+      "fpfric": 0.1,
+      "rain_scale": 1.0,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.32,
+      "station_wd_center_m": 0.018,
+      "station_wd_max_m": 11.88,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.32,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 5.802e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.347,
+          "pod": 0.786,
+          "far": 0.616,
+          "area_sim_km2": 101.43,
+          "area_bias": 2.05
+        },
+        "0.15": {
+          "csi": 0.357,
+          "pod": 0.773,
+          "far": 0.602,
+          "area_sim_km2": 96.02,
+          "area_bias": 1.94
+        },
+        "0.3": {
+          "csi": 0.358,
+          "pod": 0.752,
+          "far": 0.594,
+          "area_sim_km2": 91.6,
+          "area_bias": 1.85
+        }
+      }
+    }
+  ]
+}

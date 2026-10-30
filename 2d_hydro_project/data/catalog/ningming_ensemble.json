@@ -1,0 +1,479 @@
+{
+  "generated_utc": "2026-10-26T12:42:20.980674+00:00",
+  "design": {
+    "q_peaks_m3s": [
+      2500.0,
+      4000.0,
+      6000.0
+    ],
+    "fpfric": [
+      0.035,
+      0.06,
+      0.1
+    ],
+    "thresholds_m": [
+      0.05,
+      0.15,
+      0.3
+    ],
+    "res_m": 100,
+    "solver": "acceleration, dt=1.5s 固定",
+    "obs_time": "2026-08-24T08:00+08:00",
+    "obs_frame": 13,
+    "frame_t_h": 78.0,
+    "time_uncertainty_h": 6,
+    "primary_threshold_m": 0.15,
+    "metric_semantics": "时刻切片，模拟剔除 8/6 常水；不用 res.max"
+  },
+  "runs": [
+    {
+      "run_id": "scen_q2500_n35_100m",
+      "q_peak": 2500.0,
+      "fpfric": 0.035,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 8.92,
+      "station_wd_center_m": 0.008,
+      "station_wd_max_m": 9.55,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 8.92,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 0.0001951,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.285,
+          "pod": 0.602,
+          "far": 0.649,
+          "area_sim_km2": 84.82,
+          "area_bias": 1.71
+        },
+        "0.15": {
+          "csi": 0.283,
+          "pod": 0.58,
+          "far": 0.645,
+          "area_sim_km2": 80.75,
+          "area_bias": 1.63
+        },
+        "0.3": {
+          "csi": 0.277,
+          "pod": 0.552,
+          "far": 0.643,
+          "area_sim_km2": 76.54,
+          "area_bias": 1.55
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q2500_n60_100m",
+      "q_peak": 2500.0,
+      "fpfric": 0.06,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.08,
+      "station_wd_center_m": 0.01,
+      "station_wd_max_m": 10.05,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.08,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 0.00012,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.295,
+          "pod": 0.633,
+          "far": 0.644,
+          "area_sim_km2": 88.05,
+          "area_bias": 1.78
+        },
+        "0.15": {
+          "csi": 0.296,
+          "pod": 0.612,
+          "far": 0.636,
+          "area_sim_km2": 83.16,
+          "area_bias": 1.68
+        },
+        "0.3": {
+          "csi": 0.292,
+          "pod": 0.585,
+          "far": 0.632,
+          "area_sim_km2": 78.71,
+          "area_bias": 1.59
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q2500_n100_100m",
+      "q_peak": 2500.0,
+      "fpfric": 0.1,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.02,
+      "station_wd_center_m": 0.013,
+      "station_wd_max_m": 10.32,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.02,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 0.0001619,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.298,
+          "pod": 0.652,
+          "far": 0.646,
+          "area_sim_km2": 91.19,
+          "area_bias": 1.84
+        },
+        "0.15": {
+          "csi": 0.301,
+          "pod": 0.628,
+          "far": 0.634,
+          "area_sim_km2": 85.02,
+          "area_bias": 1.72
+        },
+        "0.3": {
+          "csi": 0.298,
+          "pod": 0.602,
+          "far": 0.629,
+          "area_sim_km2": 80.29,
+          "area_bias": 1.62
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q4000_n35_100m",
+      "q_peak": 4000.0,
+      "fpfric": 0.035,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.62,
+      "station_wd_center_m": 0.009,
+      "station_wd_max_m": 10.28,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.62,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 7.023e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.313,
+          "pod": 0.672,
+          "far": 0.63,
+          "area_sim_km2": 89.91,
+          "area_bias": 1.82
+        },
+        "0.15": {
+          "csi": 0.314,
+          "pod": 0.653,
+          "far": 0.624,
+          "area_sim_km2": 85.95,
+          "area_bias": 1.74
+        },
+        "0.3": {
+          "csi": 0.311,
+          "pod": 0.63,
+          "far": 0.62,
+          "area_sim_km2": 82.0,
+          "area_bias": 1.66
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q4000_n60_100m",
+      "q_peak": 4000.0,
+      "fpfric": 0.06,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.79,
+      "station_wd_center_m": 0.012,
+      "station_wd_max_m": 10.83,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.79,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 5.815e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.325,
+          "pod": 0.711,
+          "far": 0.625,
+          "area_sim_km2": 93.89,
+          "area_bias": 1.9
+        },
+        "0.15": {
+          "csi": 0.328,
+          "pod": 0.692,
+          "far": 0.616,
+          "area_sim_km2": 89.19,
+          "area_bias": 1.8
+        },
+        "0.3": {
+          "csi": 0.326,
+          "pod": 0.668,
+          "far": 0.61,
+          "area_sim_km2": 84.92,
+          "area_bias": 1.72
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q4000_n100_100m",
+      "q_peak": 4000.0,
+      "fpfric": 0.1,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.69,
+      "station_wd_center_m": 0.016,
+      "station_wd_max_m": 11.12,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.69,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 9.286e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.323,
+          "pod": 0.719,
+          "far": 0.63,
+          "area_sim_km2": 96.2,
+          "area_bias": 1.94
+        },
+        "0.15": {
+          "csi": 0.331,
+          "pod": 0.704,
+          "far": 0.615,
+          "area_sim_km2": 90.53,
+          "area_bias": 1.83
+        },
+        "0.3": {
+          "csi": 0.33,
+          "pod": 0.679,
+          "far": 0.609,
+          "area_sim_km2": 85.95,
+          "area_bias": 1.74
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q6000_n35_100m",
+      "q_peak": 6000.0,
+      "fpfric": 0.035,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.29,
+      "station_wd_center_m": 0.011,
+      "station_wd_max_m": 10.98,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.29,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 6.954e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.339,
+          "pod": 0.74,
+          "far": 0.615,
+          "area_sim_km2": 95.14,
+          "area_bias": 1.92
+        },
+        "0.15": {
+          "csi": 0.342,
+          "pod": 0.726,
+          "far": 0.607,
+          "area_sim_km2": 91.45,
+          "area_bias": 1.85
+        },
+        "0.3": {
+          "csi": 0.339,
+          "pod": 0.699,
+          "far": 0.604,
+          "area_sim_km2": 87.26,
+          "area_bias": 1.76
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q6000_n60_100m",
+      "q_peak": 6000.0,
+      "fpfric": 0.06,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.49,
+      "station_wd_center_m": 0.015,
+      "station_wd_max_m": 11.56,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.49,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 5.272e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.35,
+          "pod": 0.779,
+          "far": 0.612,
+          "area_sim_km2": 99.4,
+          "area_bias": 2.01
+        },
+        "0.15": {
+          "csi": 0.355,
+          "pod": 0.765,
+          "far": 0.601,
+          "area_sim_km2": 94.97,
+          "area_bias": 1.92
+        },
+        "0.3": {
+          "csi": 0.356,
+          "pod": 0.744,
+          "far": 0.594,
+          "area_sim_km2": 90.85,
+          "area_bias": 1.84
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q6000_n100_100m",
+      "q_peak": 6000.0,
+      "fpfric": 0.1,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.32,
+      "station_wd_center_m": 0.018,
+      "station_wd_max_m": 11.88,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.32,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 5.802e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.347,
+          "pod": 0.786,
+          "far": 0.616,
+          "area_sim_km2": 101.43,
+          "area_bias": 2.05
+        },
+        "0.15": {
+          "csi": 0.357,
+          "pod": 0.773,
+          "far": 0.602,
+          "area_sim_km2": 96.02,
+          "area_bias": 1.94
+        },
+        "0.3": {
+          "csi": 0.358,
+          "pod": 0.752,
+          "far": 0.594,
+          "area_sim_km2": 91.6,
+          "area_bias": 1.85
+        }
+      },
+      "wall_note": "串行 100m，见 run.log"
+    },
+    {
+      "run_id": "scen_q4000_100m(基线,同 q4000/n0.035)",
+      "q_peak": 4000.0,
+      "fpfric": 0.035,
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 9.62,
+      "station_wd_center_m": 0.009,
+      "station_wd_max_m": 10.28,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 9.62,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 7.023e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.313,
+          "pod": 0.672,
+          "far": 0.63,
+          "area_sim_km2": 89.91,
+          "area_bias": 1.82
+        },
+        "0.15": {
+          "csi": 0.314,
+          "pod": 0.653,
+          "far": 0.624,
+          "area_sim_km2": 85.95,
+          "area_bias": 1.74
+        },
+        "0.3": {
+          "csi": 0.311,
+          "pod": 0.63,
+          "far": 0.62,
+          "area_sim_km2": 82.0,
+          "area_bias": 1.66
+        }
+      }
+    }
+  ]
+}

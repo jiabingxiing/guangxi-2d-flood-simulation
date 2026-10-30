@@ -1,0 +1,132 @@
+{
+  "free": {
+    "scenario": "free",
+    "wet_area_km2": 263.24,
+    "anchor": "久隆镇/500kV站",
+    "anchor_max_depth_m": 0.547,
+    "anchor_depth_center_m": 0.008,
+    "anchor_depth_r2_m": 0.547,
+    "anchor_depth_r5_m": 1.684,
+    "r2_max_offset_cells": [
+      2,
+      0
+    ],
+    "r5_max_offset_cells": [
+      5,
+      -4
+    ],
+    "r5_distance_km": 1.28,
+    "radius_note": "主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深",
+    "final_vol_m3": 157771746.4,
+    "qout_final": 26.8,
+    "e_mass_132": 0.00049,
+    "utc": "2026-10-26T12:24:20.000000+00:00",
+    "exit": 0,
+    "wall_s": 360.0,
+    "peak_rss_mb": 9.5
+  },
+  "z0": {
+    "scenario": "z0",
+    "wet_area_km2": 263.4,
+    "anchor": "久隆镇/500kV站",
+    "anchor_max_depth_m": 0.55,
+    "final_vol_m3": 157959321.1,
+    "qout_final": 26.796,
+    "e_mass_132": 0.0001839,
+    "utc": "2026-10-26T12:24:22.104947+00:00",
+    "exit": 0,
+    "wall_s": 364.6,
+    "peak_rss_mb": 9.5,
+    "anchor_depth_center_m": 0.008,
+    "anchor_depth_r2_m": 0.547,
+    "anchor_depth_r5_m": 1.684,
+    "r2_max_offset_cells": [
+      2,
+      0
+    ],
+    "r5_max_offset_cells": [
+      5,
+      -4
+    ],
+    "r5_distance_km": 1.28,
+    "radius_note": "主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深"
+  },
+  "z05": {
+    "scenario": "z05",
+    "wet_area_km2": 264.92,
+    "anchor": "久隆镇/500kV站",
+    "anchor_max_depth_m": 0.55,
+    "final_vol_m3": 171499118.2,
+    "qout_final": 15.604,
+    "e_mass_132": 0.01223,
+    "utc": "2026-10-26T12:24:24.528259+00:00",
+    "exit": 0,
+    "wall_s": 205.2,
+    "peak_rss_mb": 9.5,
+    "anchor_depth_center_m": 0.008,
+    "anchor_depth_r2_m": 0.547,
+    "anchor_depth_r5_m": 1.684,
+    "r2_max_offset_cells": [
+      2,
+      0
+    ],
+    "r5_max_offset_cells": [
+      5,
+      -4
+    ],
+    "r5_distance_km": 1.28,
+    "radius_note": "主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深"
+  },
+  "z10": {
+    "scenario": "z10",
+    "wet_area_km2": 268.32,
+    "anchor": "久隆镇/500kV站",
+    "anchor_max_depth_m": 0.55,
+    "final_vol_m3": 191169425.5,
+    "qout_final": 17.906,
+    "e_mass_132": 0.03705,
+    "utc": "2026-10-26T12:24:27.017290+00:00",
+    "exit": 0,
+    "wall_s": 362.0,
+    "peak_rss_mb": 9.5,
+    "anchor_depth_center_m": 0.008,
+    "anchor_depth_r2_m": 0.547,
+    "anchor_depth_r5_m": 1.684,
+    "r2_max_offset_cells": [
+      2,
+      0
+    ],
+    "r5_max_offset_cells": [
+      5,
+      -4
+    ],
+    "r5_distance_km": 1.28,
+    "radius_note": "主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深"
+  },
+  "ztide": {
+    "scenario": "ztide",
+    "wet_area_km2": 286.16,
+    "anchor": "久隆镇/500kV站",
+    "anchor_max_depth_m": 0.55,
+    "final_vol_m3": 164868786.4,
+    "qout_final": 15.559,
+    "e_mass_132": 0.0406,
+    "utc": "2026-10-26T12:24:29.451246+00:00",
+    "exit": 0,
+    "wall_s": 203.9,
+    "peak_rss_mb": 9.4,
+    "anchor_depth_center_m": 0.008,
+    "anchor_depth_r2_m": 0.547,
+    "anchor_depth_r5_m": 1.684,
+    "r2_max_offset_cells": [
+      2,
+      0
+    ],
+    "r5_max_offset_cells": [
+      5,
+      -4
+    ],
+    "r5_distance_km": 1.28,
+    "radius_note": "主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深"
+  }
+}

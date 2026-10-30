@@ -1,0 +1,30 @@
+{
+  "case": "guigang",
+  "source": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
+  "target_crs": "EPSG:32649",
+  "resolution_m": 12.5,
+  "aoi_buffer_m": 2000.0,
+  "grid": [
+    6910,
+    4369
+  ],
+  "bounds_target_crs": [
+    313444.1,
+    2536333.7,
+    399819.4,
+    2590948.5
+  ],
+  "sha256": "5366f01bdaf32cca5f7cc7f1f4968d5a1b7f6d363b323800497293f0678ad94a",
+  "size_mb": 39.0,
+  "qa": {
+    "valid_px": 30189790,
+    "elev_min": -8.0,
+    "elev_p50": 62.0,
+    "elev_max": 1125.0,
+    "zero_px": 0,
+    "neg_px": 24,
+    "nodata_px": 0,
+    "note": "源 NoData=0 未做掩膜（海岸 0 m 冲突，QA 后再定）；负值多位于海面/河道水域"
+  },
+  "generated_utc": "2026-10-24T03:50:33.705541+00:00"
+}

@@ -1,0 +1,68 @@
+# 案例：钦州久隆（阶段0 —— 打通端到端闭环的先行案例）
+case: jiulong
+priority: 1
+status: stage3-degraded        # 降级模式首轮情景；AOI/站址精确坐标仍待业务确认
+
+aoi:
+  provisional_bbox_wgs84: [108.55, 21.92, 108.90, 22.20]   # [西, 南, 东, 北]
+  anchor: "久隆镇中心约 108.7161E, 22.0638N（钦南区，钦州城区东北约19km），暂定框外扩"
+  target_asset: "500kV 久隆变电站（钦州地区唯一 500kV 枢纽；精确坐标待业务提供）"
+  domain_rule: "目标站、连通河沟/排水通道、上游产流区及下游潮位控制区（终稿 1.1）"
+  confirm_pending: "站区精确坐标、流域/汇水边界、下游潮位控制断面位置"
+
+crs:
+  epsg: 32649                   # UTM 49N —— pyproj 按 AOI 核验（data/catalog/crs_check.json）
+  note: "AOI 暂定框核验结果；AOI 变更后复跑 scripts/stage0/check_crs.py"
+
+vertical_datum:
+  target: "待确认"
+  datum_offset_m: null          # 禁止预填（终稿 2.1 / 第六章）
+
+grid:
+  background_resolution_m: 12.5     # 计划值（与本地 DEM 同分辨率）
+  station_local_resolution_m: null  # ADR-0005：变电站按整体处理，站区 1–5 m 局部模型整体推迟
+  cell_estimate_note: "按终稿 1.2 网格量表在冻结 AOI 后重估"
+
+implementation:                     # 实际执行（降级模式），与计划值分开记录
+  mode: "degraded-public-data"
+  resolution_m: 200
+  dt_s: 5.0
+  saveint_s: 432000
+  run_ids: ["scen_free_200m", "scen_z0_200m", "scen_z05_200m", "scen_z10_200m", "scen_ztide_200m"]
+  note: "200 m 为当前机时下的情景网格；12.5 m 计划未执行；站址结论为 ±2 格面积级"
+
+terrain:
+  primary: {id: dem_gx_local, path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif", resolution_m: 12.5, crs: "EPSG:32648", note: "裁切后重投影至本案例 32649；来源/垂直基准待查证（ADR-0004）"}
+
+events:
+  candidates:
+    - id: "2024-09-yagi"
+      window: ["2024-09-05", "2024-09-16"]
+      status: "候选，资料未核验"
+      evidence: "2024年第11号台风摩羯残余环流：9月7–8日钦州等地暴雨、局地大暴雨到特大暴雨（央视/气象预报公开报道）；久隆站区具体雨情、水位/内涝过程未核验"
+      pending: ["钦州/钦江或站区邻近雨量站过程", "潮位过程（钦州湾）", "SAR 过境检索", "现场水痕/照片"]
+
+boundaries:
+  upstream: {type: "待确认", note: "小流域可先以降雨驱动 + 必要上游 Q(t)；避免与边界流量重复计量"}
+  downstream: {type: "待确认", note: "久隆近海须检查感潮影响；未经验证不得以自由出流替代潮位边界（终稿 2 数据表）"}
+
+special_checks:                 # 案例特有门禁
+  - "感潮/潮位边界适用性检查（钦江下游钦州湾方向）"
+  - "站区阻水/排水通道核查：围墙、站门、涵洞、排水沟、站外来水路径"
+  - "土地覆盖分类须含红树林/沿海植被类别映射（终稿 第九章）"
+
+model:
+  solver: "LISFLOOD-FP（已构建 8.1.0，见 configs/model_manifest.yaml）"
+  role: "先行案例：打通数据—模型—验证闭环"
+
+event_replay:                  # 2024-09 摩羯事件回算方案（阶段3）
+  event: "2024-09-yagi"
+  window: ["2024-09-05", "2024-09-12"]
+  rainfall: {id: era5_jiulong_sep2024, file: "data/catalog/probes/jiulong_sep2024_era5.json", total_mm: 227.7, peak_day: "09-07 102.6mm"}
+  roughness: {file: "data/interim/jiulong/mannings_12p5m_32649.tif", note: "先验映射 n≈0.092，见 roughness_jiulong.json"}
+  downstream_scenarios:        # 感潮边界情景带（无验潮数据的降级方案，ADR-0004）
+    - {id: free, type: "自由出流（对照）"}
+    - {id: z0, type: "定水位 Z=0 m（平均海面近似）"}
+    - {id: z05, type: "定水位 Z=+0.5 m（一般增水情景）"}
+    - {id: z10, type: "定水位 Z=+1.0 m（强增水情景）"}
+  tidal_note: "天文潮时变边界待引入公开潮汐模型（TPXO/FES）后升级；情景带阶段全部标注情景级"

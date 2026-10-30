@@ -1,0 +1,201 @@
+{
+  "generated_utc": "2026-10-26T13:09:48.246555+00:00",
+  "solver": "acceleration（默认 FV1 求解器在本构建存在微水深步长塌缩，见基准报告）",
+  "lisflood": "8.1.0 MinGW GCC16.2 -O3 -fopenmp -static",
+  "B1": {
+    "case": "B1 静水湖泊（cones，sim 100s）",
+    "exit": 0,
+    "wall_s": 3.67,
+    "peak_rss_mb": 5.5,
+    "steps": 2001,
+    "final_vol_m3": 3879.7925,
+    "max_abs_verror": 0.0,
+    "surface_max_dev_m": 0.0,
+    "surface_mean_dev_m": 0.0,
+    "wet_cells": 2250,
+    "status": "PASS"
+  },
+  "B2": {
+    "case": "B2 湿床径向溃坝（全域0.5m+中心2.5m柱，acceleration 求解器）",
+    "runs": {
+      "std_0.01": {
+        "initial_tstep": 0.01,
+        "exit": 0,
+        "wall_s": 2.89,
+        "peak_rss_mb": 11.3,
+        "steps": 501,
+        "vol_init": 839.12,
+        "vol_final": 846.033,
+        "mass_gain_pct": 0.8238,
+        "max_abs_verror": 4.0606
+      },
+      "tstep_0.001": {
+        "initial_tstep": 0.001,
+        "exit": 0,
+        "wall_s": 39.19,
+        "peak_rss_mb": 11.3,
+        "steps": 5000,
+        "vol_init": 839.12,
+        "vol_final": 852.331,
+        "mass_gain_pct": 1.5744,
+        "max_abs_verror": 5.1181
+      }
+    },
+    "wet_radii_m": {
+      "east": 19.8,
+      "west": 19.8,
+      "north": 19.8,
+      "south": 19.8
+    },
+    "symmetry_max_diff_m": 0.0,
+    "reference_default_solver": "默认求解器步长塌缩（~1e-5s，0.5s模拟>300s）但 Vol 恒等（Verror=0）——2026-10-24 实测",
+    "status": "SYMMETRY_PASS_MASS_FAIL",
+    "mass_gate_target": 0.0001,
+    "mass_gain_pct": 0.8238,
+    "mass_gate": "FAIL",
+    "note": "质量增益 +0.82%（dt=0.01）/ +1.57%（dt=0.001），超 1e-4；对称性通过，守恒不通过"
+  },
+  "B3": {
+    "case": "B3 一维湿床溃坝（h1=2.5/h2=0.5m，sim 2.5s，跃深判据）",
+    "exit": 0,
+    "wall_s": 4.62,
+    "peak_rss_mb": 11.0,
+    "steps": 251,
+    "max_abs_verror": 0.0,
+    "dam_col": 99,
+    "cell_m": 0.2,
+    "front_rel_m_by_save": {
+      "0000": 0.0,
+      "0001": 0.8,
+      "0002": 1.8,
+      "0003": 2.8,
+      "0004": 3.8,
+      "0005": 4.8,
+      "0006": 5.8,
+      "0007": 7.0,
+      "0008": 8.0,
+      "0009": 9.0,
+      "0010": 10.0,
+      "0011": 19.8,
+      "0012": 19.6
+    },
+    "stoker_bore_speed_ms": 4.695,
+    "note": "仅波前速度对照；未比水深/流速全剖面",
+    "status": "PASS_PARTIAL"
+  },
+  "B4": {
+    "case": "B4 均匀降雨闭域（300x300@2m，9mm/h×1h，.rain 时间序列）",
+    "exit": 0,
+    "wall_s": 6.72,
+    "peak_rss_mb": 18.6,
+    "steps": 723,
+    "expected_vol_m3": 3240.0,
+    "actual_vol_m3": 3240.0,
+    "e_mass": 1.404e-16,
+    "mean_depth_mm": 9.0,
+    "expected_depth_mm": 9.0,
+    "units_confirmed": true,
+    "note": "e_mass<5% 即确认 mm/hr 口径正确（含湿单元阈值误差）",
+    "status": "PASS"
+  },
+  "B5": {
+    "case": "B5 网格规模标定（径向斑，dx=1m，sim 2s）",
+    "runs": [
+      {
+        "exit": 0,
+        "wall_s": 3.75,
+        "peak_rss_mb": 43.5,
+        "n": 500,
+        "cells": 250000,
+        "steps": 40,
+        "max_abs_verror": 0.0,
+        "cell_per_s": 66667.0
+      },
+      {
+        "exit": 0,
+        "wall_s": 12.78,
+        "peak_rss_mb": 157.8,
+        "n": 1000,
+        "cells": 1000000,
+        "steps": 40,
+        "max_abs_verror": 0.0,
+        "cell_per_s": 78247.0
+      },
+      {
+        "exit": 0,
+        "wall_s": 49.28,
+        "peak_rss_mb": 614.3,
+        "n": 2000,
+        "cells": 4000000,
+        "steps": 40,
+        "max_abs_verror": 0.0,
+        "cell_per_s": 81169.0
+      }
+    ],
+    "status": "PERFORMANCE_ONLY"
+  },
+  "B6": {
+    "case": "B6 点源标度律（边界单位）",
+    "status": "DIAGNOSTIC",
+    "evidence": [
+      "outputs/bench/B6_bdy_units/",
+      "docs/stage3_ningming_run1.md"
+    ],
+    "result": "QFIX 10@5m -> 实测 50；80@100m -> 实测 8000（文件值=Q/格边长）",
+    "gate": "非终稿十一章独立项；用于生产边界单位校验"
+  },
+  "B7": {
+    "case": "B7 FREE 边界出流（平底池 + 坡度）",
+    "status": "DIAGNOSTIC",
+    "evidence": [
+      "outputs/bench/B7_free_bc/",
+      "docs/stage3_ningming_run1.md"
+    ],
+    "result": "无坡度近零出流；显式坡度后正常出流；用于 G14 修复",
+    "gate": "非终稿十一章独立项；用于边界机制诊断"
+  },
+  "B8": {
+    "case": "B8 结构连通性定量（合成堤防四组 + T016c 桥洞对照）",
+    "status": "PASS_PARTIAL",
+    "B8a_status": "PASS",
+    "B8b_status": "DIFFERS_FROM_REFERENCE",
+    "B8a_ratios": {
+      "wall_over_open": 0.0,
+      "notch_over_open": 0.8555,
+      "weir_over_open": 0.5294,
+      "wall_out_over_open_out": 0.0,
+      "notch_out_over_open_out": 0.7835,
+      "weir_out_over_open_out": 0.0
+    },
+    "B8a_checks": {
+      "wall_blocks": true,
+      "notch_passes": true,
+      "notch_less_than_open": true,
+      "weir_passes": true,
+      "weir_less_than_open": true,
+      "wall_no_wet_west": true,
+      "wall_no_outflow": true,
+      "e_mass_ok": true
+    },
+    "B8b_max_abs_diff_m": 8.988,
+    "B8b_orifice_downstream_wet": {
+      "v81": [
+        false,
+        false,
+        false
+      ],
+      "v57": [
+        true,
+        true,
+        true
+      ]
+    },
+    "evidence": [
+      "outputs/bench/B8_levee/summary.json",
+      "outputs/bench/B8_T016c/",
+      "outputs/bench/B8_T016c_ref/"
+    ],
+    "gate": "合成堤防证明 2D 阻断/开口/堰三类连通性可表达；T016c 提示生产构建与参考构建差异，真实结构（堤防/桥涵/站门）仍未建模（R1）",
+    "note": "结构连通性可由 weirfile 与 DEM 加高两种方式表达；通过率=全部检查项。不覆盖真实堤防/桥涵/站门资料（R1）。"
+  }
+}

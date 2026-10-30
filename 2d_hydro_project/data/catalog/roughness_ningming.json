@@ -1,0 +1,29 @@
+{
+  "case": "ningming",
+  "tile": "N21E105.tif",
+  "res_m": 12.5,
+  "epsg": 32648,
+  "grid": [
+    8198,
+    6338
+  ],
+  "n_area_weighted_mean": 0.0832,
+  "unknown_or_nodata_frac": 0.0,
+  "mapping": {
+    "10": 0.1,
+    "20": 0.08,
+    "30": 0.035,
+    "40": 0.05,
+    "50": 0.15,
+    "60": 0.025,
+    "70": 0.03,
+    "80": 0.03,
+    "90": 0.07,
+    "95": 0.13,
+    "100": 0.07
+  },
+  "default_for_unknown": 0.05,
+  "note": "先验中值（终稿 九章）；率定在阶段3/4 分阶段进行（先边界/河槽，后糙率）",
+  "generated_utc": "2026-10-24T05:55:12.531317+00:00",
+  "output": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\ningming\\mannings_12p5m_32648.tif"
+}

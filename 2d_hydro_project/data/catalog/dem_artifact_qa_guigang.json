@@ -1,0 +1,227 @@
+{
+  "case": "guigang",
+  "path": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\dem_12p5m_32649.tif",
+  "sha256": "5366f01bdaf32cca5f7cc7f1f4968d5a1b7f6d363b323800497293f0678ad94a",
+  "read_only": true,
+  "status": "diagnostic_only",
+  "metadata": {
+    "crs": "EPSG:32649",
+    "width": 6910,
+    "height": 4369,
+    "resolution_m": [
+      12.500036010360363,
+      12.50053393175828
+    ],
+    "nodata": -9999.0,
+    "bounds": [
+      313444.1055316646,
+      2536333.680518629,
+      399819.35436325474,
+      2590948.513266481
+    ]
+  },
+  "qa": {
+    "valid_px": 30189790,
+    "nodata_px": 0,
+    "zero_px": 0,
+    "negative_px": 24,
+    "zero_fraction_valid": 0.0,
+    "negative_fraction_valid": 7.9e-07,
+    "elevation_m": {
+      "n": 30189790,
+      "min": -8.0,
+      "p50": 62.0,
+      "p95": 384.0,
+      "max": 1125.0
+    }
+  },
+  "axis_profiles": {
+    "rows": {
+      "n_profile": 4369,
+      "valid_profile_count": 4369,
+      "median_valid_count": 6910,
+      "trend_slope_per_index": -0.02808412,
+      "residual": {
+        "n": 4369,
+        "min": -26.5774,
+        "p50": -1.0657,
+        "p95": 33.8836,
+        "max": 40.3557
+      },
+      "residual_mad": 14.082331,
+      "flag_threshold_m": 84.494,
+      "flagged_profile_count": 0,
+      "flagged_profile_fraction": 0.0,
+      "adjacent_jump": {
+        "n": 4368,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 1.0,
+        "max": 2.0
+      }
+    },
+    "columns": {
+      "n_profile": 6910,
+      "valid_profile_count": 6910,
+      "median_valid_count": 4369,
+      "trend_slope_per_index": -0.02078493,
+      "residual": {
+        "n": 6910,
+        "min": -68.8005,
+        "p50": 0.7591,
+        "p95": 40.8298,
+        "max": 71.5672
+      },
+      "residual_mad": 16.340374,
+      "flag_threshold_m": 98.0422,
+      "flagged_profile_count": 0,
+      "flagged_profile_fraction": 0.0,
+      "adjacent_jump": {
+        "n": 6909,
+        "min": 0.0,
+        "p50": 0.0,
+        "p95": 1.0,
+        "max": 4.0
+      }
+    },
+    "direction_energy_ratio": 1.205,
+    "gradient_m_per_px": {
+      "n": 30189790,
+      "min": 0.0,
+      "p50": 1.0,
+      "p95": 7.0711,
+      "max": 56.4026
+    }
+  },
+  "points": [
+    {
+      "id": "east_1",
+      "lon": 109.421226,
+      "lat": 23.135074,
+      "x": 338352.028,
+      "y": 2559347.719,
+      "row": 2527,
+      "col": 1992,
+      "row_f": 2527.955597,
+      "col_f": 1992.628042,
+      "row_residual_px": 0.455597,
+      "col_residual_px": 0.128042,
+      "center_dx_m": 1.600534,
+      "center_dy_m": -5.695203,
+      "inside": true,
+      "center_value_m": 47.0,
+      "window_stats_m": {
+        "n": 25,
+        "min": 44.0,
+        "p50": 47.0,
+        "p95": 49.0,
+        "max": 49.0
+      },
+      "window_zero_px": 0,
+      "window_negative_px": 0,
+      "window_nodata_px": 0
+    },
+    {
+      "id": "east_2",
+      "lon": 109.761781,
+      "lat": 23.083198,
+      "x": 373176.445,
+      "y": 2553267.15,
+      "row": 3014,
+      "col": 4778,
+      "row_f": 3014.380342,
+      "col_f": 4778.573414,
+      "row_residual_px": -0.119658,
+      "col_residual_px": 0.073414,
+      "center_dx_m": 0.917679,
+      "center_dy_m": 1.495784,
+      "inside": true,
+      "center_value_m": 32.0,
+      "window_stats_m": {
+        "n": 25,
+        "min": 30.0,
+        "p50": 32.0,
+        "p95": 33.0,
+        "max": 33.0
+      },
+      "window_zero_px": 0,
+      "window_negative_px": 0,
+      "window_nodata_px": 0
+    }
+  ],
+  "profiles": [],
+  "source_points": [
+    {
+      "id": "east_1",
+      "lon": 109.421226,
+      "lat": 23.135074,
+      "x": 952954.752,
+      "y": 2565348.213,
+      "row": 29375,
+      "col": 40716,
+      "row_f": 29375.952596,
+      "col_f": 40716.192643,
+      "row_residual_px": 0.452596,
+      "col_residual_px": -0.307357,
+      "center_dx_m": -3.841962,
+      "center_dy_m": -5.657454,
+      "inside": true,
+      "center_value_m": 47.0,
+      "window_stats_m": {
+        "n": 25,
+        "min": 44.0,
+        "p50": 47.0,
+        "p95": 49.0,
+        "max": 49.0
+      },
+      "window_zero_px": 0,
+      "window_negative_px": 0,
+      "window_nodata_px": 0,
+      "source_exists": true,
+      "source_nodata": 0.0,
+      "source_zero_is_nodata": false
+    },
+    {
+      "id": "east_2",
+      "lon": 109.761781,
+      "lat": 23.083198,
+      "x": 988086.777,
+      "y": 2560694.277,
+      "row": 29748,
+      "col": 43526,
+      "row_f": 29748.267455,
+      "col_f": 43526.754629,
+      "row_residual_px": -0.232545,
+      "col_residual_px": 0.254629,
+      "center_dx_m": 3.182863,
+      "center_dy_m": 2.906811,
+      "inside": true,
+      "center_value_m": 32.0,
+      "window_stats_m": {
+        "n": 25,
+        "min": 30.0,
+        "p50": 32.0,
+        "p95": 33.0,
+        "max": 33.0
+      },
+      "window_zero_px": 0,
+      "window_negative_px": 0,
+      "window_nodata_px": 0,
+      "source_exists": true,
+      "source_nodata": 0.0,
+      "source_zero_is_nodata": false
+    }
+  ],
+  "thresholds_recommended_not_frozen": {
+    "seam_jump_p95_m": 0.2,
+    "profile_residual_p95_m": 0.3,
+    "affected_area_fraction": 0.01,
+    "direction_energy_ratio": 1.5
+  },
+  "notes": [
+    "行列剖面只用于诊断，不能单独证明条带是错误。",
+    "真实河谷、堤顶、道路、建筑和河槽刻蚀必须单独核查。",
+    "源 DEM 的 0 值语义仍未闭合。"
+  ],
+  "generated_utc": "2026-10-28T04:56:59.551997+00:00"
+}

@@ -1,0 +1,251 @@
+{
+  "generated_utc": "2026-10-26T13:18:04.967484+00:00",
+  "smoke_equivalence": {
+    "cases": {
+      "nofile": {
+        "exit": 0,
+        "wall_s": 5.28,
+        "peak_rss_mb": 4.2,
+        "mean_wd_m": 0.035994,
+        "vol_m3": 143975.0,
+        "max_wd_m": 0.418
+      },
+      "eq": {
+        "exit": 0,
+        "wall_s": 3.17,
+        "peak_rss_mb": 4.2,
+        "mean_wd_m": 0.035994,
+        "vol_m3": 143975.0,
+        "max_wd_m": 0.418
+      },
+      "finer": {
+        "exit": 0,
+        "wall_s": 5.44,
+        "peak_rss_mb": 4.2,
+        "mean_wd_m": 0.035985,
+        "vol_m3": 143940.0,
+        "max_wd_m": 0.3
+      }
+    },
+    "checks": {
+      "uniform_manning_equals_fpfric": true,
+      "changed_n_changes_result": true,
+      "max_abs_diff_uniform_vs_fpfric_m": 0.0,
+      "max_abs_diff_n005_vs_n010_m": 0.118,
+      "vol_ratio_n005_over_n010": 0.9998,
+      "status": "PASS"
+    },
+    "note": "均匀 manning.asc 与 fpfric 同值时应逐像元一致；n 减半后必须出现差异；两者同时成立才证明 manningfile 生效（不只是被解析）。"
+  },
+  "comparison": {
+    "design": {
+      "case": "ningming 2026-08-zitan",
+      "q_peak": 6000.0,
+      "res_m": 100,
+      "uniform_baseline": {
+        "run": "scen_q6000_n100_100m",
+        "fpfric": 0.1
+      },
+      "spatial": {
+        "run": "scen_q6000_n100_100m_nsp_b0",
+        "manning_source": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\ningming\\mannings_12p5m_32648.tif",
+        "mapping": "WorldCover 先验中值（make_roughness.py）",
+        "grid_stats": {
+          "source": "data\\interim\\ningming\\mannings_12p5m_32648.tif",
+          "resampling": "nearest（类别常数，不插值）",
+          "grid": [
+            244,
+            224
+          ],
+          "res_m": 100.0,
+          "n_mean": 0.0822,
+          "n_min": 0.025,
+          "n_max": 0.15,
+          "n_p10": 0.05,
+          "n_p50": 0.1,
+          "n_p90": 0.1,
+          "uncovered_cells_fallback_fpfric": 0,
+          "fpfric_used_as_fallback": 0.1
+        }
+      },
+      "metric_semantics": "8/24 观测时刻 78h 切片；主阈值 0.15 预注册；模拟剔除 8/6 常水"
+    },
+    "uniform": {
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.32,
+      "station_wd_center_m": 0.018,
+      "station_wd_max_m": 11.88,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.32,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 5.802e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.347,
+          "pod": 0.786,
+          "far": 0.616,
+          "area_sim_km2": 101.43,
+          "area_bias": 2.05
+        },
+        "0.15": {
+          "csi": 0.357,
+          "pod": 0.773,
+          "far": 0.602,
+          "area_sim_km2": 96.02,
+          "area_bias": 1.94
+        },
+        "0.3": {
+          "csi": 0.358,
+          "pod": 0.752,
+          "far": 0.594,
+          "area_sim_km2": 91.6,
+          "area_bias": 1.85
+        }
+      }
+    },
+    "spatial": {
+      "obs_time": "2026-08-24T08:00+08:00",
+      "frame": 13,
+      "frame_t_h": 78.0,
+      "time_uncertainty_h": 6,
+      "primary_threshold_m": 0.15,
+      "valid_area_km2": 546.56,
+      "observed_new_area_km2": 49.5,
+      "station_wd_at_obs_m": 10.54,
+      "station_wd_center_m": 0.027,
+      "station_wd_max_m": 11.61,
+      "station_radius_cells": 2,
+      "station_wd_final_m": 10.54,
+      "obs_rise_station_m": 14.19,
+      "area_obs_km2": 49.5,
+      "metric_semantics": "时刻切片口径：取 2026-08-24 观测时刻最近 6h 帧（78h），模拟剔除 8/6 常水；不再用 res.max",
+      "e_mass_132": 7.685e-05,
+      "thresholds": {
+        "0.05": {
+          "csi": 0.347,
+          "pod": 0.778,
+          "far": 0.614,
+          "area_sim_km2": 99.91,
+          "area_bias": 2.02
+        },
+        "0.15": {
+          "csi": 0.353,
+          "pod": 0.762,
+          "far": 0.604,
+          "area_sim_km2": 95.12,
+          "area_bias": 1.92
+        },
+        "0.3": {
+          "csi": 0.354,
+          "pod": 0.74,
+          "far": 0.596,
+          "area_sim_km2": 90.82,
+          "area_bias": 1.83
+        }
+      }
+    },
+    "by_threshold": {
+      "0.05": {
+        "uniform": {
+          "csi": 0.347,
+          "pod": 0.786,
+          "far": 0.616,
+          "area_sim_km2": 101.43,
+          "area_bias": 2.05
+        },
+        "spatial": {
+          "csi": 0.347,
+          "pod": 0.778,
+          "far": 0.614,
+          "area_sim_km2": 99.91,
+          "area_bias": 2.02
+        },
+        "delta": {
+          "csi": 0.0,
+          "pod": -0.008,
+          "far": -0.002,
+          "area_sim_km2": -1.52
+        },
+        "area_bias_delta": -0.03
+      },
+      "0.15": {
+        "uniform": {
+          "csi": 0.357,
+          "pod": 0.773,
+          "far": 0.602,
+          "area_sim_km2": 96.02,
+          "area_bias": 1.94
+        },
+        "spatial": {
+          "csi": 0.353,
+          "pod": 0.762,
+          "far": 0.604,
+          "area_sim_km2": 95.12,
+          "area_bias": 1.92
+        },
+        "delta": {
+          "csi": -0.004,
+          "pod": -0.011,
+          "far": 0.002,
+          "area_sim_km2": -0.9
+        },
+        "area_bias_delta": -0.02
+      },
+      "0.3": {
+        "uniform": {
+          "csi": 0.358,
+          "pod": 0.752,
+          "far": 0.594,
+          "area_sim_km2": 91.6,
+          "area_bias": 1.85
+        },
+        "spatial": {
+          "csi": 0.354,
+          "pod": 0.74,
+          "far": 0.596,
+          "area_sim_km2": 90.82,
+          "area_bias": 1.83
+        },
+        "delta": {
+          "csi": -0.004,
+          "pod": -0.012,
+          "far": 0.002,
+          "area_sim_km2": -0.78
+        },
+        "area_bias_delta": -0.02
+      }
+    },
+    "primary_threshold_0p15": {
+      "uniform": {
+        "csi": 0.357,
+        "pod": 0.773,
+        "far": 0.602,
+        "area_sim_km2": 96.02,
+        "area_bias": 1.94
+      },
+      "spatial": {
+        "csi": 0.353,
+        "pod": 0.762,
+        "far": 0.604,
+        "area_sim_km2": 95.12,
+        "area_bias": 1.92
+      },
+      "delta": {
+        "csi": -0.004,
+        "pod": -0.011,
+        "far": 0.002,
+        "area_sim_km2": -0.9
+      },
+      "area_bias_delta": -0.02
+    },
+    "conclusion_key": "空间 Manning 使主阈值 CSI 变化 -0.004、面积变化 -0.90 km²（-0.02×）、FAR 变化 +0.002"
+  }
+}

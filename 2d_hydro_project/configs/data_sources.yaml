@@ -1,0 +1,219 @@
+# 数据源目录（阶段0，2026-10-24 第二批修订）—— 数据资产登记
+# 字段含义见终稿 3.1；status 取值：已获得 | 待申请 | 已申请 | 入口可达·待账号 | 待核验 | 已解决 | 不采用
+schema_version: "0.3.0"
+note: >
+  修订依据：用户 2026-10-24 五项答复（公开数据降级模式、本地 DEM、Dataspace 已注册、
+  RACI 留空、外置硬盘待接）。降级模式全部结论标注研究性/条件性（ADR-0004）。
+
+sources:
+  # ---------- 地形（本地已有，主基底） ----------
+  - id: dem_gx_local
+    category: 区域地形（主基底）
+    product: "广西全省 DEM（广西.tif，前期『五省区DEM』工作区）"
+    priority: 1
+    access: "本地路径 D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif"
+    account_required: false
+    license: "待查证（产品来源未确认，疑似 ALOS 12.5 m 系；前期项目工作地形）"
+    sensitivity: internal
+    status: 已获得·待查证
+    metadata: {resolution_m: 12.5, crs: "EPSG:32648", size_mb: 2051, grid: "61834x49239", nodata: 0}
+    qa_flags:
+      - "NoData=0 与海岸 0 m 有效值冲突——切 AOI 后必须核查边缘与海面像元"
+      - "整省单带 32648；久隆/贵港案例须重投影至 32649（ADR-0002）并留痕"
+      - "垂直基准未确认——见 aoi_crs_baseline.md 第 5 节获取路径"
+    note: "盘见 data/catalog/dem_inventory.json；云贵粤琼同名四省瓦片可复用同一流程"
+
+  - id: ningming_validation_local
+    category: 遥感观测 + 站点（宁明 2026-08 紫檀事件）
+    product: "GF-3 SAR 两期（2026-08-06 灾前、08-24 近洪峰）+ 水体/淹没范围 shp + 4 站水位（7月基期+8月峰值，站基面）"
+    priority: 1
+    access: "本地已解包 data/raw/ningming_validation/（源 7z 位于 0731 五省区DEM 目录）"
+    account_required: false
+    license: "内部/前期项目产物；GF-3 原始数据授权与提取参数待用户提供说明"
+    sensitivity: restricted
+    status: 已获得·已解包登记
+    note: "站水位与央视报道吻合（县城站 8月 123.43 m vs 8/24 08时 122.96 m 上涨中）；事件=2026年第19号台风紫檀（年份已更正，此前误记 2024）"
+
+  # ---------- 地形（公开，交叉校验/补充） ----------
+  - id: fabdem
+    category: 区域地形（交叉校验）
+    product: "FABDEM v1.2（约 30 m，去植被去建筑）"
+    priority: 4
+    access: "布里斯托大学数据页（需注册）"
+    account_required: true
+    license: "CC BY-NC-SA —— 业务化（生产/外发）前须合规审查"
+    sensitivity: public
+    network_probe: fabdem
+    status: 入口可达·待账号（降级为非阻塞：本地 12.5 m DEM 已为主基底，FABDEM 仅作裸地交叉校验）
+    note: "非必需；如 12.5 m DEM 查证为 RTC/含植被产品，再升级其优先级"
+
+  - id: copernicus_glo30
+    category: 区域地形（交叉校验）
+    product: "Copernicus DEM GLO-30（DSM）"
+    priority: 4
+    access: "https://dataspace.copernicus.eu（用户已注册，浏览器已登录）"
+    account_required: true
+    license: "Copernicus 免费使用条款，署名要求待核验"
+    sensitivity: public
+    network_probe: copernicus_dataspace
+    status: 账号已有·待 API token 与下载
+    note: "与本地 DEM 交叉校验用；下载需在账户页生成 token 后经 .env 注入"
+
+  - id: alos_plasar_rtc
+    category: 区域地形（待查明）
+    product: "ALOS PALSAR 12.5 m RTC"
+    priority: 4
+    access: "ASF（需账号）"
+    account_required: true
+    license: "待核验"
+    sensitivity: public
+    status: 不采用（暂）
+    note: "若本地 12.5 m DEM 查证即为 ASF RTC，则须按终稿 六.2 明示其为雷达地形产品、非裸地微地形"
+
+  # ---------- 河道/结构（降级模式） ----------
+  - id: hydro_cross_sections
+    category: 河道与水下地形
+    product: "水文部门实测断面、测深、桥涵断面、率定曲线"
+    priority: 2
+    access: "水文/水利部门授权（用户当前无）"
+    account_required: true
+    license: "政务数据授权"
+    sensitivity: restricted
+    status: 待申请（降级：无断面时用 DEM+MERIT Hydro 先验做有界河槽情景，结论标条件性）
+    note: "ADR-0004：河道几何不确定性进入情景带，不虚构单值断面"
+
+  - id: structures_asbuilt
+    category: 工程结构
+    product: "堤防、道路、闸坝、桥涵、围墙/站门设计或竣工资料"
+    priority: 3
+    access: "业务部门/业主提供（用户当前无）"
+    account_required: true
+    license: "内部敏感"
+    sensitivity: high
+    status: 待申请（降级：结构物按 DEM 可辨高程 + OSM/影像筛查近似，误差明示）
+    note: "ADR-0005 后站区围墙/大门细节不再是必需项"
+
+  # ---------- 土地覆盖 ----------
+  - id: esa_worldcover_2021
+    category: 土地覆盖
+    product: "ESA WorldCover 2021 v200（10 m）"
+    priority: 2
+    access: "https://esa-worldcover.org/en/data-access"
+    account_required: false
+    license: "CC BY 4.0（以官网当前条款为准，待核验）"
+    sensitivity: public
+    network_probe: esa_worldcover
+    status: 入口可达·待获取（AOI 冻结后取瓦片）
+    note: "类别映射完整处理未知类与 NoData；久隆含红树林/沿海植被类别"
+
+  - id: clcd_china
+    category: 土地覆盖
+    product: "CLCD 中国土地覆盖（30 m）"
+    priority: 3
+    access: "Zenodo/GEE（待核验当前入口）"
+    account_required: false
+    license: "CC BY 4.0 类（待核验）"
+    sensitivity: public
+    status: 待核验
+
+  - id: merit_hydro
+    category: 河网先验
+    product: "MERIT Hydro（约 90 m 全球河网/流向/河宽）"
+    priority: 2
+    access: "https://global-hydrodynamics.github.io/MERIT_Hydro/"
+    account_required: false
+    license: "待核验"
+    sensitivity: public
+    status: 待核验
+    note: "降级模式下重要性上升：作河槽参数化先验（宽度/底高程/纵坡情景带输入）"
+
+  # ---------- 降雨/水文（降级模式驱动） ----------
+  - id: open_meteo_era5
+    category: 降雨（降级模式主驱动）
+    product: "Open-Meteo Historical API（ERA5 / ERA5-Land，0.1°/逐时）"
+    priority: 1
+    access: "https://archive-api.open-meteo.com（无需账号）"
+    account_required: false
+    license: "CC BY 4.0（待核验当前条款）"
+    sensitivity: public
+    network_probe: open_meteo_api
+    status: 可用（4 天窗口样例通过；月级请求会超时，须 ≤8 天分段请求，见 probes/）
+    note: "再分析可能平滑局地强对流——作主驱动时标注驱动不确定性；与 IMERG/雷达产品交叉校验"
+
+  - id: gpm_imerg
+    category: 降雨（交叉校验）
+    product: "GPM IMERG（0.1°/30 min）"
+    priority: 2
+    access: "NASA GES DISC / Google Earth Engine（需免费账号）"
+    account_required: true
+    license: "待核验"
+    sensitivity: public
+    status: 待核验
+    note: "与 ERA5 互校；注册为用户动作"
+
+  - id: rain_gauge_local
+    category: 降雨（授权，暂缺）
+    product: "雨量站实测（气象/水文部门）"
+    priority: 2
+    access: "授权申请（用户当前无）"
+    account_required: true
+    license: "政务数据授权"
+    sensitivity: restricted
+    status: 待申请（降级模式非阻塞；取得后升级为主驱动）
+
+  - id: hydro_qz_gauges
+    category: 水文边界/验证（授权，暂缺）
+    product: "Q(t)/Z(t)：明江宁明站、贵港站；钦州湾潮位"
+    priority: 2
+    access: "水文部门授权（用户当前无）"
+    account_required: true
+    license: "政务数据授权"
+    sensitivity: restricted
+    status: 待申请（降级：河道型事件改情景级分析）
+    note: "宁明 2026-08 事件已有 4 站月度水位（7月基期+8月峰值，站基面，data/raw/ningming_validation/）；逐时过程仍无"
+
+  - id: tidal_model_public
+    category: 下游潮位边界（降级）
+    product: "天文潮潮位（TPXO/FES 公开潮汐模型计算）"
+    priority: 3
+    access: "公开学术下载（待核验入口）"
+    account_required: false
+    license: "学术使用条款待核验"
+    sensitivity: public
+    status: 待核验
+    note: "久隆感潮边界降级方案：天文潮 + 增水情景带（如 0/0.5/1.0 m）；增水无公开数据"
+
+  # ---------- 遥感 ----------
+  - id: sentinel1
+    category: 遥感观测
+    product: "Sentinel-1 IW GRD（摩羯窗口：宁明 4 景、贵港 6 景、久隆 2 景@09-05）"
+    priority: 2
+    access: "Dataspace 目录检索免登录（已验证）；下载需用户 token（账号已注册）"
+    account_required: true
+    license: "免费开放，使用条款待核验；凭证不入代码/仓库"
+    sensitivity: public
+    network_probe: copernicus_dataspace
+    status: 检索已通·待下载（data/catalog/s1_catalog.json）
+    note: "久隆窗口内仅 09-05 过境——需放宽至 09 月下旬复检索退水期影像；宁明 09-10/09-12 两期可用"
+
+  - id: field_evidence
+    category: 现场观测
+    product: "水痕/照片/水尺读数、站区受淹记录"
+    priority: 2
+    access: "业务部门/运维单位（用户当前无）"
+    account_required: true
+    license: "内部"
+    sensitivity: high
+    status: 待申请（非阻塞）
+
+  # ---------- 模型软件 ----------
+  - id: lisflood_fp
+    category: 模型（主候选）
+    product: "LISFLOOD-FP 8.1（Zenodo 开放获取）"
+    priority: 1
+    access: "已下载 data/raw/lisflood-fp/LISFLOOD-FP_v8.1.zip（63.9MB，MD5 校验通过）"
+    account_required: false
+    license: "Zenodo 元数据 gpl-2.0；官网页称 GPLv3 非商业——以源码文件头为准（阶段2核验，已在合规清单登记）"
+    sensitivity: public
+    status: 已获得·待构建
+    note: "包内含 lisflood.sln / lisflood_intel.sln（Visual Studio）、windep DLL、用户手册 PDF、Carlisle 5m 等测试案例；8.2（2024-07）在 zenodo.org/records/13121102 备选"

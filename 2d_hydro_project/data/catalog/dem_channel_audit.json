@@ -1,0 +1,22 @@
+{
+  "generated_utc": "2026-10-28T13:00:26.416827+00:00",
+  "script": "scripts/stage3/dem_channel_audit.py",
+  "water_mask": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\ningming\\water_0806.tif",
+  "gate": {
+    "far_fraction_max": 0.2,
+    "max_downcut_m": 30.0
+  },
+  "counts": {
+    "no_edit": 1
+  },
+  "runs": {
+    "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_eclosed": {
+      "run": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_eclosed",
+      "dem_asc": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\ningming\\2026-08-zitan\\scen_q6000_n100_100m_choff_eclosed\\dem.asc",
+      "status": "no_edit",
+      "gate": null,
+      "dem_sha256": "3830a1caa7baae06818660f7da2e22f34417846df51ee6fd4fd6b772355df494",
+      "reason": "无 dem_pre_carve.diff.txt：该 run 未记录地形修改"
+    }
+  }
+}

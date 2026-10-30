@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-10-26T23:04:50.772179+00:00",
+  "run_dir": "scen_free_200m_sv6h_recession",
+  "s1_scene_utc": "20240917T105023",
+  "frame_used": "res-0051.wd",
+  "frame_time_offset_h_vs_overpass": -0.84,
+  "e_mass_extended": 0.00053,
+  "model_wet_km2_0910T00": 233.08,
+  "model_wet_km2_at_overpass_frame": 260.76,
+  "model_area_change_0910_to_overpass_km2": 27.68,
+  "s1_water_km2_0905_prevent_in_aoi_nosea": 18.04,
+  "s1_water_km2_0917_in_aoi_nosea": 12.2,
+  "metrics_model_vs_s1_0917": {
+    "hit_cells": 118,
+    "false_alarm_cells": 6401,
+    "miss_cells": 187,
+    "csi": 0.018,
+    "pod": 0.387,
+    "far": 0.982,
+    "model_wet_km2": 260.76,
+    "s1_water_km2": 12.2
+  },
+  "verdict": "WEAK（退水期单景、G17 下限、模型无排水网面积系统性偏大；仅作趋势/量级参照，不作独立验证通过门）",
+  "caveats": [
+    "S1 为退水后期景（洪峰无过境），结论降级（终稿 §3.2）",
+    "S1 09-17 检出低于 09-05 常水（风浪/入射角/植被漏提，G17），S1 为下限",
+    "模型常水（河/塘/海）未编码，对照为总水体口径；海面像元双侧剔除",
+    "快照帧早于过境 50 min（±6h 窗内）",
+    "延长雨段（09-10~09-17，84 mm）下模型面积不降反增（+27.7 km²）——无排水网洼积+FREE 缓排不足以退水，与 S1 实测退水方向相反，定量支持『湿面积系统性偏大、仅情景级』既有限制"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "generated_utc": "2026-10-24T02:45:56.531180+00:00",
+  "script": "scripts/stage0/check_crs.py",
+  "aoi_status": "provisional（暂定框，业务确认后复跑）",
+  "cases": {
+    "jiulong": {
+      "bbox_wgs84": [
+        108.55,
+        21.92,
+        108.9,
+        22.2
+      ],
+      "note": "锚点：久隆镇 108.7161E 22.0638N（暂定框）",
+      "utm_zone_by_lon_formula": [
+        49
+      ],
+      "n_pyproj_candidates": 1,
+      "epsg": 32649,
+      "crs_name": "WGS 84 / UTM zone 49N",
+      "unit": "metre",
+      "is_projected": true,
+      "single_zone": true,
+      "matches_plan_expectation": true,
+      "plan_expected_epsg": 32649
+    },
+    "ningming": {
+      "bbox_wgs84": [
+        106.9,
+        21.95,
+        107.6,
+        22.45
+      ],
+      "note": "锚点：宁明县城 107.07E 22.14N（暂定框）",
+      "utm_zone_by_lon_formula": [
+        48
+      ],
+      "n_pyproj_candidates": 1,
+      "epsg": 32648,
+      "crs_name": "WGS 84 / UTM zone 48N",
+      "unit": "metre",
+      "is_projected": true,
+      "single_zone": true,
+      "matches_plan_expectation": true,
+      "plan_expected_epsg": 32648
+    },
+    "guigang": {
+      "bbox_wgs84": [
+        109.2,
+        22.95,
+        110.0,
+        23.4
+      ],
+      "note": "锚点：贵港市区郁江段 109.60E 23.11N（暂定框）",
+      "utm_zone_by_lon_formula": [
+        49
+      ],
+      "n_pyproj_candidates": 1,
+      "epsg": 32649,
+      "crs_name": "WGS 84 / UTM zone 49N",
+      "unit": "metre",
+      "is_projected": true,
+      "single_zone": true,
+      "matches_plan_expectation": true,
+      "plan_expected_epsg": 32649
+    }
+  }
+}

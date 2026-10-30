@@ -1,0 +1,69 @@
+{
+  "generated_utc": "2026-10-28T06:42:45.910781+00:00",
+  "script": "ad-hoc diagnostic (本会话只读分析 + 1 次诊断运行)",
+  "question": "上游注入口落在东缘 FREE 边界上，注入水量是否直接从同一边界泄出",
+  "answer": "是。四边 FREE 时 83.0% 的注入体积从边界排出；关闭东缘出流后退出比降到 53.4%，域内蓄量与湿面积显著上升。",
+  "cases": {
+    "A_nocut_off_4free": {
+      "run": "scen_q6000_n100_100m_choff_nocut-v1",
+      "boundary": "W/N/S/E 全部 FREE；上游 P 点源在东缘",
+      "qin_peak_m3s": 6000.0,
+      "qout_peak_m3s": 4979.7,
+      "outflow_ratio_peak": 0.83,
+      "v_in_m3": 938300000.0,
+      "v_out_m3": 765900000.0,
+      "net_in_domain_m3": 172400000.0,
+      "end_storage_m3": 326700000.0,
+      "e_mass": 0.000293,
+      "wet_area_t90_km2": 103.4,
+      "east_edge_wet_t90": 20,
+      "west_edge_wet_t90": 4
+    },
+    "B_nocut_off_wns_free": {
+      "run": "_diag_eclosed",
+      "boundary": "仅 W/N/S FREE；E 行删除；其余同 A",
+      "qin_peak_m3s": 6000.0,
+      "qout_peak_m3s": 3201.5,
+      "outflow_ratio_peak": 0.534,
+      "v_in_m3": 938300000.0,
+      "v_out_m3": 264100000.0,
+      "net_in_domain_m3": 674200000.0,
+      "end_storage_m3": 828200000.0,
+      "e_mass": 0.000103,
+      "wet_area_t90_km2": 136.33,
+      "east_edge_wet_t90": 75,
+      "west_edge_wet_t90": 4
+    },
+    "C_baseline_old_carve_4free": {
+      "run": "scen_q6000_n100_100m",
+      "boundary": "W/N/S/E 全部 FREE；地形含旧逻辑刻蚀（审计 FAIL）",
+      "qin_peak_m3s": 6000.0,
+      "qout_peak_m3s": 4941.3,
+      "outflow_ratio_peak": 0.824,
+      "v_in_m3": 938300000.0,
+      "v_out_m3": 709800000.0,
+      "net_in_domain_m3": 228500000.0,
+      "end_storage_m3": 382500000.0,
+      "e_mass": 5.8e-05,
+      "wet_area_t90_km2": 113.41,
+      "east_edge_wet_t90": 16,
+      "west_edge_wet_t90": 7
+    }
+  },
+  "implications": [
+    "E_mass 达标不能证明真实地形能出流：A 的 E_mass=2.93e-4 达标，但 83% 注入水从东缘边界直接排出。",
+    "E_mass 超限也不能证明不能出流：边界与注入口重合时，守恒与出流性是两个独立问题。",
+    "旧刻蚀基线 C 的湿面积(113.41)介于 A(103.40) 与 B(136.33) 之间，不能据此判断刻蚀优劣。",
+    "宁明现有 CSI/面积偏比结论同时受两件事污染：人造河槽，以及注入口/出流边界重合。"
+  ],
+  "required_follow_up": [
+    "把上游点源移到东缘内侧一格以上，或用 W/N/S 三边出流并另设入流断面。",
+    "在 ADR 中冻结边界定义后才允许新验证 run。",
+    "在此之前，宁明任何 CSI 与面积结论都只能标为诊断值。"
+  ],
+  "artifacts": {
+    "diag_run_dir": "outputs/ningming/2026-08-zitan/_diag_eclosed",
+    "nocut_run_dir": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_nocut-v1",
+    "baseline_run_dir": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m"
+  }
+}
