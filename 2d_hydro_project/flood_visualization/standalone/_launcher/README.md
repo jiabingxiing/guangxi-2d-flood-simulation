@@ -1,4 +1,4 @@
-# 广西二维洪涝可视化 standalone
+# 「驭洪」洪涝推演系统 standalone
 
 请双击同目录的 `打开可视化.cmd`。
 
