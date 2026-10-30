@@ -1,0 +1,17 @@
+{
+  "fetched_at": "2026-10-27T06:19:56+00:00",
+  "repos": [
+    {
+      "repo": "OSGeo/gdal",
+      "url": "https://github.com/OSGeo/gdal",
+      "status": "verified",
+      "stars": 6119,
+      "forks": 2971,
+      "license": "NOASSERTION",
+      "pushed_at": "2026-10-26T20:59:36Z",
+      "archived": false,
+      "message": "",
+      "fetched_at": "2026-10-27T06:19:53+00:00"
+    }
+  ]
+}

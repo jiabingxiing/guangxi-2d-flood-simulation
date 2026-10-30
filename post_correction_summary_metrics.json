@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "project": "广西久隆、贵港、宁明二维水动力推演模拟",
+    "updated_utc": "2026-10-29T03:45:00Z",
+    "status": "纠错后最终定版（Phase A~D完整成果）",
+    "solver": "LISFLOOD-FP 8.1.0 (acceleration)",
+    "mode": "公开数据降级模式 (ADR-0004/0005/0008)",
+    "nature": "情景级推演成果，非确定性工程预警",
+    "quality_gates": {
+      "mass_conservation_gate": "E_mass <= 1.0e-3",
+      "mass_check_summary": "36 PASS / 3 FAIL-EXPLAINED / 0 FAIL",
+      "regression_tests": "42 passed",
+      "reproducibility_13_4": "三案例重跑 res.max 逐位一致 (BITWISE_IDENTICAL)"
+    }
+  },
+  "correction_summary_table": [
+    {
+      "site": "贵港",
+      "deprecated_metrics": {
+        "wse_m": "30.01",
+        "offset_m": "+13.08 (声称固定偏移或误差<1m)",
+        "grid_sensitivity": "100m 面积暴增 +16.3% (628 km²)，误判为'对网格最敏感'"
+      },
+      "corrected_latest_metrics": {
+        "wse_m": "湿像元峰值 24.09~25.32 (09-12T14 湿像元 21.92)",
+        "offset_m": "+18.09 ~ +25.34 (随流量与时刻动态变化，证实基准不同，不可直接相减)",
+        "grid_sensitivity": "等宽 100m 仅变 +0.7% (544.13 km²)；30m 全域收敛至 493.36 km² (-8.7%)，站址水深 9.074m (-13.3%)"
+      },
+      "root_cause": "①旧 WSE 7x7 窗口取包含干地高程的伪值；②旧 100m 算例河槽宽度被离散为 300m（原为 600m），产生几何缩放伪影。"
+    },
+    {
+      "site": "久隆",
+      "deprecated_metrics": {
+        "site_water_depth_m": "1.684",
+        "qualitative_claim": "声称'站址水深 1.68m 对天文潮位不敏感'"
+      },
+      "corrected_latest_metrics": {
+        "site_water_depth_m": "像元中心 0.008 (基本不淹)；±2 格主口径 0.547 (微淹)",
+        "qualitative_claim": "站区本体防洪本质安全；无排水管网导致退水期面积不降反增 +27.7 km²；天文潮仅影响南部滨海"
+      },
+      "root_cause": "旧 1.684m 位于站址西南 1.28km 自然低洼汇水区，非站区实际位置。"
+    },
+    {
+      "site": "宁明",
+      "deprecated_metrics": {
+        "csi": "0.387 (宣称命中率 86% / CSI 0.39)",
+        "sample_size": "宣称 108 点全因子评估",
+        "channel_carving": "激进自动化河槽刻蚀"
+      },
+      "corrected_latest_metrics": {
+        "csi": "0.357 (GF-3 对应时刻 78h 切片，POD 0.773, FAR 0.602, 面积偏比 1.94x)",
+        "sample_size": "12 配置 x 3 阈值 = 36 独立评估点",
+        "channel_carving": "审计全判 FAIL (下切 244m) 并取消刻蚀；诊断揭示东缘边界短路流失 83% 注入水"
+      },
+      "root_cause": "旧验证误用全历时最大包络 res.max 代替卫星过境时刻切片；入流点与出流边界几何重合。"
+    }
+  ],
+  "sites": {
+    "guigang": {
+      "name": "贵港市区段（郁江走廊）",
+      "event": "2024-09 摩羯/郁江特大洪水",
+      "boundary_discharge": "三角情景峰值 8000 / 11500 / 15000 m³/s",
+      "quantitative_results": {
+        "baseline_200m": {
+          "grid_resolution_m": 200,
+          "grid_cells": 68707,
+          "envelope_wet_area_gt05_km2": 540.16,
+          "peak_snapshot_area_km2": 470.5,
+          "domain_max_depth_m": 19.20,
+          "site_cell_depth_m": 10.462,
+          "site_r200_depth_m": 10.499,
+          "arrival_time_h": 18.0,
+          "peak_time_h": 232.3,
+          "duration_h": 323.9,
+          "e_mass": 2.4e-5,
+          "e_mass_judgment": "PASS"
+        },
+        "width_fixed_100m": {
+          "grid_resolution_m": 100,
+          "envelope_wet_area_gt05_km2": 544.13,
+          "area_change_vs_200m_pct": 0.7,
+          "site_cell_depth_m": 9.059,
+          "site_r200_depth_m": 9.091,
+          "domain_max_depth_m": 15.40,
+          "e_mass": 3.1e-5,
+          "e_mass_judgment": "PASS"
+        },
+        "full_domain_30m": {
+          "grid_resolution_m": 30,
+          "grid_cells": 2749590,
+          "grid_dimensions": "2230 x 1233",
+          "runtime_wallclock_s": 43069,
+          "runtime_hours": 12.0,
+          "adaptive_dt_s": 1.7,
+          "envelope_wet_area_gt05_km2": 493.36,
+          "area_change_vs_200m_pct": -8.7,
+          "domain_max_depth_m": 19.44,
+          "site_cell_depth_m": 9.074,
+          "site_r200_depth_m": 9.108,
+          "site_depth_change_vs_200m_pct": -13.2,
+          "e_mass": 5.7e-5,
+          "e_mass_judgment": "PASS"
+        },
+        "wse_wet_pixels": {
+          "q8000": {
+            "peak_wse_m": 24.09,
+            "peak_time_h": 186.0,
+            "wse_0912t14_m": 19.85,
+            "apparent_offset_vs_4309_m": 23.24
+          },
+          "q11500": {
+            "peak_wse_m": 25.06,
+            "peak_time_h": 186.0,
+            "wse_0912t14_m": 21.92,
+            "apparent_offset_vs_4309_m": 21.17,
+            "wse_0914t05_m": 20.00,
+            "apparent_offset_vs_4400_m": 24.00
+          },
+          "q15000": {
+            "peak_wse_m": 25.32,
+            "peak_time_h": 234.0,
+            "wse_0912t14_m": 25.00,
+            "apparent_offset_vs_4309_m": 18.09
+          }
+        },
+        "discharge_sensitivity": {
+          "flow_variation_pct": "±30% (8000 ~ 15000 m³/s)",
+          "wet_area_range_km2": "317.4 ~ 339.6",
+          "area_variation_pct": 7.0
+        },
+        "satellite_validation_s1": {
+          "footprint_pct": 20.5,
+          "sim_in_footprint_km2": 73.0,
+          "obs_in_footprint_km2": 11.4,
+          "csi": 0.043,
+          "pod": 0.305,
+          "far": 0.952
+        }
+      },
+      "qualitative_findings": [
+        "平原自适应过流机制：万方级洪水流量变动 ±30%，漫滩面积仅变 7%，证实大平原具有极强宽漫滩水力缓冲能力。",
+        "网格收敛规律：站址水深自 100m 起已基本收敛（100m 9.06m vs 30m 9.07m，仅差 0.2%），200m 粗网格水深偏大约 15%，可作为偏保守工程包络；全域面积在 490~545 km² (±6%) 温和收敛。",
+        "基准差异定性确立：apparent offset 在 18~25m 波动，证实模型湿像元高程与水文站基面分属不同高程系统，严禁相减包装为'误差<1米'。"
+      ]
+    },
+    "jiulong": {
+      "name": "久隆500kV变电站片区",
+      "event": "2024-09 摩羯台风特大暴雨",
+      "boundary_discharge": "ERA5小时降雨 (189.6mm) + 南缘海潮 (free/z0/z05/z10/ztide)",
+      "quantitative_results": {
+        "baseline_200m": {
+          "grid_resolution_m": 200,
+          "envelope_wet_area_gt05_km2": 263.24,
+          "peak_snapshot_area_km2": 235.10,
+          "site_cell_depth_m": 0.008,
+          "site_r200_depth_m": 0.547,
+          "deprecated_far_depression_depth_m": 1.684,
+          "domain_max_depth_m": 6.03,
+          "arrival_time_h": 54.0,
+          "peak_time_h": 120.0,
+          "duration_h": 95.5,
+          "e_mass": 4.9e-4,
+          "e_mass_judgment": "PASS"
+        },
+        "tide_scenarios": {
+          "free": { "wet_area_km2": 263.24, "site_cell_m": 0.008, "site_r2_m": 0.547, "e_mass": 4.9e-4, "gate": "PASS" },
+          "z0": { "wet_area_km2": 263.40, "site_cell_m": 0.008, "site_r2_m": 0.547, "e_mass": 1.8e-4, "gate": "PASS" },
+          "z05": { "wet_area_km2": 264.92, "site_cell_m": 0.008, "site_r2_m": 0.547, "e_mass": 1.2e-2, "gate": "FAIL-EXPLAINED" },
+          "z10": { "wet_area_km2": 268.32, "site_cell_m": 0.008, "site_r2_m": 0.547, "e_mass": 3.7e-2, "gate": "FAIL-EXPLAINED" },
+          "ztide": { "wet_area_km2": 286.16, "site_cell_m": 0.008, "site_r2_m": 0.547, "e_mass": 4.1e-2, "gate": "FAIL-EXPLAINED" }
+        },
+        "recession_validation_s1": {
+          "date": "2024-09-17",
+          "extended_era5_rain_mm": 84.0,
+          "model_wet_area_km2": 260.8,
+          "s1_obs_wet_area_km2": 12.2,
+          "area_change_0910_to_0917_km2": 27.7,
+          "csi": 0.018,
+          "pod": 0.387,
+          "far": 0.982,
+          "judgment": "WEAK (退水方向与实测相反，定量证实无地下排水网瓶颈)"
+        },
+        "grid_sensitivity_100m": {
+          "wet_area_km2": 271.01,
+          "area_change_pct": 3.0,
+          "domain_max_depth_m": 8.25,
+          "site_cell_m": 0.37,
+          "site_r200_m": 0.511
+        }
+      },
+      "qualitative_findings": [
+        "站址本质安全：站址中心像元基本不淹（0.008m），400m 邻域最大水深仅 0.55m，旧版 1.68m 系西南 1.28km 自然洼地积水。",
+        "退水受阻的工程实质：平原缺少地下排水管网及人工泵站，自然平原地表坡降极小，导致洪水退水速率极慢，S1 实测面积缩小而模型面积不退反增。",
+        "潮位顶托受限：天文潮仅对南部滨海边缘产生回水壅高，向陆推进受地貌阻滞，对站区无直接水力威胁。"
+      ]
+    },
+    "ningming": {
+      "name": "宁明走廊（明江段）",
+      "event": "2026-08 紫檀台风山洪",
+      "boundary_discharge": "三角洪峰 6000 m³/s + ERA5 面雨量 + 四边 FREE",
+      "quantitative_results": {
+        "baseline_100m": {
+          "grid_resolution_m": 100,
+          "envelope_wet_area_gt05_km2": 126.20,
+          "peak_snapshot_area_km2": 115.50,
+          "site_cell_depth_m": 0.027,
+          "site_r200_depth_m": 11.883,
+          "snapshot_site_cell_m": 0.018,
+          "snapshot_site_r200_m": 10.32,
+          "arrival_time_h": 6.0,
+          "peak_time_h": 106.9,
+          "duration_h": 107.6,
+          "e_mass": 5.8e-5,
+          "e_mass_judgment": "PASS"
+        },
+        "satellite_validation_gf3_78h": {
+          "thr_005": { "csi": 0.347, "pod": 0.786, "far": 0.616, "sim_area_km2": 101.43, "bias_ratio": 2.05 },
+          "thr_015_primary": { "csi": 0.357, "pod": 0.773, "far": 0.602, "sim_area_km2": 96.02, "bias_ratio": 1.94 },
+          "thr_030": { "csi": 0.358, "pod": 0.752, "far": 0.594, "sim_area_km2": 91.60, "bias_ratio": 1.85 }
+        },
+        "manning_sensitivity_b0": {
+          "uniform_n010": { "csi": 0.357, "wet_area_km2": 96.02 },
+          "spatial_landcover": { "csi": 0.353, "wet_area_km2": 95.12 },
+          "conclusion": "空间 Manning 变化 < 2%，糙率不是面积偏大主杠杆"
+        },
+        "karst_infiltration_b3": {
+          "rate_0": { "bias_ratio": 1.94, "csi": 0.357, "far": 0.602, "pod": 0.773 },
+          "rate_1e6_3_6mmh": { "bias_ratio": 1.51, "csi": 0.372, "far": 0.549, "pod": 0.681 },
+          "rate_5e6_18mmh": { "bias_ratio": 0.92, "csi": 0.471, "far": 0.330, "pod": 0.613 },
+          "conclusion": "入渗是面积偏大强杠杆，反映喀斯特暗河强汇流下渗物理机制"
+        },
+        "phase_d_audit_and_boundary": {
+          "carve_audit": "19 个历史 run 全判 FAIL (最大下切 244.2m，176列常值人造河槽严重失真)",
+          "nocut_v1": { "wet_area_km2": 119.15, "csi": 0.334, "e_mass": 2.93e-4 },
+          "boundary_short_circuit": {
+            "east_inflow_discharge_ratio": 0.83,
+            "diagnosis": "注入口位于东缘 FREE 边界，83% 注入水量直接流失；关闭东缘后蓄量由 3.27e8 升至 8.28e8 m³"
+          }
+        }
+      },
+      "qualitative_findings": [
+        "空间构型准确：空间命中率 POD≈0.77~0.79，精准再现了明江两岸河漫滩及狭长平原地貌的淹没走势。",
+        "面积偏大成因去伪存真：证实面积偏大主因不是水力粗糙度（空间糙率变动<2%），而是喀斯特岩溶漏失强烈、源 DEM 河槽实测断面缺失，以及上游注入口与边界重合短路流失的综合影响。",
+        "工程化启示：后续工程必须依靠水利部门实测河槽大断面替代人工算法刻蚀，并将上游注入口内移闭合边界水力循环。"
+      ]
+    }
+  }
+}

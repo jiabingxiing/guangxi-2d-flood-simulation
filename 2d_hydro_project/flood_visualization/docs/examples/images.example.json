@@ -1,0 +1,184 @@
+{
+  "schema_version": "1.0",
+  "case_id": "jiulong",
+  "run_id": "scen_free_200m_sv6h",
+  "kind": "depth_frames",
+  "grid": {
+    "crs": "EPSG:32649",
+    "rows": 152,
+    "cols": 182,
+    "transform": [
+      200.0,
+      0.0,
+      246911.3,
+      0.0,
+      -200.0,
+      2456393.0
+    ],
+    "cell_size_m": 200.0,
+    "cell_area_m2": 40000.0
+  },
+  "color_scale": {
+    "transparent_below_m": 0.05,
+    "classes": [
+      {
+        "min_m": 0.05,
+        "max_m": 0.15,
+        "color": "#b7e4c7",
+        "label": "0.05–0.15 m"
+      },
+      {
+        "min_m": 0.15,
+        "max_m": 0.3,
+        "color": "#74c69d",
+        "label": "0.15–0.30 m"
+      },
+      {
+        "min_m": 0.3,
+        "max_m": 0.5,
+        "color": "#40916c",
+        "label": "0.30–0.50 m"
+      },
+      {
+        "min_m": 0.5,
+        "max_m": 1.0,
+        "color": "#f9c74f",
+        "label": "0.50–1.00 m"
+      },
+      {
+        "min_m": 1.0,
+        "max_m": 2.0,
+        "color": "#f8961e",
+        "label": "1–2 m"
+      },
+      {
+        "min_m": 2.0,
+        "max_m": 5.0,
+        "color": "#f3722c",
+        "label": "2–5 m"
+      },
+      {
+        "min_m": 5.0,
+        "max_m": 10.0,
+        "color": "#d62828",
+        "label": "5–10 m"
+      },
+      {
+        "min_m": 10.0,
+        "max_m": null,
+        "color": "#3f0071",
+        "label": "≥10 m"
+      }
+    ]
+  },
+  "split": {
+    "rows": 1,
+    "cols": 1
+  },
+  "frames": [
+    {
+      "frame_id": "f0000",
+      "max_depth_m": 0.0,
+      "wet_pixels": 0,
+      "parts": [
+        {
+          "id": "f0000_r0c0",
+          "row": 0,
+          "col": 0,
+          "path": "frames/jiulong/scen_free_200m_sv6h/f0000_r0c0.png",
+          "width": 182,
+          "height": 152,
+          "coordinates": [
+            [
+              108.5452654,
+              22.1943961
+            ],
+            [
+              108.8981159,
+              22.199335
+            ],
+            [
+              108.9021711,
+              21.9248716
+            ],
+            [
+              108.5499998,
+              21.92
+            ]
+          ],
+          "max_depth_m": 0.0,
+          "wet_pixels": 0
+        }
+      ]
+    },
+    {
+      "frame_id": "f0001",
+      "max_depth_m": 0.0,
+      "wet_pixels": 0,
+      "parts": [
+        {
+          "id": "f0001_r0c0",
+          "row": 0,
+          "col": 0,
+          "path": "frames/jiulong/scen_free_200m_sv6h/f0001_r0c0.png",
+          "width": 182,
+          "height": 152,
+          "coordinates": [
+            [
+              108.5452654,
+              22.1943961
+            ],
+            [
+              108.8981159,
+              22.199335
+            ],
+            [
+              108.9021711,
+              21.9248716
+            ],
+            [
+              108.5499998,
+              21.92
+            ]
+          ],
+          "max_depth_m": 0.0,
+          "wet_pixels": 0
+        }
+      ]
+    }
+  ],
+  "max": {
+    "max_depth_m": 0.0,
+    "wet_pixels": 0,
+    "parts": [
+      {
+        "id": "max_r0c0",
+        "row": 0,
+        "col": 0,
+        "path": "frames/jiulong/scen_free_200m_sv6h/max_r0c0.png",
+        "width": 182,
+        "height": 152,
+        "coordinates": [
+          [
+            108.5452654,
+            22.1943961
+          ],
+          [
+            108.8981159,
+            22.199335
+          ],
+          [
+            108.9021711,
+            21.9248716
+          ],
+          [
+            108.5499998,
+            21.92
+          ]
+        ],
+        "max_depth_m": 0.0,
+        "wet_pixels": 0
+      }
+    ]
+  }
+}

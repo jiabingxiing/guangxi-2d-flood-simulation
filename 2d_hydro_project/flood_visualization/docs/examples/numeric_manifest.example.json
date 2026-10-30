@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "case_id": "jiulong",
+  "run_id": "scen_free_200m_sv6h",
+  "grid": {
+    "crs": "EPSG:32649",
+    "rows": 152,
+    "cols": 182,
+    "transform": [
+      200.0,
+      0.0,
+      246911.3,
+      0.0,
+      -200.0,
+      2456393.0
+    ],
+    "cell_size_m": 200.0,
+    "cell_area_m2": 40000.0
+  },
+  "block_size": 256,
+  "blocks": {
+    "rows": 1,
+    "cols": 1
+  },
+  "dtype": "<f4",
+  "byte_order": "little",
+  "nodata": "nan",
+  "layout": "block rows [by*256, min(rows,(by+1)*256)) x cols [bx*256, min(cols,(bx+1)*256)); C order; index=(r-r0)*w+(c-c0)",
+  "mask_note": "mask=non-NaN；海域像元仅从统计剔除，点查仍返回真实值（模型已钳 0）",
+  "mask_png": "numeric/jiulong/scen_free_200m_sv6h/mask.png",
+  "mask_encoding": "1-bit PNG, full grid 1:1, row 0 north, pixel value 255=valid",
+  "frames": [
+    {
+      "frame_id": "f0000",
+      "path_template": "numeric/jiulong/scen_free_200m_sv6h/f0000/{block_y}/{block_x}.bin"
+    },
+    {
+      "frame_id": "f0001",
+      "path_template": "numeric/jiulong/scen_free_200m_sv6h/f0001/{block_y}/{block_x}.bin"
+    }
+  ],
+  "max": {
+    "path_template": "numeric/jiulong/scen_free_200m_sv6h/max/{block_y}/{block_x}.bin"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "checked_utc": "2026-10-27T08:06:59.514727+00:00",
+  "probes": [
+    {
+      "case": "ningming",
+      "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/10/447/816",
+      "origin": "http://127.0.0.1:8765",
+      "status": 200,
+      "content_type": "image/jpeg",
+      "cors": "*",
+      "bytes_read": 1024
+    },
+    {
+      "case": "ningming",
+      "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/10/447/816",
+      "origin": "http://127.0.0.1:8765",
+      "status": 200,
+      "content_type": "image/jpeg",
+      "cors": "*",
+      "bytes_read": 1024
+    },
+    {
+      "case": "guigang",
+      "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/10/444/823",
+      "origin": "http://127.0.0.1:8765",
+      "status": 200,
+      "content_type": "image/jpeg",
+      "cors": "*",
+      "bytes_read": 1024
+    },
+    {
+      "case": "guigang",
+      "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/10/444/823",
+      "origin": "http://127.0.0.1:8765",
+      "status": 200,
+      "content_type": "image/jpeg",
+      "cors": "*",
+      "bytes_read": 1024
+    }
+  ]
+}

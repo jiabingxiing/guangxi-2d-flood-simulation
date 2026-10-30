@@ -1,0 +1,114 @@
+{
+  "file-flag": {
+    "label": "file-flag",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "flood_on_vs_off": {
+      "pixels": 586800,
+      "changed_pixels": 0,
+      "changed_ratio": 0.0,
+      "max_delta": 0
+    },
+    "flood_on_vs_envelope": {
+      "pixels": 586800,
+      "changed_pixels": 115143,
+      "changed_ratio": 0.1962,
+      "max_delta": 662
+    },
+    "flood_on_vs_basemap": {
+      "pixels": 586800,
+      "changed_pixels": 278033,
+      "changed_ratio": 0.4738,
+      "max_delta": 616
+    },
+    "frame_pngs": [
+      "f0010_r0c0.png"
+    ],
+    "png_total": 16,
+    "basemap_warn": "",
+    "basemap_tile_responses": [
+      [
+        "1642",
+        200
+      ],
+      [
+        "1642",
+        200
+      ],
+      [
+        "1641",
+        200
+      ],
+      [
+        "1642",
+        200
+      ],
+      [
+        "821",
+        200
+      ],
+      [
+        "1643",
+        200
+      ]
+    ],
+    "basemap_tile_count": 10,
+    "attribution": "底图署名：Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+    "js_errors": []
+  },
+  "http": {
+    "label": "http",
+    "url": "http://127.0.0.1:8792/index.html",
+    "flood_on_vs_off": {
+      "pixels": 586800,
+      "changed_pixels": 0,
+      "changed_ratio": 0.0,
+      "max_delta": 0
+    },
+    "flood_on_vs_envelope": {
+      "pixels": 586800,
+      "changed_pixels": 115245,
+      "changed_ratio": 0.1964,
+      "max_delta": 664
+    },
+    "flood_on_vs_basemap": {
+      "pixels": 586800,
+      "changed_pixels": 277986,
+      "changed_ratio": 0.4737,
+      "max_delta": 618
+    },
+    "frame_pngs": [
+      "f0010_r0c0.png"
+    ],
+    "png_total": 16,
+    "basemap_warn": "",
+    "basemap_tile_responses": [
+      [
+        "821",
+        200
+      ],
+      [
+        "1642",
+        200
+      ],
+      [
+        "1641",
+        200
+      ],
+      [
+        "1642",
+        200
+      ],
+      [
+        "1643",
+        200
+      ],
+      [
+        "1642",
+        200
+      ]
+    ],
+    "basemap_tile_count": 10,
+    "attribution": "底图署名：Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+    "js_errors": []
+  }
+}

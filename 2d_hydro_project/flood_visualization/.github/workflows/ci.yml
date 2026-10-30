@@ -1,0 +1,83 @@
+# floodviz 持续集成（离线安全）
+#
+# 设计约束（SPEC §11 / 计划 §7.3）：
+# - 不下载大遥感数据、不运行 LISFLOOD-FP 模型、不上传真实敏感坐标；
+# - 只跑锁文件校验、静态检查、单元/集成测试与契约示例 schema 校验；
+# - e2e（Playwright/Chromium）默认不跑：需要浏览器下载与真实发布包，改在用户机执行。
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: 2d_hydro_project/flood_visualization
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: 安装 Python 3.12
+        run: uv python install 3.12
+
+      - name: 按锁文件同步依赖
+        run: uv sync --frozen --no-progress
+
+      # scripts/ 已全部清干净（2026-10-27：optical 组 45 处、Lead 5 处均已修），
+      # 因此静态检查覆盖 src + tests + scripts 全量，不再缩范围。
+      - name: 静态检查（ruff）
+        run: uv run ruff check src tests scripts
+
+      - name: 单元 + 集成测试（排除 slow/e2e）
+        run: uv run python -m pytest -m "not slow and not e2e" -q
+
+      - name: 契约示例 schema 校验
+        run: uv run python scripts/check_schemas.py
+
+      - name: 真实配置与源 run 只读盘点（父项目数据缺席则跳过）
+        run: |
+          if [ -d ../outputs ] && [ -d ../data ]; then
+            uv run python -m floodviz inventory --config configs/default.yaml
+          else
+            echo "::notice::父项目 outputs/ 与 data/ 不在 CI 工作区，跳过 inventory（不影响单元/集成门禁）"
+          fi
+
+      - name: 合成小样本 bundle 冒烟（无父项目数据时跳过）
+        run: |
+          if [ -d ../outputs ] && [ -d ../data ]; then
+            uv run python -m floodviz prepare --config configs/default.yaml \
+              --bundle-id ci-smoke --only jiulong --frames-limit 2
+            uv run python -m floodviz validate \
+              --bundle outputs/web_bundle/ci-smoke --config configs/default.yaml
+          else
+            echo "::notice::无父项目数据，跳过合成 bundle 冒烟"
+          fi
+
+      - name: 上传测试证据（失败时）
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-artifacts
+          path: |
+            2d_hydro_project/flood_visualization/outputs/qa/**
+          retention-days: 7
+          if-no-files-found: ignore

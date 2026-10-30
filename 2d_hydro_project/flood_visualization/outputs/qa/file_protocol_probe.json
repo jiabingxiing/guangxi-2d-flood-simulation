@@ -1,0 +1,127 @@
+[
+  {
+    "label": "A_file_default",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": null,
+    "args": [],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：加载失败",
+    "state": {
+      "caseId": null,
+      "frameId": null,
+      "frameCount": 0
+    },
+    "js_errors": [],
+    "console_errors": [
+      "error: Fetch API cannot load file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/catalog.json. UR"
+    ],
+    "page_errors": [],
+    "request_failed": [],
+    "failed_count": 0,
+    "notice_hidden": false
+  },
+  {
+    "label": "B_file_allow",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": null,
+    "args": [
+      "--allow-file-access-from-files"
+    ],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "state": {
+      "caseId": "jiulong",
+      "frameId": "f0000",
+      "frameCount": 21
+    },
+    "js_errors": [],
+    "console_errors": [],
+    "page_errors": [],
+    "request_failed": [],
+    "failed_count": 0,
+    "notice_hidden": false
+  },
+  {
+    "label": "C_http_baseline",
+    "url": "http://127.0.0.1:8792/index.html",
+    "channel": null,
+    "args": [],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "state": {
+      "caseId": "jiulong",
+      "frameId": "f0000",
+      "frameCount": 21
+    },
+    "js_errors": [],
+    "console_errors": [],
+    "page_errors": [],
+    "request_failed": [],
+    "failed_count": 0,
+    "notice_hidden": false
+  },
+  {
+    "label": "D_edge_file_default",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": "msedge",
+    "args": [],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：加载失败",
+    "state": {
+      "caseId": null,
+      "frameId": null,
+      "frameCount": 0
+    },
+    "js_errors": [],
+    "console_errors": [
+      "error: Access to fetch at 'file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/catalog.json' from",
+      "error: Failed to load resource: net::ERR_FAILED"
+    ],
+    "page_errors": [],
+    "request_failed": [
+      "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E :: net::ERR_FAILED"
+    ],
+    "failed_count": 1,
+    "notice_hidden": false
+  },
+  {
+    "label": "E_edge_http",
+    "url": "http://127.0.0.1:8792/index.html",
+    "channel": "msedge",
+    "args": [],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "state": {
+      "caseId": "jiulong",
+      "frameId": "f0000",
+      "frameCount": 21
+    },
+    "js_errors": [],
+    "console_errors": [],
+    "page_errors": [],
+    "request_failed": [],
+    "failed_count": 0,
+    "notice_hidden": false
+  },
+  {
+    "label": "F_edge_file_allow",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": "msedge",
+    "args": [
+      "--allow-file-access-from-files"
+    ],
+    "title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "status_bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "state": {
+      "caseId": "jiulong",
+      "frameId": "f0000",
+      "frameCount": 21
+    },
+    "js_errors": [],
+    "console_errors": [],
+    "page_errors": [],
+    "request_failed": [],
+    "failed_count": 0,
+    "notice_hidden": false
+  }
+]

@@ -1,0 +1,84 @@
+# 案例：崇左宁明（明江河道—漫滩，降级模式情景）
+case_id: ningming
+name: 宁明
+event_id: "2026-08-zitan"
+event_name: "台风紫檀（2026-08）"
+scenario_role: "事后参考组合（上游 Q 三角线 + ERA5 均匀雨 + FREE 边界）；真实 DEM 推演"
+subtitle: "100 m 真实DEM情景 · 19 帧 · 6 h/帧"
+model_bbox: [106.96, 22.056998, 107.19947, 22.262251]   # WGS84 西南东北
+crs: "EPSG:32648"
+time_zone: "Asia/Shanghai"
+time_origin: "2026-08-21T00:00:00+08:00"
+origin_status: relative_only_candidate
+origin_note: "上游 Q 三角线构造起点（2026-08-21 00:00 北京时间），由父项目脚本构造，旧 meta 无规范 t0；仅作显示用"
+default_run_id: scen_q6000_n100_100m_choff_nocut-v1
+
+sites:
+  - {name: "宁明县城站", lon: 107.0719, lat: 22.1403, label: "站址（G12 坐标待供方核证）"}
+
+runs:
+  - run_id: scen_q6000_n100_100m_choff_nocut-v1
+    label: "真实地形默认情景（Q=6000, n=0.10, 四边FREE）"
+    role: default
+    source: "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_nocut-v1"
+    save_interval_s: 21600
+    simulation_duration_s: 388800
+    notes: "100 m 走廊；真实 DEM（--channel off，零刻蚀）；四边 FREE（ADR-0009 选项 A 基线）"
+  - run_id: scen_q4000_n35_100m_choff
+    label: "真实地形基线对照（Q=4000, n=0.035, 四边FREE）"
+    role: baseline
+    source: "outputs/ningming/2026-08-zitan/scen_q4000_n35_100m_choff"
+    save_interval_s: 21600
+    simulation_duration_s: 388800
+    notes: "100 m 走廊；真实 DEM 对照情景（Q=4000 m3/s）"
+  - run_id: scen_q6000_n100_100m_choff_eclosed
+    label: "附加对照：真实地形+东缘出流关闭（选项B短路修正）"
+    role: scenario
+    source: "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_eclosed"
+    save_interval_s: 21600
+    simulation_duration_s: 388800
+    notes: "100 m 走廊；真实 DEM（--channel off）；关闭东缘 FREE（阻断注入点源直接泄出）"
+
+layers:
+  dem: {status: ready, label: "DEM 高程", kind: raster, summary: "模型输入 DEM（真实地形重采样）", note: "真实 DEM Bilinear 重采样，未施加任何人工河槽刻蚀与虚假下切"}
+  flood: {status: ready, label: "模型水深（逐帧）", kind: frame}
+  max: {status: ready, label: "全程最大水深包络", kind: max_envelope}
+  optical:
+    status: remote_verified
+    label: "可见光背景（S2 2026-09-03）"
+    kind: raster
+    asset_id: "ningming_s2_20260903"
+    acquired_at: "2026-09-03T11:32:14+08:00"
+    summary: "Sentinel-2 L2A TCI，AOI 有效覆盖 100%、SCL 云占比 0%（自动分类）；晚于洪峰，仅作背景"
+    note: "尚未导入本地发布包，状态 remote_verified，默认禁用"
+  sar:
+    status: ready
+    label: "SAR 水体（GF-3 2026-08-24）"
+    kind: raster
+    asset_id: "ningming_gf3_20260824"
+    acquired_at: "2026-08-24T00:00:00+08:00"
+    summary: "GF-3 8-24 近洪峰水体掩膜（独立层，不是水深）；精确过境时刻待证据"
+    note: "SAR 后向散射不是水深，不能共用深度图例"
+
+quality:
+  mass_gate: PASS
+  e_mass: 2.93e-4
+  validation_status: "真实 DEM（--channel off，零刻蚀）推演；E_mass=2.93e-4 PASS"
+  vertical_datum_status: "未闭合（G7）；站水位与 DEM 基准关系待查证"
+  warnings:
+    - "真实 DEM 数据源：关闭人工河槽下切刻蚀（--channel off），DEM 渲染彻底消除人造等宽长条"
+    - "默认情景四边 FREE（ADR-0009 选项 A 基线）；对比情景展示东缘关闭（选项 B）之短路修正效应"
+    - "情景级成果；Q 为三角线情景假设，非逐时实测"
+
+sources:
+  model: "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)"
+  run_path_hint: "2d_hydro_project/outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_nocut-v1"
+  evidence:
+    - "2d_hydro_project/docs/adr/ADR-0009-宁明河槽刻蚀停用与地形分层显示.md"
+    - "2d_hydro_project/data/catalog/dem_channel_audit.json"
+    - "2d_hydro_project/data/catalog/ningming_boundary_shortcut.json"
+
+terrain:
+  source_dem: "data/interim/ningming/dem_filled_12p5m_32648.tif"
+  source_label: "原始 DEM（未裁剪，12.5 m 人工填补源地形）"
+  source_note: "源自 0731 五省区DEM 广西原始数据；严格采用未做任何河道下切的人工填补重采样源地形；ArcGIS Elevation 系列色带；未做模型网格裁切"

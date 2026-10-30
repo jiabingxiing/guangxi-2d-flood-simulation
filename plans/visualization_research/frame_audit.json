@@ -1,0 +1,271 @@
+{
+  "checked_utc": "2026-10-27T07:32:19.832316+00:00",
+  "scope": "file inventory, all selected headers and parameters; not full cell-value validation",
+  "runs": {
+    "jiulong_default": {
+      "path": "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+      "count": 21,
+      "first": "res-0000.wd",
+      "last": "res-0020.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 432000.0,
+      "expected_count_under_zero_origin_convention": 21,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         182",
+        "nrows         152",
+        "xllcorner     246911.300000",
+        "yllcorner     2425993.000000",
+        "cellsize      200.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 3491901,
+      "meta": {
+        "scenario": "free",
+        "res": 200.0,
+        "dt": 5.0,
+        "sim_seconds": 432000,
+        "saveint": 21600.0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充",
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "s_low_cols": null,
+        "note": "雨驱动情景级；潮位情景为常数位面（增水带），天文潮时变待引入 TPXO/FES；海面像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元，登记）",
+        "generated_utc": "2026-10-26T15:25:43.443702+00:00"
+      }
+    },
+    "jiulong_extended": {
+      "path": "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+      "count": 53,
+      "first": "res-0000.wd",
+      "last": "res-0052.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 1123200.0,
+      "expected_count_under_zero_origin_convention": 53,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         182",
+        "nrows         152",
+        "xllcorner     246911.300000",
+        "yllcorner     2425993.000000",
+        "cellsize      200.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 8812893,
+      "meta": {
+        "scenario": "free",
+        "res": 200.0,
+        "dt": 5.0,
+        "sim_seconds": 1123200.0,
+        "saveint": 21600.0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充",
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "s_low_cols": null,
+        "note": "雨驱动情景级；潮位情景为常数位面（增水带），天文潮时变待引入 TPXO/FES；海面像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元，登记）",
+        "generated_utc": "2026-10-26T17:07:30.044530+00:00"
+      }
+    },
+    "ningming_reference": {
+      "path": "2d_hydro_project/outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
+      "count": 19,
+      "first": "res-0000.wd",
+      "last": "res-0018.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 388800.0,
+      "expected_count_under_zero_origin_convention": 19,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         244",
+        "nrows         224",
+        "xllcorner     702256.200000",
+        "yllcorner     2440767.800000",
+        "cellsize      100.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 6239618,
+      "meta": {
+        "run_id": "scen_q6000_n100_100m",
+        "aoi": [
+          106.96,
+          22.06,
+          107.2,
+          22.26
+        ],
+        "res": 100.0,
+        "dt": 1.5,
+        "q_peak": 6000.0,
+        "fpfric": 0.1,
+        "point_source_32648": [
+          726606.1543873353,
+          2447905.10233182
+        ],
+        "point_source_elev_m": 93.2,
+        "point_source_method": "8/6 常水期水体（河道）最东湿单元",
+        "dem_channel_note": "域内 82-92m 低带与常水期水体连通，判为明江河槽带；但河槽像元在源 DEM 中为 0 值空洞、经填补取邻域值，河床高程可靠性 ±10m（降级模式限制，成果标注）",
+        "sim_seconds": 388800.0,
+        "scenarios_note": "上游三角Q情景+ERA5均匀雨+FREE边界；情景级结论（ADR-0004）",
+        "generated_utc": "2026-10-25T04:05:03.321573+00:00"
+      }
+    },
+    "ningming_baseline": {
+      "path": "2d_hydro_project/outputs/ningming/2026-08-zitan/scen_q4000_100m",
+      "count": 19,
+      "first": "res-0000.wd",
+      "last": "res-0018.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 388800.0,
+      "expected_count_under_zero_origin_convention": 19,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         244",
+        "nrows         224",
+        "xllcorner     702256.200000",
+        "yllcorner     2440767.800000",
+        "cellsize      100.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 6238631,
+      "meta": {
+        "run_id": "scen_q4000_100m",
+        "aoi": [
+          106.96,
+          22.06,
+          107.2,
+          22.26
+        ],
+        "res": 100.0,
+        "dt": 1.5,
+        "q_peak": 4000.0,
+        "point_source_32648": [
+          726606.1543873353,
+          2447905.10233182
+        ],
+        "point_source_elev_m": 93.2,
+        "point_source_method": "8/6 常水期水体（河道）最东湿单元",
+        "dem_channel_note": "域内 82-92m 低带与常水期水体连通，判为明江河槽带；但河槽像元在源 DEM 中为 0 值空洞、经填补取邻域值，河床高程可靠性 ±10m（降级模式限制，成果标注）",
+        "sim_seconds": 388800.0,
+        "scenarios_note": "上游三角Q情景+ERA5均匀雨+FREE边界；情景级结论（ADR-0004）",
+        "generated_utc": "2026-10-25T00:28:30.689449+00:00"
+      }
+    },
+    "guigang_default": {
+      "path": "2d_hydro_project/outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5",
+      "count": 57,
+      "first": "res-0000.wd",
+      "last": "res-0056.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 1209600.0,
+      "expected_count_under_zero_origin_convention": 57,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         2230",
+        "nrows         1233",
+        "xllcorner     325737.900000",
+        "yllcorner     2542315.300000",
+        "cellsize      30.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 940462554,
+      "meta": {
+        "run_id": "scen_yagi_q11500_30m_b5",
+        "aoi": [
+          109.3,
+          22.98,
+          109.95,
+          23.32
+        ],
+        "res": 30.0,
+        "dt": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "point_source_32649": [
+          325752.9,
+          2561828.8
+        ],
+        "channel": {
+          "path_nodes": 2428,
+          "carved_px": 61058,
+          "bed_up_m": 43.1,
+          "bed_dn_m": 1.0,
+          "depth_m": 12.0,
+          "width_cells": 21,
+          "width_actual_m": 630,
+          "width_target_m": 600.0,
+          "method_version": "v3",
+          "method": "参数化直线河槽（过市区锚点、走向100°/280°、宽按米参数化≈600m、床=局部地表−12m + 下游累计取小）——走廊为宽平底平原无河谷可循，纯情景假设；v3 起宽度按米跨分辨率一致（200m 下与 v2 逐位同）"
+        },
+        "evidence": "南宁站 09-12T19:30 峰 11900m3/s；贵港站 09-12T14 43.09m/10500m3/s（公开转引）",
+        "note": "上游 Q 为情景三角线（无逐时实测）；WSE 与站水位对照受 G7 垂直基准未确认限制，仅诊断；情景级结论",
+        "generated_utc": "2026-10-26T17:07:36.678906+00:00"
+      }
+    },
+    "guigang_legacy": {
+      "path": "2d_hydro_project/outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m",
+      "count": 57,
+      "first": "res-0000.wd",
+      "last": "res-0056.wd",
+      "saveint_s": 21600.0,
+      "sim_time_s": 1209600.0,
+      "expected_count_under_zero_origin_convention": 57,
+      "indices_contiguous": true,
+      "headers_identical": true,
+      "header": [
+        "ncols         334",
+        "nrows         185",
+        "xllcorner     325737.900000",
+        "yllcorner     2542315.300000",
+        "cellsize      200.000000",
+        "NODATA_value  -9999.000000"
+      ],
+      "total_wd_bytes": 21153403,
+      "meta": {
+        "run_id": "scen_yagi_q11500_200m",
+        "aoi": [
+          109.3,
+          22.98,
+          109.95,
+          23.32
+        ],
+        "res": 200.0,
+        "dt": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ],
+        "channel": {
+          "path_nodes": 364,
+          "carved_px": 1210,
+          "bed_up_m": 46.5,
+          "bed_dn_m": 7.3,
+          "depth_m": 12.0,
+          "method": "参数化直线河槽（过市区锚点、走向100°/280°、宽3格600m、床=局部地表−12m + 下游累计取小）——走廊为宽平底平原无河谷可循，纯情景假设",
+          "method_version": "v2"
+        },
+        "evidence": "南宁站 09-12T19:30 峰 11900m3/s；贵港站 09-12T14 43.09m/10500m3/s（公开转引）",
+        "note": "上游 Q 为情景三角线（无逐时实测）；WSE 与站水位对照受 G7 垂直基准未确认限制，仅诊断；情景级结论",
+        "generated_utc": "2026-10-25T04:48:47.397023+00:00"
+      }
+    }
+  },
+  "mass_counts": {
+    "PASS": 36,
+    "FAIL-EXPLAINED": 3,
+    "FAIL": 0
+  }
+}

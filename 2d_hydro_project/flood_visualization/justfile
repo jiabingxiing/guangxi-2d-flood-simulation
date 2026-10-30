@@ -1,0 +1,76 @@
+# justfile —— 可复制的命令入口（Windows 上装 `just` 后可用；等价命令见 AGENTS.md）
+
+set shell := ["pwsh", "-NoProfile", "-Command"]
+export PYTHONUTF8 := "1"
+
+default:
+    @just --list
+
+# 扫描源 run：帧序、栅格头、时间一致性
+inventory:
+    uv run python -m floodviz inventory --config configs/default.yaml
+
+# 抓取固定版本前端资源（MapLibre / Proj4js）
+vendor:
+    uv run python scripts/fetch_vendor.py
+
+# 生成发布包（全量三地）
+prepare id="v2-20261027":
+    uv run python -m floodviz prepare --config configs/default.yaml --bundle-id {{id}}
+
+# 快速冒烟包（只做久隆、3 帧）
+smoke id="dev1":
+    uv run python -m floodviz prepare --config configs/default.yaml --bundle-id {{id}} --only jiulong --frames-limit 3
+
+# 把 web/ 与 vendor 复制进包
+web id="v2-20261027":
+    uv run python scripts/build_web.py --bundle-id {{id}}
+
+# 校验发布包（全量数值/统计/空间门禁）
+validate id="v2-20261027":
+    uv run python -m floodviz validate --bundle outputs/web_bundle/{{id}} --full
+
+# 独立复核发布包（Lead 侧：数值/分级色/parts 无缝/帧语义）
+verify id="v2-20261027":
+    uv run python scripts/verify_bundle.py outputs/web_bundle/{{id}} --samples 40
+
+# 生成固定验证抽样索引（入库；仅在源数据或口径变化时重跑）
+sampling-index:
+    uv run python scripts/make_sampling_index.py
+
+# 固定抽样点的跨版本回归校验（slow，约 40–90 s）
+sampling-test:
+    uv run python -m pytest tests/integration/test_fixed_sampling.py -q -m slow
+
+# 契约示例与 schema 自检
+schemas:
+    uv run python scripts/make_contract_examples.py
+    uv run python scripts/check_schemas.py
+
+# 代码质量
+lint:
+    uv run ruff check src tests scripts
+    uv run ruff format --check src tests scripts
+
+fmt:
+    uv run ruff format src tests scripts
+    uv run ruff check src tests scripts --fix
+
+# 单元 + 集成测试（默认排除 slow/e2e）
+test:
+    uv run python -m pytest -m "not slow and not e2e" -q
+
+# 全部测试（含 e2e 与性能/资源，约 5 分钟）
+test-all:
+    uv run python -m pytest -q
+
+# 浏览器端到端测试
+e2e:
+    uv run python -m pytest tests/e2e -q
+
+# 一键：构建 → 复制页面 → 校验
+all id="v2-20261027": (prepare id) (web id) (validate id)
+
+# 启动本地服务（仅 127.0.0.1:8765）
+serve id="":
+    pwsh -NoProfile -Command "if ('{{id}}' -eq '') { .\scripts\start_local.cmd } else { .\scripts\start_local.cmd {{id}} }"

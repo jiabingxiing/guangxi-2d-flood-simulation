@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0",
+  "bundle": "outputs\\build\\qa_smoke",
+  "full": true,
+  "ok": false,
+  "bundle_bytes": 529902,
+  "file_count": 20,
+  "seconds": 0.466,
+  "groups": [
+    {
+      "name": "structure",
+      "passed": false,
+      "checks": 92,
+      "failure_count": 1,
+      "failures": [
+        "jiulong/scen_free_200m_sv6h frame_count=3 与配置期望 21 不符"
+      ],
+      "notes": [
+        "display.area_threshold_note 为空：catalog.build_catalog 从 config.project 读取该字段，而 configs/default.yaml 把它写在顶层（Lead 作用域，已上报）"
+      ],
+      "details": {}
+    },
+    {
+      "name": "timeline",
+      "passed": false,
+      "checks": 63,
+      "failure_count": 1,
+      "failures": [
+        "jiulong/scen_free_200m_sv6h 帧数 3 与配置期望 21 不符"
+      ],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "statistics",
+      "passed": true,
+      "checks": 123,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "images",
+      "passed": true,
+      "checks": 57,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "completeness",
+      "passed": true,
+      "checks": 13,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "bundle_bytes": 529902,
+        "file_count": 20,
+        "content_entries": 17,
+        "numeric_files": {
+          "jiulong/scen_free_200m_sv6h": 4
+        },
+        "hash_checked": 17
+      }
+    },
+    {
+      "name": "numeric",
+      "passed": true,
+      "checks": 178,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "samples": 87,
+        "max_abs_err_m": 0.0,
+        "max_rel_err": 0.0,
+        "gate": "max(1e-05, 1e-06*|src|)",
+        "passed": true,
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "frames_checked": 3,
+            "samples": 87,
+            "max_abs_err_m": 0.0,
+            "source_compared": true
+          }
+        }
+      }
+    },
+    {
+      "name": "statistics_recompute",
+      "passed": true,
+      "checks": 57,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "frames_checked": 3,
+        "max_rel_diff": 0.0,
+        "gate": 0.001,
+        "passed": true,
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "frames_checked": 3,
+            "max_rel_diff": 0.0
+          }
+        }
+      }
+    },
+    {
+      "name": "spatial",
+      "passed": true,
+      "checks": 3,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "split": {
+              "rows": 1,
+              "cols": 1
+            },
+            "parts": [
+              {
+                "id": "r0c0",
+                "max_px": 0.048552,
+                "max_m": 9.7104
+              }
+            ],
+            "max_px": 0.048552,
+            "max_m": 9.7104,
+            "samples": 15,
+            "gate_px": 0.5,
+            "passed": true
+          }
+        },
+        "max_px": 0.048552,
+        "gate_px": 0.5,
+        "passed": true
+      }
+    },
+    {
+      "name": "schemas",
+      "passed": true,
+      "checks": 1,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "failed_documents": 0,
+        "passed": true
+      }
+    }
+  ],
+  "failures": [
+    "[structure] jiulong/scen_free_200m_sv6h frame_count=3 与配置期望 21 不符",
+    "[timeline] jiulong/scen_free_200m_sv6h 帧数 3 与配置期望 21 不符"
+  ],
+  "warnings": [
+    "manifest.web.ready=false：尚未运行 scripts/build_web.py（index.html/assets 未就位）"
+  ]
+}

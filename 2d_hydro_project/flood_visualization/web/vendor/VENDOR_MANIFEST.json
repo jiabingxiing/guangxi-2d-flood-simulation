@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "vendored_utc": "2026-10-27T09:08:11+00:00",
+  "note": "固定版本本地资源；运行时禁止 CDN。重新生成请运行 scripts/fetch_vendor.py",
+  "packages": [
+    {
+      "name": "maplibre-gl",
+      "version": "5.24.0",
+      "license": "BSD-3-Clause",
+      "url": "https://registry.npmjs.org/maplibre-gl/-/maplibre-gl-5.24.0.tgz",
+      "tarball_sha256": "5cbf83c328c9d39cb24e3f2cefc9b407d69dd104ba0b41e84c0bfbb31c44e283",
+      "target_dir": "web/vendor/maplibre",
+      "files": [
+        {
+          "file": "web/vendor/maplibre/maplibre-gl.js",
+          "bytes": 1056837,
+          "sha256": "45a9b07a9189ce56054c620a947ccf41e291e58c95e9b61533b740aaa65ee5cb"
+        },
+        {
+          "file": "web/vendor/maplibre/maplibre-gl.css",
+          "bytes": 70024,
+          "sha256": "ab1e70d59ec40465bae7e7030da2f3ccf28133fd502e62bd598eefbadfd7a732"
+        },
+        {
+          "file": "web/vendor/maplibre/LICENSE.txt",
+          "bytes": 5984,
+          "sha256": "ee5fc05a0677eaf69601d2c7db0d9ecd6cc27c3abc1d0733bc9ed34707cf8ef2"
+        }
+      ]
+    },
+    {
+      "name": "proj4",
+      "version": "2.22.0",
+      "license": "MIT",
+      "url": "https://registry.npmjs.org/proj4/-/proj4-2.22.0.tgz",
+      "tarball_sha256": "7192ce47111f28ae8c47a39b583ea419202fbc216fe6303117cb1567b42e52d7",
+      "target_dir": "web/vendor/proj4",
+      "files": [
+        {
+          "file": "web/vendor/proj4/proj4.js",
+          "bytes": 129733,
+          "sha256": "af7df653d91ea591f33d26fb958990bbd3071b2db644a4edaba441cc9861a474"
+        },
+        {
+          "file": "web/vendor/proj4/LICENSE.txt",
+          "bytes": 1454,
+          "sha256": "d514fd8b286fc00a5c97a29f8a99b73f1a4053bbdd00c400aee5f24a1b6b301e"
+        }
+      ]
+    }
+  ]
+}

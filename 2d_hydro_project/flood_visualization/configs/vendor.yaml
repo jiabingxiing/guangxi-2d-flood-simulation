@@ -1,0 +1,24 @@
+# 前端固定版本（禁止 latest / 运行时 CDN）；tarball_sha256 为 npm 包原始哈希，下载后必须核对
+schema_version: "1.0"
+# 选择理由：MapLibre 5.24.0 仍提供单文件 UMD 构建（dist/maplibre-gl.js），
+# 不需要打包器即可 <script> 引入，符合"纯静态、无 Node 构建链"的首版约束。
+packages:
+  - name: maplibre-gl
+    version: "5.24.0"
+    license: "BSD-3-Clause"
+    url: "https://registry.npmjs.org/maplibre-gl/-/maplibre-gl-5.24.0.tgz"
+    tarball_sha256: "5cbf83c328c9d39cb24e3f2cefc9b407d69dd104ba0b41e84c0bfbb31c44e283"
+    target_dir: "web/vendor/maplibre"
+    files:
+      - {src: "package/dist/maplibre-gl.js", dst: "maplibre-gl.js"}
+      - {src: "package/dist/maplibre-gl.css", dst: "maplibre-gl.css"}
+      - {src: "package/LICENSE.txt", dst: "LICENSE.txt"}
+  - name: proj4
+    version: "2.22.0"
+    license: "MIT"
+    url: "https://registry.npmjs.org/proj4/-/proj4-2.22.0.tgz"
+    tarball_sha256: "7192ce47111f28ae8c47a39b583ea419202fbc216fe6303117cb1567b42e52d7"
+    target_dir: "web/vendor/proj4"
+    files:
+      - {src: "package/dist/proj4.js", dst: "proj4.js"}
+      - {src: "package/LICENSE.md", dst: "LICENSE.txt"}

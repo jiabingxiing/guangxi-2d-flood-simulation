@@ -1,0 +1,53 @@
+{
+  "state_f0000": {
+    "status": "ready",
+    "available": true,
+    "visible": true,
+    "opacity": 0.88
+  },
+  "state_f0010": {
+    "status": "ready",
+    "available": true,
+    "visible": true,
+    "opacity": 0.88
+  },
+  "state_after_hide": {
+    "status": "ready",
+    "available": true,
+    "visible": false,
+    "opacity": 0.88
+  },
+  "wetPixels": {
+    "f0000": 0,
+    "f0010": 4969
+  },
+  "map_title": "当前帧模拟水深",
+  "subtitle": "当前帧 f0010　·　T+60.0 h　·　面积 198.4 km²",
+  "diff_f0000_vs_f0010": {
+    "changed": 97067,
+    "ratio": 0.1654,
+    "max": 638
+  },
+  "diff_f0010_vs_hidden": {
+    "changed": 67351,
+    "ratio": 0.1148,
+    "max": 476
+  },
+  "frame_pngs": [
+    "f0010_r0c0.png"
+  ],
+  "frame_pngs_dry": [
+    "f0000_r0c0.png"
+  ],
+  "js_errors": [],
+  "cache_stats": {
+    "maxBytes": 268435456,
+    "bytes": 10940864,
+    "count": 8,
+    "hits": 0,
+    "misses": 8,
+    "evictions": 0,
+    "failures": 0,
+    "overflow": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "instance_A_pages_before": [
+    {
+      "url": "about:blank",
+      "error": "Page.text_content: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#status-bundle\")\n"
+    }
+  ],
+  "instance_B": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "instance_A_pages_after": [
+    {
+      "url": "about:blank",
+      "error": "Page.text_content: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"#status-bundle\")\n"
+    }
+  ],
+  "handoff_new_page_loaded": false
+}

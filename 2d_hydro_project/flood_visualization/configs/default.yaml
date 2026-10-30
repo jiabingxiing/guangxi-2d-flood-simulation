@@ -1,0 +1,43 @@
+# flood_visualization 项目级配置（三案例清单、阈值、色带、底图）
+schema_version: "1.0"
+
+project:
+  title: "「驭洪」洪涝推演系统"
+  subtitle: ""
+  parent_root: ".."                    # 相对子项目根：2d_hydro_project/
+  bundle_root: "outputs/web_bundle"
+  root_index: "index.html"
+  license_notice: "研究性情景成果，不得用于业务告警或资产安全判据；软件与数据授权见 licenses/LICENSES.md"
+
+default_case: jiulong
+
+thresholds_m: [0.05, 0.15, 0.3, 0.5, 1.0, 2.0, 5.0, 10.0]
+default_threshold_m: 0.05
+area_threshold_note: "面积为原生模型网格单帧有效像元 depth>阈值 的像元面积之和；剔除 NaN 与海域像元；不是资产安全等级"
+
+# 固定色带（三案例、全部帧共用；写入 catalog.display.depth_classes）
+depth_classes:
+  - {min_m: 0.05, max_m: 0.15, color: "#b7e4c7", label: "0.05–0.15 m"}
+  - {min_m: 0.15, max_m: 0.30, color: "#74c69d", label: "0.15–0.30 m"}
+  - {min_m: 0.30, max_m: 0.50, color: "#40916c", label: "0.30–0.50 m"}
+  - {min_m: 0.50, max_m: 1.00, color: "#f9c74f", label: "0.50–1.00 m"}
+  - {min_m: 1.00, max_m: 2.00, color: "#f8961e", label: "1–2 m"}
+  - {min_m: 2.00, max_m: 5.00, color: "#f3722c", label: "2–5 m"}
+  - {min_m: 5.00, max_m: 10.00, color: "#d62828", label: "5–10 m"}
+  - {min_m: 10.00, max_m: null, color: "#3f0071", label: "≥10 m"}
+
+display:
+  temporal_note: "6 h/帧离散回放；播放速度不改变物理时间分辨率"
+  max_envelope_title: "全程最大水深包络（非某一时刻）"
+  current_frame_title: "当前帧模拟水深"
+
+image_max_pixels: 4096     # 单张显示图边长上限（GPU 纹理）
+block_size: 256            # 数值保真块边长
+
+layers_file: configs/layers.yaml
+basemaps_file: configs/basemaps.yaml
+
+cases:
+  - {id: jiulong, config: configs/cases/jiulong.yaml}
+  - {id: ningming, config: configs/cases/ningming.yaml}
+  - {id: guigang, config: configs/cases/guigang.yaml}

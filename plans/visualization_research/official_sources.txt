@@ -1,0 +1,631 @@
+SOURCE: https://registry.opendata.aws/sentinel-2-l2a-cogs/
+Sentinel-2 Cloud-Optimized GeoTIFFs - Registry of Open Data on AWS
+Registry of Open Data on AWS
+Sentinel-2 Cloud-Optimized GeoTIFFs
+agriculture
+cog
+disaster response
+earth observation
+geospatial
+natural resource
+satellite imagery
+stac
+Description
+The
+Sentinel-2 mission
+is
+a land monitoring constellation of two satellites that provide high resolution
+optical imagery and provide continuity for the current SPOT and Landsat missions.
+The mission provides a global coverage of the Earth's land surface every 5 days,
+making the data of great use in ongoing studies.
+This dataset is the same as the
+Sentinel-2
+dataset, except the JP2K files were converted into Cloud-Optimized GeoTIFFs (COGs).
+Additionally, SpatioTemporal Asset Catalog metadata has were in a JSON file
+alongside the data, and a STAC API called
+Earth-search
+is freely available to search the archive. This dataset contains all of the scenes in the
+original Sentinel-2 Public Dataset and will grow as that does.
+L2A data are available from April 2017 over wider Europe region and globally since December 2018.
+Update Frequency
+New Sentinel data are added regularly, usually within few hours after they are available on Copernicus OpenHub.
+License
+Access to Sentinel data is free, full and open for the broad Regional, National, European and International user community. View
+Terms and Conditions
+.
+Documentation
+https://github.com/Element84/earth-search
+Managed By
+See all datasets managed by
+Element 84
+.
+Contact
+opendata@element84.com
+How to Cite
+Sentinel-2 Cloud-Optimized GeoTIFFs was accessed on
+DATE
+from https://registry.opendata.aws/sentinel-2-l2a-cogs.
+Usage Examples
+Tutorials
+Access satellite imagery using Python
+by The Carpentries
+Create a Dynamic Tiler with TiTiler
+by Vincent Sarago
+Field-level NDVI time series for a smallholder farm field
+by
+Tanmay Sahare
+How to process Sentinel-2 data in a serverless Lambda on AWS?
+by Alvaro Huarte
+AWS Lambda
+Amazon SNS
+How to Work with Landsat and Sentinel-2 on AWS with Python
+by Martin D. Maas
+Intake-STAC with sat-search
+by Scott Henderson
+Monitoring Lake Mead drought using the new Amazon SageMaker geospatial capabilities
+by Xiong Zhou, Anirudh Viswanathan, Erran Li, Trenton Lipscomb, and Xingjian Shi
+Amazon SageMaker
+Monitoring of methane (CH4) emission point sources on AWS
+by Janosch Woschitz, Karsten Schroer
+Amazon SageMaker
+Amazon S3
+STAC, COG, Python and QGIS
+by Andrew Cutts
+Transforming Geospatial Data to Cloud-Native Frameworks with Element 84 on AWS
+by Matt Hanson, Imtranur Rahman, Mary-Elizabeth Morin, and Ariel Walcutt
+Amazon EKS
+Amazon SageMaker
+Amazon S3
+Use Sentinel-2 data in the Open Data Cube
+by Alex Leith
+Using Sentinel-2 Data from the AWS Open Data Project to measure water hyacinth growth
+by Louise Liddell
+Amazon SageMaker Studio Lab
+Tools & Applications
+FilmDrop Demo
+by Element 84
+Fire detection Twitter bot using satellite imagery
+by Firewatch
+rio-tiler-pds
+by Vincent Sarago, et al.
+Sat-search
+by Matthew Hanson
+SITS - Satellite Image Time Series Analysis for Earth Observation Data Cubes
+by
+e-Sensing
+SpatioTemporal Asset Catalogs
+by STAC Contriubutors
+Publications
+OpenSentinelMap: A Large-Scale Land Use Dataset using OpenStreetMap and Sentinel-2 Imagery
+by Noah Johnson, Wayne Treible, Daniel Crispell
+STAC and Sentinel-2 COGs (ESIP Summer Meeting 2020)
+by Matthew Hanson
+Resources on AWS
+Description
+Collection 1 Level 2A scenes and metadata
+Resource type
+S3 Bucket
+Amazon Resource Name (ARN)
+arn:aws:s3:::e84-earth-search-sentinel-data
+AWS Region
+us-west-2
+AWS CLI
+Access (No AWS account required)
+aws s3 ls --no-sign-request s3://e84-earth-search-sentinel-data/
+Explore
+Earth Search STAC C1 L2A Collection
+STAC Browser C1 L2A Collection
+Description
+S3 Inventory
+files for L2A (parquet)
+Resource type
+S3 Bucket
+Amazon Resource Name (ARN)
+arn:aws:s3:::e84-earth-search-sentinel-data-inventory
+AWS Region
+us-west-2
+AWS CLI
+Access (No AWS account required)
+aws s3 ls --no-sign-request s3://e84-earth-search-sentinel-data-inventory/
+Description
+New scene notifications, can subscribe with
+Lambda
+or
+SQS
+. Message contains entire STAC record for each new Item.
+Resource type
+SNS Topic
+Amazon Resource Name (ARN)
+arn:aws:sns:us-west-2:608149789419:cirrus-es-prod-publish
+AWS Region
+us-west-2
+Description
+Level 2A scenes and metadata
+Resource type
+S3 Bucket
+Amazon Resource Name (ARN)
+arn:aws:s3:::sentinel-cogs
+AWS Region
+us-west-2
+AWS CLI
+Access (No AWS account required)
+aws s3 ls --no-sign-request s3://sentinel-cogs/
+Explore
+Earth Search STAC L2A Collection
+STAC Browser L2A Collection
+Description
+S3 Inventory
+files for L1C (ORC and CSV)
+Resource type
+S3 Bucket
+Amazon Resource Name (ARN)
+arn:aws:s3:::sentinel-cogs-inventory
+AWS Region
+us-west-2
+AWS CLI
+Access (No AWS account required)
+aws s3 ls --no-sign-request s3://sentinel-cogs-inventory/
+Description
+New scene notifications, can subscribe with
+Lambda
+or
+SQS
+. Message contains entire STAC record for each new Item.
+Resource type
+SNS Topic
+Amazon Resource Name (ARN)
+arn:aws:sns:us-west-2:608149789419:cirrus-v0-publish
+AWS Region
+us-west-2
+Edit this dataset entry on GitHub
+Tell us about your project
+Home
+
+SOURCE: https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2
+Sentinel-2 | Copernicus Data Space Ecosystem
+News
+Dashboard
+Cases
+Events
+Gallery
+Videos
+About
+Contact
+DATA
+Copernicus Sentinel Missions
+Copernicus Services
+Copernicus Contributing Missions
+Federated Data Sets
+Complementary Data
+STAC Browser
+ANALYSIS
+APIs
+Data Workspace
+Traceability
+JupyterLab
+openEO
+Sentinel Hub
+SERVICES
+ECOSYSTEM
+About the Ecosystem
+About the Ecosystem Services Registry
+Join the Ecosystem
+Explore Data
+Support
+FAQ
+Documentation portal
+Community forum
+Submit a request
+Video tutorials
+Data Availability
+Login
+Your profile
+openEO Algorithm Plaza
+Sentinel Hub
+News
+Dashboard
+Cases
+Events
+Gallery
+Videos
+About
+Contact
+DATA
+Copernicus Sentinel Missions
+Easy access to Earth observation data from the Copernicus Sentinel satellites.
+Copernicus Services
+Explore open datasets from the Copernicus Services to support environmental monitoring, disaster response, and climate analysis.
+Copernicus Contributing Missions
+High-resolution data complements Sentinel for better Earth observation coverage.
+Federated Data Sets
+New datasets from European providers enrich the Copernicus Data Space Ecosystem.
+Complementary Data
+Access complementary data collections that enhance Earth observation workflows with high-resolution imagery and curated datasets.
+STAC Browser
+Discover and search Earth observation data in the comprehensive and searchable STAC-compliant catalog.
+ANALYSIS
+APIs
+Use APIs like openEO for advanced data interaction.
+Data Workspace
+Create EO products on demand with a user-friendly interface.
+Traceability
+Track product integrity and availability from origin to download.
+JupyterLab
+Work with CDSE data instantly—no download required.
+openEO
+Build, run, and monitor EO workflows through a visual dashboard.
+Sentinel Hub
+Access and analyze Earth observation data without the need to develop or maintain their own infrastructure.
+SERVICES
+ECOSYSTEM
+About the Ecosystem
+The Copernicus Data Space Ecosystem offers flexible access, integration, and deployment options to help users turn Sentinel data into actionable applications.
+About the Ecosystem Services Registry
+The Ecosystem Services Registry offers flexible integration and federation options for both users and third-party providers to participate at varying levels based on their needs.
+Join the Ecosystem
+Join the Ecosystem Services Registry to increase the deployment and operation of your applications and services by making use of the Ecosystem resources.
+Explore Data
+Support
+FAQ
+Documentation portal
+Community forum
+Submit a request
+Video tutorials
+Data Availability
+Login
+Your profile
+Log in to your account to access all services or edit your profile.
+openEO Algorithm Plaza
+Log in to the openEO Algorithm Plaza and access ready-to-use algorithms that run directly on EO data.
+Sentinel Hub
+Access the Sentinel Hub dashboard, monitor processing units and generate OAuth clients.
+Home
+/
+Data Collections
+/
+Copernicus Sentinel Missions
+Sentinel-2
+The Copernicus Sentinel-2 mission consists of two polar-orbiting satellites that are positioned in the same sun-synchronous orbit, with a phase difference of 180°.
+It aims to monitor changes in land surface conditions. The satellites have a wide swath width (290 km) and a high revisit time. This capability will support monitoring of changes on the Earth's surface.
+Explore Sentinel-2 data
+A European wide-swath, high-resolution, multi-spectral imaging mission
+Sentinel-2 is a European mission that utilizes wide-swath, high-resolution, multi-spectral imaging. Dedicated to Europe’s Copernicus programme, the mission supports operational applications primarily for land services, including the monitoring of vegetation, soil and water cover, as well as the observation of inland waterways and coastal areas.
+The twin satellites S-2B and S-2C fly in the same orbit but are phased at 180°, and the full mission specification is designed to provide a high revisit frequency of 5 days at the Equator. In addition satellite S-2A is temporarily operating at position 36° away from S-2B.
+The Sentinel-2 observation scenario implements a predefined observation plan, and is focused on delivering the observation requirements for the Copernicus services. Acquisition Plans can be found at:
+https://sentinels.copernicus.eu/web/sentinel/copernicus/sentinel-2/acquisition-plans
+.
+Sentinel data products are made available systematically and free of charge to all data users including the general public, scientific and commercial users.
+The spectral band configuration of the Sentinel-2 mission arose as a result of consultation with the user community during the design phase. Sentinel-2 is equipped with an optical instrument payload that samples 13 spectral bands, including:
+four bands at 10 m
+six bands at 20 m
+three bands at 60 m spatial resolution
+The orbital swath width is 290 km.
+The Sentinel-2 twin satellites provide image data that largely contribute to existing and ongoing multispectral observations.
+These satellites support a variety of services and applications offered by Copernicus, including:
+Land monitoring,
+Agriculture,
+Emergency management,
+Risk mapping,
+Security,
+Forestry,
+Climate change,
+Disaster control,
+Marine and
+Humanitarian relief operations.
+Following products are available in the data space:
+Product Type
+Spatial Extent
+Temporal Extent
+View on Browser
+Documentation
+Level 2A Packed or Unpacked (original ESA product) (IAD)
+Europe
+July 2015 - Present
+Browser
+Documentation
+Level 2A
+Packed or Unpacked (Product generated by CloudFerro using sen2cor processor) (IAD)
+Random coverage based on user request
+July 2015 - January 2023
+Documentation
+Level 1C Packed or Unpacked (IAD)
+World
+Jul 2015 - Present
+Browser
+Documentation
+Level 1B
+(*) EUP (IAD)
+World
+Last two weeks
+Documentation
+Level 3 Quarterly Mosaics
+Packed or Unpacked (IAD)
+World
+Jul 2015 - Present
+Browser
+Documentation
+POD
+AUX_GNSSRD
+Documentation
+POD
+AUX_PROQUA
+Documentation
+POD
+AUX_POEORB
+Documentation
+(*) Access restrictions may apply.
+The Level-2A product provides atmospherically corrected Surface Reflectance (SR) products from Level-1C products. The Sentinel-2 Level-2A product is compliant with the
+CEOS Analysis Ready Data (CEOS-ARD)
+specifications and is aligned with the
+CEOS-ARD
+framework.
+More about Sentinel-2
+© contains modified Copernicus Sentinel data (2016), processed by ESA, CC BY-SA 3.0 IGO
+Sentinel-2
+Data access
+Sentinel-2 user data are available. Access restrictions may apply. For Sentinel-2 L2A, more information on the reprocessing status can be found in the documentation.
+read more
+Related news
+October 26, 2026
+Discontinuation of S-NPP VIIRS data availability - Impact on Sentinel-5P TROPOMI L2_NP* production
+Operational ESA news
+Sentinel-5P
+Read article
+October 26, 2026
+VHR Europe 2024 Mosaic now available for download
+New data
+Copernicus Contributing Missions
+Read article
+October 26, 2026
+Copernicus DEM View Service - Dataset Update
+New data
+Copernicus Contributing Missions
+Read article
+Data
+Sentinel
+Copernicus Services
+Complementary data
+Federated data sets
+Analysis
+APIs
+Data Workspace
+Traceability
+JupyterLab
+openEO
+Sentinel Hub
+Ecosystem & Services
+Services Registry
+Support & More
+Support
+Login
+News
+Dashboard
+Events
+Gallery
+Videos
+About
+Newsletter
+Do you have questions?
+Contact us via the
+about page
+Terms and conditions
+Cookie Policy
+Privacy Policy
+
+SOURCE: https://dataspace.copernicus.eu/terms-and-conditions
+Terms and conditions | Copernicus Data Space Ecosystem
+News
+Dashboard
+Cases
+Events
+Gallery
+Videos
+About
+Contact
+DATA
+Copernicus Sentinel Missions
+Copernicus Services
+Copernicus Contributing Missions
+Federated Data Sets
+Complementary Data
+STAC Browser
+ANALYSIS
+APIs
+Data Workspace
+Traceability
+JupyterLab
+openEO
+Sentinel Hub
+SERVICES
+ECOSYSTEM
+About the Ecosystem
+About the Ecosystem Services Registry
+Join the Ecosystem
+Explore Data
+Support
+FAQ
+Documentation portal
+Community forum
+Submit a request
+Video tutorials
+Data Availability
+Login
+Your profile
+openEO Algorithm Plaza
+Sentinel Hub
+News
+Dashboard
+Cases
+Events
+Gallery
+Videos
+About
+Contact
+DATA
+Copernicus Sentinel Missions
+Easy access to Earth observation data from the Copernicus Sentinel satellites.
+Copernicus Services
+Explore open datasets from the Copernicus Services to support environmental monitoring, disaster response, and climate analysis.
+Copernicus Contributing Missions
+High-resolution data complements Sentinel for better Earth observation coverage.
+Federated Data Sets
+New datasets from European providers enrich the Copernicus Data Space Ecosystem.
+Complementary Data
+Access complementary data collections that enhance Earth observation workflows with high-resolution imagery and curated datasets.
+STAC Browser
+Discover and search Earth observation data in the comprehensive and searchable STAC-compliant catalog.
+ANALYSIS
+APIs
+Use APIs like openEO for advanced data interaction.
+Data Workspace
+Create EO products on demand with a user-friendly interface.
+Traceability
+Track product integrity and availability from origin to download.
+JupyterLab
+Work with CDSE data instantly—no download required.
+openEO
+Build, run, and monitor EO workflows through a visual dashboard.
+Sentinel Hub
+Access and analyze Earth observation data without the need to develop or maintain their own infrastructure.
+SERVICES
+ECOSYSTEM
+About the Ecosystem
+The Copernicus Data Space Ecosystem offers flexible access, integration, and deployment options to help users turn Sentinel data into actionable applications.
+About the Ecosystem Services Registry
+The Ecosystem Services Registry offers flexible integration and federation options for both users and third-party providers to participate at varying levels based on their needs.
+Join the Ecosystem
+Join the Ecosystem Services Registry to increase the deployment and operation of your applications and services by making use of the Ecosystem resources.
+Explore Data
+Support
+FAQ
+Documentation portal
+Community forum
+Submit a request
+Video tutorials
+Data Availability
+Login
+Your profile
+Log in to your account to access all services or edit your profile.
+openEO Algorithm Plaza
+Log in to the openEO Algorithm Plaza and access ready-to-use algorithms that run directly on EO data.
+Sentinel Hub
+Access the Sentinel Hub dashboard, monitor processing units and generate OAuth clients.
+Home
+Terms and conditions
+Terms and Conditions of the Copernicus Data Space Ecosystem
+1. Introduction
+The Copernicus programme (Copernicus) is based on a partnership between the European Union, ESA and the Member States.
+ESA coordinates the acquisition and delivery of Earth observation data from space. Starting with the successful launch of Sentinel-1A in 2014, the series of Sentinel satellites have been delivering a wide range of EO data to diverse user communities worldwide.
+The Copernicus Data Space Ecosystem and Data supply falls under the Copernicus Programme evolution, as established with the entry into force of the “Contribution Agreement between the European Commission, representing the European Union, and the European Space Agency on the Implementation of the Union Space Programme and Horizon Europe (Pillar II, Cluster “Digital, Industry and Space”, Space Section)” (in the following referred to as ‘EU-ESA Contribution Agreement') under the “Financial Framework Partnership Agreement between the European Commission, representing the European Union and the European Union Agency for the Space Programme and the European Space Agency on the Implementation of the Union Space Programme and Horizon Europe (Pillar II, Cluster “Digital, Industry and Space”, Space Section)” (FFPA) for the period 2021-2027, and in line with the Regulation (EU)2021/696 of the European Parliament and of the Council of 28 April 2021 establishing the Union Space Programme (the “Space Programme Regulation”).
+2. Data supply
+The Copernicus Data Space Ecosystem and its online web portal, make Earth observation data available to individuals and entities worldwide. The web portal allows for the visualisation, searching, processing and download of EO data.
+3. Copyrights
+The access and use of Copernicus
+Sentinel data
+is available on a free, full and open basis through the Copernicus Data Space Ecosystem and shall be governed by the Legal Notice on the use of Copernicus Sentinel Data and Service published here:
+https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice
+Any
+other contents
+of the Copernicus Data Space Ecosystem portal are intended for non-commercial use. ESA and T-Systems grant the permission to users to visit the site, and to download and copy information, images, documents and materials from the web portal for non-commercial use. ESA and T-Systems do not grant the right to resell or redistribute any information, documents, images or material from its web portal or to compile or create derivative works from material on its web portal. Copyright of information, images, documents and materials from the web portal must be recognized by an appropriate credit.
+‍
+Any other content published on the Copernicus Data Space Ecosystem portal is protected by copyright and owned or controlled by ESA or the party credited as the provider of the content, software, or other material.
+4. User registration
+To access Earth observation data at the Copernicus Data Space Ecosystem, individuals and entities need to register as a user and provide the requested information. Through the registration, the user will be granted a password to access EO data.
+5. Personal data privacy
+When the user accesses the Copernicus Data Space Ecosystem web portal, registers as a user or downloads content, certain information about users, such as internet protocol (IP) addresses, data downloaded, pages visited, software used and time spent, as well as other similar information, will be stored on the servers of Level27 based in Hasselt, Belgium, Kunstlaan 18/4, 3500 and CloudFerro based in Fabryczna 5, 00-511 Warszawa, Poland. The data centre of Level27 is located in Zaventem, Belgium, the data centre of CloudFerro in Warszawa, Poland. All data processing facilities and data centers are based in the European Union.
+The collected information will be used in accordance with the privacy policy on this web portal. Whenever sharing user information with individuals or entities other than the parties referred to in the Privacy policy, the data will be dealt with anonymously. For more information on the Privacy policy please refer to
+https://dataspace.copernicus.eu/privacy-policy
+.
+6. Use of cookies
+Cookies are pieces of information that a web portal transfers to an individual hard drive for record-keeping purposes; passwords are not saved in cookies. Cookies help to know which pages are visited most often and help to ensure that the web portal responds to users' needs.
+If you do not wish to receive a cookie, or if you wish your browser to notify you when you receive a cookie, you may use the option on your web browser to disable cookies. Click on the 'help' section of your browser to learn how to change cookie preferences. However, please note that if you disable all cookies, you may not be able to take advantage of all the features available on this web portal.
+ESA and T-Systems do not use personal identification details transferred through cookies either for promotion or marketing purposes. T-Systems will make use of a third-party provider, Piwik Pro, to place cookies on this web portal. For more information on the Cookie Privacy policy please refer to
+https://dataspace.copernicus.eu/privacy-policy
+.
+7. Availability of the Service
+ESA will make best efforts to provide the data access services through the Copernicus Data Space Ecosystem. It is understood and recognised by all individuals and entities having accepted these Terms and Conditions, that ESA is not in a position to guarantee the availability of Earth observation data through the Copernicus Data Space Ecosystem.
+In particular, ESA reserves the right to review, modify, suspend or terminate the provision of Earth observation data through the Copernicus Data Space Ecosystem at any time in the event:
+of technical capacity constraints due to the number of user requests
+of lack of sufficient funding for sustaining Sentinel missions, and associated facilities and activities
+that satellite or ground system failure occurs
+that planned activities of related Sentinel systems and facilities are suspended or cancelled for ESA to carry out activities considered of a higher priority.
+The operating entities of the Earth observation data provided through the Copernicus Data Space Ecosystem e.g., ESA, may modify their satellite operations plans at any time, should they consider such corrective action necessary for ensuring the missions safety and success.
+8. Waiver of Liability
+With regard to the service offered by ESA and T-Systems through the Copernicus Data Space Ecosystem the user shall have no claim against ESA and T-Systems, its employees, related entities or employees of such entities, with respect to any injury to, or death of its own employees or employees of related entities or for damage to or loss of its own property or that of its related entities, whether such injury, death, damage or loss arise through negligence or otherwise, except in the case of gross negligence or wilful misconduct.
+9. Use of the Copernicus Data Space Ecosystem
+By registering at the Copernicus Data Space Ecosystem, accessing, processing and\or downloading available Earth observation data, the user shall act in good faith and shall not misuse or interfere the service of the portals. The Copernicus Data Space Ecosystem uses map layers as reference information for assisting data selection, ESA, T-Systems, and their suppliers offer no guarantees of any kind in connection to their accuracy or completeness.
+In order to secure efficient data access and ensure fair use of the services to all users, one legal entity or organization, or individual person who intends to access or copy amounts of data greatly exceeding the limitations set out in
+https://documentation.dataspace.copernicus.eu/Quotas.html
+should not bypass such limitations by creating multiple user accounts (in tens, hundreds or thousands). Such activity could be treated as a breach of these Terms and Conditions and may result in an immediate cessation or limitation of the services.
+10. Use of the Copernicus Data Space Ecosystem Community forum
+The use of the Copernicus Data Space Ecosystem community forum is subject to the above mentioned terms and conditions. In addition, the following conditions must be followed to make use of the forum:
+You must be at least 18 years old.
+1. By using the forum and its associated services you confirm you are above the age of 18 years.
+You may no longer use the forum if we contact you directly to say that you may not.
+You must use the forum in accordance with the following acceptable use and content standards:
+1. You may not break the law using the forum and you may not submit content to the forum that is illegal, offensive, or otherwise harmful to others. This includes content that is harassing, inappropriate, or abusive. You may not submit content to the forum that violates the law, infringes anyone’s intellectual property rights, violates anyone’s privacy, or breaches agreements you have with others.
+2. You may not use or try to use another’s account on the forum without their specific permission.
+3. You may not buy, sell, or otherwise trade in user names or other unique identifiers on the forum.
+4. You may not send advertisements, chain letters, or other solicitations through the forum, or use the forum to gather addresses or other personal data for commercial mailing lists or databases.
+5. You may not automate access to the forum, or monitor the forum, such as with a web crawler, browser plug-in or add-on, or other computer program that is not a web browser. You may crawl the forum to index it for a publicly available search engine, if you run one.
+6. You may not use the forum to send e-mail to distribution lists, newsgroups, or group mail aliases.
+7. You may not falsely imply that you’re affiliated with or endorsed by the company.
+8. You may not hyperlink to images or other non-hypertext content on the forum on other webpages.
+9. You may not remove any marks showing proprietary ownership from materials you download from the forum.
+10. You may not show any part of the forum on other websites with <iframe>.
+11. You may not disable, avoid, or circumvent any security or access restrictions of the forum.
+12. You may not strain infrastructure of the forum with an unreasonable volume of requests, or requests designed to impose an unreasonable load on information systems underlying the forum.
+13. You may not impersonate others through the forum.
+14. You may not encourage or help anyone in violation of these terms.
+15. You may not submit content to the forum containing malicious computer code, such as computer viruses or spyware.
+16. You may not submit content to the forum as a mere placeholder, to hold a particular address, user name, or other unique identifier.
+17. You may not use the forum to disclose information that you don’t have the right to disclose, like others’ confidential or personal information.
+By using the forum the user accepts that all user contributions are licensed under a Creative Commons Attribution-ShareAlike 4.0 International (
+CC BY-SA 4.0
+) License.
+Related news
+October 26, 2026
+Discontinuation of S-NPP VIIRS data availability - Impact on Sentinel-5P TROPOMI L2_NP* production
+Operational ESA news
+Sentinel-5P
+Read article
+October 26, 2026
+VHR Europe 2024 Mosaic now available for download
+New data
+Copernicus Contributing Missions
+Read article
+October 26, 2026
+Copernicus DEM View Service - Dataset Update
+New data
+Copernicus Contributing Missions
+Read article
+Data
+Sentinel
+Copernicus Services
+Complementary data
+Federated data sets
+Analysis
+APIs
+Data Workspace
+Traceability
+JupyterLab
+openEO
+Sentinel Hub
+Ecosystem & Services
+Services Registry
+Support & More
+Support
+Login
+News
+Dashboard
+Events
+Gallery
+Videos
+About
+Newsletter
+Do you have questions?
+Contact us via the
+about page
+Terms and conditions
+Cookie Policy
+Privacy Policy

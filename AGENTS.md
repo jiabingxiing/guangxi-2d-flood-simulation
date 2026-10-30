@@ -31,4 +31,4 @@ uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py   
 - 执行状态 SSOT：`2d_hydro_project/docs/execution_status.md`
 - docs 索引：`2d_hydro_project/docs/README.md`
 - 决策记录：`2d_hydro_project/docs/adr/`（ADR-0001~0009）
-- git：主工程文档（README/docs/configs/data/catalog + 本文件）已于 2026-10-30 入库；大文件按 `.gitignore` 排除（data 原始数据、outputs、logs、models 不进 git）。
+- git：主工程代码/文档 + floodviz 源码/测试/文档/QA 证据 + plans + 根级交付报告已于 2026-10-30~31 入库；大文件与再生产物按 `.gitignore` 排除（data ~10.9 GB、outputs 运行产物、logs、models、.env、web/.dev/mock_bundle 不进 git）。

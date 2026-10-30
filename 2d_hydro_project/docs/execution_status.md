@@ -1,6 +1,6 @@
 # 执行状态与剩余项（对照终稿）
 
-更新：2026-10-30 ｜ 模式：公开数据降级（ADR-0004/0005/0008）｜ **不是计划全部完成，不是业务预警系统**
+更新：2026-10-31 ｜ 模式：公开数据降级（ADR-0004/0005/0008）｜ **不是计划全部完成，不是业务预警系统**
 
 ## 0. Phase C 增量（2026-10-27，本轮）
 
@@ -68,7 +68,7 @@
 | 在线预报/滚动/容错（R10） | 实时数据 + SLA |
 | RACI/独立审查/许可外发 | 用户/业务侧 |
 | 模型升级时 bridge/orifice 再验证 | 按 ADR-0008 第 3 条（T016c 双构建复验） |
-| git 提交 | 2026-10-30 用户授权入库：主工程 README/docs/configs/data/catalog + 根 AGENTS.md 已进 git；大文件按 `.gitignore` 排除（data 原始数据、outputs、logs、models 不入库，仅本机留存） |
+| git 提交 | 2026-10-30~31 用户授权分批入库：主工程 README/docs/configs/data-catalog/src/scripts/tests/uv 元数据 + floodviz 源码/测试/文档/QA 证据 + plans + 根级交付报告已进 git；大文件按 `.gitignore` 排除（data ~10.9 GB、outputs 运行产物、logs、models、.env、web/.dev 再生产物不入库，仅本机留存） |
 
 ## 5. 结论
 

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://floodviz.local/schemas/catalog.schema.json",
+  "title": "floodviz catalog.json",
+  "type": "object",
+  "required": ["schema_version", "bundle_id", "created_utc", "source_manifest_hash", "license_notice", "default_case", "display", "basemaps", "cases"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "bundle_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]+$"},
+    "created_utc": {"type": "string", "format": "date-time"},
+    "source_manifest_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "license_notice": {"type": "string", "minLength": 1},
+    "default_case": {"type": "string"},
+    "display": {
+      "type": "object",
+      "required": ["project_title", "default_threshold_m", "thresholds_m", "depth_classes", "temporal_note"],
+      "properties": {
+        "project_title": {"type": "string"},
+        "subtitle": {"type": "string"},
+        "default_threshold_m": {"type": "number", "exclusiveMinimum": 0},
+        "thresholds_m": {"type": "array", "items": {"type": "number", "exclusiveMinimum": 0}, "minItems": 1},
+        "depth_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["min_m", "max_m", "color", "label"],
+            "properties": {
+              "min_m": {"type": "number"},
+              "max_m": {"type": ["number", "null"]},
+              "color": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+              "label": {"type": "string"}
+            }
+          }
+        },
+        "area_threshold_note": {"type": "string"},
+        "temporal_note": {"type": "string"},
+        "max_envelope_title": {"type": "string"},
+        "current_frame_title": {"type": "string"}
+      }
+    },
+    "basemaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "tiles", "tile_size", "attribution"],
+        "properties": {
+          "id": {"type": "string"},
+          "label": {"type": "string"},
+          "tiles": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+          "tile_size": {"const": 256},
+          "attribution": {"type": "string"},
+          "requires_network": {"type": "boolean"},
+          "note": {"type": "string"}
+        }
+      }
+    },
+    "layer_order": {"type": "array", "items": {"type": "string"}},
+    "presets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "layers"],
+        "properties": {
+          "id": {"type": "string"},
+          "label": {"type": "string"},
+          "layers": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "legends": {"type": "object"},
+    "cases": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/case"}},
+    "attribution": {"type": "object"},
+    "environment": {"type": "object"}
+  },
+  "$defs": {
+    "relPath": {"type": "string", "pattern": "^(?!/)(?![A-Za-z]:)(?!.*://)[^\\\\]+$"},
+    "gridGeometry": {
+      "type": "object",
+      "required": ["rows", "cols", "transform", "crs", "cell_size_m", "coordinates"],
+      "properties": {
+        "rows": {"type": "integer", "minimum": 1},
+        "cols": {"type": "integer", "minimum": 1},
+        "transform": {"type": "array", "items": {"type": "number"}, "minItems": 6, "maxItems": 6},
+        "crs": {"type": "string", "pattern": "^EPSG:[0-9]+$"},
+        "cell_size_m": {"type": "number", "exclusiveMinimum": 0},
+        "cell_area_m2": {"type": "number", "exclusiveMinimum": 0},
+        "coordinates": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2}
+        },
+        "bbox_wgs84": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4}
+      }
+    },
+    "layer": {
+      "type": "object",
+      "required": ["status", "label", "kind"],
+      "properties": {
+        "status": {"enum": ["remote_verified", "local_unchecked", "ready", "partial", "missing", "failed"]},
+        "label": {"type": "string"},
+        "kind": {"enum": ["frame", "max_envelope", "raster", "binary", "vector", "basemap"]},
+        "summary": {"type": "string"},
+        "note": {"type": "string"},
+        "missing_reason": {"type": "string"},
+        "asset_id": {"type": "string"},
+        "acquired_at": {"type": ["string", "null"]},
+        "role": {"type": "string"},
+        "image": {"$ref": "#/$defs/relPath"},
+        "images": {"$ref": "#/$defs/relPath"},
+        "geojson": {"$ref": "#/$defs/relPath"},
+        "footprint": {"$ref": "#/$defs/relPath"},
+        "legend": {"type": "string"},
+        "coverage": {"type": "object"},
+        "attribution": {"type": ["string", "object"]},
+        "license": {"type": ["string", "object"]},
+        "source_url": {"type": "string"},
+        "sensor": {"type": "string"},
+        "modality": {"type": "string"},
+        "processing": {"type": "string"},
+        "status_reason": {"type": "string"},
+        "quality": {"type": "object"},
+        "geometry": {"$ref": "#/$defs/gridGeometry"},
+        "value_min_m": {"type": "number"},
+        "value_max_m": {"type": "number"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"enum": ["ready", "partial"]}}, "required": ["status"]},
+          "then": {"anyOf": [{"required": ["image"]}, {"required": ["geojson"]}, {"required": ["images"]}]}
+        },
+        {
+          "if": {"properties": {"status": {"enum": ["missing", "failed", "remote_verified", "local_unchecked"]}}, "required": ["status"]},
+          "then": {"anyOf": [{"required": ["summary"]}, {"required": ["note"]}, {"required": ["missing_reason"]}]}
+        }
+      ]
+    },
+    "case": {
+      "type": "object",
+      "required": ["case_id", "name", "event_id", "event_name", "scenario_role", "subtitle", "model_bbox", "grid", "time", "default_run_id", "runs", "layers", "quality", "sources"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "name": {"type": "string"},
+        "event_id": {"type": "string"},
+        "event_name": {"type": "string"},
+        "scenario_role": {"type": "string"},
+        "subtitle": {"type": "string"},
+        "model_bbox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+        "grid": {"$ref": "#/$defs/gridGeometry"},
+        "time": {
+          "type": "object",
+          "required": ["time_zone", "origin_status", "save_interval_s", "temporal_interpolation"],
+          "properties": {
+            "time_origin": {"type": ["string", "null"]},
+            "time_zone": {"type": "string"},
+            "origin_status": {"enum": ["model_schedule_confirmed", "relative_only_candidate", "relative_only"]},
+            "origin_note": {"type": "string"},
+            "save_interval_s": {"type": "number", "exclusiveMinimum": 0},
+            "temporal_interpolation": {"const": "none"}
+          }
+        },
+        "default_run_id": {"type": "string"},
+        "runs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["run_id", "label", "role", "frame_count", "save_interval_s", "simulation_duration_s", "timeline", "statistics", "numeric_manifest", "quality"],
+            "properties": {
+              "run_id": {"type": "string"},
+              "label": {"type": "string"},
+              "role": {"type": "string"},
+              "frame_count": {"type": "integer", "minimum": 1},
+              "save_interval_s": {"type": "number", "exclusiveMinimum": 0},
+              "simulation_duration_s": {"type": "number", "exclusiveMinimum": 0},
+              "timeline": {"$ref": "#/$defs/relPath"},
+              "statistics": {"$ref": "#/$defs/relPath"},
+              "numeric_manifest": {"$ref": "#/$defs/relPath"},
+              "optional": {"type": "boolean"},
+              "notes": {"type": "string"},
+              "quality": {
+                "type": "object",
+                "required": ["mass_gate", "validation_status", "vertical_datum_status", "warnings"],
+                "properties": {
+                  "mass_gate": {"enum": ["PASS", "FAIL-EXPLAINED", "FAIL", "unrecorded"]},
+                  "e_mass": {"type": ["number", "null"]},
+                  "mass_gate_cause": {"type": ["string", "null"]},
+                  "validation_status": {"type": "string"},
+                  "vertical_datum_status": {"type": "string"},
+                  "warnings": {"type": "array", "items": {"type": "string"}}
+                }
+              }
+            }
+          }
+        },
+        "layers": {
+          "type": "object",
+          "required": ["flood", "max", "dem"],
+          "properties": {
+            "flood": {"$ref": "#/$defs/layer"},
+            "max": {"$ref": "#/$defs/layer"},
+            "dem": {"$ref": "#/$defs/layer"},
+            "sar": {"$ref": "#/$defs/layer"},
+            "optical": {"$ref": "#/$defs/layer"},
+            "boundary": {"$ref": "#/$defs/layer"},
+            "sites": {"$ref": "#/$defs/layer"}
+          }
+        },
+        "sites": {"type": "array"},
+        "quality": {
+          "type": "object",
+          "required": ["mass_gate", "validation_status", "vertical_datum_status", "warnings"],
+          "properties": {
+            "mass_gate": {"enum": ["PASS", "FAIL-EXPLAINED", "FAIL", "unrecorded"]},
+            "e_mass": {"type": ["number", "null"]},
+            "validation_status": {"type": "string"},
+            "vertical_datum_status": {"type": "string"},
+            "warnings": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "sources": {"type": "object"}
+      }
+    }
+  }
+}

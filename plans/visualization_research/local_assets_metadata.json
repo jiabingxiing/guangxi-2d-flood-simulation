@@ -1,0 +1,174 @@
+[
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
+    "exists": true,
+    "bytes": 2051269376,
+    "crs": "EPSG:32648",
+    "count": 1,
+    "dtypes": [
+      "int16"
+    ],
+    "shape": [
+      49239,
+      61834
+    ],
+    "resolution": [
+      12.5,
+      12.5
+    ],
+    "nodata": 0.0,
+    "colorinterp": [
+      "1"
+    ],
+    "bounds_wgs84": [
+      104.43800324839964,
+      20.81540895508795,
+      112.17264160501244,
+      26.51338185224184
+    ]
+  },
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\淹没分析 7.8\\data\\500kV久隆站附近\\灾前可见光\\SVN3-01_20260403_L4D0000293335_02_6042500742470001_RGB.tiff",
+    "exists": true,
+    "bytes": 4719165342,
+    "crs": "EPSG:4326",
+    "count": 3,
+    "dtypes": [
+      "uint8",
+      "uint8",
+      "uint8"
+    ],
+    "shape": [
+      54850,
+      57181
+    ],
+    "resolution": [
+      4.5e-06,
+      4.5e-06
+    ],
+    "nodata": 0.0,
+    "colorinterp": [
+      "3",
+      "4",
+      "5"
+    ],
+    "bounds_wgs84": [
+      108.59888699999999,
+      21.829157999999993,
+      108.8562015,
+      22.075982999999994
+    ]
+  },
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\淹没分析 7.8\\data\\灾后SAR_久隆区域.tif",
+    "exists": true,
+    "bytes": 60874182,
+    "crs": "EPSG:32649",
+    "count": 1,
+    "dtypes": [
+      "float32"
+    ],
+    "shape": [
+      6412,
+      5919
+    ],
+    "resolution": [
+      3.0,
+      3.0
+    ],
+    "nodata": "NaN",
+    "colorinterp": [
+      "1"
+    ],
+    "bounds_wgs84": [
+      108.6548130161663,
+      21.958973414461315,
+      108.82952164598257,
+      22.134997937153116
+    ]
+  },
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\raw\\ningming_validation\\淹没深度验证数据-崇左宁明县\\宁明县8月24日SAR.tif",
+    "exists": true,
+    "bytes": 122689344,
+    "crs": "EPSG:4326",
+    "count": 1,
+    "dtypes": [
+      "uint8"
+    ],
+    "shape": [
+      11249,
+      10870
+    ],
+    "resolution": [
+      6.944450000000038e-05,
+      6.944449999999992e-05
+    ],
+    "nodata": null,
+    "colorinterp": [
+      "1"
+    ],
+    "bounds_wgs84": [
+      106.916250733268,
+      21.596734988559003,
+      107.671112448268,
+      22.377916169059002
+    ]
+  },
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240912T104222_sigma20m.tif",
+    "exists": true,
+    "bytes": 27986594,
+    "crs": "EPSG:32649",
+    "count": 1,
+    "dtypes": [
+      "float32"
+    ],
+    "shape": [
+      4380,
+      2671
+    ],
+    "resolution": [
+      20.0,
+      20.0
+    ],
+    "nodata": "NaN",
+    "colorinterp": [
+      "1"
+    ],
+    "bounds_wgs84": [
+      109.74160101361534,
+      22.76022785931904,
+      110.26924673505884,
+      23.55470567387639
+    ]
+  },
+  {
+    "path": "D:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\jiulong_20240917T105023_sigma20m.tif",
+    "exists": true,
+    "bytes": 27627099,
+    "crs": "EPSG:32649",
+    "count": 1,
+    "dtypes": [
+      "float32"
+    ],
+    "shape": [
+      3466,
+      3027
+    ],
+    "resolution": [
+      20.0,
+      20.0
+    ],
+    "nodata": "NaN",
+    "colorinterp": [
+      "1"
+    ],
+    "bounds_wgs84": [
+      108.44823882228151,
+      21.695508480369543,
+      109.04424939496104,
+      22.32934856521361
+    ]
+  }
+]

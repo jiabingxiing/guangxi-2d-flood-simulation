@@ -1,0 +1,17 @@
+{
+  "fetched_at": "2026-10-27T06:19:14+00:00",
+  "repos": [
+    {
+      "repo": "GeoTIFF/georaster-layer-for-leaflet",
+      "url": "https://github.com/GeoTIFF/georaster-layer-for-leaflet",
+      "status": "verified",
+      "stars": 352,
+      "forks": 62,
+      "license": "Apache-2.0",
+      "pushed_at": "2025-09-04T01:21:42Z",
+      "archived": false,
+      "message": "",
+      "fetched_at": "2026-10-27T06:19:13+00:00"
+    }
+  ]
+}

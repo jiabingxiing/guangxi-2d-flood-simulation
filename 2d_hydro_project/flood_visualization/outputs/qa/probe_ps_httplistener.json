@@ -1,0 +1,28 @@
+{
+  "label": "ps_httplistener",
+  "url": "http://127.0.0.1:8793/index.html",
+  "ok": true,
+  "jiulong_frames": 21,
+  "scrub_frameId": "f0010",
+  "query_state": "ok",
+  "query_value": 0.0020000000949949026,
+  "chart_painted": 19155,
+  "guigang_frames": 57,
+  "guigang_time_abs": "2024-09-03 00:00（北京时间）",
+  "status_bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+  "console_errors": [],
+  "page_errors": [],
+  "sample_statuses": {
+    "index.html": 200,
+    "maplibre-gl.css": 200,
+    "styles.css": 200,
+    "timeline.js": 200,
+    "map.js": 200,
+    "proj4.js": 200,
+    "app.js": 200,
+    "maplibre-gl.js": 200,
+    "catalog.json": 200,
+    "timeline.json": 200
+  },
+  "js_errors": []
+}

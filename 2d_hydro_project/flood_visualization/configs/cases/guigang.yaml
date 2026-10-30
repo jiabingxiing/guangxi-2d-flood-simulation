@@ -1,0 +1,85 @@
+# 案例：贵港（郁江 100 m 真实DEM情景 + 30m/200m 历史对照，降级模式）
+case_id: guigang
+name: 贵港
+event_id: "2024-09-yagi"
+event_name: "郁江 2024 年第 1 号洪水（台风摩羯残余环流）"
+scenario_role: "研究性情景（100 m 全域真实DEM，无人工刻蚀河槽；上游 Q 为三角线情景）"
+subtitle: "100 m 真实DEM情景 · 57 帧 · 6 h/帧"
+model_bbox: [109.295782, 22.98, 109.952528, 23.319742]   # WGS84 西南东北
+crs: "EPSG:32649"
+time_zone: "Asia/Shanghai"
+time_origin: "2024-09-03T00:00:00+08:00"
+origin_status: model_schedule_confirmed
+origin_note: "meta.json 记录 t0=2024-09-03T00（前 2 日基流充槽），为模型排程确认起点"
+default_run_id: scen_yagi_q11500_100m_dt2p5_choff_realdem
+
+sites:
+  - {name: "贵港市区", lon: 109.60, lat: 23.11, label: "市区参考点（站点坐标非业务核证）"}
+
+runs:
+  - run_id: scen_yagi_q11500_100m_dt2p5_choff_realdem
+    label: "默认 100 m 真实DEM全域（T+0–336 h）"
+    role: default
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    notes: "668×370 格；dt=2.5s；严格采用真实DEM（彻底清除人工直线刻蚀与12m下切）；E_mass PASS"
+  - run_id: scen_yagi_q11500_30m_b5
+    label: "30 m 历史刻蚀对照（T+0–336 h）"
+    role: legacy
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: true
+    notes: "含 12m 人工直线河槽刻蚀历史版本对照"
+  - run_id: scen_yagi_q11500_200m
+    label: "200 m 历史对照（T+0–336 h）"
+    role: legacy
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: true
+    notes: "200 m 对照，不冒充 30 m；站址水深 200 m 偏大 15%"
+
+layers:
+  dem: {status: ready, label: "DEM 高程", kind: raster, summary: "模型输入 DEM（100 m 真实重采样，彻底清除人工刻蚀与下切）", note: "原始地貌完好保持，垂直基准未闭合"}
+  flood: {status: ready, label: "模型水深（逐帧）", kind: frame}
+  max: {status: ready, label: "全程最大水深包络", kind: max_envelope}
+  optical:
+    status: remote_verified
+    label: "可见光背景（S2 2024-10-03）"
+    kind: raster
+    asset_id: "guigang_s2_20241003"
+    acquired_at: "2024-10-03T11:21:43+08:00"
+    summary: "Sentinel-2 L2A TCI，AOI 有效覆盖 96.84%、有效像元云占比 0.0005%；事件后约 3 周背景，不是洪峰观测"
+    note: "尚未导入本地发布包，状态 remote_verified，默认禁用；约 3.16% 空缺需透明"
+  sar:
+    status: partial
+    label: "SAR 后向散射（S1 2024-09-12）"
+    kind: raster
+    asset_id: "guigang_s1_20240912"
+    acquired_at: "2024-09-12T10:42:22+08:00"
+    summary: "S1 20 m 后向散射，仅覆盖模型域东部一部分（G17 降级说明）"
+    note: "必须显示足迹；不宣称全市覆盖；SAR 后向散射不是水深"
+
+quality:
+  mass_gate: PASS
+  e_mass: 5.665e-05
+  validation_status: "100 m 真实DEM情景级；彻底清除人工刻蚀下切"
+  vertical_datum_status: "未闭合（G7）；贵港站水位为站基面，未与 DEM 统一"
+  warnings:
+    - "情景级成果；上游 Q 为三角线情景，无逐时实测"
+    - "郁江站水位与 DEM 垂直基准未统一，不得直接相减率定"
+
+sources:
+  model: "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)"
+  run_path_hint: "2d_hydro_project/outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem"
+  evidence:
+    - "plans/visualization_research/frame_audit.json"
+    - "2d_hydro_project/docs/execution_status.md"
+    - "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+
+terrain:
+  source_dem: "data/interim/guigang/dem_12p5m_32649.tif"
+  source_label: "原始 DEM（未裁剪，12.5 m）"
+  source_note: "源自 0731 五省区DEM 广西原始数据；ArcGIS Elevation 系列色带；未做模型网格裁切，原始地貌完好保持"

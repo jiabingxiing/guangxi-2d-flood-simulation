@@ -1,0 +1,90 @@
+{
+  "default_file": {
+    "status_bundle": "发布包：加载失败",
+    "notice_hidden": false,
+    "notice": "发布包加载失败无法加载发布包 catalog.json：Failed to fetch请确认通过 scripts/start_local.cmd（127.0.0.1:8765）访问，且 bundle 目录完整。",
+    "query_body": "在地图上单击以查询该点水深。数值来自 numeric/** 分块，不由 PNG 颜色反算。",
+    "frame_readout": "帧 1 / 1",
+    "console_error_count": 1,
+    "console_sample": [
+      "Fetch API cannot load file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%"
+    ],
+    "body_text_head": "广西久隆·宁明·贵港 二维洪涝可视化\n      研究性情景成果（降级模式），非业务预警\n    \n    \n    \n      \n        情景 run\n        \n      \n      \n    \n  \n\n  \n    \n      \n        图层预设\n        \n        预设只控制本地图层；在线底图用下方独立开关。\n      \n\n      \n        图层与透明度\n        \n      \n\n      \n        在线底图\n        \n          \n            \n            启用在线底图"
+  },
+  "file_with_flag": {
+    "initial": {
+      "caseId": "jiulong",
+      "frameCount": 21,
+      "frameId": "f0000"
+    },
+    "after_scrub": {
+      "index": 10,
+      "frameId": "f0010",
+      "time_relative": "T+60.0 h",
+      "frame_readout": "帧 11 / 21"
+    },
+    "query": {
+      "state": "ok",
+      "value": 0.0020000000949949026,
+      "lngLat": [
+        108.72,
+        22.06
+      ],
+      "native": [
+        264710.7156067597,
+        2441227.042361928
+      ],
+      "row": 75,
+      "col": 88,
+      "grid": {
+        "crs": "EPSG:32649",
+        "rows": 152,
+        "cols": 182,
+        "shape": [
+          152,
+          182
+        ],
+        "transform": [
+          200,
+          0,
+          246911.3,
+          0,
+          -200,
+          2456393
+        ],
+        "cell_size_m": 200,
+        "cell_area_m2": 40000,
+        "grid_hash": "e594f0e5df21229e8bad538b995e4ee1"
+      },
+      "frame": {
+        "frame_id": "f0010",
+        "source_sequence": 10,
+        "sim_seconds": 216000,
+        "timestamp": null,
+        "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0010.png",
+        "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0010/{block_y}/{block_x}.bin",
+        "sha256": "3acf8e0e16d7f92e56181f919a1c4018d602a6a91fcea374fe26f61fba635d7e"
+      },
+      "frameId": "f0010",
+      "runId": "scen_free_200m_sv6h",
+      "caseId": "jiulong",
+      "cellSizeM": 200,
+      "crs": "EPSG:32649",
+      "maxMode": false,
+      "cellArea": 40000,
+      "blockPath": "numeric/jiulong/scen_free_200m_sv6h/f0010/0/0.bin",
+      "cached": false
+    },
+    "chart_painted_pixels": 19155,
+    "guigang": {
+      "caseId": "guigang",
+      "frameCount": 57,
+      "time_absolute": "2024-09-03 00:00（北京时间）",
+      "dem_available": true,
+      "sar_available": true
+    },
+    "console_errors": [],
+    "local_4xx": [],
+    "js_errors": []
+  }
+}

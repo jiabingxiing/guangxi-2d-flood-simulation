@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0",
+  "bundle": "outputs\\web_bundle\\v2-20261027",
+  "full": true,
+  "ok": true,
+  "bundle_bytes": 685869968,
+  "file_count": 2912,
+  "seconds": 59.554,
+  "groups": [
+    {
+      "name": "structure",
+      "passed": true,
+      "checks": 229,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "timeline",
+      "passed": true,
+      "checks": 1811,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "statistics",
+      "passed": true,
+      "checks": 3924,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "images",
+      "passed": true,
+      "checks": 1981,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {}
+    },
+    {
+      "name": "completeness",
+      "passed": true,
+      "checks": 251,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "bundle_bytes": 685869968,
+        "file_count": 2912,
+        "content_entries": 2895,
+        "numeric_files": {
+          "jiulong/scen_free_200m_sv6h": 22,
+          "ningming/scen_q6000_n100_100m": 20,
+          "ningming/scen_q4000_100m": 20,
+          "guigang/scen_yagi_q11500_30m_b5": 2610
+        },
+        "hash_checked": 2895
+      }
+    },
+    {
+      "name": "numeric",
+      "passed": true,
+      "checks": 6845,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "samples": 3364,
+        "max_abs_err_m": 0.0,
+        "max_rel_err": 0.0,
+        "gate": "max(1e-05, 1e-06*|src|)",
+        "passed": true,
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "frames_checked": 21,
+            "samples": 609,
+            "max_abs_err_m": 0.0,
+            "source_compared": true
+          },
+          "ningming/scen_q6000_n100_100m": {
+            "frames_checked": 19,
+            "samples": 551,
+            "max_abs_err_m": 0.0,
+            "source_compared": true
+          },
+          "ningming/scen_q4000_100m": {
+            "frames_checked": 19,
+            "samples": 551,
+            "max_abs_err_m": 0.0,
+            "source_compared": true
+          },
+          "guigang/scen_yagi_q11500_30m_b5": {
+            "frames_checked": 57,
+            "samples": 1653,
+            "max_abs_err_m": 0.0,
+            "source_compared": true
+          }
+        }
+      }
+    },
+    {
+      "name": "statistics_recompute",
+      "passed": true,
+      "checks": 1893,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "frames_checked": 116,
+        "max_rel_diff": 0.0,
+        "gate": 0.001,
+        "passed": true,
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "frames_checked": 21,
+            "max_rel_diff": 0.0
+          },
+          "ningming/scen_q6000_n100_100m": {
+            "frames_checked": 19,
+            "max_rel_diff": 0.0
+          },
+          "ningming/scen_q4000_100m": {
+            "frames_checked": 19,
+            "max_rel_diff": 0.0
+          },
+          "guigang/scen_yagi_q11500_30m_b5": {
+            "frames_checked": 57,
+            "max_rel_diff": 0.0
+          }
+        }
+      }
+    },
+    {
+      "name": "spatial",
+      "passed": true,
+      "checks": 10,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "per_run": {
+          "jiulong/scen_free_200m_sv6h": {
+            "split": {
+              "rows": 1,
+              "cols": 1
+            },
+            "parts": [
+              {
+                "id": "r0c0",
+                "max_px": 0.048552,
+                "max_m": 9.7104
+              }
+            ],
+            "max_px": 0.048552,
+            "max_m": 9.7104,
+            "samples": 15,
+            "gate_px": 0.5,
+            "passed": true
+          },
+          "ningming/scen_q6000_n100_100m": {
+            "split": {
+              "rows": 1,
+              "cols": 1
+            },
+            "parts": [
+              {
+                "id": "r0c0",
+                "max_px": 0.042831,
+                "max_m": 4.2831
+              }
+            ],
+            "max_px": 0.042831,
+            "max_m": 4.2831,
+            "samples": 15,
+            "gate_px": 0.5,
+            "passed": true
+          },
+          "ningming/scen_q4000_100m": {
+            "split": {
+              "rows": 1,
+              "cols": 1
+            },
+            "parts": [
+              {
+                "id": "r0c0",
+                "max_px": 0.042831,
+                "max_m": 4.2831
+              }
+            ],
+            "max_px": 0.042831,
+            "max_m": 4.2831,
+            "samples": 15,
+            "gate_px": 0.5,
+            "passed": true
+          },
+          "guigang/scen_yagi_q11500_30m_b5": {
+            "split": {
+              "rows": 1,
+              "cols": 2
+            },
+            "parts": [
+              {
+                "id": "r0c0",
+                "max_px": 0.338282,
+                "max_m": 10.1485
+              },
+              {
+                "id": "r0c1",
+                "max_px": 0.338166,
+                "max_m": 10.145
+              }
+            ],
+            "max_px": 0.338282,
+            "max_m": 10.1485,
+            "samples": 30,
+            "gate_px": 0.5,
+            "passed": true
+          }
+        },
+        "max_px": 0.338282,
+        "gate_px": 0.5,
+        "passed": true
+      }
+    },
+    {
+      "name": "schemas",
+      "passed": true,
+      "checks": 1,
+      "failure_count": 0,
+      "failures": [],
+      "notes": [],
+      "details": {
+        "failed_documents": 0,
+        "passed": true
+      }
+    }
+  ],
+  "failures": [],
+  "warnings": []
+}

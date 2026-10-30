@@ -1,0 +1,1202 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "v1-20261027",
+  "created_utc": "2026-10-27T10:00:00+00:00",
+  "source_manifest_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "license_notice": "研究性情景成果，不得用于业务告警或资产安全判据；软件与数据授权见 licenses/LICENSES.md",
+  "default_case": "jiulong",
+  "display": {
+    "project_title": "广西久隆·宁明·贵港 二维洪涝可视化",
+    "subtitle": "研究性情景成果（公开数据降级模式），非业务预警",
+    "default_threshold_m": 0.05,
+    "thresholds_m": [
+      0.05,
+      0.15,
+      0.3,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "depth_classes": [
+      {
+        "min_m": 0.05,
+        "max_m": 0.15,
+        "color": "#b7e4c7",
+        "label": "0.05–0.15 m"
+      },
+      {
+        "min_m": 0.15,
+        "max_m": 0.3,
+        "color": "#74c69d",
+        "label": "0.15–0.30 m"
+      },
+      {
+        "min_m": 0.3,
+        "max_m": 0.5,
+        "color": "#40916c",
+        "label": "0.30–0.50 m"
+      },
+      {
+        "min_m": 0.5,
+        "max_m": 1.0,
+        "color": "#f9c74f",
+        "label": "0.50–1.00 m"
+      },
+      {
+        "min_m": 1.0,
+        "max_m": 2.0,
+        "color": "#f8961e",
+        "label": "1–2 m"
+      },
+      {
+        "min_m": 2.0,
+        "max_m": 5.0,
+        "color": "#f3722c",
+        "label": "2–5 m"
+      },
+      {
+        "min_m": 5.0,
+        "max_m": 10.0,
+        "color": "#d62828",
+        "label": "5–10 m"
+      },
+      {
+        "min_m": 10.0,
+        "max_m": null,
+        "color": "#3f0071",
+        "label": "≥10 m"
+      }
+    ],
+    "area_threshold_note": "",
+    "temporal_note": "6 h/帧离散回放；播放速度不改变物理时间分辨率",
+    "max_envelope_title": "全程最大水深包络（非某一时刻）",
+    "current_frame_title": "当前帧模拟水深"
+  },
+  "basemaps": [
+    {
+      "id": "esri_world_imagery",
+      "label": "Esri World Imagery（在线）",
+      "tiles": [
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+      ],
+      "tile_size": 256,
+      "attribution": "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community",
+      "requires_network": true,
+      "note": "Esri 路径为 z/y/x；exportTilesAllowed=false，不得批量缓存；在线影像不是事件同期观测"
+    },
+    {
+      "id": "esri_world_street",
+      "label": "Esri World Street Map（在线）",
+      "tiles": [
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+      ],
+      "tile_size": 256,
+      "attribution": "Source: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, and the GIS User Community",
+      "requires_network": true,
+      "note": "街道地名背景；保留完整署名"
+    }
+  ],
+  "layer_order": [
+    "basemap",
+    "dem",
+    "optical",
+    "sar",
+    "flood",
+    "max",
+    "boundary",
+    "sites"
+  ],
+  "presets": [
+    {
+      "id": "optical_only",
+      "label": "仅可见光",
+      "layers": [
+        "optical"
+      ]
+    },
+    {
+      "id": "sar_only",
+      "label": "仅 SAR",
+      "layers": [
+        "sar"
+      ]
+    },
+    {
+      "id": "dem_only",
+      "label": "仅 DEM",
+      "layers": [
+        "dem"
+      ]
+    },
+    {
+      "id": "flood_only",
+      "label": "仅淹没",
+      "layers": [
+        "flood"
+      ]
+    },
+    {
+      "id": "all_available",
+      "label": "全部可用图层",
+      "layers": [
+        "dem",
+        "optical",
+        "sar",
+        "flood",
+        "boundary",
+        "sites"
+      ]
+    },
+    {
+      "id": "custom",
+      "label": "自定义",
+      "layers": []
+    }
+  ],
+  "legends": {
+    "depth": {
+      "title": "模拟水深（m）",
+      "type": "classes",
+      "classes": "depth_classes",
+      "note": "阈值与色带为固定口径；仅为模拟情景，不是资产安全等级"
+    },
+    "binary_water": {
+      "title": "SAR 水体（二值）",
+      "type": "classes",
+      "classes": [
+        {
+          "min_m": 0,
+          "max_m": null,
+          "color": "#3a86ff",
+          "label": "提取为水体"
+        }
+      ],
+      "note": "SAR 是观测时段的水体范围证据，不是水深"
+    },
+    "terrain": {
+      "title": "DEM 高程（m）",
+      "type": "gradient",
+      "stops": [
+        "#f7f7f7",
+        "#d9d2c5",
+        "#b8a98f",
+        "#8f7f66",
+        "#6b5b45"
+      ],
+      "value_min_m": 0,
+      "value_max_m": 300,
+      "note": "模型输入 DEM；来源、垂直基准未闭合"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "jiulong",
+      "name": "久隆",
+      "event_id": "2024-09-yagi",
+      "event_name": "台风摩羯残余环流（2024-09）",
+      "scenario_role": "研究性情景（雨驱动 + 常数潮位带；非独立水动力验证）",
+      "subtitle": "200 m 降级情景 · 21 帧 · 6 h/帧",
+      "model_bbox": [
+        108.545265,
+        21.92,
+        108.902171,
+        22.199335
+      ],
+      "grid": {
+        "rows": 152,
+        "cols": 182,
+        "transform": [
+          200.0,
+          0.0,
+          246911.3,
+          0.0,
+          -200.0,
+          2456393.0
+        ],
+        "crs": "EPSG:32649",
+        "cell_size_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "coordinates": [
+          [
+            108.5452654,
+            22.1943961
+          ],
+          [
+            108.8981159,
+            22.199335
+          ],
+          [
+            108.9021711,
+            21.9248716
+          ],
+          [
+            108.5499998,
+            21.92
+          ]
+        ],
+        "bbox_wgs84": [
+          108.5452654,
+          21.92,
+          108.9021711,
+          22.199335
+        ]
+      },
+      "time": {
+        "time_origin": null,
+        "time_zone": "Asia/Shanghai",
+        "origin_status": "relative_only_candidate",
+        "origin_note": "旧 meta 无规范 t0；该起点来自父项目脚本构造（2024-09-05 00:00 北京时间），仅作显示用；核对冻结雨量/边界/代码哈希前不写入正式时间基准",
+        "save_interval_s": 21600.0,
+        "temporal_interpolation": "none"
+      },
+      "default_run_id": "scen_free_200m_sv6h",
+      "runs": [
+        {
+          "run_id": "scen_free_200m_sv6h",
+          "label": "默认情景（T+0–120 h）",
+          "role": "default",
+          "frame_count": 21,
+          "save_interval_s": 21600.0,
+          "simulation_duration_s": 432000.0,
+          "timeline": "cases/jiulong/scen_free_200m_sv6h/timeline.json",
+          "statistics": "cases/jiulong/scen_free_200m_sv6h/statistics.json",
+          "numeric_manifest": "numeric/jiulong/scen_free_200m_sv6h/manifest.json",
+          "optional": false,
+          "notes": "自由出流边界；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）",
+          "quality": {
+            "mass_gate": "PASS",
+            "e_mass": 0.0004893,
+            "validation_status": "降级模式情景级；无近洪峰观测，无连续水位/流量过程",
+            "vertical_datum_status": "未闭合（G7）",
+            "warnings": [
+              "情景级成果，不得用于业务告警或资产安全判据",
+              "下游边界为常数位面情景带（free/z0/z05/z10），天文潮时变未引入",
+              "河槽未刻蚀，退水期面积不降反增（无排水网限制）"
+            ],
+            "mass_gate_cause": null
+          }
+        }
+      ],
+      "layers": {
+        "dem": {
+          "status": "ready",
+          "label": "DEM 高程",
+          "kind": "raster",
+          "summary": "父项目 12.5 m DEM 重采样到模型网格",
+          "note": "来源与垂直基准未闭合",
+          "image": "frames/jiulong/dem.png",
+          "geometry": {
+            "rows": 152,
+            "cols": 182,
+            "transform": [
+              200.0,
+              0.0,
+              246911.3,
+              0.0,
+              -200.0,
+              2456393.0
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 200.0,
+            "cell_area_m2": 40000.0,
+            "coordinates": [
+              [
+                108.5452654,
+                22.1943961
+              ],
+              [
+                108.8981159,
+                22.199335
+              ],
+              [
+                108.9021711,
+                21.9248716
+              ],
+              [
+                108.5499998,
+                21.92
+              ]
+            ],
+            "bbox_wgs84": [
+              108.5452654,
+              21.92,
+              108.9021711,
+              22.199335
+            ]
+          },
+          "legend": "terrain"
+        },
+        "flood": {
+          "status": "ready",
+          "label": "模型水深（逐帧）",
+          "kind": "frame",
+          "images": "frames/jiulong/scen_free_200m_sv6h/images.json"
+        },
+        "max": {
+          "status": "ready",
+          "label": "全程最大水深包络",
+          "kind": "max_envelope",
+          "image": "frames/jiulong/scen_free_200m_sv6h/max.png",
+          "geometry": {
+            "rows": 152,
+            "cols": 182,
+            "transform": [
+              200.0,
+              0.0,
+              246911.3,
+              0.0,
+              -200.0,
+              2456393.0
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 200.0,
+            "cell_area_m2": 40000.0,
+            "coordinates": [
+              [
+                108.5452654,
+                22.1943961
+              ],
+              [
+                108.8981159,
+                22.199335
+              ],
+              [
+                108.9021711,
+                21.9248716
+              ],
+              [
+                108.5499998,
+                21.92
+              ]
+            ],
+            "bbox_wgs84": [
+              108.5452654,
+              21.92,
+              108.9021711,
+              22.199335
+            ]
+          }
+        },
+        "optical": {
+          "status": "local_unchecked",
+          "label": "可见光背景（2026-04-03 本地影像）",
+          "kind": "raster",
+          "summary": "本地 RGB（SVN3-01，4.7 GB，EPSG:4326），仅覆盖部分模型域；2026 影像不能当作 2024 事件同期观测",
+          "note": "未完成发布质检，默认禁用",
+          "asset_id": "jiulong_rgb_20260403",
+          "acquired_at": "2026-04-03T00:00:00+08:00",
+          "image": "frames/jiulong/optical.png",
+          "geometry": {
+            "rows": 152,
+            "cols": 182,
+            "transform": [
+              200.0,
+              0.0,
+              246911.3,
+              0.0,
+              -200.0,
+              2456393.0
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 200.0,
+            "cell_area_m2": 40000.0,
+            "coordinates": [
+              [
+                108.5452654,
+                22.1943961
+              ],
+              [
+                108.8981159,
+                22.199335
+              ],
+              [
+                108.9021711,
+                21.9248716
+              ],
+              [
+                108.5499998,
+                21.92
+              ]
+            ],
+            "bbox_wgs84": [
+              108.5452654,
+              21.92,
+              108.9021711,
+              22.199335
+            ]
+          },
+          "legend": "rgb",
+          "footprint": "cases/jiulong/optical_footprint.geojson"
+        },
+        "sar": {
+          "status": "local_unchecked",
+          "label": "SAR 后向散射（2024-09-17 事后）",
+          "kind": "raster",
+          "summary": "S1 20 m 后向散射；不是水深，不能共用深度图例",
+          "note": "过境时刻与模拟事件不同期；仅范围证据",
+          "asset_id": "jiulong_s1_20240917",
+          "acquired_at": "2024-09-17T10:50:23+08:00",
+          "image": "frames/jiulong/sar.png",
+          "geometry": {
+            "rows": 152,
+            "cols": 182,
+            "transform": [
+              200.0,
+              0.0,
+              246911.3,
+              0.0,
+              -200.0,
+              2456393.0
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 200.0,
+            "cell_area_m2": 40000.0,
+            "coordinates": [
+              [
+                108.5452654,
+                22.1943961
+              ],
+              [
+                108.8981159,
+                22.199335
+              ],
+              [
+                108.9021711,
+                21.9248716
+              ],
+              [
+                108.5499998,
+                21.92
+              ]
+            ],
+            "bbox_wgs84": [
+              108.5452654,
+              21.92,
+              108.9021711,
+              22.199335
+            ]
+          },
+          "legend": "binary_water",
+          "footprint": "cases/jiulong/sar_footprint.geojson"
+        },
+        "boundary": {
+          "status": "ready",
+          "label": "模型域边界",
+          "kind": "vector",
+          "geojson": "cases/jiulong/boundary.geojson"
+        },
+        "sites": {
+          "status": "ready",
+          "label": "站点/参考点",
+          "kind": "vector",
+          "geojson": "cases/jiulong/sites.geojson"
+        }
+      },
+      "sites": [
+        {
+          "name": "久隆500kV站",
+          "lon": 108.7161,
+          "lat": 22.0638,
+          "label": "站址（精确坐标待业务确认）"
+        }
+      ],
+      "quality": {
+        "mass_gate": "PASS",
+        "e_mass": 0.0004893,
+        "validation_status": "降级模式情景级；无近洪峰观测，无连续水位/流量过程",
+        "vertical_datum_status": "未闭合（G7）",
+        "warnings": [
+          "情景级成果，不得用于业务告警或资产安全判据",
+          "下游边界为常数位面情景带（free/z0/z05/z10），天文潮时变未引入",
+          "河槽未刻蚀，退水期面积不降反增（无排水网限制）"
+        ]
+      },
+      "sources": {
+        "model": "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)",
+        "run_path_hint": "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+        "evidence": [
+          "plans/visualization_research/frame_audit.json",
+          "2d_hydro_project/docs/execution_status.md",
+          "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+        ]
+      }
+    },
+    {
+      "case_id": "ningming",
+      "name": "宁明",
+      "event_id": "2026-08-zitan",
+      "event_name": "台风紫檀（2026-08）",
+      "scenario_role": "事后参考组合（上游 Q 三角线 + ERA5 均匀雨 + FREE 边界）；非独立验证",
+      "subtitle": "100 m 降级情景 · 19 帧 · 6 h/帧",
+      "model_bbox": [
+        106.96,
+        22.056998,
+        107.19947,
+        22.262251
+      ],
+      "grid": {
+        "rows": 224,
+        "cols": 244,
+        "transform": [
+          100.0,
+          0.0,
+          702256.2,
+          0.0,
+          -100.0,
+          2463167.8
+        ],
+        "crs": "EPSG:32648",
+        "cell_size_m": 100.0,
+        "cell_area_m2": 10000.0,
+        "coordinates": [
+          [
+            106.9628054,
+            22.2622514
+          ],
+          [
+            107.19947,
+            22.2592189
+          ],
+          [
+            107.1963275,
+            22.0569981
+          ],
+          [
+            106.9600004,
+            22.0600002
+          ]
+        ],
+        "bbox_wgs84": [
+          106.9600004,
+          22.0569981,
+          107.19947,
+          22.2622514
+        ]
+      },
+      "time": {
+        "time_origin": null,
+        "time_zone": "Asia/Shanghai",
+        "origin_status": "relative_only_candidate",
+        "origin_note": "上游 Q 三角线构造起点（2026-08-21 00:00 北京时间），由父项目脚本构造，旧 meta 无规范 t0；仅作显示用",
+        "save_interval_s": 21600.0,
+        "temporal_interpolation": "none"
+      },
+      "default_run_id": "scen_q6000_n100_100m",
+      "runs": [
+        {
+          "run_id": "scen_q6000_n100_100m",
+          "label": "默认参考组合（T+0–108 h）",
+          "role": "default",
+          "frame_count": 19,
+          "save_interval_s": 21600.0,
+          "simulation_duration_s": 388800.0,
+          "timeline": "cases/ningming/scen_q6000_n100_100m/timeline.json",
+          "statistics": "cases/ningming/scen_q6000_n100_100m/statistics.json",
+          "numeric_manifest": "numeric/ningming/scen_q6000_n100_100m/manifest.json",
+          "optional": false,
+          "notes": "100 m 走廊；Q=6000 m3/s 峰值；喀斯特落水洞未建入（标量入渗替代）",
+          "quality": {
+            "mass_gate": "PASS",
+            "e_mass": 5.802e-05,
+            "validation_status": "时刻切片 CSI≈0.357（既有报告，非本次重新验证）；单事件、无连续水位过程",
+            "vertical_datum_status": "未闭合（G7）；站水位与 DEM 基准关系待查证",
+            "warnings": [
+              "情景级成果；Q 为三角线情景假设，非逐时实测",
+              "事后参考组合不是独立验证；CSI 0.357 来自既有报告",
+              "喀斯特落水洞未建入，适用性限制已登记"
+            ],
+            "mass_gate_cause": null
+          }
+        }
+      ],
+      "layers": {
+        "dem": {
+          "status": "ready",
+          "label": "DEM 高程",
+          "kind": "raster",
+          "summary": "模型输入 DEM（12.5 m 裁切）",
+          "note": "河槽像元为 0 值空洞经填补，河床高程可靠性 ±10 m",
+          "image": "frames/ningming/dem.png",
+          "geometry": {
+            "rows": 224,
+            "cols": 244,
+            "transform": [
+              100.0,
+              0.0,
+              702256.2,
+              0.0,
+              -100.0,
+              2463167.8
+            ],
+            "crs": "EPSG:32648",
+            "cell_size_m": 100.0,
+            "cell_area_m2": 10000.0,
+            "coordinates": [
+              [
+                106.9628054,
+                22.2622514
+              ],
+              [
+                107.19947,
+                22.2592189
+              ],
+              [
+                107.1963275,
+                22.0569981
+              ],
+              [
+                106.9600004,
+                22.0600002
+              ]
+            ],
+            "bbox_wgs84": [
+              106.9600004,
+              22.0569981,
+              107.19947,
+              22.2622514
+            ]
+          },
+          "legend": "terrain"
+        },
+        "flood": {
+          "status": "ready",
+          "label": "模型水深（逐帧）",
+          "kind": "frame",
+          "images": "frames/ningming/scen_q6000_n100_100m/images.json"
+        },
+        "max": {
+          "status": "ready",
+          "label": "全程最大水深包络",
+          "kind": "max_envelope",
+          "image": "frames/ningming/scen_q6000_n100_100m/max.png",
+          "geometry": {
+            "rows": 224,
+            "cols": 244,
+            "transform": [
+              100.0,
+              0.0,
+              702256.2,
+              0.0,
+              -100.0,
+              2463167.8
+            ],
+            "crs": "EPSG:32648",
+            "cell_size_m": 100.0,
+            "cell_area_m2": 10000.0,
+            "coordinates": [
+              [
+                106.9628054,
+                22.2622514
+              ],
+              [
+                107.19947,
+                22.2592189
+              ],
+              [
+                107.1963275,
+                22.0569981
+              ],
+              [
+                106.9600004,
+                22.0600002
+              ]
+            ],
+            "bbox_wgs84": [
+              106.9600004,
+              22.0569981,
+              107.19947,
+              22.2622514
+            ]
+          }
+        },
+        "optical": {
+          "status": "remote_verified",
+          "label": "可见光背景（S2 2026-09-03）",
+          "kind": "raster",
+          "summary": "Sentinel-2 L2A TCI，AOI 有效覆盖 100%、SCL 云占比 0%（自动分类）；晚于洪峰，仅作背景",
+          "note": "尚未导入本地发布包，状态 remote_verified，默认禁用",
+          "asset_id": "ningming_s2_20260903",
+          "acquired_at": "2026-09-03T11:32:14+08:00",
+          "image": "frames/ningming/optical.png",
+          "geometry": {
+            "rows": 224,
+            "cols": 244,
+            "transform": [
+              100.0,
+              0.0,
+              702256.2,
+              0.0,
+              -100.0,
+              2463167.8
+            ],
+            "crs": "EPSG:32648",
+            "cell_size_m": 100.0,
+            "cell_area_m2": 10000.0,
+            "coordinates": [
+              [
+                106.9628054,
+                22.2622514
+              ],
+              [
+                107.19947,
+                22.2592189
+              ],
+              [
+                107.1963275,
+                22.0569981
+              ],
+              [
+                106.9600004,
+                22.0600002
+              ]
+            ],
+            "bbox_wgs84": [
+              106.9600004,
+              22.0569981,
+              107.19947,
+              22.2622514
+            ]
+          },
+          "legend": "rgb",
+          "footprint": "cases/ningming/optical_footprint.geojson"
+        },
+        "sar": {
+          "status": "ready",
+          "label": "SAR 水体（GF-3 2026-08-24）",
+          "kind": "raster",
+          "summary": "GF-3 8-24 近洪峰水体掩膜（独立层，不是水深）；精确过境时刻待证据",
+          "note": "SAR 后向散射不是水深，不能共用深度图例",
+          "asset_id": "ningming_gf3_20260824",
+          "acquired_at": "2026-08-24T00:00:00+08:00",
+          "image": "frames/ningming/sar.png",
+          "geometry": {
+            "rows": 224,
+            "cols": 244,
+            "transform": [
+              100.0,
+              0.0,
+              702256.2,
+              0.0,
+              -100.0,
+              2463167.8
+            ],
+            "crs": "EPSG:32648",
+            "cell_size_m": 100.0,
+            "cell_area_m2": 10000.0,
+            "coordinates": [
+              [
+                106.9628054,
+                22.2622514
+              ],
+              [
+                107.19947,
+                22.2592189
+              ],
+              [
+                107.1963275,
+                22.0569981
+              ],
+              [
+                106.9600004,
+                22.0600002
+              ]
+            ],
+            "bbox_wgs84": [
+              106.9600004,
+              22.0569981,
+              107.19947,
+              22.2622514
+            ]
+          },
+          "legend": "binary_water",
+          "footprint": "cases/ningming/sar_footprint.geojson"
+        },
+        "boundary": {
+          "status": "ready",
+          "label": "模型域边界",
+          "kind": "vector",
+          "geojson": "cases/ningming/boundary.geojson"
+        },
+        "sites": {
+          "status": "ready",
+          "label": "站点/参考点",
+          "kind": "vector",
+          "geojson": "cases/ningming/sites.geojson"
+        }
+      },
+      "sites": [
+        {
+          "name": "宁明县城站",
+          "lon": 107.0719,
+          "lat": 22.1403,
+          "label": "站址（G12 坐标待供方核证）"
+        }
+      ],
+      "quality": {
+        "mass_gate": "PASS",
+        "e_mass": 5.802e-05,
+        "validation_status": "时刻切片 CSI≈0.357（既有报告，非本次重新验证）；单事件、无连续水位过程",
+        "vertical_datum_status": "未闭合（G7）；站水位与 DEM 基准关系待查证",
+        "warnings": [
+          "情景级成果；Q 为三角线情景假设，非逐时实测",
+          "事后参考组合不是独立验证；CSI 0.357 来自既有报告",
+          "喀斯特落水洞未建入，适用性限制已登记"
+        ]
+      },
+      "sources": {
+        "model": "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)",
+        "run_path_hint": "2d_hydro_project/outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
+        "evidence": [
+          "plans/visualization_research/frame_audit.json",
+          "2d_hydro_project/docs/execution_status.md",
+          "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+        ]
+      }
+    },
+    {
+      "case_id": "guigang",
+      "name": "贵港",
+      "event_id": "2024-09-yagi",
+      "event_name": "郁江 2024 年第 1 号洪水（台风摩羯残余环流）",
+      "scenario_role": "研究性情景（区域 30 m 全域 + 参数化直线河槽；上游 Q 为三角线情景）",
+      "subtitle": "30 m 区域情景 · 57 帧 · 6 h/帧",
+      "model_bbox": [
+        109.295782,
+        22.98,
+        109.952528,
+        23.319742
+      ],
+      "grid": {
+        "rows": 1233,
+        "cols": 2230,
+        "transform": [
+          30.0,
+          0.0,
+          325737.9,
+          0.0,
+          -30.0,
+          2579305.3
+        ],
+        "crs": "EPSG:32649",
+        "cell_size_m": 30.0,
+        "cell_area_m2": 900.0,
+        "coordinates": [
+          [
+            109.2957815,
+            23.3139931
+          ],
+          [
+            109.949927,
+            23.3197419
+          ],
+          [
+            109.9525275,
+            22.9856574
+          ],
+          [
+            109.3000005,
+            22.9800002
+          ]
+        ],
+        "bbox_wgs84": [
+          109.2957815,
+          22.9800002,
+          109.9525275,
+          23.3197419
+        ]
+      },
+      "time": {
+        "time_origin": "2024-09-03T00:00:00+08:00",
+        "time_zone": "Asia/Shanghai",
+        "origin_status": "model_schedule_confirmed",
+        "origin_note": "meta.json 记录 t0=2024-09-03T00（前 2 日基流充槽），为模型排程确认起点",
+        "save_interval_s": 21600.0,
+        "temporal_interpolation": "none"
+      },
+      "default_run_id": "scen_yagi_q11500_30m_b5",
+      "runs": [
+        {
+          "run_id": "scen_yagi_q11500_30m_b5",
+          "label": "默认 30 m 全域（T+0–336 h）",
+          "role": "default",
+          "frame_count": 57,
+          "save_interval_s": 21600.0,
+          "simulation_duration_s": 1209600.0,
+          "timeline": "cases/guigang/scen_yagi_q11500_30m_b5/timeline.json",
+          "statistics": "cases/guigang/scen_yagi_q11500_30m_b5/statistics.json",
+          "numeric_manifest": "numeric/guigang/scen_yagi_q11500_30m_b5/manifest.json",
+          "optional": false,
+          "notes": "2230×1233 格；自适应步长；河槽宽按米参数化≈630 m；E_mass 5.665e-05 PASS；墙钟 12.0 h",
+          "quality": {
+            "mass_gate": "PASS",
+            "e_mass": 5.665e-05,
+            "validation_status": "区域 30 m 情景级；站区局部 5 m 与区域—局部接口未执行（ADR-0005 推迟）",
+            "vertical_datum_status": "未闭合（G7）；贵港站水位为站基面，未与 DEM 统一",
+            "warnings": [
+              "情景级成果；上游 Q 为三角线情景，无逐时实测",
+              "30 m 不能继承 200 m 的验证指标；站区局部 5 m 未执行",
+              "郁江站水位与 DEM 垂直基准未统一，不得直接相减率定"
+            ],
+            "mass_gate_cause": null
+          }
+        }
+      ],
+      "layers": {
+        "dem": {
+          "status": "ready",
+          "label": "DEM 高程",
+          "kind": "raster",
+          "summary": "模型输入 DEM（12.5 m 裁切）",
+          "note": "垂直基准未闭合",
+          "image": "frames/guigang/dem.png",
+          "geometry": {
+            "rows": 1233,
+            "cols": 2230,
+            "transform": [
+              30.0,
+              0.0,
+              325737.9,
+              0.0,
+              -30.0,
+              2579305.3
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 30.0,
+            "cell_area_m2": 900.0,
+            "coordinates": [
+              [
+                109.2957815,
+                23.3139931
+              ],
+              [
+                109.949927,
+                23.3197419
+              ],
+              [
+                109.9525275,
+                22.9856574
+              ],
+              [
+                109.3000005,
+                22.9800002
+              ]
+            ],
+            "bbox_wgs84": [
+              109.2957815,
+              22.9800002,
+              109.9525275,
+              23.3197419
+            ]
+          },
+          "legend": "terrain"
+        },
+        "flood": {
+          "status": "ready",
+          "label": "模型水深（逐帧）",
+          "kind": "frame",
+          "images": "frames/guigang/scen_yagi_q11500_30m_b5/images.json"
+        },
+        "max": {
+          "status": "ready",
+          "label": "全程最大水深包络",
+          "kind": "max_envelope",
+          "image": "frames/guigang/scen_yagi_q11500_30m_b5/max.png",
+          "geometry": {
+            "rows": 1233,
+            "cols": 2230,
+            "transform": [
+              30.0,
+              0.0,
+              325737.9,
+              0.0,
+              -30.0,
+              2579305.3
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 30.0,
+            "cell_area_m2": 900.0,
+            "coordinates": [
+              [
+                109.2957815,
+                23.3139931
+              ],
+              [
+                109.949927,
+                23.3197419
+              ],
+              [
+                109.9525275,
+                22.9856574
+              ],
+              [
+                109.3000005,
+                22.9800002
+              ]
+            ],
+            "bbox_wgs84": [
+              109.2957815,
+              22.9800002,
+              109.9525275,
+              23.3197419
+            ]
+          }
+        },
+        "optical": {
+          "status": "remote_verified",
+          "label": "可见光背景（S2 2024-10-03）",
+          "kind": "raster",
+          "summary": "Sentinel-2 L2A TCI，AOI 有效覆盖 96.84%、有效像元云占比 0.0005%；事件后约 3 周背景，不是洪峰观测",
+          "note": "尚未导入本地发布包，状态 remote_verified，默认禁用；约 3.16% 空缺需透明",
+          "asset_id": "guigang_s2_20241003",
+          "acquired_at": "2024-10-03T11:21:43+08:00",
+          "image": "frames/guigang/optical.png",
+          "geometry": {
+            "rows": 1233,
+            "cols": 2230,
+            "transform": [
+              30.0,
+              0.0,
+              325737.9,
+              0.0,
+              -30.0,
+              2579305.3
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 30.0,
+            "cell_area_m2": 900.0,
+            "coordinates": [
+              [
+                109.2957815,
+                23.3139931
+              ],
+              [
+                109.949927,
+                23.3197419
+              ],
+              [
+                109.9525275,
+                22.9856574
+              ],
+              [
+                109.3000005,
+                22.9800002
+              ]
+            ],
+            "bbox_wgs84": [
+              109.2957815,
+              22.9800002,
+              109.9525275,
+              23.3197419
+            ]
+          },
+          "legend": "rgb",
+          "footprint": "cases/guigang/optical_footprint.geojson"
+        },
+        "sar": {
+          "status": "partial",
+          "label": "SAR 后向散射（S1 2024-09-12）",
+          "kind": "raster",
+          "summary": "S1 20 m 后向散射，仅覆盖模型域东部一部分（G17 降级说明）",
+          "note": "必须显示足迹；不宣称全市覆盖；SAR 后向散射不是水深",
+          "asset_id": "guigang_s1_20240912",
+          "acquired_at": "2024-09-12T10:42:22+08:00",
+          "image": "frames/guigang/sar.png",
+          "geometry": {
+            "rows": 1233,
+            "cols": 2230,
+            "transform": [
+              30.0,
+              0.0,
+              325737.9,
+              0.0,
+              -30.0,
+              2579305.3
+            ],
+            "crs": "EPSG:32649",
+            "cell_size_m": 30.0,
+            "cell_area_m2": 900.0,
+            "coordinates": [
+              [
+                109.2957815,
+                23.3139931
+              ],
+              [
+                109.949927,
+                23.3197419
+              ],
+              [
+                109.9525275,
+                22.9856574
+              ],
+              [
+                109.3000005,
+                22.9800002
+              ]
+            ],
+            "bbox_wgs84": [
+              109.2957815,
+              22.9800002,
+              109.9525275,
+              23.3197419
+            ]
+          },
+          "legend": "binary_water",
+          "footprint": "cases/guigang/sar_footprint.geojson"
+        },
+        "boundary": {
+          "status": "ready",
+          "label": "模型域边界",
+          "kind": "vector",
+          "geojson": "cases/guigang/boundary.geojson"
+        },
+        "sites": {
+          "status": "ready",
+          "label": "站点/参考点",
+          "kind": "vector",
+          "geojson": "cases/guigang/sites.geojson"
+        }
+      },
+      "sites": [
+        {
+          "name": "贵港市区",
+          "lon": 109.6,
+          "lat": 23.11,
+          "label": "市区参考点（站点坐标非业务核证）"
+        }
+      ],
+      "quality": {
+        "mass_gate": "PASS",
+        "e_mass": 5.665e-05,
+        "validation_status": "区域 30 m 情景级；站区局部 5 m 与区域—局部接口未执行（ADR-0005 推迟）",
+        "vertical_datum_status": "未闭合（G7）；贵港站水位为站基面，未与 DEM 统一",
+        "warnings": [
+          "情景级成果；上游 Q 为三角线情景，无逐时实测",
+          "30 m 不能继承 200 m 的验证指标；站区局部 5 m 未执行",
+          "郁江站水位与 DEM 垂直基准未统一，不得直接相减率定"
+        ]
+      },
+      "sources": {
+        "model": "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)",
+        "run_path_hint": "2d_hydro_project/outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5",
+        "evidence": [
+          "plans/visualization_research/frame_audit.json",
+          "2d_hydro_project/docs/execution_status.md",
+          "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+        ]
+      }
+    }
+  ],
+  "attribution": {
+    "online_basemaps": "在线底图署名随服务元数据动态加载；不得声称离线授权",
+    "sentinel": "Contains modified Copernicus Sentinel data 2024/2026（裁剪与遮云处理）"
+  },
+  "environment": {
+    "offline_capable": true,
+    "requires_network_layers": [
+      "esri_world_imagery",
+      "esri_world_street"
+    ]
+  }
+}

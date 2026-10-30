@@ -1,0 +1,207 @@
+{
+  "schema_version": "1.0",
+  "case_id": "jiulong",
+  "event_id": "2024-09-yagi",
+  "run_id": "scen_free_200m_sv6h",
+  "time_origin": null,
+  "time_zone": "Asia/Shanghai",
+  "origin_status": "relative_only_candidate",
+  "origin_note": "旧 meta 无规范 t0；该起点来自父项目脚本构造（2024-09-05 00:00 北京时间），仅作显示用；核对冻结雨量/边界/代码哈希前不写入正式时间基准",
+  "save_interval_s": 21600.0,
+  "simulation_duration_s": 432000.0,
+  "frame_count": 21,
+  "temporal_interpolation": "none",
+  "statistics": "cases/jiulong/scen_free_200m_sv6h/statistics.json",
+  "numeric_manifest": "numeric/jiulong/scen_free_200m_sv6h/manifest.json",
+  "frames": [
+    {
+      "frame_id": "f0000",
+      "source_sequence": 0,
+      "sim_seconds": 0.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0000.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0000/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0001",
+      "source_sequence": 1,
+      "sim_seconds": 21600.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0001.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0001/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0002",
+      "source_sequence": 2,
+      "sim_seconds": 43200.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0002.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0002/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0003",
+      "source_sequence": 3,
+      "sim_seconds": 64800.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0003.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0003/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0004",
+      "source_sequence": 4,
+      "sim_seconds": 86400.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0004.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0004/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0005",
+      "source_sequence": 5,
+      "sim_seconds": 108000.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0005.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0005/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0006",
+      "source_sequence": 6,
+      "sim_seconds": 129600.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0006.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0006/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0007",
+      "source_sequence": 7,
+      "sim_seconds": 151200.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0007.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0007/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0008",
+      "source_sequence": 8,
+      "sim_seconds": 172800.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0008.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0008/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0009",
+      "source_sequence": 9,
+      "sim_seconds": 194400.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0009.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0009/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0010",
+      "source_sequence": 10,
+      "sim_seconds": 216000.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0010.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0010/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0011",
+      "source_sequence": 11,
+      "sim_seconds": 237600.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0011.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0011/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0012",
+      "source_sequence": 12,
+      "sim_seconds": 259200.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0012.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0012/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0013",
+      "source_sequence": 13,
+      "sim_seconds": 280800.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0013.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0013/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0014",
+      "source_sequence": 14,
+      "sim_seconds": 302400.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0014.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0014/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0015",
+      "source_sequence": 15,
+      "sim_seconds": 324000.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0015.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0015/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0016",
+      "source_sequence": 16,
+      "sim_seconds": 345600.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0016.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0016/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0017",
+      "source_sequence": 17,
+      "sim_seconds": 367200.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0017.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0017/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0018",
+      "source_sequence": 18,
+      "sim_seconds": 388800.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0018.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0018/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0019",
+      "source_sequence": 19,
+      "sim_seconds": 410400.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0019.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0019/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "frame_id": "f0020",
+      "source_sequence": 20,
+      "sim_seconds": 432000.0,
+      "timestamp": null,
+      "depth_image": "frames/jiulong/scen_free_200m_sv6h/f0020.png",
+      "query_blocks": "numeric/jiulong/scen_free_200m_sv6h/f0020/{block_y}/{block_x}.bin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

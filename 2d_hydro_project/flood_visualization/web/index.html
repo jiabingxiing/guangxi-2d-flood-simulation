@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「驭洪」洪涝推演系统 - 中国南方电网</title>
+<link rel="icon" href="assets/images/favicon.svg">
+<link rel="stylesheet" href="assets/vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div id="app">
+  <!-- 驭洪 全景门户展示主屏（参考「驭理」数智高科技门户设计） -->
+  <aside id="portal-overlay" class="portal-overlay" hidden aria-label="「驭洪」全景推演门户">
+    <div class="portal-backdrop"></div>
+    <div class="portal-container">
+      <button type="button" id="btn-portal-close" class="portal-close-btn" title="收起总览，进入推演地图" aria-label="进入推演地图">
+        <span class="close-icon">✕</span> 进入推演
+      </button>
+
+      <div class="portal-hero">
+        <div class="portal-csg-badge">
+          <img src="assets/images/csg_logo.png" alt="中国南方电网" class="portal-csg-logo">
+          <span class="csg-subtext">数字电网 · 二维水动力仿真引擎</span>
+        </div>
+        <img src="assets/images/yu_hong_hero_brand.png" alt="驭洪 洞悉科技脉络，预演电力未来" class="portal-hero-logo">
+      </div>
+
+      <!-- 模式切换药丸（极速浏览 vs 深度推演） -->
+      <div class="portal-mode-box">
+        <div class="portal-mode-pills" role="tablist" aria-label="推演模式切换">
+          <button type="button" class="portal-mode-btn active" id="mode-fast" role="tab" aria-selected="true">
+            <span class="mode-icon">⚡</span> 极速模式
+          </button>
+          <button type="button" class="portal-mode-btn" id="mode-research" role="tab" aria-selected="false">
+            <span class="mode-icon">💡</span> 研究模式
+          </button>
+        </div>
+        <p class="portal-mode-hint" id="portal-mode-hint">
+          极速浏览：聚焦防汛关键断线、变电站淹没淹顶与水深包络极值，响应敏捷
+        </p>
+      </div>
+
+      <!-- 三大流域快速卡片直达 -->
+      <div class="portal-basin-cards" id="portal-basin-cards">
+        <!-- 由 app.js 动态填充与联动 -->
+      </div>
+
+      <!-- 底部悬浮功能药丸卡片 -->
+      <div class="portal-dock-cards" role="group" aria-label="快捷业务模块">
+        <button type="button" class="dock-card" data-action="playback" title="启动时空流体回放">
+          <span class="dock-icon">🌊</span>
+          <span class="dock-label">淹没回放</span>
+        </button>
+        <button type="button" class="dock-card" data-action="substations" title="聚焦变电站分布与水深">
+          <span class="dock-icon">⚡</span>
+          <span class="dock-label">厂站水深</span>
+        </button>
+        <button type="button" class="dock-card" data-action="chart" title="查看淹没面积过程线">
+          <span class="dock-icon">📊</span>
+          <span class="dock-label">面积过程线</span>
+        </button>
+        <button type="button" class="dock-card" data-action="satellite" title="比对哨兵二号等卫星遥感真实水体">
+          <span class="dock-icon">🗺️</span>
+          <span class="dock-label">遥感核验</span>
+        </button>
+        <button type="button" class="dock-card" data-action="quality" title="查阅模型质量与答辩手册">
+          <span class="dock-icon">📑</span>
+          <span class="dock-label">答辩报告</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <header id="app-header">
+    <div class="brand">
+      <img src="assets/images/csg_logo.png" alt="中国南方电网" class="brand-csg-logo" title="中国南方电网">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <img src="assets/images/yu_hong_logo.png" alt="驭洪" class="brand-yu-logo" title="「驭洪」品牌">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <h1 id="project-title" class="brand-title">「驭洪」洪涝推演系统</h1>
+      <span class="brand-slogan" title="洞悉科技脉络，预演电力未来">洞悉科技脉络 · 预演电力未来</span>
+    </div>
+    <nav id="case-tabs" class="case-tabs" aria-label="推演流域切换"></nav>
+    <div class="header-right">
+      <button type="button" id="btn-portal-toggle" class="btn-portal-pill" title="打开/关闭推演总览门户">
+        <span class="pill-icon">🏛️</span> 驭洪总览
+      </button>
+      <div class="run-picker">
+        <label for="run-select">情景方案</label>
+        <select id="run-select" aria-label="切换情景方案"></select>
+      </div>
+      <div id="header-badges" class="badges"></div>
+    </div>
+  </header>
+
+  <main id="app-main">
+    <aside id="panel-left" class="panel" aria-label="图层控制">
+      <section class="card">
+        <div class="card-head">
+          <h2>图层预设</h2>
+        </div>
+        <div id="preset-buttons" class="preset-grid" role="group" aria-label="图层预设"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>图层与透明度</h2>
+        </div>
+        <div id="layer-list" class="layer-list"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>在线底图</h2>
+        </div>
+        <div class="basemap-row">
+          <label class="switch">
+            <input type="checkbox" id="basemap-toggle">
+            <span>启用在线影像</span>
+          </label>
+        </div>
+        <select id="basemap-select" aria-label="在线底图来源"></select>
+        <p class="warn-inline" id="basemap-warn" hidden></p>
+        <button type="button" id="basemap-retry" class="btn-ghost" hidden>重试在线底图</button>
+      </section>
+    </aside>
+
+    <section id="map-wrap">
+      <button type="button" id="btn-toggle-left" class="panel-collapse-trigger left" title="收起/展开图层面板" aria-label="收起/展开图层面板">
+        <span class="toggle-icon">◀</span>
+      </button>
+      <button type="button" id="btn-toggle-right" class="panel-collapse-trigger right" title="收起/展开分析面板" aria-label="收起/展开分析面板">
+        <span class="toggle-icon">▶</span>
+      </button>
+
+      <div id="map"></div>
+      <div id="map-hud" class="map-hud">
+        <div id="map-title" class="map-title">当前帧模拟水深</div>
+        <div id="map-subtitle" class="map-subtitle"></div>
+      </div>
+      <div id="notice-bar" class="notice-bar" hidden role="status" aria-live="polite"></div>
+      <div id="map-hint" class="map-hint">单击地图查询水深</div>
+    </section>
+
+    <aside id="panel-right" class="panel" aria-label="查询与分析">
+      <section class="card" id="query-card">
+        <div class="card-head">
+          <h2>点位水深查询</h2>
+        </div>
+        <div id="query-body" class="query-body">
+          <p class="hint query-empty">点击地图任意位置获取网格水深</p>
+        </div>
+      </section>
+
+      <section class="card" id="chart-card">
+        <div class="card-head with-action">
+          <h2>淹没面积—时间过程线</h2>
+          <select id="threshold-select" aria-label="面积阈值" class="compact-select"></select>
+        </div>
+        <canvas id="area-chart" width="640" height="260" aria-label="面积—时间曲线"></canvas>
+        <div class="chart-footnote">
+          <span class="footnote-dot">ⓘ</span>
+          <span id="chart-note">面积为原生模型网格单帧有效像元 depth&gt;阈值 的面积；不是资产安全等级。</span>
+        </div>
+      </section>
+
+      <section class="card" id="legend-card">
+        <div class="card-head">
+          <h2>图例说明</h2>
+        </div>
+        <div id="legend-body" class="legend-body"></div>
+      </section>
+
+      <section class="card" id="quality-card">
+        <details id="quality-details">
+          <summary class="card-summary">
+            <h2>模型质量与来源</h2>
+            <span class="summary-caret">▾</span>
+          </summary>
+          <div id="quality-body" class="quality-body"></div>
+        </details>
+      </section>
+    </aside>
+  </main>
+
+  <footer id="timeline-bar">
+    <div class="timeline-row-main">
+      <div class="playback-controls">
+        <button type="button" id="btn-prev" class="btn btn-icon" title="上一帧（←）" aria-label="上一帧">◀</button>
+        <button type="button" id="btn-play" class="btn btn-primary" title="播放/暂停（空格）">▶ 播放</button>
+        <button type="button" id="btn-next" class="btn btn-icon" title="下一帧（→）" aria-label="下一帧">▶</button>
+        <div class="speed-group" id="speed-group" role="group" aria-label="播放速度"></div>
+      </div>
+
+      <div class="time-readout">
+        <span class="time-relative" id="time-relative">T+0.0 h</span>
+        <span class="time-divider">|</span>
+        <span class="time-absolute" id="time-absolute">—</span>
+      </div>
+
+      <div class="timeline-actions">
+        <div class="frame-readout" id="frame-readout">帧 1 / 1</div>
+        <button type="button" id="btn-max" class="btn btn-toggle" title="切换到全程最大水深包络">全程最大包络</button>
+      </div>
+    </div>
+
+    <div class="timeline-row-track">
+      <div class="timeline-track" id="timeline-track">
+        <input type="range" id="frame-slider" min="0" max="0" step="1" value="0" aria-label="帧进度">
+        <div id="frame-ticks" class="frame-ticks"></div>
+      </div>
+      <div class="timeline-notes">
+        <span id="temporal-note">回放步长: 6 h/帧</span>
+        <span id="origin-note">时间起点: 候选依据</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="status-bar">
+    <span id="status-bundle">系统发布包：加载中…</span>
+    <span id="status-layers"></span>
+    <span id="status-attribution"></span>
+    <span id="status-license"></span>
+  </div>
+</div>
+<noscript><p style="color:#f0a03c;padding:16px">本页面需要启用 JavaScript。</p></noscript>
+<script src="assets/vendor/maplibre/maplibre-gl.js"></script>
+<script src="assets/vendor/proj4/proj4.js"></script>
+<script src="assets/timeline.js"></script>
+<script src="assets/map.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

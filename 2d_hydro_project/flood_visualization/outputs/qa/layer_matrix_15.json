@@ -1,0 +1,260 @@
+[
+  {
+    "case": "jiulong",
+    "preset": "optical_only",
+    "visible": [
+      "optical"
+    ],
+    "expected_visible": [
+      "optical"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "sar_only",
+    "visible": [
+      "sar"
+    ],
+    "expected_visible": [
+      "sar"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "dem_only",
+    "visible": [
+      "dem"
+    ],
+    "expected_visible": [
+      "dem"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "terrain_source_only",
+    "visible": [
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "terrain_edit_only",
+    "visible": [
+      "terrain_edit"
+    ],
+    "expected_visible": [
+      "terrain_edit"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "flood_only",
+    "visible": [
+      "flood"
+    ],
+    "expected_visible": [
+      "flood"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "jiulong",
+    "preset": "all_available",
+    "visible": [
+      "boundary",
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "sites",
+      "terrain_edit",
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "optical_only",
+    "visible": [
+      "optical"
+    ],
+    "expected_visible": [
+      "optical"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "sar_only",
+    "visible": [
+      "sar"
+    ],
+    "expected_visible": [
+      "sar"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "dem_only",
+    "visible": [
+      "dem"
+    ],
+    "expected_visible": [
+      "dem"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "terrain_source_only",
+    "visible": [
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "terrain_edit_only",
+    "visible": [],
+    "expected_visible": [],
+    "disabled_layers": [
+      "terrain_edit"
+    ]
+  },
+  {
+    "case": "ningming",
+    "preset": "flood_only",
+    "visible": [
+      "flood"
+    ],
+    "expected_visible": [
+      "flood"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "ningming",
+    "preset": "all_available",
+    "visible": [
+      "boundary",
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "sites",
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "optical_only",
+    "visible": [
+      "optical"
+    ],
+    "expected_visible": [
+      "optical"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "sar_only",
+    "visible": [
+      "sar"
+    ],
+    "expected_visible": [
+      "sar"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "dem_only",
+    "visible": [
+      "dem"
+    ],
+    "expected_visible": [
+      "dem"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "terrain_source_only",
+    "visible": [
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "terrain_edit_only",
+    "visible": [],
+    "expected_visible": [],
+    "disabled_layers": [
+      "terrain_edit"
+    ]
+  },
+  {
+    "case": "guigang",
+    "preset": "flood_only",
+    "visible": [
+      "flood"
+    ],
+    "expected_visible": [
+      "flood"
+    ],
+    "disabled_layers": []
+  },
+  {
+    "case": "guigang",
+    "preset": "all_available",
+    "visible": [
+      "boundary",
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "sites",
+      "terrain_source"
+    ],
+    "expected_visible": [
+      "dem",
+      "flood",
+      "optical",
+      "sar",
+      "terrain_source"
+    ],
+    "disabled_layers": []
+  }
+]

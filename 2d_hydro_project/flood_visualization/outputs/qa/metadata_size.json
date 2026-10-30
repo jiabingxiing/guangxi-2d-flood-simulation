@@ -1,0 +1,86 @@
+{
+  "gate_bytes": 1048576,
+  "per_case_bytes": {
+    "jiulong": 48674,
+    "ningming": 131660,
+    "guigang": 124048
+  },
+  "per_case_mb": {
+    "jiulong": 0.049,
+    "ningming": 0.132,
+    "guigang": 0.124
+  },
+  "largest_files": {
+    "jiulong": [
+      {
+        "path": "frames\\jiulong\\scen_free_100m_dt2p5_sv6h_realdem\\images.json",
+        "bytes": 20272
+      },
+      {
+        "path": "cases/jiulong/scen_free_100m_dt2p5_sv6h_realdem/statistics.json",
+        "bytes": 12818
+      },
+      {
+        "path": "cases/jiulong/scen_free_100m_dt2p5_sv6h_realdem/timeline.json",
+        "bytes": 9257
+      },
+      {
+        "path": "numeric/jiulong/scen_free_100m_dt2p5_sv6h_realdem/manifest.json",
+        "bytes": 4530
+      },
+      {
+        "path": "frames\\jiulong\\dem_images.json",
+        "bytes": 1797
+      }
+    ],
+    "ningming": [
+      {
+        "path": "frames\\ningming\\scen_q6000_n100_100m_choff_nocut-v1\\images.json",
+        "bytes": 18805
+      },
+      {
+        "path": "frames\\ningming\\scen_q6000_n100_100m_choff_eclosed\\images.json",
+        "bytes": 18794
+      },
+      {
+        "path": "frames\\ningming\\scen_q4000_n35_100m_choff\\images.json",
+        "bytes": 18582
+      },
+      {
+        "path": "cases/ningming/scen_q6000_n100_100m_choff_eclosed/statistics.json",
+        "bytes": 12055
+      },
+      {
+        "path": "cases/ningming/scen_q6000_n100_100m_choff_nocut-v1/statistics.json",
+        "bytes": 11944
+      },
+      {
+        "path": "cases/ningming/scen_q4000_n35_100m_choff/statistics.json",
+        "bytes": 11912
+      }
+    ],
+    "guigang": [
+      {
+        "path": "frames\\guigang\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\images.json",
+        "bytes": 50894
+      },
+      {
+        "path": "cases/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/statistics.json",
+        "bytes": 34950
+      },
+      {
+        "path": "cases/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/timeline.json",
+        "bytes": 26025
+      },
+      {
+        "path": "numeric/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/manifest.json",
+        "bytes": 10373
+      },
+      {
+        "path": "frames\\guigang\\dem_images.json",
+        "bytes": 1806
+      }
+    ]
+  },
+  "note": "只计元数据（JSON）；PNG 与 .bin 不计入本门禁"
+}

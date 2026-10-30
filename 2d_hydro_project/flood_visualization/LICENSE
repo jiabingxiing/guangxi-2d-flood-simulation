@@ -1,0 +1,40 @@
+BSD 3-Clause License
+
+Copyright (c) 2026, 广西二维洪涝可视化发布工程（floodviz）
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+---------------------------------------------------------------------------
+注意：本许可只覆盖本子项目自行编写的代码（`src/`、`scripts/`、`web/` 中除 vendor 外部分、
+`tests/`、`schemas/`、`configs/`）。它**不**覆盖：
+
+1. 数据：模型输出、DEM、Sentinel-1/2、GF-3、Esri 底图 —— 各自条款见 `docs/licenses.md`
+   与发布包 `licenses/LICENSES.md`。
+2. 前端 vendor（MapLibre GL JS 为 BSD-3-Clause，Proj4js 为 MIT），原文见各自的
+   `vendor/<pkg>/LICENSE.txt`。
+3. 模型求解器 LISFLOOD-FP 8.1.0 —— 其许可在父项目登记为 **UNRESOLVED**，不得外发。
+
+本项目产物为**研究性情景成果**，不是业务预警系统，不提供任何适用性担保。

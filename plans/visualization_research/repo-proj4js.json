@@ -1,0 +1,17 @@
+{
+  "fetched_at": "2026-10-27T07:52:49+00:00",
+  "repos": [
+    {
+      "repo": "proj4js/proj4js",
+      "url": "https://github.com/proj4js/proj4js",
+      "status": "verified-web",
+      "stars": null,
+      "forks": null,
+      "license": null,
+      "pushed_at": null,
+      "archived": false,
+      "message": "API 限流或不可用，已用仓库网页核验；stars/license 可能缺失",
+      "fetched_at": "2026-10-27T07:52:40+00:00"
+    }
+  ]
+}

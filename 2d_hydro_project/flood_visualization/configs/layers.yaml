@@ -1,0 +1,50 @@
+# 图层顺序、预设与图例（底图定义见 configs/basemaps.yaml）
+layer_order: [basemap, terrain_source, terrain_edit, dem, optical, sar, flood, max, boundary, sites]
+
+presets:
+  - {id: optical_only, label: "仅可见光", layers: [optical]}
+  - {id: sar_only, label: "仅 SAR", layers: [sar]}
+  - {id: dem_only, label: "仅模型地形", layers: [dem]}
+  - {id: terrain_source_only, label: "仅源地形（未修改）", layers: [terrain_source]}
+  - {id: terrain_edit_only, label: "仅地形修改证据", layers: [terrain_edit]}
+  - {id: flood_only, label: "仅淹没", layers: [flood]}
+  - {id: all_available, label: "全部可用图层", layers: [terrain_source, terrain_edit, dem, optical, sar, flood, boundary, sites]}
+  - {id: custom, label: "自定义", layers: []}
+
+legends:
+  depth:
+    title: "模拟水深（m）"
+    type: classes
+    classes: depth_classes           # 引用 default.yaml 的 depth_classes
+    note: "阈值与色带为固定口径；仅为模拟情景，不是资产安全等级"
+  binary_water:
+    title: "SAR 水体（二值）"
+    type: classes
+    classes:
+      - {min_m: 0, max_m: null, color: "#3a86ff", label: "提取为水体"}
+    note: "SAR 是观测时段的水体范围证据，不是水深"
+  terrain:
+    title: "数字高程 DEM（m）"
+    type: gradient
+    stops: ["#267300", "#38a800", "#70a800", "#a8c400", "#ffd300", "#e69800", "#e67300", "#a84700", "#732600", "#998273", "#e0e0e0", "#ffffff"]
+    auto_range: true
+    value_min_m: 0
+    value_max_m: 300
+    note: "ArcGIS Elevation 系列经典色带（低地绿—中山黄/橙—高山褐—峰顶白）"
+  terrain_source:
+    title: "原始 DEM（m，未裁剪）"
+    type: gradient
+    stops: ["#267300", "#38a800", "#70a800", "#a8c400", "#ffd300", "#e69800", "#e67300", "#a84700", "#732600", "#998273", "#e0e0e0", "#ffffff"]
+    auto_range: true
+    note: "ArcGIS Elevation 经典色带；未裁切原始 DEM 地貌，色带按观测 p1–p99 自适应"
+  terrain_edit:
+    title: "地形修改证据"
+    type: classes
+    classes:
+      - {min_m: 0, max_m: 1, color: "#d63031", label: "河道刻蚀（情景假设，非实测断面）"}
+      - {min_m: 1, max_m: 2, color: "#00897b", label: "空洞填补"}
+    note: "被模型预处理改写的像元；不是观测，也不是地形误差图"
+  rgb:
+    title: "可见光背景"
+    type: rgb
+    note: "影像采集时刻固定，不随模拟时间滑块变化；遮云与无观测区透明"

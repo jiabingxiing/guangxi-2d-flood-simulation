@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://floodviz.local/schemas/timeline.schema.json",
+  "title": "floodviz timeline.json",
+  "type": "object",
+  "required": ["schema_version", "case_id", "event_id", "run_id", "time_zone", "origin_status", "save_interval_s", "simulation_duration_s", "frame_count", "temporal_interpolation", "statistics", "numeric_manifest", "frames"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "case_id": {"type": "string"},
+    "event_id": {"type": "string"},
+    "run_id": {"type": "string"},
+    "time_origin": {"type": ["string", "null"]},
+    "time_zone": {"type": "string"},
+    "origin_status": {"enum": ["model_schedule_confirmed", "relative_only_candidate", "relative_only"]},
+    "origin_note": {"type": "string"},
+    "save_interval_s": {"type": "number", "exclusiveMinimum": 0},
+    "simulation_duration_s": {"type": "number", "exclusiveMinimum": 0},
+    "frame_count": {"type": "integer", "minimum": 1},
+    "temporal_interpolation": {"const": "none"},
+    "statistics": {"type": "string", "pattern": "^cases/"},
+    "numeric_manifest": {"type": "string", "pattern": "^numeric/"},
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["frame_id", "source_sequence", "sim_seconds", "timestamp", "depth_image", "query_blocks", "sha256"],
+        "properties": {
+          "frame_id": {"type": "string", "pattern": "^f[0-9]{4,}$"},
+          "source_sequence": {"type": "integer", "minimum": 0},
+          "sim_seconds": {"type": "number", "minimum": 0},
+          "timestamp": {"type": ["string", "null"]},
+          "depth_image": {"type": "string", "pattern": "^frames/.+\\.png$"},
+          "query_blocks": {"type": "string", "pattern": "^numeric/.+\\{block_y\\}/\\{block_x\\}\\.bin$"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}

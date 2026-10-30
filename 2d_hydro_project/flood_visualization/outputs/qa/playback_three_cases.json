@@ -1,0 +1,60 @@
+{
+  "bundle": null,
+  "jiulong": {
+    "frame_count": 21,
+    "advanced_frames": 19,
+    "observed_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "rounds": 30
+  },
+  "ningming": {
+    "frame_count": 19,
+    "advanced_frames": 17,
+    "observed_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13
+    ],
+    "rounds": 30
+  },
+  "guigang": {
+    "frame_count": 57,
+    "advanced_frames": 31,
+    "observed_indices": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "rounds": 30
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "wetPixels": {
+    "f0000": 0,
+    "f0010": 4969
+  },
+  "subtitle": "当前帧 f0010　·　T+60.0 h　·　面积 198.4 km²",
+  "diff_dry_vs_wet": {
+    "changed": 97136,
+    "ratio": 0.1655,
+    "max": 638
+  },
+  "diff_wet_vs_hidden": {
+    "changed": 67332,
+    "ratio": 0.1147,
+    "max": 476
+  },
+  "pngs": [
+    "dem_r0c0.png",
+    "f0000_r0c0.png",
+    "f0001_r0c0.png",
+    "f0009_r0c0.png",
+    "f0010_r0c0.png",
+    "f0011_r0c0.png",
+    "jiulong_rgb_20260403.png",
+    "sar.png"
+  ],
+  "js_errors": []
+}

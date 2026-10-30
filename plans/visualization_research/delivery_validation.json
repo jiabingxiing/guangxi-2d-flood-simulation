@@ -1,0 +1,20 @@
+{
+  "checked_utc": "2026-10-27T08:31:14.561448+00:00",
+  "strict_plan_lint": "PASS; 9 sections; 7 resources; 0 errors",
+  "existing_local_links_checked": 39,
+  "optical_assets_range206_tiff": 30,
+  "optical_scl_aoi_checks": 6,
+  "frame_run_header_checks": 6,
+  "default_frame_counts": [
+    21,
+    19,
+    57
+  ],
+  "scope": "planning evidence and internal consistency; no website implemented; no full RGB visual validation",
+  "deliverable_sha256": {
+    "广西久隆_宁明_贵港_二维洪涝可视化实现计划.md": "3458d59de409b7aa81c22d2461abeb69c13d35102f3819823de0921b74f9732f",
+    "宁明_贵港_公开可见光影像检索结果.md": "18eb14fce5e075aaa02087e31480904c7d2a304e607ee41576e3ca52deb212a3",
+    "flood-visualization-repos.md": "7176163a1db7dbfb01187244afc70251f2d022dd660cf783c6b71000781a7ca3"
+  },
+  "license_pdf_sha256": "fa2955ff48a1d82e77fc7296d63681670ecdb9d2811a0505ae60d0683b62fa64"
+}

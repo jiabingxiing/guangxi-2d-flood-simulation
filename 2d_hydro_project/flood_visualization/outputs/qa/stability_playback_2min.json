@@ -1,0 +1,55 @@
+{
+  "duration_s": 120,
+  "samples": [
+    {
+      "bytes": 27620920,
+      "count": 29,
+      "index": 26
+    },
+    {
+      "bytes": 53364040,
+      "count": 55,
+      "index": 52
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    },
+    {
+      "bytes": 57324520,
+      "count": 59,
+      "index": 56
+    }
+  ],
+  "final_cache": {
+    "maxBytes": 268435456,
+    "bytes": 57324520,
+    "count": 59,
+    "hits": 66,
+    "misses": 107,
+    "evictions": 0,
+    "failures": 0,
+    "overflow": false
+  }
+}

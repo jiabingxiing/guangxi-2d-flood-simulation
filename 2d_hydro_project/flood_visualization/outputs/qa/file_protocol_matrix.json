@@ -1,0 +1,82 @@
+[
+  {
+    "label": "edge_file_default",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": "msedge",
+    "args": [],
+    "ready": false,
+    "caseId": null,
+    "frames": 0,
+    "page_errors": [],
+    "bundle": "发布包：加载失败",
+    "notice": "发布包加载失败无法加载发布包 catalog.json：Failed to fetch请确认通过 scripts/start_local.cmd（127.0.0.1:8765）访问，且 bundle 目录完整。",
+    "js_errors": []
+  },
+  {
+    "label": "edge_file_flag",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": "msedge",
+    "args": [
+      "--allow-file-access-from-files"
+    ],
+    "ready": true,
+    "caseId": "jiulong",
+    "frames": 21,
+    "page_errors": [],
+    "bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "notice": "",
+    "js_errors": []
+  },
+  {
+    "label": "edge_file_flag_persistent_profile",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "ready": true,
+    "caseId": "jiulong",
+    "frames": 21,
+    "page_errors": [],
+    "bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "notice": "",
+    "js_errors": []
+  },
+  {
+    "label": "edge_http_baseline",
+    "url": "http://127.0.0.1:8792/index.html",
+    "channel": "msedge",
+    "args": [],
+    "ready": true,
+    "caseId": "jiulong",
+    "frames": 21,
+    "page_errors": [],
+    "bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "notice": "",
+    "js_errors": []
+  },
+  {
+    "label": "chromium_file_default",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": null,
+    "args": [],
+    "ready": false,
+    "caseId": null,
+    "frames": 0,
+    "page_errors": [],
+    "bundle": "发布包：加载失败",
+    "notice": "发布包加载失败无法加载发布包 catalog.json：Failed to fetch请确认通过 scripts/start_local.cmd（127.0.0.1:8765）访问，且 bundle 目录完整。",
+    "js_errors": []
+  },
+  {
+    "label": "chromium_file_flag",
+    "url": "file:///D:/NWKYYSJZX/2026%E5%B9%B4%E5%B7%A5%E4%BD%9C/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/flood_visualization/outputs/web_bundle/v2-20261027/index.html",
+    "channel": null,
+    "args": [
+      "--allow-file-access-from-files"
+    ],
+    "ready": true,
+    "caseId": "jiulong",
+    "frames": 21,
+    "page_errors": [],
+    "bundle": "发布包：v2-20261027　构建于 2026-10-27T10:01:22+00:00",
+    "notice": "",
+    "js_errors": []
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "conditions": {
+    "viewport": "1920x1080",
+    "device_scale_factor": 1,
+    "server": "python -m http.server, 127.0.0.1",
+    "bundle": "v6-20261029",
+    "note": "有头 = 真实 AMD Radeon 核显（ANGLE/D3D11）；无头 = SwiftShader 软件渲染，仅参考"
+  },
+  "headed_enabled": false,
+  "gate_mode": "headless_gpu",
+  "headless_gpu": {
+    "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001636) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "cold_start": {
+      "first_interactive_s": 1.101,
+      "first_business_tile_s": 1.099,
+      "gate_interactive_s": 5.0,
+      "gate_tile_s": 2.0
+    },
+    "point_query": {
+      "samples": 54,
+      "p50_ms": 5.07,
+      "p95_ms": 8.09,
+      "max_ms": 11.66,
+      "gate_p95_ms": 200.0,
+      "cache_miss_p50_ms": 6.0,
+      "cache_miss_max_ms": 16.91,
+      "method": "缓存命中口径（同点第二次查询），含 Playwright IPC，偏保守；冷查询另记，不计入门禁"
+    },
+    "ui_response": {
+      "samples": 20,
+      "p50_ms": 33.45,
+      "p95_ms": 34.2,
+      "gate_p95_ms": 300.0,
+      "case": "guigang 30 m（每帧 2 张 PNG，最重）",
+      "method": "浏览器内 performance.now()（滑块 input → 帧提交），不含 IPC"
+    },
+    "playback": {
+      "seconds": 6.05,
+      "frames_advanced": 11,
+      "effective_fps": 1.82,
+      "target_fps": 2.0
+    },
+    "memory": {
+      "dom_images": 2,
+      "decoded_pixels_mb": 0.5,
+      "js_heap_mb": 26.0,
+      "lru_cache_mb": 27.7,
+      "lru_limit_mb": 268.4,
+      "note": "解码像素 = w×h×4 估算；不含 WebGL 纹理与 GPU 显存，属下界"
+    },
+    "console_errors": [],
+    "page_errors": []
+  },
+  "headless_software": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "cold_start": {
+      "first_interactive_s": 0.918,
+      "first_business_tile_s": 0.913,
+      "gate_interactive_s": 5.0,
+      "gate_tile_s": 2.0
+    },
+    "point_query": {
+      "samples": 54,
+      "p50_ms": 5.55,
+      "p95_ms": 79.7,
+      "max_ms": 83.79,
+      "gate_p95_ms": 200.0,
+      "cache_miss_p50_ms": 7.0,
+      "cache_miss_max_ms": 321.46,
+      "method": "缓存命中口径（同点第二次查询），含 Playwright IPC，偏保守；冷查询另记，不计入门禁"
+    },
+    "ui_response": {
+      "samples": 20,
+      "p50_ms": 498.9,
+      "p95_ms": 548.3,
+      "gate_p95_ms": 300.0,
+      "case": "guigang 30 m（每帧 2 张 PNG，最重）",
+      "method": "浏览器内 performance.now()（滑块 input → 帧提交），不含 IPC"
+    },
+    "playback": {
+      "seconds": 6.35,
+      "frames_advanced": 11,
+      "effective_fps": 1.73,
+      "target_fps": 2.0
+    },
+    "memory": {
+      "dom_images": 2,
+      "decoded_pixels_mb": 0.5,
+      "js_heap_mb": 19.3,
+      "lru_cache_mb": 27.7,
+      "lru_limit_mb": 268.4,
+      "note": "解码像素 = w×h×4 估算；不含 WebGL 纹理与 GPU 显存，属下界"
+    },
+    "console_errors": [],
+    "page_errors": []
+  }
+}

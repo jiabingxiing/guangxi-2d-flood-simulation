@@ -1,0 +1,20 @@
+{
+  "switches": 100,
+  "cases_cycled": [
+    "jiulong",
+    "ningming",
+    "guigang"
+  ],
+  "lru_cache": {
+    "maxBytes": 268435456,
+    "bytes": 1877800,
+    "count": 3,
+    "hits": 0,
+    "misses": 3,
+    "evictions": 0,
+    "failures": 0,
+    "overflow": false
+  },
+  "js_heap_growth_mb": 0.0,
+  "note": "JS 堆为浏览器上限内的当前用量；growth 为正值表示增长"
+}

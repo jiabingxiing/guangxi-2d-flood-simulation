@@ -1,0 +1,237 @@
+{
+  "checked_utc": "2026-10-27T07:37:16.016216+00:00",
+  "candidates": [
+    {
+      "case": "ningming",
+      "id": "S2A_48QYK_20260903_0_L2A",
+      "aoi": [
+        106.96,
+        22.06,
+        107.2,
+        22.26
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YK/2026/9/S2A_48QYK_20260903_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 1780780,
+      "crs": "EPSG:32648",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 1371041,
+      "valid_coverage_percent": 100.0,
+      "cloud_percent_of_valid": 0.0,
+      "cloud_shadow_percent_of_valid": 0.0,
+      "clear_4_5_6_percent_of_aoi": 99.6611,
+      "scl_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 1207,
+        "3": 0,
+        "4": 1123846,
+        "5": 221257,
+        "6": 21292,
+        "7": 3439,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    },
+    {
+      "case": "ningming",
+      "id": "S2C_48QYK_20260812_0_L2A",
+      "aoi": [
+        106.96,
+        22.06,
+        107.2,
+        22.26
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/48/Q/YK/2026/8/S2C_48QYK_20260812_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 2181793,
+      "crs": "EPSG:32648",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 1371041,
+      "valid_coverage_percent": 100.0,
+      "cloud_percent_of_valid": 31.4821,
+      "cloud_shadow_percent_of_valid": 0.6487,
+      "clear_4_5_6_percent_of_aoi": 67.6801,
+      "scl_counts": {
+        "0": 0,
+        "1": 0,
+        "2": 211,
+        "3": 8894,
+        "4": 864407,
+        "5": 51624,
+        "6": 11891,
+        "7": 2381,
+        "8": 7998,
+        "9": 1407,
+        "10": 422228,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    },
+    {
+      "case": "guigang",
+      "id": "S2A_49QCF_20241031_0_L2A",
+      "aoi": [
+        109.3,
+        22.98,
+        109.95,
+        23.32
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/CF/2024/10/S2A_49QCF_20241031_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 2119929,
+      "crs": "EPSG:32649",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 6264229,
+      "valid_coverage_percent": 67.6182,
+      "cloud_percent_of_valid": 0.0032,
+      "cloud_shadow_percent_of_valid": 0.009,
+      "clear_4_5_6_percent_of_aoi": 66.6917,
+      "scl_counts": {
+        "0": 2028469,
+        "1": 0,
+        "2": 16596,
+        "3": 381,
+        "4": 3185130,
+        "5": 923815,
+        "6": 68776,
+        "7": 40925,
+        "8": 21,
+        "9": 12,
+        "10": 104,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    },
+    {
+      "case": "guigang",
+      "id": "S2B_49QCF_20241003_0_L2A",
+      "aoi": [
+        109.3,
+        22.98,
+        109.95,
+        23.32
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/CF/2024/10/S2B_49QCF_20241003_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 2146146,
+      "crs": "EPSG:32649",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 6264229,
+      "valid_coverage_percent": 96.8428,
+      "cloud_percent_of_valid": 0.0005,
+      "cloud_shadow_percent_of_valid": 0.0,
+      "clear_4_5_6_percent_of_aoi": 95.7953,
+      "scl_counts": {
+        "0": 197777,
+        "1": 0,
+        "2": 11171,
+        "3": 0,
+        "4": 5148156,
+        "5": 741544,
+        "6": 111136,
+        "7": 54413,
+        "8": 29,
+        "9": 3,
+        "10": 0,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    },
+    {
+      "case": "guigang",
+      "id": "S2B_49QCF_20240913_0_L2A",
+      "aoi": [
+        109.3,
+        22.98,
+        109.95,
+        23.32
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/CF/2024/9/S2B_49QCF_20240913_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 3285039,
+      "crs": "EPSG:32649",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 6264229,
+      "valid_coverage_percent": 96.7495,
+      "cloud_percent_of_valid": 34.3356,
+      "cloud_shadow_percent_of_valid": 5.8748,
+      "clear_4_5_6_percent_of_aoi": 53.0059,
+      "scl_counts": {
+        "0": 203621,
+        "1": 0,
+        "2": 1230,
+        "3": 356050,
+        "4": 1656778,
+        "5": 1597728,
+        "6": 65903,
+        "7": 301971,
+        "8": 806370,
+        "9": 1027261,
+        "10": 247317,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    },
+    {
+      "case": "guigang",
+      "id": "S2B_49QCF_20240903_0_L2A",
+      "aoi": [
+        109.3,
+        22.98,
+        109.95,
+        23.32
+      ],
+      "method": "full-resolution 20 m SCL; projected AOI polygon; pixel centers",
+      "scl_url": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/49/Q/CF/2024/9/S2B_49QCF_20240903_0_L2A/SCL.tif",
+      "downloaded_scl_bytes": 2073025,
+      "crs": "EPSG:32649",
+      "resolution_m": [
+        20.0,
+        20.0
+      ],
+      "aoi_pixels": 6264229,
+      "valid_coverage_percent": 97.0434,
+      "cloud_percent_of_valid": 15.1739,
+      "cloud_shadow_percent_of_valid": 0.15,
+      "clear_4_5_6_percent_of_aoi": 81.3305,
+      "scl_counts": {
+        "0": 185207,
+        "1": 0,
+        "2": 7333,
+        "3": 9121,
+        "4": 4416028,
+        "5": 586015,
+        "6": 92686,
+        "7": 45413,
+        "8": 13049,
+        "9": 1609,
+        "10": 907768,
+        "11": 0
+      },
+      "status": "checked_scl_not_full_rgb_visual_review"
+    }
+  ],
+  "notes": [
+    "SCL is an automatic classification, not manual cloud validation.",
+    "No full RGB scenes were downloaded or imported into the project."
+  ]
+}

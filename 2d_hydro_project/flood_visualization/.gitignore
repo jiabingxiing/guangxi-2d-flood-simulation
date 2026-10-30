@@ -14,6 +14,10 @@ outputs/web_bundle/
 outputs/_archive_bundles/
 outputs/build/
 outputs/*.zip
+# web/.dev 开发产物（2026-10-31 补）：mock 包由 web/.dev/make_mock_bundle.py 再生（e2e 用），
+# 截图为开发期手工验证存档，均不入库；.dev 下探测/压测脚本保留入库
+web/.dev/mock_bundle/
+web/.dev/screenshots/
 logs/
 *.log
 

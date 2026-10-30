@@ -1,0 +1,28 @@
+# 真实空间底图（可选在线；本地数据始终可用）
+# 来源：官方 Esri REST 服务元数据（见 plans/visualization_research/esri_world_imagery.json、
+# esri_world_street.json 与 basemap_probe.json）。
+#
+# 注意：Esri 瓦片路径顺序是 `{z}/{y}/{x}`，不是机械照搬 XYZ 的 `{z}/{x}/{y}`。
+# `exportTilesAllowed=false`：不得批量缓存并称为离线授权；能请求不等于免费无限使用。
+# 在线底图失败时必须保留本地图层、比例尺与范围，显示"在线底图不可用"，
+# 不得偷偷切换到未审核的地图。
+schema_version: "1.0"
+
+basemaps:
+  - id: esri_world_imagery
+    label: "Esri World Imagery（在线）"
+    tiles:
+      - "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+    tile_size: 256
+    attribution: "Source: Esri, Vantor, Earthstar Geographics, and the GIS User Community"
+    requires_network: true
+    note: "在线影像背景，不是事件同期观测；exportTilesAllowed=false，不得批量缓存"
+
+  - id: esri_world_street
+    label: "Esri World Street Map（在线）"
+    tiles:
+      - "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+    tile_size: 256
+    attribution: "Source: Esri, HERE, Garmin, USGS, Intermap, INCREMENT P, NRCan, Esri Japan, METI, Esri China (Hong Kong), Esri Korea, Esri (Thailand), NGCC, and the GIS User Community"
+    requires_network: true
+    note: "街道地名背景；保留完整署名"

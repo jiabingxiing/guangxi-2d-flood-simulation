@@ -1,0 +1,86 @@
+# 案例：钦州久隆（500kV 久隆站周边，降级模式情景）
+case_id: jiulong
+name: 久隆
+event_id: "2024-09-yagi"
+event_name: "台风摩羯残余环流（2024-09）"
+scenario_role: "研究性情景（雨驱动 + 常数潮位带；非独立水动力验证）"
+subtitle: "100 m 真实DEM情景 · 21 帧 · 6 h/帧"
+model_bbox: [108.545265, 21.92, 108.902171, 22.199335]   # WGS84 西南东北（由模型网格四角变换得到）
+crs: "EPSG:32649"
+time_zone: "Asia/Shanghai"
+time_origin: "2024-09-05T00:00:00+08:00"
+origin_status: relative_only_candidate
+origin_note: "旧 meta 无规范 t0；该起点来自父项目脚本构造（2024-09-05 00:00 北京时间），仅作显示用；核对冻结雨量/边界/代码哈希前不写入正式时间基准"
+default_run_id: scen_free_100m_dt2p5_sv6h_realdem
+
+sites:
+  - {name: "久隆500kV站", lon: 108.7161, lat: 22.0638, label: "站址（精确坐标待业务确认）"}
+
+runs:
+  - run_id: scen_free_100m_dt2p5_sv6h_realdem
+    label: "默认 100 m 真实DEM情景（T+0–120 h）"
+    role: default
+    source: "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem"
+    save_interval_s: 21600
+    simulation_duration_s: 432000
+    notes: "100 m 网格自由出流；雨驱动；严格采用真实DEM（海面连通像元钳0，内陆无效负值8邻域填补，未施加任何河道下切）"
+  - run_id: scen_free_200m_sv6h
+    label: "200 m 历史对照（T+0–120 h）"
+    role: legacy
+    source: "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h"
+    save_interval_s: 21600
+    simulation_duration_s: 432000
+    optional: true
+    notes: "自由出流边界；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）"
+  - run_id: scen_free_200m_sv6h_recession
+    label: "扩展退水情景（T+0–312 h）"
+    role: scenario
+    source: "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession"
+    save_interval_s: 21600
+    simulation_duration_s: 1123200
+    optional: true
+    notes: "与默认情景在 T+120 h 前逐位一致；退水期验证为 WEAK，模型面积不降反增（无排水网限制）"
+
+layers:
+  dem: {status: ready, label: "DEM 高程", kind: raster, summary: "父项目 12.5 m DEM 重采样到 100 m 模型网格（海面钳0+内陆空洞填补，无人工河槽刻蚀）", note: "原始地貌完好保持，垂直基准未闭合"}
+  flood: {status: ready, label: "模型水深（逐帧）", kind: frame}
+  max: {status: ready, label: "全程最大水深包络", kind: max_envelope}
+  optical:
+    status: local_unchecked
+    label: "可见光背景（2026-04-03 本地影像）"
+    kind: raster
+    asset_id: "jiulong_rgb_20260403"
+    acquired_at: "2026-04-03T00:00:00+08:00"
+    summary: "本地 RGB（SVN3-01，4.7 GB，EPSG:4326），仅覆盖部分模型域；2026 影像不能当作 2024 事件同期观测"
+    note: "未完成发布质检，默认禁用"
+  sar:
+    status: local_unchecked
+    label: "SAR 后向散射（2024-09-17 事后）"
+    kind: raster
+    asset_id: "jiulong_s1_20240917"
+    acquired_at: "2024-09-17T10:50:23+08:00"
+    summary: "S1 20 m 后向散射；不是水深，不能共用深度图例"
+    note: "过境时刻与模拟事件不同期；仅范围证据"
+
+quality:
+  mass_gate: PASS
+  e_mass: 0.0004893
+  validation_status: "降级模式情景级；无近洪峰观测，无连续水位/流量过程"
+  vertical_datum_status: "未闭合（G7）"
+  warnings:
+    - "情景级成果，不得用于业务告警或资产安全判据"
+    - "下游边界为常数位面情景带（free/z0/z05/z10），天文潮时变未引入"
+    - "河槽未刻蚀，退水期面积不降反增（无排水网限制）"
+
+sources:
+  model: "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)"
+  run_path_hint: "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem"
+  evidence:
+    - "plans/visualization_research/frame_audit.json"
+    - "2d_hydro_project/docs/execution_status.md"
+    - "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+
+terrain:
+  source_dem: "data/interim/jiulong/dem_12p5m_32649.tif"
+  source_label: "原始 DEM（未裁剪，12.5 m）"
+  source_note: "源自 0731 五省区DEM 广西原始数据；ArcGIS Elevation 系列色带；未做模型网格裁切，原始地貌完好保持"

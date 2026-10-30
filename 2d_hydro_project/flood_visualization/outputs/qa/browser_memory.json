@@ -1,0 +1,22 @@
+{
+  "method": "Sum(tasklist 全部 Chromium 进程 WorkingSet；无头为 chrome-headless-shell.exe)",
+  "baseline_mb": 149.9,
+  "peak_mb": 767.8,
+  "browser_only_mb": 617.9,
+  "after_close_mb": 147.6,
+  "js_heap_mb": 15.2,
+  "decoded_pixels_mb": 0.5,
+  "lru_cache": {
+    "maxBytes": 268435456,
+    "bytes": 42575160,
+    "count": 43,
+    "hits": 2,
+    "misses": 43,
+    "evictions": 0,
+    "failures": 0,
+    "overflow": false
+  },
+  "gate_total_mb": 1536.0,
+  "case": "guigang 30 m（57 帧全过一遍，最重）",
+  "note": "peak_mb 为机器上所有 Chromium 进程之和（本用例独占启动，故≈本次会话占用）；browser_only_mb 已扣除启动前基线。含 GPU 进程与 WebGL 纹理，比页内读数完整。"
+}

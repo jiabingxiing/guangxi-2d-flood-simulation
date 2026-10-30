@@ -1,0 +1,14 @@
+[
+  {
+    "case": "guigang",
+    "layer": "terrain_edit",
+    "status": "missing",
+    "text": "地形修改证据未提供透明度100%"
+  },
+  {
+    "case": "jiulong",
+    "layer": "terrain_edit",
+    "status": "missing",
+    "text": "地形修改证据未提供透明度100%"
+  }
+]

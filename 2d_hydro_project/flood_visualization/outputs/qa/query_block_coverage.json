@@ -1,0 +1,26 @@
+[
+  {
+    "bx": 0,
+    "state": "ok",
+    "value": 0.004000000189989805,
+    "blockPath": "numeric/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/f0030/0/0.bin",
+    "runId": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "cellSizeM": 100
+  },
+  {
+    "bx": 1,
+    "state": "ok",
+    "value": 0.5479999780654907,
+    "blockPath": "numeric/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/f0030/0/1.bin",
+    "runId": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "cellSizeM": 100
+  },
+  {
+    "bx": 2,
+    "state": "ok",
+    "value": 0.0010000000474974513,
+    "blockPath": "numeric/guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem/f0030/0/2.bin",
+    "runId": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "cellSizeM": 100
+  }
+]
