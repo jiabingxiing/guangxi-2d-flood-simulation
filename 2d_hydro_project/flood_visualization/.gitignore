@@ -9,12 +9,18 @@ htmlcov/
 
 # 发布包与运行产物
 outputs/web_bundle/
+# 归档的历史发布包（200 m 旧代）：三个包约 1.97 GB / 8 793 文件，不入库
+# 2026-10-30 补：原规则只覆盖 outputs/web_bundle/，导致归档目录 8 793 个文件待追踪
+outputs/_archive_bundles/
 outputs/build/
 outputs/*.zip
 logs/
 *.log
 
-# standalone：656 MB/版的发布内容不入库；只保留启动器真源 standalone/_launcher/
+# standalone：发布内容不入库；只保留启动器真源 standalone/_launcher/
+# 2026-10-30 实测：清理前的 standalone 目录有 3 590 文件 / 744 MB，
+# 同步后的镜像目录有 718 文件 / 104 MB，都不应入库。
+# _backup_* 是人工清理前的备份，同样不入库。
 standalone/*
 !standalone/_launcher/
 

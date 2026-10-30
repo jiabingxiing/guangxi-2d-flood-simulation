@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# 凭证：不得入库（计划 3.1）
+.env
+*.token
+*_credentials*
+
+# 第三方模型源码树与运行产物（已登记哈希与补丁，不入库）
+models/
+
+# 大文件与运行产物：目录保留、内容不入库
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+# S1 原始 ZIP（6 景，9.81 GiB）：2026-10-30 用户复制到项目内后新增
+# 原规则无此条，git status -uall 曾列出全部 6 个 ZIP，必须忽略
+data/S1_gxhydro/
+data/catalog/probes/
+outputs/*
+!outputs/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# OS
+Thumbs.db
+.DS_Store

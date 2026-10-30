@@ -4,9 +4,14 @@
 包括手工维护的 `打开可视化.cmd`、`server.ps1`、`使用说明.txt`、`README.md`。
 2026-10-28 已因此误删过一次。本脚本显式保护这 4 个文件。
 
+为什么还要清理残留：发布包换 run 时（如 200 m 旧 run → 100 m 真实DEM 新 run），
+`numeric/<case>/<old_run>/`、`frames/<case>/<old_run>/` 在源包里已不存在，
+但目标目录仍保留。实测 2026-10-30 残留 2 876 个文件、639.8 MB，
+双击打开会看到与发布包不一致的旧数据。本脚本按「源包没有就删」补齐清理。
+
 用法：
-    uv run python scripts/sync_standalone.py --bundle-id v3-20261028
-    uv run python scripts/sync_standalone.py --bundle-id v3-20261028 --dry-run
+    uv run python scripts/sync_standalone.py --bundle-id v6-20261029
+    uv run python scripts/sync_standalone.py --bundle-id v6-20261029 --dry-run
 """
 from __future__ import annotations
 
@@ -120,6 +125,57 @@ def main() -> int:
             if not args.dry_run:
                 shutil.copy2(source, target)
 
+    # 2b) 清理残留：删除 standalone 镜像目录中源包已不存在的文件
+    #
+    # 为什么需要这一步：第 1 步只处理「整个顶层条目在源里缺失」的情况。
+    # 但发布包换 run（例如 200 m 旧 run → 100 m 真实DEM 新 run）时，
+    # numeric/<case>/<old_run>/、frames/<case>/<old_run>/ 这些子目录在源里
+    # 已经不存在，而第 1 步看到 numeric/、frames/ 仍存在就跳过了。
+    # 实测（2026-10-30）：standalone 残留 2876 个旧文件、639.8 MB。
+    pruned_files = 0
+    pruned_bytes = 0
+    for name in BUNDLE_ENTRIES:
+        target_root = STANDALONE / name
+        source_root = src / name
+        if not target_root.is_dir():
+            continue
+        if source_root.is_dir():
+            for item in sorted(target_root.rglob("*"), reverse=True):
+                if not item.is_file():
+                    continue
+                rel = item.relative_to(STANDALONE)
+                if (src / rel).exists():
+                    continue
+                pruned_bytes += item.stat().st_size
+                pruned_files += 1
+                if not args.dry_run:
+                    item.unlink()
+        elif source_root.is_file():
+            continue
+        else:
+            # 源包没有这个顶层条目，第 1 步已处理
+            continue
+
+    # 2c) 删除清理后留下的空目录（自底向上，不碰 STANDALONE 根）
+    pruned_dirs = 0
+    if not args.dry_run:
+        for name in BUNDLE_ENTRIES:
+            target_root = STANDALONE / name
+            if not target_root.is_dir():
+                continue
+            for item in sorted(target_root.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+                if item.is_dir() and not any(item.iterdir()):
+                    item.rmdir()
+                    pruned_dirs += 1
+    else:
+        for name in BUNDLE_ENTRIES:
+            target_root = STANDALONE / name
+            if not target_root.is_dir():
+                continue
+            for item in sorted(target_root.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+                if item.is_dir() and not any(item.iterdir()):
+                    pruned_dirs += 1
+
     # 3) 从版本控制的真源重新生成启动器（README 内替换发布包 id）
     launcher_written = _sync_launcher(args.bundle_id, args.dry_run)
 
@@ -141,6 +197,10 @@ def main() -> int:
     print(f"[sync_standalone] {'（dry-run）' if args.dry_run else ''}"
           f"bundle={args.bundle_id} 复制 {copied} 个文件；"
           f"目录共 {len(list(STANDALONE.rglob('*')))} 项 / {_human(total)}")
+    if pruned_files or pruned_dirs:
+        print(f"[sync_standalone] 清理残留 {'（dry-run 未执行）' if args.dry_run else ''}"
+              f"{pruned_files} 个文件 / {_human(pruned_bytes)}，"
+              f"{pruned_dirs} 个空目录")
     print(f"[sync_standalone] 启动器来自版本控制真源：{LAUNCHER_SOURCE.name}/"
           f"（本次写入 {launcher_written} 个）")
     return 0
