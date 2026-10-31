@@ -1,0 +1,2441 @@
+{
+  "generated_utc": "2026-10-31T13:26:08+00:00",
+  "script": "scripts/stage6/diagnose_jiulong_artifacts.py",
+  "run_tag": null,
+  "phase": "Phase 0 / T0（事实冻结）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本文件全部数值由脚本从 outputs/jiulong/** 只读复算；未写入、移动或删除该目录下任何文件；未调用 lisflood.exe",
+  "resolution_policy": {
+    "production_baseline": "200 m（scen_free_200m_sv6h）",
+    "sensitivity_only": "100 m（scen_free_100m_dt2p5_sv6h_realdem）",
+    "rule": "跨分辨率比较必须使用同一物理面积阈值（km²），不得只比像元数或斑块个数（计划 §3.4）",
+    "cell_area_source": "栅格头 cellsize 平方，逐 run 记录，禁止写死 0.04 km²"
+  },
+  "event_window": {
+    "event": "2024-09 摩羯（久隆）",
+    "rain_source": "ERA5 锚点（22.0638N, 108.7161E）逐时，非站点实测雨量",
+    "note": "久隆/贵港为 2024-09 摩羯，宁明为 2026-08 紫檀；不共用绝对时间轴"
+  },
+  "runs": [
+    {
+      "run_id": "scen_free_100m_b1",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_b1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 5.0,
+        "sea_px": 97,
+        "s1_water_px": 1749,
+        "filled_px": 32467,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.0002242,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_100m_dt2p5_sv6h_realdem",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem",
+      "role": "sensitivity_100m",
+      "role_note": "100 m 敏感性试验（21 帧，dt=2.5 s）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 21,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0020.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "sea_px": 97,
+        "s1_water_px": 1749,
+        "filled_px": 32467,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 271.07,
+        "final_vol_m3": 164711509.6,
+        "e_mass_132": 0.0003089
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.0003089,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_100m_dt2p5_sv6h_realdem_cleaned",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem_cleaned",
+      "role": "non_physical_derived",
+      "role_note": "后处理滤杂产物（clean_audit.json 声明 ARR 2019 / UK EA 规则），不是物理模拟结果，本 Phase 只作对照，不得称为物理结果",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 21,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0020.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "sea_px": 97,
+        "s1_water_px": 1749,
+        "filled_px": 32467,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 144.74,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_100m_interrupted",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_interrupted",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "run.log"
+      ],
+      "frame_count": 1,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0000.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 5.0,
+        "sea_px": 97,
+        "s1_water_px": 1749,
+        "filled_px": 32467,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m",
+      "role": "single_frame_baseline_200m",
+      "role_note": "200 m 单帧基线（saveint=sim_time）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 263.24,
+        "final_vol_m3": 158115603.2,
+        "e_mass_132": 0.0004893
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.0004893,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m_dt2p5_b1",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_b1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 2.5,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 3.96e-05,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m_repro",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_repro",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "meta.json",
+        "sea_mask.npy",
+        "run.log"
+      ],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": null,
+        "dt_s": null,
+        "sea_px": null,
+        "s1_water_px": null,
+        "filled_px": null,
+        "unfilled_px": null,
+        "dem_v2": null
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m_sv6h",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+      "role": "production_baseline_200m",
+      "role_note": "200 m 生产基线（21 帧，saveint=21600）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 21,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0020.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 263.24,
+        "final_vol_m3": 158115603.2,
+        "e_mass_132": 0.0004893
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.0004893,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m_sv6h_recession",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+      "role": "production_recession_200m",
+      "role_note": "200 m 退水延长情景（53 帧，sim=1123200）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 53,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0052.wd",
+      "run_par": {
+        "sim_time_s": 1123200.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.00053,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_free_200m_v1invalid",
+      "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_v1invalid",
+      "role": "excluded_variant",
+      "role_note": "作废的 v1 DEM/河槽变体，不参与诊断与质量门",
+      "eligible_for_diagnosis": false,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": null,
+        "s1_water_px": null,
+        "filled_px": null,
+        "unfilled_px": null,
+        "dem_v2": null
+      },
+      "verify_json": {
+        "wet_area_km2": 93.36,
+        "final_vol_m3": 149378831.7,
+        "e_mass_132": 0.1483
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "FREE"
+        },
+        "free_edge_count": 4,
+        "kinds": [
+          "FREE"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z05_200m",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z05_200m",
+      "role": "boundary_scenario_200m",
+      "role_note": "下游边界情景（HFIX/HVAR）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 264.92,
+        "final_vol_m3": 171499118.2,
+        "e_mass_132": 0.01223
+      },
+      "mass_gate_g15": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.01223,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z05_200m_v1invalid",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z05_200m_v1invalid",
+      "role": "excluded_variant",
+      "role_note": "作废的 v1 DEM/河槽变体，不参与诊断与质量门",
+      "eligible_for_diagnosis": false,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": null,
+        "s1_water_px": null,
+        "filled_px": null,
+        "unfilled_px": null,
+        "dem_v2": null
+      },
+      "verify_json": {
+        "wet_area_km2": 96.16,
+        "final_vol_m3": 213382023.5,
+        "e_mass_132": 0.1616
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z0_200m",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z0_200m",
+      "role": "boundary_scenario_200m",
+      "role_note": "下游边界情景（HFIX/HVAR）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 263.4,
+        "final_vol_m3": 157959321.1,
+        "e_mass_132": 0.0001839
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 0.0001839,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z0_200m_v1invalid",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z0_200m_v1invalid",
+      "role": "excluded_variant",
+      "role_note": "作废的 v1 DEM/河槽变体，不参与诊断与质量门",
+      "eligible_for_diagnosis": false,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": null,
+        "s1_water_px": null,
+        "filled_px": null,
+        "unfilled_px": null,
+        "dem_v2": null
+      },
+      "verify_json": {
+        "wet_area_km2": 93.2,
+        "final_vol_m3": 149297374.7,
+        "e_mass_132": 0.1488
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z10_200m",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z10_200m",
+      "role": "boundary_scenario_200m",
+      "role_note": "下游边界情景（HFIX/HVAR）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 268.32,
+        "final_vol_m3": 191169425.5,
+        "e_mass_132": 0.03705
+      },
+      "mass_gate_g15": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.03705,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_z10_200m_v1invalid",
+      "path": "outputs/jiulong/2024-09-yagi/scen_z10_200m_v1invalid",
+      "role": "excluded_variant",
+      "role_note": "作废的 v1 DEM/河槽变体，不参与诊断与质量门",
+      "eligible_for_diagnosis": false,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": null,
+        "s1_water_px": null,
+        "filled_px": null,
+        "unfilled_px": null,
+        "dem_v2": null
+      },
+      "verify_json": {
+        "wet_area_km2": 101.68,
+        "final_vol_m3": 325434105.0,
+        "e_mass_132": 0.1183
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null,
+        "excluded_from_pass_count": null
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HFIX"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HFIX"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    },
+    {
+      "run_id": "scen_ztide_200m",
+      "path": "outputs/jiulong/2024-09-yagi/scen_ztide_200m",
+      "role": "boundary_scenario_200m",
+      "role_note": "下游边界情景（HFIX/HVAR）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 2,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0001.wd",
+      "run_par": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 432000.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "sea_px": 27,
+        "s1_water_px": 462,
+        "filled_px": 7813,
+        "unfilled_px": 0,
+        "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充"
+      },
+      "verify_json": {
+        "wet_area_km2": 286.16,
+        "final_vol_m3": 164868786.4,
+        "e_mass_132": 0.0406
+      },
+      "mass_gate_g15": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.0406,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      },
+      "boundary": {
+        "edges": {
+          "N": "FREE",
+          "W": "FREE",
+          "E": "FREE",
+          "S": "HVAR"
+        },
+        "free_edge_count": 3,
+        "kinds": [
+          "FREE",
+          "HVAR"
+        ],
+        "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+      }
+    }
+  ],
+  "grid_and_time_facts": {
+    "scen_free_200m_sv6h": {
+      "grid": {
+        "ncols": 182,
+        "nrows": 152,
+        "cellsize_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0,
+        "cells": 27664,
+        "domain_area_km2": 1106.56,
+        "cell_area_m2_from_header": 40000.0,
+        "area_0p04_km2_in_cells": 1,
+        "area_0p36_km2_in_cells": 9
+      },
+      "time": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 21600.0,
+        "sim_hours": 120.0,
+        "frame_count": 21,
+        "timeline": [
+          {
+            "seq": 0,
+            "t_s": 0.0,
+            "t_h": 0.0
+          },
+          {
+            "seq": 1,
+            "t_s": 21600.0,
+            "t_h": 6.0
+          },
+          {
+            "seq": 2,
+            "t_s": 43200.0,
+            "t_h": 12.0
+          },
+          {
+            "seq": 3,
+            "t_s": 64800.0,
+            "t_h": 18.0
+          },
+          {
+            "seq": 4,
+            "t_s": 86400.0,
+            "t_h": 24.0
+          },
+          {
+            "seq": 5,
+            "t_s": 108000.0,
+            "t_h": 30.0
+          },
+          {
+            "seq": 6,
+            "t_s": 129600.0,
+            "t_h": 36.0
+          },
+          {
+            "seq": 7,
+            "t_s": 151200.0,
+            "t_h": 42.0
+          },
+          {
+            "seq": 8,
+            "t_s": 172800.0,
+            "t_h": 48.0
+          },
+          {
+            "seq": 9,
+            "t_s": 194400.0,
+            "t_h": 54.0
+          },
+          {
+            "seq": 10,
+            "t_s": 216000.0,
+            "t_h": 60.0
+          },
+          {
+            "seq": 11,
+            "t_s": 237600.0,
+            "t_h": 66.0
+          },
+          {
+            "seq": 12,
+            "t_s": 259200.0,
+            "t_h": 72.0
+          },
+          {
+            "seq": 13,
+            "t_s": 280800.0,
+            "t_h": 78.0
+          },
+          {
+            "seq": 14,
+            "t_s": 302400.0,
+            "t_h": 84.0
+          },
+          {
+            "seq": 15,
+            "t_s": 324000.0,
+            "t_h": 90.0
+          },
+          {
+            "seq": 16,
+            "t_s": 345600.0,
+            "t_h": 96.0
+          },
+          {
+            "seq": 17,
+            "t_s": 367200.0,
+            "t_h": 102.0
+          },
+          {
+            "seq": 18,
+            "t_s": 388800.0,
+            "t_h": 108.0
+          },
+          {
+            "seq": 19,
+            "t_s": 410400.0,
+            "t_h": 114.0
+          },
+          {
+            "seq": 20,
+            "t_s": 432000.0,
+            "t_h": 120.0
+          }
+        ],
+        "beyond_sim_end": []
+      },
+      "dem_classification": {
+        "min_plateau_area_km2": 1.0,
+        "min_plateau_cells": 25,
+        "cells": {
+          "total": 27664,
+          "unchanged_valid": 19824,
+          "sea_clamped_zero": 27,
+          "negative_bfs_filled": 7813,
+          "source_nodata_filled": 0,
+          "unresolved_negative": 0,
+          "nodata_in_model_dem": 0
+        },
+        "area_km2": {
+          "sea_clamped_zero": 1.08,
+          "negative_bfs_filled": 312.52,
+          "raw_negative_outside_sea": 312.52,
+          "raw_negative_including_sea": 313.52,
+          "edited_total_including_sea": 313.6,
+          "domain_total": 1106.56
+        },
+        "raw_dem": {
+          "negative_cells": 7813,
+          "negative_frac_of_domain": 0.282425,
+          "min_m": -22.072357177734375,
+          "p50_m": 10.734711647033691,
+          "p95_m": 84.58484649658203,
+          "max_m": 388.5342712402344
+        },
+        "model_dem": {
+          "min_m": 0.0,
+          "zero_cells": 733,
+          "p50_m": 10.91550064086914,
+          "p95_m": 84.58454895019531,
+          "max_m": 388.53399658203125
+        },
+        "plateaus": {
+          "region_count": 24506,
+          "regions_at_or_above_min": 13,
+          "cells_at_or_above_min": 1340,
+          "area_at_or_above_min_km2": 53.6,
+          "largest_region_cells": 693,
+          "largest_region_area_km2": 27.72,
+          "largest_region_elevation_m": 0.0
+        },
+        "flat_neighbourhood_cells": 892,
+        "flat_neighbourhood_area_km2": 35.68,
+        "max_frame_overlap": {
+          "available": true,
+          "wet_threshold_m": 0.05,
+          "wet_cells": 6581,
+          "wet_area_km2": 263.24,
+          "edited_share_of_wet_pct": 51.42,
+          "edited_wet_area_km2": 135.36,
+          "plateau_share_of_wet_pct": 17.31,
+          "plateau_wet_area_km2": 45.56,
+          "flat8_share_of_wet_pct": 12.1,
+          "flat8_wet_area_km2": 31.84,
+          "negative_filled_share_of_wet_pct": 51.42,
+          "thin_film_cells": 8077,
+          "thin_film_area_km2": 323.08,
+          "thin_film_share_of_domain_pct": 29.23,
+          "note": "交叠率是相关描述，不是因果证明；同一像元可同时属于多个处理层，各百分比不可相加"
+        },
+        "reconstruction_check": {
+          "declared_filled_plus_sea_px": 7840,
+          "recomputed_edited_px": 7840,
+          "edit_tolerance_m": 0.001,
+          "ok": true,
+          "note": "meta.json filled_px+sea_px 必须等于重算的改写像元数，否则口径漂移；容差取 dem.asc 的 %.3f 输出量化步长 0.001 m"
+        },
+        "edit_tolerance_sensitivity_cells": {
+          "0": 27609,
+          "1e-06": 27590,
+          "0.0005": 7843,
+          "0.001": 7840,
+          "0.01": 7840
+        }
+      }
+    },
+    "scen_free_100m_dt2p5_sv6h_realdem": {
+      "grid": {
+        "ncols": 365,
+        "nrows": 304,
+        "cellsize_m": 100.0,
+        "cell_area_m2": 10000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0,
+        "cells": 110960,
+        "domain_area_km2": 1109.6,
+        "cell_area_m2_from_header": 10000.0,
+        "area_0p04_km2_in_cells": 4,
+        "area_0p36_km2_in_cells": 36
+      },
+      "time": {
+        "sim_time_s": 432000.0,
+        "saveint_s": 21600.0,
+        "sim_hours": 120.0,
+        "frame_count": 21,
+        "timeline": [
+          {
+            "seq": 0,
+            "t_s": 0.0,
+            "t_h": 0.0
+          },
+          {
+            "seq": 1,
+            "t_s": 21600.0,
+            "t_h": 6.0
+          },
+          {
+            "seq": 2,
+            "t_s": 43200.0,
+            "t_h": 12.0
+          },
+          {
+            "seq": 3,
+            "t_s": 64800.0,
+            "t_h": 18.0
+          },
+          {
+            "seq": 4,
+            "t_s": 86400.0,
+            "t_h": 24.0
+          },
+          {
+            "seq": 5,
+            "t_s": 108000.0,
+            "t_h": 30.0
+          },
+          {
+            "seq": 6,
+            "t_s": 129600.0,
+            "t_h": 36.0
+          },
+          {
+            "seq": 7,
+            "t_s": 151200.0,
+            "t_h": 42.0
+          },
+          {
+            "seq": 8,
+            "t_s": 172800.0,
+            "t_h": 48.0
+          },
+          {
+            "seq": 9,
+            "t_s": 194400.0,
+            "t_h": 54.0
+          },
+          {
+            "seq": 10,
+            "t_s": 216000.0,
+            "t_h": 60.0
+          },
+          {
+            "seq": 11,
+            "t_s": 237600.0,
+            "t_h": 66.0
+          },
+          {
+            "seq": 12,
+            "t_s": 259200.0,
+            "t_h": 72.0
+          },
+          {
+            "seq": 13,
+            "t_s": 280800.0,
+            "t_h": 78.0
+          },
+          {
+            "seq": 14,
+            "t_s": 302400.0,
+            "t_h": 84.0
+          },
+          {
+            "seq": 15,
+            "t_s": 324000.0,
+            "t_h": 90.0
+          },
+          {
+            "seq": 16,
+            "t_s": 345600.0,
+            "t_h": 96.0
+          },
+          {
+            "seq": 17,
+            "t_s": 367200.0,
+            "t_h": 102.0
+          },
+          {
+            "seq": 18,
+            "t_s": 388800.0,
+            "t_h": 108.0
+          },
+          {
+            "seq": 19,
+            "t_s": 410400.0,
+            "t_h": 114.0
+          },
+          {
+            "seq": 20,
+            "t_s": 432000.0,
+            "t_h": 120.0
+          }
+        ],
+        "beyond_sim_end": []
+      },
+      "dem_classification": {
+        "min_plateau_area_km2": 1.0,
+        "min_plateau_cells": 100,
+        "cells": {
+          "total": 110960,
+          "unchanged_valid": 78396,
+          "sea_clamped_zero": 97,
+          "negative_bfs_filled": 32467,
+          "source_nodata_filled": 0,
+          "unresolved_negative": 0,
+          "nodata_in_model_dem": 0
+        },
+        "area_km2": {
+          "sea_clamped_zero": 0.97,
+          "negative_bfs_filled": 324.67,
+          "raw_negative_outside_sea": 324.67,
+          "raw_negative_including_sea": 325.56,
+          "edited_total_including_sea": 325.64,
+          "domain_total": 1109.6
+        },
+        "raw_dem": {
+          "negative_cells": 32467,
+          "negative_frac_of_domain": 0.292601,
+          "min_m": -27.42067527770996,
+          "p50_m": 10.269548416137695,
+          "p95_m": 85.52082061767578,
+          "max_m": 405.77655029296875
+        },
+        "model_dem": {
+          "min_m": 0.0,
+          "zero_cells": 2405,
+          "p50_m": 10.496000289916992,
+          "p95_m": 85.52115631103516,
+          "max_m": 405.7770080566406
+        },
+        "plateaus": {
+          "region_count": 95646,
+          "regions_at_or_above_min": 13,
+          "cells_at_or_above_min": 5930,
+          "area_at_or_above_min_km2": 59.3,
+          "largest_region_cells": 2331,
+          "largest_region_area_km2": 23.31,
+          "largest_region_elevation_m": 0.0
+        },
+        "flat_neighbourhood_cells": 5684,
+        "flat_neighbourhood_area_km2": 56.84,
+        "max_frame_overlap": {
+          "available": true,
+          "wet_threshold_m": 0.05,
+          "wet_cells": 27107,
+          "wet_area_km2": 271.07,
+          "edited_share_of_wet_pct": 53.62,
+          "edited_wet_area_km2": 145.34,
+          "plateau_share_of_wet_pct": 18.31,
+          "plateau_wet_area_km2": 49.62,
+          "flat8_share_of_wet_pct": 17.71,
+          "flat8_wet_area_km2": 48.02,
+          "negative_filled_share_of_wet_pct": 53.62,
+          "thin_film_cells": 54552,
+          "thin_film_area_km2": 545.52,
+          "thin_film_share_of_domain_pct": 49.21,
+          "note": "交叠率是相关描述，不是因果证明；同一像元可同时属于多个处理层，各百分比不可相加"
+        },
+        "reconstruction_check": {
+          "declared_filled_plus_sea_px": 32564,
+          "recomputed_edited_px": 32564,
+          "edit_tolerance_m": 0.001,
+          "ok": true,
+          "note": "meta.json filled_px+sea_px 必须等于重算的改写像元数，否则口径漂移；容差取 dem.asc 的 %.3f 输出量化步长 0.001 m"
+        },
+        "edit_tolerance_sensitivity_cells": {
+          "0": 110767,
+          "1e-06": 110700,
+          "0.0005": 32591,
+          "0.001": 32564,
+          "0.01": 32564
+        }
+      }
+    },
+    "scen_free_200m_sv6h_recession": {
+      "grid": {
+        "ncols": 182,
+        "nrows": 152,
+        "cellsize_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0,
+        "cells": 27664,
+        "domain_area_km2": 1106.56,
+        "cell_area_m2_from_header": 40000.0,
+        "area_0p04_km2_in_cells": 1,
+        "area_0p36_km2_in_cells": 9
+      },
+      "time": {
+        "sim_time_s": 1123200.0,
+        "saveint_s": 21600.0,
+        "sim_hours": 312.0,
+        "frame_count": 53,
+        "timeline": [
+          {
+            "seq": 0,
+            "t_s": 0.0,
+            "t_h": 0.0
+          },
+          {
+            "seq": 1,
+            "t_s": 21600.0,
+            "t_h": 6.0
+          },
+          {
+            "seq": 2,
+            "t_s": 43200.0,
+            "t_h": 12.0
+          },
+          {
+            "seq": 3,
+            "t_s": 64800.0,
+            "t_h": 18.0
+          },
+          {
+            "seq": 4,
+            "t_s": 86400.0,
+            "t_h": 24.0
+          },
+          {
+            "seq": 5,
+            "t_s": 108000.0,
+            "t_h": 30.0
+          },
+          {
+            "seq": 6,
+            "t_s": 129600.0,
+            "t_h": 36.0
+          },
+          {
+            "seq": 7,
+            "t_s": 151200.0,
+            "t_h": 42.0
+          },
+          {
+            "seq": 8,
+            "t_s": 172800.0,
+            "t_h": 48.0
+          },
+          {
+            "seq": 9,
+            "t_s": 194400.0,
+            "t_h": 54.0
+          },
+          {
+            "seq": 10,
+            "t_s": 216000.0,
+            "t_h": 60.0
+          },
+          {
+            "seq": 11,
+            "t_s": 237600.0,
+            "t_h": 66.0
+          },
+          {
+            "seq": 12,
+            "t_s": 259200.0,
+            "t_h": 72.0
+          },
+          {
+            "seq": 13,
+            "t_s": 280800.0,
+            "t_h": 78.0
+          },
+          {
+            "seq": 14,
+            "t_s": 302400.0,
+            "t_h": 84.0
+          },
+          {
+            "seq": 15,
+            "t_s": 324000.0,
+            "t_h": 90.0
+          },
+          {
+            "seq": 16,
+            "t_s": 345600.0,
+            "t_h": 96.0
+          },
+          {
+            "seq": 17,
+            "t_s": 367200.0,
+            "t_h": 102.0
+          },
+          {
+            "seq": 18,
+            "t_s": 388800.0,
+            "t_h": 108.0
+          },
+          {
+            "seq": 19,
+            "t_s": 410400.0,
+            "t_h": 114.0
+          },
+          {
+            "seq": 20,
+            "t_s": 432000.0,
+            "t_h": 120.0
+          },
+          {
+            "seq": 21,
+            "t_s": 453600.0,
+            "t_h": 126.0
+          },
+          {
+            "seq": 22,
+            "t_s": 475200.0,
+            "t_h": 132.0
+          },
+          {
+            "seq": 23,
+            "t_s": 496800.0,
+            "t_h": 138.0
+          },
+          {
+            "seq": 24,
+            "t_s": 518400.0,
+            "t_h": 144.0
+          },
+          {
+            "seq": 25,
+            "t_s": 540000.0,
+            "t_h": 150.0
+          },
+          {
+            "seq": 26,
+            "t_s": 561600.0,
+            "t_h": 156.0
+          },
+          {
+            "seq": 27,
+            "t_s": 583200.0,
+            "t_h": 162.0
+          },
+          {
+            "seq": 28,
+            "t_s": 604800.0,
+            "t_h": 168.0
+          },
+          {
+            "seq": 29,
+            "t_s": 626400.0,
+            "t_h": 174.0
+          },
+          {
+            "seq": 30,
+            "t_s": 648000.0,
+            "t_h": 180.0
+          },
+          {
+            "seq": 31,
+            "t_s": 669600.0,
+            "t_h": 186.0
+          },
+          {
+            "seq": 32,
+            "t_s": 691200.0,
+            "t_h": 192.0
+          },
+          {
+            "seq": 33,
+            "t_s": 712800.0,
+            "t_h": 198.0
+          },
+          {
+            "seq": 34,
+            "t_s": 734400.0,
+            "t_h": 204.0
+          },
+          {
+            "seq": 35,
+            "t_s": 756000.0,
+            "t_h": 210.0
+          },
+          {
+            "seq": 36,
+            "t_s": 777600.0,
+            "t_h": 216.0
+          },
+          {
+            "seq": 37,
+            "t_s": 799200.0,
+            "t_h": 222.0
+          },
+          {
+            "seq": 38,
+            "t_s": 820800.0,
+            "t_h": 228.0
+          },
+          {
+            "seq": 39,
+            "t_s": 842400.0,
+            "t_h": 234.0
+          },
+          {
+            "seq": 40,
+            "t_s": 864000.0,
+            "t_h": 240.0
+          },
+          {
+            "seq": 41,
+            "t_s": 885600.0,
+            "t_h": 246.0
+          },
+          {
+            "seq": 42,
+            "t_s": 907200.0,
+            "t_h": 252.0
+          },
+          {
+            "seq": 43,
+            "t_s": 928800.0,
+            "t_h": 258.0
+          },
+          {
+            "seq": 44,
+            "t_s": 950400.0,
+            "t_h": 264.0
+          },
+          {
+            "seq": 45,
+            "t_s": 972000.0,
+            "t_h": 270.0
+          },
+          {
+            "seq": 46,
+            "t_s": 993600.0,
+            "t_h": 276.0
+          },
+          {
+            "seq": 47,
+            "t_s": 1015200.0,
+            "t_h": 282.0
+          },
+          {
+            "seq": 48,
+            "t_s": 1036800.0,
+            "t_h": 288.0
+          },
+          {
+            "seq": 49,
+            "t_s": 1058400.0,
+            "t_h": 294.0
+          },
+          {
+            "seq": 50,
+            "t_s": 1080000.0,
+            "t_h": 300.0
+          },
+          {
+            "seq": 51,
+            "t_s": 1101600.0,
+            "t_h": 306.0
+          },
+          {
+            "seq": 52,
+            "t_s": 1123200.0,
+            "t_h": 312.0
+          }
+        ],
+        "beyond_sim_end": []
+      },
+      "dem_classification": {
+        "min_plateau_area_km2": 1.0,
+        "min_plateau_cells": 25,
+        "cells": {
+          "total": 27664,
+          "unchanged_valid": 19824,
+          "sea_clamped_zero": 27,
+          "negative_bfs_filled": 7813,
+          "source_nodata_filled": 0,
+          "unresolved_negative": 0,
+          "nodata_in_model_dem": 0
+        },
+        "area_km2": {
+          "sea_clamped_zero": 1.08,
+          "negative_bfs_filled": 312.52,
+          "raw_negative_outside_sea": 312.52,
+          "raw_negative_including_sea": 313.52,
+          "edited_total_including_sea": 313.6,
+          "domain_total": 1106.56
+        },
+        "raw_dem": {
+          "negative_cells": 7813,
+          "negative_frac_of_domain": 0.282425,
+          "min_m": -22.072357177734375,
+          "p50_m": 10.734711647033691,
+          "p95_m": 84.58484649658203,
+          "max_m": 388.5342712402344
+        },
+        "model_dem": {
+          "min_m": 0.0,
+          "zero_cells": 733,
+          "p50_m": 10.91550064086914,
+          "p95_m": 84.58454895019531,
+          "max_m": 388.53399658203125
+        },
+        "plateaus": {
+          "region_count": 24506,
+          "regions_at_or_above_min": 13,
+          "cells_at_or_above_min": 1340,
+          "area_at_or_above_min_km2": 53.6,
+          "largest_region_cells": 693,
+          "largest_region_area_km2": 27.72,
+          "largest_region_elevation_m": 0.0
+        },
+        "flat_neighbourhood_cells": 892,
+        "flat_neighbourhood_area_km2": 35.68,
+        "max_frame_overlap": {
+          "available": true,
+          "wet_threshold_m": 0.05,
+          "wet_cells": 7359,
+          "wet_area_km2": 294.36,
+          "edited_share_of_wet_pct": 51.64,
+          "edited_wet_area_km2": 152.0,
+          "plateau_share_of_wet_pct": 15.79,
+          "plateau_wet_area_km2": 46.48,
+          "flat8_share_of_wet_pct": 10.88,
+          "flat8_wet_area_km2": 32.04,
+          "negative_filled_share_of_wet_pct": 51.64,
+          "thin_film_cells": 7943,
+          "thin_film_area_km2": 317.72,
+          "thin_film_share_of_domain_pct": 28.74,
+          "note": "交叠率是相关描述，不是因果证明；同一像元可同时属于多个处理层，各百分比不可相加"
+        },
+        "reconstruction_check": {
+          "declared_filled_plus_sea_px": 7840,
+          "recomputed_edited_px": 7840,
+          "edit_tolerance_m": 0.001,
+          "ok": true,
+          "note": "meta.json filled_px+sea_px 必须等于重算的改写像元数，否则口径漂移；容差取 dem.asc 的 %.3f 输出量化步长 0.001 m"
+        },
+        "edit_tolerance_sensitivity_cells": {
+          "0": 27609,
+          "1e-06": 27590,
+          "0.0005": 7843,
+          "0.001": 7840,
+          "0.01": 7840
+        }
+      }
+    }
+  },
+  "input_hashes": {
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/dem.asc": {
+      "sha256": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10",
+      "bytes": 181662
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/run.par": {
+      "sha256": "a50f4a45a91f1a71590803d2a6fe07d41b101766f099d3321d807b2d9a5ceb43",
+      "bytes": 166
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/rain.rain": {
+      "sha256": "a40d4a1ee285b8652d6209d202ddc4bc3c203f8fbe4b2b1d947e18847055bf5f",
+      "bytes": 1728
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/sea_mask.npy": {
+      "sha256": "d07cdac8fe57340738fe6593e3a3c307da7facd6a827aa086cdf37038cd0c328",
+      "bytes": 27792
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/results/res.max": {
+      "sha256": "ee46cf7b296d6754bb38b224397b2170f6f737b6f01c69d2b8b8058f1f32b57b",
+      "bytes": 166281
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/results/res.mass": {
+      "sha256": "ef715c94dc6be5145b9b8b4974bc3ccba60296c0395ae74e0799d1f5dbc6b100",
+      "bytes": 18517
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/dem.asc": {
+      "sha256": "f63fd610b8688694eccb5ac13acc85a0629cdad10d7fd47b04e07f934fcd44c7",
+      "bytes": 727108
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/run.par": {
+      "sha256": "75d1d67cf44911f0b5f8aff93b5571e5576b2431a10fded164887651fcefb7d2",
+      "bytes": 166
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/rain.rain": {
+      "sha256": "a40d4a1ee285b8652d6209d202ddc4bc3c203f8fbe4b2b1d947e18847055bf5f",
+      "bytes": 1728
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/sea_mask.npy": {
+      "sha256": "582a498c155bf6ca2394ddd74ce4da8a5aacb82a39710831486d3b720d4cbea7",
+      "bytes": 111088
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/results/res.max": {
+      "sha256": "b59cc00a587fb8562f6fa821ed7f2df468391c32cf479275a45da1954f735777",
+      "bytes": 666209
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/results/res.mass": {
+      "sha256": "6fc7b11c61aa6acc267fbc1c1771ef0e244a107ce7c3b037d85b5d39867ed89a",
+      "bytes": 18518
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/dem.asc": {
+      "sha256": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10",
+      "bytes": 181662
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/run.par": {
+      "sha256": "d8210a2fc146dd9d540e378f58626052e89f04ffe0f64a0b8e886c43da7aa244",
+      "bytes": 167
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/rain.rain": {
+      "sha256": "06d3256460ca228c3586c7d3ff07d464b234c23da4a43a3ec56e6ab1afa0d765",
+      "bytes": 4454
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/sea_mask.npy": {
+      "sha256": "d07cdac8fe57340738fe6593e3a3c307da7facd6a827aa086cdf37038cd0c328",
+      "bytes": 27792
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/results/res.max": {
+      "sha256": "c725505d25119f39149164fab5f71089a34bd40987b7b00221f3eb7e59370de1",
+      "bytes": 166281
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/results/res.mass": {
+      "sha256": "4ff213249d9224bbc82b42b127a9d1760d56a39a2c8c77a02f3073a4e8fbea1b",
+      "bytes": 48085
+    },
+    "data/interim/jiulong/dem_12p5m_32649.tif": {
+      "sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d",
+      "bytes": 10618040
+    },
+    "data/processed/s1_water/jiulong_20240905T105022_water20m.tif": {
+      "sha256": "76d0ce69bf70b615fa8070ba1554fd983cb9780b850bf1f68471797f08790cc9",
+      "bytes": 187636
+    },
+    "data/processed/s1_water/jiulong_20240917T105023_water20m.tif": {
+      "sha256": "3ce3abfb25216ba6eb079992ab4c5b5ae01a17d571d61ecf94b3272e3f4c76b2",
+      "bytes": 185181
+    }
+  },
+  "quality_gate_summary": {
+    "source": "data/catalog/mass_recheck_g15.json（复用，未重算全表）",
+    "policy": "PASS<=1e-3；FAIL-EXPLAINED 不计通过（ADR-0006 / 计划 §7.1）",
+    "jiulong_runs": {
+      "outputs/jiulong/2024-09-yagi/scen_free_100m_b1": {
+        "gate": "PASS",
+        "e_mass": 0.0002242,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem": {
+        "gate": "PASS",
+        "e_mass": 0.0003089,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_free_200m": {
+        "gate": "PASS",
+        "e_mass": 0.0004893,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_b1": {
+        "gate": "PASS",
+        "e_mass": 3.96e-05,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h": {
+        "gate": "PASS",
+        "e_mass": 0.0004893,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession": {
+        "gate": "PASS",
+        "e_mass": 0.00053,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_z05_200m": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.01223,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      },
+      "outputs/jiulong/2024-09-yagi/scen_z0_200m": {
+        "gate": "PASS",
+        "e_mass": 0.0001839,
+        "cause": null,
+        "excluded_from_pass_count": false
+      },
+      "outputs/jiulong/2024-09-yagi/scen_z10_200m": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.03705,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      },
+      "outputs/jiulong/2024-09-yagi/scen_ztide_200m": {
+        "gate": "FAIL-EXPLAINED",
+        "e_mass": 0.0406,
+        "cause": "G13 求解器在常湿激波/HFIX-HVAR 边界下的有界质量增益；G15 已确认 Qin/Qout 列含边界通量。该 run 不计入质量门通过。",
+        "excluded_from_pass_count": true
+      }
+    },
+    "note": "不得表述为『质量门全量通过』；z05/z10/ztide 为 FAIL-EXPLAINED"
+  },
+  "recession_accounting": {
+    "run_id": "scen_free_200m_sv6h_recession",
+    "wet_threshold_m": 0.05,
+    "frame_series": [
+      {
+        "seq": 0,
+        "t_h": 0.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "wet_volume_m3": 0.0,
+        "max_depth_m": 0.0,
+        "thin_film_cells": 0
+      },
+      {
+        "seq": 1,
+        "t_h": 6.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "wet_volume_m3": 0.0,
+        "max_depth_m": 0.0,
+        "thin_film_cells": 0
+      },
+      {
+        "seq": 2,
+        "t_h": 12.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "wet_volume_m3": 0.0,
+        "max_depth_m": 0.0,
+        "thin_film_cells": 0
+      },
+      {
+        "seq": 3,
+        "t_h": 18.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "wet_volume_m3": 0.0,
+        "max_depth_m": 0.0,
+        "thin_film_cells": 0
+      },
+      {
+        "seq": 4,
+        "t_h": 24.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "wet_volume_m3": 0.0,
+        "max_depth_m": 0.0,
+        "thin_film_cells": 27664
+      },
+      {
+        "seq": 5,
+        "t_h": 30.0,
+        "wet_cells": 497,
+        "wet_area_km2": 19.88,
+        "wet_volume_m3": 1589840.1,
+        "max_depth_m": 0.262,
+        "thin_film_cells": 23341
+      },
+      {
+        "seq": 6,
+        "t_h": 36.0,
+        "wet_cells": 603,
+        "wet_area_km2": 24.12,
+        "wet_volume_m3": 2044160.0,
+        "max_depth_m": 0.274,
+        "thin_film_cells": 23197
+      },
+      {
+        "seq": 7,
+        "t_h": 42.0,
+        "wet_cells": 959,
+        "wet_area_km2": 38.36,
+        "wet_volume_m3": 3458600.2,
+        "max_depth_m": 0.321,
+        "thin_film_cells": 22673
+      },
+      {
+        "seq": 8,
+        "t_h": 48.0,
+        "wet_cells": 1953,
+        "wet_area_km2": 78.12,
+        "wet_volume_m3": 8593960.0,
+        "max_depth_m": 0.534,
+        "thin_film_cells": 21629
+      },
+      {
+        "seq": 9,
+        "t_h": 54.0,
+        "wet_cells": 3008,
+        "wet_area_km2": 120.32,
+        "wet_volume_m3": 17747600.1,
+        "max_depth_m": 0.884,
+        "thin_film_cells": 15059
+      },
+      {
+        "seq": 10,
+        "t_h": 60.0,
+        "wet_cells": 4961,
+        "wet_area_km2": 198.44,
+        "wet_volume_m3": 55064316.4,
+        "max_depth_m": 2.362,
+        "thin_film_cells": 11111
+      },
+      {
+        "seq": 11,
+        "t_h": 66.0,
+        "wet_cells": 5696,
+        "wet_area_km2": 227.84,
+        "wet_volume_m3": 102426435.5,
+        "max_depth_m": 5.076,
+        "thin_film_cells": 15529
+      },
+      {
+        "seq": 12,
+        "t_h": 72.0,
+        "wet_cells": 5634,
+        "wet_area_km2": 225.36,
+        "wet_volume_m3": 115855878.9,
+        "max_depth_m": 5.21,
+        "thin_film_cells": 18423
+      },
+      {
+        "seq": 13,
+        "t_h": 78.0,
+        "wet_cells": 5633,
+        "wet_area_km2": 225.32,
+        "wet_volume_m3": 123470195.3,
+        "max_depth_m": 5.196,
+        "thin_film_cells": 18738
+      },
+      {
+        "seq": 14,
+        "t_h": 84.0,
+        "wet_cells": 5768,
+        "wet_area_km2": 230.72,
+        "wet_volume_m3": 135077793.0,
+        "max_depth_m": 5.532,
+        "thin_film_cells": 18952
+      },
+      {
+        "seq": 15,
+        "t_h": 90.0,
+        "wet_cells": 5857,
+        "wet_area_km2": 234.28,
+        "wet_volume_m3": 143608242.2,
+        "max_depth_m": 5.725,
+        "thin_film_cells": 19362
+      },
+      {
+        "seq": 16,
+        "t_h": 96.0,
+        "wet_cells": 5830,
+        "wet_area_km2": 233.2,
+        "wet_volume_m3": 146534628.9,
+        "max_depth_m": 5.793,
+        "thin_film_cells": 20024
+      },
+      {
+        "seq": 17,
+        "t_h": 102.0,
+        "wet_cells": 5767,
+        "wet_area_km2": 230.68,
+        "wet_volume_m3": 146277832.0,
+        "max_depth_m": 5.797,
+        "thin_film_cells": 20577
+      },
+      {
+        "seq": 18,
+        "t_h": 108.0,
+        "wet_cells": 5749,
+        "wet_area_km2": 229.96,
+        "wet_volume_m3": 147714043.0,
+        "max_depth_m": 5.839,
+        "thin_film_cells": 20061
+      },
+      {
+        "seq": 19,
+        "t_h": 114.0,
+        "wet_cells": 5866,
+        "wet_area_km2": 234.64,
+        "wet_volume_m3": 154707597.7,
+        "max_depth_m": 6.0,
+        "thin_film_cells": 19536
+      },
+      {
+        "seq": 20,
+        "t_h": 120.0,
+        "wet_cells": 5827,
+        "wet_area_km2": 233.08,
+        "wet_volume_m3": 156040507.8,
+        "max_depth_m": 6.03,
+        "thin_film_cells": 19837
+      },
+      {
+        "seq": 21,
+        "t_h": 126.0,
+        "wet_cells": 5943,
+        "wet_area_km2": 237.72,
+        "wet_volume_m3": 162181484.4,
+        "max_depth_m": 6.171,
+        "thin_film_cells": 17519
+      },
+      {
+        "seq": 22,
+        "t_h": 132.0,
+        "wet_cells": 5987,
+        "wet_area_km2": 239.48,
+        "wet_volume_m3": 166439589.8,
+        "max_depth_m": 6.267,
+        "thin_film_cells": 18697
+      },
+      {
+        "seq": 23,
+        "t_h": 138.0,
+        "wet_cells": 6099,
+        "wet_area_km2": 243.96,
+        "wet_volume_m3": 173648476.6,
+        "max_depth_m": 6.507,
+        "thin_film_cells": 19136
+      },
+      {
+        "seq": 24,
+        "t_h": 144.0,
+        "wet_cells": 6056,
+        "wet_area_km2": 242.24,
+        "wet_volume_m3": 174995039.1,
+        "max_depth_m": 6.561,
+        "thin_film_cells": 19844
+      },
+      {
+        "seq": 25,
+        "t_h": 150.0,
+        "wet_cells": 6021,
+        "wet_area_km2": 240.84,
+        "wet_volume_m3": 175739511.7,
+        "max_depth_m": 6.593,
+        "thin_film_cells": 19949
+      },
+      {
+        "seq": 26,
+        "t_h": 156.0,
+        "wet_cells": 6069,
+        "wet_area_km2": 242.76,
+        "wet_volume_m3": 178593437.5,
+        "max_depth_m": 6.675,
+        "thin_film_cells": 13989
+      },
+      {
+        "seq": 27,
+        "t_h": 162.0,
+        "wet_cells": 6278,
+        "wet_area_km2": 251.12,
+        "wet_volume_m3": 189381250.0,
+        "max_depth_m": 7.126,
+        "thin_film_cells": 19255
+      },
+      {
+        "seq": 28,
+        "t_h": 168.0,
+        "wet_cells": 6190,
+        "wet_area_km2": 247.6,
+        "wet_volume_m3": 189348085.9,
+        "max_depth_m": 7.131,
+        "thin_film_cells": 20100
+      },
+      {
+        "seq": 29,
+        "t_h": 174.0,
+        "wet_cells": 6158,
+        "wet_area_km2": 246.32,
+        "wet_volume_m3": 190719277.3,
+        "max_depth_m": 7.192,
+        "thin_film_cells": 19559
+      },
+      {
+        "seq": 30,
+        "t_h": 180.0,
+        "wet_cells": 6096,
+        "wet_area_km2": 243.84,
+        "wet_volume_m3": 190922656.2,
+        "max_depth_m": 7.215,
+        "thin_film_cells": 20182
+      },
+      {
+        "seq": 31,
+        "t_h": 186.0,
+        "wet_cells": 6036,
+        "wet_area_km2": 241.44,
+        "wet_volume_m3": 190851562.5,
+        "max_depth_m": 7.223,
+        "thin_film_cells": 20401
+      },
+      {
+        "seq": 32,
+        "t_h": 192.0,
+        "wet_cells": 5960,
+        "wet_area_km2": 238.4,
+        "wet_volume_m3": 190585468.8,
+        "max_depth_m": 7.225,
+        "thin_film_cells": 20527
+      },
+      {
+        "seq": 33,
+        "t_h": 198.0,
+        "wet_cells": 5914,
+        "wet_area_km2": 236.56,
+        "wet_volume_m3": 190525878.9,
+        "max_depth_m": 7.233,
+        "thin_film_cells": 20573
+      },
+      {
+        "seq": 34,
+        "t_h": 204.0,
+        "wet_cells": 5863,
+        "wet_area_km2": 234.52,
+        "wet_volume_m3": 190280000.0,
+        "max_depth_m": 7.233,
+        "thin_film_cells": 20647
+      },
+      {
+        "seq": 35,
+        "t_h": 210.0,
+        "wet_cells": 5916,
+        "wet_area_km2": 236.64,
+        "wet_volume_m3": 193443828.1,
+        "max_depth_m": 7.36,
+        "thin_film_cells": 19727
+      },
+      {
+        "seq": 36,
+        "t_h": 216.0,
+        "wet_cells": 5880,
+        "wet_area_km2": 235.2,
+        "wet_volume_m3": 193667031.2,
+        "max_depth_m": 7.371,
+        "thin_film_cells": 20303
+      },
+      {
+        "seq": 37,
+        "t_h": 222.0,
+        "wet_cells": 5836,
+        "wet_area_km2": 233.44,
+        "wet_volume_m3": 193535644.5,
+        "max_depth_m": 7.371,
+        "thin_film_cells": 20513
+      },
+      {
+        "seq": 38,
+        "t_h": 228.0,
+        "wet_cells": 5803,
+        "wet_area_km2": 232.12,
+        "wet_volume_m3": 193723359.4,
+        "max_depth_m": 7.382,
+        "thin_film_cells": 20510
+      },
+      {
+        "seq": 39,
+        "t_h": 234.0,
+        "wet_cells": 6214,
+        "wet_area_km2": 248.56,
+        "wet_volume_m3": 203243964.8,
+        "max_depth_m": 7.737,
+        "thin_film_cells": 13698
+      },
+      {
+        "seq": 40,
+        "t_h": 240.0,
+        "wet_cells": 6226,
+        "wet_area_km2": 249.04,
+        "wet_volume_m3": 206754375.0,
+        "max_depth_m": 7.874,
+        "thin_film_cells": 19497
+      },
+      {
+        "seq": 41,
+        "t_h": 246.0,
+        "wet_cells": 6161,
+        "wet_area_km2": 246.44,
+        "wet_volume_m3": 206715136.7,
+        "max_depth_m": 7.874,
+        "thin_film_cells": 20047
+      },
+      {
+        "seq": 42,
+        "t_h": 252.0,
+        "wet_cells": 6167,
+        "wet_area_km2": 246.68,
+        "wet_volume_m3": 208624843.8,
+        "max_depth_m": 7.952,
+        "thin_film_cells": 19829
+      },
+      {
+        "seq": 43,
+        "t_h": 258.0,
+        "wet_cells": 6127,
+        "wet_area_km2": 245.08,
+        "wet_volume_m3": 208963789.1,
+        "max_depth_m": 7.97,
+        "thin_film_cells": 20037
+      },
+      {
+        "seq": 44,
+        "t_h": 264.0,
+        "wet_cells": 6053,
+        "wet_area_km2": 242.12,
+        "wet_volume_m3": 208800996.1,
+        "max_depth_m": 7.974,
+        "thin_film_cells": 20253
+      },
+      {
+        "seq": 45,
+        "t_h": 270.0,
+        "wet_cells": 6010,
+        "wet_area_km2": 240.4,
+        "wet_volume_m3": 208640781.2,
+        "max_depth_m": 7.974,
+        "thin_film_cells": 20378
+      },
+      {
+        "seq": 46,
+        "t_h": 276.0,
+        "wet_cells": 5972,
+        "wet_area_km2": 238.88,
+        "wet_volume_m3": 208500722.7,
+        "max_depth_m": 7.976,
+        "thin_film_cells": 20438
+      },
+      {
+        "seq": 47,
+        "t_h": 282.0,
+        "wet_cells": 5992,
+        "wet_area_km2": 239.68,
+        "wet_volume_m3": 210229804.7,
+        "max_depth_m": 8.046,
+        "thin_film_cells": 19924
+      },
+      {
+        "seq": 48,
+        "t_h": 288.0,
+        "wet_cells": 6453,
+        "wet_area_km2": 258.12,
+        "wet_volume_m3": 221002890.6,
+        "max_depth_m": 8.408,
+        "thin_film_cells": 11053
+      },
+      {
+        "seq": 49,
+        "t_h": 294.0,
+        "wet_cells": 6683,
+        "wet_area_km2": 267.32,
+        "wet_volume_m3": 232680175.8,
+        "max_depth_m": 8.874,
+        "thin_film_cells": 18834
+      },
+      {
+        "seq": 50,
+        "t_h": 300.0,
+        "wet_cells": 6579,
+        "wet_area_km2": 263.16,
+        "wet_volume_m3": 232732949.2,
+        "max_depth_m": 8.886,
+        "thin_film_cells": 19623
+      },
+      {
+        "seq": 51,
+        "t_h": 306.0,
+        "wet_cells": 6519,
+        "wet_area_km2": 260.76,
+        "wet_volume_m3": 232835937.5,
+        "max_depth_m": 8.904,
+        "thin_film_cells": 19840
+      },
+      {
+        "seq": 52,
+        "t_h": 312.0,
+        "wet_cells": 6451,
+        "wet_area_km2": 258.04,
+        "wet_volume_m3": 232524375.0,
+        "max_depth_m": 8.904,
+        "thin_film_cells": 20042
+      }
+    ],
+    "mass_gate_recomputed": {
+      "v0_m3": 0.0,
+      "v_end_m3": 234411986.6264,
+      "v_rain_m3": 268340800.0,
+      "v_in_m3": 0.0,
+      "v_out_m3": 33786599.4,
+      "residual_m3": -142213.9736000076,
+      "e_mass": 0.00052998
+    },
+    "window": {
+      "t_start_h": 120.0,
+      "t_end_h": 312.0,
+      "rain_m3": 92453779.6,
+      "volume_start_m3": 158603189.0,
+      "volume_end_m3": 234411986.6,
+      "volume_change_m3": 75808797.6,
+      "qin_integral_m3": 0.0,
+      "qout_integral_m3": 33786599.4,
+      "qout_integral_window_m3": 16589329.2,
+      "qout_window_over_rain": 0.1794
+    },
+    "boundary": {
+      "edges": {
+        "N": "FREE",
+        "W": "FREE",
+        "E": "FREE",
+        "S": "FREE"
+      },
+      "free_edge_count": 4,
+      "kinds": [
+        "FREE"
+      ],
+      "note": "FREE 四边均可能出流；Qout 是四边之和（boundary.cpp:1330-1378），不是仅南缘"
+    },
+    "comparison_0910_to_overpass": {
+      "seq_0910": 20,
+      "seq_overpass": 51,
+      "model_wet_km2_0910": 233.08,
+      "model_wet_km2_overpass": 260.76,
+      "model_area_change_km2": 27.68,
+      "s1_area_change_km2": -5.84,
+      "direction_agreement": false
+    },
+    "s1_reference": {
+      "source": "data/catalog/jiulong_recession_s1.json（复用，未重算）",
+      "s1_water_km2_0905_nosea": 18.04,
+      "s1_water_km2_0917_nosea": 12.2,
+      "model_wet_km2_0910T00": 233.08,
+      "model_wet_km2_at_overpass": 260.76,
+      "model_area_change_0910_to_overpass_km2": 27.68,
+      "csi": 0.018,
+      "pod": 0.387,
+      "far": 0.982,
+      "verdict": "WEAK（退水期单景、G17 下限、模型无排水网面积系统性偏大；仅作趋势/量级参照，不作独立验证通过门）",
+      "s1_area_change_0905_to_0917_km2": -5.84
+    },
+    "caveats": [
+      "S1 仅灾前（09-05）与退水后（09-17）两景，无洪峰过境；退水结论为 WEAK（计划 §1.2 独立观测行）",
+      "模型未编码常水（河/塘/海），湿面积为总水体口径，含全部降雨驱动积水",
+      "海面像元已从湿面积与体积统计中剔除（sea_mask.npy）",
+      "Qin 全程为 0（无干流注入），出流全部来自边界，四边均 FREE"
+    ]
+  },
+  "artifacts": {
+    "dem_artifact_map": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\diagnostics\\jiulong\\dem_artifact_map.tif",
+      "crs": "EPSG:32649",
+      "shape": [
+        152,
+        182
+      ],
+      "cellsize_m": 200.0,
+      "bands": {
+        "1": "dem_class_code（取值见 class_legend）",
+        "2": "constant_plateau_cells（该像元所在精确常值连通区的像元数；0=低于阈值）",
+        "3": "flat_neighbourhood（8 邻域全部等高=1）",
+        "4": "thin_film_le_5mm（res.max 水深在 (0, 0.005] m）",
+        "5": "max_depth_mm_quantised（res.max 水深×1000 取整，用于显示 0.001 m 量化台阶）"
+      },
+      "class_legend": {
+        "0": "UNCHANGED_VALID",
+        "1": "SEA_CLAMPED_ZERO",
+        "2": "NEGATIVE_BFS_FILLED",
+        "3": "SOURCE_NODATA_FILLED",
+        "4": "UNRESOLVED_NEGATIVE",
+        "5": "NODATA_IN_MODEL_DEM"
+      }
+    },
+    "dem_artifact_map_note": "栅格以 200 m 生产基线为准（生产口径）；100 m 分类统计见 grid_and_time_facts，不另出栅格以避免与生产层混淆"
+  }
+}

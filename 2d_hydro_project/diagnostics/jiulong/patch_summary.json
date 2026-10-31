@@ -1,0 +1,253 @@
+{
+  "generated_utc": "2026-10-31T13:26:36+00:00",
+  "script": "scripts/stage6/analyze_patch_persistence.py",
+  "run_tag": null,
+  "phase": "Phase 0 / T1（斑块时空统计）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本文件全部数值由脚本从 outputs/jiulong/** 只读复算；未写入、移动或删除该目录下任何文件；未调用 lisflood.exe",
+  "threshold_policy": {
+    "frozen": false,
+    "reason": "方案 A/B 未确认前不冻结展示阈值（计划 §5 Phase 0 门禁）；本文件阈值仅用于诊断分档",
+    "area_expression": "全部以 km² 表达；像元数由 cells_for_area 按当前网格换算",
+    "cell_area_source": "栅格头 cellsize 平方"
+  },
+  "evidence_levels": {
+    "frame_patch_statistics": "E1（脚本从 raw run 逐帧复算）",
+    "patch_tracks": "E1（8 邻域连通 + 像元重叠关联）",
+    "diagnostic_verdict": "E1 规则判定，但阈值未冻结，不得作为发布依据",
+    "physical_cause": "E3（需 Phase 2 四层 DEM 与 Phase 3-4 试验确认）",
+    "independent_accuracy_metrics": "E4 未测（无连续观测；S1 仅灾前/退水后两景）"
+  },
+  "parameters": {
+    "wet_threshold_m": 0.05,
+    "thin_film_max_m": 0.005,
+    "output_precision_m": 0.001,
+    "output_precision_note": "LISFLOOD-FP 以 %.3f 写 .wd（output.cpp:686），水深量化到 0.001 m；任何小于 0.001 m 的深度差不可分辨",
+    "area_bins_km2": [
+      0.04,
+      0.16,
+      0.36,
+      1.0,
+      4.0,
+      10.0
+    ],
+    "diag_area_threshold_km2": 0.16,
+    "diag_persistence_frames": 3,
+    "diag_shallow_threshold_m": 0.1,
+    "diag_exempt_area_km2": 1.0,
+    "connectivity": 8
+  },
+  "runs": {
+    "scen_free_200m_sv6h": {
+      "run_id": "scen_free_200m_sv6h",
+      "role": "production_baseline_200m",
+      "grid": {
+        "ncols": 182,
+        "nrows": 152,
+        "cellsize_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0
+      },
+      "cells": 27664,
+      "domain_area_km2": 1106.56,
+      "sea_cells": 27,
+      "saveint_s": 21600.0,
+      "sim_time_s": 432000.0,
+      "frame_count": 21,
+      "diag_area_threshold_km2": 0.16,
+      "diag_area_threshold_cells": 4,
+      "diag_persistence_frames": 3,
+      "diag_shallow_threshold_m": 0.1,
+      "diag_exempt_area_km2": 1.0,
+      "track_count": 1620,
+      "merge_events": 385
+    },
+    "scen_free_100m_dt2p5_sv6h_realdem": {
+      "run_id": "scen_free_100m_dt2p5_sv6h_realdem",
+      "role": "sensitivity_100m",
+      "grid": {
+        "ncols": 365,
+        "nrows": 304,
+        "cellsize_m": 100.0,
+        "cell_area_m2": 10000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0
+      },
+      "cells": 110960,
+      "domain_area_km2": 1109.6,
+      "sea_cells": 97,
+      "saveint_s": 21600.0,
+      "sim_time_s": 432000.0,
+      "frame_count": 21,
+      "diag_area_threshold_km2": 0.16,
+      "diag_area_threshold_cells": 16,
+      "diag_persistence_frames": 3,
+      "diag_shallow_threshold_m": 0.1,
+      "diag_exempt_area_km2": 1.0,
+      "track_count": 6002,
+      "merge_events": 1509
+    },
+    "scen_free_200m_sv6h_recession": {
+      "run_id": "scen_free_200m_sv6h_recession",
+      "role": "production_recession_200m",
+      "grid": {
+        "ncols": 182,
+        "nrows": 152,
+        "cellsize_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0
+      },
+      "cells": 27664,
+      "domain_area_km2": 1106.56,
+      "sea_cells": 27,
+      "saveint_s": 21600.0,
+      "sim_time_s": 1123200.0,
+      "frame_count": 53,
+      "diag_area_threshold_km2": 0.16,
+      "diag_area_threshold_cells": 4,
+      "diag_persistence_frames": 3,
+      "diag_shallow_threshold_m": 0.1,
+      "diag_exempt_area_km2": 1.0,
+      "track_count": 1689,
+      "merge_events": 518
+    }
+  },
+  "aggregate": {
+    "scen_free_200m_sv6h": {
+      "role": "production_baseline_200m",
+      "cellsize_m": 200.0,
+      "cell_area_m2": 40000.0,
+      "frame_count": 21,
+      "wet_frame_count": 16,
+      "peak_frame": {
+        "seq": 19,
+        "t_h": 114.0,
+        "wet_area_km2": 234.64,
+        "n_patches": 1113
+      },
+      "last_frame": {
+        "seq": 20,
+        "t_h": 120.0,
+        "wet_area_km2": 232.56,
+        "n_patches": 1113
+      },
+      "diag_verdict_counts": {
+        "exempt": 1483,
+        "filter": 137
+      },
+      "diag_reason_counts": {
+        "EXEMPT_LARGE_AREA": 44,
+        "EXEMPT_PERSISTENT": 1439,
+        "FILTER_SMALL_AREA": 129,
+        "FILTER_SHALLOW": 8
+      },
+      "track_count": 1620,
+      "tracks_in_2plus_frames": 1593,
+      "tracks_spanning_all_wet_frames": 377,
+      "area_spectrum_peak_frame": {
+        "note": "面积谱按物理面积阈值（km²）给出；像元数随网格变化，不做跨分辨率直接比较",
+        "diag_area_threshold_km2": 0.16,
+        "patches_ge_diag_area_threshold": 259,
+        "single_cell_patches": 507,
+        "single_cell_area_km2": 20.28,
+        "largest_patch_area_km2": 31.64
+      }
+    },
+    "scen_free_100m_dt2p5_sv6h_realdem": {
+      "role": "sensitivity_100m",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "frame_count": 21,
+      "wet_frame_count": 16,
+      "peak_frame": {
+        "seq": 15,
+        "t_h": 90.0,
+        "wet_area_km2": 249.11,
+        "n_patches": 4231
+      },
+      "last_frame": {
+        "seq": 20,
+        "t_h": 120.0,
+        "wet_area_km2": 243.05,
+        "n_patches": 4138
+      },
+      "diag_verdict_counts": {
+        "exempt": 5601,
+        "filter": 401
+      },
+      "diag_reason_counts": {
+        "EXEMPT_PERSISTENT": 5562,
+        "EXEMPT_LARGE_AREA": 39,
+        "FILTER_SMALL_AREA": 393,
+        "FILTER_SHALLOW": 8
+      },
+      "track_count": 6002,
+      "tracks_in_2plus_frames": 5976,
+      "tracks_spanning_all_wet_frames": 1523,
+      "area_spectrum_peak_frame": {
+        "note": "面积谱按物理面积阈值（km²）给出；像元数随网格变化，不做跨分辨率直接比较",
+        "diag_area_threshold_km2": 0.16,
+        "patches_ge_diag_area_threshold": 165,
+        "single_cell_patches": 1858,
+        "single_cell_area_km2": 18.58,
+        "largest_patch_area_km2": 29.79
+      }
+    },
+    "scen_free_200m_sv6h_recession": {
+      "role": "production_recession_200m",
+      "cellsize_m": 200.0,
+      "cell_area_m2": 40000.0,
+      "frame_count": 53,
+      "wet_frame_count": 48,
+      "peak_frame": {
+        "seq": 49,
+        "t_h": 294.0,
+        "wet_area_km2": 267.32,
+        "n_patches": 973
+      },
+      "last_frame": {
+        "seq": 52,
+        "t_h": 312.0,
+        "wet_area_km2": 258.04,
+        "n_patches": 978
+      },
+      "diag_verdict_counts": {
+        "exempt": 1492,
+        "filter": 197
+      },
+      "diag_reason_counts": {
+        "EXEMPT_LARGE_AREA": 58,
+        "EXEMPT_PERSISTENT": 1434,
+        "FILTER_SMALL_AREA": 183,
+        "FILTER_SHALLOW": 14
+      },
+      "track_count": 1689,
+      "tracks_in_2plus_frames": 1619,
+      "tracks_spanning_all_wet_frames": 340,
+      "area_spectrum_peak_frame": {
+        "note": "面积谱按物理面积阈值（km²）给出；像元数随网格变化，不做跨分辨率直接比较",
+        "diag_area_threshold_km2": 0.16,
+        "patches_ge_diag_area_threshold": 266,
+        "single_cell_patches": 405,
+        "single_cell_area_km2": 16.2,
+        "largest_patch_area_km2": 29.56
+      }
+    }
+  },
+  "outputs": {
+    "patch_persistence_csv": "patch_persistence.csv（逐帧逐斑块）",
+    "patch_tracks_csv": "patch_tracks.csv（跨帧轨迹）",
+    "patch_frame_summary_csv": "patch_frame_summary.csv（逐帧汇总）"
+  },
+  "artifacts": [
+    "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\diagnostics\\jiulong\\patch_persistence.csv",
+    "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\diagnostics\\jiulong\\patch_tracks.csv",
+    "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\diagnostics\\jiulong\\patch_frame_summary.csv",
+    "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\diagnostics\\jiulong\\patch_summary.json"
+  ]
+}

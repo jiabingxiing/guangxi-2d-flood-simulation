@@ -1,0 +1,337 @@
+{
+  "policy": "200 m 是生产基线，100 m 仅为敏感性试验（计划 §1.4）；跨分辨率比较只允许同一物理面积阈值（km²），不得只比像元数或斑块个数",
+  "wet_threshold_m": 0.05,
+  "area_thresholds_km2": [
+    0.04,
+    0.16,
+    0.36,
+    1.0,
+    4.0
+  ],
+  "runs": {
+    "200m": {
+      "run_id": "scen_free_200m_sv6h",
+      "role": "production_baseline_200m",
+      "grid": {
+        "ncols": 182,
+        "nrows": 152,
+        "cellsize_m": 200.0,
+        "cell_area_m2": 40000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0,
+        "cells": 27664,
+        "domain_area_km2": 1106.56
+      },
+      "res_max": {
+        "wet_cells": 6581,
+        "wet_area_km2": 263.24,
+        "wet_volume_m3_above_threshold": 162448320.3,
+        "max_depth_m": 6.027,
+        "p50": 0.433,
+        "p90": 1.415,
+        "p99": 2.9652,
+        "max": 6.027,
+        "mean": 0.6171,
+        "patch_count": 1107,
+        "single_cell_patches": 504,
+        "single_cell_patch_area_km2": 20.16
+      },
+      "by_physical_area_threshold": {
+        "0.04": {
+          "area_threshold_km2": 0.04,
+          "cells_threshold_on_this_grid": 1,
+          "patch_count": 1107,
+          "area_km2": 263.24,
+          "volume_m3": 162448319.9,
+          "area_share_pct": 100.0
+        },
+        "0.16": {
+          "area_threshold_km2": 0.16,
+          "cells_threshold_on_this_grid": 4,
+          "patch_count": 256,
+          "area_km2": 210.36,
+          "volume_m3": 110530359.9,
+          "area_share_pct": 79.91
+        },
+        "0.36": {
+          "area_threshold_km2": 0.36,
+          "cells_threshold_on_this_grid": 9,
+          "patch_count": 94,
+          "area_km2": 177.08,
+          "volume_m3": 78436439.9,
+          "area_share_pct": 67.27
+        },
+        "1": {
+          "area_threshold_km2": 1.0,
+          "cells_threshold_on_this_grid": 25,
+          "patch_count": 25,
+          "area_km2": 140.24,
+          "volume_m3": 51863639.8,
+          "area_share_pct": 53.27
+        },
+        "4": {
+          "area_threshold_km2": 4.0,
+          "cells_threshold_on_this_grid": 100,
+          "patch_count": 8,
+          "area_km2": 109.72,
+          "volume_m3": 38071479.9,
+          "area_share_pct": 41.68
+        }
+      },
+      "anchor_radius": {
+        "anchor": [
+          108.7161,
+          22.0638
+        ],
+        "radius": {
+          "1000": {
+            "radius_m": 1000.0,
+            "cells": 81,
+            "max_depth_m": 0.547,
+            "p95_depth_m": 0.378,
+            "mean_depth_m": 0.0962,
+            "wet_fraction": 0.4444,
+            "note": "邻域参考值，不是资产级水深判据"
+          },
+          "2000": {
+            "radius_m": 2000.0,
+            "cells": 317,
+            "max_depth_m": 1.685,
+            "p95_depth_m": 0.5528,
+            "mean_depth_m": 0.1464,
+            "wet_fraction": 0.4038,
+            "note": "邻域参考值，不是资产级水深判据"
+          }
+        }
+      },
+      "terrain_hydraulics": {
+        "slope": {
+          "p50": 0.017814,
+          "p95": 0.136798,
+          "max": 0.581138,
+          "frac_below_0p0005": 0.061632
+        },
+        "pits": {
+          "count_interior": 2944,
+          "area_km2_interior": 117.76,
+          "frac_of_domain": 0.10642,
+          "note": "只统计内部像元（排除最外一圈）；边界像元按 edge padding 天然判为洼坑，会虚增计数"
+        },
+        "priority_flood": {
+          "changed_cells": 6964,
+          "changed_area_km2": 278.56,
+          "fill_volume_m3": 520745192.9,
+          "max_rise_m": 13.616,
+          "flat_cells_after_fill": 3231,
+          "flat_area_after_fill_km2": 129.24,
+          "note": "Priority-Flood 只在本脚本内作诊断派生，用于 DEM_HYDRO 候选评估；填洼后仍有平坦像元，平坦面与水力连通性必须单独检查（计划 §2.3）"
+        },
+        "d8": {
+          "max_accumulation_cells": 130,
+          "sink_cells_no_downstream": 8201,
+          "sink_share_of_domain_pct": 29.65,
+          "evidence_level": "E4（出口位置未测）",
+          "note": "D8 只是候选线索，不是真实沟渠（计划 §2.2）。本域 DEM 存在大片精确常值平地，D8 在这些像元上没有唯一下游（sink 占比见上），**因此本脚本不给出任何出口位置或按边出流占比结论**——出口判定标 E4 未测，须在 Phase 2 用DEM_HYDRO 的平坦面路由与 Phase 4 的边界/排水审计单独完成。模型实际出流由四边 FREE 边界共同承担（见 boundary_control），只能用 res.mass 的 Qout 账目计量"
+        },
+        "dem_source_sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d"
+      }
+    },
+    "100m": {
+      "run_id": "scen_free_100m_dt2p5_sv6h_realdem",
+      "role": "sensitivity_100m",
+      "grid": {
+        "ncols": 365,
+        "nrows": 304,
+        "cellsize_m": 100.0,
+        "cell_area_m2": 10000.0,
+        "xllcorner": 246911.3,
+        "yllcorner": 2425993.0,
+        "nodata": -9999.0,
+        "cells": 110960,
+        "domain_area_km2": 1109.6
+      },
+      "res_max": {
+        "wet_cells": 27107,
+        "wet_area_km2": 271.07,
+        "wet_volume_m3_above_threshold": 168431855.5,
+        "max_depth_m": 8.256,
+        "p50": 0.439,
+        "p90": 1.404,
+        "p99": 3.0889,
+        "max": 8.256,
+        "mean": 0.6214,
+        "patch_count": 4047,
+        "single_cell_patches": 1739,
+        "single_cell_patch_area_km2": 17.39
+      },
+      "by_physical_area_threshold": {
+        "0.04": {
+          "area_threshold_km2": 0.04,
+          "cells_threshold_on_this_grid": 4,
+          "patch_count": 1037,
+          "area_km2": 223.91,
+          "volume_m3": 122310180.0,
+          "area_share_pct": 82.6
+        },
+        "0.16": {
+          "area_threshold_km2": 0.16,
+          "cells_threshold_on_this_grid": 16,
+          "patch_count": 178,
+          "area_km2": 168.3,
+          "volume_m3": 69955180.0,
+          "area_share_pct": 62.09
+        },
+        "0.36": {
+          "area_threshold_km2": 0.36,
+          "cells_threshold_on_this_grid": 36,
+          "patch_count": 76,
+          "area_km2": 145.16,
+          "volume_m3": 51808240.0,
+          "area_share_pct": 53.55
+        },
+        "1": {
+          "area_threshold_km2": 1.0,
+          "cells_threshold_on_this_grid": 100,
+          "patch_count": 27,
+          "area_km2": 118.24,
+          "volume_m3": 38266480.0,
+          "area_share_pct": 43.62
+        },
+        "4": {
+          "area_threshold_km2": 4.0,
+          "cells_threshold_on_this_grid": 400,
+          "patch_count": 6,
+          "area_km2": 86.59,
+          "volume_m3": 24090290.1,
+          "area_share_pct": 31.94
+        }
+      },
+      "anchor_radius": {
+        "anchor": [
+          108.7161,
+          22.0638
+        ],
+        "radius": {
+          "1000": {
+            "radius_m": 1000.0,
+            "cells": 317,
+            "max_depth_m": 1.132,
+            "p95_depth_m": 0.6906,
+            "mean_depth_m": 0.1574,
+            "wet_fraction": 0.3659,
+            "note": "邻域参考值，不是资产级水深判据"
+          },
+          "2000": {
+            "radius_m": 2000.0,
+            "cells": 1257,
+            "max_depth_m": 1.8,
+            "p95_depth_m": 0.6322,
+            "mean_depth_m": 0.1372,
+            "wet_fraction": 0.3477,
+            "note": "邻域参考值，不是资产级水深判据"
+          }
+        }
+      },
+      "terrain_hydraulics": {
+        "slope": {
+          "p50": 0.03294,
+          "p95": 0.215467,
+          "max": 0.654629,
+          "frac_below_0p0005": 0.079993
+        },
+        "pits": {
+          "count_interior": 13971,
+          "area_km2_interior": 139.71,
+          "frac_of_domain": 0.12591,
+          "note": "只统计内部像元（排除最外一圈）；边界像元按 edge padding 天然判为洼坑，会虚增计数"
+        },
+        "priority_flood": {
+          "changed_cells": 29728,
+          "changed_area_km2": 297.28,
+          "fill_volume_m3": 492164833.7,
+          "max_rise_m": 12.877,
+          "flat_cells_after_fill": 14917,
+          "flat_area_after_fill_km2": 149.17,
+          "note": "Priority-Flood 只在本脚本内作诊断派生，用于 DEM_HYDRO 候选评估；填洼后仍有平坦像元，平坦面与水力连通性必须单独检查（计划 §2.3）"
+        },
+        "d8": {
+          "max_accumulation_cells": 224,
+          "sink_cells_no_downstream": 35325,
+          "sink_share_of_domain_pct": 31.84,
+          "evidence_level": "E4（出口位置未测）",
+          "note": "D8 只是候选线索，不是真实沟渠（计划 §2.2）。本域 DEM 存在大片精确常值平地，D8 在这些像元上没有唯一下游（sink 占比见上），**因此本脚本不给出任何出口位置或按边出流占比结论**——出口判定标 E4 未测，须在 Phase 2 用DEM_HYDRO 的平坦面路由与 Phase 4 的边界/排水审计单独完成。模型实际出流由四边 FREE 边界共同承担（见 boundary_control），只能用 res.mass 的 Qout 账目计量"
+        },
+        "dem_source_sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d"
+      }
+    }
+  },
+  "cross_resolution": {
+    "wet_area_ratio_100m_over_200m": 1.0297,
+    "by_threshold": {
+      "0.04": {
+        "area_threshold_km2": 0.04,
+        "cells_200m": 1,
+        "cells_100m": 4,
+        "patch_count_200m": 1107,
+        "patch_count_100m": 1037,
+        "patch_count_ratio_100m_over_200m": 0.9368,
+        "area_km2_200m": 263.24,
+        "area_km2_100m": 223.91,
+        "area_ratio_100m_over_200m": 0.8506
+      },
+      "0.16": {
+        "area_threshold_km2": 0.16,
+        "cells_200m": 4,
+        "cells_100m": 16,
+        "patch_count_200m": 256,
+        "patch_count_100m": 178,
+        "patch_count_ratio_100m_over_200m": 0.6953,
+        "area_km2_200m": 210.36,
+        "area_km2_100m": 168.3,
+        "area_ratio_100m_over_200m": 0.8001
+      },
+      "0.36": {
+        "area_threshold_km2": 0.36,
+        "cells_200m": 9,
+        "cells_100m": 36,
+        "patch_count_200m": 94,
+        "patch_count_100m": 76,
+        "patch_count_ratio_100m_over_200m": 0.8085,
+        "area_km2_200m": 177.08,
+        "area_km2_100m": 145.16,
+        "area_ratio_100m_over_200m": 0.8197
+      },
+      "1": {
+        "area_threshold_km2": 1.0,
+        "cells_200m": 25,
+        "cells_100m": 100,
+        "patch_count_200m": 25,
+        "patch_count_100m": 27,
+        "patch_count_ratio_100m_over_200m": 1.08,
+        "area_km2_200m": 140.24,
+        "area_km2_100m": 118.24,
+        "area_ratio_100m_over_200m": 0.8431
+      },
+      "4": {
+        "area_threshold_km2": 4.0,
+        "cells_200m": 100,
+        "cells_100m": 400,
+        "patch_count_200m": 8,
+        "patch_count_100m": 6,
+        "patch_count_ratio_100m_over_200m": 0.75,
+        "area_km2_200m": 109.72,
+        "area_km2_100m": 86.59,
+        "area_ratio_100m_over_200m": 0.7892
+      }
+    },
+    "wet_area_delta_km2": 7.83
+  },
+  "decision_input": {
+    "recommended_option": "A",
+    "option_a": "按 200 m 生产基线治理；展示阈值按 200 m 换算；100 m 仅作敏感性参照（计划 §1.4 推荐）",
+    "option_b": "批准 100 m 或更细重跑后治理；须先完成重跑、质量门与分辨率收敛",
+    "status": "未冻结：方案 A/B 需用户确认后才能冻结展示阈值（计划 §5 Phase 0 门禁）",
+    "evidence_level": "E1（本文件全部数值由脚本从 raw run 复算）"
+  }
+}

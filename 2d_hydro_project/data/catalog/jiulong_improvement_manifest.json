@@ -1,0 +1,320 @@
+{
+  "generated_utc": "2026-10-31T13:26:08+00:00",
+  "script": "scripts/stage6/diagnose_jiulong_artifacts.py（build_manifest）",
+  "phase": "Phase 0 / T0+T1（事实冻结 + 根因诊断）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本清单登记的全部 run 输入均只读；outputs/jiulong/** 未被写入、移动或删除；未调用 lisflood.exe；models/ 未修改",
+  "resolution_policy": {
+    "production_baseline": "200 m（scen_free_200m_sv6h）",
+    "sensitivity_only": "100 m（scen_free_100m_dt2p5_sv6h_realdem）",
+    "rule": "跨分辨率比较必须使用同一物理面积阈值（km²），不得只比像元数或斑块个数（计划 §3.4）",
+    "cell_area_source": "栅格头 cellsize 平方，逐 run 记录，禁止写死 0.04 km²"
+  },
+  "parameters": {
+    "wet_threshold_m": 0.05,
+    "thin_film_max_m": 0.005,
+    "output_precision_m": 0.001,
+    "area_thresholds_km2": [
+      0.04,
+      0.16,
+      0.36,
+      1.0,
+      4.0
+    ],
+    "plateau_min_km2": 1.0,
+    "radii_m": [
+      1000.0,
+      2000.0
+    ],
+    "anchor_lonlat": [
+      108.7161,
+      22.0638
+    ],
+    "cell_area_source": "栅格头 cellsize 平方；逐 run 记录；禁止写死 0.04 km²",
+    "thresholds_frozen": false,
+    "threshold_freeze_blocker": "方案 A/B 未确认（计划 §5 Phase 0 门禁 / §9.3 第 1 项）"
+  },
+  "baseline_runs": {
+    "production_200m": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+    "production_recession_200m": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+    "sensitivity_100m": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem",
+    "non_physical_derived": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem_cleaned",
+    "excluded": [
+      "scen_free_200m_v1invalid",
+      "scen_z0_200m_v1invalid",
+      "scen_z05_200m_v1invalid",
+      "scen_z10_200m_v1invalid"
+    ]
+  },
+  "key_facts": {
+    "production_wet_area_km2": 263.24,
+    "sensitivity_wet_area_km2": 271.07,
+    "wet_area_ratio_100m_over_200m": 1.0297,
+    "max_depth_200m_m": 6.027,
+    "max_depth_100m_m": 8.256,
+    "cell_area_200m_m2": 40000.0,
+    "cell_area_100m_m2": 10000.0,
+    "dem_edited_area_km2_200m": 313.6,
+    "sea_clamped_area_km2_200m": 1.08,
+    "recession_model_area_change_km2": 27.68,
+    "recession_s1_area_change_km2": -5.84,
+    "recession_qout_over_rain": 0.1794,
+    "quality_gate": {
+      "PASS": [
+        "scen_free_200m_sv6h",
+        "scen_free_200m_sv6h_recession",
+        "scen_free_100m_dt2p5_sv6h_realdem",
+        "scen_z0_200m"
+      ],
+      "FAIL_EXPLAINED": [
+        "scen_z05_200m",
+        "scen_z10_200m",
+        "scen_ztide_200m"
+      ],
+      "note": "FAIL-EXPLAINED 不计通过（ADR-0006 / 计划 §7.1）；不得表述为全量通过"
+    }
+  },
+  "evidence_levels": {
+    "run_inventory_and_grid_metadata": "E1",
+    "dem_classification_and_reconstruction": "E1",
+    "patch_statistics_and_tracks": "E1",
+    "resolution_comparison": "E1",
+    "recession_mass_accounting": "E1",
+    "geometric_artifact_causal_link": "E2",
+    "isolated_patch_physical_cause": "E3",
+    "outlet_position_and_per_edge_outflow": "E4 未测",
+    "continuous_depth_and_asset_level": "E4 未测",
+    "independent_validation_metrics": "E4 未测"
+  },
+  "inputs": {
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/dem.asc": {
+      "sha256": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10",
+      "bytes": 181662
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/run.par": {
+      "sha256": "a50f4a45a91f1a71590803d2a6fe07d41b101766f099d3321d807b2d9a5ceb43",
+      "bytes": 166
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/rain.rain": {
+      "sha256": "a40d4a1ee285b8652d6209d202ddc4bc3c203f8fbe4b2b1d947e18847055bf5f",
+      "bytes": 1728
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/sea_mask.npy": {
+      "sha256": "d07cdac8fe57340738fe6593e3a3c307da7facd6a827aa086cdf37038cd0c328",
+      "bytes": 27792
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/results/res.max": {
+      "sha256": "ee46cf7b296d6754bb38b224397b2170f6f737b6f01c69d2b8b8058f1f32b57b",
+      "bytes": 166281
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/results/res.mass": {
+      "sha256": "ef715c94dc6be5145b9b8b4974bc3ccba60296c0395ae74e0799d1f5dbc6b100",
+      "bytes": 18517
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/dem.asc": {
+      "sha256": "f63fd610b8688694eccb5ac13acc85a0629cdad10d7fd47b04e07f934fcd44c7",
+      "bytes": 727108
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/run.par": {
+      "sha256": "75d1d67cf44911f0b5f8aff93b5571e5576b2431a10fded164887651fcefb7d2",
+      "bytes": 166
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/rain.rain": {
+      "sha256": "a40d4a1ee285b8652d6209d202ddc4bc3c203f8fbe4b2b1d947e18847055bf5f",
+      "bytes": 1728
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/sea_mask.npy": {
+      "sha256": "582a498c155bf6ca2394ddd74ce4da8a5aacb82a39710831486d3b720d4cbea7",
+      "bytes": 111088
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/results/res.max": {
+      "sha256": "b59cc00a587fb8562f6fa821ed7f2df468391c32cf479275a45da1954f735777",
+      "bytes": 666209
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem/results/res.mass": {
+      "sha256": "6fc7b11c61aa6acc267fbc1c1771ef0e244a107ce7c3b037d85b5d39867ed89a",
+      "bytes": 18518
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/dem.asc": {
+      "sha256": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10",
+      "bytes": 181662
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/run.par": {
+      "sha256": "d8210a2fc146dd9d540e378f58626052e89f04ffe0f64a0b8e886c43da7aa244",
+      "bytes": 167
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/rain.rain": {
+      "sha256": "06d3256460ca228c3586c7d3ff07d464b234c23da4a43a3ec56e6ab1afa0d765",
+      "bytes": 4454
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/bci.bci": {
+      "sha256": "d94b598b1758d01527d56afb9ee62d3b61e2dd4986a3f3dfb1f05e87c1c25bdc",
+      "bytes": 111
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/sea_mask.npy": {
+      "sha256": "d07cdac8fe57340738fe6593e3a3c307da7facd6a827aa086cdf37038cd0c328",
+      "bytes": 27792
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/results/res.max": {
+      "sha256": "c725505d25119f39149164fab5f71089a34bd40987b7b00221f3eb7e59370de1",
+      "bytes": 166281
+    },
+    "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/results/res.mass": {
+      "sha256": "4ff213249d9224bbc82b42b127a9d1760d56a39a2c8c77a02f3073a4e8fbea1b",
+      "bytes": 48085
+    },
+    "data/interim/jiulong/dem_12p5m_32649.tif": {
+      "sha256": "1802dd956e11a7df175f6e397427068759f75cd2d7a81c3b84a9aae37bd62e7d",
+      "bytes": 10618040
+    },
+    "data/processed/s1_water/jiulong_20240905T105022_water20m.tif": {
+      "sha256": "76d0ce69bf70b615fa8070ba1554fd983cb9780b850bf1f68471797f08790cc9",
+      "bytes": 187636
+    },
+    "data/processed/s1_water/jiulong_20240917T105023_water20m.tif": {
+      "sha256": "3ce3abfb25216ba6eb079992ab4c5b5ae01a17d571d61ecf94b3272e3f4c76b2",
+      "bytes": 185181
+    },
+    "data/catalog/mass_recheck_g15.json": {
+      "sha256": "4602cbc7fe0fcfe8777a1d28162f244e88ee0f4c70865c2210caed0a190b8a84",
+      "bytes": 23184
+    },
+    "data/catalog/jiulong_scenarios_summary.json": {
+      "sha256": "51728d34c009e758f32f03e62b4e0d167bcf2c7dd324ac6a20559a686f4b5f41",
+      "bytes": 3496
+    },
+    "data/catalog/jiulong_recession_s1.json": {
+      "sha256": "5bbbf5fc6fb2444eb00a88ecf8c78b90a8fe1d954ad0af5ee5dafae2c16d613c",
+      "bytes": 1473
+    },
+    "data/catalog/input_manifest.json": {
+      "sha256": "a1dba228f67b3ff81379dcb1d12ee9b347694b8514594d784f4d51bf47b58e34",
+      "bytes": 6198
+    }
+  },
+  "code": {
+    "scripts/stage6/diagnose_jiulong_artifacts.py": {
+      "sha256": "a717d87d61f87180a2ed2b8e355c8932847f008196da1a9f4aa35f4ee652ebb5",
+      "bytes": 64877
+    },
+    "scripts/stage6/analyze_patch_persistence.py": {
+      "sha256": "d35c4db3e609dbeed34167b20fa01d94404b21259050b053e25d831cf26623bf",
+      "bytes": 21517
+    },
+    "scripts/common/grid_io.py": {
+      "sha256": "109c5a0f08288b8e2b91d1b4fc02eaeace8d0db0e0cf88e17f3f4a2e3c186487",
+      "bytes": 13533
+    },
+    "scripts/common/patch_analysis.py": {
+      "sha256": "8760ae41908522afb519a219ff8b3d5661a40bda3a64f7ba80fa36629dba32ef",
+      "bytes": 13312
+    },
+    "scripts/stage3/jiulong_scenarios.py": {
+      "sha256": "0e8a38a03edc40beb66c45d77bdd5e0688a25adcfaba287c445e1baa8a673c8d",
+      "bytes": 20906
+    },
+    "scripts/stage3/g15_mass_recheck.py": {
+      "sha256": "689f444a5c9d7ee76121eaaca5c2068c9398d98c38da8c70d801fc40dbf5e59b",
+      "bytes": 5488
+    },
+    "scripts/stage3/jiulong_recession_s1.py": {
+      "sha256": "745c13fef0d463155add9c2f3b1304f24f3faaf4adec4d2d69d0b9ee48fbaaef",
+      "bytes": 7405
+    },
+    "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/output.cpp": {
+      "sha256": "b56d18bbbb4f2fc428d973cafc4810c33e5277535f13a684eeba3f8f40af1336",
+      "bytes": 39050
+    },
+    "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/boundary.cpp": {
+      "sha256": "93cb472c525e49cd9d3f10faa6c3048d3939ec9195baed510a2a1aebd0e160e5",
+      "bytes": 48659
+    },
+    "pyproject.toml": {
+      "sha256": "af70cf04022b66e0ab7ebf0c8d132ff6763eebfb49464adadbd6fe0a82fcacd0",
+      "bytes": 584
+    }
+  },
+  "artifacts": {
+    "diagnostics/jiulong/baseline_snapshot.json": {
+      "sha256": "4157749d20fdaac2f1af791827e0a92067332a896aa0b58340d9b10b7644bc04",
+      "bytes": 68967
+    },
+    "diagnostics/jiulong/dem_artifact_map.tif": {
+      "sha256": "390f2820189b85748edcf1af27d1627961e4149861879794133d0fe093b51171",
+      "bytes": 58820
+    },
+    "diagnostics/jiulong/resolution_comparison.json": {
+      "sha256": "14576896e910235a1d74729208c7a99a96668492c9e3e85e389a59fac8a27bcb",
+      "bytes": 11646
+    },
+    "diagnostics/jiulong/patch_persistence.csv": {
+      "sha256": "71a56e9edf0f4b5723501ec1d4798b493a77fbe96bce8e93c4dc5e45af823d25",
+      "bytes": 22660501
+    },
+    "diagnostics/jiulong/patch_tracks.csv": {
+      "sha256": "fec2c826169fe624c2645a93f85f4356e13f07e7dcf1352eaee5e5a83b3030f3",
+      "bytes": 1143939
+    },
+    "diagnostics/jiulong/patch_frame_summary.csv": {
+      "sha256": "2da20b4b0c965948cf06b14b02c2b663f700a46e5c614e42edef93299abbc5da",
+      "bytes": 14361
+    },
+    "diagnostics/jiulong/patch_summary.json": {
+      "sha256": "3b34dba8f3a99fbead09f19e43ddea03b382afe9fbaef38aed3a327013504803",
+      "bytes": 8452
+    },
+    "diagnostics/jiulong/root_cause_report.md": {
+      "sha256": "7ea3c91af4405b693df83798ffee8633b56866c5b01d36657b06b1995b7667af",
+      "bytes": 25811
+    }
+  },
+  "open_blockers": [
+    "方案 A/B 未确认：展示阈值不得冻结（计划 §5 Phase 0 门禁）",
+    "四层 DEM 未生成（Phase 2 / task-3）",
+    "DEM_HYDRO 平坦面路由未实现：出口位置判定 E4 未测",
+    "降雨损失与入渗敏感性未做（Phase 3 / task-4）",
+    "排水网络、潮位与站址资料未授权（Phase 4 / 计划 §9.3）",
+    "久隆独立验证仅有灾前/退水后两景 S1：CSI/POD/FAR 为 WEAK，NSE/R² 未测",
+    "12.5 m 原生网格未重算：lisflood.exe 禁止调用"
+  ],
+  "known_doc_discrepancies": [
+    {
+      "id": "C1",
+      "doc": "计划 §执行摘要「负值 DEM 约 319.5 km²」",
+      "measured": "200 m 网格改写合计 313.60 km²；负值不含海 312.52 km²；12.5 m AOI 内 341.69 km²",
+      "action": "请 Lead 标注口径；本 Phase 不改计划"
+    },
+    {
+      "id": "C2",
+      "doc": "计划 §执行摘要「S1 常水仅约 11 km²」",
+      "measured": "200 m 网格 S1 常水 18.48 km²，其中判为海 1.08 km²",
+      "action": "区分常水总量与判海量"
+    },
+    {
+      "id": "C3",
+      "doc": "计划 §1.2「下游边界 FREE、Z=0、Z=0.5、Z=1.0」",
+      "measured": "N/W/E/S 四边全部 FREE；Qout 为四边之和（boundary.cpp:1330-1378）",
+      "action": "更正边界口径描述"
+    },
+    {
+      "id": "C7",
+      "doc": "scripts/stage3/jiulong_recession_s1.py:97 硬编码 0.04 km²",
+      "measured": "该常量只对 200 m 成立；本 Phase 脚本一律从栅格头读 cellsize",
+      "action": "Phase 5 建议改为从栅格头读单元面积"
+    },
+    {
+      "id": "C8",
+      "doc": "scen_free_100m_..._cleaned/clean_audit.json 声明 ARR 2019 / UK EA 规则",
+      "measured": "计划 §2.3 禁止把 ARR 2019 阈值写成强制标准；100 m 不是生产层",
+      "action": "该产物只能作对照，不得称物理结果"
+    }
+  ]
+}
