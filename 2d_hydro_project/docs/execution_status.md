@@ -29,6 +29,77 @@
 - 宁明既有 CSI 0.357 / 面积偏比 1.94 同时受「人造河槽」与「注入口/出流边界重合」两项污染，不得作为模型物理性能结论。
 - `nocut-v1` 的 `E_mass` 达标不能证明真实地形能出流（0.83 的注入量直接从东缘边界排出）。
 
+## 0c. Phase E 增量（2026-10-31，久隆治理）
+
+计划基线：`plans/久隆水动力推演效果改进实施计划_从伪影诊断到全链条治理.md` v3.0。治理口径以 ADR-0010 定版。
+本节状态为 **2026-10-31 21:28 快照**。Phase 0/1/2/3-4 由并行工作流执行；凡标「部分完成/未完成」的项，以落盘文件是否存在与实跑结果为准复核，不得据本节推断已完成的物理工作。
+
+### 0c-1 分阶段状态
+
+| Phase | 内容 | 状态 |
+|---|---|---|
+| E0 | 分辨率决策（计划 §1.4）：定方案 A，200 m 为生产治理基线、100 m 仅敏感性对照 | **部分完成**：ADR-0010 决策项 2 已按方案 A 定版为默认工作口径；但 Phase 0 产出 `resolution_comparison.json` 的 `decision_input.status` 仍记「未冻结：方案 A/B 需用户确认后才能冻结展示阈值」。**用户确认属未确认项**；方案 B 需用户单独批准 |
+| E0 | 基线事实冻结：200 m 生产基线 `scen_free_200m_sv6h`（21 帧、`sim_time=432000`、湿面积 263.24 km²、`E_mass=4.893e-4` PASS） | **已验证**（本次实测复核 `res.max` 与栅格头） |
+| E0 | 退水延长基线 `scen_free_200m_sv6h_recession`（53 帧、`sim_time=1123200`、`E_mass=5.3e-4` PASS） | **已验证** |
+| E0 | 100 m 敏感性基线 `scen_free_100m_dt2p5_sv6h_realdem`（21 帧、湿面积 271.07 km²、`E_mass=3.089e-4` PASS） | **已验证** |
+| E0 | Phase 0 诊断包 `diagnostics/jiulong/`（基线快照、斑块持续性 CSV、DEM 异常分类栅格、根因报告） | **已完成**：`diagnostics/jiulong/phase0-v1/` 已落 `baseline_snapshot.json`、`resolution_comparison.json`、`dem_artifact_map.tif`、`patch_persistence.csv`、`patch_frame_summary.csv`、`patch_tracks.csv`、`patch_summary.json`、`root_cause_report.md` 八件，`data/catalog/jiulong_improvement_manifest.json` 已落盘（含 `evidence_levels`、`inputs`、`code`、`artifacts`、`open_blockers`、`known_doc_discrepancies`） |
+| E1 | `display_qc` 只读展示质控层（A/B/C 三档预注册、逐帧审计、派生标记） | **已完成（产出）**：`outputs/display_qc/scen_free_200m_sv6h_recession/{A,B,C}/` 三档已产出（含 `meta.json`+`results/`+`audit/`），`data/catalog/jiulong_display_qc_audit.json` 已落盘；raw 前后哈希 `unchanged=true`，三档 `blocked_for_default_publish` 均为 `false`，派生目录内 `res.mass` 计数为 0，派生标记字段齐全。`tests/test_display_qc.py` 已落盘（52 项） |
+| E1 | 旧展示层 `scen_free_100m_dt2p5_sv6h_realdem_cleaned` 退役（写死 4/9 像元、写死 100 m 面积、声称「ARR 2019 规定」） | **已完成（口径）**：ADR-0010 决策项 8 判定不合规并明令不得作默认生产层；**该目录物理保留未删**，前端口径切换见 E5 |
+| E2 | 四层 DEM 契约（`DEM_RAW`/`DEM_REPAIRED`/`DEM_HYDRO`/`DEM_HYDRAULIC`） | **已完成（口径）**：ADR-0010 决策项 1 定版 |
+| E2 | 四层 DEM 实际生成与候选填洼 | **已完成（产出）**：`data/interim/jiulong/dem_layers/` 四层栅格 + `meta.json` + 差异栅格已落盘（`dem_raw` 改 0 像元、`dem_repaired` 改 154、`dem_hydro` 改 441、`dem_hydraulic` 改 0），`data/catalog/jiulong_dem_layers.json` 已落盘（`contract_version=jiulong_dem_layers_v1`，`substitution_rules.enforced=true`，`hydro_differs_from_hydraulic_cells=441`）。**但层契约里的 `not_done`/`blocked` 仍开放**：结构修复缺授权资料、垂直基准未闭合（G7）、全域最小坡度与固定刻蚀按计划禁止故未实现。`tests/test_dem_layers.py` 已存在 |
+| E3 | 降雨损失预注册敏感性矩阵 | **部分完成**：`data/catalog/jiulong_rainfall_loss_matrix.json` 已落盘，三档（A 零入渗 / B 标量入渗 / C 初损+持续损失）在跑任何算例前冻结并带 `preregistration_sha256`，`preregistered_before_any_run=true`；闭合域冒烟 `PASS`（蓄量=净雨逐位成立）。**真算例未跑**：`real_run.executed=false`，C 档在本构建无法实现（无初损参数），故为雨量序列预处理候选输入而非已跑模型 |
+| E4 | 排水/边界/退水审计 | **已完成（审计层）**：`data/catalog/jiulong_drainage_audit.json` 与 `scripts/stage3/audit_jiulong_drainage.py` 已落盘（`read_only=true`），`docs/jiulong_phase34_candidates.md` 已落盘。**物理治理未做**：排水网络只到线索级，D1–D5 五项授权资料全部缺失（阻塞），退水异常未消除 |
+| E5 | ADR-0010 定版 | **已完成**：`docs/adr/ADR-0010-久隆直接降雨模型治理规范.md`（8 条决策 + 后果 + 替代方案） |
+| E5 | `docs/README.md` ADR 索引更新至 0010 | **已完成** |
+| E5 | `execution_status.md` 本段更新 | **已完成** |
+| E5 | floodviz 接入（默认层与退役标注） | **已完成（默认层回退 raw）**：`flood_visualization/configs/cases/jiulong.yaml` 已按 ADR-0010 第 2/8 条改为 `default_run_id: scen_free_200m_sv6h`（200 m 生产基线 raw），`_cleaned` 已从 `runs` 移除并加退役注释（含实测改动量 −36.56%/−53.16%），100 m 标 `role: legacy` 并注明「不得升级为生产基线」，`quality.warnings` 已写「7 PASS / 3 FAIL-EXPLAINED，FAIL-EXPLAINED 不计通过」。**`role=derived` 的 `display_qc` 条目仍未写入**——按计划 §9.3 第 3 条，`display_qc` 是否作默认层需用户确认；配置内已留注释说明 |
+| E5 | 契约测试 `tests/test_governance_contract.py` | **已验证**：2026-10-31 21:34 全量实跑 **`152 passed`，0 failed，0 skipped**。此前 21:26 的 96 passed 为 Phase 1 独立测试落盘前的口径。两处测试缺陷已修（均属测试自身数据设置错误，非实现缺陷）：① `test_classify_cells_distinguishes_categories` 把海面标记混在数值行内，导致 `wet_cells` 期望值错算；② `test_classify_track_filter_requires_all_conditions` 未越过 A 档 `shallow_max_area_km2=0.16` 与 `deep_depth_m=0.30` 就断言「不再小/不再浅」，实际仍命中 `FILTER_SHALLOW` / `FILTER_SUBRESOLUTION` |
+
+### 0c-2 久隆逐 run 质量门状态（`data/catalog/mass_recheck_g15.json`，2026-10-31 21:15 重算）
+
+| run | 边界 | `E_mass` | 质量门状态 |
+|---|---|---|---|
+| `scen_free_200m` | FREE | 4.893e-4 | **PASS** |
+| `scen_free_200m_sv6h`（200 m 生产基线） | FREE | 4.893e-4 | **PASS** |
+| `scen_free_200m_dt2p5_b1` | FREE | 3.960e-5 | **PASS** |
+| `scen_free_200m_sv6h_recession`（退水延长） | FREE | 5.300e-4 | **PASS** |
+| `scen_free_100m_b1` | FREE | 2.242e-4 | **PASS** |
+| `scen_free_100m_dt2p5_sv6h_realdem`（100 m 敏感性） | FREE | 3.089e-4 | **PASS** |
+| `scen_z0_200m` | HFIX | 1.839e-4 | **PASS** |
+| `scen_z05_200m` | HFIX | 1.223e-2 | **FAIL-EXPLAINED**（G13 常湿激波/HFIX 有界质量增益；不计通过） |
+| `scen_z10_200m` | HFIX | 3.705e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
+| `scen_ztide_200m` | HVAR | 4.060e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
+
+久隆合计：**10 个有效 run → 7 PASS / 3 FAIL-EXPLAINED / 0 FAIL**。全表（三案例）：**39 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（共 42 run）。
+**不得表述为「质量门全量通过」**；`PASS` 只证明水量账目闭合，不证明预测正确。
+
+### 0c-3 本轮必须随成果标注的限制
+
+- 200 m 与 100 m 同一情景湿面积差 **+7.83 km²（+2.97%）**（271.07 vs 263.24 km²），站址邻域水深对分辨率敏感；200 m 能力上限未解除。
+- 旧展示层 `scen_free_100m_dt2p5_sv6h_realdem_cleaned` 在 `res.max` 上把湿面积从 271.07 压到 **171.97 km²（−36.56%）**、水量从 168.43 压到 **78.90 Mm³（−53.16%）**，且未登记体积变化率——属「滤波误删真实积水」风险的实际发生，已由 ADR-0010 决策项 8 退役。
+- 该目录含 `results/res.mass`（SHA-256 前 16 位 `6fc7b11c61aa6acc`，与源 run 逐位相同）且含 `run.log`，会被 `g15_mass_recheck.py` 的扫描条件计为独立 run。**已按 ADR-0010 第 8 条修复**：`g15_mass_recheck.py` 增加派生层判定（`meta.json` 的 `not_physical_recalculation`/`derived_from`，或存在 `clean_audit.json`/`display_qc_audit.json`），并把该目录登记进 `excluded_variants`（理由「展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数」）。2026-10-31 21:15 重算仍为 **39 PASS / 3 FAIL-EXPLAINED / 0 FAIL（42 run）**，久隆仍 10 个有效 run，计数不再需要人工排除。
+- 退水异常未消除：模型 09-10→09-17 湿面积 **+27.68 km² 不降反增**，S1 09-17 水体约 12.2 km²，方向相反（`jiulong_recession_s1.json` 判 `WEAK`）。无排水网络与 FREE 缓排是主因，不得以滤波掩盖。
+- `display_qc` 三档实测改动量（`jiulong_display_qc_audit.json`，源 run `scen_free_200m_sv6h_recession`）：`res.max` 面积/水量变化 A 档 −0.37%/−0.03%、B 档 −0.48%/−0.05%、C 档 −0.56%/−0.06%；单帧最大变化 A 1.43%/1.02%、B 2.49%/1.81%、C 3.06%/2.28%。三档均未触发预注册 10% 告警（`blocked_for_default_publish=false`）。**这组数字只说明展示层改动量可控，不证明模型正确，也不能当精度证据。**
+- 旧 4/9 像元规则在 200 m 网格上的实测后果（`legacy_pixel_rule_diagnostic`）：峰值帧删除 764 个斑块 / 1348 像元 / 53.92 km²（占该帧 20.17%），其中 205 个斑块在 90% 以上帧次持续存在——属模型长期维持的浅水像元，不是瞬时渲染噪点。
+- 久隆独立验证状态仍为 **`WEAK/未测`**：CSI、POD、FAR、NSE、R²、水深误差**未测**，不构成硬门。
+- 本节 §2 门禁矩阵「13.2 质量守恒」行仍记 36 PASS（2026-10-27 口径），与本节 39 PASS（2026-10-31 21:15 口径）不同源；以 `mass_recheck_g15.json` 为准。
+- 本节 §2 门禁矩阵「十四章测试」行仍记 42 passed（2026-10-27 口径）；2026-10-31 21:34 实测为 **`152 passed`，0 failed，0 skipped**，**全量测试通过**。
+- 截至 2026-10-31 21:34，Phase 0/1/2/3-4/5 的脚本与产物均已落盘，无「应落盘而未落盘」的交付物。本段所有状态判定基于该时点的文件存在性与实跑结果，不基于任何口头进度。
+
+### 0c-4 本轮明确未完成项（不得当作已完成）
+
+| 项 | 阻塞原因 | 需要 |
+|---|---|---|
+| 方案 A/B 分辨率决策的用户确认 | Phase 0 产出 `resolution_comparison.json` 的 `decision_input.status` 记「未冻结：方案 A/B 需用户确认后才能冻结展示阈值」；ADR-0010 只把方案 A 定为**默认工作口径** | 用户按计划 §9.3 第 1 条明确选择方案 A；确认前不冻结 A/B/C 具体阈值数值 |
+| Phase 0 输入 manifest | **已补齐**（`data/catalog/jiulong_improvement_manifest.json` 已落盘） | ~~无~~ |
+| Phase 1 单元测试 `tests/test_display_qc.py` | **已补齐**（52 项，覆盖 raw 哈希不变、派生标记、cellsize 换算、体积账目、`res.mass` 拒写） | ~~无~~ |
+| Phase 2 物理候选（新 run tag 的候选地形算例） | 未获物理重跑授权；`jiulong_dem_layers.json` 的 `blocked` 记「DEM_HYDRAULIC 结构修复缺授权资料」「负值来源闭合缺 G7」 | 用户批准后按 ADR-0010 决策项 1 与 §6 回滚规则执行 |
+| Phase 3 降雨损失真算例 | `real_run.executed=false`；C 档（初损+持续损失）在本构建无初损参数，只能作雨量序列预处理候选 | 用户授权后跑 A/B 档；C 档不得写成「已跑初损模型」 |
+| Phase 4 排水网络与边界治理 | 审计已完成，但物理治理未做：排水网络只到线索级，D1–D5 五项授权资料全部缺失（阻塞）；退水异常（+27.68 km²）无物理手段消除 | 业务部门提供排水/潮位/断面资料，或用户明确接受候选情景 |
+| 方案 B：100 m 或更细分辨率完整物理重跑 | **用户未批准** | 用户单独批准；批准前 100 m 结果不升级为生产基线 |
+| 前端默认层切换到 `display_qc` | 当前默认层已按 ADR-0010 回退到 200 m 生产基线 raw（`scen_free_200m_sv6h`）；`display_qc` 三档已产出但**未接入前端**，因为计划 §9.3 第 3 条要求用户确认后才可作默认层 | 用户确认是否允许 `display_qc` 作默认展示层（raw 保留科研诊断层）；确认后由发布工程加 `role=derived` 条目 |
+| 久隆独立验证（CSI/POD/FAR/NSE/R²/水深误差） | 无近洪峰观测、无连续水位/流量过程 | 授权观测资料；未取得前保持「未测」 |
+
 ## 1. 总判定
 
 已完成的是"三案例降级模式首轮情景 + 结果完整性修正（Phase A）+ Phase B0–B5 敏感性/结构/喀斯特补课 + Phase C 复现/退水验证/去混杂/定版 ADR/30 m 全域"，不是终稿全部阶段/门禁完成。原阶段 0 门禁未满足；阶段 6 未执行；贵港站区局部 5 m、区域—局部单向接口、宁明 25/12.5 m、久隆 12.5 m 未执行（用户决策推迟）。全部结论为情景级。
@@ -49,7 +120,7 @@
 | 13.3 水文/空间验证 | 无连续水位/流量过程；宁明时刻切片 CSI 0.357；贵港 S1 足迹 CSI 0.043；久隆退水 S1 WEAK | **未满足** |
 | 13.4 性能/复现/站区安全 | **三案例冻结重跑逐位一致（2026-10-27）**；run_manifest 模块部分接入；无站区业务阈值 | **部分（复现项已闭合）** |
 | 十四章测试 | **42 passed**（2026-10-27 复测；产品重生成后原 2 skip 已实跑） | **部分（覆盖仍有限）** |
-| 十六章 ADR | ADR-0001~0009（**0008 模型定版/桥涵限制、0009 宁明刻蚀停用/地形分层已补**）；DEM 校正/验证指标 ADR 仍可细化 | **部分** |
+| 十六章 ADR | ADR-0001~0010（**0008 模型定版/桥涵限制、0009 宁明刻蚀停用/地形分层已补、0010 久隆直接降雨模型治理规范已补**）；DEM 校正/验证指标 ADR 仍可细化 | **部分** |
 
 ## 3. 前轮已完成（Phase A/B 摘要，详见 git 历史/前版）
 
