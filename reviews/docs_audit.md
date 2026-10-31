@@ -159,43 +159,84 @@ skill 核心规则 2 要求「其他位置只写链接或摘要」。
 
 ---
 
-## 6. 建议的修复计划（待批准后执行）
+## 6. 修复执行结果（用户批准 P0–P3 后）
 
-| 优先级 | 动作 | 涉及文件 | 风险 |
+| 优先级 | 动作 | 状态 | 结果 |
 |---|---|---|---|
-| P0 | 统一质量门计数为 43/3/0（46 run），并明写权威来源为 `mass_recheck_g15.json` | `execution_status.md`、`ADR-0010`、`SPEC.md` | 低（纯事实更正） |
-| P0 | 历史快照类文档（`final_report.md`、`stage_summary_3cases.md`、`RUNBOOK.md`）的 36 PASS **加注「2026-10-27 历史口径，当前见 mass_recheck_g15.json」**，不改数字 | 同上 3 篇 | 低（保留历史，只加注） |
-| P1 | 根级 `AGENTS.md` 补 ADR-0010、`diagnostics/jiulong/`、`outputs/display_qc/`、治理脚本入口、`python -m pytest` 命令要点 | `AGENTS.md` | 低 |
-| P1 | `docs/README.md` 补 3 篇缺失文档索引 | `docs/README.md` | 低 |
-| P2 | 清理 `execution_status.md` 内部过时计数，改为链接到权威 JSON | `execution_status.md` | 低 |
-| P3 | （可选）27 篇文档补 frontmatter | 27 篇 | **中**（大量 diff，破坏既有体例） |
-| P3 | （可选）`optical_assets.md` 改写入库外链接 | 1 篇 | 低 |
+| P0 | 统一质量门计数为 43/3/0（46 run） | **已完成** | `execution_status.md`（:73/:80/:121 三处）、`ADR-0010`（:13/:157）、`SPEC.md`（:56）、`RUNBOOK.md`（:72）全部改为当前值并指向权威 JSON |
+| P0 | 历史快照加注不改数字 | **已完成** | `final_report.md`、`stage_summary_3cases.md` 保留 36 PASS，加注「2026-10-27 阶段快照，当前见 mass_recheck_g15.json」 |
+| P1 | 根级 `AGENTS.md` 补新增内容 | **已完成** | 补 ADR-0010、`diagnostics/jiulong/`、`outputs/display_qc/`、久隆治理基线计划、6 个治理脚本、3 个测试、质量门 SSOT 指针、`python -m pytest` 实测坑 |
+| P1 | `docs/README.md` 补索引 | **已完成** | 新增「久隆治理」分节（2 篇）与 `diagnostics/jiulong/` 指针；补质量门 SSOT 与久隆治理计划链接 |
+| P2 | 清理 `execution_status.md` 内部矛盾 | **已完成** | 删除「不同源」注记，改为正式约定「以 mass_recheck_g15.json 为准」 |
+| P3 | 27 篇文档补 frontmatter | **已完成** | 实际补 28 篇（含 `docs/README.md`）；`missing-frontmatter` warning 由 27 → **0** |
 
-**不建议做的**：
-- 不为消除 lint 误报而修改 `optical_assets.md` 链接或删改 ADR 引用。
-- 不批量补 frontmatter，除非用户明确要求。
+**未执行（有意）**：
+- 未修改 `optical_assets.md` 的两个入库外链接（lint 误报，文件真实存在）。
+- 未删改任何 ADR 引用（`duplicate-id` 误报）。
+- `placeholder` 1 个（`standalone/_launcher/README.md`）与 `missing-agent-context` 1 个（根级 AGENTS.md 实际存在）保留，均为误报。
+
+### 6.1 修复后 lint 复核
+
+```text
+改动前：documents=67, errors=11, warnings=29
+改动后：documents=67, errors=11, warnings=2
+  error  codes: broken-link 2（误报）, duplicate-id 9（误报）
+  warning codes: placeholder 1（误报）, missing-agent-context 1（误报）
+  frontmatter present: 28/67（docs/ 全部 28 篇已补；其余 39 篇为 data/catalog、flood_visualization 等）
+```
+
+### 6.2 回归验证
+
+| 检查 | 结果 |
+|---|---|
+| `uv --directory 2d_hydro_project run python -m pytest -q` | **152 passed** |
+| `floodviz pytest -m "not slow and not e2e"` | **253 passed** |
+| `floodviz inventory --config configs/default.yaml` | **总体：通过** |
+
+**结论**：文档改动未影响任何测试或发布流程。
 
 ---
 
 ## 7. 交付门声明
 
-**改动文件**：无（本次为只读审计）。
+**改动文件与目的**：
+
+| 文件 | 目的 |
+|---|---|
+| `AGENTS.md` | 补 ADR-0010、新增目录与脚本指针、质量门 SSOT、`python -m pytest` 实测坑 |
+| `2d_hydro_project/docs/execution_status.md` | 质量门计数 39→43；久隆 run 10→14；清理内部矛盾 |
+| `2d_hydro_project/docs/adr/ADR-0010-*.md` | 两处质量门计数 39→43 |
+| `2d_hydro_project/docs/final_report.md` | 加「历史快照」注记，数字不变 |
+| `2d_hydro_project/docs/stage_summary_3cases.md` | 加「历史快照」注记，数字不变 |
+| `2d_hydro_project/docs/RUNBOOK.md` | 质量门计数 36→43 |
+| `2d_hydro_project/docs/README.md` | 补 3 篇索引、新增「久隆治理」分节、质量门 SSOT 指针 |
+| `2d_hydro_project/flood_visualization/SPEC.md` | 质量门计数 36→43 |
+| `2d_hydro_project/docs/**/*.md`（28 篇） | 补 YAML frontmatter |
+| `reviews/add_frontmatter.py` | 幂等补 frontmatter 脚本（支持 --dry-run/--apply） |
+| `reviews/docs_audit.md` | 本审计报告 |
 
 **检查命令与结果**：
 
 ```text
-uv run --no-project --python 3.12 python <skill>/scripts/inventory_docs.py 2d_hydro_project
-  -> 67 文档盘点完成
+lint_docs.py 改动前 -> errors=11, warnings=29
+lint_docs.py 改动后 -> errors=11, warnings=2
+  （11 个 error 全部为已核实的工具误报；27 个 missing-frontmatter 已消除）
 
-uv run --no-project --python 3.12 python <skill>/scripts/lint_docs.py 2d_hydro_project \
-    --ignore models/ --ignore outputs/ --ignore .venv/
-  -> status=fail, documents=67, errors=11, warnings=29
-  -> error 分类：broken-link 2（误报）、duplicate-id 9（误报）
-  -> warning 分类：missing-frontmatter 27（既有约定）、placeholder 1（误报）、missing-agent-context 1（误报）
+uv --directory 2d_hydro_project run python -m pytest -q          -> 152 passed
+floodviz pytest -m "not slow and not e2e"                        -> 253 passed
+floodviz inventory --config configs/default.yaml                 -> 总体：通过
 ```
 
-**覆盖范围**：文档结构、链接可达性、ID 唯一性、frontmatter、索引完整性、质量门计数一致性、AGENTS.md 时效性。
+**覆盖范围**：文档结构、链接可达性、ID 唯一性、frontmatter 完整性、索引完整性、质量门计数一致性、AGENTS.md 时效性。
 
-**未覆盖**：文档陈述与代码/数据的事实正确性（除质量门计数外）；`flood_visualization/docs/` 7 篇的逐篇事实核对。
+**未执行的检查与未确认事实**：
+- 未做 `flood_visualization/docs/` 7 篇的逐篇事实核对（只做了结构与链接检查）。
+- 未确认 `final_report.md` 除质量门外的其他数字是否仍与代码一致。
+- 未确认 `optical_assets.md` 入库外链接是否需要改写（取决于文档是否对外发布）。
 
-**未做的高风险变更及原因**：未批量补 frontmatter（会产生 27 篇无价值 diff 且破坏 ADR 既有体例）；未改动历史报告的数字（保留历史快照是正确做法，只需加注）。
+**未做的高风险变更及原因**：
+- 未修改 `optical_assets.md` 的 2 个链接（lint 误报，文件真实存在；改动无收益）。
+- 未删改任何 ADR 引用（`duplicate-id` 误报）。
+- 未改动历史报告的数字（保留历史快照是正确做法，只需加注）。
+
+**不得把「Markdown 格式正确」写成「文档事实正确」。** 本次修复的是可核验的事实漂移（质量门计数）；文档陈述与代码的一致性只覆盖质量门一项。
