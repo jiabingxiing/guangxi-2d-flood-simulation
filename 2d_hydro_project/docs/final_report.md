@@ -136,3 +136,7 @@
 6. **ADR-0008 模型定版**：生产锁定 8.1.0（exe SHA-256 冻结）；禁止 bridge/orifice 型链接（B8b 未获独立验证），结构只用 DEM 加高 + weirfile；chan −0.181 m 系统偏差登记；不触发历史 run 重跑。
 7. **汇报可视化修订**：`make_viz.py` 六处旧口径（res.max 验证、事后阈值 0.30、+13.08 率定、1.68 m 站址、86%/CSI 0.39、"质量门全过"）按 ADR-0006 重制 fig1–6 与使用说明（GIF 几何未变未重制）。
 8. **质量门全表刷新**：36 PASS + 3 FAIL-EXPLAINED（HFIX/HVAR）+ 0 FAIL（`mass_recheck_g15.json`，含全部复现/延长/等宽 run）。
+
+> **口径时效**：本节为 2026-10-27 阶段成果快照，36 PASS 是当时口径。当前权威值见
+> `data/catalog/mass_recheck_g15.json`（2026-10-31 起为 43 PASS / 3 FAIL-EXPLAINED / 0 FAIL，46 run，
+> 因新增 4 个 100 m 重跑 run）。本文其余数字同样为历史快照，不作滚动更新。

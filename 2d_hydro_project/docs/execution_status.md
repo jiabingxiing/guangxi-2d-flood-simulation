@@ -70,20 +70,21 @@
 | `scen_z10_200m` | HFIX | 3.705e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
 | `scen_ztide_200m` | HVAR | 4.060e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
 
-久隆合计：**10 个有效 run → 7 PASS / 3 FAIL-EXPLAINED / 0 FAIL**。全表（三案例）：**39 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（共 42 run）。
+久隆合计：**14 个有效 run → 11 PASS / 3 FAIL-EXPLAINED / 0 FAIL**。全表（三案例）：**43 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（共 46 run）。
+（2026-10-31 新增 4 个 100 m 重跑 run 后由 39 PASS / 42 run 更新；权威值以 `data/catalog/mass_recheck_g15.json` 为准。）
 **不得表述为「质量门全量通过」**；`PASS` 只证明水量账目闭合，不证明预测正确。
 
 ### 0c-3 本轮必须随成果标注的限制
 
 - 200 m 与 100 m 同一情景湿面积差 **+7.83 km²（+2.97%）**（271.07 vs 263.24 km²），站址邻域水深对分辨率敏感；200 m 能力上限未解除。
 - 旧展示层 `scen_free_100m_dt2p5_sv6h_realdem_cleaned` 在 `res.max` 上把湿面积从 271.07 压到 **171.97 km²（−36.56%）**、水量从 168.43 压到 **78.90 Mm³（−53.16%）**，且未登记体积变化率——属「滤波误删真实积水」风险的实际发生，已由 ADR-0010 决策项 8 退役。
-- 该目录含 `results/res.mass`（SHA-256 前 16 位 `6fc7b11c61aa6acc`，与源 run 逐位相同）且含 `run.log`，会被 `g15_mass_recheck.py` 的扫描条件计为独立 run。**已按 ADR-0010 第 8 条修复**：`g15_mass_recheck.py` 增加派生层判定（`meta.json` 的 `not_physical_recalculation`/`derived_from`，或存在 `clean_audit.json`/`display_qc_audit.json`），并把该目录登记进 `excluded_variants`（理由「展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数」）。2026-10-31 21:15 重算仍为 **39 PASS / 3 FAIL-EXPLAINED / 0 FAIL（42 run）**，久隆仍 10 个有效 run，计数不再需要人工排除。
+- 该目录含 `results/res.mass`（SHA-256 前 16 位 `6fc7b11c61aa6acc`，与源 run 逐位相同）且含 `run.log`，会被 `g15_mass_recheck.py` 的扫描条件计为独立 run。**已按 ADR-0010 第 8 条修复**：`g15_mass_recheck.py` 增加派生层判定（`meta.json` 的 `not_physical_recalculation`/`derived_from`，或存在 `clean_audit.json`/`display_qc_audit.json`），并把该目录登记进 `excluded_variants`（理由「展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数」）。当前重算为 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run）**，久隆 14 个有效 run，计数不再需要人工排除。
 - 退水异常未消除：模型 09-10→09-17 湿面积 **+27.68 km² 不降反增**，S1 09-17 水体约 12.2 km²，方向相反（`jiulong_recession_s1.json` 判 `WEAK`）。无排水网络与 FREE 缓排是主因，不得以滤波掩盖。
 - `display_qc` 三档实测改动量（`jiulong_display_qc_audit.json`，源 run `scen_free_200m_sv6h_recession`）：`res.max` 面积/水量变化 A 档 −0.37%/−0.03%、B 档 −0.48%/−0.05%、C 档 −0.56%/−0.06%；单帧最大变化 A 1.43%/1.02%、B 2.49%/1.81%、C 3.06%/2.28%。三档均未触发预注册 10% 告警（`blocked_for_default_publish=false`）。**这组数字只说明展示层改动量可控，不证明模型正确，也不能当精度证据。**
 - 旧 4/9 像元规则在 200 m 网格上的实测后果（`legacy_pixel_rule_diagnostic`）：峰值帧删除 764 个斑块 / 1348 像元 / 53.92 km²（占该帧 20.17%），其中 205 个斑块在 90% 以上帧次持续存在——属模型长期维持的浅水像元，不是瞬时渲染噪点。
 - 久隆独立验证状态仍为 **`WEAK/未测`**：CSI、POD、FAR、NSE、R²、水深误差**未测**，不构成硬门。
-- 本节 §2 门禁矩阵「13.2 质量守恒」行仍记 36 PASS（2026-10-27 口径），与本节 39 PASS（2026-10-31 21:15 口径）不同源；以 `mass_recheck_g15.json` 为准。
-- 本节 §2 门禁矩阵「十四章测试」行仍记 42 passed（2026-10-27 口径）；2026-10-31 21:34 实测为 **`152 passed`，0 failed，0 skipped**，**全量测试通过**。
+- 本节 §2 门禁矩阵「13.2 质量守恒」行已同步为当前口径（43 PASS / 46 run）；**权威值以 `data/catalog/mass_recheck_g15.json` 为准**，本节任何数字与之冲突时以该 JSON 为正确。
+- 本节 §2 门禁矩阵「十四章测试」行已同步为当前口径；2026-10-31 实测为 **`152 passed`，0 failed，0 skipped**，**全量测试通过**。
 - 截至 2026-10-31 21:34，Phase 0/1/2/3-4/5 的脚本与产物均已落盘，无「应落盘而未落盘」的交付物。本段所有状态判定基于该时点的文件存在性与实跑结果，不基于任何口头进度。
 
 ### 0c-4 本轮明确未完成项（不得当作已完成）
@@ -118,7 +119,7 @@
 | 阶段 5 贵港区域 30 m + 局部 5 m + 单向接口 | 200 m 走廊基线 + **30 m 全域已完成（493.36 km²）** + 等宽 100 m 对照；站区局部 5 m/接口未执行 | **部分（区域 30 m 已达成，局部降级）** |
 | 阶段 6 业务化 | run_case/RUNBOOK 雏形（入口缺陷已修）；无在线源/滚动/容错/SLA | **未执行** |
 | 13.1 数据门禁 | input_manifest 已扩至贵港/S1/GF-3/配置/ERA5 延长段；许可/G7/G12 仍开放 | **部分** |
-| 13.2 质量守恒 | **36 PASS / 3 FAIL-EXPLAINED（z05/z10/ztide）/ 0 FAIL**（含复现/延长/等宽/30 m run） | **部分（有明示不合格）** |
+| 13.2 质量守恒 | **43 PASS / 3 FAIL-EXPLAINED（z05/z10/ztide）/ 0 FAIL**（46 run，含复现/延长/等宽/30 m/100 m 重跑 run） | **部分（有明示不合格）** |
 | 13.3 水文/空间验证 | 无连续水位/流量过程；宁明时刻切片 CSI 0.357；贵港 S1 足迹 CSI 0.043；久隆退水 S1 WEAK | **未满足** |
 | 13.4 性能/复现/站区安全 | **三案例冻结重跑逐位一致（2026-10-27）**；run_manifest 模块部分接入；无站区业务阈值 | **部分（复现项已闭合）** |
 | 十四章测试 | **42 passed**（2026-10-27 复测；产品重生成后原 2 skip 已实跑） | **部分（覆盖仍有限）** |

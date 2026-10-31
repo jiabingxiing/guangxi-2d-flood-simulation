@@ -69,7 +69,7 @@ uv run python scripts/stage3/grid_sensitivity.py --case guigang --res 30 --tag b
 - **E_mass（终稿 13.2）**= |Ve−V0−Vrain−(∫Qin−∫Qout)dt| / max(V0+Vrain+∫Qin,1) ≤ 1e-3；
   工具 `scripts/stage3/g15_mass_recheck.py`（自动扫描全部有效 run）。
 - HFIX/HVAR 海（潮）边界情景超 1e-3 记 **FAIL-EXPLAINED**（G13 常湿激波质量增益），**不计入通过数**；不再使用 N/A-HFIX。
-- 当前全表：36 PASS、3 FAIL-EXPLAINED（久隆 z05/z10/ztide）、0 FAIL（2026-10-27，含复现/延长/等宽 run）。
+- 当前全表：**43 PASS、3 FAIL-EXPLAINED（久隆 z05/z10/ztide）、0 FAIL**（46 run，含复现/延长/等宽/30 m/100 m 重跑 run）。权威值以 `data/catalog/mass_recheck_g15.json` 为准。
 - 运行秒退（exit −1）优先查 run.log：多为时刻序列非递增（雨/潮写入已加断言防护）。
 
 ## 3. 已固化的三个坑（勿回退）

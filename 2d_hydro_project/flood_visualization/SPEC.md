@@ -53,7 +53,7 @@ uv --directory './2d_hydro_project/flood_visualization' run python -m pytest -q
 模型时间：`sim_seconds = source_sequence * save_interval_s`，但实现必须逐帧写显式 `sim_seconds`；不得用文件时间/目录名。
 每帧面积：原生网格有效像元（非 NaN、非海域 mask）`depth > threshold` 的像元数 × 格面积。
 
-质量门：读父项目 `data/catalog/mass_recheck_g15.json`（GBK/UTF-8 容错），按 run 路径映射 `gate_1e-3`、`e_mass_132`；无记录 → `unrecorded`，UI 不得显示 PASS。总体现状 36 PASS / 3 FAIL-EXPLAINED / 0 FAIL，但页面只展示所选 run 的状态。
+质量门：读父项目 `data/catalog/mass_recheck_g15.json`（GBK/UTF-8 容错），按 run 路径映射 `gate_1e-3`、`e_mass_132`；无记录 → `unrecorded`，UI 不得显示 PASS。总体现状 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（46 run，以该 JSON 为权威），但页面只展示所选 run 的状态。
 
 ## 3. 发布包目录契约（`outputs/web_bundle/<bundle_id>/`）
 

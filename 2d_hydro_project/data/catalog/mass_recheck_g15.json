@@ -1,5 +1,5 @@
 {
-  "computed_utc": "2026-10-31T15:01:39.428959+00:00",
+  "computed_utc": "2026-10-31T15:04:25.469369+00:00",
   "formula": "E_mass=|Ve-V0-Vrain-(∫Qin-∫Qout)|/max(V0+Vrain+∫Qin,1)",
   "policy": "PASS<=1e-3；HFIX/HVAR 超限记 FAIL-EXPLAINED 且不计通过；其它超限 FAIL；不再用 N/A",
   "counts": {

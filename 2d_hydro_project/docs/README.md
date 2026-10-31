@@ -1,6 +1,7 @@
 # docs/ 索引
 
 执行状态与剩余项的事实 SSOT 是 `execution_status.md`，先读它；其余为阶段报告与决策记录。
+质量门计数的事实 SSOT 是 `../data/catalog/mass_recheck_g15.json`；任何文档的计数与它冲突时以它为准。
 
 ## 状态与总览
 
@@ -11,6 +12,12 @@
 ## 操作手册
 
 - `RUNBOOK.md` —— 二维水动力情景回算操作手册（降级模式，阶段 6 雏形）
+
+## 久隆治理（Phase 0–5，ADR-0010 口径）
+
+- `jiulong_100m_rerun.md` —— 100 m 完整物理重跑（5 天 / 13 天窗 × 四边 FREE / 三边闭合；含可复现性与分辨率对退水异常的影响）
+- `jiulong_phase34_candidates.md` —— 降雨损失预注册矩阵与排水/边界/退水审计；D1–D5 授权阻塞项
+- `adr/ADR-0010-久隆直接降雨模型治理规范.md` —— 治理口径定版（四层 DEM 契约、分辨率口径、阈值预注册、派生标记、质量门、回滚、禁止表述）
 
 ## 阶段报告
 
@@ -32,7 +39,10 @@
 
 ## 相关文档（不在本目录）
 
+- 久隆诊断包：`../diagnostics/jiulong/`（Phase 0：`root_cause_report.md`、`baseline_snapshot.json`、`patch_persistence.csv`、`dem_artifact_map.tif`、`resolution_comparison.json`）
+- 质量门全表：`../data/catalog/mass_recheck_g15.json`（权威计数）
 - 数据元数据与清单：`../data/catalog/`（CRS 基线、事件候选、可达性、合规、缺口风险、硬件）
 - 发布子工程：`../flood_visualization/`（其 `AGENTS.md`、`docs/`、`SPEC.md`）
 - 计划基线：`../../plans/广西久隆_宁明_贵港_二维水动力模拟技术路线与工程落地方案_终稿.md`
+- 久隆治理计划：`../../plans/久隆水动力推演效果改进实施计划_从伪影诊断到全链条治理.md`
 - 汇报图使用说明：`../outputs/viz/汇报图使用说明.md`
