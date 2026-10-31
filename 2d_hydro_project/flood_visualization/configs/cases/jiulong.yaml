@@ -4,34 +4,31 @@ name: 久隆
 event_id: "2024-09-yagi"
 event_name: "台风摩羯残余环流（2024-09）"
 scenario_role: "研究性情景（雨驱动 + 常数潮位带；非独立水动力验证）"
-subtitle: "100 m 真实DEM情景 · 21 帧 · 6 h/帧"
+subtitle: "200 m 生产基线 · 21 帧 · 6 h/帧"
 model_bbox: [108.545265, 21.92, 108.902171, 22.199335]   # WGS84 西南东北（由模型网格四角变换得到）
 crs: "EPSG:32649"
 time_zone: "Asia/Shanghai"
 time_origin: "2024-09-05T00:00:00+08:00"
 origin_status: relative_only_candidate
 origin_note: "旧 meta 无规范 t0；该起点来自父项目脚本构造（2024-09-05 00:00 北京时间），仅作显示用；核对冻结雨量/边界/代码哈希前不写入正式时间基准"
-default_run_id: scen_free_100m_dt2p5_sv6h_realdem
+default_run_id: scen_free_200m_sv6h
 
 sites:
   - {name: "久隆500kV站", lon: 108.7161, lat: 22.0638, label: "站址（精确坐标待业务确认）"}
 
+# 分层口径（ADR-0010）：
+#   raw 层   = 模型原始输出，可一键切回，是唯一有物理意义的层；
+#   display_qc 层 = 只读展示派生层，带 not_physical_recalculation=true，不具物理意义。
+# 默认层按 ADR-0010 第 2 条取 200 m 生产基线 raw（方案 A）。
+# display_qc 待用户确认（计划 §9.3 第 3 条）后才会成为默认层。
 runs:
-  - run_id: scen_free_100m_dt2p5_sv6h_realdem
-    label: "默认 100 m 真实DEM情景（T+0–120 h）"
-    role: default
-    source: "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem"
-    save_interval_s: 21600
-    simulation_duration_s: 432000
-    notes: "100 m 网格自由出流；雨驱动；严格采用真实DEM（海面连通像元钳0，内陆无效负值8邻域填补，未施加任何河道下切）"
   - run_id: scen_free_200m_sv6h
-    label: "200 m 历史对照（T+0–120 h）"
-    role: legacy
+    label: "200 m 生产基线（T+0–120 h，默认）"
+    role: default
     source: "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h"
     save_interval_s: 21600
     simulation_duration_s: 432000
-    optional: true
-    notes: "自由出流边界；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）"
+    notes: "200 m 网格自由出流；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）。ADR-0010 方案 A 生产治理基线；湿面积 263.24 km²"
   - run_id: scen_free_200m_sv6h_recession
     label: "扩展退水情景（T+0–312 h）"
     role: scenario
@@ -39,10 +36,24 @@ runs:
     save_interval_s: 21600
     simulation_duration_s: 1123200
     optional: true
-    notes: "与默认情景在 T+120 h 前逐位一致；退水期验证为 WEAK，模型面积不降反增（无排水网限制）"
+    notes: "与默认情景在 T+120 h 前逐位一致；退水期验证为 WEAK，模型面积不降反增（无排水网限制）。display_qc 派生层的源 run"
+  - run_id: scen_free_100m_dt2p5_sv6h_realdem
+    label: "100 m 敏感性对照（科研诊断，非生产）"
+    role: legacy
+    source: "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem"
+    save_interval_s: 21600
+    simulation_duration_s: 432000
+    optional: true
+    notes: "100 m 网格自由出流；雨驱动；严格采用真实DEM。ADR-0010 第 2 条：仅作敏感性对照，不得升级为生产基线；湿面积 271.07 km²"
+
+# 不合规展示层已退役（ADR-0010 第 8 条），不再列入 runs：
+#   scen_free_100m_dt2p5_sv6h_realdem_cleaned
+#   退役理由：写死 4/9 像元阈值；写死 100 m 单元面积；声称"ARR 2019 规定"（未核验）。
+#   实测改动量：res.max 湿面积 −36.56%（271.07→171.97 km²）、水量 −53.16%（168.43→78.90 Mm³）。
+#   目录保留为历史证据，但不得作为默认层或对外成果展示。
 
 layers:
-  dem: {status: ready, label: "DEM 高程", kind: raster, summary: "父项目 12.5 m DEM 重采样到 100 m 模型网格（海面钳0+内陆空洞填补，无人工河槽刻蚀）", note: "原始地貌完好保持，垂直基准未闭合"}
+  dem: {status: ready, label: "DEM 高程", kind: raster, summary: "父项目 12.5 m DEM 重采样到 200 m 模型网格（海面钳0+内陆空洞填补，无人工河槽刻蚀）", note: "原始地貌完好保持，垂直基准未闭合（G7）"}
   flood: {status: ready, label: "模型水深（逐帧）", kind: frame}
   max: {status: ready, label: "全程最大水深包络", kind: max_envelope}
   optical:
@@ -65,20 +76,23 @@ layers:
 quality:
   mass_gate: PASS
   e_mass: 0.0004893
-  validation_status: "降级模式情景级；无近洪峰观测，无连续水位/流量过程"
+  mass_gate_note: "PASS 仅表示水量账目闭合，不表示预测正确（ADR-0006 / ADR-0010 第 5 条）"
+  validation_status: "降级模式情景级；无近洪峰观测，无连续水位/流量过程；独立验证 WEAK/未测"
   vertical_datum_status: "未闭合（G7）"
   warnings:
     - "情景级成果，不得用于业务告警或资产安全判据"
     - "下游边界为常数位面情景带（free/z0/z05/z10），天文潮时变未引入"
     - "河槽未刻蚀，退水期面积不降反增（无排水网限制）"
+    - "久隆 10 个有效 run 中 7 PASS / 3 FAIL-EXPLAINED；FAIL-EXPLAINED 不计通过，不得表述为全量通过"
 
 sources:
   model: "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)"
-  run_path_hint: "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem"
+  run_path_hint: "2d_hydro_project/outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h"
   evidence:
     - "plans/visualization_research/frame_audit.json"
     - "2d_hydro_project/docs/execution_status.md"
     - "2d_hydro_project/data/catalog/mass_recheck_g15.json"
+    - "2d_hydro_project/docs/adr/ADR-0010-久隆直接降雨模型治理规范.md"
 
 terrain:
   source_dem: "data/interim/jiulong/dem_12p5m_32649.tif"

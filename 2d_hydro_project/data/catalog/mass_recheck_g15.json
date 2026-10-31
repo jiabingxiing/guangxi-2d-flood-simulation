@@ -1,5 +1,5 @@
 {
-  "computed_utc": "2026-10-28T16:09:54.364680+00:00",
+  "computed_utc": "2026-10-31T13:38:34.410264+00:00",
   "formula": "E_mass=|Ve-V0-Vrain-(∫Qin-∫Qout)|/max(V0+Vrain+∫Qin,1)",
   "policy": "PASS<=1e-3；HFIX/HVAR 超限记 FAIL-EXPLAINED 且不计通过；其它超限 FAIL；不再用 N/A",
   "counts": {
@@ -8,6 +8,7 @@
     "FAIL": 0
   },
   "excluded_variants": {
+    "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem_cleaned": "展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数",
     "outputs/jiulong/2024-09-yagi/scen_free_200m_v1invalid": "已废弃的 v1 DEM/河槽变体，不参与质量门",
     "outputs/jiulong/2024-09-yagi/scen_z05_200m_v1invalid": "已废弃的 v1 DEM/河槽变体，不参与质量门",
     "outputs/jiulong/2024-09-yagi/scen_z0_200m_v1invalid": "已废弃的 v1 DEM/河槽变体，不参与质量门",

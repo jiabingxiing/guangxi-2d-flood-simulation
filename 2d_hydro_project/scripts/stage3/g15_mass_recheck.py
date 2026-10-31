@@ -19,6 +19,23 @@ PROJ = Path(__file__).resolve().parents[2]
 OUT = PROJ / "data" / "catalog" / "mass_recheck_g15.json"
 CASE_ROOTS = [PROJ / "outputs" / "ningming", PROJ / "outputs" / "jiulong", PROJ / "outputs" / "guigang"]
 EXCLUDE_MARKERS = ("_v1invalid", "_v1_polyfitbed")
+# ADR-0010 第 8 条：展示派生层不是独立模型 run。
+# 它们复制了源 run 的 res.mass 与 run.log，若不排除会被计为独立 run 并污染 PASS 计数。
+# 判定用 meta.json 的派生标记，不用目录名猜测。
+DERIVED_MARKER_FILES = ("clean_audit.json", "display_qc_audit.json")
+
+
+def is_derived_layer(run_dir: Path) -> bool:
+    """展示派生层判定：meta.json 声明 not_physical_recalculation，或存在派生审计文件。"""
+    meta = run_dir / "meta.json"
+    if meta.is_file():
+        try:
+            doc = json.loads(meta.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            doc = {}
+        if doc.get("not_physical_recalculation") is True or doc.get("derived_from"):
+            return True
+    return any((run_dir / name).is_file() for name in DERIVED_MARKER_FILES)
 
 
 def e_mass(res_dir: Path) -> dict:
@@ -80,6 +97,12 @@ def main() -> None:
             rel = run_dir.relative_to(PROJ).as_posix()
             if any(m in rel for m in EXCLUDE_MARKERS):
                 excluded[rel] = "已废弃的 v1 DEM/河槽变体，不参与质量门"
+                continue
+            if is_derived_layer(run_dir):
+                excluded[rel] = (
+                    "展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，"
+                    "按 ADR-0010 第 8 条不参与质量门计数"
+                )
                 continue
             kind = bc_kind(run_dir)
             rec = e_mass(run_dir)
