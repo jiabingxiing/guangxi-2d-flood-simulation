@@ -1,0 +1,79 @@
+{
+  "generated_utc": "2026-10-31T14:59:22+00:00",
+  "run_tag": "e100m-v1",
+  "authorization": "用户 2026-10-31 批准 100 m 完整物理重跑",
+  "runs": {
+    "r5d_allfree": {
+      "status": "completed",
+      "started_utc": "2026-10-31T13:56:10+00:00",
+      "target_dir": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_r5d_allfree",
+      "prep": {
+        "exit": 0,
+        "tail": "prep[free] 完成：S1水 1749 格、海 97 格、填充 32467 格、残留 0，南缘低列 None\n"
+      },
+      "run": {
+        "exit": 0,
+        "tail": "{\"exit\": 0, \"wall_s\": 558.4, \"peak_rss_mb\": 21.9}\n"
+      },
+      "verify": {
+        "exit": 0,
+        "tail": "{\"scenario\": \"free\", \"wet_area_km2\": 271.07, \"anchor\": \"久隆镇/500kV站\", \"anchor_max_depth_m\": 0.51, \"anchor_depth_center_m\": 0.37, \"anchor_depth_r2_m\": 0.512, \"anchor_depth_r5_m\": 1.034, \"r2_max_offset_cells\": [0, 2], \"r5_max_offset_cells\": [5, 3], \"r5_distance_km\": 0.58, \"radius_note\": \"主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深\", \"final_vol_m3\": 164711509.6, \"qout_final\": 16.039, \"e_mass_132\": 0.0003089, \"utc\": \"2026-10-31T14:05:34.294368+00:00\"}\n"
+      },
+      "wall_s": 564.0
+    },
+    "r5d_southonly": {
+      "status": "completed",
+      "started_utc": "2026-10-31T14:05:34+00:00",
+      "target_dir": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+      "prep": {
+        "exit": 0,
+        "tail": "prep[free] 完成：S1水 1749 格、海 97 格、填充 32467 格、残留 0，南缘低列 None\n"
+      },
+      "run": {
+        "exit": 0,
+        "tail": "{\"exit\": 0, \"wall_s\": 568.2, \"peak_rss_mb\": 22.0}\n"
+      },
+      "verify": {
+        "exit": 0,
+        "tail": "{\"scenario\": \"free\", \"wet_area_km2\": 274.66, \"anchor\": \"久隆镇/500kV站\", \"anchor_max_depth_m\": 0.51, \"anchor_depth_center_m\": 0.37, \"anchor_depth_r2_m\": 0.512, \"anchor_depth_r5_m\": 1.033, \"r2_max_offset_cells\": [0, 2], \"r5_max_offset_cells\": [5, 3], \"r5_distance_km\": 0.58, \"radius_note\": \"主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深\", \"final_vol_m3\": 168723984.2, \"qout_final\": 14.034, \"e_mass_132\": 7.877e-06, \"utc\": \"2026-10-31T14:15:08.497080+00:00\"}\n"
+      },
+      "wall_s": 574.2
+    },
+    "r13d_allfree": {
+      "status": "completed",
+      "started_utc": "2026-10-31T14:15:08+00:00",
+      "target_dir": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_r13d_allfree",
+      "prep": {
+        "exit": 0,
+        "tail": "prep[free] 完成：S1水 1749 格、海 97 格、填充 32467 格、残留 0，南缘低列 None\n"
+      },
+      "run": {
+        "exit": 0,
+        "tail": "{\"exit\": 0, \"wall_s\": 1403.2, \"peak_rss_mb\": 22.0}\n"
+      },
+      "verify": {
+        "exit": 0,
+        "tail": "{\"scenario\": \"free\", \"wet_area_km2\": 309.9, \"anchor\": \"久隆镇/500kV站\", \"anchor_max_depth_m\": 0.57, \"anchor_depth_center_m\": 0.429, \"anchor_depth_r2_m\": 0.571, \"anchor_depth_r5_m\": 1.176, \"r2_max_offset_cells\": [0, 2], \"r5_max_offset_cells\": [5, 3], \"r5_distance_km\": 0.58, \"radius_note\": \"主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深\", \"final_vol_m3\": 246876968.7, \"qout_final\": 12.317, \"e_mass_132\": 0.0003388, \"utc\": \"2026-10-31T14:38:37.972875+00:00\"}\n"
+      },
+      "wall_s": 1409.4
+    },
+    "r13d_southonly": {
+      "status": "completed",
+      "started_utc": "2026-10-31T14:38:38+00:00",
+      "target_dir": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+      "prep": {
+        "exit": 0,
+        "tail": "prep[free] 完成：S1水 1749 格、海 97 格、填充 32467 格、残留 0，南缘低列 None\n"
+      },
+      "run": {
+        "exit": 0,
+        "tail": "{\"exit\": 0, \"wall_s\": 1239.2, \"peak_rss_mb\": 21.9}\n"
+      },
+      "verify": {
+        "exit": 0,
+        "tail": "{\"scenario\": \"free\", \"wet_area_km2\": 314.74, \"anchor\": \"久隆镇/500kV站\", \"anchor_max_depth_m\": 0.57, \"anchor_depth_center_m\": 0.429, \"anchor_depth_r2_m\": 0.571, \"anchor_depth_r5_m\": 1.176, \"r2_max_offset_cells\": [0, 2], \"r5_max_offset_cells\": [5, 3], \"r5_distance_km\": 0.58, \"radius_note\": \"主口径=±2格（约400m见方，与产品包一致）；±5格值仅作邻域参考，不得称站址点水深\", \"final_vol_m3\": 254672636.4, \"qout_final\": 10.944, \"e_mass_132\": 1.494e-05, \"utc\": \"2026-10-31T14:59:22.496590+00:00\"}\n"
+      },
+      "wall_s": 1244.5
+    }
+  }
+}
