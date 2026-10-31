@@ -742,6 +742,7 @@ def process_param_set(
     res_max: np.ndarray,
     dry_run: bool,
     source_rel: str,
+    source_dir: Path,
     source_hashes: dict[str, Any],
     run_tag: str | None,
 ) -> dict[str, Any]:
@@ -1033,6 +1034,20 @@ def process_param_set(
 
     if not dry_run:
         write_json(out_dir / "meta.json", meta)
+        # 派生层必须自带 sea_mask.npy：floodviz 的 read_sea_mask 只读 run 目录下的
+        # sea_mask.npy，缺失时返回 None，海域像元就会混进淹没统计。
+        # 从源 run 复制（只读复制，不改源）；源 run 路径由 source_dir 给出。
+        source_sea = Path(source_dir) / "sea_mask.npy"
+        if source_sea.is_file():
+            np.save(out_dir / "sea_mask.npy", np.load(source_sea))
+            meta["sea_mask_copied_from"] = f"{source_rel}/sea_mask.npy"
+        else:
+            meta["sea_mask_copied_from"] = None
+            meta["sea_mask_missing_note"] = (
+                "源 run 无 sea_mask.npy；本派生层不含海域掩膜，"
+                "下游统计不得声称已剔除海域像元"
+            )
+        write_json(out_dir / "meta.json", meta)
         _write_frame_csv(out_dir / "audit" / f"frame_audit_{set_id}.csv", frame_records)
         write_json(out_dir / "audit" / f"track_verdicts_{set_id}.json", {
             "param_set_id": set_id,
@@ -1232,6 +1247,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             res_max=res_max,
             dry_run=bool(args.dry_run),
             source_rel=source_rel,
+            source_dir=run_dir,
             source_hashes=before,
             run_tag=args.run_tag,
         )

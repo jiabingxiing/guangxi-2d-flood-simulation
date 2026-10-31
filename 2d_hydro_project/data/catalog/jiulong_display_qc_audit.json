@@ -1,6 +1,6 @@
 {
   "script": "scripts/stage6/clean_jiulong_display.py",
-  "generated_utc": "2026-10-31T13:27:40+00:00",
+  "generated_utc": "2026-10-31T13:58:45+00:00",
   "run_tag": "display-qc-v1",
   "dry_run": false,
   "not_physical_recalculation": true,
@@ -1726,7 +1726,7 @@
         "res_mass_copied": false,
         "tool": "scripts/stage6/clean_jiulong_display.py",
         "run_tag": "display-qc-v1",
-        "generated_utc": "2026-10-31T13:27:21+00:00",
+        "generated_utc": "2026-10-31T13:58:23+00:00",
         "caveats": [
           "展示派生层，不是物理重算，不得用于业务告警。",
           "被过滤像元水深置 0 仅为展示与统计口径处理；源 run 文件逐字节未改动。",
@@ -1742,7 +1742,8 @@
           "max_area_change_pct": 1.4295,
           "max_volume_change_pct": 1.0151
         },
-        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）"
+        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）",
+        "sea_mask_copied_from": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/sea_mask.npy"
       }
     },
     "B": {
@@ -3398,7 +3399,7 @@
         "res_mass_copied": false,
         "tool": "scripts/stage6/clean_jiulong_display.py",
         "run_tag": "display-qc-v1",
-        "generated_utc": "2026-10-31T13:27:31+00:00",
+        "generated_utc": "2026-10-31T13:58:34+00:00",
         "caveats": [
           "展示派生层，不是物理重算，不得用于业务告警。",
           "被过滤像元水深置 0 仅为展示与统计口径处理；源 run 文件逐字节未改动。",
@@ -3414,7 +3415,8 @@
           "max_area_change_pct": 2.4934,
           "max_volume_change_pct": 1.8089
         },
-        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）"
+        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）",
+        "sea_mask_copied_from": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/sea_mask.npy"
       }
     },
     "C": {
@@ -5082,7 +5084,7 @@
         "res_mass_copied": false,
         "tool": "scripts/stage6/clean_jiulong_display.py",
         "run_tag": "display-qc-v1",
-        "generated_utc": "2026-10-31T13:27:40+00:00",
+        "generated_utc": "2026-10-31T13:58:45+00:00",
         "caveats": [
           "展示派生层，不是物理重算，不得用于业务告警。",
           "被过滤像元水深置 0 仅为展示与统计口径处理；源 run 文件逐字节未改动。",
@@ -5098,7 +5100,8 @@
           "max_area_change_pct": 3.0585,
           "max_volume_change_pct": 2.2782
         },
-        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）"
+        "rollback": "删除本派生目录即回退；raw run 未被修改（计划 §9.2）",
+        "sea_mask_copied_from": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/sea_mask.npy"
       }
     }
   },
@@ -5241,19 +5244,19 @@
   "log_steps": [
     {
       "name": "source_hash_before",
-      "utc": "2026-10-31T13:27:03+00:00",
+      "utc": "2026-10-31T13:58:02+00:00",
       "frame_count": 53,
       "res_max_sha256": "c725505d25119f39149164fab5f71089a34bd40987b7b00221f3eb7e59370de1"
     },
     {
       "name": "raw_summaries",
-      "utc": "2026-10-31T13:27:11+00:00",
+      "utc": "2026-10-31T13:58:12+00:00",
       "frame_count": 53,
       "peak_seq": 49
     },
     {
       "name": "track_context",
-      "utc": "2026-10-31T13:27:12+00:00",
+      "utc": "2026-10-31T13:58:13+00:00",
       "tracks": 1689,
       "peak_seq": 49,
       "main_body_cells": 5324,
@@ -5263,13 +5266,13 @@
     },
     {
       "name": "legacy_pixel_rule_diagnostic",
-      "utc": "2026-10-31T13:27:12+00:00",
+      "utc": "2026-10-31T13:58:13+00:00",
       "peak_frame_drop_area_pct": 20.171,
       "peak_frame_drop_tracks_wet_in_90pct": 205
     },
     {
       "name": "param_set_A",
-      "utc": "2026-10-31T13:27:21+00:00",
+      "utc": "2026-10-31T13:58:24+00:00",
       "param_hash": "da55cbcec60191d65230e574d9ca62a7bb31fb143c8a5ac3f55340aaba150ca9",
       "verdict_counts": {
         "exempt": 769,
@@ -5282,7 +5285,7 @@
     },
     {
       "name": "param_set_B",
-      "utc": "2026-10-31T13:27:31+00:00",
+      "utc": "2026-10-31T13:58:34+00:00",
       "param_hash": "e6b5447f681c339d716f95c8fd4f91995f4f1938f7600d0181e527564bc06cfc",
       "verdict_counts": {
         "exempt": 768,
@@ -5295,7 +5298,7 @@
     },
     {
       "name": "param_set_C",
-      "utc": "2026-10-31T13:27:40+00:00",
+      "utc": "2026-10-31T13:58:45+00:00",
       "param_hash": "e47100206e7f264c95a94be86b5e1c7ee52b82ff1452e854862219a27e326e88",
       "verdict_counts": {
         "exempt": 707,
@@ -5308,7 +5311,7 @@
     },
     {
       "name": "source_hash_after",
-      "utc": "2026-10-31T13:27:40+00:00",
+      "utc": "2026-10-31T13:58:45+00:00",
       "unchanged": true
     }
   ],

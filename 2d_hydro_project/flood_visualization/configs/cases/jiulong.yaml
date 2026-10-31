@@ -45,6 +45,30 @@ runs:
     simulation_duration_s: 432000
     optional: true
     notes: "100 m 网格自由出流；雨驱动；严格采用真实DEM。ADR-0010 第 2 条：仅作敏感性对照，不得升级为生产基线；湿面积 271.07 km²"
+  - run_id: scen_free_200m_sv6h_recession__display_qc_A
+    label: "展示质控层 A 档（保守，只清亚网格碎斑）"
+    role: derived
+    source: "outputs/display_qc/scen_free_200m_sv6h_recession/A"
+    save_interval_s: 21600
+    simulation_duration_s: 1123200
+    optional: true
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true，不是物理重算。源 run scen_free_200m_sv6h_recession。A 档为最保守档：min_patch_area 0.08 km²、persistence 36 h、shallow 0.10 m。实测 res.max 面积 −0.37% / 水量 −0.03%，单帧最大 1.43%/1.02%，未触发 10% 告警。仅供展示，不得用于物理结论或资产判据"
+  - run_id: scen_free_200m_sv6h_recession__display_qc_B
+    label: "展示质控层 B 档（中等）"
+    role: derived
+    source: "outputs/display_qc/scen_free_200m_sv6h_recession/B"
+    save_interval_s: 21600
+    simulation_duration_s: 1123200
+    optional: true
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true。源 run scen_free_200m_sv6h_recession。B 档：min_patch_area 0.16 km²、persistence 36 h。实测 res.max 面积 −0.48% / 水量 −0.05%，单帧最大 2.49%/1.81%。仅供展示"
+  - run_id: scen_free_200m_sv6h_recession__display_qc_C
+    label: "展示质控层 C 档（激进）"
+    role: derived
+    source: "outputs/display_qc/scen_free_200m_sv6h_recession/C"
+    save_interval_s: 21600
+    simulation_duration_s: 1123200
+    optional: true
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true。源 run scen_free_200m_sv6h_recession。C 档：min_patch_area 0.36 km²、persistence 54 h。实测 res.max 面积 −0.56% / 水量 −0.06%，单帧最大 3.06%/2.28%。三档均未触发 10% 告警。仅供展示，不得用于物理结论"
 
 # 不合规展示层已退役（ADR-0010 第 8 条），不再列入 runs：
 #   scen_free_100m_dt2p5_sv6h_realdem_cleaned

@@ -989,7 +989,17 @@ def resolution_comparison(
         "recommended_option": "A",
         "option_a": "按 200 m 生产基线治理；展示阈值按 200 m 换算；100 m 仅作敏感性参照（计划 §1.4 推荐）",
         "option_b": "批准 100 m 或更细重跑后治理；须先完成重跑、质量门与分辨率收敛",
-        "status": "未冻结：方案 A/B 需用户确认后才能冻结展示阈值（计划 §5 Phase 0 门禁）",
+        "status": "已冻结：用户于 2026-10-31 明确选择方案 A（200 m 为生产治理基线）",
+        "status_basis": (
+            "用户决定，非脚本推断。ADR-0010 决策项 2 按方案 A 定版；"
+            "Phase 1 的 A/B/C 展示阈值据此按 200 m 口径冻结。"
+        ),
+        "option_b_authorization": (
+            "用户同日批准 100 m 完整物理重跑，作为独立升级路径；"
+            "重跑完成并通过质量门与分辨率收敛前，100 m 仍不得升级为生产基线"
+            "（ADR-0010 决策项 2 保持有效）。"
+        ),
+        "decided_utc": "2026-10-31",
         "evidence_level": "E1（本文件全部数值由脚本从 raw run 复算）",
     }
     return out

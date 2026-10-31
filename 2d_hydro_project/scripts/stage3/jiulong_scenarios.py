@@ -55,6 +55,14 @@ SCENARIOS = {
     "ztide": ("HVAR", None),  # 合成天文潮（钦州湾调和振幅，相位未定——包络有效）
 }
 
+# Phase E4 候选：边界闭合方式（计划 Phase 4 审计指出「N/W/E 三边 FREE 短路」）。
+# 源码核验（input.cpp:1551/1566、boundary.cpp:37-43、lisflood.h:178 NONE0=0）：
+# **省略某一边的 bci 行 = 该边闭合**（BC_Ident 保持 NONE0，法向通量被置 0）。
+# 因此闭合三边只需不写对应行，不需要特殊关键字。
+BOUNDARY_MODE = (sys.argv[sys.argv.index("--boundary-mode") + 1]
+                 if "--boundary-mode" in sys.argv else "allfree")
+BOUNDARY_MODES = ("allfree", "southonly")
+
 
 RUN_TAG = os.environ.get("RUN_TAG", "").strip()
 
@@ -63,8 +71,9 @@ def run_dir(scen: str) -> Path:
     suffix = f"_{RUN_TAG}" if RUN_TAG else ""
     dt_tag = f"_dt{str(DT).replace('.', 'p')}" if abs(DT - 5.0) > 1e-9 else ""
     sv_tag = f"_sv{SAVEINT / 3600:.0f}h" if abs(SAVEINT - SIM_SECONDS) > 1e-9 else ""
+    bd_tag = "" if BOUNDARY_MODE == "allfree" else f"_bd{BOUNDARY_MODE}"
     return PROJ / "outputs" / "jiulong" / "2024-09-yagi" / (
-        f"scen_{scen}_{int(RES)}m{dt_tag}{sv_tag}{suffix}")
+        f"scen_{scen}_{int(RES)}m{dt_tag}{sv_tag}{bd_tag}{suffix}")
 
 
 def fetch_hourly() -> dict[str, float]:
@@ -254,11 +263,21 @@ def prep(scen: str) -> None:
         print(f"合成天文潮: {len(ts_h)} 时点, 范围 {tide.min():.2f}~{tide.max():.2f} m (MSL 基准)")
     else:
         seg = [f"S\t-{BIG}\t{BIG}\tFREE 0.0005"]
-    (d / "bci.bci").write_text(
-        f"N\t-{BIG}\t{BIG}\tFREE\n"
-        f"W\t-{BIG}\t{BIG}\tFREE\n"
-        f"E\t-{BIG}\t{BIG}\tFREE\n" +
-        "\n".join(seg) + "\n", encoding="ascii", newline="\n")
+    # 边界组合（--boundary-mode）：
+    #   allfree    N/W/E/S 四边全 FREE（历史基线，200 m 生产 run 的口径）
+    #   southonly  N/W/E 三边闭合，只留南缘（计划 Phase 4 审计的候选处置）
+    # 源码依据：省略某一边的 bci 行 = 该边 BC_Ident 保持 NONE0 = 闭合，
+    # 法向通量被置 0（boundary.cpp:37-43；lisflood.h:178 NONE0=0）。
+    if BOUNDARY_MODE == "southonly":
+        bci_lines = "\n".join(seg) + "\n"
+    else:
+        bci_lines = (
+            f"N\t-{BIG}\t{BIG}\tFREE\n"
+            f"W\t-{BIG}\t{BIG}\tFREE\n"
+            f"E\t-{BIG}\t{BIG}\tFREE\n"
+            + "\n".join(seg) + "\n"
+        )
+    (d / "bci.bci").write_text(bci_lines, encoding="ascii", newline="\n")
     # 雨：逐时 -> (t秒, mm/h)
     hourly = fetch_hourly()
     pts = [(0.0, 0.0)]
@@ -279,6 +298,11 @@ def prep(scen: str) -> None:
         f"fpfric\t0.035\nacceleration\n", encoding="ascii", newline="\n")
     meta = {"scenario": scen, "res": RES, "dt": DT, "sim_seconds": SIM_SECONDS,
             "saveint": SAVEINT,
+            "boundary_mode": BOUNDARY_MODE,
+            "boundary_note": (
+                "allfree=N/W/E/S 四边 FREE（历史基线口径）；"
+                "southonly=N/W/E 三边闭合（省略 bci 行 = NONE0 闭合），只留南缘 FREE 0.0005"
+            ),
             "dem_v2": "S1 常水水体约束修复（G16）：海=边缘连通 S1 水体钳0；其余负值/洞 BFS 填充",
             "sea_px": int(sea.sum()), "s1_water_px": int(water.sum()),
             "filled_px": n_bad_init, "unfilled_px": int(bad.sum()),

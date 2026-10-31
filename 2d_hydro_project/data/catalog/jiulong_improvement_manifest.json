@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-31T13:26:08+00:00",
+  "generated_utc": "2026-10-31T13:45:52+00:00",
   "script": "scripts/stage6/diagnose_jiulong_artifacts.py（build_manifest）",
   "phase": "Phase 0 / T0+T1（事实冻结 + 根因诊断）",
   "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
@@ -184,7 +184,7 @@
       "bytes": 185181
     },
     "data/catalog/mass_recheck_g15.json": {
-      "sha256": "4602cbc7fe0fcfe8777a1d28162f244e88ee0f4c70865c2210caed0a190b8a84",
+      "sha256": "41ebe7bf97891c494f8348a35ef6502fcebf8d1cb732ac85f9882c32a7c6fe79",
       "bytes": 23184
     },
     "data/catalog/jiulong_scenarios_summary.json": {
@@ -202,8 +202,8 @@
   },
   "code": {
     "scripts/stage6/diagnose_jiulong_artifacts.py": {
-      "sha256": "a717d87d61f87180a2ed2b8e355c8932847f008196da1a9f4aa35f4ee652ebb5",
-      "bytes": 64877
+      "sha256": "369420a36d3aee0472708af303964cf1846ffcc3a26dc89b95c475a77b5ca352",
+      "bytes": 65404
     },
     "scripts/stage6/analyze_patch_persistence.py": {
       "sha256": "d35c4db3e609dbeed34167b20fa01d94404b21259050b053e25d831cf26623bf",
@@ -244,7 +244,7 @@
   },
   "artifacts": {
     "diagnostics/jiulong/baseline_snapshot.json": {
-      "sha256": "4157749d20fdaac2f1af791827e0a92067332a896aa0b58340d9b10b7644bc04",
+      "sha256": "667cb70988faefddaf92e41098ff02934ba3fa9b47e3689a8841cfa096e63258",
       "bytes": 68967
     },
     "diagnostics/jiulong/dem_artifact_map.tif": {
@@ -252,8 +252,8 @@
       "bytes": 58820
     },
     "diagnostics/jiulong/resolution_comparison.json": {
-      "sha256": "14576896e910235a1d74729208c7a99a96668492c9e3e85e389a59fac8a27bcb",
-      "bytes": 11646
+      "sha256": "d3060302c473ab608169867729e7da3fa4994c2868d641d88da04ad74374f355",
+      "bytes": 12068
     },
     "diagnostics/jiulong/patch_persistence.csv": {
       "sha256": "71a56e9edf0f4b5723501ec1d4798b493a77fbe96bce8e93c4dc5e45af823d25",
@@ -268,12 +268,12 @@
       "bytes": 14361
     },
     "diagnostics/jiulong/patch_summary.json": {
-      "sha256": "3b34dba8f3a99fbead09f19e43ddea03b382afe9fbaef38aed3a327013504803",
+      "sha256": "4804798b03197eea81f6f44261ddcdba562c6eef0aa7caa733b4db0588de20e3",
       "bytes": 8452
     },
     "diagnostics/jiulong/root_cause_report.md": {
-      "sha256": "7ea3c91af4405b693df83798ffee8633b56866c5b01d36657b06b1995b7667af",
-      "bytes": 25811
+      "sha256": "ff3f71926a82bc122edbd4137e221aeddb06a4104d503dc835d9afb7ac1e9b03",
+      "bytes": 25932
     }
   },
   "open_blockers": [

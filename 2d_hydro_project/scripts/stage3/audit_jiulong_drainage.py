@@ -535,6 +535,7 @@ def drainage_network_candidates(run_dir: Path, *, log: AuditLog) -> dict:
                 "status": "阻塞",
                 "why": "D8 廊道是地形汇流线索，不是实测沟渠；无中心线则无法判定真实排水路径与断面",
                 "needed_from": "业务部门 / 水利普查 / 1:10000 以上地形图或影像解译成果",
+                "user_decision_2026_10_31": "用户明确：目前无法提供。该项保持阻塞，不得以 D8 线索替代",
             },
             {
                 "id": "D2",
@@ -542,6 +543,7 @@ def drainage_network_candidates(run_dir: Path, *, log: AuditLog) -> dict:
                 "status": "阻塞",
                 "why": "无断面则任何刻蚀深度都是无依据猜测；计划 §3.5 禁止全域固定刻蚀 0.5–1.5 m",
                 "needed_from": "实测断面或设计资料",
+                "user_decision_2026_10_31": "用户明确：目前无法提供。该项保持阻塞，不得以假定断面刻蚀",
             },
             {
                 "id": "D3",
@@ -549,6 +551,10 @@ def drainage_network_candidates(run_dir: Path, *, log: AuditLog) -> dict:
                 "status": "阻塞",
                 "why": "无过程则下游边界只能是 FREE/Z=常数情景，无法判定真实排水能力",
                 "needed_from": "水文站 / 潮位站",
+                "user_decision_2026_10_31": (
+                    "用户明确：目前无法提供潮位/水位资料。"
+                    "下游边界继续用 FREE/Z=常数情景带，结论保持情景级"
+                ),
             },
             {
                 "id": "D4",
@@ -556,6 +562,10 @@ def drainage_network_candidates(run_dir: Path, *, log: AuditLog) -> dict:
                 "status": "阻塞",
                 "why": "决定 N/W/E 三边是否应闭合；当前三边 FREE 未经资料核证",
                 "needed_from": "水系图 + 现场/影像核证",
+                "user_decision_2026_10_31": (
+                    "用户明确：目前无法提供。三边 FREE 的短路风险只作候选处置，"
+                    "不凭推断改 bci；已另立 100 m 边界对照 run 作纯敏感性证据"
+                ),
             },
             {
                 "id": "D5",
@@ -563,8 +573,21 @@ def drainage_network_candidates(run_dir: Path, *, log: AuditLog) -> dict:
                 "status": "阻塞",
                 "why": "ADR-0008 已定版禁 bridge/orifice（B8b 未独立验证），结构只能靠 DEM 加高 + weirfile",
                 "needed_from": "结构竣工资料 + 独立再验证",
+                "user_decision_2026_10_31": "用户明确：目前无法提供。结构表达不实施",
             },
         ],
+        "authorization_status_2026_10_31": {
+            "decision": "用户明确表示目前无法提供站址坐标、排水网络、潮位/水位资料",
+            "consequence": (
+                "Phase 4 物理治理（排水网络、断面刻蚀、结构表达、Z(t)/Q(t) 边界）"
+                "全部无法推进，保持阻塞。退水异常（+27.68 km²）在现有资料下不可消除，"
+                "只能登记原因，不得以滤波掩盖。"
+            ),
+            "what_remains_possible": (
+                "边界设置的敏感性对照（N/W/E 闭合 vs 四边 FREE）不需要外部资料，"
+                "可作纯候选证据；但不得据此宣称已找到真实排水路径"
+            ),
+        },
         "conclusion": (
             "候选排水网络**只能到线索级**：D8 给出地形汇流廊道与洼地分布，"
             "但缺 D1–D5 全部授权资料，**不得**据此刻蚀河道、**不得**当作已建成的排水网络，"
