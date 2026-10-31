@@ -1,0 +1,1224 @@
+{
+  "generated_utc": "2026-10-31T13:26:58+00:00",
+  "script": "scripts/stage3/audit_jiulong_drainage.py",
+  "phase": "Phase 4（排水、边界和结构治理）",
+  "mode": "公开数据降级 · 情景级（ADR-0004）；不是业务预警，无率定值",
+  "run_under_audit": "scen_free_200m_sv6h_recession",
+  "read_only": true,
+  "note": "本脚本只读既有 run，不跑 lisflood.exe、不改 bci.bci、不改 DEM、不改任何 outputs/jiulong/**。",
+  "order": [
+    "边界与重复计量",
+    "候选排水网络",
+    "退水对账"
+  ],
+  "boundary_and_double_counting": {
+    "run": "scen_free_200m_sv6h_recession",
+    "run_dir": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+    "grid": {
+      "ncols": 182,
+      "nrows": 152,
+      "cellsize_m": 200.0,
+      "cell_area_m2": 40000.0,
+      "xllcorner": 246911.3,
+      "yllcorner": 2425993.0,
+      "nodata": -9999.0
+    },
+    "bci": {
+      "edges": {
+        "N": {
+          "type": "FREE",
+          "slope": null,
+          "slope_meaning": "未给坡度 → 求解器用局地水面坡（boundary.cpp:112-117，注释称 likely unstable）",
+          "raw_line": "N\t-99999999\t99999999\tFREE"
+        },
+        "W": {
+          "type": "FREE",
+          "slope": null,
+          "slope_meaning": "未给坡度 → 求解器用局地水面坡（boundary.cpp:112-117，注释称 likely unstable）",
+          "raw_line": "W\t-99999999\t99999999\tFREE"
+        },
+        "E": {
+          "type": "FREE",
+          "slope": null,
+          "slope_meaning": "未给坡度 → 求解器用局地水面坡（boundary.cpp:112-117，注释称 likely unstable）",
+          "raw_line": "E\t-99999999\t99999999\tFREE"
+        },
+        "S": {
+          "type": "FREE",
+          "slope": 0.0005,
+          "slope_meaning": "用户给定坡度 0.0005（boundary.cpp:118-121 直接用它，不用地形）",
+          "raw_line": "S\t-99999999\t99999999\tFREE 0.0005"
+        }
+      },
+      "outflow_capable_edges": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "inflow_capable_edges": [],
+      "raw_lines": [
+        "N\t-99999999\t99999999\tFREE",
+        "W\t-99999999\t99999999\tFREE",
+        "E\t-99999999\t99999999\tFREE",
+        "S\t-99999999\t99999999\tFREE 0.0005"
+      ]
+    },
+    "accounting_structure": {
+      "source_code": "boundary.cpp:1327-1409 BoundaryFlux()",
+      "fact": "求解器把 N/S/W/E 四边通量按正负分别累加，最后合成**单个** BCptr->Qin / BCptr->Qout；res.mass 的 Qin/Qout 列只有域总账，**没有逐边账目**。",
+      "chanmask_note": "无 chanmask 文件时 ChanMask 全为 -1（input.cpp:1459），四边的全部边界单元都参与记账（boundary.cpp:1343-1373 的 `== -1` 判定恒真）。",
+      "free_one_way_note": "FREE 边界在 sign 钳位下只能出流不能入流（boundary.cpp:180-183），故 Qin 恒为 0 与边界设置自洽。",
+      "consequence": "逐边 Qin/Qout 无法从 res.mass 取得；本节逐边份额为**估计值**，不是求解器记录值。"
+    },
+    "measured": {
+      "qin_integrated_m3": 0.0,
+      "qout_integrated_m3": 33786599.4,
+      "qin_all_rows_zero": true,
+      "qout_mean_m3s": 30.081,
+      "qout_max_m3s": 181.252,
+      "qout_final_m3s": 16.805
+    },
+    "per_edge_estimate": {
+      "method": "在每帧 .wd 上用求解器自身的 FREE/inertial 公式（boundary.cpp:109-125）按 Manning 形式估计各边出流；S 边用 bci 给定的 0.0005 坡度，N/W/E 边用局地水面坡（因 bci 未给坡度）。",
+      "confidence": "E4（估计值；非求解器记录，只用于判断逐边量级与合理性，不作账目依据）",
+      "manning_n": 0.035,
+      "frames_used": 53,
+      "per_edge": {
+        "N": {
+          "avg_wet_cells": 36.49,
+          "avg_wet_cells_5cm": 2.47,
+          "frames_with_wet": 48,
+          "frames_with_wet_5cm": 43,
+          "avg_sum_h_m": 0.687,
+          "mean_q_est_m3s": 2.618,
+          "mean_q_est_upland_m3s": 0.716,
+          "q_est_upland_share_pct": 27.35,
+          "wet5_dem_min_m": 0.09,
+          "wet5_dem_max_m": 26.38,
+          "share_of_estimated_total_pct": 9.99,
+          "upland_flux_dominant": false
+        },
+        "S": {
+          "avg_wet_cells": 96.74,
+          "avg_wet_cells_5cm": 2.58,
+          "frames_with_wet": 48,
+          "frames_with_wet_5cm": 10,
+          "avg_sum_h_m": 1.582,
+          "mean_q_est_m3s": 17.08,
+          "mean_q_est_upland_m3s": 0.64,
+          "q_est_upland_share_pct": 3.75,
+          "wet5_dem_min_m": 0.0,
+          "wet5_dem_max_m": 10.81,
+          "share_of_estimated_total_pct": 65.15,
+          "upland_flux_dominant": false
+        },
+        "W": {
+          "avg_wet_cells": 45.85,
+          "avg_wet_cells_5cm": 7.42,
+          "frames_with_wet": 48,
+          "frames_with_wet_5cm": 44,
+          "avg_sum_h_m": 1.9,
+          "mean_q_est_m3s": 3.376,
+          "mean_q_est_upland_m3s": 0.776,
+          "q_est_upland_share_pct": 23.0,
+          "wet5_dem_min_m": 0.0,
+          "wet5_dem_max_m": 3.61,
+          "share_of_estimated_total_pct": 12.88,
+          "upland_flux_dominant": false
+        },
+        "E": {
+          "avg_wet_cells": 24.79,
+          "avg_wet_cells_5cm": 0.85,
+          "frames_with_wet": 48,
+          "frames_with_wet_5cm": 43,
+          "avg_sum_h_m": 0.37,
+          "mean_q_est_m3s": 3.142,
+          "mean_q_est_upland_m3s": 3.049,
+          "q_est_upland_share_pct": 97.03,
+          "wet5_dem_min_m": 16.94,
+          "wet5_dem_max_m": 23.35,
+          "share_of_estimated_total_pct": 11.99,
+          "upland_flux_dominant": true
+        }
+      },
+      "estimated_total_m3s": 26.216,
+      "estimated_upland_total_m3s": 5.181,
+      "estimated_upland_share_pct": 19.76,
+      "outlet_hotspots": {
+        "N": {
+          "total_q_est_m3": 138.8,
+          "n_cells_carrying_gt_threshold": 6,
+          "hotspots": [
+            {
+              "cell_index_along_edge": 109,
+              "share_of_edge_flux_pct": 13.61,
+              "dem_m": 1.2,
+              "mean_depth_m_when_wet": 0.0479,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 26,
+              "share_of_edge_flux_pct": 8.9,
+              "dem_m": 0.33,
+              "mean_depth_m_when_wet": 0.0083,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 27,
+              "share_of_edge_flux_pct": 7.38,
+              "dem_m": 0.33,
+              "mean_depth_m_when_wet": 0.031,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 159,
+              "share_of_edge_flux_pct": 5.97,
+              "dem_m": 0.09,
+              "mean_depth_m_when_wet": 0.0114,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 175,
+              "share_of_edge_flux_pct": 5.54,
+              "dem_m": 12.43,
+              "mean_depth_m_when_wet": 0.0068,
+              "frames_wet": 36,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 44,
+              "share_of_edge_flux_pct": 5.52,
+              "dem_m": 12.99,
+              "mean_depth_m_when_wet": 0.0074,
+              "frames_wet": 39,
+              "frames_total": 53
+            }
+          ]
+        },
+        "S": {
+          "total_q_est_m3": 905.2,
+          "n_cells_carrying_gt_threshold": 0,
+          "hotspots": []
+        },
+        "W": {
+          "total_q_est_m3": 178.9,
+          "n_cells_carrying_gt_threshold": 2,
+          "hotspots": [
+            {
+              "cell_index_along_edge": 37,
+              "share_of_edge_flux_pct": 14.56,
+              "dem_m": 9.61,
+              "mean_depth_m_when_wet": 0.0119,
+              "frames_wet": 45,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 118,
+              "share_of_edge_flux_pct": 7.36,
+              "dem_m": 0.88,
+              "mean_depth_m_when_wet": 0.0105,
+              "frames_wet": 43,
+              "frames_total": 53
+            }
+          ]
+        },
+        "E": {
+          "total_q_est_m3": 166.5,
+          "n_cells_carrying_gt_threshold": 4,
+          "hotspots": [
+            {
+              "cell_index_along_edge": 99,
+              "share_of_edge_flux_pct": 19.82,
+              "dem_m": 9.93,
+              "mean_depth_m_when_wet": 0.0154,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 11,
+              "share_of_edge_flux_pct": 18.21,
+              "dem_m": 16.94,
+              "mean_depth_m_when_wet": 0.0217,
+              "frames_wet": 44,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 21,
+              "share_of_edge_flux_pct": 9.75,
+              "dem_m": 23.35,
+              "mean_depth_m_when_wet": 0.0142,
+              "frames_wet": 47,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 20,
+              "share_of_edge_flux_pct": 7.27,
+              "dem_m": 23.01,
+              "mean_depth_m_when_wet": 0.0073,
+              "frames_wet": 39,
+              "frames_total": 53
+            }
+          ]
+        }
+      },
+      "solver_recorded_mean_qout_m3s": 30.081,
+      "estimate_over_recorded_ratio": 0.872,
+      "interpretation": "估计总量与求解器记录的 Qout 均值同量级（比值 0.87）即视为逐边拆分可信度足够做**量级判断**；不得据此写精确逐边通量。"
+    },
+    "short_circuit_check": {
+      "definition": "边界短路 = 注入体积从边界直接排出（宁明 D4：83.0% 注入量从东缘排出）",
+      "has_upstream_injection": false,
+      "d4_type_short_circuit": false,
+      "reason": "本例全程 Qin ≡ 0、无干流/上游注入（计划 §1.2），不存在“注入量被边界直接排走”的 D4 式短路。",
+      "three_side_outflow_risk": {
+        "present": true,
+        "edges": [
+          "E",
+          "N",
+          "S",
+          "W"
+        ],
+        "detail": "N/W/E 三边也是 FREE，即除南缘外三边都能出流。这与宁明 D4 属**同类**（边界可自由排水且与地形/汇流关系未核证），但**成因不同**：D4 是注入点与出流边界重合，本例是全域无注入、仅靠四边缓排。",
+        "risk_level": "中（不是账目错误，但边界排水路径未经资料核证）",
+        "unresolved": true
+      }
+    },
+    "findings": [
+      {
+        "id": "B1",
+        "claim": "南缘（S，FREE 0.0005）是设计上的主出口，湿宽最大、估计出流份额最高",
+        "evidence": {
+          "s_avg_wet_cells": 96.74,
+          "s_mean_q_est_m3s": 17.08,
+          "s_share_pct": 65.15
+        },
+        "confidence": "E2（估计值方向一致 + bci 设计意图）"
+      },
+      {
+        "id": "B2",
+        "claim": "N/W/E 三边同时可出流。南缘（S）是主出口（估计占 65%）；但**东缘（E）的出流几乎全部来自高地单元**（DEM>5 m 贡献 97%），热点单元位于 DEM 22.2–23.4 m、平均水深仅 0.007–0.022 m，物理上不构成真实排水出口",
+        "evidence": {
+          "share_pct": {
+            "N": 9.99,
+            "S": 65.15,
+            "W": 12.88,
+            "E": 11.99
+          },
+          "upland_flux_share_pct": {
+            "N": 27.35,
+            "S": 3.75,
+            "W": 23.0,
+            "E": 97.03
+          },
+          "upland_flux_total_share_pct": 19.76,
+          "east_hotspots": [
+            {
+              "cell_index_along_edge": 99,
+              "share_of_edge_flux_pct": 19.82,
+              "dem_m": 9.93,
+              "mean_depth_m_when_wet": 0.0154,
+              "frames_wet": 48,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 11,
+              "share_of_edge_flux_pct": 18.21,
+              "dem_m": 16.94,
+              "mean_depth_m_when_wet": 0.0217,
+              "frames_wet": 44,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 21,
+              "share_of_edge_flux_pct": 9.75,
+              "dem_m": 23.35,
+              "mean_depth_m_when_wet": 0.0142,
+              "frames_wet": 47,
+              "frames_total": 53
+            },
+            {
+              "cell_index_along_edge": 20,
+              "share_of_edge_flux_pct": 7.27,
+              "dem_m": 23.01,
+              "mean_depth_m_when_wet": 0.0073,
+              "frames_wet": 39,
+              "frames_total": 53
+            }
+          ],
+          "north_hotspots_dem_m": [
+            1.2,
+            0.33,
+            0.33,
+            0.09
+          ],
+          "south_hotspots_count": 0
+        },
+        "confidence": "E3（逐边与逐单元为估计值；高地判据 DEM>5 m 为项目自定，非规范阈值）",
+        "implication": "东缘存在与宁明 D4 **同类**的问题：边界被当作人工排水口，排走的是高地上的毫米级薄膜水。量级小（E 边占估计总出流 12%），但方向上是假排水——它让模型显得比实际更能退水，而真实退水仍严重不足。候选处置：将 N/W/E 改为闭合（仅留南缘 FREE），作为新 run tag 单独试验；**不得**直接改现有 bci.bci。",
+        "self_correction": "初版曾用'湿边界单元的最大 DEM>5 m'判定'高地出口'，实测发现这些多为毫米级薄膜（H≈0.002–0.013 m），会把风险夸大成假阳性；已改为按**通量占比**判定，并逐单元定位热点后重新核对，本记录保留以免误读。"
+      },
+      {
+        "id": "B3",
+        "claim": "域内总出流能力远小于降雨输入能力，是退水异常的边界侧原因",
+        "evidence": {
+          "mean_qout_m3s": 30.081,
+          "rain_input_mean_m3s": 238.908
+        },
+        "confidence": "E1（两者均为 res.mass 直接可得）"
+      }
+    ],
+    "limitations": [
+      "本构建无逐边 Qin/Qout 账目（boundary.cpp:1327-1409），逐边份额只能估计，标 E4。",
+      "无潮位/水位过程资料 → 下游边界只能是情景（FREE / Z=0 / Z=0.5 / Z=1.0），不能判定哪一档接近真实（计划 §1.2）。",
+      "无排水网络授权资料（沟渠中心线/断面/影像/现场）→ 候选网络只能是 D8 线索。",
+      "垂直基准未闭合（G7）→ 边界高程与水深不做绝对高程结论。"
+    ]
+  },
+  "drainage_network_candidates": {
+    "method": "纯 numpy D8 最陡下降 + 汇流累积（8 邻域；无更低邻居即为局部洼地）",
+    "role": "**线索**：只用于回答地形上最可能汇流到哪里，不得当作真实沟渠/排水管网",
+    "grid": {
+      "ncols": 182,
+      "nrows": 152,
+      "cellsize_m": 200.0,
+      "cell_area_m2": 40000.0,
+      "xllcorner": 246911.3,
+      "yllcorner": 2425993.0,
+      "nodata": -9999.0
+    },
+    "d8_result": {
+      "accumulation_max_cells": 178,
+      "corridor_threshold_cells": 52.2,
+      "corridor_cells": 58,
+      "corridor_area_km2": 2.32,
+      "sink_cells": 3108,
+      "sink_cells_pct": 11.23,
+      "largest_sink_upstream_cells": 178
+    },
+    "wet_overlay_on_corridors": {
+      "frame": "res-0052.wd",
+      "wet_cells": 6451,
+      "wet_cells_on_corridor": 48,
+      "wet_cells_on_corridor_pct": 0.74
+    },
+    "authorization_blockers": [
+      {
+        "id": "D1",
+        "item": "排水沟渠/河渠中心线（矢量）",
+        "status": "阻塞",
+        "why": "D8 廊道是地形汇流线索，不是实测沟渠；无中心线则无法判定真实排水路径与断面",
+        "needed_from": "业务部门 / 水利普查 / 1:10000 以上地形图或影像解译成果"
+      },
+      {
+        "id": "D2",
+        "item": "沟渠断面（宽度/深度/底高程）",
+        "status": "阻塞",
+        "why": "无断面则任何刻蚀深度都是无依据猜测；计划 §3.5 禁止全域固定刻蚀 0.5–1.5 m",
+        "needed_from": "实测断面或设计资料"
+      },
+      {
+        "id": "D3",
+        "item": "下游控制断面水位/流量过程 Z(t)、Q(t)",
+        "status": "阻塞",
+        "why": "无过程则下游边界只能是 FREE/Z=常数情景，无法判定真实排水能力",
+        "needed_from": "水文站 / 潮位站"
+      },
+      {
+        "id": "D4",
+        "item": "受纳水体（钦江/海湾）与域边界的真实连通关系",
+        "status": "阻塞",
+        "why": "决定 N/W/E 三边是否应闭合；当前三边 FREE 未经资料核证",
+        "needed_from": "水系图 + 现场/影像核证"
+      },
+      {
+        "id": "D5",
+        "item": "涵洞/桥闸/泵站等结构位置与参数",
+        "status": "阻塞",
+        "why": "ADR-0008 已定版禁 bridge/orifice（B8b 未独立验证），结构只能靠 DEM 加高 + weirfile",
+        "needed_from": "结构竣工资料 + 独立再验证"
+      }
+    ],
+    "conclusion": "候选排水网络**只能到线索级**：D8 给出地形汇流廊道与洼地分布，但缺 D1–D5 全部授权资料，**不得**据此刻蚀河道、**不得**当作已建成的排水网络，也**不得**把候选网络切换到生产 run。"
+  },
+  "recession_reconciliation": {
+    "run": "scen_free_200m_sv6h_recession",
+    "window": {
+      "t0_days": 0.0,
+      "t1_days": 13.0,
+      "sim_seconds": 1123200.0,
+      "saveint_s": 21600.0
+    },
+    "totals": {
+      "v_rain_m3": 268340800.0,
+      "v_out_m3": 33786599.4,
+      "v_in_m3": 0.0,
+      "dv_storage_m3": 234411986.6
+    },
+    "per_day_reconciliation": [
+      {
+        "t0_days": 0.0,
+        "t1_days": 1.0,
+        "dv_storage_m3": 663936.0,
+        "v_rain_m3": 663936.0,
+        "v_out_m3": 0.0,
+        "v_in_m3": 0.0,
+        "residual_m3": 0.0,
+        "residual_pct_of_rain": 0.0,
+        "storage_share_of_rain_pct": 100.0,
+        "outflow_share_of_rain_pct": 0.0
+      },
+      {
+        "t0_days": 1.0,
+        "t1_days": 2.0,
+        "dv_storage_m3": 12258709.2,
+        "v_rain_m3": 12725286.3,
+        "v_out_m3": 461851.2,
+        "v_in_m3": 0.0,
+        "residual_m3": -4725.9,
+        "residual_pct_of_rain": -0.0371,
+        "storage_share_of_rain_pct": 96.33,
+        "outflow_share_of_rain_pct": 3.63
+      },
+      {
+        "t0_days": 2.0,
+        "t1_days": 3.0,
+        "dv_storage_m3": 106505985.5,
+        "v_rain_m3": 114030316.4,
+        "v_out_m3": 7519829.4,
+        "v_in_m3": 0.0,
+        "residual_m3": -4501.5,
+        "residual_pct_of_rain": -0.0039,
+        "storage_share_of_rain_pct": 93.4,
+        "outflow_share_of_rain_pct": 6.59
+      },
+      {
+        "t0_days": 3.0,
+        "t1_days": 4.0,
+        "dv_storage_m3": 29394472.2,
+        "v_rain_m3": 35576749.3,
+        "v_out_m3": 6128775.0,
+        "v_in_m3": 0.0,
+        "residual_m3": -53502.1,
+        "residual_pct_of_rain": -0.1504,
+        "storage_share_of_rain_pct": 82.62,
+        "outflow_share_of_rain_pct": 17.23
+      },
+      {
+        "t0_days": 4.0,
+        "t1_days": 5.0,
+        "dv_storage_m3": 9780086.1,
+        "v_rain_m3": 12890732.4,
+        "v_out_m3": 3086814.6,
+        "v_in_m3": 0.0,
+        "residual_m3": -23831.7,
+        "residual_pct_of_rain": -0.1849,
+        "storage_share_of_rain_pct": 75.87,
+        "outflow_share_of_rain_pct": 23.95
+      },
+      {
+        "t0_days": 5.0,
+        "t1_days": 6.0,
+        "dv_storage_m3": 18668408.0,
+        "v_rain_m3": 22076563.6,
+        "v_out_m3": 3411556.2,
+        "v_in_m3": 0.0,
+        "residual_m3": 3400.6,
+        "residual_pct_of_rain": 0.0154,
+        "storage_share_of_rain_pct": 84.56,
+        "outflow_share_of_rain_pct": 15.45
+      },
+      {
+        "t0_days": 6.0,
+        "t1_days": 7.0,
+        "dv_storage_m3": 14030848.1,
+        "v_rain_m3": 17041024.0,
+        "v_out_m3": 2996861.4,
+        "v_in_m3": 0.0,
+        "residual_m3": -13314.5,
+        "residual_pct_of_rain": -0.0781,
+        "storage_share_of_rain_pct": 82.34,
+        "outflow_share_of_rain_pct": 17.59
+      },
+      {
+        "t0_days": 7.0,
+        "t1_days": 8.0,
+        "dv_storage_m3": 1192276.2,
+        "v_rain_m3": 2877056.0,
+        "v_out_m3": 1679979.6,
+        "v_in_m3": 0.0,
+        "residual_m3": -4800.2,
+        "residual_pct_of_rain": -0.1668,
+        "storage_share_of_rain_pct": 41.44,
+        "outflow_share_of_rain_pct": 58.39
+      },
+      {
+        "t0_days": 8.0,
+        "t1_days": 9.0,
+        "dv_storage_m3": 3333272.7,
+        "v_rain_m3": 4536896.0,
+        "v_out_m3": 1199521.8,
+        "v_in_m3": 0.0,
+        "residual_m3": -4101.5,
+        "residual_pct_of_rain": -0.0904,
+        "storage_share_of_rain_pct": 73.47,
+        "outflow_share_of_rain_pct": 26.44
+      },
+      {
+        "t0_days": 9.0,
+        "t1_days": 10.0,
+        "dv_storage_m3": 13335640.2,
+        "v_rain_m3": 15049216.0,
+        "v_out_m3": 1681619.4,
+        "v_in_m3": 0.0,
+        "residual_m3": -31956.4,
+        "residual_pct_of_rain": -0.2123,
+        "storage_share_of_rain_pct": 88.61,
+        "outflow_share_of_rain_pct": 11.17
+      },
+      {
+        "t0_days": 10.0,
+        "t1_days": 11.0,
+        "dv_storage_m3": 1715829.4,
+        "v_rain_m3": 2987712.0,
+        "v_out_m3": 1303549.2,
+        "v_in_m3": 0.0,
+        "residual_m3": 31666.6,
+        "residual_pct_of_rain": 1.0599,
+        "storage_share_of_rain_pct": 57.43,
+        "outflow_share_of_rain_pct": 43.63
+      },
+      {
+        "t0_days": 11.0,
+        "t1_days": 12.0,
+        "dv_storage_m3": 16824363.7,
+        "v_rain_m3": 18193613.8,
+        "v_out_m3": 1374568.2,
+        "v_in_m3": 0.0,
+        "residual_m3": 5318.1,
+        "residual_pct_of_rain": 0.0292,
+        "storage_share_of_rain_pct": 92.47,
+        "outflow_share_of_rain_pct": 7.56
+      },
+      {
+        "t0_days": 12.0,
+        "t1_days": 13.0,
+        "dv_storage_m3": 6708159.2,
+        "v_rain_m3": 9691698.2,
+        "v_out_m3": 2941673.4,
+        "v_in_m3": 0.0,
+        "residual_m3": -41865.6,
+        "residual_pct_of_rain": -0.432,
+        "storage_share_of_rain_pct": 69.22,
+        "outflow_share_of_rain_pct": 30.35
+      }
+    ],
+    "per_frame": [
+      {
+        "seq": 0,
+        "t_s": 0.0,
+        "t_days": 0.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "vol_m3": 0.0,
+        "qout_m3s": 0.0
+      },
+      {
+        "seq": 1,
+        "t_s": 21600.0,
+        "t_days": 0.25,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "vol_m3": 0.0,
+        "qout_m3s": 0.0
+      },
+      {
+        "seq": 2,
+        "t_s": 43200.0,
+        "t_days": 0.5,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "vol_m3": 110656.0,
+        "qout_m3s": 0.0
+      },
+      {
+        "seq": 3,
+        "t_s": 64800.0,
+        "t_days": 0.75,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "vol_m3": 553126.3,
+        "qout_m3s": 0.0
+      },
+      {
+        "seq": 4,
+        "t_s": 86400.0,
+        "t_days": 1.0,
+        "wet_cells": 0,
+        "wet_area_km2": 0.0,
+        "vol_m3": 663936.0,
+        "qout_m3s": 0.0
+      },
+      {
+        "seq": 5,
+        "t_s": 108000.0,
+        "t_days": 1.25,
+        "wet_cells": 497,
+        "wet_area_km2": 19.88,
+        "vol_m3": 5591252.0,
+        "qout_m3s": 1.782
+      },
+      {
+        "seq": 6,
+        "t_s": 129600.0,
+        "t_days": 1.5,
+        "wet_cells": 603,
+        "wet_area_km2": 24.12,
+        "vol_m3": 6054834.8,
+        "qout_m3s": 1.107
+      },
+      {
+        "seq": 7,
+        "t_s": 151200.0,
+        "t_days": 1.75,
+        "wet_cells": 959,
+        "wet_area_km2": 38.36,
+        "vol_m3": 7867880.0,
+        "qout_m3s": 2.782
+      },
+      {
+        "seq": 8,
+        "t_s": 172800.0,
+        "t_days": 2.0,
+        "wet_cells": 1953,
+        "wet_area_km2": 78.12,
+        "vol_m3": 12922645.2,
+        "qout_m3s": 6.482
+      },
+      {
+        "seq": 9,
+        "t_s": 194400.0,
+        "t_days": 2.25,
+        "wet_cells": 3008,
+        "wet_area_km2": 120.32,
+        "vol_m3": 24927173.4,
+        "qout_m3s": 58.592
+      },
+      {
+        "seq": 10,
+        "t_s": 216000.0,
+        "t_days": 2.5,
+        "wet_cells": 4961,
+        "wet_area_km2": 198.44,
+        "vol_m3": 63070194.5,
+        "qout_m3s": 130.207
+      },
+      {
+        "seq": 11,
+        "t_s": 237600.0,
+        "t_days": 2.75,
+        "wet_cells": 5696,
+        "wet_area_km2": 227.84,
+        "vol_m3": 107673945.5,
+        "qout_m3s": 111.207
+      },
+      {
+        "seq": 12,
+        "t_s": 259200.0,
+        "t_days": 3.0,
+        "wet_cells": 5634,
+        "wet_area_km2": 225.36,
+        "vol_m3": 119428630.7,
+        "qout_m3s": 77.771
+      },
+      {
+        "seq": 13,
+        "t_s": 280800.0,
+        "t_days": 3.25,
+        "wet_cells": 5633,
+        "wet_area_km2": 225.32,
+        "vol_m3": 127020770.0,
+        "qout_m3s": 69.953
+      },
+      {
+        "seq": 14,
+        "t_s": 302400.0,
+        "t_days": 3.5,
+        "wet_cells": 5768,
+        "wet_area_km2": 230.72,
+        "vol_m3": 138223435.2,
+        "qout_m3s": 63.447
+      },
+      {
+        "seq": 15,
+        "t_s": 324000.0,
+        "t_days": 3.75,
+        "wet_cells": 5857,
+        "wet_area_km2": 234.28,
+        "vol_m3": 146321073.1,
+        "qout_m3s": 54.99
+      },
+      {
+        "seq": 16,
+        "t_s": 345600.0,
+        "t_days": 4.0,
+        "wet_cells": 5830,
+        "wet_area_km2": 233.2,
+        "vol_m3": 148823102.9,
+        "qout_m3s": 42.264
+      },
+      {
+        "seq": 17,
+        "t_s": 367200.0,
+        "t_days": 4.25,
+        "wet_cells": 5767,
+        "wet_area_km2": 230.68,
+        "vol_m3": 148158115.4,
+        "qout_m3s": 31.072
+      },
+      {
+        "seq": 18,
+        "t_s": 388800.0,
+        "t_days": 4.5,
+        "wet_cells": 5749,
+        "wet_area_km2": 229.96,
+        "vol_m3": 150071674.2,
+        "qout_m3s": 35.032
+      },
+      {
+        "seq": 19,
+        "t_s": 410400.0,
+        "t_days": 4.75,
+        "wet_cells": 5866,
+        "wet_area_km2": 234.64,
+        "vol_m3": 157219485.4,
+        "qout_m3s": 34.027
+      },
+      {
+        "seq": 20,
+        "t_s": 432000.0,
+        "t_days": 5.0,
+        "wet_cells": 5827,
+        "wet_area_km2": 233.08,
+        "vol_m3": 158603189.0,
+        "qout_m3s": 31.657
+      },
+      {
+        "seq": 21,
+        "t_s": 453600.0,
+        "t_days": 5.25,
+        "wet_cells": 5943,
+        "wet_area_km2": 237.72,
+        "vol_m3": 165957910.5,
+        "qout_m3s": 44.465
+      },
+      {
+        "seq": 22,
+        "t_s": 475200.0,
+        "t_days": 5.5,
+        "wet_cells": 5987,
+        "wet_area_km2": 239.48,
+        "vol_m3": 169511792.2,
+        "qout_m3s": 41.463
+      },
+      {
+        "seq": 23,
+        "t_s": 496800.0,
+        "t_days": 5.75,
+        "wet_cells": 6099,
+        "wet_area_km2": 243.96,
+        "vol_m3": 176380441.7,
+        "qout_m3s": 38.018
+      },
+      {
+        "seq": 24,
+        "t_s": 518400.0,
+        "t_days": 6.0,
+        "wet_cells": 6056,
+        "wet_area_km2": 242.24,
+        "vol_m3": 177271597.0,
+        "qout_m3s": 27.902
+      },
+      {
+        "seq": 25,
+        "t_s": 540000.0,
+        "t_days": 6.25,
+        "wet_cells": 6021,
+        "wet_area_km2": 240.84,
+        "vol_m3": 178096261.4,
+        "qout_m3s": 24.544
+      },
+      {
+        "seq": 26,
+        "t_s": 561600.0,
+        "t_days": 6.5,
+        "wet_cells": 6069,
+        "wet_area_km2": 242.76,
+        "vol_m3": 183728128.8,
+        "qout_m3s": 72.896
+      },
+      {
+        "seq": 27,
+        "t_s": 583200.0,
+        "t_days": 6.75,
+        "wet_cells": 6278,
+        "wet_area_km2": 251.12,
+        "vol_m3": 191856426.8,
+        "qout_m3s": 39.268
+      },
+      {
+        "seq": 28,
+        "t_s": 604800.0,
+        "t_days": 7.0,
+        "wet_cells": 6190,
+        "wet_area_km2": 247.6,
+        "vol_m3": 191302445.1,
+        "qout_m3s": 23.519
+      },
+      {
+        "seq": 29,
+        "t_s": 626400.0,
+        "t_days": 7.25,
+        "wet_cells": 6158,
+        "wet_area_km2": 246.32,
+        "vol_m3": 193151103.8,
+        "qout_m3s": 24.916
+      },
+      {
+        "seq": 30,
+        "t_s": 648000.0,
+        "t_days": 7.5,
+        "wet_cells": 6096,
+        "wet_area_km2": 243.84,
+        "vol_m3": 192913469.1,
+        "qout_m3s": 19.526
+      },
+      {
+        "seq": 31,
+        "t_s": 669600.0,
+        "t_days": 7.75,
+        "wet_cells": 6036,
+        "wet_area_km2": 241.44,
+        "vol_m3": 192758617.5,
+        "qout_m3s": 16.064
+      },
+      {
+        "seq": 32,
+        "t_s": 691200.0,
+        "t_days": 8.0,
+        "wet_cells": 5960,
+        "wet_area_km2": 238.4,
+        "vol_m3": 192494721.4,
+        "qout_m3s": 13.541
+      },
+      {
+        "seq": 33,
+        "t_s": 712800.0,
+        "t_days": 8.25,
+        "wet_cells": 5914,
+        "wet_area_km2": 236.56,
+        "vol_m3": 192431415.1,
+        "qout_m3s": 12.057
+      },
+      {
+        "seq": 34,
+        "t_s": 734400.0,
+        "t_days": 8.5,
+        "wet_cells": 5863,
+        "wet_area_km2": 234.52,
+        "vol_m3": 192188548.4,
+        "qout_m3s": 10.457
+      },
+      {
+        "seq": 35,
+        "t_s": 756000.0,
+        "t_days": 8.75,
+        "wet_cells": 5916,
+        "wet_area_km2": 236.64,
+        "vol_m3": 195946435.5,
+        "qout_m3s": 16.983
+      },
+      {
+        "seq": 36,
+        "t_s": 777600.0,
+        "t_days": 9.0,
+        "wet_cells": 5880,
+        "wet_area_km2": 235.2,
+        "vol_m3": 195827994.1,
+        "qout_m3s": 11.312
+      },
+      {
+        "seq": 37,
+        "t_s": 799200.0,
+        "t_days": 9.25,
+        "wet_cells": 5836,
+        "wet_area_km2": 233.44,
+        "vol_m3": 195609950.0,
+        "qout_m3s": 9.183
+      },
+      {
+        "seq": 38,
+        "t_s": 820800.0,
+        "t_days": 9.5,
+        "wet_cells": 5803,
+        "wet_area_km2": 232.12,
+        "vol_m3": 195906076.2,
+        "qout_m3s": 11.031
+      },
+      {
+        "seq": 39,
+        "t_s": 842400.0,
+        "t_days": 9.75,
+        "wet_cells": 6214,
+        "wet_area_km2": 248.56,
+        "vol_m3": 209060331.2,
+        "qout_m3s": 70.523
+      },
+      {
+        "seq": 40,
+        "t_s": 864000.0,
+        "t_days": 10.0,
+        "wet_cells": 6226,
+        "wet_area_km2": 249.04,
+        "vol_m3": 209163634.3,
+        "qout_m3s": 19.503
+      },
+      {
+        "seq": 41,
+        "t_s": 885600.0,
+        "t_days": 10.25,
+        "wet_cells": 6161,
+        "wet_area_km2": 246.44,
+        "vol_m3": 208820379.6,
+        "qout_m3s": 13.423
+      },
+      {
+        "seq": 42,
+        "t_s": 907200.0,
+        "t_days": 10.5,
+        "wet_cells": 6167,
+        "wet_area_km2": 246.68,
+        "vol_m3": 210869092.7,
+        "qout_m3s": 14.458
+      },
+      {
+        "seq": 43,
+        "t_s": 928800.0,
+        "t_days": 10.75,
+        "wet_cells": 6127,
+        "wet_area_km2": 245.08,
+        "vol_m3": 211125389.2,
+        "qout_m3s": 12.765
+      },
+      {
+        "seq": 44,
+        "t_s": 950400.0,
+        "t_days": 11.0,
+        "wet_cells": 6053,
+        "wet_area_km2": 242.12,
+        "vol_m3": 210879463.7,
+        "qout_m3s": 10.493
+      },
+      {
+        "seq": 45,
+        "t_s": 972000.0,
+        "t_days": 11.25,
+        "wet_cells": 6010,
+        "wet_area_km2": 240.4,
+        "vol_m3": 210666547.4,
+        "qout_m3s": 9.334
+      },
+      {
+        "seq": 46,
+        "t_s": 993600.0,
+        "t_days": 11.5,
+        "wet_cells": 5972,
+        "wet_area_km2": 238.88,
+        "vol_m3": 210528237.0,
+        "qout_m3s": 9.135
+      },
+      {
+        "seq": 47,
+        "t_s": 1015200.0,
+        "t_days": 11.75,
+        "wet_cells": 5992,
+        "wet_area_km2": 239.68,
+        "vol_m3": 212642991.8,
+        "qout_m3s": 11.39
+      },
+      {
+        "seq": 48,
+        "t_s": 1036800.0,
+        "t_days": 12.0,
+        "wet_cells": 6453,
+        "wet_area_km2": 258.12,
+        "vol_m3": 227703827.5,
+        "qout_m3s": 106.756
+      },
+      {
+        "seq": 49,
+        "t_s": 1058400.0,
+        "t_days": 12.25,
+        "wet_cells": 6683,
+        "wet_area_km2": 267.32,
+        "vol_m3": 235216877.4,
+        "qout_m3s": 35.717
+      },
+      {
+        "seq": 50,
+        "t_s": 1080000.0,
+        "t_days": 12.5,
+        "wet_cells": 6579,
+        "wet_area_km2": 263.16,
+        "vol_m3": 234806224.7,
+        "qout_m3s": 24.652
+      },
+      {
+        "seq": 51,
+        "t_s": 1101600.0,
+        "t_days": 12.75,
+        "wet_cells": 6519,
+        "wet_area_km2": 260.76,
+        "vol_m3": 234810873.4,
+        "qout_m3s": 20.295
+      },
+      {
+        "seq": 52,
+        "t_s": 1123200.0,
+        "t_days": 13.0,
+        "wet_cells": 6451,
+        "wet_area_km2": 258.04,
+        "vol_m3": 234411986.6,
+        "qout_m3s": 16.805
+      }
+    ],
+    "drainage_deficit": {
+      "full_13d": {
+        "span_s": 1123200.0,
+        "rain_volume_m3": 268340800.0,
+        "outflow_volume_m3": 33786599.4,
+        "required_outflow_to_hold_storage_m3s": 238.907,
+        "actual_outflow_m3s": 30.081,
+        "outflow_deficit_m3s": 208.827,
+        "outflow_capacity_ratio": 0.1259
+      },
+      "extension_8d_09_10_to_09_18": {
+        "span_s": 691200.0,
+        "rain_volume_m3": 92453779.6,
+        "outflow_volume_m3": 16589329.2,
+        "required_outflow_to_hold_storage_m3s": 133.758,
+        "actual_outflow_m3s": 24.001,
+        "outflow_deficit_m3s": 109.758,
+        "outflow_capacity_ratio": 0.1794
+      },
+      "interpretation": "维持蓄量不变所需的出流能力远大于模型实际出流能力；这就是“退水不降反升”的边界侧定量原因。"
+    },
+    "wet_area_trend": {
+      "at_09_10T00_km2": 233.08,
+      "at_09_17T18_km2": 260.76,
+      "change_km2": 27.68,
+      "s1_reference_0917_km2": 12.2,
+      "s1_reference_0905_km2": 18.04,
+      "direction_vs_s1": "模型湿面积在延长段**增加**，S1 实测从 09-05 到 09-17 **减少** → 方向相反",
+      "confidence": "E2（模型侧 E1 可复核；S1 侧 WEAK，单景、G17 下限）"
+    },
+    "recession_anomaly_cause": {
+      "anomaly": "延长段（09-10→09-18）降雨 9.2454e+07 m³，出流仅 1.6589e+07 m³（维持蓄量不变所需能力的 0.179×），蓄量反而增加 → 湿面积变化 27.68 km²。",
+      "causes": [
+        {
+          "id": "R1",
+          "cause": "无排水网络：域内无沟渠/河槽编码，洼地积水只能靠四边缓排",
+          "evidence": "模型无 chanmask/河槽刻蚀（meta.json note：河槽未刻蚀，钦江亚像元）；D8 显示大量局部洼地（见候选网络段）",
+          "confidence": "E2"
+        },
+        {
+          "id": "R2",
+          "cause": "边界排水能力不足：四边 FREE 缓排，出流仅占降雨的 12.6%",
+          "evidence": "总雨 2.6834e+08 m³，出流 3.3787e+07 m³",
+          "confidence": "E1（res.mass 直接可得）"
+        },
+        {
+          "id": "R3",
+          "cause": "延长段仍有 84 mm 降雨持续补给，退水期并未真正“无雨”",
+          "evidence": "ERA5 延长段 09-10~09-17 累计 84.0 mm；延长段雨量 9.2454e+07 m³",
+          "confidence": "E1"
+        },
+        {
+          "id": "R4",
+          "cause": "无蒸发、无入渗（现状 run 未设 infiltration/evaporation）→ 损失项为 0",
+          "evidence": "run.par 无 infiltration / evaporation 关键字；res.mass 损失列 = 纯降雨",
+          "confidence": "E1"
+        }
+      ],
+      "not_the_cause": [
+        "不是数值不稳定：E_mass 5.3e-4 PASS，Verror/Qerror 末行均为 0。",
+        "不是滤波问题：本审计全程用原始 res.mass 与 .wd，未做任何平滑。"
+      ],
+      "discipline": "该异常**未消除**，本脚本只给原因、不改结果、不做滤波（计划 §5 Phase 4 验收：退水异常若未消除必须给出原因，不得以滤波掩盖）。"
+    }
+  },
+  "structural_expression": {
+    "policy": "ADR-0008 定版：禁 bridge/orifice（B8b 未独立验证）；结构限 DEM 加高 + weirfile",
+    "current_state": "本例无结构物编码（无堤防/桥涵/闸门资料）",
+    "blocker": "阻塞：缺结构位置与参数资料；且 ADR-0008 要求升级后再验证才可启用 bridge/orifice",
+    "global_etching": "不采用全域固定刻蚀（计划 §3.5）"
+  },
+  "limitations": [
+    "本构建无逐边 Qin/Qout 账目（boundary.cpp:1327-1409），逐边份额只能估计，标 E4。",
+    "无潮位/水位过程资料 → 下游边界只能是情景（FREE / Z=0 / Z=0.5 / Z=1.0），不能判定哪一档接近真实（计划 §1.2）。",
+    "无排水网络授权资料（沟渠中心线/断面/影像/现场）→ 候选网络只能是 D8 线索。",
+    "垂直基准未闭合（G7）→ 边界高程与水深不做绝对高程结论。",
+    "逐边通量为估计值（E4），非求解器记录；本构建无逐边账目。",
+    "候选排水网络仅到 D8 线索级；D1–D5 授权资料全部缺失（阻塞）。",
+    "退水异常未消除；本审计只给原因，不做滤波掩盖。"
+  ],
+  "verdict": {
+    "boundary_verified": {
+      "no_upstream_injection": true,
+      "per_edge_accounting_available": false,
+      "d4_type_short_circuit": false,
+      "three_side_outflow_risk": true,
+      "estimated_edge_shares_pct": {
+        "N": 9.99,
+        "S": 65.15,
+        "W": 12.88,
+        "E": 11.99
+      }
+    },
+    "drainage_network": {
+      "level": "线索级（D8）",
+      "usable_as_real_channel": false,
+      "blockers": [
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "D5"
+      ]
+    },
+    "recession": {
+      "anomaly_resolved": false,
+      "wet_area_change_km2": 27.68,
+      "direction_vs_s1": "模型湿面积在延长段**增加**，S1 实测从 09-05 到 09-17 **减少** → 方向相反",
+      "outflow_capacity_ratio_extension": 0.1794,
+      "cause_given": true,
+      "filtered": false
+    },
+    "writable": [
+      "边界结构事实：N/W/E/S 四边均 FREE（S 带 0.0005 坡度），本构建无逐边 Qin/Qout 账目。",
+      "无 D4 式注入短路（Qin ≡ 0）；但存在三边可出流的结构风险（未核证）。",
+      "退水异常未消除，原因是无排水网络 + 边界排水能力不足 + 延长段仍有降雨，出流能力仅为维持蓄量所需的 ~18%（见 drainage_deficit）。"
+    ],
+    "not_writable": [
+      "不得把逐边份额写成求解器实测值（那是 E4 估计）。",
+      "不得把 D8 廊道当作真实沟渠，不得据此刻蚀河道。",
+      "不得声称排水网络已建成/已治理。",
+      "不得用滤波或平滑掩盖退水异常。",
+      "不得给出绝对高程/资产级水深结论（G7 未闭合）。"
+    ]
+  }
+}
