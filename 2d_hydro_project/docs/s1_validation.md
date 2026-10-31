@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: s1-validation
+canonical: true
+scope: project
+---
+
 # S1 水体提取验证链（阶段 3/5，降级模式）
 
 日期：2026-10-25 ｜ 数据：E:\S1_gxhydro\sentinel1 六景（2024-09 摩羯窗口，CRC 全过）

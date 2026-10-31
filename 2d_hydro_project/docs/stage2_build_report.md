@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage2-build
+canonical: true
+scope: project
+---
+
 # 阶段 2 报告：LISFLOOD-FP 8.1 Windows 构建（2026-10-24）
 
 ## 结论

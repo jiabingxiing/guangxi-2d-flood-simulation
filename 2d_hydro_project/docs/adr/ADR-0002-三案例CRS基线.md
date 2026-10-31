@@ -1,3 +1,11 @@
+---
+doc_type: explanation
+status: active
+topic: adr-0002
+canonical: true
+scope: project
+---
+
 # ADR-0002：三案例水平 CRS 基线
 
 - **状态**：有条件接受（AOI 为暂定框；业务确认精确 AOI 后复跑核验脚本方可转正）

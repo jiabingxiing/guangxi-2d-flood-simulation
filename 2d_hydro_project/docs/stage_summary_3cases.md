@@ -1,3 +1,11 @@
+---
+doc_type: explanation
+status: active
+topic: stage-summary
+canonical: true
+scope: project
+---
+
 # 三案例阶段汇总（阶段 3~5 首轮，降级模式 ADR-0004/0005）
 
 日期：2026-10-26 ｜ 范围：宁明（2026-08 紫檀）、久隆（2024-09 摩羯）、贵港（2024-09 摩羯/郁江）

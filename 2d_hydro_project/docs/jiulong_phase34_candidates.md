@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: jiulong-phase34
+canonical: true
+scope: project
+---
+
 # 久隆 Phase 3–4 候选清单与阻塞项
 
 > 生成：2026-10-31 ｜ 模式：**公开数据降级 · 情景级**（ADR-0004）

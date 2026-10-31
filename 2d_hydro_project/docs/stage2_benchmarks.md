@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage2-benchmarks
+canonical: true
+scope: project
+---
+
 # 阶段 2 报告（续）：数值基准 B1–B5（终稿 十一章，2026-10-24）
 
 - **对象**：LISFLOOD-FP 8.1.0（MinGW GCC 16.2 构建，见 `stage2_build_report.md`）

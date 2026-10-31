@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: jiulong-100m-rerun
+canonical: true
+scope: project
+---
+
 # 久隆 100 m 完整物理重跑（Phase E4）
 
 > 授权：用户 2026-10-31 明确批准「100 m 完整物理重跑」，并选择「两个时间窗都跑」+「同时试边界修正」。

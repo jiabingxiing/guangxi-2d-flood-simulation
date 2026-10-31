@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: docs-index
+canonical: true
+scope: project
+---
+
 # docs/ 索引
 
 执行状态与剩余项的事实 SSOT 是 `execution_status.md`，先读它；其余为阶段报告与决策记录。

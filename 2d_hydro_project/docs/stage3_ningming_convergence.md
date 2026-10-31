@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage3-ningming-convergence
+canonical: true
+scope: project
+---
+
 # 宁明换维度收敛试验（水量维度 @ q6000/n0.10）
 
 指标口径：观测时刻 2026-08-24 最近 6h 帧（78h）；主阈值 0.15 m；模拟剔除 8/6 常水。

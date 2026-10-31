@@ -1,3 +1,11 @@
+---
+doc_type: how-to
+status: active
+topic: runbook
+canonical: true
+scope: project
+---
+
 # RUNBOOK：二维水动力情景回算操作手册（降级模式，阶段 6 雏形）
 
 更新：2026-10-27 ｜ 适用：`2d_hydro_project`（LISFLOOD-FP 8.1 MinGW 构建，公开数据降级模式 ADR-0004；模型/结构使用边界见 ADR-0008）

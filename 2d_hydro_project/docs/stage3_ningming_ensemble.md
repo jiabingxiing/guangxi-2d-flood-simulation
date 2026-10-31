@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage3-ningming-ensemble
+canonical: true
+scope: project
+---
+
 # 宁明率定敏感性集（2026-08 紫檀事件，情景级）
 
 指标口径：观测时刻 2026-08-24T08:00+08:00（最近 6h 帧 13 = 78h，±6h）；主阈值 0.15 m（预注册），0.05/0.30 仅敏感性；模拟剔除 8/6 常水。

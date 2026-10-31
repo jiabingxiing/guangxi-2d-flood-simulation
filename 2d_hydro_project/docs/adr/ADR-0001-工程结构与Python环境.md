@@ -1,3 +1,11 @@
+---
+doc_type: explanation
+status: active
+topic: adr-0001
+canonical: true
+scope: project
+---
+
 # ADR-0001：工程结构与 Python 环境管理
 
 - **状态**：已接受（Accepted）

@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage3-sensitivity
+canonical: true
+scope: project
+---
+
 # 网格/时间步敏感性（Phase B1，终稿 §11 第 7 项）
 
 生成：2026-10-27T05:09:09.140011+00:00　｜　情景级结论

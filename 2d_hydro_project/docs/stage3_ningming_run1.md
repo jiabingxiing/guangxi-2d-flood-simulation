@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage3-ningming-run1
+canonical: true
+scope: project
+---
+
 # 阶段 3 报告：宁明 2026-08 紫檀事件 首轮情景回算（run1，2026-10-24）
 
 > **2026-10-26 追注**：本页保留首轮调试历史（`res.max` 口径）。首轮 CSI 0.305/0.336、站址 9.99/16.3 m 等数字已被时刻切片口径取代；现行指标见 `docs/stage3_ningming_ensemble.md` 与 `docs/final_report.md`（q6000/n0.10 主阈值 0.15：CSI 0.357、POD 0.773、FAR 0.602；站址像元 0.018 m、±2 格 10.32 m）。

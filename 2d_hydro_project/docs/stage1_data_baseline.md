@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage1-data-baseline
+canonical: true
+scope: project
+---
+
 # 阶段 1 报告：久隆数据基线（进行中）与三案例公共数据（2026-10-24 首批）
 
 > 范围调整说明：本项目实际以「三案例公共数据基线 + 久隆先行」推进；宁明因本地验证数据反而资料最全。

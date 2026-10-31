@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: execution-status
+canonical: true
+scope: project
+---
+
 # 执行状态与剩余项（对照终稿）
 
 更新：2026-10-31 ｜ 模式：公开数据降级（ADR-0004/0005/0008）｜ **不是计划全部完成，不是业务预警系统**

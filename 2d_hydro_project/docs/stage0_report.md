@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage0-report
+canonical: true
+scope: project
+---
+
 # 阶段 0（启动/盘点）报告与门禁评估
 
 - **执行日期**：2026-10-24 ｜ **执行方式**：本机自动化盘点 + 网络检索（公开报道级）

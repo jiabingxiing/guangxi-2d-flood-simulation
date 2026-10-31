@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage3-manning
+canonical: true
+scope: project
+---
+
 # 宁明空间 Manning 敏感性（Phase B0，修正 G18）
 
 生成：2026-10-26T13:18:04.967484+00:00　｜　情景级结论，非业务判据

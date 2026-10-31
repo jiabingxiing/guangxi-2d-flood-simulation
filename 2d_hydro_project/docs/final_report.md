@@ -1,3 +1,11 @@
+---
+doc_type: explanation
+status: active
+topic: final-report
+canonical: true
+scope: project
+---
+
 # 广西久隆/宁明/贵港二维水动力模拟阶段成果报告（降级模式首轮，修订版）
 
 日期：2026-10-26（2026-10-27 增补 §9）｜ 模式：公开数据降级（ADR-0004/0005）｜ **全部结论为情景级，不是业务预警系统**

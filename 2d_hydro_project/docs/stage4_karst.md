@@ -1,3 +1,11 @@
+---
+doc_type: reference
+status: active
+topic: stage4-karst
+canonical: true
+scope: project
+---
+
 # 宁明喀斯特标量入渗有界损失情景（Phase B3，R6）
 
 生成：2026-10-26T14:08:00.263983+00:00　｜　情景级结论，非实测入渗率
