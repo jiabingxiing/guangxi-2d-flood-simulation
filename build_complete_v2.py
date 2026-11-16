@@ -5,6 +5,8 @@ build_complete_v2.py
 """
 import os
 import sys
+from pathlib import Path
+
 import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -728,9 +730,11 @@ def append_chapters_7_to_10_and_finish(doc, md_lines):
     log_md("## 第十章：防汛业务汇报与领导技术答辩核心话术库\n")
     log_md(q10_lead + "\n\n" + q10_expert + "\n\n" + q10_eng + "\n\n---\n")
 
-    # 保存文档
-    docx_path = r"d:\NWKYYSJZX\2026年工作\1023 久隆 贵港 宁明 二维水动力模拟\广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版).docx"
-    md_path = r"d:\NWKYYSJZX\2026年工作\1023 久隆 贵港 宁明 二维水动力模拟\广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版).md"
+    # 保存文档：输出到脚本所在目录，不写死盘符（换盘/换目录后可运行）
+    _here = Path(__file__).resolve().parent
+    _stem = "广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版)"
+    docx_path = str(_here / f"{_stem}.docx")
+    md_path = str(_here / f"{_stem}.md")
     
     print(f"Saving Word docx to: {docx_path}")
     doc.save(docx_path)

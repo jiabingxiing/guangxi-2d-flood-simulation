@@ -56,8 +56,14 @@ uv --directory . sync
 # 质量/追溯
 uv --directory . run python scripts/stage0/make_code_manifest.py   # 代码/配置哈希
 uv --directory . run python scripts/stage0/make_input_manifest.py  # 输入哈希
-uv --directory . run python scripts/stage3/g15_mass_recheck.py     # 全 run 质量门
-uv --directory . run pytest
+uv --directory . run python scripts/stage3/g15_mass_recheck.py     # 全 run 质量门（61 PASS / 3 FAIL-EXPLAINED / 0 FAIL，64 run）
+uv --directory . run python -m pytest                              # 全量自动化测试（383 passed）
+
+# 换盘/换位置后首步（详见根 AGENTS.md「可移植性」节）
+uv --directory . run python scripts/maintenance/preflight.py        # 自检：陈旧 editable 安装 / 导入越界
+uv --directory . run python scripts/maintenance/health_check.py     # 巡检：盘可读 / 备份时效 / 计数自洽
+uv --directory . run python scripts/maintenance/make_backup.py      # 备份（代码包 + 不可再生中间件 + 证据）
+uv --directory . run python scripts/maintenance/verify_backup.py --root <备份根>   # 备份哈希校验
 
 # 三案例（降级模式；宁明默认基线 q4000/n0.035）
 uv --directory . run python scripts/run_case.py ningming

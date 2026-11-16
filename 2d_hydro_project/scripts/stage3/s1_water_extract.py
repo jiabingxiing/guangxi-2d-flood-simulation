@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 import xml.etree.ElementTree as ET
 import zipfile
 from datetime import datetime, timezone
@@ -25,6 +26,9 @@ import rasterio
 from pyproj import Transformer
 
 PROJ = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJ))
+from scripts.common.paths import resolve_legacy  # noqa: E402
+
 OUT_DIR = PROJ / "data" / "processed" / "s1_water"
 S1_JSON = PROJ / "data" / "catalog" / "s1_downloads.json"
 
@@ -190,7 +194,9 @@ def main() -> None:
             continue
         print(f"[{site}] {key} ...", flush=True)
         try:
-            r = extract(Path(rec["path"]), site)
+            # 清单里的 path 是历史宿主绝对路径（可能旧盘符/旧上级目录名），
+            # 经 paths 重锚到当前项目；解析失败只跳过该景，不中断批次。
+            r = extract(resolve_legacy(rec["path"]), site)
         except Exception as exc:  # 单景失败不中断批次
             r = {"site": site, "scene": key, "error": repr(exc)}
         print(json.dumps(r, ensure_ascii=False), flush=True)

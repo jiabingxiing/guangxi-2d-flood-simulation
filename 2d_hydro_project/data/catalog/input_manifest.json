@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T23:07:07.435323+00:00",
+  "generated_utc": "2026-11-16T09:39:57.730271+00:00",
   "algorithm": "sha256",
   "files": {
     "dem_ningming_interim": {
@@ -51,11 +51,6 @@
       "path": "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe",
       "bytes": 1336106,
       "sha256": "651306080e20529dc6a72c8113037a4333c943c7d6adad712457d41f4d321ee8"
-    },
-    "dem_source_guangxi": {
-      "path": "D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
-      "bytes": 2051269376,
-      "sha256": "c621f4681a65cb2c288d769f8edff5463fa150062940fe71a19df27ee69aadbf"
     },
     "dem_source_jiulong_clip": {
       "path": "data/interim/jiulong/dem_12p5m_32649.tif",
@@ -124,28 +119,34 @@
     },
     "config_base": {
       "path": "configs/base.yaml",
-      "bytes": 3615,
-      "sha256": "b2363820bbf848bc101c530d82dabc0b3e23e33610a6a59bcf7aa9992ba383fe"
+      "bytes": 3873,
+      "sha256": "a97ba06b44639b9cb178565302d0a84f20438d756de0844b7538a59422134435"
     },
     "config_jiulong": {
       "path": "configs/cases/jiulong.yaml",
-      "bytes": 4075,
-      "sha256": "00228bbcf27b0da0dd957d83a3a9bde6f92fd1650116c257f4d4082f22840ce4"
+      "bytes": 4100,
+      "sha256": "343dd67c79ff3073766db91a7c437586c625e3e245d4659da1377eacfd3c7535"
     },
     "config_ningming": {
       "path": "configs/cases/ningming.yaml",
-      "bytes": 3333,
-      "sha256": "8b18a7732fa108c283b1272943261e78a62f385d0c45d51e9eca25d3c55d2b90"
+      "bytes": 3358,
+      "sha256": "7f69fdae35482cd845d4d83efbb356ac885e1f07a9305422b6a2b16b4fa4b8ed"
     },
     "config_guigang": {
       "path": "configs/cases/guigang.yaml",
-      "bytes": 3199,
-      "sha256": "1f44ee8471df9abaad0f088291c2f949f67d2b426b08c190d8583de08c4cbfb7"
+      "bytes": 3224,
+      "sha256": "49d675c9745ea0f290493f1a9c448eedcca8e08aabb20b21dbd5867f3e08ae58"
     },
     "config_model_manifest": {
       "path": "configs/model_manifest.yaml",
-      "bytes": 4336,
-      "sha256": "77a6872361fa5910d97a167424bee72f2dc312b5e91887e264ed6d3978066613"
+      "bytes": 4362,
+      "sha256": "a349ca06cf600f1affea0de4a240b70c2f4a2b9968433502b89cb3e98cbf1fda"
+    },
+    "dem_source_guangxi": {
+      "bytes": 2051269376,
+      "sha256": "c621f4681a65cb2c288d769f8edff5463fa150062940fe71a19df27ee69aadbf",
+      "external_id": "DEM_SOURCE",
+      "path": "data/raw/dem_source/广西.tif"
     }
   }
 }

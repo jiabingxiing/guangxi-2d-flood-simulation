@@ -18,9 +18,9 @@ from pathlib import Path
 import requests
 
 PROJ = Path(__file__).resolve().parents[2]
-# 下载目标：外置盘 E: 掉线后（2026-10-24）临时改 D 盘；E 盘恢复后整体迁移。
-# 可用环境变量 S1_DEST 覆盖（如 S1_DEST=E:/S1_gxhydro/sentinel1）。
-OUT_BASE = Path(os.environ.get("S1_DEST", "D:/S1_gxhydro/sentinel1"))
+# 下载目标默认落在项目内 data/S1_gxhydro/sentinel1（与 verify_s1.py 一致）。
+# 可用环境变量 S1_DEST 覆盖到项目外位置。
+OUT_BASE = Path(os.environ.get("S1_DEST") or (PROJ / "data" / "S1_gxhydro" / "sentinel1"))
 LOG = PROJ / "logs" / "s1_download.log"
 RESULT_JSON = PROJ / "data" / "catalog" / "s1_downloads.json"
 ENV_PATH = PROJ / ".env"

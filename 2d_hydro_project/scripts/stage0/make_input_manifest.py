@@ -7,10 +7,23 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 PROJ = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJ))
+from scripts.common.paths import (  # noqa: E402
+    EXTERNAL_DEFAULTS,
+    PathResolutionError,
+    external,
+    rel_posix,
+)
+
+# 真外部资源用逻辑名标记，由 paths 解析到当前位置；不得写死盘符。
+EXTERNAL_KEYS = {
+    "dem_source_guangxi": "DEM_SOURCE",
+}
 
 TARGETS = {
     "dem_ningming_interim": "data/interim/ningming/dem_filled_12p5m_32648.tif",
@@ -23,7 +36,6 @@ TARGETS = {
     "era5_jiulong_sep2024_ext": "data/catalog/probes/jiulong_sep2024_era5_hourly_ext.json",
     "era5_guigang_sep2024": "data/catalog/probes/guigang_sep2024_era5_hourly.json",
     "lisflood_exe": "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe",
-    "dem_source_guangxi": r"D:\NWKYYSJZX\2026年工作\0731 五省区DEM\广西\广西.tif",
     "dem_source_jiulong_clip": "data/interim/jiulong/dem_12p5m_32649.tif",
     "dem_guigang_clip": "data/interim/guigang/dem_12p5m_32649.tif",
     "mannings_jiulong": "data/interim/jiulong/mannings_12p5m_32649.tif",
@@ -57,14 +69,36 @@ def main() -> None:
     out = {"generated_utc": datetime.now(timezone.utc).isoformat(),
            "algorithm": "sha256", "files": {}}
     for key, rel in TARGETS.items():
-        p = Path(rel) if not Path(rel).is_absolute() else Path(rel)
-        p = p if p.is_absolute() else PROJ / p
+        p = PROJ / rel
         if not p.exists():
             out["files"][key] = {"path": rel, "missing": True}
             continue
-        out["files"][key] = {"path": rel, "bytes": p.stat().st_size,
+        out["files"][key] = {"path": rel_posix(p), "bytes": p.stat().st_size,
                              "sha256": sha256(p)}
         print(key, out["files"][key]["bytes"], out["files"][key]["sha256"][:16])
+    # 真外部资源：不写宿主盘符。`path` 写项目内默认位置（若资源在项目内）
+    # 或写外部资源默认位置；两者都不可用时用 `external:<KEY>` 逻辑名占位，
+    # 由 scripts/common/paths.py 的 external() 解析——消费者不得直接 open(path)。
+    for key, ext_key in EXTERNAL_KEYS.items():
+        found = external(ext_key)
+        default_parts = EXTERNAL_DEFAULTS.get(ext_key, ())
+        default_rel = "/".join(default_parts) if default_parts else f"external:{ext_key}"
+        if found is None:
+            out["files"][key] = {
+                "path": default_rel, "external_id": ext_key, "missing": True,
+                "note": f"外部资源未就位；设置 GX_{ext_key} 或放入 "
+                        f"{default_rel} 后重跑本脚本",
+            }
+            print(key, "MISSING(external)", ext_key)
+            continue
+        rec = {"bytes": found.stat().st_size, "sha256": sha256(found),
+               "external_id": ext_key}
+        try:
+            rec["path"] = rel_posix(found)
+        except PathResolutionError:
+            rec["path"] = default_rel  # 在项目外：写逻辑默认位置，不写盘符
+        out["files"][key] = rec
+        print(key, rec["bytes"], rec["sha256"][:16], "(external)")
     dst = PROJ / "data" / "catalog" / "input_manifest.json"
     dst.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
     print("->", dst)

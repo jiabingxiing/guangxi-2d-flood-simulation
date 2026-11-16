@@ -18,7 +18,11 @@ dependencies = [
     "pyshp>=3.1.6",
 ]
 
-[project.optional-dependencies]
+# 开发依赖用 [dependency-groups]（uv 默认安装，与 floodviz 一致）。
+# 原用 [project.optional-dependencies]，需 --extra dev 才装；
+# 2026-11-16 实测 `uv sync`（不带 --extra dev）会连带卸载 pytest，
+# 改为默认组后 sync 不再破坏测试环境。
+[dependency-groups]
 dev = [
     "pytest>=8.0",
 ]

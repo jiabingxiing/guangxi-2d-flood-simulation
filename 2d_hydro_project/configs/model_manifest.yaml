@@ -17,7 +17,7 @@ primary_candidate:
                 downloaded_meta: "data/catalog/lisflood_fp_download.json"}
   build:
     status: "已构建（2026-10-24，详见 docs/stage2_build_report.md）"
-    toolchain: "w64devkit v2.10.1（MinGW-w64 GCC 16.2.0，D:\\w64devkit）"
+    toolchain: "w64devkit v2.10.1（MinGW-w64 GCC 16.2.0；路径由环境决定，不固定盘符）"
     config: "config/local-mingw（-O3 -fopenmp -static -D_NUMERIC_MODE=1 -D_NETCDF=0）"
     executable: "models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe（1.34MB，静态链接）"
     banner: "LISFLOOD-FP version 8.1.0 (double), _CALCULATE_Q_MODE 1"

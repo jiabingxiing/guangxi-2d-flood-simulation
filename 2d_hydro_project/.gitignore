@@ -10,6 +10,9 @@ __pycache__/
 *.token
 *_credentials*
 
+# 本机路径映射（含宿主盘符/用户名）：模板入库，真实映射不入库
+configs/paths.local.yaml
+
 # 第三方模型源码树与运行产物（已登记哈希与补丁，不入库）
 models/
 

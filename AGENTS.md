@@ -27,20 +27,49 @@
 
 ```bash
 $env:PYTHONUTF8 = "1"
-uv --directory 2d_hydro_project run python -m pytest        # 152 passed（基线）
-uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py   # 质量门全表，权威值 43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run）
-uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not slow and not e2e"
-uv --directory 2d_hydro_project/flood_visualization run python -m floodviz inventory --config configs/default.yaml
+uv --directory 2d_hydro_project run python -m pytest        # 383 passed（2026-11-16 实测全量通过）
+uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py   # 质量门全表，权威值 61 PASS / 3 FAIL-EXPLAINED / 0 FAIL（64 run）
+uv --directory 2d_hydro_project run python scripts/stage6/validate_guigang_s1.py  # 贵港四情景 S1 POD/FAR/CSI + 站点水位诊断
+uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not slow and not e2e"   # 253 passed
+uv --directory 2d_hydro_project/flood_visualization run python -m floodviz inventory --config configs/default.yaml   # 18 run 通过
 ```
 
 **注意**：`uv --directory 2d_hydro_project run pytest` 会报
 `uv trampoline failed to canonicalize script path`；必须用 `run python -m pytest`。
+
+## 换盘 / 换位置后的首步（可移植性）
+
+项目可整体复制到任意盘符与任意上级目录后运行；`.venv` **不要**手工搬，重建即可。
+
+```powershell
+# 1. 自检：会报出陈旧的 editable 安装与"导入自别处副本"
+uv --directory 2d_hydro_project run python scripts/maintenance/preflight.py
+
+# 2. 修复（父子工程各一次）：重写 .pth 到当前位置
+uv --directory 2d_hydro_project sync
+uv --directory 2d_hydro_project/flood_visualization sync
+
+# 3. 日常巡检：盘可读性、备份时效、计数自洽
+uv --directory 2d_hydro_project run python scripts/maintenance/health_check.py
+
+# 4. 备份与校验（备份必须落在另一块物理盘）
+uv --directory 2d_hydro_project run python scripts/maintenance/make_backup.py
+uv --directory 2d_hydro_project run python scripts/maintenance/verify_backup.py --root <备份根>
+```
+
+- 源 DEM 等真外部资源由 `scripts/common/paths.py` 解析：`GX_DEM_SOURCE` → `configs/paths.local.yaml` → 项目内 `data/raw/dem_source/`（可为目录联接，`mklink /J` 无需管理员）。
+- 备份根用 `GX_BACKUP_ROOT` 指定（本机已设为 `D:\Backups\gx-hydro2d`）。
+- 静态门 `tests/test_no_host_paths.py` 会阻止把宿主盘符写回代码/配置。
+- 2026-11-16 实测：项目复制到另一盘符且中间目录改名后，父 383 / 子 253 / 质量门 61-3-0 / inventory 18 run 全部与源位置一致。
 
 ## 状态与文档指针
 
 - 执行状态 SSOT：`2d_hydro_project/docs/execution_status.md`
 - 质量门 SSOT：`2d_hydro_project/data/catalog/mass_recheck_g15.json`（任何文档的计数与此冲突时以该 JSON 为准）
 - docs 索引：`2d_hydro_project/docs/README.md`
-- 决策记录：`2d_hydro_project/docs/adr/`（ADR-0001~0010；0010 = 久隆直接降雨模型治理规范）
-- 久隆治理脚本：`scripts/common/{grid_io,patch_analysis}.py`（共用底座）、`scripts/stage6/{diagnose_jiulong_artifacts,analyze_patch_persistence,clean_jiulong_display}.py`、`scripts/stage3/{prepare_jiulong_dem_layers,run_rainfall_loss_sensitivity,audit_jiulong_drainage,jiulong_100m_rerun}.py`
+- 降雨下渗预处理器：`2d_hydro_project/docs/rainfall_runoff_preprocessor.md`（Green-Ampt/SCS-CN/Horton 土壤水文与物理净雨驱动报告）
+- 决策记录：`2d_hydro_project/docs/adr/`（ADR-0001~0014；0010 = 久隆直接降雨模型治理规范，0011 = 贵港零散伪影治理与驱动重构，0012 = 贵港水力约束河槽重构，0013 = 贵港组合驱动归因实验，0014 = 贵港排水连通治理（诊断探针，含第四轮天花板/密度/G7-S1 复核））
+- 久隆治理脚本：`scripts/common/{grid_io,patch_analysis}.py`（共用底座）、`scripts/stage6/{diagnose_jiulong_artifacts,analyze_patch_persistence,clean_jiulong_display}.py`、`scripts/stage3/{prepare_jiulong_dem_layers,run_rainfall_loss_sensitivity,audit_jiulong_drainage,jiulong_100m_rerun,run_jiulong_ga_rerun}.py`
+- 贵港治理脚本：`scripts/stage6/{diagnose_guigang_artifacts,analyze_guigang_patches,clean_guigang_display,audit_guigang_channel_route,compare_guigang_phase4,summarize_guigang_phase4,diagnose_guigang_phase4_paradox,verify_guigang_patch_mechanism,hist_guigang_patches,validate_guigang_s1,attribute_guigang_combo,diagnose_guigang_ponding,review_guigang_g7_s1}.py`、`scripts/stage5/guigang_scenario.py`（`--rain {on,off,loss_medium,loss_high,ga}`；`--channel {off,linear,hydraulic}`，hydraulic 需 `--channel-dem <channel_recon/dXXm[_drA|_drB]>`；`--infiltration <mm/h>` 路径 B 单用只配 `--rain on`，ADR-0012~0014）
+- 贵港河槽重构与排水治理（ADR-0012~0014）：`scripts/common/channel_engine.py`（Manning 反演/圆滑梯形/刻蚀核心）、`scripts/common/net_rain.py`（预处理器净雨读取 + 时基移位）、`scripts/stage3/build_guigang_centerline.py`（OSM→S2→直线回退链）、`scripts/stage3/build_guigang_channel_dem.py`（五套重构 DEM + 几何/输水验证）、`scripts/stage3/build_guigang_drainage.py`（DEM 推导排水沟 A 档，主槽种子传播树 + canyon 守卫）；priors 预注册 `data/catalog/guigang_channel_priors.json`，组合矩阵 `guigang_round2_matrix.json`，排水矩阵 `guigang_round3_drainage.json`，先冻结后刻蚀/跑
 - git：主工程代码/文档 + floodviz 源码/测试/文档/QA 证据 + plans + 根级交付报告已入库；大文件与再生产物按 `.gitignore` 排除（data ~10.9 GB、outputs 运行产物、logs、models、.env、web/.dev/mock_bundle 不进 git）。

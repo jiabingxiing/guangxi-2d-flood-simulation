@@ -31,7 +31,7 @@ implementation:                     # 实际执行（降级模式），与计划
   note: "100 m 走廊；25/12.5 m 计划未执行；验证为 2026-08-24 时刻切片，非 res.max"
 
 terrain:
-  primary: {id: dem_gx_local, path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif", resolution_m: 12.5, crs: "EPSG:32648", note: "本案例同为 32648，可直接裁切对齐；来源/垂直基准待查证"}
+  primary: {id: dem_gx_local, external_id: DEM_SOURCE, resolution_m: 12.5, crs: "EPSG:32648", note: "本案例同为 32648，可直接裁切对齐；源 DEM 由 scripts/common/paths.py 解析（不固定宿主路径）；来源/垂直基准待查证"}
 
 events:
   candidates:

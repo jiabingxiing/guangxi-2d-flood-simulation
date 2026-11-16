@@ -11,7 +11,8 @@ sources:
     category: 区域地形（主基底）
     product: "广西全省 DEM（广西.tif，前期『五省区DEM』工作区）"
     priority: 1
-    access: "本地路径 D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif"
+    external_id: DEM_SOURCE
+    access: "本地已有（真外部资源）。由 scripts/common/paths.py 解析：环境变量 GX_DEM_SOURCE → configs/paths.local.yaml → 项目内 data/raw/dem_source/；本机现以此目录联接指向原始 DEM 目录"
     account_required: false
     license: "待查证（产品来源未确认，疑似 ALOS 12.5 m 系；前期项目工作地形）"
     sensitivity: internal

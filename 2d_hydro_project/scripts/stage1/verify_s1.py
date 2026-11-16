@@ -1,18 +1,24 @@
-"""阶段1：S1 数据完整性校验与登记（E:\S1_gxhydro\sentinel1 六景）。
+"""阶段1：S1 数据完整性校验与登记（项目内 data/S1_gxhydro/sentinel1 六景）。
 
 用法：uv --directory . run python scripts/stage1/verify_s1.py
-校验：zip CRC 测试（zipfile testzip）+ manifest/safe 文件存在性；
+校验：zip CRC 测试（zipfile.testzip）+ manifest/safe 文件存在性；
 登记：大小、文件数、CRC 结果 -> data/catalog/s1_downloads.json 更新。
+
+S1 原始 ZIP 已随项目迁移到 data/S1_gxhydro/（.gitignore 已排除，不入库）；
+可用环境变量 GX_S1_ROOT 覆盖到项目外位置。
 """
 from __future__ import annotations
 
 import json
+import os
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-BASE = Path("E:/S1_gxhydro/sentinel1")
-OUT = Path(__file__).resolve().parents[2] / "data" / "catalog" / "s1_downloads.json"
+PROJ = Path(__file__).resolve().parents[2]
+_DEFAULT_S1 = PROJ / "data" / "S1_gxhydro" / "sentinel1"
+BASE = Path(os.environ.get("GX_S1_ROOT") or _DEFAULT_S1)
+OUT = PROJ / "data" / "catalog" / "s1_downloads.json"
 
 EXPECT = {
     "ningming": [

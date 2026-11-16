@@ -21,7 +21,8 @@ from rasterio.vrt import WarpedVRT
 from rasterio.windows import from_bounds
 
 PROJ_ROOT = Path(__file__).resolve().parents[2]
-DEM_PATH = Path("D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif")
+sys.path.insert(0, str(PROJ_ROOT))
+from scripts.common.paths import dem_source  # noqa: E402  可移植：源 DEM 由 paths 解析
 
 
 def main() -> None:
@@ -38,7 +39,8 @@ def main() -> None:
     ys = [c[1] for c in corners]
     bounds = (min(xs), min(ys), max(xs), max(ys))
 
-    with rasterio.open(DEM_PATH) as src:
+    dem_path = dem_source()
+    with rasterio.open(dem_path) as src:
         with WarpedVRT(src, crs=f"EPSG:{target_epsg}", resampling=Resampling.bilinear) as vrt:
             # AOI 外扩 2 km 缓冲，避免边界重采样伪影
             pad = 2000.0
@@ -66,7 +68,7 @@ def main() -> None:
     valid = data[data != -9999.0]
     rec = {
         "case": case,
-        "source": str(DEM_PATH),
+        "source": str(dem_path),
         "target_crs": f"EPSG:{target_epsg}",
         "resolution_m": res,
         "aoi_buffer_m": pad,

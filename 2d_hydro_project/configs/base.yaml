@@ -51,7 +51,10 @@ data_baseline:                    # 2026-10-24 修订（ADR-0004/0005）
   degraded_mode: true             # 公开/本地数据降级模式；全部结论标注研究性/条件性
   dem_primary:
     id: dem_gx_local
-    path: "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/广西/广西.tif"
+    # 源 DEM 为真外部资源：不在此固定宿主路径，由 scripts/common/paths.py 解析
+    # （env GX_DEM_SOURCE → configs/paths.local.yaml → 项目内 data/raw/dem_source/）。
+    # 当前本机：E:\NWKYYSJZX\2026\0101 五省区DEM\广西\广西.tif，经目录联接挂入项目。
+    external_id: DEM_SOURCE
     resolution_m: 12.5
     crs: "EPSG:32648"
     status: "暂定主基底；产品来源与垂直基准待查证（dem_inventory.json）"

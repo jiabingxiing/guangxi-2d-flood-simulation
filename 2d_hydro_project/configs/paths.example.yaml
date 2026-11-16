@@ -1,0 +1,33 @@
+# 路径配置模板 —— 复制为 paths.local.yaml 并按本机实际情况填写
+#
+# 用途：声明"真外部资源"（不在项目内的文件）在本机的位置。
+# 项目内资源不需要在这里登记：它们由 scripts/common/paths.py 以项目相对路径解析。
+#
+# 解析优先级（见 scripts/common/paths.py 的 external()）：
+#   1. 环境变量 GX_<KEY>（最高）
+#   2. 本文件 <KEY>: <路径>
+#   3. 项目内默认位置
+#   4. 都没有 → 返回 None（可选资源）或报错（必需资源）
+#
+# 本文件不含真实宿主路径，可提交入库。
+# paths.local.yaml 含本机路径，已被 .gitignore 排除，不得入库。
+
+# ── 源 DEM（广西.tif，约 2.05 GB）────────────────────────────────────────
+# 只被重现脚本读取（clip_dem.py、dem_artifact_qa.py、guigang_scenario.py 等）；
+# 已完成的 run 不依赖它，缺失不影响既有成果。
+#
+# 推荐做法：在 2d_hydro_project/data/raw/ 下建目录联接（无需管理员）：
+#   cmd /c mklink /J "data\raw\dem_source" "E:\NWKYYSJZX\2026\0101 五省区DEM\广西"
+# 该目录已含 广西.tif，故 paths 的项目内默认位置可直接命中，无需填本文件。
+#
+# 也可直接指定：
+# DEM_SOURCE: "E:/NWKYYSJZX/2026/0101 五省区DEM/广西/广西.tif"
+
+# ── 光学/背景影像根（可选）──────────────────────────────────────────────
+# 久隆本地 RGB 与灾后 SAR 的上级目录（其下应有「淹没分析 7.8」）。
+# 缺失时光学层降级为 missing，不阻断发布。
+# OPTICAL_ROOT: "E:/NWKYYSJZX/2026/0101 五省区DEM"
+
+# ── 工具链（仅需重编译 lisflood.exe 时）─────────────────────────────────
+# 默认走 PATH 上的 gcc/make；w64devkit 可不登记。
+# TOOLCHAIN_ROOT: "D:/w64devkit"

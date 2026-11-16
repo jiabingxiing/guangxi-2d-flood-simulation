@@ -80,6 +80,29 @@ FV_ROOT = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = FV_ROOT.parent
 TASK_ROOT = PROJECT_ROOT.parent
 
+# 真外部资源（源 DEM 衍生目录）：不写死盘符。按 env → 项目内默认解析。
+# 子工程只读父项目，故此处独立实现解析，不反向 import 父项目 scripts。
+def _resolve_optical_root_default() -> Path | None:
+    env = os.environ.get("GX_OPTICAL_ROOT")
+    if env:
+        cand = Path(env)
+        if cand.exists():
+            return cand
+    local = PROJECT_ROOT / "configs" / "paths.local.yaml"
+    if local.is_file():
+        try:
+            import yaml
+
+            doc = yaml.safe_load(local.read_text(encoding="utf-8")) or {}
+            raw = doc.get("OPTICAL_ROOT") or doc.get("optical_root")
+            if raw and Path(str(raw)).exists():
+                return Path(str(raw))
+        except (OSError, ValueError, ImportError):
+            pass
+    cand = PROJECT_ROOT / "data" / "raw" / "optical"
+    return cand if cand.exists() else None
+
+
 OPTICAL_ROOT = FV_ROOT / "data" / "processed" / "optical"
 ASSETS_ROOT = FV_ROOT / "data" / "processed" / "assets"
 SAR_ROOT = ASSETS_ROOT / "sar"
@@ -173,13 +196,19 @@ OPTICAL_SCENES = {
     },
 }
 
+# 本地 RGB 源：媒体根由 _resolve_optical_root_default() 解析（env GX_OPTICAL_ROOT
+# → configs/paths.local.yaml → data/raw/optical）；缺失时光学层降级为 missing，
+# 不阻断发布。历史 D: 绝对路径已失效。
+_OPTICAL_SRC_ROOT = _resolve_optical_root_default()
+_JIU_RGB_REL = (
+    Path("淹没分析 7.8") / "data" / "500kV久隆站附近"
+    / "灾前可见光" / "SVN3-01_20260403_L4D0000293335_02_6042500742470001_RGB.tiff"
+)
+
 LOCAL_OPTICAL = {
     "jiulong": {
         "asset_id": "jiulong_rgb_20260403",
-        "path": (
-            Path("D:/NWKYYSJZX/2026年工作/0731 五省区DEM/淹没分析 7.8/data/500kV久隆站附近/")
-            / "灾前可见光/SVN3-01_20260403_L4D0000293335_02_6042500742470001_RGB.tiff"
-        ),
+        "path": (_OPTICAL_SRC_ROOT / _JIU_RGB_REL) if _OPTICAL_SRC_ROOT else None,
         "datetime_local": "2026-04-03（仅日期，精确过境时刻未核实）",
         "label": "可见光背景（本地 RGB，2026-04-03）",
         "role": "background",
@@ -245,7 +274,10 @@ DISABLED_ASSETS = [
         "case_id": "jiulong",
         "layer": "sar",
         "asset_id": "jiulong_local_sar_after_unknown",
-        "path": "D:/NWKYYSJZX/2026年工作/0731 五省区DEM/淹没分析 7.8/data/灾后SAR_久隆区域.tif",
+        "path": (
+            str(_OPTICAL_SRC_ROOT / "淹没分析 7.8" / "data" / "灾后SAR_久隆区域.tif")
+            if _OPTICAL_SRC_ROOT else None
+        ),
         "status": "local_unchecked",
         "enabled": False,
         "reason": "传感器/日期/处理链未核实；不得进入发布包，不得标 ready",
@@ -924,7 +956,14 @@ def prepare_remote_optical(case_id: str, scene: dict, grid: dict, args) -> dict:
 
 def prepare_local_optical(case_id: str, spec: dict, grid: dict, args) -> dict:
     asset_id = spec["asset_id"]
-    src_path: Path = spec["path"]
+    src_path: Path | None = spec["path"]
+    if src_path is None:
+        # 外部影像根未配置：降级为 missing，不阻断发布（契约要求不得假装 ready）
+        raise FileNotFoundError(
+            f"本地影像根未配置，光学层降级 missing：{asset_id}。\n"
+            "  设置 GX_OPTICAL_ROOT=<含『淹没分析 7.8』的目录>，\n"
+            "  或把影像放到 2d_hydro_project/data/raw/optical/"
+        )
     source_label = src_path.name
     out_png = OPTICAL_ROOT / case_id / f"{asset_id}.png"
     out_json = OPTICAL_ROOT / case_id / f"{asset_id}.json"

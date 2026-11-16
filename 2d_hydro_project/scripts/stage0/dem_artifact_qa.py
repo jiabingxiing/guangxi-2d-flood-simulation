@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -23,7 +24,11 @@ import yaml
 from pyproj import Transformer
 
 PROJ_ROOT = Path(__file__).resolve().parents[2]
-SOURCE = Path(r"D:\NWKYYSJZX\2026年工作\0731 五省区DEM\广西\广西.tif")
+sys.path.insert(0, str(PROJ_ROOT))
+from scripts.common.paths import external  # noqa: E402  可移植：源 DEM 由 paths 解析
+
+# 源 DEM 属可选外部资源：缺失时本脚本仍产出案例内 DEM 的 QA，仅跳过源点回读。
+SOURCE = external("DEM_SOURCE")
 CASE_SPECS = {
     "jiulong": {
         "path": PROJ_ROOT / "data/interim/jiulong/dem_12p5m_32649.tif",

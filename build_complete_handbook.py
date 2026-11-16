@@ -4,6 +4,8 @@
 功能：完整生成《广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版).docx》
 """
 import sys
+from pathlib import Path
+
 import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -266,7 +268,7 @@ def build():
     add_p(doc, "【一句话定论】它在“物理交付与访问方式”上是【本地预先存储】，在“数据技术血统与规格”上是【公开 ALOS PALSAR RTC 来源】。两者并不矛盾，是同一个数据资产在物理存放与技术源头上的两重属性。")
     
     add_h2(doc, "3.1 物理层面：它是工作站本地已有文件，本项目未重新下载")
-    add_p(doc, "1. 实际存放路径：D:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif\n"
+    add_p(doc, "1. 实际存放路径：项目内 data/raw/dem_source（目录联接），指向原始「五省区DEM」工作区的 广西.tif；具体盘符由本机决定，换盘后可重新联接，故文档不固定盘符\n"
                "2. 物理规格：文件大小精确为 2,051,269,376 字节（约 2.05 GB），整省栅格矩阵 61,834 × 49,239，投影为 UTM Zone 48N（EPSG:32648），空间分辨率为 12.5 米。\n"
                "3. 获取事实：该文件是在本项目启动前，团队在 2026 年 7 月底开展“0731 五省区DEM”工作时，就已经拼接并存放在本机磁盘上的现成成果底座。本项目在阶段 0 盘点时直接挂载了该本地路径，避免了重复从外网耗时下载海量瓦片的带宽开销。")
 
@@ -522,8 +524,11 @@ def build():
         "【本质认知升华】"
     )
 
-    # 保存文档
-    out_docx_path = r"d:\NWKYYSJZX\2026年工作\1023 久隆 贵港 宁明 二维水动力模拟\广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版).docx"
+    # 保存文档：输出到脚本所在目录，不写死盘符（换盘/换目录后可运行）
+    out_docx_path = str(
+        Path(__file__).resolve().parent
+        / "广西二维水动力模拟项目_全问答与技术答辩手册(手机阅读优化版).docx"
+    )
     doc.save(out_docx_path)
     print(f"Docx generated successfully: {out_docx_path}")
 
