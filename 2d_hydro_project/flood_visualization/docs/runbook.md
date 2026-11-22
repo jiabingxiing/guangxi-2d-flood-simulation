@@ -68,12 +68,19 @@ uv run python scripts/fetch_vendor.py    # 抓固定版本 MapLibre 5.24.0 / Pro
 
 > vendor 缓存留在 `data/external/vendor-cache/`；断网重建时用 `--offline`。
 
-## 4. 发布包版本现状（2026-10-30 更新）
+## 4. 发布包版本现状（2026-11-02 更新）
 
-**当前交付包**：`v6-20261029`（100 m 真实DEM，104.2 MB、714 文件，16 946 项全量验证 0 失败）。
-**构建级回滚包**：`v5-20261028`（100 m 真实DEM，94.5 MB、706 文件，同验证结果）。
+**当前交付包**：`v8-20261102`（3 案例 / 11 run，461.5 MB、3113 文件，9/9 校验组通过、0 失败）。
+　新增贵港 6 个可选层：`display_qc` A/B/C 三档 + `flow_only_v1` / `dualloss_v1` / `rainloss_high_v1` 三个物理情景。
+　贵港默认层仍为 raw `scen_yagi_q11500_100m_dt2p5_choff_realdem`；6 个新增层均可在网页下拉中切换（`runSelect`）。
+**构建级回滚包**：`v7-20261031`。
+**上一交付包**：`v6-20261029`（100 m 真实DEM，104.2 MB、714 文件）。
 **数据级回滚包**：`v4-20261028`（200 m 旧代，已归档）。
 **历史归档**：`v2-20261027`、`v3-20261028`、`v4-20261028`。
+
+> **v8 的两处实测修正（发布前发现并已修复，见 ADR-0011 §5.3）**：
+> ① 贵港 `display_qc` 的派生 `res.max` 原按斑块级删除，导致 1,732 像元低于逐帧值，`validate --full` 判 4 项「违反单向性」失败；改为「保留帧包络 + 主水体取源值」后归零。
+> ② `flow_only_v1` 源 `res.max` 有 9 个像元被 6 h 采样帧超出 0.0010 m，属 `.wd` 输出量化步长伪影；`pipeline.py` 单向性容差由 `-1e-9` 放宽为一个量化步长 `0.001 m`，超过一步仍判失败。
 
 ### 4.1 两个目录的分工
 
@@ -138,8 +145,8 @@ uv run python -m floodviz validate --bundle outputs/web_bundle/dev1
 ## 5. 启动与访问
 
 ```powershell
-scripts\start_local.cmd                 # 服务最新版包（当前为 v6-20261029）
-scripts\start_local.cmd v6-20261029     # 服务指定包
+scripts\start_local.cmd                 # 服务最新版包（当前为 v8-20261102）
+scripts\start_local.cmd v8-20261102     # 服务指定包
 scripts\start_local.cmd v5-20261028     # 构建级回滚
 $env:PORT=8766; scripts\start_local.cmd # 换回环端口
 ```

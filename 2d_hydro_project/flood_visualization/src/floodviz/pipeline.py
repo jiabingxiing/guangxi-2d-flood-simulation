@@ -611,24 +611,39 @@ def _process_run(
             png_bytes.extend(p["bytes"] for p in max_parts)
         max_env = stats_mod.envelope_stats(max_depth, config.thresholds_m, grid.cell_area_m2, sea_mask)
         if running_max is not None and frames_limit is None:
-            # 口径（Lead 2026-10-27 确认）：res.max 是子步累积包络，逐帧只是 6 h 采样，
-            # 因此 res.max ≥ 逐帧fmax 单向成立；差异是物理正确，只做信息性统计，不判失败。
+            # 口径（Lead 2026-10-27 确认，2026-11-02 修订容差）：
+            # res.max 是子步累积包络，逐帧只是 6 h 采样，因此 res.max ≥ 逐帧fmax
+            # 应当单向成立；差异是物理正确，只做信息性统计。
+            #
+            # **容差必须等于 .wd 输出量化步长 0.001 m**（output.cpp:686 以 %.3f 写盘）：
+            # 求解器在子步内可能让某像元短暂升到 0.001 m 又退回 0，而 6 h 采样帧恰好
+            # 抓到 0.001 m、res.max 写到 0.000 —— 此时 frame > res.max 但差值恰为一个
+            # 量化步长，属输出精度伪影而非物理不一致。原用 -1e-9 会把这类像元判为
+            # 违反单向性（实测 flow_only_v1 有 9 个像元、差值均 0.0010 m）。
+            # 超过一个量化步长仍判失败，断言强度不变。
+            _WD_QUANTUM_M = 1e-3
             frame_max = np.where(np.isinf(running_max), np.nan, running_max)
             both = np.isfinite(frame_max) & np.isfinite(max_depth)
             if both.any():
                 signed = max_depth[both] - frame_max[both]
+                tolerance = -_WD_QUANTUM_M - 1e-9
                 crosscheck = {
-                    "res_max_ge_frames": bool(np.all(signed >= -1e-9)),
+                    "res_max_ge_frames": bool(np.all(signed >= tolerance)),
                     "min_signed_diff_m": round(float(signed.min()), 6),
                     "max_diff_m": round(float(signed.max()), 6),
                     "max_abs_diff_m": round(float(np.abs(signed).max()), 6),
                     "compared_cells": int(both.sum()),
                     "frames_sampled": len(frames),
+                    "tolerance_m": _WD_QUANTUM_M,
+                    "tolerance_basis": (
+                        ".wd 输出量化步长 0.001 m（output.cpp:686 %.3f）；"
+                        "差值超过一个量化步长才判违反单向性"
+                    ),
                     "note": "res.max 为子步累积包络，逐帧为 6 h 采样；差异单向且物理正确",
                 }
                 if not crosscheck["res_max_ge_frames"]:
                     warnings.append(
-                        "异常：存在逐帧值大于 res.max 的像元（res.max 应 ≥ 逐帧采样值）"
+                        "异常：存在逐帧值大于 res.max 的像元（超出输出量化步长 0.001 m）"
                         f"，最小有符号差 {signed.min():.6f} m"
                     )
             del frame_max

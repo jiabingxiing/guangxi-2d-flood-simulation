@@ -60,16 +60,14 @@
 
   function cacheDom() {
     [
-      'project-title', 'project-subtitle', 'case-tabs', 'run-select', 'header-badges',
-      'preset-buttons', 'layer-list', 'basemap-toggle', 'basemap-select', 'basemap-hint',
+      'project-title', 'case-tabs', 'run-select', 'header-badges',
+      'preset-buttons', 'layer-list', 'basemap-toggle', 'basemap-select',
       'basemap-warn', 'basemap-retry', 'map-title', 'map-subtitle', 'notice-bar', 'map-hint',
       'query-body', 'threshold-select', 'area-chart', 'chart-note', 'legend-body',
       'quality-body', 'btn-prev', 'btn-play', 'btn-next', 'speed-group', 'time-relative',
       'time-absolute', 'frame-readout', 'btn-max', 'frame-slider', 'frame-ticks',
       'temporal-note', 'origin-note', 'status-bundle', 'status-layers',
-      'status-attribution', 'status-license',
-      'btn-portal-toggle', 'portal-overlay', 'btn-portal-close', 'portal-basin-cards',
-      'mode-fast', 'mode-research', 'portal-mode-hint'
+      'status-attribution', 'status-license'
     ].forEach(function (id) {
       dom[camel(id)] = el(id);
     });
@@ -166,7 +164,6 @@
       applyCatalogChrome(catalog);
       setupBasemaps(catalog);
       buildPresetButtons(catalog);
-      renderPortalBasins(catalog);
       var caseId = catalog.default_case || (catalog.cases[0] && catalog.cases[0].case_id);
       return selectCase(caseId, null, { initial: true });
     }).then(function () {
@@ -182,14 +179,13 @@
     dom.noticeBar.hidden = false;
     dom.noticeBar.className = 'notice-bar';
     dom.noticeBar.innerHTML = '<strong>发布包加载失败</strong><br>' + escapeHtml(message) +
-      '<br><span style="color:#9db0c4">请确认通过 scripts/start_local.cmd（127.0.0.1:8765）访问，且 bundle 目录完整。</span>';
+      '<br><span style="color:var(--text-3)">请确认通过 scripts/start_local.cmd（127.0.0.1:8765）访问，且 bundle 目录完整。</span>';
     dom.statusBundle.textContent = '发布包：加载失败';
   }
 
   function applyCatalogChrome(catalog) {
     var display = catalog.display || {};
     if (dom.projectTitle) dom.projectTitle.textContent = '「驭洪」洪涝推演系统';
-    if (dom.projectSubtitle) dom.projectSubtitle.textContent = display.subtitle || '';
     state.threshold = display.default_threshold_m != null ? display.default_threshold_m : 0.05;
     if (dom.temporalNote) dom.temporalNote.textContent = '回放步长: 6 h/帧';
     if (dom.chartNote) dom.chartNote.textContent = (display.area_threshold_note || '') ||
@@ -218,77 +214,6 @@
         selectCase(c.case_id, null);
       });
       dom.caseTabs.appendChild(btn);
-    });
-  }
-
-  /* -------------------------------------------------------------- 驭洪全景门户 */
-
-  function togglePortal(show) {
-    if (!dom.portalOverlay) return;
-    var isCurrentlyHidden = dom.portalOverlay.hasAttribute('hidden') || dom.portalOverlay.classList.contains('hidden');
-    var shouldShow = show != null ? show : isCurrentlyHidden;
-    if (shouldShow) {
-      dom.portalOverlay.removeAttribute('hidden');
-      dom.portalOverlay.classList.remove('hidden');
-      updatePortalActiveBasin();
-    } else {
-      dom.portalOverlay.setAttribute('hidden', '');
-      dom.portalOverlay.classList.add('hidden');
-    }
-  }
-
-  function renderPortalBasins(catalog) {
-    if (!dom.portalBasinCards) return;
-    clearNode(dom.portalBasinCards);
-    (catalog.cases || []).forEach(function (c) {
-      var card = document.createElement('div');
-      card.className = 'portal-basin-card' + (c.case_id === state.caseId ? ' active' : '');
-      card.dataset.caseId = c.case_id;
-
-      var head = document.createElement('div');
-      head.className = 'basin-card-head';
-      var title = document.createElement('span');
-      title.className = 'basin-card-title';
-      title.textContent = c.name || c.case_id;
-      var tag = document.createElement('span');
-      tag.className = 'basin-card-tag';
-      tag.textContent = c.event_name || '典型汛情';
-      head.appendChild(title);
-      head.appendChild(tag);
-
-      var desc = document.createElement('p');
-      desc.className = 'basin-card-desc';
-      desc.textContent = c.subtitle || (c.name + ' 二维高精度网格流体动力学演进模拟');
-
-      var meta = document.createElement('div');
-      meta.className = 'basin-card-meta';
-      var runCount = (c.runs || []).length;
-      meta.innerHTML = '<span>情景方案: ' + runCount + ' 组</span><span>网格推演: 2D Hydro</span>';
-
-      card.appendChild(head);
-      card.appendChild(desc);
-      card.appendChild(meta);
-
-      card.addEventListener('click', function () {
-        if (state.caseId !== c.case_id) {
-          selectCase(c.case_id, null);
-        }
-        togglePortal(false);
-      });
-
-      dom.portalBasinCards.appendChild(card);
-    });
-  }
-
-  function updatePortalActiveBasin() {
-    if (!dom.portalBasinCards) return;
-    var cards = dom.portalBasinCards.querySelectorAll('.portal-basin-card');
-    cards.forEach(function (cd) {
-      if (cd.dataset.caseId === state.caseId) {
-        cd.classList.add('active');
-      } else {
-        cd.classList.remove('active');
-      }
     });
   }
 
@@ -356,7 +281,6 @@
         renderTimelineTicks();
         renderPlayerState(player.state());
         renderHeaderBadges();
-        updatePortalActiveBasin();
         // 首帧提交
         return player.goTo(0, { reason: 'case-switch' });
       });
@@ -1036,11 +960,6 @@
     if (state.basemapId) dom.basemapSelect.value = state.basemapId;
     dom.basemapSelect.disabled = basemaps.length === 0;
     dom.basemapToggle.disabled = basemaps.length === 0;
-    if (dom.basemapHint) {
-      dom.basemapHint.textContent = basemaps.length
-        ? '仅 Esri 在线底图；需联网，断网时保留本地图层。'
-        : '发布包未提供在线底图定义。';
-    }
   }
 
   function onBasemapState(info) {
@@ -1333,7 +1252,7 @@
     if (payload.state === 'error') {
       var pe = document.createElement('p');
       pe.className = 'query-value';
-      pe.style.color = 'var(--error)';
+      pe.style.color = 'var(--err)';
       pe.textContent = '查询失败';
       body.appendChild(pe);
       var se = document.createElement('p');
@@ -1471,8 +1390,15 @@
     ctx.clearRect(0, 0, cssW, cssH);
 
     var series = seriesFor(state.threshold);
+    // 画布颜色与 :root token 单一真源保持一致（canvas 无法直接读 CSS 变量，此处镜像）
+    var C = {
+      axis: '#cbd5e1', grid: '#f1f5f9', label: '#64748b',
+      line: '#0369a1', lineSoft: 'rgba(3, 105, 161, 0.35)',
+      fillTop: 'rgba(3, 105, 161, 0.22)', fillBottom: 'rgba(3, 105, 161, 0.02)',
+      cursor: '#b45309', cursorSoft: 'rgba(180, 83, 9, 0.85)', cursorText: '#ffd79a'
+    };
     if (!series.length) {
-      ctx.fillStyle = '#74899f';
+      ctx.fillStyle = C.label;
       ctx.font = '12px "Microsoft YaHei", sans-serif';
       ctx.fillText('无统计数据', 12, 24);
       return;
@@ -1492,7 +1418,7 @@
     var yMax = maxArea * 1.12;
 
     // 坐标轴
-    ctx.strokeStyle = '#cbd5e1';
+    ctx.strokeStyle = C.axis;
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(padL, padT);
@@ -1501,14 +1427,14 @@
     ctx.stroke();
 
     // Y 轴刻度（从 0 起，面积单位 km² 写在卡片标题里，避免与刻度叠字）
-    ctx.fillStyle = '#64748b';
+    ctx.fillStyle = C.label;
     ctx.font = '10px "Cascadia Mono", monospace';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     for (var g = 0; g <= 4; g += 1) {
       var yv = (yMax / 4) * g;
       var y = padT + plotH - (yv / yMax) * plotH;
-      ctx.strokeStyle = g === 0 ? '#cbd5e1' : '#f1f5f9';
+      ctx.strokeStyle = g === 0 ? C.axis : C.grid;
       ctx.beginPath();
       ctx.moveTo(padL, y);
       ctx.lineTo(padL + plotW, y);
@@ -1528,7 +1454,7 @@
     }
 
     // 曲线（含前段 0，不裁剪）；包络模式下逐帧曲线降为背景参考
-    ctx.strokeStyle = state.maxMode ? 'rgba(22, 119, 255, 0.35)' : '#1677ff';
+    ctx.strokeStyle = state.maxMode ? C.lineSoft : C.line;
     ctx.lineWidth = 2.2;
     ctx.beginPath();
     var started = false;
@@ -1552,8 +1478,8 @@
       ctx.lineTo(padL + (n > 1 ? (firstIdx / (n - 1)) * plotW : plotW / 2), padT + plotH);
       ctx.closePath();
       var grad = ctx.createLinearGradient(0, padT, 0, padT + plotH);
-      grad.addColorStop(0, 'rgba(22, 119, 255, 0.22)');
-      grad.addColorStop(1, 'rgba(22, 119, 255, 0.02)');
+      grad.addColorStop(0, C.fillTop);
+      grad.addColorStop(1, C.fillBottom);
       ctx.fillStyle = grad;
       ctx.fill();
     }
@@ -1562,7 +1488,7 @@
     var curIdx = player.index;
     if (!state.maxMode && curIdx >= 0 && curIdx < n) {
       var cx = padL + (n > 1 ? (curIdx / (n - 1)) * plotW : plotW / 2);
-      ctx.strokeStyle = '#d97706';
+      ctx.strokeStyle = C.cursor;
       ctx.lineWidth = 1.4;
       ctx.setLineDash([3, 3]);
       ctx.beginPath();
@@ -1573,7 +1499,7 @@
       var cur = series[curIdx];
       if (cur && cur.area != null) {
         var cy = padT + plotH - (cur.area / yMax) * plotH;
-        ctx.fillStyle = '#d97706';
+        ctx.fillStyle = C.cursor;
         ctx.beginPath();
         ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
         ctx.fill();
@@ -1581,7 +1507,7 @@
     }
 
     // 曲线所属口径：逐帧回放为“单帧面积”，包络模式为“全程包络”
-    ctx.fillStyle = '#64748b';
+    ctx.fillStyle = C.label;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'top';
     ctx.font = '10px "Microsoft YaHei", sans-serif';
@@ -1589,7 +1515,7 @@
     var envArea = envAreas && envAreas[String(state.threshold)] != null ? envAreas[String(state.threshold)] : null;
     if (state.maxMode) {
       // 包络模式：不显示“当前帧”数值（时间轴已暂停），只显示包络值，避免两个口径同屏混称
-      ctx.fillStyle = '#b45309';
+      ctx.fillStyle = C.cursor;
       ctx.fillText('包络（全程）' + (envArea != null ? ' ' + fmtArea(envArea) : ' 无数据') + '　·　时间轴已暂停',
         cssW - padR, padT - 1);
     } else {
@@ -1601,7 +1527,7 @@
     // 包络模式：画全程包络水平参考线（与逐帧曲线区分；逐帧曲线降为背景）
     if (state.maxMode && envArea != null && yMax > 0) {
       var ey = padT + plotH - (envArea / yMax) * plotH;
-      ctx.strokeStyle = 'rgba(255, 215, 154, 0.85)';
+      ctx.strokeStyle = C.cursorSoft;
       ctx.lineWidth = 1.4;
       ctx.setLineDash([6, 4]);
       ctx.beginPath();
@@ -1609,7 +1535,7 @@
       ctx.lineTo(padL + plotW, ey);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.fillStyle = '#ffd79a';
+      ctx.fillStyle = C.cursorText;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'bottom';
       ctx.fillText('全程包络', padL + 4, ey - 2);
@@ -1703,12 +1629,6 @@
       rows.appendChild(row);
     });
     block.appendChild(rows);
-    if (note) {
-      var p = document.createElement('p');
-      p.className = 'legend-note';
-      p.textContent = note;
-      block.appendChild(p);
-    }
     return block;
   }
 
@@ -1783,19 +1703,6 @@
     mx.textContent = (mxVal != null ? (typeof mxVal === 'number' ? fmtNum(mxVal) : mxVal) : '—') + ' m';
     scale.appendChild(mx);
     block.appendChild(scale);
-
-    if (extraNote) {
-      var en = document.createElement('p');
-      en.className = 'legend-note';
-      en.textContent = extraNote;
-      block.appendChild(en);
-    }
-    if (def.note) {
-      var p = document.createElement('p');
-      p.className = 'legend-note';
-      p.textContent = def.note;
-      block.appendChild(p);
-    }
     return block;
   }
 
@@ -1841,9 +1748,9 @@
     var kpiRow = document.createElement('div');
     kpiRow.className = 'quality-kpi-row';
     var badge = massGateBadge(q.mass_gate);
-    addKpiChip(kpiRow, '质量守恒门', badge.text, badge.cls === 'ok' ? '#34d399' : '#f59e0b');
-    addKpiChip(kpiRow, '验证状态', q.validation_status || '已校核', '#38bdf8');
-    addKpiChip(kpiRow, '垂直基准', q.vertical_datum_status || '1985国家高程', '#93c5fd');
+    addKpiChip(kpiRow, '质量守恒门', badge.text, 'var(--ok)');
+    addKpiChip(kpiRow, '验证状态', q.validation_status || '已校核', 'var(--info)');
+    addKpiChip(kpiRow, '垂直基准', q.vertical_datum_status || '1985国家高程', 'var(--accent)');
     dom.qualityBody.appendChild(kpiRow);
 
     var scenario = block('情景与来源');
@@ -1915,11 +1822,6 @@
     var q = (runObj && runObj.quality) || caseObj.quality || {};
     var badge = massGateBadge(q.mass_gate);
     addBadge(badge.cls, '质量门 ' + badge.text);
-    if (state.timeline && state.timeline.origin_status === 'model_schedule_confirmed') {
-      addBadge('info', '时间起点已确认');
-    } else {
-      addBadge('warn', '时间起点为候选依据');
-    }
     addBadge('info', (runObj ? runObj.frame_count : 0) + ' 帧 · ' +
       (state.timeline && state.timeline.save_interval_s ? (state.timeline.save_interval_s / 3600) : 6) + ' h/帧');
     var grid = gridOf();
@@ -1940,64 +1842,6 @@
   /* -------------------------------------------------------------- 事件 */
 
   function bindStaticEvents() {
-    if (dom.btnPortalToggle) {
-      dom.btnPortalToggle.addEventListener('click', function () {
-        togglePortal();
-      });
-    }
-    if (dom.btnPortalClose) {
-      dom.btnPortalClose.addEventListener('click', function () {
-        togglePortal(false);
-      });
-    }
-
-    if (dom.modeFast && dom.modeResearch && dom.portalModeHint) {
-      dom.modeFast.addEventListener('click', function () {
-        dom.modeFast.classList.add('active');
-        dom.modeFast.setAttribute('aria-selected', 'true');
-        dom.modeResearch.classList.remove('active');
-        dom.modeResearch.setAttribute('aria-selected', 'false');
-        dom.portalModeHint.textContent = '极速浏览：聚焦防汛关键断线、变电站淹没淹顶与水深包络极值，响应敏捷';
-      });
-      dom.modeResearch.addEventListener('click', function () {
-        dom.modeResearch.classList.add('active');
-        dom.modeResearch.setAttribute('aria-selected', 'true');
-        dom.modeFast.classList.remove('active');
-        dom.modeFast.setAttribute('aria-selected', 'false');
-        dom.portalModeHint.textContent = '研究模式：自主规划，水动力逐帧演进、时空连续流体与数值网格深度分析';
-      });
-    }
-
-    if (dom.portalOverlay) {
-      var dockBtns = dom.portalOverlay.querySelectorAll('.dock-card');
-      dockBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var action = btn.dataset.action;
-          togglePortal(false);
-          if (action === 'playback') {
-            player.play();
-          } else if (action === 'substations') {
-            applyPreset('all_available');
-          } else if (action === 'chart') {
-            var chartCard = el('chart-card');
-            if (chartCard) chartCard.scrollIntoView({ behavior: 'smooth' });
-          } else if (action === 'satellite') {
-            if (dom.basemapToggle) {
-              dom.basemapToggle.checked = true;
-              state.basemapEnabled = true;
-              fvmap.setBasemap(true, state.basemapId);
-            }
-          } else if (action === 'quality') {
-            var qual = el('quality-details');
-            if (qual) {
-              qual.open = true;
-              qual.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
-      });
-    }
-
     dom.runSelect.addEventListener('change', function () {
       if (state.caseId && dom.runSelect.value !== state.runId) {
         selectCase(state.caseId, dom.runSelect.value);
@@ -2064,11 +1908,6 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.defaultPrevented) return;
-      if (e.key === 'Escape' && dom.portalOverlay && !dom.portalOverlay.hasAttribute('hidden') && !dom.portalOverlay.classList.contains('hidden')) {
-        e.preventDefault();
-        togglePortal(false);
-        return;
-      }
       var tag = (e.target && e.target.tagName || '').toLowerCase();
       if (tag === 'input' || tag === 'select' || tag === 'textarea') {
         if (e.key === ' ' && e.target.type === 'range') {

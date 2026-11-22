@@ -10,68 +10,6 @@
 </head>
 <body>
 <div id="app">
-  <!-- 驭洪 全景门户展示主屏（参考「驭理」数智高科技门户设计） -->
-  <aside id="portal-overlay" class="portal-overlay" hidden aria-label="「驭洪」全景推演门户">
-    <div class="portal-backdrop"></div>
-    <div class="portal-container">
-      <button type="button" id="btn-portal-close" class="portal-close-btn" title="收起总览，进入推演地图" aria-label="进入推演地图">
-        <span class="close-icon">✕</span> 进入推演
-      </button>
-
-      <div class="portal-hero">
-        <div class="portal-csg-badge">
-          <img src="assets/images/csg_logo.png" alt="中国南方电网" class="portal-csg-logo">
-          <span class="csg-subtext">数字电网 · 二维水动力仿真引擎</span>
-        </div>
-        <img src="assets/images/yu_hong_hero_brand.png" alt="驭洪 洞悉科技脉络，预演电力未来" class="portal-hero-logo">
-      </div>
-
-      <!-- 模式切换药丸（极速浏览 vs 深度推演） -->
-      <div class="portal-mode-box">
-        <div class="portal-mode-pills" role="tablist" aria-label="推演模式切换">
-          <button type="button" class="portal-mode-btn active" id="mode-fast" role="tab" aria-selected="true">
-            <span class="mode-icon">⚡</span> 极速模式
-          </button>
-          <button type="button" class="portal-mode-btn" id="mode-research" role="tab" aria-selected="false">
-            <span class="mode-icon">💡</span> 研究模式
-          </button>
-        </div>
-        <p class="portal-mode-hint" id="portal-mode-hint">
-          极速浏览：聚焦防汛关键断线、变电站淹没淹顶与水深包络极值，响应敏捷
-        </p>
-      </div>
-
-      <!-- 三大流域快速卡片直达 -->
-      <div class="portal-basin-cards" id="portal-basin-cards">
-        <!-- 由 app.js 动态填充与联动 -->
-      </div>
-
-      <!-- 底部悬浮功能药丸卡片 -->
-      <div class="portal-dock-cards" role="group" aria-label="快捷业务模块">
-        <button type="button" class="dock-card" data-action="playback" title="启动时空流体回放">
-          <span class="dock-icon">🌊</span>
-          <span class="dock-label">淹没回放</span>
-        </button>
-        <button type="button" class="dock-card" data-action="substations" title="聚焦变电站分布与水深">
-          <span class="dock-icon">⚡</span>
-          <span class="dock-label">厂站水深</span>
-        </button>
-        <button type="button" class="dock-card" data-action="chart" title="查看淹没面积过程线">
-          <span class="dock-icon">📊</span>
-          <span class="dock-label">面积过程线</span>
-        </button>
-        <button type="button" class="dock-card" data-action="satellite" title="比对哨兵二号等卫星遥感真实水体">
-          <span class="dock-icon">🗺️</span>
-          <span class="dock-label">遥感核验</span>
-        </button>
-        <button type="button" class="dock-card" data-action="quality" title="查阅模型质量与答辩手册">
-          <span class="dock-icon">📑</span>
-          <span class="dock-label">答辩报告</span>
-        </button>
-      </div>
-    </div>
-  </aside>
-
   <header id="app-header">
     <div class="brand">
       <img src="assets/images/csg_logo.png" alt="中国南方电网" class="brand-csg-logo" title="中国南方电网">
@@ -79,13 +17,9 @@
       <img src="assets/images/yu_hong_logo.png" alt="驭洪" class="brand-yu-logo" title="「驭洪」品牌">
       <span class="brand-divider" aria-hidden="true"></span>
       <h1 id="project-title" class="brand-title">「驭洪」洪涝推演系统</h1>
-      <span class="brand-slogan" title="洞悉科技脉络，预演电力未来">洞悉科技脉络 · 预演电力未来</span>
     </div>
     <nav id="case-tabs" class="case-tabs" aria-label="推演流域切换"></nav>
     <div class="header-right">
-      <button type="button" id="btn-portal-toggle" class="btn-portal-pill" title="打开/关闭推演总览门户">
-        <span class="pill-icon">🏛️</span> 驭洪总览
-      </button>
       <div class="run-picker">
         <label for="run-select">情景方案</label>
         <select id="run-select" aria-label="切换情景方案"></select>
@@ -160,7 +94,7 @@
         </div>
         <canvas id="area-chart" width="640" height="260" aria-label="面积—时间曲线"></canvas>
         <div class="chart-footnote">
-          <span class="footnote-dot">ⓘ</span>
+          <span class="footnote-dot">注</span>
           <span id="chart-note">面积为原生模型网格单帧有效像元 depth&gt;阈值 的面积；不是资产安全等级。</span>
         </div>
       </section>
@@ -224,7 +158,7 @@
     <span id="status-license"></span>
   </div>
 </div>
-<noscript><p style="color:#f0a03c;padding:16px">本页面需要启用 JavaScript。</p></noscript>
+<noscript><p class="noscript-note">本页面需要启用 JavaScript。</p></noscript>
 <script src="assets/vendor/maplibre/maplibre-gl.js"></script>
 <script src="assets/vendor/proj4/proj4.js"></script>
 <script src="assets/timeline.js"></script>

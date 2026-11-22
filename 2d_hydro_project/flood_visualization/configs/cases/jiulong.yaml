@@ -37,6 +37,13 @@ runs:
     simulation_duration_s: 1123200
     optional: true
     notes: "与默认情景在 T+120 h 前逐位一致；退水期验证为 WEAK，模型面积不降反增（无排水网限制）。display_qc 派生层的源 run"
+  - run_id: scen_free_200m_dt2p5_sv6h_recession_ga_v1
+    label: "200 m GA 净雨重跑（T+0–312 h）"
+    role: scenario
+    source: "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_sv6h_recession_ga_v1"
+    save_interval_s: 21600
+    simulation_duration_s: 1123200
+    notes: "Green-Ampt 净雨驱动重跑（GA-Mid：毛雨 242.5 mm、净雨 109.7 mm、Ks 2.58 mm/h）；与扩展退水情景同期长。全周期峰值湿面积 217.60 km²（零损失重跑前 294.36 km²，−26.1%）；S1 假警报像元 −23.5%（execution_status 2026-11-07）。质量门 PASS（mass_recheck_g15.json）"
   - run_id: scen_free_100m_dt2p5_sv6h_realdem
     label: "100 m 敏感性对照（科研诊断，非生产）"
     role: legacy

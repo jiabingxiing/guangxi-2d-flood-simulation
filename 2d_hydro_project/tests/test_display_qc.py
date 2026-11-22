@@ -39,6 +39,11 @@ JIU = PROJ / "outputs" / "jiulong" / "2024-09-yagi"
 RUN_200M = JIU / "scen_free_200m_sv6h_recession"
 RUN_100M = JIU / "scen_free_100m_dt2p5_sv6h_realdem"
 DISPLAY_ROOT = PROJ / "outputs" / "display_qc"
+#: 久隆派生层的 run 级根目录。``outputs/display_qc`` 是**多案例共用**的根：
+#: 贵港 Phase 1 已在 ``outputs/display_qc/guigang/2024-09-yagi/...`` 下落盘 57 帧
+#: 派生层（帧数与久隆 53 帧不同）。本文件的断言只针对久隆 200 m 基线，
+#: 故把遍历范围收敛到久隆自己的 run 目录，避免把贵港层误当作久隆层来断言。
+DISPLAY_RUN_ROOT = DISPLAY_ROOT / "scen_free_200m_sv6h_recession"
 AUDIT_PATH = PROJ / "data" / "catalog" / "jiulong_display_qc_audit.json"
 SCRIPT = PROJ / "scripts" / "stage6" / "clean_jiulong_display.py"
 
@@ -57,9 +62,9 @@ REQUIRED_DERIVED_META = (
 
 
 def _display_dirs() -> list[Path]:
-    if not DISPLAY_ROOT.is_dir():
+    if not DISPLAY_RUN_ROOT.is_dir():
         return []
-    return sorted(p for p in DISPLAY_ROOT.rglob("*") if (p / "meta.json").is_file())
+    return sorted(p for p in DISPLAY_RUN_ROOT.rglob("*") if (p / "meta.json").is_file())
 
 
 def _audit() -> dict:

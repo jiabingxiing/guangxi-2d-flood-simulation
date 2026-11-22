@@ -100,7 +100,7 @@
         var f = feats[0];
         var props = f.properties || {};
         var html = '<strong>' + escapeHtml(props.name || '站点') + '</strong>' +
-          (props.label ? '<br><span style="color:#64748b">' + escapeHtml(props.label) + '</span>' : '');
+          (props.label ? '<br><span style="color:var(--text-3)">' + escapeHtml(props.label) + '</span>' : '');
         new maplibregl.Popup({ closeButton: true, maxWidth: '280px' })
           .setLngLat(f.geometry.coordinates)
           .setHTML(html)
@@ -393,7 +393,7 @@
               type: 'line',
               source: sourceId,
               paint: {
-                'line-color': '#d97706',
+                'line-color': '#b45309',
                 'line-width': 1.6,
                 'line-dasharray': [4, 3],
                 'line-opacity': g.visible ? 1 : 0
@@ -411,7 +411,7 @@
               source: sourceId,
               paint: {
                 'circle-radius': 5,
-                'circle-color': '#0284c7',
+                'circle-color': '#0369a1',
                 'circle-stroke-color': '#ffffff',
                 'circle-stroke-width': 1.6,
                 'circle-opacity': g.visible ? 1 : 0

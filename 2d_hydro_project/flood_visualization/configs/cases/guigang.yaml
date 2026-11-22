@@ -16,6 +16,12 @@ default_run_id: scen_yagi_q11500_100m_dt2p5_choff_realdem
 sites:
   - {name: "贵港市区", lon: 109.60, lat: 23.11, label: "市区参考点（站点坐标非业务核证）"}
 
+# 分层口径（ADR-0010 / 贵港治理 Phase 1）：
+#   raw 层   = 模型原始输出，可一键切回，是唯一有物理意义的层；
+#   display_qc 层 = 只读展示派生层，带 not_physical_recalculation=true，不具物理意义。
+# 默认层按 ADR-0010 第 2 条维持 raw（scen_yagi_q11500_100m_dt2p5_choff_realdem）。
+# 贵港 display_qc 三档 A/B/C 实测均 blocked_for_default_publish=true，且用户未确认是否作默认层，
+# 故默认层维持 raw；三档仅作诊断层，不得默认发布。
 runs:
   - run_id: scen_yagi_q11500_100m_dt2p5_choff_realdem
     label: "默认 100 m 真实DEM全域（T+0–336 h）"
@@ -40,6 +46,70 @@ runs:
     simulation_duration_s: 1209600
     optional: true
     notes: "200 m 对照，不冒充 30 m；站址水深 200 m 偏大 15%"
+  # ---- 展示质控派生层（Phase 1）----
+  # 三档均为只读展示派生，源 run 为 scen_yagi_q11500_100m_dt2p5_choff_realdem；
+  # 三档实测 blocked_for_default_publish=true（第 14 帧 seq14/t=84 h 涨水段湿面积变化率超 5% 预注册上限），
+  # 只能作诊断层，不得默认发布。参数为预注册，不得为凑结果修改。
+  # ⚠ optional 取值说明（本包实测语义）：floodviz 的 optional=true 不是「非默认层」，而是
+  #   「不进发布包」（pipeline.py:1590 `or run.optional: continue`；prepare_bundle 恒传
+  #   only_runs=None，CLI 无覆盖参数；docs/build_report.md:215 明载 optional run 未入包）。
+  #   本任务要求「接入并重建发布包」，故下列 6 个新 run 一律 optional=false 才能进入 v8；
+  #   「不设为默认」由 default_run_id 保持 raw 实现，与 optional 无关。
+  - run_id: scen_yagi_q11500_100m_realdem_display_qc_A
+    label: "展示质控层 A 档（保守，只清计划 A 档上限内碎斑）"
+    role: derived
+    source: "outputs/display_qc/guigang/2024-09-yagi/scen_yagi_q11500_100m_realdem_display_qc/A"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true，不是物理重算。源 run scen_yagi_q11500_100m_dt2p5_choff_realdem。A 档参数：≤0.04 km² 且 ≤0.15 m、persistence 36 h、深水豁免 ≥0.50 m。res.max 口径实测 4,422 斑块去除 979 个＝22.14%（计划预测 80.2%），面积变化 2.086%、水量变化 0.0606%，主水体 614.96 km² 精确保护（removed_cells=0）。未达到计划 §4 验收目标（≥90%）。blocked_for_default_publish=true（第 14 帧湿面积变化率 13.76% > 5% 上限），故不得默认发布，仅作诊断层。仅供展示，不得用于物理结论或资产判据"
+  - run_id: scen_yagi_q11500_100m_realdem_display_qc_B
+    label: "展示质控层 B 档（中等）"
+    role: derived
+    source: "outputs/display_qc/guigang/2024-09-yagi/scen_yagi_q11500_100m_realdem_display_qc/B"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true，不是物理重算。源 run scen_yagi_q11500_100m_dt2p5_choff_realdem。B 档参数：≤0.09 km² 且 ≤0.30 m、persistence 72 h、深水豁免 ≥0.50 m。res.max 口径实测 4,422 斑块去除 991 个＝22.41%（计划预测 92.5%），面积变化 2.127%、水量变化 0.0632%，主水体 614.96 km² 精确保护（removed_cells=0）。未达到计划 §4 验收目标（≥90%）。blocked_for_default_publish=true（第 14 帧湿面积变化率 23.95% > 5% 上限），故不得默认发布，仅作诊断层。仅供展示，不得用于物理结论或资产判据"
+  - run_id: scen_yagi_q11500_100m_realdem_display_qc_C
+    label: "展示质控层 C 档（激进）"
+    role: derived
+    source: "outputs/display_qc/guigang/2024-09-yagi/scen_yagi_q11500_100m_realdem_display_qc/C"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "display_qc 只读展示派生层，not_physical_recalculation=true，不是物理重算。源 run scen_yagi_q11500_100m_dt2p5_choff_realdem。C 档参数：≤0.25 km² 且 ≤0.50 m、persistence 144 h、深水豁免 ≥0.50 m。res.max 口径实测 4,422 斑块去除 1,127 个＝25.49%（计划预测 96.8%），面积变化 2.387%、水量变化 0.1059%，主水体 614.96 km² 精确保护（removed_cells=0）。未达到计划 §4 验收目标（≥90%）。blocked_for_default_publish=true（第 14 帧湿面积变化率 27.48% > 5% 上限），故不得默认发布，仅作诊断层。仅供展示，不得用于物理结论或资产判据"
+  # 结构性说明（贵港 display_qc 三档共同适用）：
+  #   计划 §3 第 2 条对 max_depth ≥ 0.50 m 的斑块设深水豁免，故任何档位最多只能去除
+  #   max_depth < 0.50 m 的斑块。实测该可去除上界为 1,127 个＝25.49%，即去除率理论上界仅 25.49%。
+  #   因此计划 §4 的 ≥90% 目标与计划自身规则结构矛盾，非执行缺陷；不得为凑目标修改预注册阈值。
+  # ---- 物理驱动重构情景（Phase 2 + Phase 4）----
+  # 三者与默认 run 仅降雨处理不同，其余参数逐位一致（100 m、q_peak=11500、dt=2.5 s、channel=off、
+  # sim_time=1209600 s、fpfric=0.035）；均 E_mass PASS（< 1e-3）。均为对照情景，不设为默认层。
+  - run_id: scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1
+    label: "纯过境来水驱动（rain=off）"
+    role: scenario
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "rain=off，纯过境来水驱动，无降雨输入。res.max 口径湿像元 52,952、湿面积 529.52 km²、斑块数 20。相对基线（85,256 像元 / 852.56 km² / 4,422 斑块）斑块数 4,422→20（−99.5%），湿面积 −37.9%。E_mass 5.758e-05 PASS。该结果直接检验「离散水点主要由无损失降雨造成」这一假设。channel=off，未做河道调理（已知限制）"
+  - run_id: scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1
+    label: "降雨初损+持续入渗（Ia=30 mm, fc=2.0 mm/h）"
+    role: scenario
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "净雨预处理：初损 Ia=30 mm、持续入渗 fc=2.0 mm/h，ERA5 毛雨 135.50 mm 下净雨 45.40 mm。res.max 口径湿像元 71,818、湿面积 718.18 km²、斑块数 6,041。否证性事实：斑块数相对基线 4,422 反升 36.6%，湿面积 −15.8%；即施加降雨损失未能减少离散斑块，与「单纯无损失降雨导致碎斑」的假设不符。E_mass 7.290e-05 PASS。channel=off，未做河道调理（已知限制）"
+  - run_id: scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1
+    label: "降雨初损+持续入渗（Ia=50 mm, fc=3.0 mm/h）"
+    role: scenario
+    source: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1"
+    save_interval_s: 21600
+    simulation_duration_s: 1209600
+    optional: false
+    notes: "净雨预处理：初损 Ia=50 mm、持续入渗 fc=3.0 mm/h，ERA5 毛雨 135.50 mm 下净雨 36.10 mm。res.max 口径湿像元 69,538、湿面积 695.38 km²、斑块数 6,167。否证性事实：斑块数相对基线 4,422 反升 39.5%，湿面积 −18.4%；加大初损与入渗后斑块数不降反升，与「碎斑由降雨量驱动」的假设不符。E_mass 6.241e-05 PASS。channel=off，未做河道调理（已知限制）"
 
 layers:
   dem: {status: ready, label: "DEM 高程", kind: raster, summary: "模型输入 DEM（100 m 真实重采样，彻底清除人工刻蚀与下切）", note: "原始地貌完好保持，垂直基准未闭合"}
