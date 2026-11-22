@@ -1,0 +1,96 @@
+{
+  "script": "scripts/stage3/build_guigang_channel_dem.py",
+  "generated_utc": "2026-11-07T04:51:09+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "priors": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\catalog\\guigang_channel_priors.json",
+      "exists": true,
+      "bytes": 7515,
+      "sha256": "1506050b344a157cfce305a98e45177b88447f9cbcf41d5d88fef880af57f2f9"
+    },
+    "centerline": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\yujiang_centerline.geojson",
+      "exists": true,
+      "bytes": 45106,
+      "sha256": "5131efc586061c1e7bfbb900ac1243c716b43fd464b9336637d66f1ab8f7f322"
+    },
+    "dem_source": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\0731 五省区DEM\\广西\\广西.tif",
+      "exists": true,
+      "bytes": 2051269376
+    },
+    "centerline_sha256": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\yujiang_centerline.geojson",
+      "exists": true,
+      "bytes": 45106,
+      "sha256": "5131efc586061c1e7bfbb900ac1243c716b43fd464b9336637d66f1ab8f7f322"
+    }
+  },
+  "parameters": {
+    "priors_sha256": "1506050b344a157cfce305a98e45177b88447f9cbcf41d5d88fef880af57f2f9",
+    "matrix_id": "guigang-channel-priors-v1",
+    "width_m": 300.0,
+    "slope": 0.000116,
+    "roughness": 0.03,
+    "q_peak": 11500.0
+  },
+  "steps": [
+    {
+      "name": "alpha_recheck",
+      "utc": "2026-11-07T04:51:09+00:00",
+      "A_d10m": 2.4e-05,
+      "B_d12m": 1.4e-05,
+      "C_d14m": 5e-05,
+      "D_d16m": 4.9e-05,
+      "E_d19m": 4.2e-05
+    },
+    {
+      "name": "corridor_built",
+      "utc": "2026-11-07T04:51:11+00:00",
+      "res": 100.0,
+      "shape": [
+        370,
+        669
+      ],
+      "bounds_32649": [
+        325737.9,
+        2542315.3,
+        392645.6,
+        2579333.8
+      ]
+    },
+    {
+      "name": "path_ready",
+      "utc": "2026-11-07T04:51:11+00:00",
+      "nodes": 790,
+      "injection": [
+        357174.93,
+        2542761.91
+      ]
+    },
+    {
+      "name": "bank_surface",
+      "utc": "2026-11-07T04:51:11+00:00",
+      "band": 2,
+      "bank_min": 15.0,
+      "bank_max": 20.0
+    },
+    {
+      "name": "done",
+      "utc": "2026-11-07T04:51:30+00:00",
+      "scenarios": 5,
+      "all_pass": {
+        "A_d10m": true,
+        "B_d12m": true,
+        "C_d14m": true,
+        "D_d16m": true,
+        "E_d19m": true
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "finished_utc": "2026-11-07T04:51:30+00:00"
+}

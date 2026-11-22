@@ -1,0 +1,88 @@
+{
+  "generated_utc": "2026-11-07（日期精度，手工预注册；构建脚本会另记精确时间戳）",
+  "script": "scripts/stage3/build_guigang_channel_dem.py（消费方）",
+  "phase": "Phase H（贵港水力约束河槽重构，ADR-0012）",
+  "mode": "公开数据降级 · 情景级（ADR-0004）；产物是水力一致性河槽先验地形，不是实测 bathymetry",
+  "preregistration": {
+    "matrix_id": "guigang-channel-priors-v1",
+    "frozen_utc": "2026-11-07",
+    "discipline": "全部刻蚀参数在生成任何重构 DEM 与跑任何 lisflood.exe 之前冻结；构建脚本复算 alpha 并与冻结值核对（|Δalpha| <= 1e-3，超差即拒绝）。用户决策登记：①批准重跑 5 个深度情景 run；②中心线 OSM Overpass（带回退链）；③首轮滩地糙率维持基线 0.035。",
+    "parameter_table": {
+      "width_top_m": {
+        "value": 300.0,
+        "source": "2023 年贵港石卡郁水作业区泊位工程环评：评价河段平均河宽约 320 m；2018 年定祥山矿山方案：郁江河宽约 250~300 m。取两源交集上界整数值 300 m。",
+        "confidence": "E3（公开转引工程先验，非实测断面）"
+      },
+      "longitudinal_slope": {
+        "value": 0.000116,
+        "source": "2023 年环评报告河流坡降 0.116 permil",
+        "confidence": "E3；.txt 计划明示不等同洪水期能量坡降 Sf（郁江有顶托与调蓄），仅用于 Manning 反演与输水核验，不写入模型",
+        "model_role": "不直接进入 LISFLOOD-FP（床面纵坡由沿线 DEM 岸顶面推导）"
+      },
+      "n_main_channel": {
+        "value": 0.030,
+        "source": "HEC-RAS Hydraulic Reference Manual 6.6 糙率表：清洁、顺直、无明显深潭浅滩天然河道参考值 0.030（.txt §5.1）",
+        "implemented_as": "manningfile 栅格：主槽掩膜内 0.030，掩膜外 nodata 回退 fpfric"
+      },
+      "side_slope_z": {
+        "value": 2.0,
+        "source": ".txt §2.4 假定 2H:1V",
+        "confidence": "情景假设"
+      },
+      "bottom_width_rule": {
+        "formula": "B = W - 2*z*D，下钳 0.4*W",
+        "note": "与 Manning 反演用同一梯形断面，保证输水核验闭合；D=19 时 B=224 m（beta=0.747），与 .txt §6.1 的说明一致（底宽比例随深度变化，不用固定 0.65）"
+      },
+      "profile_type": {
+        "value": "smooth_trapezoid",
+        "formula": "F(d): d<=B/2 取 1；B/2<d<=W/2 取 1-smoothstep(u)，u=(d-B/2)/((W-B)/2)；d>W/2 取 0；Z_ideal = Z_bank(s) - D(s)*F(d)",
+        "note": ".txt §6.1 圆滑梯形（底部平坦 + smoothstep 岸坡过渡），作为第一版默认"
+      },
+      "bank_reference": {
+        "method": "沿线 DEM ±1 带最小值 -> 15 节点滑动均值（沿用 guigang_scenario.py v3 口径）",
+        "datum_note": "深度为相对岸顶口径：Z_bed(s) = Z_bank(s) - D(s)。不用绝对水位/站基面（G7 垂直基准未闭合：城区平原 DEM 约 21 m vs 贵港站洪峰 43.09 m，基准差约 -20 m 未确认）",
+        "confidence": "口径级（岸顶取自同一 DEM，内部自洽）"
+      },
+      "supersample": {
+        "value": 4,
+        "note": "100 m 格 4x4 亚采样面积加权（.txt §6.4 增强一）；Z_new = min(Z_orig, Z_ideal)，走廊外零修改"
+      },
+      "bed_monotonicity": {
+        "method": "np.minimum.accumulate 向下游累计取小（顺流单调不升）",
+        "note": "单一线型过境河段适用；天然深潭/回水不在此域建模目标内，登记为简化"
+      }
+    },
+    "depth_scenarios_note": ".txt §7.3 第一轮 A~E；alpha = 主槽独立承担洪峰比例（Manning 正算 Q(D)/Q_peak，梯形断面同上）；E 档 19 m 接近主槽独立承载（19.12 m 为解析解）",
+    "depth_scenarios": {
+      "A_d10m": { "depth_m": 10.0, "bottom_width_m": 260.0, "q_conveyance_m3s": 4410.0, "alpha": 0.3835, "positioning": "浅槽" },
+      "B_d12m": { "depth_m": 12.0, "bottom_width_m": 252.0, "q_conveyance_m3s": 5822.3, "alpha": 0.5063, "positioning": "中浅槽" },
+      "C_d14m": { "depth_m": 14.0, "bottom_width_m": 244.0, "q_conveyance_m3s": 7331.8, "alpha": 0.6375, "positioning": "基准候选（接近 .txt §9 建议 13.5 m/60% 情景）" },
+      "D_d16m": { "depth_m": 16.0, "bottom_width_m": 236.0, "q_conveyance_m3s": 8917.7, "alpha": 0.7754, "positioning": "深槽" },
+      "E_d19m": { "depth_m": 19.0, "bottom_width_m": 224.0, "q_conveyance_m3s": 11400.4, "alpha": 0.9913, "positioning": "主槽极限输水情景（解析上限 19.12 m）" }
+    },
+    "roughness_round1": {
+      "n_channel": 0.030,
+      "n_floodplain": "维持基线 fpfric=0.035 均一（用户 2026-11-07 决策：首轮单变量控制，滩地糙率敏感性留第 2 轮）",
+      "rationale": "与既有 4 情景唯一差异=河槽几何+manningfile 主槽覆写，FAR 变化可归因于几何"
+    }
+  },
+  "sources": [
+    { "id": "shioka_env_2023", "content": "2023 年贵港石卡郁水作业区泊位工程环评报告：平均河宽约 320 m、枯水期平均水深约 6.9 m、枯水流量约 84.8 m3/s、坡降 0.116 permil", "used_for": "W_top、longitudinal_slope", "confidence": "公开转引，未取得原文核对" },
+    { "id": "dingxiangshan_mine_2018", "content": "2018 年贵港定祥山矿山地质环境保护与土地复垦方案：郁江河宽 250~300 m、河床深约 25 m、最大流量 12800 m3/s、平均流量 1450 m3/s", "used_for": "W_top 交叉参考；25 m 仅作深度上限量级参考，不作为设计水深", "confidence": "公开转引区域水文资料，非连续实测断面" },
+    { "id": "hecras_ref_6p6", "content": "HEC-RAS Hydraulic Reference Manual 6.6 Manning 糙率参考表", "used_for": "n_main_channel 初始值与敏感性范围 0.025~0.035", "confidence": "规范级参考值，非率定值" },
+    { "id": "plan_txt_2026", "content": "plans/无实测水下地形条件下的河槽水力刻蚀与几何重构算法（针对贵港干流漫滩）.txt", "used_for": "方法路线、A~E 深度矩阵、圆滑梯形断面、亚采样增强", "confidence": "技术调研文档" }
+  ],
+  "limitations": [
+    "重构结果定义为水力一致性河槽先验地形（hydraulically-consistent channel prior），不是实测水下地形；不得用于资产级判据或业务预警",
+    "100 m 网格下主槽仅 2~3 格宽（.txt §5.4 勉强显式分辨率）；本构建无亚网格河道（模型横幅 Rectangular channels only），采用 4x4 亚采样聚合缓解，30 m 对照列为后续可选项",
+    "洪峰 11500 m3/s 不等于平滩流量；alpha 是情景假设不是观测值；各深度情景的反演水深不构成真实断面深度",
+    "S=0.000116 不等同于洪水能量坡降；水位-流量关系受顶托与调蓄影响，未经水文站资料校准",
+    "与 ADR-0011 决策 3 的关系：S1 骨架阻塞结论不变；本路线不依赖 S1/DEM 山谷信号，改用水力先验 + 外部中心线，属新增候选情景层，不推翻 channel=off 基线的地位"
+  ],
+  "verification_commitments": [
+    "几何检查 6 项（中心线连续、河宽对先验 250~320 m、纵坡无逆坡突变、断面无尖坎、岸坡衔接、无孤立深坑）",
+    "输水核验：重构 DEM 实测断面反算 Q(D)/Q_peak 与冻结 alpha 对照，|误差| <= 5%",
+    "S1 09-12 洪峰景 POD/FAR/CSI 与基线对照（口径不变：t=228h、足迹内、wet>0.05）",
+    "质量门：5 个新 run E_mass 全表刷新（g15_mass_recheck.py）"
+  ]
+}

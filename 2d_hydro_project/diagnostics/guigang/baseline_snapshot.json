@@ -1,0 +1,1266 @@
+{
+  "generated_utc": "2026-11-02T04:00:16+00:00",
+  "script": "scripts/stage6/diagnose_guigang_artifacts.py",
+  "run_tag": null,
+  "phase": "Phase 0 / T0（事实冻结）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本文件全部数值由脚本从 outputs/guigang/** 只读复算；未写入、移动或删除该目录下任何文件；未调用 lisflood.exe；models/ 未修改",
+  "source_run": {
+    "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "sha256_before": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "sha256_after": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "integrity": {
+      "unchanged": true,
+      "differing_keys": [],
+      "changed_frames": [],
+      "changed_control_files": []
+    }
+  },
+  "event_window": {
+    "event": "2024-09 摩羯（贵港/郁江走廊）",
+    "rain_source": "ERA5 贵港锚点逐时（degraded），非站点实测雨量",
+    "upstream_bc": "情景三角 Q 线（q_base=1000 → q_peak=11500 → 2000），非逐时实测",
+    "note": "久隆/贵港为 2024-09 摩羯，宁明为 2026-08 紫檀；不共用绝对时间轴"
+  },
+  "runs": [
+    {
+      "run_id": "scen_yagi_q11500_100m_b1",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_b1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 3.087e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "run.log"
+      ],
+      "frame_count": 39,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0038.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": "off",
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "rain.rain",
+        "run.log"
+      ],
+      "frame_count": 51,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0050.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": "off",
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "run.log"
+      ],
+      "frame_count": 39,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0038.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": "off",
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "role": "production_baseline_100m",
+      "role_note": "100 m 真实 DEM 基线（channel=off，无人工河槽刻蚀）；本 Phase 0 的诊断对象",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": "off",
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 1758291929.2,
+        "e_mass_132": 6.241e-05,
+        "v_in_integrated_m3": 5378394899.0,
+        "v_rain_m3": 335403150.0
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 6.241e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_wfix",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_wfix",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 100.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325787.9,
+          2561783.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 7.549e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_200m",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m",
+      "role": "baseline_200m",
+      "role_note": "200 m 基线（跨分辨率参照）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 462277598.0,
+        "e_mass_132": 2.411e-05,
+        "v_in_integrated_m3": 5378389841.2,
+        "v_rain_m3": 334901800.0
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 2.411e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_200m_dt2p5_b1",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_dt2p5_b1",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 1.767e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_200m_dt2p5_b1_interrupted",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_dt2p5_b1_interrupted",
+      "role": "interrupted_run",
+      "role_note": "中断的 run，不参与诊断主表与质量门",
+      "eligible_for_diagnosis": false,
+      "missing_files": [
+        "run.log"
+      ],
+      "frame_count": 40,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0039.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 2.5,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 2.5,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_200m_repro",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_repro",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 462277598.0,
+        "e_mass_132": 2.411e-05,
+        "v_in_integrated_m3": 5378389841.2,
+        "v_rain_m3": 334901800.0
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 2.411e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_200m_v1_polyfitbed",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_v1_polyfitbed",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 757900422.6,
+        "e_mass_132": 7.919e-05,
+        "v_in_integrated_m3": 5378389841.2,
+        "v_rain_m3": 334901800.0
+      },
+      "mass_gate_g15": {
+        "gate": null,
+        "e_mass": null,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q11500_30m_b5",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5",
+      "role": "other",
+      "role_note": "未归类的 run 目录",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 30.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 11500.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325752.9,
+          2561828.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": null,
+        "e_mass_132": null,
+        "v_in_integrated_m3": null,
+        "v_rain_m3": null
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 5.665e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q15000_200m",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q15000_200m",
+      "role": "q_sensitivity_200m",
+      "role_note": "上游 Q 敏感性情景（200 m）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 15000.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 517480828.7,
+        "e_mass_132": 1.561e-05,
+        "v_in_integrated_m3": 6663589956.4,
+        "v_rain_m3": 334901800.0
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 1.561e-05,
+        "cause": null
+      }
+    },
+    {
+      "run_id": "scen_yagi_q8000_200m",
+      "path": "outputs/guigang/2024-09-yagi/scen_yagi_q8000_200m",
+      "role": "q_sensitivity_200m",
+      "role_note": "上游 Q 敏感性情景（200 m）",
+      "eligible_for_diagnosis": true,
+      "missing_files": [],
+      "frame_count": 57,
+      "first_frame": "res-0000.wd",
+      "last_frame": "res-0056.wd",
+      "run_par": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "initial_tstep_s": 5.0,
+        "massint_s": 3600.0,
+        "fpfric": 0.035,
+        "acceleration": true
+      },
+      "meta": {
+        "res_m": 200.0,
+        "dt_s": 5.0,
+        "q_base": 1000.0,
+        "q_peak": 8000.0,
+        "sim_seconds": 1209600,
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "channel_mode": null,
+        "point_source_32649": [
+          325837.9,
+          2561833.8
+        ]
+      },
+      "verify_json": {
+        "wet_area_km2": null,
+        "final_vol_m3": 461220889.4,
+        "e_mass_132": 3.67e-05,
+        "v_in_integrated_m3": 4093189927.6,
+        "v_rain_m3": 334901800.0
+      },
+      "mass_gate_g15": {
+        "gate": "PASS",
+        "e_mass": 3.67e-05,
+        "cause": null
+      }
+    }
+  ],
+  "grid_and_time_facts": {
+    "scen_yagi_q11500_100m_dt2p5_choff_realdem": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "grid": {
+        "ncols": 669,
+        "nrows": 370,
+        "cellsize_m": 100.0,
+        "cell_area_m2": 10000.0,
+        "xllcorner": 325737.9,
+        "yllcorner": 2542315.3,
+        "nodata": -9999.0,
+        "cells": 247530,
+        "domain_area_km2": 2475.3,
+        "cell_area_m2_from_header": 10000.0,
+        "cell_area_source": "栅格头 cellsize 平方（grid_io.AsciiGrid.cell_area_m2）",
+        "area_km2_to_cells": {
+          "0.04": 4,
+          "0.09": 9,
+          "0.25": 25,
+          "1": 100,
+          "5": 500
+        }
+      },
+      "time": {
+        "sim_time_s": 1209600.0,
+        "saveint_s": 21600.0,
+        "sim_hours": 336.0,
+        "frame_count": 57,
+        "timeline": [
+          {
+            "seq": 0,
+            "t_s": 0.0,
+            "t_h": 0.0
+          },
+          {
+            "seq": 1,
+            "t_s": 21600.0,
+            "t_h": 6.0
+          },
+          {
+            "seq": 2,
+            "t_s": 43200.0,
+            "t_h": 12.0
+          },
+          {
+            "seq": 3,
+            "t_s": 64800.0,
+            "t_h": 18.0
+          },
+          {
+            "seq": 4,
+            "t_s": 86400.0,
+            "t_h": 24.0
+          },
+          {
+            "seq": 5,
+            "t_s": 108000.0,
+            "t_h": 30.0
+          },
+          {
+            "seq": 6,
+            "t_s": 129600.0,
+            "t_h": 36.0
+          },
+          {
+            "seq": 7,
+            "t_s": 151200.0,
+            "t_h": 42.0
+          },
+          {
+            "seq": 8,
+            "t_s": 172800.0,
+            "t_h": 48.0
+          },
+          {
+            "seq": 9,
+            "t_s": 194400.0,
+            "t_h": 54.0
+          },
+          {
+            "seq": 10,
+            "t_s": 216000.0,
+            "t_h": 60.0
+          },
+          {
+            "seq": 11,
+            "t_s": 237600.0,
+            "t_h": 66.0
+          },
+          {
+            "seq": 12,
+            "t_s": 259200.0,
+            "t_h": 72.0
+          },
+          {
+            "seq": 13,
+            "t_s": 280800.0,
+            "t_h": 78.0
+          },
+          {
+            "seq": 14,
+            "t_s": 302400.0,
+            "t_h": 84.0
+          },
+          {
+            "seq": 15,
+            "t_s": 324000.0,
+            "t_h": 90.0
+          },
+          {
+            "seq": 16,
+            "t_s": 345600.0,
+            "t_h": 96.0
+          },
+          {
+            "seq": 17,
+            "t_s": 367200.0,
+            "t_h": 102.0
+          },
+          {
+            "seq": 18,
+            "t_s": 388800.0,
+            "t_h": 108.0
+          },
+          {
+            "seq": 19,
+            "t_s": 410400.0,
+            "t_h": 114.0
+          },
+          {
+            "seq": 20,
+            "t_s": 432000.0,
+            "t_h": 120.0
+          },
+          {
+            "seq": 21,
+            "t_s": 453600.0,
+            "t_h": 126.0
+          },
+          {
+            "seq": 22,
+            "t_s": 475200.0,
+            "t_h": 132.0
+          },
+          {
+            "seq": 23,
+            "t_s": 496800.0,
+            "t_h": 138.0
+          },
+          {
+            "seq": 24,
+            "t_s": 518400.0,
+            "t_h": 144.0
+          },
+          {
+            "seq": 25,
+            "t_s": 540000.0,
+            "t_h": 150.0
+          },
+          {
+            "seq": 26,
+            "t_s": 561600.0,
+            "t_h": 156.0
+          },
+          {
+            "seq": 27,
+            "t_s": 583200.0,
+            "t_h": 162.0
+          },
+          {
+            "seq": 28,
+            "t_s": 604800.0,
+            "t_h": 168.0
+          },
+          {
+            "seq": 29,
+            "t_s": 626400.0,
+            "t_h": 174.0
+          },
+          {
+            "seq": 30,
+            "t_s": 648000.0,
+            "t_h": 180.0
+          },
+          {
+            "seq": 31,
+            "t_s": 669600.0,
+            "t_h": 186.0
+          },
+          {
+            "seq": 32,
+            "t_s": 691200.0,
+            "t_h": 192.0
+          },
+          {
+            "seq": 33,
+            "t_s": 712800.0,
+            "t_h": 198.0
+          },
+          {
+            "seq": 34,
+            "t_s": 734400.0,
+            "t_h": 204.0
+          },
+          {
+            "seq": 35,
+            "t_s": 756000.0,
+            "t_h": 210.0
+          },
+          {
+            "seq": 36,
+            "t_s": 777600.0,
+            "t_h": 216.0
+          },
+          {
+            "seq": 37,
+            "t_s": 799200.0,
+            "t_h": 222.0
+          },
+          {
+            "seq": 38,
+            "t_s": 820800.0,
+            "t_h": 228.0
+          },
+          {
+            "seq": 39,
+            "t_s": 842400.0,
+            "t_h": 234.0
+          },
+          {
+            "seq": 40,
+            "t_s": 864000.0,
+            "t_h": 240.0
+          },
+          {
+            "seq": 41,
+            "t_s": 885600.0,
+            "t_h": 246.0
+          },
+          {
+            "seq": 42,
+            "t_s": 907200.0,
+            "t_h": 252.0
+          },
+          {
+            "seq": 43,
+            "t_s": 928800.0,
+            "t_h": 258.0
+          },
+          {
+            "seq": 44,
+            "t_s": 950400.0,
+            "t_h": 264.0
+          },
+          {
+            "seq": 45,
+            "t_s": 972000.0,
+            "t_h": 270.0
+          },
+          {
+            "seq": 46,
+            "t_s": 993600.0,
+            "t_h": 276.0
+          },
+          {
+            "seq": 47,
+            "t_s": 1015200.0,
+            "t_h": 282.0
+          },
+          {
+            "seq": 48,
+            "t_s": 1036800.0,
+            "t_h": 288.0
+          },
+          {
+            "seq": 49,
+            "t_s": 1058400.0,
+            "t_h": 294.0
+          },
+          {
+            "seq": 50,
+            "t_s": 1080000.0,
+            "t_h": 300.0
+          },
+          {
+            "seq": 51,
+            "t_s": 1101600.0,
+            "t_h": 306.0
+          },
+          {
+            "seq": 52,
+            "t_s": 1123200.0,
+            "t_h": 312.0
+          },
+          {
+            "seq": 53,
+            "t_s": 1144800.0,
+            "t_h": 318.0
+          },
+          {
+            "seq": 54,
+            "t_s": 1166400.0,
+            "t_h": 324.0
+          },
+          {
+            "seq": 55,
+            "t_s": 1188000.0,
+            "t_h": 330.0
+          },
+          {
+            "seq": 56,
+            "t_s": 1209600.0,
+            "t_h": 336.0
+          }
+        ],
+        "beyond_sim_end": [],
+        "t0": "2024-09-03T00 Asia/Shanghai（前2日基流充槽）",
+        "t0_note": "模型 t=0 对应 2024-09-03T00；rain.rain 与 bdy 时刻列同基准。ERA5 原始序列首键为 2024-09-05T00，勿混用"
+      },
+      "dem": {
+        "dtype": "float32（res/dem 均为 float32；禁止升位）",
+        "min_m": 14.0,
+        "max_m": 1110.0,
+        "p50_m": 37.0,
+        "negative_cells": 0,
+        "nodata_cells": 0,
+        "zero_cells": 0
+      },
+      "mass_accounting": {
+        "available": true,
+        "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+        "rows": 337,
+        "v0_m3": 2500.0,
+        "v_end_m3": 1758291929.2,
+        "v_rain_m3": 335403150.0,
+        "v_in_m3": 5378394899.0,
+        "v_out_m3": 3955152024.6,
+        "residual_m3": -356595.2,
+        "e_mass": 6.2409e-05,
+        "gate_1e-3": "PASS",
+        "note": "v_end 是末帧蓄量，与 res.max 峰值包络体积不是同一口径，不得混用（res.max 是全程逐像元最大值，其体积大于任一单帧蓄量）"
+      },
+      "channel": {
+        "mode": "off",
+        "carved_px": 0,
+        "path_nodes": 729,
+        "note": "off: 真实DEM未施加任何人工河槽刻蚀与虚假下切，严格采用源地形"
+      }
+    }
+  },
+  "input_hashes": {
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/dem.asc": {
+      "sha256": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+      "bytes": 1799128
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/run.par": {
+      "sha256": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+      "bytes": 187
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/rain.rain": {
+      "sha256": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+      "bytes": 4181
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/bci.bci": {
+      "sha256": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+      "bytes": 153
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/yujiang.bdy": {
+      "sha256": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+      "bytes": 188
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/meta.json": {
+      "sha256": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707",
+      "bytes": 863
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/results/res.max": {
+      "sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "bytes": 1485790
+    },
+    "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/results/res.mass": {
+      "sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "bytes": 51926
+    },
+    "data/catalog/probes/guigang_sep2024_era5_hourly.json": {
+      "sha256": "d61fcd6db131bccdcbd06cee1d1114653b70da9a70a1a04d0a6e3875a5131ebd",
+      "bytes": 7817
+    },
+    "data/catalog/mass_recheck_g15.json": {
+      "sha256": "d16610c10d8fbed980b68167f9cbeb51bf00d25372debe81bb5356a036ff8f77",
+      "bytes": 25293
+    },
+    "data/processed/s1_water/guigang_20240905T105022_water20m.tif": {
+      "sha256": "791369d96623a660847d25eb57236e0dba9287f472bbae732d6924466e303391",
+      "bytes": 175636
+    }
+  },
+  "quality_gate_summary": {
+    "source": "data/catalog/mass_recheck_g15.json（复用，未重算全表）",
+    "policy": "PASS <= 1e-3；FAIL-EXPLAINED 不计通过（ADR-0006）",
+    "guigang_runs": {
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_b1": {
+        "gate": "PASS",
+        "e_mass": 3.087e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem": {
+        "gate": "PASS",
+        "e_mass": 6.241e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_wfix": {
+        "gate": "PASS",
+        "e_mass": 7.549e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m": {
+        "gate": "PASS",
+        "e_mass": 2.411e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_dt2p5_b1": {
+        "gate": "PASS",
+        "e_mass": 1.767e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_repro": {
+        "gate": "PASS",
+        "e_mass": 2.411e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5": {
+        "gate": "PASS",
+        "e_mass": 5.665e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q15000_200m": {
+        "gate": "PASS",
+        "e_mass": 1.561e-05,
+        "cause": null
+      },
+      "outputs/guigang/2024-09-yagi/scen_yagi_q8000_200m": {
+        "gate": "PASS",
+        "e_mass": 3.67e-05,
+        "cause": null
+      }
+    },
+    "baseline_recomputed_e_mass": {
+      "available": true,
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "rows": 337,
+      "v0_m3": 2500.0,
+      "v_end_m3": 1758291929.2,
+      "v_rain_m3": 335403150.0,
+      "v_in_m3": 5378394899.0,
+      "v_out_m3": 3955152024.6,
+      "residual_m3": -356595.2,
+      "e_mass": 6.2409e-05,
+      "gate_1e-3": "PASS",
+      "note": "v_end 是末帧蓄量，与 res.max 峰值包络体积不是同一口径，不得混用（res.max 是全程逐像元最大值，其体积大于任一单帧蓄量）"
+    },
+    "note": "不得表述为『质量门全量通过』；计数以 mass_recheck_g15.json 为 SSOT"
+  },
+  "evidence_levels": {
+    "run_inventory_and_grid_metadata": "E1",
+    "mass_accounting": "E1（res.mass 梯形积分复算，与 verify.json 交叉核对）",
+    "sink_masks_and_correlation": "E1（见 guigang_sink_analysis.json）",
+    "physical_cause_attribution": "E2/E3",
+    "independent_validation_metrics": "E4 未测（S1 仅灾前/洪峰两景）"
+  }
+}

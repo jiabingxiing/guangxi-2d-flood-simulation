@@ -1,0 +1,5441 @@
+{
+  "generated_utc": "2026-11-02T04:05:04+00:00",
+  "script": "scripts/stage6/analyze_guigang_patches.py",
+  "run_tag": null,
+  "phase": "Phase 0 / T0.1+T0.3（斑块时空 + 降雨账目 + 三档实测）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本文件全部数值由脚本从 outputs/guigang/** 只读复算；未写入、移动或删除该目录下任何文件；未调用 lisflood.exe；models/ 未修改",
+  "source_run": {
+    "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "sha256_before": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "sha256_after": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "integrity": {
+      "unchanged": true,
+      "differing_keys": [],
+      "changed_frames": [],
+      "changed_control_files": []
+    }
+  },
+  "hard_constraints": {
+    "connectivity": 8,
+    "wet_threshold_m": 0.05,
+    "wet_threshold_dtype": "float32（未升位；float32(0.05)=0.05000000074505806）",
+    "area_threshold_expression": "km²；像元数由栅格头 cellsize 经 cells_for_area 现算",
+    "forbidden_literals": [
+      "10000.0",
+      "4 像元",
+      "9 像元"
+    ],
+    "no_lisflood_call": true,
+    "no_models_edit": true,
+    "no_res_mass_in_output_dir": true,
+    "threshold_policy": "三档参数照抄计划 §Phase1 表格原值；未按结果调整；计划未给 min_persistence_ratio 数值，本脚本处理前预注册 0.25 并给敏感性区间"
+  },
+  "evidence_levels": {
+    "frame_patch_statistics": "E1（脚本从 raw run 逐帧复算）",
+    "patch_tracks": "E1（8 邻域连通 + 像元重叠关联）",
+    "tier_removal_rates": "E1（按计划原规则顺序逐斑块/逐轨迹复算）",
+    "rain_budget": "E1（rain.rain 与 yujiang.bdy 解析积分，与 res.mass 交叉核对）",
+    "rain_interception": "E2（分子为 res.max 包络口径、分母为累计入流口径）",
+    "physical_cause_attribution": "E2/E3（时序同步性是相关描述，非因果证明）",
+    "independent_accuracy_metrics": "E4 未测（S1 仅灾前/洪峰两景，无连续观测）"
+  },
+  "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+  "grid": {
+    "ncols": 669,
+    "nrows": 370,
+    "cellsize_m": 100.0,
+    "cell_area_m2": 10000.0,
+    "xllcorner": 325737.9,
+    "yllcorner": 2542315.3,
+    "nodata": -9999.0,
+    "cells": 247530,
+    "domain_area_km2": 2475.3
+  },
+  "time": {
+    "sim_time_s": 1209600.0,
+    "saveint_s": 21600.0,
+    "frame_count": 57,
+    "n_wet_frames": 57,
+    "sim_hours": 336.0,
+    "first_frame_seq": 0,
+    "last_frame_seq": 56,
+    "last_frame_t_h": 336.0
+  },
+  "threshold_conversion": {
+    "cell_area_source": "栅格头 cellsize 平方（grid_io.AsciiGrid.cell_area_m2）",
+    "cellsize_m": 100.0,
+    "cell_area_m2": 10000.0,
+    "area_km2_to_cells": {
+      "0.04": 4,
+      "0.09": 9,
+      "0.25": 25,
+      "1": 100,
+      "5": 500,
+      "4": 400,
+      "10": 1000
+    },
+    "tiers": {
+      "A": {
+        "area_max_km2": 0.04,
+        "n_cells_area_max": 4,
+        "depth_max_m": 0.15,
+        "s1_buffer_m": 500.0,
+        "n_cells_s1_buffer": 5,
+        "plan_predicted_removal_pct": 80.2
+      },
+      "B": {
+        "area_max_km2": 0.09,
+        "n_cells_area_max": 9,
+        "depth_max_m": 0.3,
+        "s1_buffer_m": 300.0,
+        "n_cells_s1_buffer": 3,
+        "plan_predicted_removal_pct": 92.5
+      },
+      "C": {
+        "area_max_km2": 0.25,
+        "n_cells_area_max": 25,
+        "depth_max_m": 0.5,
+        "s1_buffer_m": 200.0,
+        "n_cells_s1_buffer": 2,
+        "plan_predicted_removal_pct": 96.8
+      }
+    },
+    "protected_main_stem_min_area_km2": 5.0,
+    "n_cells_protected_main_stem": 500,
+    "deep_depth_threshold_m": 0.5,
+    "min_persistence_ratio": 0.25,
+    "min_persistence_ratio_source": "计划 §Phase1 规则 4 只给规则名与 min_persistence_ratio 变量，未给数值；本脚本处理前预注册 0.25，并在 min_persistence_ratio_sensitivity 给出区间结果",
+    "hard_rule": "禁止写死 10000.0 / '4 像元' / '9 像元'；像元数一律经 cells_for_area 现算"
+  },
+  "s1_corridor": {
+    "available": true,
+    "source": "data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+    "source_sha256": "791369d96623a660847d25eb57236e0dba9287f472bbae732d6924466e303391",
+    "source_crs": "EPSG:32649",
+    "resampling": "nearest",
+    "water_cells": 1355,
+    "footprint_cells": 64835,
+    "footprint_fraction_of_domain": 0.2619,
+    "distance_to_water_cells_max": 334.14,
+    "buffers_summary": {
+      "A": {
+        "buffer_m": 500.0,
+        "buffer_cells": 5,
+        "mask_cells": 16701,
+        "mask_area_km2": 167.01,
+        "mask_frac_of_domain_pct": 6.747
+      },
+      "B": {
+        "buffer_m": 300.0,
+        "buffer_cells": 3,
+        "mask_cells": 9013,
+        "mask_area_km2": 90.13,
+        "mask_frac_of_domain_pct": 3.641
+      },
+      "C": {
+        "buffer_m": 200.0,
+        "buffer_cells": 2,
+        "mask_cells": 5452,
+        "mask_area_km2": 54.52,
+        "mask_frac_of_domain_pct": 2.203
+      }
+    }
+  },
+  "frame_summary": [
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 0,
+      "t_h": 0.0,
+      "n_patches": 1,
+      "wet_cells": 1,
+      "wet_area_km2": 0.01,
+      "wet_volume_m3": 2500.0,
+      "max_depth_m": 0.25,
+      "p50_depth_m": 0.25,
+      "p90_depth_m": 0.25,
+      "p99_depth_m": 0.25,
+      "thin_film_cells": 0,
+      "single_cell_patches": 1,
+      "single_cell_area_km2": 0.01,
+      "largest_patch_area_km2": 0.01,
+      "main_body_patches": 1,
+      "main_body_area_km2": 0.01,
+      "patches_le_4_cells": 1,
+      "patches_le_9_cells": 1,
+      "patches_ge_1km2": 0,
+      "area_le_4_cells_km2": 0.01,
+      "area_le_9_cells_km2": 0.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 1,
+      "t_h": 6.0,
+      "n_patches": 1,
+      "wet_cells": 1179,
+      "wet_area_km2": 11.79,
+      "wet_volume_m3": 17083940.4,
+      "max_depth_m": 4.891,
+      "p50_depth_m": 1.249,
+      "p90_depth_m": 2.8564,
+      "p99_depth_m": 4.0017,
+      "thin_film_cells": 7,
+      "single_cell_patches": 0,
+      "single_cell_area_km2": 0.0,
+      "largest_patch_area_km2": 11.79,
+      "main_body_patches": 1,
+      "main_body_area_km2": 11.79,
+      "patches_le_4_cells": 0,
+      "patches_le_9_cells": 0,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.0,
+      "area_le_9_cells_km2": 0.0
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 2,
+      "t_h": 12.0,
+      "n_patches": 2,
+      "wet_cells": 2400,
+      "wet_area_km2": 24.0,
+      "wet_volume_m3": 34103999.0,
+      "max_depth_m": 5.165,
+      "p50_depth_m": 1.161,
+      "p90_depth_m": 2.984,
+      "p99_depth_m": 4.1691,
+      "thin_film_cells": 46,
+      "single_cell_patches": 1,
+      "single_cell_area_km2": 0.01,
+      "largest_patch_area_km2": 23.99,
+      "main_body_patches": 1,
+      "main_body_area_km2": 23.99,
+      "patches_le_4_cells": 1,
+      "patches_le_9_cells": 1,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.01,
+      "area_le_9_cells_km2": 0.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 3,
+      "t_h": 18.0,
+      "n_patches": 2,
+      "wet_cells": 3406,
+      "wet_area_km2": 34.06,
+      "wet_volume_m3": 51139541.0,
+      "max_depth_m": 5.274,
+      "p50_depth_m": 1.287,
+      "p90_depth_m": 2.91,
+      "p99_depth_m": 4.1618,
+      "thin_film_cells": 40,
+      "single_cell_patches": 1,
+      "single_cell_area_km2": 0.01,
+      "largest_patch_area_km2": 34.05,
+      "main_body_patches": 1,
+      "main_body_area_km2": 34.05,
+      "patches_le_4_cells": 1,
+      "patches_le_9_cells": 1,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.01,
+      "area_le_9_cells_km2": 0.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 4,
+      "t_h": 24.0,
+      "n_patches": 2,
+      "wet_cells": 4985,
+      "wet_area_km2": 49.85,
+      "wet_volume_m3": 68164604.5,
+      "max_depth_m": 5.293,
+      "p50_depth_m": 1.237,
+      "p90_depth_m": 2.8462,
+      "p99_depth_m": 4.2093,
+      "thin_film_cells": 51,
+      "single_cell_patches": 1,
+      "single_cell_area_km2": 0.01,
+      "largest_patch_area_km2": 49.84,
+      "main_body_patches": 1,
+      "main_body_area_km2": 49.84,
+      "patches_le_4_cells": 1,
+      "patches_le_9_cells": 1,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.01,
+      "area_le_9_cells_km2": 0.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 5,
+      "t_h": 30.0,
+      "n_patches": 2,
+      "wet_cells": 6229,
+      "wet_area_km2": 62.29,
+      "wet_volume_m3": 85192617.2,
+      "max_depth_m": 5.306,
+      "p50_depth_m": 1.202,
+      "p90_depth_m": 2.7302,
+      "p99_depth_m": 4.1892,
+      "thin_film_cells": 56,
+      "single_cell_patches": 1,
+      "single_cell_area_km2": 0.01,
+      "largest_patch_area_km2": 62.28,
+      "main_body_patches": 1,
+      "main_body_area_km2": 62.28,
+      "patches_le_4_cells": 1,
+      "patches_le_9_cells": 1,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.01,
+      "area_le_9_cells_km2": 0.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 6,
+      "t_h": 36.0,
+      "n_patches": 5,
+      "wet_cells": 7617,
+      "wet_area_km2": 76.17,
+      "wet_volume_m3": 102211015.6,
+      "max_depth_m": 5.326,
+      "p50_depth_m": 1.199,
+      "p90_depth_m": 2.5734,
+      "p99_depth_m": 4.148,
+      "thin_film_cells": 103,
+      "single_cell_patches": 3,
+      "single_cell_area_km2": 0.03,
+      "largest_patch_area_km2": 76.12,
+      "main_body_patches": 1,
+      "main_body_area_km2": 76.12,
+      "patches_le_4_cells": 4,
+      "patches_le_9_cells": 4,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.05,
+      "area_le_9_cells_km2": 0.05
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 7,
+      "t_h": 42.0,
+      "n_patches": 5,
+      "wet_cells": 8617,
+      "wet_area_km2": 86.17,
+      "wet_volume_m3": 119228593.8,
+      "max_depth_m": 6.135,
+      "p50_depth_m": 1.227,
+      "p90_depth_m": 2.679,
+      "p99_depth_m": 4.1488,
+      "thin_film_cells": 94,
+      "single_cell_patches": 4,
+      "single_cell_area_km2": 0.04,
+      "largest_patch_area_km2": 86.13,
+      "main_body_patches": 1,
+      "main_body_area_km2": 86.13,
+      "patches_le_4_cells": 4,
+      "patches_le_9_cells": 4,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.04,
+      "area_le_9_cells_km2": 0.04
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 8,
+      "t_h": 48.0,
+      "n_patches": 6,
+      "wet_cells": 9281,
+      "wet_area_km2": 92.81,
+      "wet_volume_m3": 136276914.1,
+      "max_depth_m": 6.419,
+      "p50_depth_m": 1.368,
+      "p90_depth_m": 2.729,
+      "p99_depth_m": 4.3144,
+      "thin_film_cells": 69,
+      "single_cell_patches": 4,
+      "single_cell_area_km2": 0.04,
+      "largest_patch_area_km2": 92.75,
+      "main_body_patches": 1,
+      "main_body_area_km2": 92.75,
+      "patches_le_4_cells": 5,
+      "patches_le_9_cells": 5,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.06,
+      "area_le_9_cells_km2": 0.06
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 9,
+      "t_h": 54.0,
+      "n_patches": 4,
+      "wet_cells": 9652,
+      "wet_area_km2": 96.52,
+      "wet_volume_m3": 153321503.9,
+      "max_depth_m": 7.492,
+      "p50_depth_m": 1.387,
+      "p90_depth_m": 2.911,
+      "p99_depth_m": 4.3385,
+      "thin_film_cells": 67,
+      "single_cell_patches": 3,
+      "single_cell_area_km2": 0.03,
+      "largest_patch_area_km2": 96.49,
+      "main_body_patches": 1,
+      "main_body_area_km2": 96.49,
+      "patches_le_4_cells": 3,
+      "patches_le_9_cells": 3,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.03,
+      "area_le_9_cells_km2": 0.03
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 10,
+      "t_h": 60.0,
+      "n_patches": 4,
+      "wet_cells": 10527,
+      "wet_area_km2": 105.27,
+      "wet_volume_m3": 170367793.0,
+      "max_depth_m": 7.951,
+      "p50_depth_m": 1.359,
+      "p90_depth_m": 3.176,
+      "p99_depth_m": 4.3417,
+      "thin_film_cells": 59,
+      "single_cell_patches": 2,
+      "single_cell_area_km2": 0.02,
+      "largest_patch_area_km2": 105.23,
+      "main_body_patches": 1,
+      "main_body_area_km2": 105.23,
+      "patches_le_4_cells": 3,
+      "patches_le_9_cells": 3,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.04,
+      "area_le_9_cells_km2": 0.04
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 11,
+      "t_h": 66.0,
+      "n_patches": 4,
+      "wet_cells": 10840,
+      "wet_area_km2": 108.4,
+      "wet_volume_m3": 187426406.2,
+      "max_depth_m": 8.433,
+      "p50_depth_m": 1.468,
+      "p90_depth_m": 3.456,
+      "p99_depth_m": 4.464,
+      "thin_film_cells": 68,
+      "single_cell_patches": 2,
+      "single_cell_area_km2": 0.02,
+      "largest_patch_area_km2": 108.36,
+      "main_body_patches": 1,
+      "main_body_area_km2": 108.36,
+      "patches_le_4_cells": 3,
+      "patches_le_9_cells": 3,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 0.04,
+      "area_le_9_cells_km2": 0.04
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 12,
+      "t_h": 72.0,
+      "n_patches": 307,
+      "wet_cells": 11227,
+      "wet_area_km2": 112.27,
+      "wet_volume_m3": 205016738.3,
+      "max_depth_m": 8.739,
+      "p50_depth_m": 1.75,
+      "p90_depth_m": 3.738,
+      "p99_depth_m": 4.752,
+      "thin_film_cells": 210284,
+      "single_cell_patches": 293,
+      "single_cell_area_km2": 2.93,
+      "largest_patch_area_km2": 109.04,
+      "main_body_patches": 1,
+      "main_body_area_km2": 109.04,
+      "patches_le_4_cells": 306,
+      "patches_le_9_cells": 306,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 3.23,
+      "area_le_9_cells_km2": 3.23
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 13,
+      "t_h": 78.0,
+      "n_patches": 1450,
+      "wet_cells": 12768,
+      "wet_area_km2": 127.68,
+      "wet_volume_m3": 223413359.4,
+      "max_depth_m": 9.019,
+      "p50_depth_m": 1.662,
+      "p90_depth_m": 3.354,
+      "p99_depth_m": 5.022,
+      "thin_film_cells": 210787,
+      "single_cell_patches": 1312,
+      "single_cell_area_km2": 13.12,
+      "largest_patch_area_km2": 111.6,
+      "main_body_patches": 1,
+      "main_body_area_km2": 111.6,
+      "patches_le_4_cells": 1449,
+      "patches_le_9_cells": 1449,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 16.08,
+      "area_le_9_cells_km2": 16.08
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 14,
+      "t_h": 84.0,
+      "n_patches": 7145,
+      "wet_cells": 24389,
+      "wet_area_km2": 243.89,
+      "wet_volume_m3": 261268828.1,
+      "max_depth_m": 9.239,
+      "p50_depth_m": 0.286,
+      "p90_depth_m": 3.243,
+      "p99_depth_m": 5.243,
+      "thin_film_cells": 190429,
+      "single_cell_patches": 4535,
+      "single_cell_area_km2": 45.35,
+      "largest_patch_area_km2": 122.17,
+      "main_body_patches": 1,
+      "main_body_area_km2": 122.17,
+      "patches_le_4_cells": 6840,
+      "patches_le_9_cells": 7111,
+      "patches_ge_1km2": 1,
+      "area_le_4_cells_km2": 101.28,
+      "area_le_9_cells_km2": 117.15
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 15,
+      "t_h": 90.0,
+      "n_patches": 7337,
+      "wet_cells": 26944,
+      "wet_area_km2": 269.44,
+      "wet_volume_m3": 294678730.5,
+      "max_depth_m": 9.463,
+      "p50_depth_m": 0.411,
+      "p90_depth_m": 3.465,
+      "p99_depth_m": 5.463,
+      "thin_film_cells": 196212,
+      "single_cell_patches": 4485,
+      "single_cell_area_km2": 44.85,
+      "largest_patch_area_km2": 123.47,
+      "main_body_patches": 9,
+      "main_body_area_km2": 135.04,
+      "patches_le_4_cells": 6924,
+      "patches_le_9_cells": 7270,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 104.89,
+      "area_le_9_cells_km2": 125.89
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 16,
+      "t_h": 96.0,
+      "n_patches": 7558,
+      "wet_cells": 29770,
+      "wet_area_km2": 297.7,
+      "wet_volume_m3": 330411914.1,
+      "max_depth_m": 9.68,
+      "p50_depth_m": 0.444,
+      "p90_depth_m": 3.3651,
+      "p99_depth_m": 5.679,
+      "thin_film_cells": 182204,
+      "single_cell_patches": 4388,
+      "single_cell_area_km2": 43.88,
+      "largest_patch_area_km2": 129.1,
+      "main_body_patches": 21,
+      "main_body_area_km2": 148.94,
+      "patches_le_4_cells": 6999,
+      "patches_le_9_cells": 7441,
+      "patches_ge_1km2": 5,
+      "area_le_4_cells_km2": 108.86,
+      "area_le_9_cells_km2": 135.78
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 17,
+      "t_h": 102.0,
+      "n_patches": 7276,
+      "wet_cells": 29430,
+      "wet_area_km2": 294.3,
+      "wet_volume_m3": 355742812.5,
+      "max_depth_m": 9.876,
+      "p50_depth_m": 0.561,
+      "p90_depth_m": 3.375,
+      "p99_depth_m": 5.876,
+      "thin_film_cells": 192418,
+      "single_cell_patches": 4249,
+      "single_cell_area_km2": 42.49,
+      "largest_patch_area_km2": 131.72,
+      "main_body_patches": 5,
+      "main_body_area_km2": 147.15,
+      "patches_le_4_cells": 6750,
+      "patches_le_9_cells": 7169,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 104.63,
+      "area_le_9_cells_km2": 130.28
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 18,
+      "t_h": 108.0,
+      "n_patches": 7348,
+      "wet_cells": 32793,
+      "wet_area_km2": 327.93,
+      "wet_volume_m3": 392874296.9,
+      "max_depth_m": 10.123,
+      "p50_depth_m": 0.556,
+      "p90_depth_m": 3.078,
+      "p99_depth_m": 5.073,
+      "thin_film_cells": 184472,
+      "single_cell_patches": 4045,
+      "single_cell_area_km2": 40.45,
+      "largest_patch_area_km2": 143.41,
+      "main_body_patches": 9,
+      "main_body_area_km2": 164.06,
+      "patches_le_4_cells": 6646,
+      "patches_le_9_cells": 7170,
+      "patches_ge_1km2": 6,
+      "area_le_4_cells_km2": 105.62,
+      "area_le_9_cells_km2": 138.04
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 19,
+      "t_h": 114.0,
+      "n_patches": 7401,
+      "wet_cells": 34847,
+      "wet_area_km2": 348.47,
+      "wet_volume_m3": 427351796.9,
+      "max_depth_m": 10.219,
+      "p50_depth_m": 0.603,
+      "p90_depth_m": 3.225,
+      "p99_depth_m": 5.225,
+      "thin_film_cells": 166278,
+      "single_cell_patches": 3892,
+      "single_cell_area_km2": 38.92,
+      "largest_patch_area_km2": 151.46,
+      "main_body_patches": 23,
+      "main_body_area_km2": 174.25,
+      "patches_le_4_cells": 6562,
+      "patches_le_9_cells": 7173,
+      "patches_ge_1km2": 5,
+      "area_le_4_cells_km2": 106.47,
+      "area_le_9_cells_km2": 144.64
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 20,
+      "t_h": 120.0,
+      "n_patches": 6973,
+      "wet_cells": 37550,
+      "wet_area_km2": 375.5,
+      "wet_volume_m3": 475961484.4,
+      "max_depth_m": 10.371,
+      "p50_depth_m": 0.688,
+      "p90_depth_m": 3.375,
+      "p99_depth_m": 5.377,
+      "thin_film_cells": 178989,
+      "single_cell_patches": 3473,
+      "single_cell_area_km2": 34.73,
+      "largest_patch_area_km2": 155.62,
+      "main_body_patches": 28,
+      "main_body_area_km2": 187.9,
+      "patches_le_4_cells": 5997,
+      "patches_le_9_cells": 6647,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 99.27,
+      "area_le_9_cells_km2": 140.72
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 21,
+      "t_h": 126.0,
+      "n_patches": 6884,
+      "wet_cells": 36321,
+      "wet_area_km2": 363.21,
+      "wet_volume_m3": 503387539.1,
+      "max_depth_m": 10.493,
+      "p50_depth_m": 0.883,
+      "p90_depth_m": 3.497,
+      "p99_depth_m": 5.499,
+      "thin_film_cells": 187546,
+      "single_cell_patches": 3521,
+      "single_cell_area_km2": 35.21,
+      "largest_patch_area_km2": 157.37,
+      "main_body_patches": 11,
+      "main_body_area_km2": 181.86,
+      "patches_le_4_cells": 6019,
+      "patches_le_9_cells": 6608,
+      "patches_ge_1km2": 6,
+      "area_le_4_cells_km2": 98.82,
+      "area_le_9_cells_km2": 136.08
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 22,
+      "t_h": 132.0,
+      "n_patches": 6812,
+      "wet_cells": 35851,
+      "wet_area_km2": 358.51,
+      "wet_volume_m3": 535981171.9,
+      "max_depth_m": 10.609,
+      "p50_depth_m": 1.005,
+      "p90_depth_m": 3.618,
+      "p99_depth_m": 5.618,
+      "thin_film_cells": 194428,
+      "single_cell_patches": 3551,
+      "single_cell_area_km2": 35.51,
+      "largest_patch_area_km2": 164.53,
+      "main_body_patches": 3,
+      "main_body_area_km2": 179.28,
+      "patches_le_4_cells": 6013,
+      "patches_le_9_cells": 6568,
+      "patches_ge_1km2": 6,
+      "area_le_4_cells_km2": 98.02,
+      "area_le_9_cells_km2": 133.25
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 23,
+      "t_h": 138.0,
+      "n_patches": 6624,
+      "wet_cells": 41582,
+      "wet_area_km2": 415.82,
+      "wet_volume_m3": 603872109.4,
+      "max_depth_m": 12.349,
+      "p50_depth_m": 0.937,
+      "p90_depth_m": 3.817,
+      "p99_depth_m": 5.821,
+      "thin_film_cells": 177547,
+      "single_cell_patches": 3169,
+      "single_cell_area_km2": 31.69,
+      "largest_patch_area_km2": 177.14,
+      "main_body_patches": 12,
+      "main_body_area_km2": 208.53,
+      "patches_le_4_cells": 5529,
+      "patches_le_9_cells": 6240,
+      "patches_ge_1km2": 9,
+      "area_le_4_cells_km2": 92.62,
+      "area_le_9_cells_km2": 138.45
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 24,
+      "t_h": 144.0,
+      "n_patches": 6506,
+      "wet_cells": 40973,
+      "wet_area_km2": 409.73,
+      "wet_volume_m3": 657799375.0,
+      "max_depth_m": 12.909,
+      "p50_depth_m": 1.03,
+      "p90_depth_m": 4.07,
+      "p99_depth_m": 6.0733,
+      "thin_film_cells": 186250,
+      "single_cell_patches": 3223,
+      "single_cell_area_km2": 32.23,
+      "largest_patch_area_km2": 199.28,
+      "main_body_patches": 2,
+      "main_body_area_km2": 207.97,
+      "patches_le_4_cells": 5560,
+      "patches_le_9_cells": 6175,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 92.16,
+      "area_le_9_cells_km2": 131.46
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 25,
+      "t_h": 150.0,
+      "n_patches": 6435,
+      "wet_cells": 41092,
+      "wet_area_km2": 410.92,
+      "wet_volume_m3": 717639609.4,
+      "max_depth_m": 13.025,
+      "p50_depth_m": 1.044,
+      "p90_depth_m": 4.329,
+      "p99_depth_m": 6.333,
+      "thin_film_cells": 190757,
+      "single_cell_patches": 3237,
+      "single_cell_area_km2": 32.37,
+      "largest_patch_area_km2": 216.71,
+      "main_body_patches": 1,
+      "main_body_area_km2": 216.71,
+      "patches_le_4_cells": 5561,
+      "patches_le_9_cells": 6142,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 91.77,
+      "area_le_9_cells_km2": 128.59
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 26,
+      "t_h": 156.0,
+      "n_patches": 6402,
+      "wet_cells": 41559,
+      "wet_area_km2": 415.59,
+      "wet_volume_m3": 785554687.5,
+      "max_depth_m": 13.015,
+      "p50_depth_m": 1.099,
+      "p90_depth_m": 4.584,
+      "p99_depth_m": 6.587,
+      "thin_film_cells": 192470,
+      "single_cell_patches": 3248,
+      "single_cell_area_km2": 32.48,
+      "largest_patch_area_km2": 228.82,
+      "main_body_patches": 1,
+      "main_body_area_km2": 228.82,
+      "patches_le_4_cells": 5575,
+      "patches_le_9_cells": 6135,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 92.03,
+      "area_le_9_cells_km2": 127.44
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 27,
+      "t_h": 162.0,
+      "n_patches": 6322,
+      "wet_cells": 42579,
+      "wet_area_km2": 425.79,
+      "wet_volume_m3": 858895703.1,
+      "max_depth_m": 13.012,
+      "p50_depth_m": 1.207,
+      "p90_depth_m": 4.817,
+      "p99_depth_m": 6.817,
+      "thin_film_cells": 191605,
+      "single_cell_patches": 3228,
+      "single_cell_area_km2": 32.28,
+      "largest_patch_area_km2": 246.53,
+      "main_body_patches": 1,
+      "main_body_area_km2": 246.53,
+      "patches_le_4_cells": 5533,
+      "patches_le_9_cells": 6081,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 91.1,
+      "area_le_9_cells_km2": 125.75
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 28,
+      "t_h": 168.0,
+      "n_patches": 6210,
+      "wet_cells": 44495,
+      "wet_area_km2": 444.95,
+      "wet_volume_m3": 932423750.0,
+      "max_depth_m": 13.056,
+      "p50_depth_m": 1.288,
+      "p90_depth_m": 5.012,
+      "p99_depth_m": 7.014,
+      "thin_film_cells": 183850,
+      "single_cell_patches": 3160,
+      "single_cell_area_km2": 31.6,
+      "largest_patch_area_km2": 267.58,
+      "main_body_patches": 1,
+      "main_body_area_km2": 267.58,
+      "patches_le_4_cells": 5435,
+      "patches_le_9_cells": 5970,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 89.57,
+      "area_le_9_cells_km2": 123.3
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 29,
+      "t_h": 174.0,
+      "n_patches": 6081,
+      "wet_cells": 51215,
+      "wet_area_km2": 512.15,
+      "wet_volume_m3": 1020733203.1,
+      "max_depth_m": 13.117,
+      "p50_depth_m": 1.182,
+      "p90_depth_m": 5.172,
+      "p99_depth_m": 7.177,
+      "thin_film_cells": 166085,
+      "single_cell_patches": 2883,
+      "single_cell_area_km2": 28.83,
+      "largest_patch_area_km2": 303.97,
+      "main_body_patches": 1,
+      "main_body_area_km2": 303.97,
+      "patches_le_4_cells": 5087,
+      "patches_le_9_cells": 5726,
+      "patches_ge_1km2": 4,
+      "area_le_4_cells_km2": 85.94,
+      "area_le_9_cells_km2": 126.57
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 30,
+      "t_h": 180.0,
+      "n_patches": 5777,
+      "wet_cells": 51658,
+      "wet_area_km2": 516.58,
+      "wet_volume_m3": 1092909921.9,
+      "max_depth_m": 13.04,
+      "p50_depth_m": 1.337,
+      "p90_depth_m": 5.294,
+      "p99_depth_m": 7.299,
+      "thin_film_cells": 175803,
+      "single_cell_patches": 2846,
+      "single_cell_area_km2": 28.46,
+      "largest_patch_area_km2": 328.63,
+      "main_body_patches": 1,
+      "main_body_area_km2": 328.63,
+      "patches_le_4_cells": 4936,
+      "patches_le_9_cells": 5485,
+      "patches_ge_1km2": 5,
+      "area_le_4_cells_km2": 82.33,
+      "area_le_9_cells_km2": 116.99
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 31,
+      "t_h": 186.0,
+      "n_patches": 5587,
+      "wet_cells": 59179,
+      "wet_area_km2": 591.79,
+      "wet_volume_m3": 1185738046.9,
+      "max_depth_m": 13.133,
+      "p50_depth_m": 1.195,
+      "p90_depth_m": 5.3682,
+      "p99_depth_m": 7.401,
+      "thin_film_cells": 156085,
+      "single_cell_patches": 2512,
+      "single_cell_area_km2": 25.12,
+      "largest_patch_area_km2": 359.22,
+      "main_body_patches": 1,
+      "main_body_area_km2": 359.22,
+      "patches_le_4_cells": 4516,
+      "patches_le_9_cells": 5161,
+      "patches_ge_1km2": 11,
+      "area_le_4_cells_km2": 77.78,
+      "area_le_9_cells_km2": 119.23
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 32,
+      "t_h": 192.0,
+      "n_patches": 5397,
+      "wet_cells": 57031,
+      "wet_area_km2": 570.31,
+      "wet_volume_m3": 1253561875.0,
+      "max_depth_m": 13.033,
+      "p50_depth_m": 1.514,
+      "p90_depth_m": 5.47,
+      "p99_depth_m": 7.475,
+      "thin_film_cells": 171814,
+      "single_cell_patches": 2626,
+      "single_cell_area_km2": 26.26,
+      "largest_patch_area_km2": 373.26,
+      "main_body_patches": 1,
+      "main_body_area_km2": 373.26,
+      "patches_le_4_cells": 4547,
+      "patches_le_9_cells": 5087,
+      "patches_ge_1km2": 9,
+      "area_le_4_cells_km2": 76.08,
+      "area_le_9_cells_km2": 110.56
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 33,
+      "t_h": 198.0,
+      "n_patches": 5342,
+      "wet_cells": 57559,
+      "wet_area_km2": 575.59,
+      "wet_volume_m3": 1321238125.0,
+      "max_depth_m": 13.018,
+      "p50_depth_m": 1.668,
+      "p90_depth_m": 5.531,
+      "p99_depth_m": 7.536,
+      "thin_film_cells": 175142,
+      "single_cell_patches": 2647,
+      "single_cell_area_km2": 26.47,
+      "largest_patch_area_km2": 395.08,
+      "main_body_patches": 1,
+      "main_body_area_km2": 395.08,
+      "patches_le_4_cells": 4569,
+      "patches_le_9_cells": 5081,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 76.29,
+      "area_le_9_cells_km2": 108.69
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 34,
+      "t_h": 204.0,
+      "n_patches": 5281,
+      "wet_cells": 58541,
+      "wet_area_km2": 585.41,
+      "wet_volume_m3": 1391159531.2,
+      "max_depth_m": 13.015,
+      "p50_depth_m": 1.767,
+      "p90_depth_m": 5.589,
+      "p99_depth_m": 7.595,
+      "thin_film_cells": 175075,
+      "single_cell_patches": 2648,
+      "single_cell_area_km2": 26.48,
+      "largest_patch_area_km2": 412.96,
+      "main_body_patches": 1,
+      "main_body_area_km2": 412.96,
+      "patches_le_4_cells": 4551,
+      "patches_le_9_cells": 5045,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 75.73,
+      "area_le_9_cells_km2": 107.04
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 35,
+      "t_h": 210.0,
+      "n_patches": 5224,
+      "wet_cells": 59573,
+      "wet_area_km2": 595.73,
+      "wet_volume_m3": 1465719375.0,
+      "max_depth_m": 13.061,
+      "p50_depth_m": 1.819,
+      "p90_depth_m": 5.647,
+      "p99_depth_m": 7.651,
+      "thin_film_cells": 167870,
+      "single_cell_patches": 2607,
+      "single_cell_area_km2": 26.07,
+      "largest_patch_area_km2": 426.36,
+      "main_body_patches": 1,
+      "main_body_area_km2": 426.36,
+      "patches_le_4_cells": 4507,
+      "patches_le_9_cells": 4995,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 75.28,
+      "area_le_9_cells_km2": 106.27
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 36,
+      "t_h": 216.0,
+      "n_patches": 5176,
+      "wet_cells": 61226,
+      "wet_area_km2": 612.26,
+      "wet_volume_m3": 1540408593.8,
+      "max_depth_m": 13.026,
+      "p50_depth_m": 2.029,
+      "p90_depth_m": 5.7,
+      "p99_depth_m": 7.703,
+      "thin_film_cells": 171383,
+      "single_cell_patches": 2611,
+      "single_cell_area_km2": 26.11,
+      "largest_patch_area_km2": 447.28,
+      "main_body_patches": 1,
+      "main_body_area_km2": 447.28,
+      "patches_le_4_cells": 4481,
+      "patches_le_9_cells": 4957,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 74.49,
+      "area_le_9_cells_km2": 104.52
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 37,
+      "t_h": 222.0,
+      "n_patches": 5135,
+      "wet_cells": 62017,
+      "wet_area_km2": 620.17,
+      "wet_volume_m3": 1617310781.2,
+      "max_depth_m": 13.017,
+      "p50_depth_m": 2.111,
+      "p90_depth_m": 5.753,
+      "p99_depth_m": 7.755,
+      "thin_film_cells": 172837,
+      "single_cell_patches": 2598,
+      "single_cell_area_km2": 25.98,
+      "largest_patch_area_km2": 458.62,
+      "main_body_patches": 1,
+      "main_body_area_km2": 458.62,
+      "patches_le_4_cells": 4460,
+      "patches_le_9_cells": 4925,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 74.07,
+      "area_le_9_cells_km2": 103.46
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 38,
+      "t_h": 228.0,
+      "n_patches": 5112,
+      "wet_cells": 63014,
+      "wet_area_km2": 630.14,
+      "wet_volume_m3": 1696669375.0,
+      "max_depth_m": 13.014,
+      "p50_depth_m": 2.224,
+      "p90_depth_m": 5.804,
+      "p99_depth_m": 7.804,
+      "thin_film_cells": 172334,
+      "single_cell_patches": 2596,
+      "single_cell_area_km2": 25.96,
+      "largest_patch_area_km2": 469.07,
+      "main_body_patches": 1,
+      "main_body_area_km2": 469.07,
+      "patches_le_4_cells": 4439,
+      "patches_le_9_cells": 4902,
+      "patches_ge_1km2": 9,
+      "area_le_4_cells_km2": 73.52,
+      "area_le_9_cells_km2": 102.76
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 39,
+      "t_h": 234.0,
+      "n_patches": 5075,
+      "wet_cells": 63823,
+      "wet_area_km2": 638.23,
+      "wet_volume_m3": 1769800312.5,
+      "max_depth_m": 13.042,
+      "p50_depth_m": 2.211,
+      "p90_depth_m": 5.857,
+      "p99_depth_m": 7.838,
+      "thin_film_cells": 167229,
+      "single_cell_patches": 2574,
+      "single_cell_area_km2": 25.74,
+      "largest_patch_area_km2": 478.15,
+      "main_body_patches": 1,
+      "main_body_area_km2": 478.15,
+      "patches_le_4_cells": 4407,
+      "patches_le_9_cells": 4867,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 73.05,
+      "area_le_9_cells_km2": 102.1
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 40,
+      "t_h": 240.0,
+      "n_patches": 5036,
+      "wet_cells": 64914,
+      "wet_area_km2": 649.14,
+      "wet_volume_m3": 1827838906.2,
+      "max_depth_m": 13.026,
+      "p50_depth_m": 2.281,
+      "p90_depth_m": 5.8507,
+      "p99_depth_m": 7.824,
+      "thin_film_cells": 169279,
+      "single_cell_patches": 2547,
+      "single_cell_area_km2": 25.47,
+      "largest_patch_area_km2": 490.71,
+      "main_body_patches": 1,
+      "main_body_area_km2": 490.71,
+      "patches_le_4_cells": 4374,
+      "patches_le_9_cells": 4836,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 72.73,
+      "area_le_9_cells_km2": 101.84
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 41,
+      "t_h": 246.0,
+      "n_patches": 5011,
+      "wet_cells": 65455,
+      "wet_area_km2": 654.55,
+      "wet_volume_m3": 1876085937.5,
+      "max_depth_m": 13.024,
+      "p50_depth_m": 2.447,
+      "p90_depth_m": 5.825,
+      "p99_depth_m": 7.791,
+      "thin_film_cells": 168666,
+      "single_cell_patches": 2540,
+      "single_cell_area_km2": 25.4,
+      "largest_patch_area_km2": 497.7,
+      "main_body_patches": 1,
+      "main_body_area_km2": 497.7,
+      "patches_le_4_cells": 4360,
+      "patches_le_9_cells": 4817,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 72.56,
+      "area_le_9_cells_km2": 101.45
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 42,
+      "t_h": 252.0,
+      "n_patches": 4995,
+      "wet_cells": 65672,
+      "wet_area_km2": 656.72,
+      "wet_volume_m3": 1914029843.8,
+      "max_depth_m": 13.018,
+      "p50_depth_m": 2.612,
+      "p90_depth_m": 5.816,
+      "p99_depth_m": 7.758,
+      "thin_film_cells": 169734,
+      "single_cell_patches": 2544,
+      "single_cell_area_km2": 25.44,
+      "largest_patch_area_km2": 502.44,
+      "main_body_patches": 1,
+      "main_body_area_km2": 502.44,
+      "patches_le_4_cells": 4354,
+      "patches_le_9_cells": 4809,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 72.28,
+      "area_le_9_cells_km2": 100.92
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 43,
+      "t_h": 258.0,
+      "n_patches": 4945,
+      "wet_cells": 66579,
+      "wet_area_km2": 665.79,
+      "wet_volume_m3": 1946028125.0,
+      "max_depth_m": 13.089,
+      "p50_depth_m": 2.691,
+      "p90_depth_m": 5.823,
+      "p99_depth_m": 7.777,
+      "thin_film_cells": 160705,
+      "single_cell_patches": 2481,
+      "single_cell_area_km2": 24.81,
+      "largest_patch_area_km2": 508.73,
+      "main_body_patches": 1,
+      "main_body_area_km2": 508.73,
+      "patches_le_4_cells": 4274,
+      "patches_le_9_cells": 4743,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 71.25,
+      "area_le_9_cells_km2": 100.83
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 44,
+      "t_h": 264.0,
+      "n_patches": 4930,
+      "wet_cells": 66755,
+      "wet_area_km2": 667.55,
+      "wet_volume_m3": 1965693906.2,
+      "max_depth_m": 13.241,
+      "p50_depth_m": 2.653,
+      "p90_depth_m": 5.992,
+      "p99_depth_m": 7.991,
+      "thin_film_cells": 165584,
+      "single_cell_patches": 2481,
+      "single_cell_area_km2": 24.81,
+      "largest_patch_area_km2": 511.71,
+      "main_body_patches": 1,
+      "main_body_area_km2": 511.71,
+      "patches_le_4_cells": 4268,
+      "patches_le_9_cells": 4727,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 71.06,
+      "area_le_9_cells_km2": 100.01
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 45,
+      "t_h": 270.0,
+      "n_patches": 4887,
+      "wet_cells": 67262,
+      "wet_area_km2": 672.62,
+      "wet_volume_m3": 1976471875.0,
+      "max_depth_m": 13.293,
+      "p50_depth_m": 2.603,
+      "p90_depth_m": 6.132,
+      "p99_depth_m": 8.132,
+      "thin_film_cells": 167176,
+      "single_cell_patches": 2463,
+      "single_cell_area_km2": 24.63,
+      "largest_patch_area_km2": 519.04,
+      "main_body_patches": 1,
+      "main_body_area_km2": 519.04,
+      "patches_le_4_cells": 4235,
+      "patches_le_9_cells": 4693,
+      "patches_ge_1km2": 7,
+      "area_le_4_cells_km2": 70.54,
+      "area_le_9_cells_km2": 99.51
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 46,
+      "t_h": 276.0,
+      "n_patches": 4856,
+      "wet_cells": 67518,
+      "wet_area_km2": 675.18,
+      "wet_volume_m3": 1980978437.5,
+      "max_depth_m": 13.336,
+      "p50_depth_m": 2.554,
+      "p90_depth_m": 6.16,
+      "p99_depth_m": 8.2268,
+      "thin_film_cells": 163136,
+      "single_cell_patches": 2444,
+      "single_cell_area_km2": 24.44,
+      "largest_patch_area_km2": 521.5,
+      "main_body_patches": 1,
+      "main_body_area_km2": 521.5,
+      "patches_le_4_cells": 4212,
+      "patches_le_9_cells": 4658,
+      "patches_ge_1km2": 8,
+      "area_le_4_cells_km2": 70.23,
+      "area_le_9_cells_km2": 98.28
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 47,
+      "t_h": 282.0,
+      "n_patches": 4309,
+      "wet_cells": 76997,
+      "wet_area_km2": 769.97,
+      "wet_volume_m3": 2030759531.2,
+      "max_depth_m": 14.994,
+      "p50_depth_m": 2.049,
+      "p90_depth_m": 6.025,
+      "p99_depth_m": 8.026,
+      "thin_film_cells": 144996,
+      "single_cell_patches": 2005,
+      "single_cell_area_km2": 20.05,
+      "largest_patch_area_km2": 567.06,
+      "main_body_patches": 1,
+      "main_body_area_km2": 567.06,
+      "patches_le_4_cells": 3530,
+      "patches_le_9_cells": 3996,
+      "patches_ge_1km2": 16,
+      "area_le_4_cells_km2": 60.46,
+      "area_le_9_cells_km2": 90.48
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 48,
+      "t_h": 288.0,
+      "n_patches": 4458,
+      "wet_cells": 73136,
+      "wet_area_km2": 731.36,
+      "wet_volume_m3": 2018281875.0,
+      "max_depth_m": 15.103,
+      "p50_depth_m": 2.132,
+      "p90_depth_m": 6.0365,
+      "p99_depth_m": 8.095,
+      "thin_film_cells": 157269,
+      "single_cell_patches": 2164,
+      "single_cell_area_km2": 21.64,
+      "largest_patch_area_km2": 544.79,
+      "main_body_patches": 1,
+      "main_body_area_km2": 544.79,
+      "patches_le_4_cells": 3743,
+      "patches_le_9_cells": 4184,
+      "patches_ge_1km2": 14,
+      "area_le_4_cells_km2": 62.86,
+      "area_le_9_cells_km2": 90.97
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 49,
+      "t_h": 294.0,
+      "n_patches": 4535,
+      "wet_cells": 72025,
+      "wet_area_km2": 720.25,
+      "wet_volume_m3": 2002981562.5,
+      "max_depth_m": 15.139,
+      "p50_depth_m": 2.238,
+      "p90_depth_m": 6.04,
+      "p99_depth_m": 8.11,
+      "thin_film_cells": 149891,
+      "single_cell_patches": 2207,
+      "single_cell_area_km2": 22.07,
+      "largest_patch_area_km2": 538.23,
+      "main_body_patches": 1,
+      "main_body_area_km2": 538.23,
+      "patches_le_4_cells": 3810,
+      "patches_le_9_cells": 4277,
+      "patches_ge_1km2": 13,
+      "area_le_4_cells_km2": 63.8,
+      "area_le_9_cells_km2": 93.42
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 50,
+      "t_h": 300.0,
+      "n_patches": 4593,
+      "wet_cells": 70467,
+      "wet_area_km2": 704.67,
+      "wet_volume_m3": 1979816718.8,
+      "max_depth_m": 15.219,
+      "p50_depth_m": 2.323,
+      "p90_depth_m": 6.02,
+      "p99_depth_m": 8.137,
+      "thin_film_cells": 159635,
+      "single_cell_patches": 2253,
+      "single_cell_area_km2": 22.53,
+      "largest_patch_area_km2": 525.45,
+      "main_body_patches": 1,
+      "main_body_area_km2": 525.45,
+      "patches_le_4_cells": 3882,
+      "patches_le_9_cells": 4339,
+      "patches_ge_1km2": 13,
+      "area_le_4_cells_km2": 64.96,
+      "area_le_9_cells_km2": 94.0
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 51,
+      "t_h": 306.0,
+      "n_patches": 4596,
+      "wet_cells": 70303,
+      "wet_area_km2": 703.03,
+      "wet_volume_m3": 1954381562.5,
+      "max_depth_m": 15.293,
+      "p50_depth_m": 2.267,
+      "p90_depth_m": 5.961,
+      "p99_depth_m": 8.123,
+      "thin_film_cells": 158285,
+      "single_cell_patches": 2244,
+      "single_cell_area_km2": 22.44,
+      "largest_patch_area_km2": 523.53,
+      "main_body_patches": 1,
+      "main_body_area_km2": 523.53,
+      "patches_le_4_cells": 3874,
+      "patches_le_9_cells": 4338,
+      "patches_ge_1km2": 13,
+      "area_le_4_cells_km2": 65.01,
+      "area_le_9_cells_km2": 94.32
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 52,
+      "t_h": 312.0,
+      "n_patches": 4608,
+      "wet_cells": 69606,
+      "wet_area_km2": 696.06,
+      "wet_volume_m3": 1920820468.8,
+      "max_depth_m": 15.323,
+      "p50_depth_m": 2.195,
+      "p90_depth_m": 5.9885,
+      "p99_depth_m": 8.1639,
+      "thin_film_cells": 162950,
+      "single_cell_patches": 2265,
+      "single_cell_area_km2": 22.65,
+      "largest_patch_area_km2": 520.58,
+      "main_body_patches": 1,
+      "main_body_area_km2": 520.58,
+      "patches_le_4_cells": 3910,
+      "patches_le_9_cells": 4374,
+      "patches_ge_1km2": 13,
+      "area_le_4_cells_km2": 65.6,
+      "area_le_9_cells_km2": 95.31
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 53,
+      "t_h": 318.0,
+      "n_patches": 4630,
+      "wet_cells": 69025,
+      "wet_area_km2": 690.25,
+      "wet_volume_m3": 1882462500.0,
+      "max_depth_m": 15.332,
+      "p50_depth_m": 2.125,
+      "p90_depth_m": 5.973,
+      "p99_depth_m": 8.082,
+      "thin_film_cells": 165424,
+      "single_cell_patches": 2280,
+      "single_cell_area_km2": 22.8,
+      "largest_patch_area_km2": 517.16,
+      "main_body_patches": 1,
+      "main_body_area_km2": 517.16,
+      "patches_le_4_cells": 3941,
+      "patches_le_9_cells": 4401,
+      "patches_ge_1km2": 12,
+      "area_le_4_cells_km2": 66.11,
+      "area_le_9_cells_km2": 95.43
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 54,
+      "t_h": 324.0,
+      "n_patches": 4673,
+      "wet_cells": 67940,
+      "wet_area_km2": 679.4,
+      "wet_volume_m3": 1839545625.0,
+      "max_depth_m": 15.336,
+      "p50_depth_m": 2.167,
+      "p90_depth_m": 5.985,
+      "p99_depth_m": 8.002,
+      "thin_film_cells": 166493,
+      "single_cell_patches": 2314,
+      "single_cell_area_km2": 23.14,
+      "largest_patch_area_km2": 509.29,
+      "main_body_patches": 1,
+      "main_body_area_km2": 509.29,
+      "patches_le_4_cells": 3985,
+      "patches_le_9_cells": 4442,
+      "patches_ge_1km2": 11,
+      "area_le_4_cells_km2": 66.63,
+      "area_le_9_cells_km2": 95.71
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 55,
+      "t_h": 330.0,
+      "n_patches": 4684,
+      "wet_cells": 67681,
+      "wet_area_km2": 676.81,
+      "wet_volume_m3": 1796101093.8,
+      "max_depth_m": 15.349,
+      "p50_depth_m": 2.095,
+      "p90_depth_m": 5.89,
+      "p99_depth_m": 7.895,
+      "thin_film_cells": 163208,
+      "single_cell_patches": 2323,
+      "single_cell_area_km2": 23.23,
+      "largest_patch_area_km2": 504.3,
+      "main_body_patches": 1,
+      "main_body_area_km2": 504.3,
+      "patches_le_4_cells": 3995,
+      "patches_le_9_cells": 4450,
+      "patches_ge_1km2": 12,
+      "area_le_4_cells_km2": 66.8,
+      "area_le_9_cells_km2": 95.68
+    },
+    {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "cellsize_m": 100.0,
+      "cell_area_m2": 10000.0,
+      "seq": 56,
+      "t_h": 336.0,
+      "n_patches": 4724,
+      "wet_cells": 67294,
+      "wet_area_km2": 672.94,
+      "wet_volume_m3": 1753687812.5,
+      "max_depth_m": 15.395,
+      "p50_depth_m": 2.087,
+      "p90_depth_m": 5.7927,
+      "p99_depth_m": 7.795,
+      "thin_film_cells": 163715,
+      "single_cell_patches": 2338,
+      "single_cell_area_km2": 23.38,
+      "largest_patch_area_km2": 499.55,
+      "main_body_patches": 1,
+      "main_body_area_km2": 499.55,
+      "patches_le_4_cells": 4017,
+      "patches_le_9_cells": 4487,
+      "patches_ge_1km2": 12,
+      "area_le_4_cells_km2": 67.1,
+      "area_le_9_cells_km2": 96.99
+    }
+  ],
+  "track_count": 10138,
+  "res_max_facts": {
+    "wet_cells": 85256,
+    "wet_area_km2": 852.56,
+    "flood_ratio_pct_of_domain": 34.4427,
+    "patch_count": 4422,
+    "max_depth_m": 15.396,
+    "p50": 2.022,
+    "p90": 6.022,
+    "p99": 8.029,
+    "max": 15.396,
+    "mean": 2.5687,
+    "patches_le_1_cell": 1922,
+    "patches_le_4_cells": 3546,
+    "patches_le_4_cells_pct": 80.19,
+    "patches_le_9_cells": 4089,
+    "patches_le_9_cells_pct": 92.469,
+    "patches_ge_1km2": 14,
+    "largest_patch_area_km2": 614.96,
+    "largest_patch_share_pct": 72.131,
+    "wet_volume_m3": 2189938988.7
+  },
+  "volume_budget": {
+    "res_max_wet_volume_m3": 2189938988.7,
+    "largest_patch_area_km2": 614.96,
+    "largest_patch_volume_m3": 2013680718.9,
+    "largest_patch_share_of_wet_area_pct": 72.131,
+    "largest_patch_share_of_volume_pct": 91.951,
+    "by_patch_size": {
+      "le_1_cells": {
+        "patch_count": 1922,
+        "area_km2": 19.22,
+        "volume_m3": 16846310.0,
+        "volume_share_of_res_max_pct": 0.7693
+      },
+      "le_4_cells": {
+        "patch_count": 3546,
+        "area_km2": 62.01,
+        "volume_m3": 55132289.9,
+        "volume_share_of_res_max_pct": 2.5175
+      },
+      "le_9_cells": {
+        "patch_count": 4089,
+        "area_km2": 96.85,
+        "volume_m3": 83539739.9,
+        "volume_share_of_res_max_pct": 3.8147
+      },
+      "le_25_cells": {
+        "patch_count": 4319,
+        "area_km2": 131.38,
+        "volume_m3": 109503699.9,
+        "volume_share_of_res_max_pct": 5.0003
+      },
+      "le_100_cells": {
+        "patch_count": 4408,
+        "area_km2": 170.31,
+        "volume_m3": 136811869.9,
+        "volume_share_of_res_max_pct": 6.2473
+      }
+    },
+    "note": "res.max 是全程逐像元最大值包络，其体积不等于末帧蓄量（见 mass_accounting.v_end_m3）"
+  },
+  "discrete_depth_profile": {
+    "note": "对 res.max 口径按斑块像元数分组的 max_depth 分位。用于检验计划 §1.2 把离散斑块描述为「浅水坑洼 / 5 cm 地表糙度」是否成立。",
+    "le_1_cell": {
+      "n": 1922,
+      "p10": 0.056,
+      "p25": 0.0802,
+      "p50": 0.8415,
+      "p75": 1.054,
+      "p90": 1.9688,
+      "p99": 5.0819,
+      "max": 9.144,
+      "mean": 0.8765
+    },
+    "le_4_cells": {
+      "n": 3546,
+      "p10": 0.061,
+      "p25": 0.1253,
+      "p50": 1.0185,
+      "p75": 1.3202,
+      "p90": 2.1385,
+      "p99": 5.941,
+      "max": 12.06,
+      "mean": 1.1035
+    },
+    "le_9_cells": {
+      "n": 4089,
+      "p10": 0.063,
+      "p25": 0.376,
+      "p50": 1.034,
+      "p75": 1.482,
+      "p90": 2.335,
+      "p99": 6.1714,
+      "max": 12.06,
+      "mean": 1.1965
+    },
+    "le_25_cells": {
+      "n": 4319,
+      "p10": 0.064,
+      "p25": 0.4435,
+      "p50": 1.041,
+      "p75": 1.5795,
+      "p90": 2.4638,
+      "p99": 6.9867,
+      "max": 14.424,
+      "mean": 1.2545
+    },
+    "gt_9_cells": {
+      "n": 333,
+      "p10": 1.0692,
+      "p25": 1.123,
+      "p50": 2.066,
+      "p75": 2.539,
+      "p90": 5.0822,
+      "p99": 12.6274,
+      "max": 15.396,
+      "mean": 2.4792
+    },
+    "all": {
+      "n": 4422,
+      "p10": 0.065,
+      "p25": 0.467,
+      "p50": 1.045,
+      "p75": 1.6425,
+      "p90": 2.5523,
+      "p99": 7.1373,
+      "max": 15.396,
+      "mean": 1.2931
+    },
+    "count_le_9_cells_depth_lt_0p15": 971,
+    "count_le_9_cells_depth_lt_0p30": 996,
+    "count_le_9_cells_depth_lt_0p50": 1134,
+    "count_le_9_cells_total": 4089,
+    "evidence_level": "E1（脚本从 res.max 逐斑块复算）"
+  },
+  "depth_spectrum": {
+    "note": "res.max 口径下，depth > 阈值 的像元面积与占湿面积比例。用于检验「全域大部分湿区是深水」这一事实（与计划 §1.2 的浅水噪点叙事对照）。",
+    "wet_area_km2_at_0p05": 852.56,
+    "by_threshold": {
+      "0.05": {
+        "depth_gt_m": 0.05,
+        "cells": 85256,
+        "area_km2": 852.56,
+        "pct_of_wet_area": 100.0
+      },
+      "0.1": {
+        "depth_gt_m": 0.1,
+        "cells": 75926,
+        "area_km2": 759.26,
+        "pct_of_wet_area": 89.056
+      },
+      "0.15": {
+        "depth_gt_m": 0.15,
+        "cells": 71463,
+        "area_km2": 714.63,
+        "pct_of_wet_area": 83.822
+      },
+      "0.3": {
+        "depth_gt_m": 0.3,
+        "cells": 66730,
+        "area_km2": 667.3,
+        "pct_of_wet_area": 78.27
+      },
+      "0.5": {
+        "depth_gt_m": 0.5,
+        "cells": 63644,
+        "area_km2": 636.44,
+        "pct_of_wet_area": 74.65
+      },
+      "1": {
+        "depth_gt_m": 1.0,
+        "cells": 58498,
+        "area_km2": 584.98,
+        "pct_of_wet_area": 68.615
+      },
+      "2": {
+        "depth_gt_m": 2.0,
+        "cells": 43301,
+        "area_km2": 433.01,
+        "pct_of_wet_area": 50.789
+      }
+    },
+    "evidence_level": "E1（脚本从 res.max 逐像元复算，float32 口径）"
+  },
+  "main_vs_nonmain_depth": {
+    "note": "主水体 = 面积最大的单个连通斑块（该 run 的郁江干流连通漫滩）。非主水体 = 其余全部湿像元。用于回答「离散水点是否只是薄水」：非主水体中位深度不深，但尾部很深，说明其中既有薄水也有深水坑。",
+    "main_body": {
+      "patch_count": 1,
+      "definition": "面积最大的单个 8 邻域连通斑块",
+      "n_cells": 61496,
+      "area_km2": 614.96,
+      "p10": 0.2145,
+      "p25": 1.1658,
+      "p50": 3.032,
+      "p75": 5.021,
+      "p90": 6.4955,
+      "p99": 8.374,
+      "max": 13.332,
+      "mean": 3.2745
+    },
+    "non_main_body": {
+      "n_cells": 23760,
+      "area_km2": 237.6,
+      "p10": 0.063,
+      "p25": 0.094,
+      "p50": 0.344,
+      "p75": 1.072,
+      "p90": 1.7471,
+      "p99": 5.038,
+      "max": 15.396,
+      "mean": 0.7418
+    },
+    "domain_wet": {
+      "n_cells": 85256,
+      "area_km2": 852.56,
+      "p10": 0.094,
+      "p25": 0.475,
+      "p50": 2.022,
+      "p75": 4.115,
+      "p90": 6.022,
+      "p99": 8.029,
+      "max": 15.396,
+      "mean": 2.5687
+    },
+    "evidence_level": "E1（脚本从 res.max 逐像元复算）"
+  },
+  "rain_accounting": {
+    "rain_file": "outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\rain.rain",
+    "rain_file_sha256": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+    "rain_series_points_declared": 290,
+    "rain_series_points_actual": 290,
+    "rain_series_points_match": true,
+    "rain_total_mm": 135.5,
+    "rain_hours_with_rain": 123,
+    "rain_max_hourly_mm": 14.1,
+    "rain_mean_hourly_mm": 0.467241,
+    "domain_cells": 247530,
+    "cell_area_m2": 10000.0,
+    "domain_area_km2": 2475.3,
+    "v_rain_m3": 335403150.0,
+    "v_rain_formula": "domain_cells × cell_area_m2 × rain_total_mm / 1000",
+    "upstream_q_series_m3s": [
+      [
+        0.0,
+        1000.0
+      ],
+      [
+        432000.0,
+        1000.0
+      ],
+      [
+        820800.0,
+        11500.0
+      ],
+      [
+        1166400.0,
+        2500.0
+      ],
+      [
+        1209600.0,
+        2000.0
+      ]
+    ],
+    "v_upstream_m3": 5378400000.0,
+    "v_upstream_formula": "Σ 0.5×(Q_i+Q_i+1)×Δt_i（三角情景线解析积分）",
+    "rain_over_upstream_pct": 6.236,
+    "rain_share_of_total_inflow_pct": 5.87,
+    "rain_series": [
+      {
+        "t_s": 0.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 172800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 176400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 180000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 183600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 187200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 190800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 194400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 198000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 201600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 205200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 208800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 212400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 216000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 219600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 223200.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 226800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 230400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 234000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 237600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 241200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 244800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 248400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 252000.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 255600.0,
+        "mm": 1.9
+      },
+      {
+        "t_s": 259200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 262800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 266400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 270000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 273600.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 277200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 280800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 284400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 288000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 291600.0,
+        "mm": 4.9
+      },
+      {
+        "t_s": 295200.0,
+        "mm": 4.5
+      },
+      {
+        "t_s": 298800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 302400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 306000.0,
+        "mm": 3.7
+      },
+      {
+        "t_s": 309600.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 313200.0,
+        "mm": 1.0
+      },
+      {
+        "t_s": 316800.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 320400.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 324000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 327600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 331200.0,
+        "mm": 0.8
+      },
+      {
+        "t_s": 334800.0,
+        "mm": 2.0
+      },
+      {
+        "t_s": 338400.0,
+        "mm": 3.6
+      },
+      {
+        "t_s": 342000.0,
+        "mm": 1.7
+      },
+      {
+        "t_s": 345600.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 349200.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 352800.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 356400.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 360000.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 363600.0,
+        "mm": 0.8
+      },
+      {
+        "t_s": 367200.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 370800.0,
+        "mm": 1.8
+      },
+      {
+        "t_s": 374400.0,
+        "mm": 1.6
+      },
+      {
+        "t_s": 378000.0,
+        "mm": 1.6
+      },
+      {
+        "t_s": 381600.0,
+        "mm": 2.8
+      },
+      {
+        "t_s": 385200.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 388800.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 392400.0,
+        "mm": 0.8
+      },
+      {
+        "t_s": 396000.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 399600.0,
+        "mm": 1.5
+      },
+      {
+        "t_s": 403200.0,
+        "mm": 1.4
+      },
+      {
+        "t_s": 406800.0,
+        "mm": 1.9
+      },
+      {
+        "t_s": 410400.0,
+        "mm": 4.4
+      },
+      {
+        "t_s": 414000.0,
+        "mm": 4.0
+      },
+      {
+        "t_s": 417600.0,
+        "mm": 2.3
+      },
+      {
+        "t_s": 421200.0,
+        "mm": 1.1
+      },
+      {
+        "t_s": 424800.0,
+        "mm": 1.2
+      },
+      {
+        "t_s": 428400.0,
+        "mm": 0.8
+      },
+      {
+        "t_s": 432000.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 435600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 439200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 442800.0,
+        "mm": 1.0
+      },
+      {
+        "t_s": 446400.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 450000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 453600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 457200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 460800.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 464400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 468000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 471600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 475200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 478800.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 482400.0,
+        "mm": 6.9
+      },
+      {
+        "t_s": 486000.0,
+        "mm": 4.7
+      },
+      {
+        "t_s": 489600.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 493200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 496800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 500400.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 504000.0,
+        "mm": 0.9
+      },
+      {
+        "t_s": 507600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 511200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 514800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 518400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 522000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 525600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 529200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 532800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 536400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 540000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 543600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 547200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 550800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 554400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 558000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 561600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 565200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 568800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 572400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 576000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 579600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 583200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 586800.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 590400.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 594000.0,
+        "mm": 0.9
+      },
+      {
+        "t_s": 597600.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 601200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 604800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 608400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 612000.0,
+        "mm": 4.3
+      },
+      {
+        "t_s": 615600.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 619200.0,
+        "mm": 4.0
+      },
+      {
+        "t_s": 622800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 626400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 630000.0,
+        "mm": 0.9
+      },
+      {
+        "t_s": 633600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 637200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 640800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 644400.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 648000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 651600.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 655200.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 658800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 662400.0,
+        "mm": 11.5
+      },
+      {
+        "t_s": 666000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 669600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 673200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 676800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 680400.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 684000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 687600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 691200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 694800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 698400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 702000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 705600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 709200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 712800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 716400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 720000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 723600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 727200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 730800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 734400.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 738000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 741600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 745200.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 748800.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 752400.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 756000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 759600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 763200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 766800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 770400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 774000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 777600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 781200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 784800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 788400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 792000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 795600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 799200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 802800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 806400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 810000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 813600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 817200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 820800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 824400.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 828000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 831600.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 835200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 838800.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 842400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 846000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 849600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 853200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 856800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 860400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 864000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 867600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 871200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 874800.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 878400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 882000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 885600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 889200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 892800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 896400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 900000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 903600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 907200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 910800.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 914400.0,
+        "mm": 1.2
+      },
+      {
+        "t_s": 918000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 921600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 925200.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 928800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 932400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 936000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 939600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 943200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 946800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 950400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 954000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 957600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 961200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 964800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 968400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 972000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 975600.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 979200.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 982800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 986400.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 990000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 993600.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 997200.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 1000800.0,
+        "mm": 14.1
+      },
+      {
+        "t_s": 1004400.0,
+        "mm": 8.4
+      },
+      {
+        "t_s": 1008000.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 1011600.0,
+        "mm": 0.5
+      },
+      {
+        "t_s": 1015200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1018800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1022400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1026000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1029600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1033200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1036800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1040400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1044000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1047600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1051200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1054800.0,
+        "mm": 2.0
+      },
+      {
+        "t_s": 1058400.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1062000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1065600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1069200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1072800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1076400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1080000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1083600.0,
+        "mm": 1.3
+      },
+      {
+        "t_s": 1087200.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 1090800.0,
+        "mm": 0.2
+      },
+      {
+        "t_s": 1094400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1098000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1101600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1105200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1108800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1112400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1116000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1119600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1123200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1126800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1130400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1134000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1137600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1141200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1144800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1148400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1152000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1155600.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1159200.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1162800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1166400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1170000.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1173600.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1177200.0,
+        "mm": 0.4
+      },
+      {
+        "t_s": 1180800.0,
+        "mm": 0.1
+      },
+      {
+        "t_s": 1184400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1188000.0,
+        "mm": 0.3
+      },
+      {
+        "t_s": 1191600.0,
+        "mm": 0.6
+      },
+      {
+        "t_s": 1195200.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1198800.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1202400.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1206000.0,
+        "mm": 0.0
+      },
+      {
+        "t_s": 1209600.0,
+        "mm": 0.0
+      }
+    ],
+    "clock_basis": "rain.rain 时刻列以模型 t=0 = 2024-09-03T00 为基准（scripts/stage5/guigang_scenario.py:196-200，T0_DAY=3）；ERA5 原始序列首个键为 2024-09-05T00，不得把 t=0 当成 09-05T00，否则累计雨量整体偏移 48 h",
+    "evidence_level": "E1（脚本从 rain.rain 与 yujiang.bdy 复算）"
+  },
+  "rain_interception": {
+    "v_rain_m3": 335403150.0,
+    "res_max_wet_volume_m3": 2189938988.7,
+    "interception_by_patch_size": {
+      "le_1_cells": {
+        "volume_m3": 16846310.0,
+        "pct_of_rain_volume": 5.023,
+        "pct_of_res_max_volume": 0.7693
+      },
+      "le_4_cells": {
+        "volume_m3": 55132289.9,
+        "pct_of_rain_volume": 16.438,
+        "pct_of_res_max_volume": 2.5175
+      },
+      "le_9_cells": {
+        "volume_m3": 83539739.9,
+        "pct_of_rain_volume": 24.907,
+        "pct_of_res_max_volume": 3.8147
+      },
+      "le_25_cells": {
+        "volume_m3": 109503699.9,
+        "pct_of_rain_volume": 32.648,
+        "pct_of_res_max_volume": 5.0003
+      },
+      "le_100_cells": {
+        "volume_m3": 136811869.9,
+        "pct_of_rain_volume": 40.79,
+        "pct_of_res_max_volume": 6.2473
+      }
+    },
+    "note": "「截留占比」= 该尺寸组斑块在 res.max 包络中的蓄水体积 / 全域降雨体积。分子是包络峰值口径、分母是全程累计入流口径，两者不是同一时间断面，故比值只能读作量级对照，不能读作水量守恒项。",
+    "evidence_level": "E2（分子分母口径不同，只能给量级；严格闭合账目见 mass_accounting）"
+  },
+  "mass_accounting": {
+    "available": true,
+    "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+    "rows": 337,
+    "v0_m3": 2500.0,
+    "v_end_m3": 1758291929.2,
+    "v_rain_m3": 335403150.0,
+    "v_in_m3": 5378394899.0,
+    "v_out_m3": 3955152024.6,
+    "residual_m3": -356595.2,
+    "e_mass": 6.2409e-05,
+    "gate_1e-3": "PASS",
+    "note": "v_end 是末帧蓄量，与 res.max 峰值包络体积不是同一口径，不得混用（res.max 是全程逐像元最大值，其体积大于任一单帧蓄量）"
+  },
+  "structural_ceiling": {
+    "deep_depth_threshold_m": 0.5,
+    "res_max_patch_count": 4422,
+    "patches_with_max_depth_ge_threshold": 3283,
+    "patches_with_max_depth_lt_threshold": 1139,
+    "max_possible_removal_pct_any_tier": 25.758,
+    "explanation": "计划 §Phase1 的规则顺序把 R2（max_depth >= 0.50 m 显著深水洼地保护）排在 R3（面积+水深）与 R4（时空持久性）之前，且 R2 的阈值是固定 0.50 m、不随档位变化。因此 max_depth >= 0.50 m 的斑块对任何档位都绝对豁免，任何档位的去除率上界= 1 − P(max_depth >= 0.50 m)。这是规则结构决定的上界，与阈值怎么选无关。",
+    "evidence_level": "E1（脚本按计划原规则顺序逐斑块复算）"
+  },
+  "tier_comparison": {
+    "A": {
+      "label": "A 档（保守）",
+      "pre_registered_params": {
+        "area_max_km2": 0.04,
+        "n_cells_area_max": 4,
+        "depth_max_m": 0.15,
+        "s1_buffer_m": 500.0
+      },
+      "plan_predicted_removal_pct": 80.2,
+      "measured_removal_pct_res_max": 22.388,
+      "measured_removal_pct_peak_frame": 7.914,
+      "measured_removal_pct_track_level": 30.558,
+      "measured_area_change_pct_res_max": 2.1336,
+      "measured_volume_change_pct_res_max": 0.0631,
+      "gap_pp": -57.812,
+      "meets_plan_target": false,
+      "plan_target_90pct_met": false,
+      "reason_counts_res_max": {
+        "FILTER_DISCRETE_PUDDLE": 913,
+        "FILTER_TRANSIENT_NOISE": 77,
+        "KEEP_DEEP_WATER": 3043,
+        "KEEP_MAIN_STEM": 5,
+        "KEEP_NATURAL_WETLAND": 133,
+        "KEEP_RIVER_CORRIDOR": 251
+      },
+      "r3_only_removal_pct": 20.737,
+      "r3_only_area_change_pct": 1.6058,
+      "r3_only_volume_change_pct": 0.0449
+    },
+    "B": {
+      "label": "B 档（推荐平衡）",
+      "pre_registered_params": {
+        "area_max_km2": 0.09,
+        "n_cells_area_max": 9,
+        "depth_max_m": 0.3,
+        "s1_buffer_m": 300.0
+      },
+      "plan_predicted_removal_pct": 92.5,
+      "measured_removal_pct_res_max": 22.614,
+      "measured_removal_pct_peak_frame": 8.146,
+      "measured_removal_pct_track_level": 31.121,
+      "measured_area_change_pct_res_max": 2.1559,
+      "measured_volume_change_pct_res_max": 0.0647,
+      "gap_pp": -69.886,
+      "meets_plan_target": false,
+      "plan_target_90pct_met": false,
+      "reason_counts_res_max": {
+        "FILTER_DISCRETE_PUDDLE": 993,
+        "FILTER_TRANSIENT_NOISE": 7,
+        "KEEP_DEEP_WATER": 3148,
+        "KEEP_MAIN_STEM": 5,
+        "KEEP_NATURAL_WETLAND": 129,
+        "KEEP_RIVER_CORRIDOR": 140
+      },
+      "r3_only_removal_pct": 22.524,
+      "r3_only_area_change_pct": 2.0949,
+      "r3_only_volume_change_pct": 0.0628
+    },
+    "C": {
+      "label": "C 档（激进展示）",
+      "pre_registered_params": {
+        "area_max_km2": 0.25,
+        "n_cells_area_max": 25,
+        "depth_max_m": 0.5,
+        "s1_buffer_m": 200.0
+      },
+      "plan_predicted_removal_pct": 96.8,
+      "measured_removal_pct_res_max": 25.622,
+      "measured_removal_pct_peak_frame": 11.812,
+      "measured_removal_pct_track_level": 34.149,
+      "measured_area_change_pct_res_max": 2.4104,
+      "measured_volume_change_pct_res_max": 0.106,
+      "gap_pp": -71.178,
+      "meets_plan_target": false,
+      "plan_target_90pct_met": false,
+      "reason_counts_res_max": {
+        "FILTER_DISCRETE_PUDDLE": 1133,
+        "KEEP_DEEP_WATER": 3207,
+        "KEEP_MAIN_STEM": 5,
+        "KEEP_RIVER_CORRIDOR": 77
+      },
+      "r3_only_removal_pct": 25.78,
+      "r3_only_area_change_pct": 2.4233,
+      "r3_only_volume_change_pct": 0.1079
+    }
+  },
+  "area_spectrum_cumulative": {
+    "A": {
+      "area_max_km2": 0.04,
+      "n_cells_area_max": 4,
+      "patches_area_le_amax": 3546,
+      "cumulative_pct_of_patches": 80.19,
+      "plan_predicted_removal_pct": 80.2,
+      "matches_area_spectrum_within_1pp": true
+    },
+    "B": {
+      "area_max_km2": 0.09,
+      "n_cells_area_max": 9,
+      "patches_area_le_amax": 4089,
+      "cumulative_pct_of_patches": 92.469,
+      "plan_predicted_removal_pct": 92.5,
+      "matches_area_spectrum_within_1pp": true
+    },
+    "C": {
+      "area_max_km2": 0.25,
+      "n_cells_area_max": 25,
+      "patches_area_le_amax": 4319,
+      "cumulative_pct_of_patches": 97.671,
+      "plan_predicted_removal_pct": 96.8,
+      "matches_area_spectrum_within_1pp": true
+    }
+  },
+  "plan_prediction_provenance": {
+    "explanation": "计划 §3 Phase 1 表格的「预期去除斑块比例」与「面积 <= A_max 的斑块累计占比」几乎逐位相等（见 area_spectrum_cumulative），说明该预测是在「面积 <= A_max 的小斑块全部被去除」的假设下算出的，等价于只用面积一条规则。计划伪代码里排在面积规则之前的规则 1（主干保护）与规则 2（max_depth >= 0.50 m 深水豁免）会拦截其中相当一部分斑块，因此实际去除率必然低于该预测值。",
+    "evidence_level": "E1（面积谱累计占比由 res.max 逐斑块复算）",
+    "not_a_threshold_change": "本块只做口径对齐，不改变、不建议任何阈值；三档参数仍按计划原值使用"
+  },
+  "diagnostic_variants": {
+    "A": {
+      "area_max_km2": 0.04,
+      "depth_max_m": 0.15,
+      "v1_area_only_removal_pct": 80.19,
+      "v2_area_and_depth_no_deep_exemption_pct": 20.737,
+      "v3_full_four_rules_removal_pct": 22.388,
+      "note": "V1/V2 是诊断对照，**不是候选发布参数**。V1 复现计划预测值的来源；V2 显示若让三档水深上限直接生效（绕过 R2）能去掉多少；V3 是按计划原规则顺序的正式实测值。三者差距定位了差距来源。"
+    },
+    "B": {
+      "area_max_km2": 0.09,
+      "depth_max_m": 0.3,
+      "v1_area_only_removal_pct": 92.469,
+      "v2_area_and_depth_no_deep_exemption_pct": 22.524,
+      "v3_full_four_rules_removal_pct": 22.614,
+      "note": "V1/V2 是诊断对照，**不是候选发布参数**。V1 复现计划预测值的来源；V2 显示若让三档水深上限直接生效（绕过 R2）能去掉多少；V3 是按计划原规则顺序的正式实测值。三者差距定位了差距来源。"
+    },
+    "C": {
+      "area_max_km2": 0.25,
+      "depth_max_m": 0.5,
+      "v1_area_only_removal_pct": 97.671,
+      "v2_area_and_depth_no_deep_exemption_pct": 25.78,
+      "v3_full_four_rules_removal_pct": 25.622,
+      "note": "V1/V2 是诊断对照，**不是候选发布参数**。V1 复现计划预测值的来源；V2 显示若让三档水深上限直接生效（绕过 R2）能去掉多少；V3 是按计划原规则顺序的正式实测值。三者差距定位了差距来源。"
+    }
+  },
+  "tier_per_frame": {
+    "A": [
+      {
+        "seq": 0,
+        "t_h": 0.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 1,
+        "t_h": 6.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 2,
+        "t_h": 12.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0417,
+        "volume_change_pct": 0.0028
+      },
+      {
+        "seq": 3,
+        "t_h": 18.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 4,
+        "t_h": 24.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 5,
+        "t_h": 30.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 6,
+        "t_h": 36.0,
+        "patch_count": 5,
+        "removal_pct": 60.0,
+        "area_change_pct": 0.0525,
+        "volume_change_pct": 0.011
+      },
+      {
+        "seq": 7,
+        "t_h": 42.0,
+        "patch_count": 5,
+        "removal_pct": 20.0,
+        "area_change_pct": 0.0116,
+        "volume_change_pct": 0.0006
+      },
+      {
+        "seq": 8,
+        "t_h": 48.0,
+        "patch_count": 6,
+        "removal_pct": 66.667,
+        "area_change_pct": 0.0539,
+        "volume_change_pct": 0.0052
+      },
+      {
+        "seq": 9,
+        "t_h": 54.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0207,
+        "volume_change_pct": 0.0011
+      },
+      {
+        "seq": 10,
+        "t_h": 60.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0285,
+        "volume_change_pct": 0.0012
+      },
+      {
+        "seq": 11,
+        "t_h": 66.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0277,
+        "volume_change_pct": 0.0014
+      },
+      {
+        "seq": 12,
+        "t_h": 72.0,
+        "patch_count": 307,
+        "removal_pct": 94.788,
+        "area_change_pct": 2.7434,
+        "volume_change_pct": 0.1161
+      },
+      {
+        "seq": 13,
+        "t_h": 78.0,
+        "patch_count": 1450,
+        "removal_pct": 82.621,
+        "area_change_pct": 10.3853,
+        "volume_change_pct": 0.475
+      },
+      {
+        "seq": 14,
+        "t_h": 84.0,
+        "patch_count": 7145,
+        "removal_pct": 53.128,
+        "area_change_pct": 26.3151,
+        "volume_change_pct": 2.5878
+      },
+      {
+        "seq": 15,
+        "t_h": 90.0,
+        "patch_count": 7337,
+        "removal_pct": 34.346,
+        "area_change_pct": 18.5199,
+        "volume_change_pct": 2.2697
+      },
+      {
+        "seq": 16,
+        "t_h": 96.0,
+        "patch_count": 7558,
+        "removal_pct": 23.459,
+        "area_change_pct": 14.4138,
+        "volume_change_pct": 1.8881
+      },
+      {
+        "seq": 17,
+        "t_h": 102.0,
+        "patch_count": 7276,
+        "removal_pct": 16.218,
+        "area_change_pct": 9.2898,
+        "volume_change_pct": 1.3309
+      },
+      {
+        "seq": 18,
+        "t_h": 108.0,
+        "patch_count": 7348,
+        "removal_pct": 12.534,
+        "area_change_pct": 7.4101,
+        "volume_change_pct": 1.015
+      },
+      {
+        "seq": 19,
+        "t_h": 114.0,
+        "patch_count": 7401,
+        "removal_pct": 11.215,
+        "area_change_pct": 6.4998,
+        "volume_change_pct": 0.791
+      },
+      {
+        "seq": 20,
+        "t_h": 120.0,
+        "patch_count": 6973,
+        "removal_pct": 6.798,
+        "area_change_pct": 4.3276,
+        "volume_change_pct": 0.5123
+      },
+      {
+        "seq": 21,
+        "t_h": 126.0,
+        "patch_count": 6884,
+        "removal_pct": 4.256,
+        "area_change_pct": 2.789,
+        "volume_change_pct": 0.3685
+      },
+      {
+        "seq": 22,
+        "t_h": 132.0,
+        "patch_count": 6812,
+        "removal_pct": 2.848,
+        "area_change_pct": 2.1283,
+        "volume_change_pct": 0.3032
+      },
+      {
+        "seq": 23,
+        "t_h": 138.0,
+        "patch_count": 6624,
+        "removal_pct": 5.722,
+        "area_change_pct": 3.1841,
+        "volume_change_pct": 0.2818
+      },
+      {
+        "seq": 24,
+        "t_h": 144.0,
+        "patch_count": 6506,
+        "removal_pct": 2.721,
+        "area_change_pct": 1.6938,
+        "volume_change_pct": 0.1715
+      },
+      {
+        "seq": 25,
+        "t_h": 150.0,
+        "patch_count": 6435,
+        "removal_pct": 1.336,
+        "area_change_pct": 0.9734,
+        "volume_change_pct": 0.071
+      },
+      {
+        "seq": 26,
+        "t_h": 156.0,
+        "patch_count": 6402,
+        "removal_pct": 0.922,
+        "area_change_pct": 0.7868,
+        "volume_change_pct": 0.0506
+      },
+      {
+        "seq": 27,
+        "t_h": 162.0,
+        "patch_count": 6322,
+        "removal_pct": 0.522,
+        "area_change_pct": 0.6365,
+        "volume_change_pct": 0.0322
+      },
+      {
+        "seq": 28,
+        "t_h": 168.0,
+        "patch_count": 6210,
+        "removal_pct": 0.612,
+        "area_change_pct": 0.1483,
+        "volume_change_pct": 0.0062
+      },
+      {
+        "seq": 29,
+        "t_h": 174.0,
+        "patch_count": 6081,
+        "removal_pct": 6.381,
+        "area_change_pct": 1.7514,
+        "volume_change_pct": 0.0601
+      },
+      {
+        "seq": 30,
+        "t_h": 180.0,
+        "patch_count": 5777,
+        "removal_pct": 2.614,
+        "area_change_pct": 0.7453,
+        "volume_change_pct": 0.0231
+      },
+      {
+        "seq": 31,
+        "t_h": 186.0,
+        "patch_count": 5587,
+        "removal_pct": 9.361,
+        "area_change_pct": 2.1004,
+        "volume_change_pct": 0.0781
+      },
+      {
+        "seq": 32,
+        "t_h": 192.0,
+        "patch_count": 5397,
+        "removal_pct": 2.446,
+        "area_change_pct": 0.5102,
+        "volume_change_pct": 0.0155
+      },
+      {
+        "seq": 33,
+        "t_h": 198.0,
+        "patch_count": 5342,
+        "removal_pct": 1.179,
+        "area_change_pct": 0.2224,
+        "volume_change_pct": 0.0058
+      },
+      {
+        "seq": 34,
+        "t_h": 204.0,
+        "patch_count": 5281,
+        "removal_pct": 0.53,
+        "area_change_pct": 0.0769,
+        "volume_change_pct": 0.002
+      },
+      {
+        "seq": 35,
+        "t_h": 210.0,
+        "patch_count": 5224,
+        "removal_pct": 0.727,
+        "area_change_pct": 0.1192,
+        "volume_change_pct": 0.0029
+      },
+      {
+        "seq": 36,
+        "t_h": 216.0,
+        "patch_count": 5176,
+        "removal_pct": 0.657,
+        "area_change_pct": 0.1176,
+        "volume_change_pct": 0.0029
+      },
+      {
+        "seq": 37,
+        "t_h": 222.0,
+        "patch_count": 5135,
+        "removal_pct": 0.351,
+        "area_change_pct": 0.0548,
+        "volume_change_pct": 0.0012
+      },
+      {
+        "seq": 38,
+        "t_h": 228.0,
+        "patch_count": 5112,
+        "removal_pct": 0.274,
+        "area_change_pct": 0.0349,
+        "volume_change_pct": 0.0008
+      },
+      {
+        "seq": 39,
+        "t_h": 234.0,
+        "patch_count": 5075,
+        "removal_pct": 0.276,
+        "area_change_pct": 0.0329,
+        "volume_change_pct": 0.0007
+      },
+      {
+        "seq": 40,
+        "t_h": 240.0,
+        "patch_count": 5036,
+        "removal_pct": 0.218,
+        "area_change_pct": 0.0401,
+        "volume_change_pct": 0.0008
+      },
+      {
+        "seq": 41,
+        "t_h": 246.0,
+        "patch_count": 5011,
+        "removal_pct": 0.22,
+        "area_change_pct": 0.0412,
+        "volume_change_pct": 0.0008
+      },
+      {
+        "seq": 42,
+        "t_h": 252.0,
+        "patch_count": 4995,
+        "removal_pct": 0.16,
+        "area_change_pct": 0.0183,
+        "volume_change_pct": 0.0003
+      },
+      {
+        "seq": 43,
+        "t_h": 258.0,
+        "patch_count": 4945,
+        "removal_pct": 0.627,
+        "area_change_pct": 0.1006,
+        "volume_change_pct": 0.002
+      },
+      {
+        "seq": 44,
+        "t_h": 264.0,
+        "patch_count": 4930,
+        "removal_pct": 0.649,
+        "area_change_pct": 0.1079,
+        "volume_change_pct": 0.0022
+      },
+      {
+        "seq": 45,
+        "t_h": 270.0,
+        "patch_count": 4887,
+        "removal_pct": 0.348,
+        "area_change_pct": 0.0535,
+        "volume_change_pct": 0.001
+      },
+      {
+        "seq": 46,
+        "t_h": 276.0,
+        "patch_count": 4856,
+        "removal_pct": 0.391,
+        "area_change_pct": 0.0489,
+        "volume_change_pct": 0.0009
+      },
+      {
+        "seq": 47,
+        "t_h": 282.0,
+        "patch_count": 4309,
+        "removal_pct": 7.914,
+        "area_change_pct": 1.039,
+        "volume_change_pct": 0.0301
+      },
+      {
+        "seq": 48,
+        "t_h": 288.0,
+        "patch_count": 4458,
+        "removal_pct": 2.131,
+        "area_change_pct": 0.2557,
+        "volume_change_pct": 0.0062
+      },
+      {
+        "seq": 49,
+        "t_h": 294.0,
+        "patch_count": 4535,
+        "removal_pct": 2.007,
+        "area_change_pct": 0.211,
+        "volume_change_pct": 0.0047
+      },
+      {
+        "seq": 50,
+        "t_h": 300.0,
+        "patch_count": 4593,
+        "removal_pct": 1.132,
+        "area_change_pct": 0.122,
+        "volume_change_pct": 0.0027
+      },
+      {
+        "seq": 51,
+        "t_h": 306.0,
+        "patch_count": 4596,
+        "removal_pct": 1.305,
+        "area_change_pct": 0.1522,
+        "volume_change_pct": 0.0035
+      },
+      {
+        "seq": 52,
+        "t_h": 312.0,
+        "patch_count": 4608,
+        "removal_pct": 0.499,
+        "area_change_pct": 0.0675,
+        "volume_change_pct": 0.0018
+      },
+      {
+        "seq": 53,
+        "t_h": 318.0,
+        "patch_count": 4630,
+        "removal_pct": 0.389,
+        "area_change_pct": 0.0623,
+        "volume_change_pct": 0.0017
+      },
+      {
+        "seq": 54,
+        "t_h": 324.0,
+        "patch_count": 4673,
+        "removal_pct": 0.449,
+        "area_change_pct": 0.0677,
+        "volume_change_pct": 0.0018
+      },
+      {
+        "seq": 55,
+        "t_h": 330.0,
+        "patch_count": 4684,
+        "removal_pct": 0.512,
+        "area_change_pct": 0.0783,
+        "volume_change_pct": 0.002
+      },
+      {
+        "seq": 56,
+        "t_h": 336.0,
+        "patch_count": 4724,
+        "removal_pct": 0.804,
+        "area_change_pct": 0.1263,
+        "volume_change_pct": 0.0031
+      }
+    ],
+    "B": [
+      {
+        "seq": 0,
+        "t_h": 0.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 1,
+        "t_h": 6.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 2,
+        "t_h": 12.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0417,
+        "volume_change_pct": 0.0028
+      },
+      {
+        "seq": 3,
+        "t_h": 18.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0294,
+        "volume_change_pct": 0.0055
+      },
+      {
+        "seq": 4,
+        "t_h": 24.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 5,
+        "t_h": 30.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 6,
+        "t_h": 36.0,
+        "patch_count": 5,
+        "removal_pct": 60.0,
+        "area_change_pct": 0.0525,
+        "volume_change_pct": 0.011
+      },
+      {
+        "seq": 7,
+        "t_h": 42.0,
+        "patch_count": 5,
+        "removal_pct": 40.0,
+        "area_change_pct": 0.0232,
+        "volume_change_pct": 0.002
+      },
+      {
+        "seq": 8,
+        "t_h": 48.0,
+        "patch_count": 6,
+        "removal_pct": 66.667,
+        "area_change_pct": 0.0539,
+        "volume_change_pct": 0.0052
+      },
+      {
+        "seq": 9,
+        "t_h": 54.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0207,
+        "volume_change_pct": 0.0011
+      },
+      {
+        "seq": 10,
+        "t_h": 60.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0285,
+        "volume_change_pct": 0.0012
+      },
+      {
+        "seq": 11,
+        "t_h": 66.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0277,
+        "volume_change_pct": 0.0014
+      },
+      {
+        "seq": 12,
+        "t_h": 72.0,
+        "patch_count": 307,
+        "removal_pct": 98.046,
+        "area_change_pct": 2.8325,
+        "volume_change_pct": 0.1252
+      },
+      {
+        "seq": 13,
+        "t_h": 78.0,
+        "patch_count": 1450,
+        "removal_pct": 94.276,
+        "area_change_pct": 11.8969,
+        "volume_change_pct": 0.6111
+      },
+      {
+        "seq": 14,
+        "t_h": 84.0,
+        "patch_count": 7145,
+        "removal_pct": 79.832,
+        "area_change_pct": 40.2395,
+        "volume_change_pct": 4.6371
+      },
+      {
+        "seq": 15,
+        "t_h": 90.0,
+        "patch_count": 7337,
+        "removal_pct": 63.173,
+        "area_change_pct": 33.874,
+        "volume_change_pct": 4.7206
+      },
+      {
+        "seq": 16,
+        "t_h": 96.0,
+        "patch_count": 7558,
+        "removal_pct": 48.65,
+        "area_change_pct": 27.0171,
+        "volume_change_pct": 4.1304
+      },
+      {
+        "seq": 17,
+        "t_h": 102.0,
+        "patch_count": 7276,
+        "removal_pct": 39.885,
+        "area_change_pct": 20.8869,
+        "volume_change_pct": 3.2854
+      },
+      {
+        "seq": 18,
+        "t_h": 108.0,
+        "patch_count": 7348,
+        "removal_pct": 29.927,
+        "area_change_pct": 15.2411,
+        "volume_change_pct": 2.4286
+      },
+      {
+        "seq": 19,
+        "t_h": 114.0,
+        "patch_count": 7401,
+        "removal_pct": 24.267,
+        "area_change_pct": 12.024,
+        "volume_change_pct": 1.8023
+      },
+      {
+        "seq": 20,
+        "t_h": 120.0,
+        "patch_count": 6973,
+        "removal_pct": 14.441,
+        "area_change_pct": 7.0599,
+        "volume_change_pct": 1.0165
+      },
+      {
+        "seq": 21,
+        "t_h": 126.0,
+        "patch_count": 6884,
+        "removal_pct": 11.258,
+        "area_change_pct": 5.4652,
+        "volume_change_pct": 0.8123
+      },
+      {
+        "seq": 22,
+        "t_h": 132.0,
+        "patch_count": 6812,
+        "removal_pct": 9.748,
+        "area_change_pct": 4.7363,
+        "volume_change_pct": 0.7098
+      },
+      {
+        "seq": 23,
+        "t_h": 138.0,
+        "patch_count": 6624,
+        "removal_pct": 9.677,
+        "area_change_pct": 4.3841,
+        "volume_change_pct": 0.4854
+      },
+      {
+        "seq": 24,
+        "t_h": 144.0,
+        "patch_count": 6506,
+        "removal_pct": 6.609,
+        "area_change_pct": 2.9117,
+        "volume_change_pct": 0.3533
+      },
+      {
+        "seq": 25,
+        "t_h": 150.0,
+        "patch_count": 6435,
+        "removal_pct": 5.206,
+        "area_change_pct": 2.1634,
+        "volume_change_pct": 0.2346
+      },
+      {
+        "seq": 26,
+        "t_h": 156.0,
+        "patch_count": 6402,
+        "removal_pct": 4.795,
+        "area_change_pct": 1.9466,
+        "volume_change_pct": 0.1965
+      },
+      {
+        "seq": 27,
+        "t_h": 162.0,
+        "patch_count": 6322,
+        "removal_pct": 4.35,
+        "area_change_pct": 1.7403,
+        "volume_change_pct": 0.1616
+      },
+      {
+        "seq": 28,
+        "t_h": 168.0,
+        "patch_count": 6210,
+        "removal_pct": 4.155,
+        "area_change_pct": 1.09,
+        "volume_change_pct": 0.1117
+      },
+      {
+        "seq": 29,
+        "t_h": 174.0,
+        "patch_count": 6081,
+        "removal_pct": 8.716,
+        "area_change_pct": 2.2806,
+        "volume_change_pct": 0.1232
+      },
+      {
+        "seq": 30,
+        "t_h": 180.0,
+        "patch_count": 5777,
+        "removal_pct": 4.708,
+        "area_change_pct": 1.1886,
+        "volume_change_pct": 0.0756
+      },
+      {
+        "seq": 31,
+        "t_h": 186.0,
+        "patch_count": 5587,
+        "removal_pct": 10.507,
+        "area_change_pct": 2.3201,
+        "volume_change_pct": 0.1061
+      },
+      {
+        "seq": 32,
+        "t_h": 192.0,
+        "patch_count": 5397,
+        "removal_pct": 3.687,
+        "area_change_pct": 0.8031,
+        "volume_change_pct": 0.0432
+      },
+      {
+        "seq": 33,
+        "t_h": 198.0,
+        "patch_count": 5342,
+        "removal_pct": 2.359,
+        "area_change_pct": 0.4656,
+        "volume_change_pct": 0.0305
+      },
+      {
+        "seq": 34,
+        "t_h": 204.0,
+        "patch_count": 5281,
+        "removal_pct": 1.723,
+        "area_change_pct": 0.3246,
+        "volume_change_pct": 0.026
+      },
+      {
+        "seq": 35,
+        "t_h": 210.0,
+        "patch_count": 5224,
+        "removal_pct": 1.742,
+        "area_change_pct": 0.334,
+        "volume_change_pct": 0.0213
+      },
+      {
+        "seq": 36,
+        "t_h": 216.0,
+        "patch_count": 5176,
+        "removal_pct": 1.662,
+        "area_change_pct": 0.3136,
+        "volume_change_pct": 0.0198
+      },
+      {
+        "seq": 37,
+        "t_h": 222.0,
+        "patch_count": 5135,
+        "removal_pct": 1.383,
+        "area_change_pct": 0.2532,
+        "volume_change_pct": 0.0176
+      },
+      {
+        "seq": 38,
+        "t_h": 228.0,
+        "patch_count": 5112,
+        "removal_pct": 1.272,
+        "area_change_pct": 0.2079,
+        "volume_change_pct": 0.0158
+      },
+      {
+        "seq": 39,
+        "t_h": 234.0,
+        "patch_count": 5075,
+        "removal_pct": 1.261,
+        "area_change_pct": 0.2037,
+        "volume_change_pct": 0.0147
+      },
+      {
+        "seq": 40,
+        "t_h": 240.0,
+        "patch_count": 5036,
+        "removal_pct": 1.211,
+        "area_change_pct": 0.2049,
+        "volume_change_pct": 0.0143
+      },
+      {
+        "seq": 41,
+        "t_h": 246.0,
+        "patch_count": 5011,
+        "removal_pct": 1.157,
+        "area_change_pct": 0.1925,
+        "volume_change_pct": 0.0135
+      },
+      {
+        "seq": 42,
+        "t_h": 252.0,
+        "patch_count": 4995,
+        "removal_pct": 1.101,
+        "area_change_pct": 0.1675,
+        "volume_change_pct": 0.0127
+      },
+      {
+        "seq": 43,
+        "t_h": 258.0,
+        "patch_count": 4945,
+        "removal_pct": 1.416,
+        "area_change_pct": 0.2283,
+        "volume_change_pct": 0.0123
+      },
+      {
+        "seq": 44,
+        "t_h": 264.0,
+        "patch_count": 4930,
+        "removal_pct": 1.42,
+        "area_change_pct": 0.2262,
+        "volume_change_pct": 0.0123
+      },
+      {
+        "seq": 45,
+        "t_h": 270.0,
+        "patch_count": 4887,
+        "removal_pct": 1.166,
+        "area_change_pct": 0.1888,
+        "volume_change_pct": 0.0114
+      },
+      {
+        "seq": 46,
+        "t_h": 276.0,
+        "patch_count": 4856,
+        "removal_pct": 1.194,
+        "area_change_pct": 0.1807,
+        "volume_change_pct": 0.011
+      },
+      {
+        "seq": 47,
+        "t_h": 282.0,
+        "patch_count": 4309,
+        "removal_pct": 8.146,
+        "area_change_pct": 1.0637,
+        "volume_change_pct": 0.0317
+      },
+      {
+        "seq": 48,
+        "t_h": 288.0,
+        "patch_count": 4458,
+        "removal_pct": 2.512,
+        "area_change_pct": 0.3418,
+        "volume_change_pct": 0.0099
+      },
+      {
+        "seq": 49,
+        "t_h": 294.0,
+        "patch_count": 4535,
+        "removal_pct": 2.426,
+        "area_change_pct": 0.311,
+        "volume_change_pct": 0.0085
+      },
+      {
+        "seq": 50,
+        "t_h": 300.0,
+        "patch_count": 4593,
+        "removal_pct": 1.459,
+        "area_change_pct": 0.1902,
+        "volume_change_pct": 0.0056
+      },
+      {
+        "seq": 51,
+        "t_h": 306.0,
+        "patch_count": 4596,
+        "removal_pct": 1.61,
+        "area_change_pct": 0.2091,
+        "volume_change_pct": 0.0063
+      },
+      {
+        "seq": 52,
+        "t_h": 312.0,
+        "patch_count": 4608,
+        "removal_pct": 0.738,
+        "area_change_pct": 0.1034,
+        "volume_change_pct": 0.0042
+      },
+      {
+        "seq": 53,
+        "t_h": 318.0,
+        "patch_count": 4630,
+        "removal_pct": 0.734,
+        "area_change_pct": 0.1478,
+        "volume_change_pct": 0.0053
+      },
+      {
+        "seq": 54,
+        "t_h": 324.0,
+        "patch_count": 4673,
+        "removal_pct": 0.77,
+        "area_change_pct": 0.1384,
+        "volume_change_pct": 0.005
+      },
+      {
+        "seq": 55,
+        "t_h": 330.0,
+        "patch_count": 4684,
+        "removal_pct": 0.79,
+        "area_change_pct": 0.13,
+        "volume_change_pct": 0.0048
+      },
+      {
+        "seq": 56,
+        "t_h": 336.0,
+        "patch_count": 4724,
+        "removal_pct": 1.101,
+        "area_change_pct": 0.1917,
+        "volume_change_pct": 0.0062
+      }
+    ],
+    "C": [
+      {
+        "seq": 0,
+        "t_h": 0.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 1,
+        "t_h": 6.0,
+        "patch_count": 1,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 2,
+        "t_h": 12.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0417,
+        "volume_change_pct": 0.0028
+      },
+      {
+        "seq": 3,
+        "t_h": 18.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0294,
+        "volume_change_pct": 0.0055
+      },
+      {
+        "seq": 4,
+        "t_h": 24.0,
+        "patch_count": 2,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0201,
+        "volume_change_pct": 0.007
+      },
+      {
+        "seq": 5,
+        "t_h": 30.0,
+        "patch_count": 2,
+        "removal_pct": 0.0,
+        "area_change_pct": 0.0,
+        "volume_change_pct": 0.0
+      },
+      {
+        "seq": 6,
+        "t_h": 36.0,
+        "patch_count": 5,
+        "removal_pct": 60.0,
+        "area_change_pct": 0.0525,
+        "volume_change_pct": 0.011
+      },
+      {
+        "seq": 7,
+        "t_h": 42.0,
+        "patch_count": 5,
+        "removal_pct": 40.0,
+        "area_change_pct": 0.0232,
+        "volume_change_pct": 0.002
+      },
+      {
+        "seq": 8,
+        "t_h": 48.0,
+        "patch_count": 6,
+        "removal_pct": 66.667,
+        "area_change_pct": 0.0539,
+        "volume_change_pct": 0.0052
+      },
+      {
+        "seq": 9,
+        "t_h": 54.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0207,
+        "volume_change_pct": 0.0011
+      },
+      {
+        "seq": 10,
+        "t_h": 60.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0285,
+        "volume_change_pct": 0.0012
+      },
+      {
+        "seq": 11,
+        "t_h": 66.0,
+        "patch_count": 4,
+        "removal_pct": 50.0,
+        "area_change_pct": 0.0277,
+        "volume_change_pct": 0.0014
+      },
+      {
+        "seq": 12,
+        "t_h": 72.0,
+        "patch_count": 307,
+        "removal_pct": 99.349,
+        "area_change_pct": 2.8681,
+        "volume_change_pct": 0.1282
+      },
+      {
+        "seq": 13,
+        "t_h": 78.0,
+        "patch_count": 1450,
+        "removal_pct": 96.966,
+        "area_change_pct": 12.2102,
+        "volume_change_pct": 0.6545
+      },
+      {
+        "seq": 14,
+        "t_h": 84.0,
+        "patch_count": 7145,
+        "removal_pct": 90.875,
+        "area_change_pct": 45.1392,
+        "volume_change_pct": 5.903
+      },
+      {
+        "seq": 15,
+        "t_h": 90.0,
+        "patch_count": 7337,
+        "removal_pct": 78.929,
+        "area_change_pct": 41.5417,
+        "volume_change_pct": 6.7324
+      },
+      {
+        "seq": 16,
+        "t_h": 96.0,
+        "patch_count": 7558,
+        "removal_pct": 68.06,
+        "area_change_pct": 35.8582,
+        "volume_change_pct": 6.6573
+      },
+      {
+        "seq": 17,
+        "t_h": 102.0,
+        "patch_count": 7276,
+        "removal_pct": 60.239,
+        "area_change_pct": 30.0102,
+        "volume_change_pct": 5.7491
+      },
+      {
+        "seq": 18,
+        "t_h": 108.0,
+        "patch_count": 7348,
+        "removal_pct": 49.864,
+        "area_change_pct": 24.0326,
+        "volume_change_pct": 4.9373
+      },
+      {
+        "seq": 19,
+        "t_h": 114.0,
+        "patch_count": 7401,
+        "removal_pct": 42.886,
+        "area_change_pct": 19.9185,
+        "volume_change_pct": 4.0852
+      },
+      {
+        "seq": 20,
+        "t_h": 120.0,
+        "patch_count": 6973,
+        "removal_pct": 30.389,
+        "area_change_pct": 13.1212,
+        "volume_change_pct": 2.7909
+      },
+      {
+        "seq": 21,
+        "t_h": 126.0,
+        "patch_count": 6884,
+        "removal_pct": 26.482,
+        "area_change_pct": 11.313,
+        "volume_change_pct": 2.3858
+      },
+      {
+        "seq": 22,
+        "t_h": 132.0,
+        "patch_count": 6812,
+        "removal_pct": 24.692,
+        "area_change_pct": 10.4376,
+        "volume_change_pct": 2.1254
+      },
+      {
+        "seq": 23,
+        "t_h": 138.0,
+        "patch_count": 6624,
+        "removal_pct": 21.573,
+        "area_change_pct": 8.2199,
+        "volume_change_pct": 1.4871
+      },
+      {
+        "seq": 24,
+        "t_h": 144.0,
+        "patch_count": 6506,
+        "removal_pct": 18.275,
+        "area_change_pct": 6.6678,
+        "volume_change_pct": 1.2308
+      },
+      {
+        "seq": 25,
+        "t_h": 150.0,
+        "patch_count": 6435,
+        "removal_pct": 16.892,
+        "area_change_pct": 5.8065,
+        "volume_change_pct": 1.03
+      },
+      {
+        "seq": 26,
+        "t_h": 156.0,
+        "patch_count": 6402,
+        "removal_pct": 16.557,
+        "area_change_pct": 5.6137,
+        "volume_change_pct": 0.9238
+      },
+      {
+        "seq": 27,
+        "t_h": 162.0,
+        "patch_count": 6322,
+        "removal_pct": 16.134,
+        "area_change_pct": 5.1904,
+        "volume_change_pct": 0.818
+      },
+      {
+        "seq": 28,
+        "t_h": 168.0,
+        "patch_count": 6210,
+        "removal_pct": 15.684,
+        "area_change_pct": 4.2881,
+        "volume_change_pct": 0.6959
+      },
+      {
+        "seq": 29,
+        "t_h": 174.0,
+        "patch_count": 6081,
+        "removal_pct": 18.221,
+        "area_change_pct": 4.5553,
+        "volume_change_pct": 0.5669
+      },
+      {
+        "seq": 30,
+        "t_h": 180.0,
+        "patch_count": 5777,
+        "removal_pct": 14.229,
+        "area_change_pct": 3.2522,
+        "volume_change_pct": 0.4538
+      },
+      {
+        "seq": 31,
+        "t_h": 186.0,
+        "patch_count": 5587,
+        "removal_pct": 17.738,
+        "area_change_pct": 3.6195,
+        "volume_change_pct": 0.3642
+      },
+      {
+        "seq": 32,
+        "t_h": 192.0,
+        "patch_count": 5397,
+        "removal_pct": 10.951,
+        "area_change_pct": 2.1006,
+        "volume_change_pct": 0.2774
+      },
+      {
+        "seq": 33,
+        "t_h": 198.0,
+        "patch_count": 5342,
+        "removal_pct": 9.641,
+        "area_change_pct": 1.786,
+        "volume_change_pct": 0.2534
+      },
+      {
+        "seq": 34,
+        "t_h": 204.0,
+        "patch_count": 5281,
+        "removal_pct": 8.748,
+        "area_change_pct": 1.5237,
+        "volume_change_pct": 0.2272
+      },
+      {
+        "seq": 35,
+        "t_h": 210.0,
+        "patch_count": 5224,
+        "removal_pct": 8.499,
+        "area_change_pct": 1.4453,
+        "volume_change_pct": 0.2012
+      },
+      {
+        "seq": 36,
+        "t_h": 216.0,
+        "patch_count": 5176,
+        "removal_pct": 8.327,
+        "area_change_pct": 1.3409,
+        "volume_change_pct": 0.1854
+      },
+      {
+        "seq": 37,
+        "t_h": 222.0,
+        "patch_count": 5135,
+        "removal_pct": 8.062,
+        "area_change_pct": 1.2626,
+        "volume_change_pct": 0.1746
+      },
+      {
+        "seq": 38,
+        "t_h": 228.0,
+        "patch_count": 5112,
+        "removal_pct": 7.864,
+        "area_change_pct": 1.1807,
+        "volume_change_pct": 0.1626
+      },
+      {
+        "seq": 39,
+        "t_h": 234.0,
+        "patch_count": 5075,
+        "removal_pct": 7.764,
+        "area_change_pct": 1.1469,
+        "volume_change_pct": 0.1535
+      },
+      {
+        "seq": 40,
+        "t_h": 240.0,
+        "patch_count": 5036,
+        "removal_pct": 7.685,
+        "area_change_pct": 1.123,
+        "volume_change_pct": 0.1474
+      },
+      {
+        "seq": 41,
+        "t_h": 246.0,
+        "patch_count": 5011,
+        "removal_pct": 7.603,
+        "area_change_pct": 1.0969,
+        "volume_change_pct": 0.1423
+      },
+      {
+        "seq": 42,
+        "t_h": 252.0,
+        "patch_count": 4995,
+        "removal_pct": 7.487,
+        "area_change_pct": 1.0537,
+        "volume_change_pct": 0.1372
+      },
+      {
+        "seq": 43,
+        "t_h": 258.0,
+        "patch_count": 4945,
+        "removal_pct": 7.482,
+        "area_change_pct": 1.0529,
+        "volume_change_pct": 0.1281
+      },
+      {
+        "seq": 44,
+        "t_h": 264.0,
+        "patch_count": 4930,
+        "removal_pct": 7.465,
+        "area_change_pct": 1.0456,
+        "volume_change_pct": 0.1266
+      },
+      {
+        "seq": 45,
+        "t_h": 270.0,
+        "patch_count": 4887,
+        "removal_pct": 7.203,
+        "area_change_pct": 0.9946,
+        "volume_change_pct": 0.124
+      },
+      {
+        "seq": 46,
+        "t_h": 276.0,
+        "patch_count": 4856,
+        "removal_pct": 7.084,
+        "area_change_pct": 0.9627,
+        "volume_change_pct": 0.1209
+      },
+      {
+        "seq": 47,
+        "t_h": 282.0,
+        "patch_count": 4309,
+        "removal_pct": 11.812,
+        "area_change_pct": 1.4065,
+        "volume_change_pct": 0.0855
+      },
+      {
+        "seq": 48,
+        "t_h": 288.0,
+        "patch_count": 4458,
+        "removal_pct": 6.101,
+        "area_change_pct": 0.7055,
+        "volume_change_pct": 0.0645
+      },
+      {
+        "seq": 49,
+        "t_h": 294.0,
+        "patch_count": 4535,
+        "removal_pct": 5.755,
+        "area_change_pct": 0.6845,
+        "volume_change_pct": 0.0604
+      },
+      {
+        "seq": 50,
+        "t_h": 300.0,
+        "patch_count": 4593,
+        "removal_pct": 4.725,
+        "area_change_pct": 0.5563,
+        "volume_change_pct": 0.0577
+      },
+      {
+        "seq": 51,
+        "t_h": 306.0,
+        "patch_count": 4596,
+        "removal_pct": 4.765,
+        "area_change_pct": 0.5675,
+        "volume_change_pct": 0.0582
+      },
+      {
+        "seq": 52,
+        "t_h": 312.0,
+        "patch_count": 4608,
+        "removal_pct": 3.885,
+        "area_change_pct": 0.464,
+        "volume_change_pct": 0.0569
+      },
+      {
+        "seq": 53,
+        "t_h": 318.0,
+        "patch_count": 4630,
+        "removal_pct": 3.823,
+        "area_change_pct": 0.4926,
+        "volume_change_pct": 0.0587
+      },
+      {
+        "seq": 54,
+        "t_h": 324.0,
+        "patch_count": 4673,
+        "removal_pct": 3.831,
+        "area_change_pct": 0.4887,
+        "volume_change_pct": 0.0596
+      },
+      {
+        "seq": 55,
+        "t_h": 330.0,
+        "patch_count": 4684,
+        "removal_pct": 3.779,
+        "area_change_pct": 0.4772,
+        "volume_change_pct": 0.0603
+      },
+      {
+        "seq": 56,
+        "t_h": 336.0,
+        "patch_count": 4724,
+        "removal_pct": 4.001,
+        "area_change_pct": 0.5305,
+        "volume_change_pct": 0.0614
+      }
+    ]
+  },
+  "min_persistence_ratio_sensitivity": {
+    "0.1": {
+      "A": 22.365,
+      "B": 22.614,
+      "C": 25.622
+    },
+    "0.25": {
+      "A": 22.388,
+      "B": 22.614,
+      "C": 25.622
+    },
+    "0.5": {
+      "A": 22.388,
+      "B": 22.614,
+      "C": 25.622
+    },
+    "0.75": {
+      "A": 25.396,
+      "B": 25.531,
+      "C": 25.622
+    },
+    "0.9": {
+      "A": 25.396,
+      "B": 25.531,
+      "C": 25.622
+    }
+  },
+  "timing_evidence": {
+    "note": "计划 §1.2 根因一的时序判据：斑块数暴增时刻上游 Q 是否仍为基流。本脚本只登记事实，因果归因见 root_cause_report.md 并标证据等级。**模型时钟基准 t=0 对应 2024-09-03T00（meta.json t0 / guigang_scenario.T0_DAY=3）**；rain.rain 的时刻列按同一基准生成，故此处 t_h 与 rain.rain 逐时序列可直接对齐。",
+    "first_wet_frame_t_h": 0.0,
+    "peak_patch_count_frame": {
+      "seq": 16,
+      "t_h": 96.0,
+      "n_patches": 7558,
+      "wet_area_km2": 297.7
+    },
+    "burst_frame": {
+      "definition": "相邻帧斑块数增幅最大的那一帧（不是斑块数峰值帧）",
+      "seq": 14,
+      "t_h": 84.0,
+      "n_patches": 7145,
+      "wet_area_km2": 243.89,
+      "patches_le_4_cells": 6840,
+      "patches_le_9_cells": 7111,
+      "previous_seq": 13,
+      "previous_t_h": 78.0,
+      "previous_n_patches": 1450
+    },
+    "clock_basis": {
+      "t0": "2024-09-03T00 Asia/Shanghai（前 2 日基流充槽）",
+      "t0_source": "meta.json 的 t0 字段 + scripts/stage5/guigang_scenario.py T0_DAY=3",
+      "trap": "ERA5 原始序列首个键是 2024-09-05T00。若误把 t=0 当成 09-05T00（而非 09-03T00），全部累计雨量会整体偏移 48 h；若误把 t=0 当成 09-04T00，则偏移 24 h。本文件已按 09-03T00 对齐。",
+      "lead_reported_offset_check": "外部报告的累计雨量（72h→26.9mm / 96h→58.6mm）比本文件曲线整体超前 24 h，对应 t0=09-04T00 口径。本文件采用与本 run 的 rain.rain / yujiang.bdy / res.mass 同源的 T0_DAY=3 口径，故数值不可直接混用。该偏移不影响「暴增帧上游 Q 仍为基流」这一判据：Q 基流段持续到 t=120h，而暴增帧在 t=84h，任何偏移量下都落在基流段内。"
+    },
+    "patch_count_series": [
+      {
+        "seq": 0,
+        "t_h": 0.0,
+        "n_patches": 1,
+        "wet_area_km2": 0.01,
+        "patches_le_4_cells": 1,
+        "patches_le_9_cells": 1,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 1,
+        "t_h": 6.0,
+        "n_patches": 1,
+        "wet_area_km2": 11.79,
+        "patches_le_4_cells": 0,
+        "patches_le_9_cells": 0,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 2,
+        "t_h": 12.0,
+        "n_patches": 2,
+        "wet_area_km2": 24.0,
+        "patches_le_4_cells": 1,
+        "patches_le_9_cells": 1,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 3,
+        "t_h": 18.0,
+        "n_patches": 2,
+        "wet_area_km2": 34.06,
+        "patches_le_4_cells": 1,
+        "patches_le_9_cells": 1,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 4,
+        "t_h": 24.0,
+        "n_patches": 2,
+        "wet_area_km2": 49.85,
+        "patches_le_4_cells": 1,
+        "patches_le_9_cells": 1,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 5,
+        "t_h": 30.0,
+        "n_patches": 2,
+        "wet_area_km2": 62.29,
+        "patches_le_4_cells": 1,
+        "patches_le_9_cells": 1,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 6,
+        "t_h": 36.0,
+        "n_patches": 5,
+        "wet_area_km2": 76.17,
+        "patches_le_4_cells": 4,
+        "patches_le_9_cells": 4,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 7,
+        "t_h": 42.0,
+        "n_patches": 5,
+        "wet_area_km2": 86.17,
+        "patches_le_4_cells": 4,
+        "patches_le_9_cells": 4,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 8,
+        "t_h": 48.0,
+        "n_patches": 6,
+        "wet_area_km2": 92.81,
+        "patches_le_4_cells": 5,
+        "patches_le_9_cells": 5,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 9,
+        "t_h": 54.0,
+        "n_patches": 4,
+        "wet_area_km2": 96.52,
+        "patches_le_4_cells": 3,
+        "patches_le_9_cells": 3,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 10,
+        "t_h": 60.0,
+        "n_patches": 4,
+        "wet_area_km2": 105.27,
+        "patches_le_4_cells": 3,
+        "patches_le_9_cells": 3,
+        "rain_cum_mm": 0.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 11,
+        "t_h": 66.0,
+        "n_patches": 4,
+        "wet_area_km2": 108.4,
+        "patches_le_4_cells": 3,
+        "patches_le_9_cells": 3,
+        "rain_cum_mm": 0.2,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 12,
+        "t_h": 72.0,
+        "n_patches": 307,
+        "wet_area_km2": 112.27,
+        "patches_le_4_cells": 306,
+        "patches_le_9_cells": 306,
+        "rain_cum_mm": 2.6,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 13,
+        "t_h": 78.0,
+        "n_patches": 1450,
+        "wet_area_km2": 127.68,
+        "patches_le_4_cells": 1449,
+        "patches_le_9_cells": 1449,
+        "rain_cum_mm": 3.2,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 14,
+        "t_h": 84.0,
+        "n_patches": 7145,
+        "wet_area_km2": 243.89,
+        "patches_le_4_cells": 6840,
+        "patches_le_9_cells": 7111,
+        "rain_cum_mm": 12.7,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 15,
+        "t_h": 90.0,
+        "n_patches": 7337,
+        "wet_area_km2": 269.44,
+        "patches_le_4_cells": 6924,
+        "patches_le_9_cells": 7270,
+        "rain_cum_mm": 18.7,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 16,
+        "t_h": 96.0,
+        "n_patches": 7558,
+        "wet_area_km2": 297.7,
+        "patches_le_4_cells": 6999,
+        "patches_le_9_cells": 7441,
+        "rain_cum_mm": 27.5,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 17,
+        "t_h": 102.0,
+        "n_patches": 7276,
+        "wet_area_km2": 294.3,
+        "patches_le_4_cells": 6750,
+        "patches_le_9_cells": 7169,
+        "rain_cum_mm": 30.0,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 18,
+        "t_h": 108.0,
+        "n_patches": 7348,
+        "wet_area_km2": 327.93,
+        "patches_le_4_cells": 6646,
+        "patches_le_9_cells": 7170,
+        "rain_cum_mm": 38.6,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 19,
+        "t_h": 114.0,
+        "n_patches": 7401,
+        "wet_area_km2": 348.47,
+        "patches_le_4_cells": 6562,
+        "patches_le_9_cells": 7173,
+        "rain_cum_mm": 49.2,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 20,
+        "t_h": 120.0,
+        "n_patches": 6973,
+        "wet_area_km2": 375.5,
+        "patches_le_4_cells": 5997,
+        "patches_le_9_cells": 6647,
+        "rain_cum_mm": 59.2,
+        "upstream_q_m3s": 1000.0
+      },
+      {
+        "seq": 21,
+        "t_h": 126.0,
+        "n_patches": 6884,
+        "wet_area_km2": 363.21,
+        "patches_le_4_cells": 6019,
+        "patches_le_9_cells": 6608,
+        "rain_cum_mm": 60.9,
+        "upstream_q_m3s": 1583.3
+      },
+      {
+        "seq": 22,
+        "t_h": 132.0,
+        "n_patches": 6812,
+        "wet_area_km2": 358.51,
+        "patches_le_4_cells": 6013,
+        "patches_le_9_cells": 6568,
+        "rain_cum_mm": 61.3,
+        "upstream_q_m3s": 2166.7
+      },
+      {
+        "seq": 23,
+        "t_h": 138.0,
+        "n_patches": 6624,
+        "wet_area_km2": 415.82,
+        "patches_le_4_cells": 5529,
+        "patches_le_9_cells": 6240,
+        "rain_cum_mm": 73.7,
+        "upstream_q_m3s": 2750.0
+      },
+      {
+        "seq": 24,
+        "t_h": 144.0,
+        "n_patches": 6506,
+        "wet_area_km2": 409.73,
+        "patches_le_4_cells": 5560,
+        "patches_le_9_cells": 6175,
+        "rain_cum_mm": 74.9,
+        "upstream_q_m3s": 3333.3
+      },
+      {
+        "seq": 25,
+        "t_h": 150.0,
+        "n_patches": 6435,
+        "wet_area_km2": 410.92,
+        "patches_le_4_cells": 5561,
+        "patches_le_9_cells": 6142,
+        "rain_cum_mm": 75.0,
+        "upstream_q_m3s": 3916.7
+      },
+      {
+        "seq": 26,
+        "t_h": 156.0,
+        "n_patches": 6402,
+        "wet_area_km2": 415.59,
+        "patches_le_4_cells": 5575,
+        "patches_le_9_cells": 6135,
+        "rain_cum_mm": 75.0,
+        "upstream_q_m3s": 4500.0
+      },
+      {
+        "seq": 27,
+        "t_h": 162.0,
+        "n_patches": 6322,
+        "wet_area_km2": 425.79,
+        "patches_le_4_cells": 5533,
+        "patches_le_9_cells": 6081,
+        "rain_cum_mm": 75.2,
+        "upstream_q_m3s": 5083.3
+      },
+      {
+        "seq": 28,
+        "t_h": 168.0,
+        "n_patches": 6210,
+        "wet_area_km2": 444.95,
+        "patches_le_4_cells": 5435,
+        "patches_le_9_cells": 5970,
+        "rain_cum_mm": 76.7,
+        "upstream_q_m3s": 5666.7
+      },
+      {
+        "seq": 29,
+        "t_h": 174.0,
+        "n_patches": 6081,
+        "wet_area_km2": 512.15,
+        "patches_le_4_cells": 5087,
+        "patches_le_9_cells": 5726,
+        "rain_cum_mm": 85.6,
+        "upstream_q_m3s": 6250.0
+      },
+      {
+        "seq": 30,
+        "t_h": 180.0,
+        "n_patches": 5777,
+        "wet_area_km2": 516.58,
+        "patches_le_4_cells": 4936,
+        "patches_le_9_cells": 5485,
+        "rain_cum_mm": 86.8,
+        "upstream_q_m3s": 6833.3
+      },
+      {
+        "seq": 31,
+        "t_h": 186.0,
+        "n_patches": 5587,
+        "wet_area_km2": 591.79,
+        "patches_le_4_cells": 4516,
+        "patches_le_9_cells": 5161,
+        "rain_cum_mm": 98.9,
+        "upstream_q_m3s": 7416.7
+      },
+      {
+        "seq": 32,
+        "t_h": 192.0,
+        "n_patches": 5397,
+        "wet_area_km2": 570.31,
+        "patches_le_4_cells": 4547,
+        "patches_le_9_cells": 5087,
+        "rain_cum_mm": 99.1,
+        "upstream_q_m3s": 8000.0
+      },
+      {
+        "seq": 33,
+        "t_h": 198.0,
+        "n_patches": 5342,
+        "wet_area_km2": 575.59,
+        "patches_le_4_cells": 4569,
+        "patches_le_9_cells": 5081,
+        "rain_cum_mm": 99.1,
+        "upstream_q_m3s": 8583.3
+      },
+      {
+        "seq": 34,
+        "t_h": 204.0,
+        "n_patches": 5281,
+        "wet_area_km2": 585.41,
+        "patches_le_4_cells": 4551,
+        "patches_le_9_cells": 5045,
+        "rain_cum_mm": 99.4,
+        "upstream_q_m3s": 9166.7
+      },
+      {
+        "seq": 35,
+        "t_h": 210.0,
+        "n_patches": 5224,
+        "wet_area_km2": 595.73,
+        "patches_le_4_cells": 4507,
+        "patches_le_9_cells": 4995,
+        "rain_cum_mm": 101.1,
+        "upstream_q_m3s": 9750.0
+      },
+      {
+        "seq": 36,
+        "t_h": 216.0,
+        "n_patches": 5176,
+        "wet_area_km2": 612.26,
+        "patches_le_4_cells": 4481,
+        "patches_le_9_cells": 4957,
+        "rain_cum_mm": 101.1,
+        "upstream_q_m3s": 10333.3
+      },
+      {
+        "seq": 37,
+        "t_h": 222.0,
+        "n_patches": 5135,
+        "wet_area_km2": 620.17,
+        "patches_le_4_cells": 4460,
+        "patches_le_9_cells": 4925,
+        "rain_cum_mm": 101.1,
+        "upstream_q_m3s": 10916.7
+      },
+      {
+        "seq": 38,
+        "t_h": 228.0,
+        "n_patches": 5112,
+        "wet_area_km2": 630.14,
+        "patches_le_4_cells": 4439,
+        "patches_le_9_cells": 4902,
+        "rain_cum_mm": 101.3,
+        "upstream_q_m3s": 11500.0
+      },
+      {
+        "seq": 39,
+        "t_h": 234.0,
+        "n_patches": 5075,
+        "wet_area_km2": 638.23,
+        "patches_le_4_cells": 4407,
+        "patches_le_9_cells": 4867,
+        "rain_cum_mm": 102.2,
+        "upstream_q_m3s": 10937.5
+      },
+      {
+        "seq": 40,
+        "t_h": 240.0,
+        "n_patches": 5036,
+        "wet_area_km2": 649.14,
+        "patches_le_4_cells": 4374,
+        "patches_le_9_cells": 4836,
+        "rain_cum_mm": 102.2,
+        "upstream_q_m3s": 10375.0
+      },
+      {
+        "seq": 41,
+        "t_h": 246.0,
+        "n_patches": 5011,
+        "wet_area_km2": 654.55,
+        "patches_le_4_cells": 4360,
+        "patches_le_9_cells": 4817,
+        "rain_cum_mm": 102.5,
+        "upstream_q_m3s": 9812.5
+      },
+      {
+        "seq": 42,
+        "t_h": 252.0,
+        "n_patches": 4995,
+        "wet_area_km2": 656.72,
+        "patches_le_4_cells": 4354,
+        "patches_le_9_cells": 4809,
+        "rain_cum_mm": 102.5,
+        "upstream_q_m3s": 9250.0
+      },
+      {
+        "seq": 43,
+        "t_h": 258.0,
+        "n_patches": 4945,
+        "wet_area_km2": 665.79,
+        "patches_le_4_cells": 4274,
+        "patches_le_9_cells": 4743,
+        "rain_cum_mm": 104.7,
+        "upstream_q_m3s": 8687.5
+      },
+      {
+        "seq": 44,
+        "t_h": 264.0,
+        "n_patches": 4930,
+        "wet_area_km2": 667.55,
+        "patches_le_4_cells": 4268,
+        "patches_le_9_cells": 4727,
+        "rain_cum_mm": 104.7,
+        "upstream_q_m3s": 8125.0
+      },
+      {
+        "seq": 45,
+        "t_h": 270.0,
+        "n_patches": 4887,
+        "wet_area_km2": 672.62,
+        "patches_le_4_cells": 4235,
+        "patches_le_9_cells": 4693,
+        "rain_cum_mm": 104.7,
+        "upstream_q_m3s": 7562.5
+      },
+      {
+        "seq": 46,
+        "t_h": 276.0,
+        "n_patches": 4856,
+        "wet_area_km2": 675.18,
+        "patches_le_4_cells": 4212,
+        "patches_le_9_cells": 4658,
+        "rain_cum_mm": 105.9,
+        "upstream_q_m3s": 7000.0
+      },
+      {
+        "seq": 47,
+        "t_h": 282.0,
+        "n_patches": 4309,
+        "wet_area_km2": 769.97,
+        "patches_le_4_cells": 3530,
+        "patches_le_9_cells": 3996,
+        "rain_cum_mm": 129.7,
+        "upstream_q_m3s": 6437.5
+      },
+      {
+        "seq": 48,
+        "t_h": 288.0,
+        "n_patches": 4458,
+        "wet_area_km2": 731.36,
+        "patches_le_4_cells": 3743,
+        "patches_le_9_cells": 4184,
+        "rain_cum_mm": 129.7,
+        "upstream_q_m3s": 5875.0
+      },
+      {
+        "seq": 49,
+        "t_h": 294.0,
+        "n_patches": 4535,
+        "wet_area_km2": 720.25,
+        "patches_le_4_cells": 3810,
+        "patches_le_9_cells": 4277,
+        "rain_cum_mm": 132.0,
+        "upstream_q_m3s": 5312.5
+      },
+      {
+        "seq": 50,
+        "t_h": 300.0,
+        "n_patches": 4593,
+        "wet_area_km2": 704.67,
+        "patches_le_4_cells": 3882,
+        "patches_le_9_cells": 4339,
+        "rain_cum_mm": 132.0,
+        "upstream_q_m3s": 4750.0
+      },
+      {
+        "seq": 51,
+        "t_h": 306.0,
+        "n_patches": 4596,
+        "wet_area_km2": 703.03,
+        "patches_le_4_cells": 3874,
+        "patches_le_9_cells": 4338,
+        "rain_cum_mm": 133.8,
+        "upstream_q_m3s": 4187.5
+      },
+      {
+        "seq": 52,
+        "t_h": 312.0,
+        "n_patches": 4608,
+        "wet_area_km2": 696.06,
+        "patches_le_4_cells": 3910,
+        "patches_le_9_cells": 4374,
+        "rain_cum_mm": 133.8,
+        "upstream_q_m3s": 3625.0
+      },
+      {
+        "seq": 53,
+        "t_h": 318.0,
+        "n_patches": 4630,
+        "wet_area_km2": 690.25,
+        "patches_le_4_cells": 3941,
+        "patches_le_9_cells": 4401,
+        "rain_cum_mm": 133.8,
+        "upstream_q_m3s": 3062.5
+      },
+      {
+        "seq": 54,
+        "t_h": 324.0,
+        "n_patches": 4673,
+        "wet_area_km2": 679.4,
+        "patches_le_4_cells": 3985,
+        "patches_le_9_cells": 4442,
+        "rain_cum_mm": 133.9,
+        "upstream_q_m3s": 2500.0
+      },
+      {
+        "seq": 55,
+        "t_h": 330.0,
+        "n_patches": 4684,
+        "wet_area_km2": 676.81,
+        "patches_le_4_cells": 3995,
+        "patches_le_9_cells": 4450,
+        "rain_cum_mm": 134.9,
+        "upstream_q_m3s": 2250.0
+      },
+      {
+        "seq": 56,
+        "t_h": 336.0,
+        "n_patches": 4724,
+        "wet_area_km2": 672.94,
+        "patches_le_4_cells": 4017,
+        "patches_le_9_cells": 4487,
+        "rain_cum_mm": 135.5,
+        "upstream_q_m3s": 2000.0
+      }
+    ],
+    "evidence_level": "E1（逐帧复算 + rain.rain/yujiang.bdy 解析）",
+    "burst_transition": {
+      "from": {
+        "seq": 13,
+        "t_h": 78.0,
+        "n_patches": 1450,
+        "wet_area_km2": 127.68,
+        "patches_le_4_cells": 1449,
+        "patches_le_9_cells": 1449,
+        "rain_cum_mm": 3.2,
+        "upstream_q_m3s": 1000.0
+      },
+      "to": {
+        "seq": 14,
+        "t_h": 84.0,
+        "n_patches": 7145,
+        "wet_area_km2": 243.89,
+        "patches_le_4_cells": 6840,
+        "patches_le_9_cells": 7111,
+        "rain_cum_mm": 12.7,
+        "upstream_q_m3s": 1000.0
+      },
+      "patch_count_delta": 5695,
+      "patch_count_ratio": 4.93,
+      "upstream_q_at_burst_m3s": 1000.0,
+      "upstream_q_is_baseflow": true,
+      "rain_cum_at_burst_mm": 12.7,
+      "interpretation": "斑块数最大增幅出现在「上游 Q 仍为基流 1000 m³/s」的帧上，且该帧累计雨量已明显抬升；斑块数随后随降雨过程持续维持高位，而与洪峰（seq38 峰值 11500）不同步。该同步性是相关描述（E2），不是因果证明。因果确认需 Phase 2 的flow_only_v1 对照 run（rain=off）——该 run 若斑块数不暴增，则根因一成立。",
+      "evidence_level": "E1（时序数值）；E2（同步性归因）；因果待 Phase 2 确认"
+    }
+  },
+  "patch_row_count": 244685
+}

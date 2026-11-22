@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-11-22T02:20:28+00:00",
+  "repos": [
+    {
+      "repo": "icesat2py/icepyx",
+      "url": "https://github.com/icesat2py/icepyx",
+      "status": "verified",
+      "stars": 259,
+      "forks": 120,
+      "license": "BSD-3-Clause",
+      "pushed_at": "2026-11-09T03:47:18Z",
+      "archived": false,
+      "message": "",
+      "fetched_at": "2026-11-22T02:20:27+00:00"
+    },
+    {
+      "repo": "sdv-dev/Copulas",
+      "url": "https://github.com/sdv-dev/Copulas",
+      "status": "verified",
+      "stars": 658,
+      "forks": 122,
+      "license": "NOASSERTION",
+      "pushed_at": "2026-11-16T16:36:58Z",
+      "archived": false,
+      "message": "",
+      "fetched_at": "2026-11-22T02:20:28+00:00"
+    },
+    {
+      "repo": "ECMWF/cdsapi",
+      "url": "https://github.com/ECMWF/cdsapi",
+      "status": "verified",
+      "stars": 322,
+      "forks": 70,
+      "license": "Apache-2.0",
+      "pushed_at": "2026-11-20T14:10:28Z",
+      "archived": false,
+      "message": "",
+      "fetched_at": "2026-11-22T02:20:28+00:00"
+    }
+  ]
+}

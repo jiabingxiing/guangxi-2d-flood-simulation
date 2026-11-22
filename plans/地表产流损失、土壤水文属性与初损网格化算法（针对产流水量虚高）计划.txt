@@ -1,0 +1,1198 @@
+# 广西华南湿润红壤区二维地表水动力模拟：土壤下渗数据源与净雨转换算法调研
+
+## 一、结论与技术路线建议
+
+针对钦州、贵港等华南湿润丘陵—平原区，建议采用：
+
+HiHydroSoil v2.0 + 中国 250 m 土壤质地数据 + ERA5-Land 前期土壤湿度 + CLCD/ESA WorldCover 土地利用 + Green-Ampt 网格化净雨预处理。
+
+同时保留 SCS-CN 作为独立对照方案，并以中国区域 CN-China 研究成果进行本地化校核。
+
+这套组合的理由是：
+
+1. HiHydroSoil v2.0 可以直接提供 250 m 土壤水力参数，包括饱和导水率、饱和含水量、土壤水分特征参数和 HSG，能减少大量 PTF 参数推导工作。
+2. 中国 250 m 土壤质地数据 能补充本土土壤空间差异，可用于修正 HiHydroSoil 的质地与导水率估计。
+3. ERA5-Land 土壤水分 可以提供降雨事件开始前的湿润状态，解决仅使用静态土壤参数、无法区分台风前干土和连续降雨后湿土的问题。
+4. Green-Ampt 可以描述初期入渗能力较强、随湿润锋推进逐渐下降并趋近饱和导水率的过程，比单一恒定扣水率更适合台风暴雨事件。
+5. CLCD 与 ESA WorldCover 可以区分林地、农田、建设用地、水体、湿地和红树林等不同下垫面，避免整个模型区域使用同一个下渗参数。
+
+这里有一个需要特别强调的模型架构问题：
+
+> 离线净雨预处理可以解决“降雨落地后、地表尚未形成水深时的初期下渗”，但无法直接感知二维水动力求解器中其他位置汇入的地表径流。因此，它能合理处理 local rainfall infiltration，却不能完整模拟地表径流的再入渗（run-on infiltration）。
+
+这决定了推荐方案的适用边界，后文会具体说明。
+
+# 二、公开土壤水文数据集
+
+## 2.1 数据集对比
+
+| 数据集               | 空间分辨率        | 时间属性                | 主要内容                         | 格式                   | 适用性        |
+| ----------------- | ------------ | ------------------- | ---------------------------- | -------------------- | ---------- |
+| HiHydroSoil v2.0  | 250 m        | 静态                  | Ks、θs、θr、田间持水量相关指标、HSG、VG 参数 | GeoTIFF              | 首选水力参数源    |
+| SoilGrids 2.0     | 250 m        | 静态                  | 砂粒、粉粒、黏粒、有机碳、容重、θ33、θ1500 等  | GeoTIFF/COG、WebDAV 等 | PTF 推导基础数据 |
+| HYSOGs250m        | 约 250 m      | 静态                  | A/B/C/D 水文土壤分组               | 栅格                   | CN 算法辅助数据  |
+| 中国土壤水文数据集         | 30″，约 0.9 km | 静态，基础数据年代较早         | Ks、θs、θfc、θwp、VG 参数等         | NetCDF               | 中国区域独立校核   |
+| 中国 250 m 土壤质地数据   | 250 m        | 2010—2018 年土壤剖面调查基础 | 砂粒、粉粒、黏粒和质地类型                | GeoTIFF              | 本地化修正      |
+| Kosugi 全球土壤水力参数数据 | 约 1 km       | 静态                  | θs、Ks、田间持水量、凋萎点等             | GeoTIFF              | 备选校核数据     |
+
+这些产品的数据含义并不相同。尤其需要注意：HSG 是水文分组，不能代替 Ks；SoilGrids 提供的土壤质地也不能直接当成实测导水率。
+
+## 2.2 首选：HiHydroSoil v2.0
+
+优先推荐
+
+官方数据入口：
+
+- [FutureWater HiHydroSoil](https://www.futurewater.eu/solutions/hihydrosoil/?utm_source=chatgpt.com)
+- [HiHydroSoil v2.0 数据说明](https://www.futurewater.eu/projects/hihydrosoil-nl/?utm_source=chatgpt.com)
+- [Google Earth Engine 数据目录](https://gee-community-catalog.org/projects/hihydro_soil/?utm_source=chatgpt.com)
+
+HiHydroSoil v2.0 是基于 SoilGrids 土壤属性及 Pedotransfer Functions（PTF，土壤转换函数）构建的全球土壤水力属性格网，空间分辨率为 250 m。其数据覆盖六个土层深度：
+
+| 土层      | 深度         |
+| ------- | ---------- |
+| Layer 1 | 0–5 cm     |
+| Layer 2 | 5–15 cm    |
+| Layer 3 | 15–30 cm   |
+| Layer 4 | 30–60 cm   |
+| Layer 5 | 60–100 cm  |
+| Layer 6 | 100–200 cm |
+
+主要变量包括：
+
+| 参数                 | 含义                      | Green-Ampt / CN 用途 |
+| ------------------ | ----------------------- | ------------------ |
+| Ksat               | 饱和导水率                   | Green-Ampt 的核心参数   |
+| θsat               | 饱和体积含水量                 | Green-Ampt 的含水量上限  |
+| θres               | 残余含水量                   | 土壤水分特征曲线参数         |
+| WCPF2              | pF2 对应含水量               | 近似低吸力条件下的持水量指标     |
+| WCPF3              | pF3 对应含水量               | 土壤水分特征曲线           |
+| WCPF4.2            | pF4.2 对应含水量             | 永久凋萎点相关指标          |
+| Alpha、N            | Mualem-van Genuchten 参数 | 土壤水力特征曲线           |
+| HSG                | USDA 水文土壤分组             | SCS-CN             |
+| Soil Texture Class | 土壤质地分类                  | 参数校核及分组            |
+
+HiHydroSoil 提供 GeoTIFF，既有逐土层产品，也有 Topsoil（0–30 cm）及 Subsoil（30–200 cm）汇总产品。其数据为 CC BY 4.0 许可，需填写官方申请表获取下载链接；也可通过 Google Earth Engine 访问。需要注意，原始浮点数据为节省空间乘以了 10000，读取后需要乘以 `0.0001` 恢复原始数值。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.futurewater.eu\&sz=32)
+
+FutureWater+3
+
+
+
+### 参数提取时的单位转换
+
+HiHydroSoil 的 Ksat 数据以 cm/day 表示时，转换为 mm/h：
+
+\\[ K_s(\mathrm{mm/h})=K_s(\mathrm{cm/day})\times\frac{10}{24} \\]
+
+水力含水量数据恢复缩放因子后，单位通常为：
+
+\\[ \mathrm{m^3/m^3} \\]
+
+有一个细节：HiHydroSoil 的 pF2 含水量不能直接等同于常规定义的田间持水量。 pF2 大约对应 10 kPa 吸力，而许多土壤数据产品将 −33 kPa 作为田间持水量的参考。因此，若项目需要严格意义上的 θfc，建议用中国土壤水文数据集中的 TH33 或 SoilGrids 的 `wv003` 作为交叉参考。
+
+## 2.3 SoilGrids 2.0
+
+官方入口：
+
+- [SoilGrids 数据说明](https://docs.isric.org/globaldata/soilgrids/?utm_source=chatgpt.com)
+- [SoilGrids FAQ](https://docs.isric.org/globaldata/soilgrids/SoilGrids_faqs_01.html?utm_source=chatgpt.com)
+- [ISRIC 数据访问状态](https://isric.org/explore/soilgrids?utm_source=chatgpt.com)
+
+SoilGrids 2.0 为全球 250 m 土壤属性数据，提供六个标准土层深度，与 HiHydroSoil 一致。它不直接提供完整的 Ks 水力参数，但可以提供计算这些参数所需的基础土壤属性。
+
+| 变量       | 含义              | 水文用途      |
+| -------- | --------------- | --------- |
+| `sand`   | 砂粒含量            | PTF       |
+| `silt`   | 粉粒含量            | PTF       |
+| `clay`   | 黏粒含量            | PTF       |
+| `bdod`   | 土壤容重            | PTF、孔隙度估计 |
+| `soc`    | 土壤有机碳           | PTF       |
+| `cfvo`   | 粗颗粒体积分数         | 有效土体校正    |
+| `wv003`  | 33 kPa 下体积含水量   | θfc 参考    |
+| `wv1500` | 1500 kPa 下体积含水量 | θwp 参考    |
+
+这些变量可以用于推导或校核：
+
+\\[ \theta\_{fc}\approx wv003 \\]
+
+\\[ \theta\_{wp}\approx wv1500 \\]
+
+\\[ \Delta \theta = \theta_s-\theta_i \\]
+
+SoilGrids 的含水量和质地变量有对应缩放因子，不能直接把栅格原始整数值作为真实物理量使用。例如，砂粒、粉粒和黏粒数据的比例换算与含水量数据不同，必须按官方 FAQ 处理。
+
+[image](https://www.google.com/s2/favicons?domain=https://dev-docs.isric.containers.wur.nl\&sz=32)
+
+SoilGrids Documentation+2
+
+
+
+\*\*当前访问状态：\*\*截至 2026 年 11 月，ISRIC 官方明确说明 SoilGrids REST API 暂停服务，且没有给出恢复时间。因此不建议把 REST API 作为工程生产依赖。优先采用官方 WebDAV、替代数据访问服务或 Google Earth Engine 等路径。
+
+[image](https://www.google.com/s2/favicons?domain=https://isric.org\&sz=32)
+
+Global gridded soil information+1
+
+
+
+## 2.4 中国土壤水文参数数据集
+
+中国区域校核重点
+
+数据名称：
+
+面向陆面过程模型的中国土壤水文数据集
+
+英文名称：
+
+A China Dataset of Soil Hydraulic Parameters Pedotransfer Functions for Land Surface Modeling
+
+官方数据入口：
+
+- [国家冰川冻土沙漠科学数据中心](https://www.ncdc.ac.cn/portal/metadata/0b691e2e-6235-4f61-baa9-01b00b5959bb?utm_source=chatgpt.com)
+- [中国地球系统科学数据中心 TPDC 镜像](https://data.tpdc.ac.cn/en/data/205da4ae-63cd-48e1-994e-0b5d8830812a?utm_source=chatgpt.com)
+
+数据基本信息：
+
+| 属性     | 内容              |
+| ------ | --------------- |
+| 区域     | 中国              |
+| 空间分辨率  | 30″，约 0.9 km    |
+| 时间属性   | 静态产品，基础土壤数据年代较早 |
+| 垂向层数   | 7 层             |
+| 最大土层深度 | 1.383 m         |
+| 格式     | NetCDF          |
+| 获取方式   | 数据平台登录获取        |
+
+土层为：
+
+- 0–0.045 m
+- 0.045–0.091 m
+- 0.091–0.166 m
+- 0.166–0.289 m
+- 0.289–0.493 m
+- 0.493–0.829 m
+- 0.829–1.383 m
+
+重要变量：
+
+| 文件或变量       | 含义                           |
+| ----------- | ---------------------------- |
+| `THSCH`     | Clapp-Hornberger 参数体系下的饱和含水量 |
+| `PSI_S`     | 饱和毛细势                        |
+| `LAMBDA`    | 孔隙尺寸分布指数                     |
+| `K_SCH`     | 饱和导水率                        |
+| `THR`       | van Genuchten 参数体系下残余含水量     |
+| `THSGM`     | van Genuchten 参数体系下饱和含水量     |
+| `TH33`      | 33 kPa 下含水量                  |
+| `TH1500`    | 1500 kPa 下含水量                |
+| `ALPHA`、`N` | van Genuchten 曲线参数           |
+
+数据通过砂粒、粉粒、黏粒、有机质和容重等输入，利用 PTF 估算土壤水文参数，同时提供中位数和变异系数。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.ncdc.ac.cn\&sz=32)
+
+国家冰川冻土沙漠科学数据中心+2
+
+
+
+这个数据集对本项目很有价值：它可以作为 HiHydroSoil 的中国区域独立参照，尤其适合检查广西区域不同土层的 Ks、θs 和 θfc 是否存在系统性偏差。
+
+需要注意的是，它的名义空间分辨率约 1 km，且年代较早，不能作为最新土地利用变化或工程地表改造的直接反映。
+
+## 2.5 中国 250 m 土壤质地数据集
+
+数据名称：
+
+中国高分辨率国家土壤信息格网基本属性数据集——250 米土壤质地（2010—2018）
+
+官方入口：
+
+- [中国土壤科学数据中心](https://soil.geodata.cn/data/datadetails.html?dataguid=8306349869502\&docid=0\&utm_source=chatgpt.com)
+- [国家地球系统科学数据中心](https://www.geodata.cn/main/face_science_detail?guid=8306349869502\&publisherGuid=76224125409013\&utm_source=chatgpt.com)
+
+数据内容：
+
+- 250 m 分辨率。
+- 六个土层：0–5、5–15、15–30、30–60、60–100、100–200 cm。
+- 提供砂粒、粉粒、黏粒含量和土壤质地分类。
+- GeoTIFF 格式，WGS84 Albers 投影。
+- 基于 2010—2018 年土壤剖面调查样点，覆盖全国 5000 多个剖面调查点。
+
+DOI：`10.12041/geodata.8306349869502.ver1.db`。
+
+该产品本身不直接提供 Ks 或 θs，但它的全国土壤剖面基础数据和区域空间分辨率具有优势。建议将其作为 HiHydroSoil 和中国 30″ 水文数据的土壤质地对照源，用于识别广西区域内不同土壤质地的空间差异。
+
+[image](https://www.google.com/s2/favicons?domain=https://soil.geodata.cn\&sz=32)
+
+soil.geodata.cn+1
+
+
+
+## 2.6 HYSOGs250m：水文土壤分组
+
+官方入口：
+
+- [ORNL DAAC 数据页面](https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1566\&utm_source=chatgpt.com)
+- [NASA Earthdata DOI](https://doi.org/10.3334/ORNLDAAC/1566?utm_source=chatgpt.com)
+- [可直接读取的 COG 镜像](https://data.naturalcapitalalliance.stanford.edu/download/global/HYSOGs250m/HYSOGs250m_Soil_Groups_reclassified.tif?utm_source=chatgpt.com)
+
+HYSOGs250m 是全球 HSG 数据集，空间分辨率约 250 m，基于土壤质地和基岩深度进行水文土壤分组，主要服务于 SCS-CN 径流计算。
+
+[image](https://www.google.com/s2/favicons?domain=https://doi.org\&sz=32)
+
+NASA Earthdata+2
+
+
+
+四类土壤的基本含义：
+
+| HSG | 水文特征        | 典型土壤类型       |
+| --- | ----------- | ------------ |
+| A   | 入渗能力高，径流潜势低 | 砂土、壤砂土、砂壤土   |
+| B   | 入渗能力中等偏高    | 壤土、粉壤土       |
+| C   | 入渗能力中等偏低    | 砂质黏壤土        |
+| D   | 入渗能力低，径流潜势高 | 黏土、粉黏土、浅薄土层等 |
+
+常见分类参考中的入渗率界限大致为：
+
+- A：大于 7.6 mm/h
+- B：3.8–7.6 mm/h
+- C：1.3–3.8 mm/h
+- D：小于 1.3 mm/h
+
+这些界限是 HSG 的水文分类参考，不代表每个 A/B/C/D 像元都能直接采用对应的单一 Ks 值。土层厚度、地下水位、限制性土层和排水条件也会影响最终分组。
+
+[image](https://www.google.com/s2/favicons?domain=https://pe-calc.com\&sz=32)
+
+PE-Calc+1
+
+
+
+\*\*建议：\*\*对于广西区域，优先采用 HiHydroSoil 的 HSG，并以 HYSOGs250m 作独立对照。若两者分类冲突，不要简单取平均，应检查它们对土壤质地、导水率和土层深度的处理差异。
+
+# 三、土地利用与降雨前期湿度数据
+
+土壤参数解决的是“土体能够入渗多少”，而土地利用决定“地表哪些区域容易产流”。此外，前期土壤湿度会显著改变降雨期间的实际入渗能力。
+
+## 3.1 ESA WorldCover
+
+数据入口：
+
+[ESA WorldCover Data Access](https://esa-worldcover.org/en/data-access?utm_source=chatgpt.com)
+
+| 属性   | 内容                      |
+| ---- | ----------------------- |
+| 分辨率  | 10 m                    |
+| 数据年份 | 2020、2021               |
+| 格式   | Cloud-Optimized GeoTIFF |
+| 投影   | EPSG:4326               |
+| 类别数量 | 11 类                    |
+| 许可   | CC BY 4.0               |
+
+与下渗建模相关的类别：
+
+| 分类代码 | 地表类型                     |
+| ---- | ------------------------ |
+| 10   | Tree cover               |
+| 20   | Shrubland                |
+| 30   | Grassland                |
+| 40   | Cropland                 |
+| 50   | Built-up                 |
+| 60   | Bare / sparse vegetation |
+| 80   | Permanent water bodies   |
+| 90   | Herbaceous wetland       |
+| 95   | Mangroves                |
+
+钦州属于沿海区域，湿地和红树林对下渗与蓄水过程有特殊影响，不能全部划为普通农田或林地。
+
+有一点需要注意：WorldCover 2020 与 2021 使用不同算法版本，其分类差异不能直接解释为土地利用真实变化。WorldCover 适合作为高分辨率土地覆盖底图，而不是连续年度土地利用变化序列。
+
+[image](https://www.google.com/s2/favicons?domain=https://esa-worldcover.org\&sz=32)
+
+WORLDCOVER+2
+
+
+
+## 3.2 CLCD：中国 30 m 年度土地覆盖数据
+
+数据入口：
+
+[CLCD 1985—2025 数据集](https://zenodo.org/records/18180184?utm_source=chatgpt.com)
+
+DOI：`10.5281/zenodo.18180184`
+
+| 属性    | 内容            |
+| ----- | ------------- |
+| 分辨率   | 30 m          |
+| 时间覆盖  | 1985—2025     |
+| 时间分辨率 | 年度            |
+| 格式    | GeoTIFF / COG |
+| 区域    | 中国            |
+| 最新数据  | 2025 年        |
+
+CLCD 能够按洪水事件发生年份选择相近年份的土地利用数据，适合长期洪水事件回算、土地利用变化分析以及不同年份的产流差异对照。
+
+[image](https://www.google.com/s2/favicons?domain=https://zenodo.org\&sz=32)
+
+Zenodo
+
+
+
+建议的使用方法：
+
+- CLCD 作为主要年度土地利用数据。
+- WorldCover 作为 10 m 高分辨率辅助数据。
+- 对建设用地、农田、林地、水体和湿地进行分类细化。
+- 在降雨净雨计算中保留每个水动力网格内部的土地利用面积比例，而不是只取主导类别。
+
+例如，某个水动力网格内部可能包含：
+
+\\[ f\_{\text{forest}}=0.50,\quad f\_{\text{cropland}}=0.30,\quad f\_{\text{impervious}}=0.20 \\]
+
+这时不应该把整个网格都当成林地，也不应该简单用一个类别替代。
+
+## 3.3 ERA5-Land 土壤湿度
+
+官方入口：
+
+[Copernicus ERA5-Land](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=overview\&utm_source=chatgpt.com)
+
+ERA5-Land 提供：
+
+- 0.1° × 0.1° 网格，原生尺度约 9 km。
+- 1950 年至今。
+- 小时数据。
+- GRIB 格式，部分时序接口还支持 NetCDF。
+- 四层土壤体积含水量。
+
+| 土层           | 深度         |
+| ------------ | ---------- |
+| Soil layer 1 | 0–7 cm     |
+| Soil layer 2 | 7–28 cm    |
+| Soil layer 3 | 28–100 cm  |
+| Soil layer 4 | 100–289 cm |
+
+重要变量：
+
+`volumetric_soil_water_layer_1`
+
+`volumetric_soil_water_layer_2`
+
+`volumetric_soil_water_layer_3`
+
+`volumetric_soil_water_layer_4`
+
+可将前两层按厚度加权，构造 0–28 cm 的前期土壤湿度指标：
+
+\\[ \theta\_{\text{ERA,0-28}} = \frac{ 7\theta_1+21\theta_2 }{28} \\]
+
+然后利用本地土壤参数对其进行偏差校正，将其映射到每个土壤网格的合理含水量范围。
+
+[image](https://www.google.com/s2/favicons?domain=https://cds.climate.copernicus.eu\&sz=32)
+
+气候数据存储+1
+
+
+
+这里有两个注意事项：
+
+第一，ERA5-Land 的土壤水分是陆面模式估计值，不是广西每一个土壤像元的现场实测值。它适合提供事件前的湿润程度或相对湿度指标，不适合未经校正直接作为 250 m、10 m 或更高分辨率的真实土壤含水量。
+
+第二，必须区分 ERA5 与 ERA5-Land。二者的空间分辨率不同。如果现有降雨驱动使用的是 ERA5，而不是 ERA5-Land，不要把 ERA5-Land 的土壤水分时间序列误认为同一分辨率的降雨数据。
+
+# 四、三类净雨转换算法
+
+## 4.1 SCS-CN 曲线数法
+
+### 4.1.1 基本原理
+
+SCS-CN 是基于降雨量、土壤类型、土地利用和前期湿润条件的经验产流模型。
+
+其核心思想是：
+
+- 降雨开始时，部分降雨被截留、洼地蓄水和土壤初期入渗消耗。
+- 当累积降雨超过初损后，地表开始产生径流。
+- 随着累积降雨增加，径流量逐渐增加。
+
+公式为：
+
+\\[ S=\frac{25400}{CN}-254 \\]
+
+其中：
+
+- \\(S\\)：最大潜在滞蓄量，mm。
+- \\(CN\\)：曲线数，范围 0–100。
+
+初期损失：
+
+\\[ I_a=\lambda S \\]
+
+累计径流深：
+
+\\[ Q(P)= \begin{cases} 0, & P\leq I_a\\\\[5pt] \dfrac{(P-I_a)^2}{P-I_a+S}, & P>I_a \end{cases} \\]
+
+将 \\(I_a=\lambda S\\) 代入：
+
+\\[ Q(P)= \begin{cases} 0, & P\leq \lambda S\\\\[5pt] \dfrac{(P-\lambda S)^2} {P+(1-\lambda)S}, & P>\lambda S \end{cases} \\]
+
+传统 NRCS 方法采用：
+
+\\[ \lambda=0.20 \\]
+
+需要注意：如果将 \\(\lambda\\) 改为 0.05，就不能直接认为原有 USDA CN 表仍然适用。NRCS 明确指出，原有 CN 参数表是以 \\(I_a=0.2S\\) 为基础建立的，改变该关系后需要重新建立或校准 CN 参数。
+
+[image](https://www.google.com/s2/favicons?domain=https://directives.nrcs.usda.gov\&sz=32)
+
+directives.nrcs.usda.gov+1
+
+
+
+### 4.1.2 华南区域 CN 初始参考值
+
+以下是 USDA TR-55 体系的参考值，用于建立参数先验，不应直接当成广西当地实测值。
+
+| 土地覆盖类型    | HSG A | HSG B | HSG C | HSG D |
+| --------- | ----- | ----- | ----- | ----- |
+| 林地，良好覆盖   | 30    | 55    | 70    | 77    |
+| 林地，较差覆盖   | 45    | 66    | 77    | 83    |
+| 草地，良好覆盖   | 39    | 61    | 74    | 80    |
+| 草地，中等覆盖   | 49    | 69    | 79    | 84    |
+| 草地，较差覆盖   | 68    | 79    | 86    | 89    |
+| 行作农田，良好管理 | 67    | 78    | 85    | 89    |
+| 行作农田，较差管理 | 72    | 81    | 88    | 91    |
+| 裸露耕地      | 77    | 86    | 91    | 94    |
+| 不透水面      | 98    | 98    | 98    | 98    |
+
+这些数值来自 TR-55 和相关工程手册的土壤—土地覆盖组合表。
+
+[image](https://www.google.com/s2/favicons?domain=https://stormwater.pca.state.mn.us\&sz=32)
+
+Minnesota Stormwater Manual+2
+
+
+
+对于广西钦州、贵港等区域，可以先用以下范围建立参数集合：
+
+| 土地覆盖类型    | 建议 CN-II 初始范围   |
+| --------- | --------------- |
+| 林地        | 55–83           |
+| 灌木林       | 56–86           |
+| 草地        | 61–89           |
+| 农田        | 75–91           |
+| 裸地        | 77–94           |
+| 高度硬化建设区   | 90–98           |
+| 不透水面      | 98              |
+| 湿地、水稻田、滩涂 | 单独建立参数，不宜套用普通农田 |
+
+这些范围主要是基于不同 HSG 和植被覆盖条件的工程初始范围。对广西而言，湿润季风条件和农田水管理会影响有效 CN，尤其是水稻田、灌溉区和低洼积水区，不能直接使用普通行作农田 CN。
+
+### 4.1.3 前期湿润条件修正
+
+NRCS 传统方法可以根据前期湿润条件调整 CN：
+
+\\[ CN_I = \frac{CN\_{II}} {2.281-0.01281CN\_{II}} \\]
+
+\\[ CN\_{III} = \frac{CN\_{II}} {0.427+0.00573CN\_{II}} \\]
+
+其中：
+
+- \\(CN_I\\)：偏干状态。
+- \\(CN\_{II}\\)：平均状态。
+- \\(CN\_{III}\\)：偏湿状态。
+
+对于华南台风暴雨，前期土壤湿润程度通常很重要。建议优先使用 ERA5-Land 土壤水分作为湿润状态指标，再结合本地事件径流数据校准，而不是仅依赖传统 5 日累计降雨分组。
+
+### 4.1.4 如何将 CN 法转成逐小时净雨？
+
+CN 法计算的是事件累计径流深，不是天然的逐小时下渗速率。
+
+因此，正确做法是：
+
+1. 对每个网格累计降雨。
+2. 计算每个时刻的累计径流深。
+3. 对累计径流深求差，生成每小时净雨。
+
+\\[ Q_t=Q(P\_{\text{cum},t}) \\]
+
+\\[ R\_{\text{net},t}=Q_t-Q\_{t-1} \\]
+
+这样可以得到和事件累计 CN 结果保持一致的净雨时序。
+
+注意：不能每小时单独计算一次 SCS-CN 并重新扣除一次初期损失。 这会导致初损被重复扣除，低估整场暴雨的径流量。
+
+### 4.1.5 CN-China：更适合中国区域的校准参考
+
+建议重点关注：
+
+CN-China: Revised runoff curve number by using rainfall-runoff events data in China
+
+论文：
+
+Lian et al., Water Research, 2020.
+
+DOI：[10.1016/j.watres.2020.115767](https://doi.org/10.1016/j.watres.2020.115767?utm_source=chatgpt.com)
+
+该研究利用中国 55 个监测地点的降雨—径流事件数据修正 CN 值，研究结论指出，原始 USDA CN 表在中国复杂自然条件下可能存在显著偏差，修订后的 CN-China 能提供更合适的中国区域参考。
+
+[image](https://www.google.com/s2/favicons?domain=https://pubmed.ncbi.nlm.nih.gov\&sz=32)
+
+PubMed+1
+
+
+
+这项研究值得作为本项目 CN 本地化的重要依据。但它并不意味着可以直接拿某一个全国平均 CN 套用到钦州或贵港。建议利用其参数体系建立初始先验，再使用广西本地降雨—径流或洪水水位过程校准。
+
+\*\*评价：\*\*CN 方法适合快速构建大范围分布式净雨场，计算成本低，容易批量预处理。但其本质是事件累计经验关系，不能像 Green-Ampt 一样直接表达湿润锋推进、降雨强度与土壤入渗能力之间的动态关系。
+
+## 4.2 Green-Ampt 入渗模型
+
+首选物理型预处理算法
+
+### 4.2.1 基本原理
+
+Green-Ampt 是基于湿润锋推进假设的物理入渗模型。
+
+可以理解为：
+
+- 降雨进入土体后，形成一个相对清晰的湿润锋。
+- 湿润锋以上的土壤含水量接近饱和。
+- 湿润锋以下仍然保持初始含水状态。
+- 随着入渗量增加，湿润锋逐渐向下推进。
+- 入渗能力逐渐下降，最终接近饱和导水率。
+
+经典 Green-Ampt 入渗能力公式：
+
+\\[ f_c= K_s\left( 1+ \frac{\psi_f(\theta_s-\theta_i)}{F} \right) \\]
+
+其中：
+
+| 参数             | 含义       | 单位    |
+| -------------- | -------- | ----- |
+| \\(f_c\\)      | 当前最大入渗能力 | mm/h  |
+| \\(K_s\\)      | 饱和导水率    | mm/h  |
+| \\(\psi_f\\)   | 湿润锋吸力水头  | mm    |
+| \\(\theta_s\\) | 饱和体积含水量  | m³/m³ |
+| \\(\theta_i\\) | 初始体积含水量  | m³/m³ |
+| \\(F\\)        | 累积入渗量    | mm    |
+
+实际入渗速率：
+
+\\[ f=\min(r,f_c) \\]
+
+其中 \\(r\\) 为当前地表降雨供水强度。
+
+净雨速率：
+
+\\[ r\_{\text{net}}=\max(0,r-f) \\]
+
+累积入渗量随时间更新：
+
+\\[ \frac{dF}{dt}=f \\]
+
+这个模型的关键优势是：初期入渗能力由初始土壤干湿程度决定，而不是事先设定一个固定的初期扣水深。
+
+如果土壤比较干燥，\\(\theta_s-\theta_i\\) 较大，初期入渗能力更强；随着湿润锋下移，\\(F\\) 增加，入渗能力逐渐下降，最后趋近 \\(K_s\\)。
+
+HEC-RAS 的 Green-Ampt 技术文档也采用上述参数体系，并给出了不同土壤质地的参数参考表。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.hec.usace.army.mil\&sz=32)
+
+hec.usace.army.mil+2
+
+
+
+### 4.2.2 不同土壤质地的初始参数
+
+以下参数来自 Rawls 等土壤质地经验参数及 HEC-RAS 技术参考表。它们适合作为广西区域模型的初始先验，而不是本地实测值。
+
+| 土壤质地            | \\(K_s\\)（mm/h） | \\(\psi_f\\)（mm） | \\(\theta_s\\) |
+| --------------- | --------------- | ---------------- | -------------- |
+| Sandy loam      | 10.9            | 68–152           | 0.453          |
+| Loam            | 3.4             | 64–100           | 0.463          |
+| Silt loam       | 6.5             | 72–167           | 0.501          |
+| Sandy clay loam | 1.5             | 219–261          | 0.398          |
+| Clay loam       | 1.0             | 152–270          | 0.464          |
+| Silty clay loam | 1.0             | 140–273          | 0.471          |
+| Sandy clay      | 0.6             | 239–367          | 0.430          |
+| Silty clay      | 0.5             | 292–457          | 0.479          |
+| Clay            | 0.3             | 277–547          | 0.475          |
+
+数据来源：HEC-RAS Green-Ampt 参数表。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.hec.usace.army.mil\&sz=32)
+
+hec.usace.army.mil+1
+
+
+
+### 4.2.3 广西红壤区的参数建议
+
+红壤区不能简单全部归类为黏土。林地红壤、坡耕地红壤、裸露红壤和长期压实的建设用地，具有不同的入渗特征。
+
+建议初期采用分类型参数先验：
+
+| 土地利用 / 土壤条件 | \\(K_s\\) 初始参考范围 | 参数处理建议              |
+| ----------- | ---------------- | ------------------- |
+| 林地、根系发达的红壤  | 1–10 mm/h 起步     | 结合土壤质地与实测校准         |
+| 一般红壤壤土、黏壤土  | 0.5–5 mm/h 起步    | 结合 HiHydroSoil Ksat |
+| 压实农田、裸露坡耕地  | 0.3–2 mm/h 起步    | 优先考虑表层压实            |
+| 建设用地不透水面    | 不采用普通土壤 Ks       | 按不透水比例直接产流          |
+| 水稻田、湿地、低洼平原 | 不宜仅用普通 GA        | 增加浅水位或饱和状态约束        |
+
+这里给出的范围是参数初始试算区间，不是钦州、贵港已经测定的区域参数。特别是林地表层的根孔、虫孔和团聚体结构可能使现场入渗率显著高于单纯根据质地推导的导水率。
+
+2025 年南方红壤区土地利用入渗研究显示，不同覆盖方式的初始、平均和稳定入渗率存在明显差异，林地整体高于农地和草地；研究中双环入渗试验的稳定入渗率范围为 1.28–17.15 mm/min。这个数据反映的是特定场地、特定试验尺度下的入渗表现，不能直接将其当作 250 m 网格的 Ks 输入值。
+
+[image](https://www.google.com/s2/favicons?domain=https://cjournal.hep.com.cn\&sz=32)
+
+中国高校科技期刊+1
+
+
+
+### 4.2.4 初始土壤含水量如何确定？
+
+Green-Ampt 最关键的区域动态参数是：
+
+\\[ \Delta\theta=\theta_s-\theta_i \\]
+
+其中 \\(\theta_i\\) 是暴雨前的初始体积含水量。
+
+建议采用以下方法：
+
+第一步：获取静态土壤水力参数
+
+从 HiHydroSoil 获取每个土壤像元的：
+
+- \\(\theta_s\\)
+- \\(K_s\\)
+- 土壤水分特征曲线参数
+
+从中国土壤水文数据集获取：
+
+- \\(\theta\_{fc}\\)
+- \\(\theta\_{wp}\\)
+- \\(K_s\\)
+
+第二步：获取 ERA5-Land 前期含水量
+
+使用降雨事件前 0–7 cm 和 7–28 cm 两层土壤含水量，构造 0–28 cm 的前期湿润状态。
+
+第三步：本地化校正
+
+不要直接使用 ERA5-Land 含水量作为 HiHydroSoil 的真实含水量。建议先利用区域土壤水分气候分位数或站点实测，对 ERA5-Land 的湿润程度进行归一化，再映射到本地土壤的 \\(\theta\_{wp}\\) 与 \\(\theta_s\\) 范围。
+
+一种简单的初始映射方式是：
+
+\\[ \theta_i = \theta\_{wp}+ \eta(\theta_s-\theta\_{wp}) \\]
+
+其中：
+
+\\[ \eta= \mathrm{clip}\left( \frac{SM-SM\_{\mathrm{dry}}} {SM\_{\mathrm{wet}}-SM\_{\mathrm{dry}}}, 0,1 \right) \\]
+
+\\(SM\\) 是经过区域偏差校正后的 ERA5-Land 湿润程度指标，\\(SM\_{\mathrm{dry}}\\) 和 \\(SM\_{\mathrm{wet}}\\) 是根据区域历史序列或本地观测确定的干湿参照值。
+
+这样可以避免把所有网格都初始化为相同的土壤含水量。
+
+### 4.2.5 Green-Ampt 的局限
+
+Green-Ampt 最适用于具有代表性湿润锋、较明确土层结构的入渗过程。
+
+但广西丘陵和平原区有两个需要专门处理的情况：
+
+情况一：浅层地下水位和饱和产流。
+
+钦州、贵港部分低洼平原、农田或河网区，降雨期间可能发生地下水位抬升、浅层土壤接近饱和等现象。此时地表产流不完全由降雨强度超过入渗能力引起，而可能由土体储水空间不足引起。
+
+因此需要增加土层有效厚度或饱和储水容量约束：
+
+\\[ F\_{\max}=Z\_{\mathrm{eff}}(\theta_s-\theta_i) \\]
+
+其中 \\(Z\_{\mathrm{eff}}\\) 是参与入渗的有效土层深度。
+
+如果土壤存在硬盘层、浅层基岩或高地下水位，\\(Z\_{\mathrm{eff}}\\) 应适当缩小。当地表下方有可持续排水的深层土体时，不能简单把全部入渗都限制为一个有限蓄水量，还需要考虑深层渗漏。
+
+情况二：地表汇流后的再入渗。
+
+如果一个网格从上游接收地表径流，即使本地没有降雨，也可能继续发生入渗。离线预处理无法知道该网格接收了多少上游来水，因此无法正确计算这部分入渗。
+
+这是离线 Green-Ampt 方案最重要的物理边界。
+
+## 4.3 Horton 变入渗模型
+
+### 4.3.1 基本公式
+
+Horton 模型是一种经验入渗能力衰减模型：
+
+\\[ f(t)=f_c+(f_0-f_c)e^{-kt} \\]
+
+其中：
+
+- \\(f_0\\)：初始入渗率，mm/h。
+- \\(f_c\\)：最终稳定入渗率，mm/h。
+- \\(k\\)：衰减系数，h\\(^{-1}\\)。
+- \\(t\\)：降雨开始后的时间，h。
+
+累计入渗量为：
+
+\\[ F(t)=f_ct+ \frac{f_0-f_c}{k} \left(1-e^{-kt}\right) \\]
+
+实际入渗速率：
+
+\\[ f\_{\mathrm{actual}}=\min(r,f(t)) \\]
+
+净雨速率：
+
+\\[ r\_{\mathrm{net}}=\max(0,r-f\_{\mathrm{actual}}) \\]
+
+Horton 模型的基本参数含义和使用条件见 Autodesk InfoWorks 的模型说明。文档也明确指出，原始按时间衰减的 Horton 入渗曲线不适合直接用于连续模拟，应进一步结合土壤水分储量或实际累计入渗量处理。
+
+[image](https://www.google.com/s2/favicons?domain=https://help.autodesk.com\&sz=32)
+
+Autodesk Help+1
+
+
+
+### 4.3.2 典型参数
+
+软件手册中常见的 HSG 参数参考如下：
+
+| HSG | \\(f_0\\)（mm/h） | \\(f_c\\)（mm/h） | \\(k\\)（h⁻¹） |
+| --- | --------------- | --------------- | ------------ |
+| A   | 250             | 25.4            | 2            |
+| B   | 200             | 12.7            | 2            |
+| C   | 125             | 6.3             | 2            |
+| D   | 76              | 2.5             | 2            |
+
+[image](https://www.google.com/s2/favicons?domain=https://help.autodesk.com\&sz=32)
+
+Autodesk Help+1
+
+这套参数可以作为初期试算范围，但要注意：
+
+- 这里的 \\(f_c\\) 是 Horton 模型的最终稳定入渗率，不等同于所有条件下实测的 \\(K_s\\)。
+- \\(f_0\\) 与 \\(f_c\\) 受植被、表层结构、压实状况和土壤湿度影响。
+- \\(k\\) 不应在没有观测数据的情况下被认为是固定的广西红壤常数。
+
+### 4.3.3 华南暴雨情景下的适用性
+
+Horton 模型的优势是计算简单，适合快速构建空间分布式下渗场。
+
+但是它不能天然表达 Green-Ampt 中湿润锋吸力与含水量亏缺的物理含义。若只根据时间衰减，一场持续数小时的台风暴雨结束后，模型还需要额外机制处理土壤恢复和下一场暴雨的初始状态。
+
+对于连续模拟，建议引入土壤水分储量状态，或者使用以实际累计入渗量、土壤湿润程度为基础的修正 Horton 方案。不要每场降雨都简单重新初始化为 \\(f_0\\)。
+
+\*\*评价：\*\*Horton 可以作为 Green-Ampt 的简化对照方案，特别适合先进行工程快速验证，但不建议作为本项目最终的首选物理算法。
+
+# 五、三种算法的比较与推荐
+
+| 对比维度   | SCS-CN          | Green-Ampt     | Horton       |
+| ------ | --------------- | -------------- | ------------ |
+| 初期损失   | 通过 \\(I_a\\) 表达 | 由初始含水亏缺和吸力隐式表达 | 通过高初始入渗率表达   |
+| 饱和后入渗  | 事件经验关系          | 趋近 \\(K_s\\)   | 趋近 \\(f_c\\) |
+| 降雨强度影响 | 较弱，主要使用累计降雨     | 直接影响是否产生超渗产流   | 直接影响是否产生超渗产流 |
+| 土壤参数需求 | CN、HSG、土地利用     | Ks、θs、θi、吸力水头  | f0、fc、k      |
+| 前期土壤湿度 | 可通过 AMC/CN 修正   | 直接通过 θi 体现     | 需额外状态处理      |
+| 连续暴雨   | 需要正确处理事件累计状态    | 可以维护累计入渗量和含水状态 | 原始形式不足，需修正   |
+| 计算成本   | 低               | 中等             | 低            |
+| 物理解释性  | 经验型             | 较强             | 经验型          |
+| 推荐程度   | 重要对照方案          | 首选             | 简化对照方案       |
+
+对当前项目的建议：
+
+- 主方案：Green-Ampt。 逐网格维护土壤初始含水量、累计入渗量和土壤有效储水容量。
+- 对照方案：SCS-CN。 用同一场台风暴雨分别计算 CN 净雨，比较事件累计产流深和区域总产流量。
+- 简化方案：Horton。 用来评估 Green-Ampt 物理参数不足时，经验型入渗衰减是否能够改善模拟结果。
+
+# 六、在不修改 LISFLOOD-FP 求解器源码条件下的工程实现
+
+## 6.1 总体架构
+
+建议将整个降雨处理过程拆分为两个相互独立的阶段：
+
+阶段一：离线净雨预处理
+
+ERA5 降雨 + 土壤水力参数 + 土地利用 + 前期土壤湿度
+
+网格化参数构建 → 降雨事件识别 → Green-Ampt / CN 计算 → 净雨时序
+
+阶段二：LISFLOOD-FP 8.1 二维水动力模拟
+
+读取净雨 NetCDF，作为地表降雨源项
+
+二维浅水方程求解 → 地表流动 → 汇流 → 淹没范围和水深
+
+LISFLOOD-FP 8.1 的质量守恒方程中，降雨以地表源项 \\(r\\) 的形式进入水深演化方程：
+
+\\[ \frac{\partial h}{\partial t} + \frac{\partial q_x}{\partial x} + \frac{\partial q_y}{\partial y} =r \\]
+
+其中 \\(r\\) 是具有长度/时间量纲的降雨源项。8.1 版本支持将空间和时间均变化的降雨数据通过 NetCDF 输入；空间均匀、时间变化的降雨则可以使用 `.rain` 文件。
+
+[image](https://www.google.com/s2/favicons?domain=https://gmd.copernicus.org\&sz=32)
+
+GMD+2
+
+
+
+因此，净雨预处理的核心输出就是：
+
+\\[ r\_{\mathrm{net}}(x,y,t) \\]
+
+即空间和时间分布的净雨率。
+
+## 6.2 第一步：降雨数据预处理
+
+当前 ERA5 降雨数据需要检查：
+
+- 使用的是 ERA5 还是 ERA5-Land。
+- 降雨数据是逐小时累计量还是瞬时值。
+- ERA5 的 `total_precipitation` 是否需要反累计。
+- 原始单位是否为 m。
+- 模型时间轴是否存在 UTC 与本地时区转换错误。
+
+建议统一转换为：
+
+\\[ P(x,y,t)\quad[\mathrm{mm/hour}] \\]
+
+例如，若读取的某个逐时累计降雨值为 0.002 m，则：
+
+\\[ P=0.002\times1000=2\ \mathrm{mm} \\]
+
+不要把累计降雨直接当成每小时瞬时雨强。
+
+另外，ERA5/ERA5-Land 的空间分辨率远低于局地水动力网格。即使将 ERA5 降雨插值到 5 m，也只是增加像元数量，不会产生真实的空间降雨信息。若目标是精细的台风内涝模拟，应尽可能引入雨量站或雷达降雨进行空间订正。
+
+## 6.3 第二步：构建统一的土壤与土地利用网格
+
+建议采用如下数据层：
+
+| 图层                  | 数据来源                     | 推荐处理方式      |
+| ------------------- | ------------------------ | ----------- |
+| Ksat                | HiHydroSoil              | 连续值，检查单位后投影 |
+| θs                  | HiHydroSoil              | 连续值         |
+| θfc                 | 中国土壤水文数据 / SoilGrids     | 连续值         |
+| θwp                 | 中国土壤水文数据 / SoilGrids     | 连续值         |
+| θi                  | ERA5-Land + 本地校正         | 每个事件初始化     |
+| HSG                 | HiHydroSoil / HYSOGs250m | 分类栅格        |
+| Soil Texture        | 中国 250 m 土壤质地            | 分类或组分数据     |
+| Land Cover          | CLCD / WorldCover        | 分类型面积比例     |
+| Impervious Fraction | 土地利用进一步处理                | 每网格不透水率     |
+
+这里需要处理两个不同空间尺度：
+
+- SoilGrids、HiHydroSoil：中国 250 m 左右的土壤信息。
+- WorldCover、CLCD：10 m 或 30 m 的土地覆盖信息。
+- 二维水动力网格：由项目 DEM 决定。
+
+建议采用分辨率分层方法：
+
+1. 土壤水力参数按源数据的实际空间尺度提供，不要用插值制造不存在的细节。
+2. 土地利用按更细分辨率统计每个水动力网格的类别面积比例。
+3. 以土壤参数栅格为基础，叠加细分土地利用比例，建立网格级混合产流参数。
+4. 对土壤质地和水力参数采用适当的空间重采样；对 HSG 和土地利用等分类数据使用分类方式或面积比例统计，不使用双线性插值。
+
+如果模型网格小于 250 m，一个土壤像元可能对应很多水动力网格。这些小网格可以共享其上层土壤水力参数，但不能据此声称土壤参数精度也达到了水动力网格精度。
+
+## 6.4 第三步：按土地利用比例计算净雨
+
+对于一个水动力网格，假设其内部有多种土地利用类型：
+
+- 林地比例 50%
+- 农田比例 30%
+- 不透水面比例 20%
+
+建议分别计算每种土地覆盖的净雨，再按面积比例聚合：
+
+\\[ R\_{\mathrm{net}} = \sum_i f_i R\_{\mathrm{net},i} \\]
+
+其中：
+
+\\[ \sum_i f_i=1 \\]
+
+这种方法比先计算一个简单平均 CN、再计算该网格的总径流更合理，因为 CN 公式是非线性的，先平均 CN 与先计算各类径流后做面积加权通常不等价。
+
+对于不透水面：
+
+\\[ R\_{\mathrm{net,impervious}} \approx P \\]
+
+但要注意，WorldCover 的 Built-up 类别并不代表 100% 不透水。应进一步识别道路、屋顶和非硬化绿地，尽可能估计实际不透水比例。
+
+水稻田、湿地、红树林和常年水体应单独处理，不要和普通耕地混在一个参数组里。
+
+# 七、Python 实现管线
+
+## 7.1 建议的软件栈
+
+| 任务        | Python 工具                      |
+| --------- | ------------------------------ |
+| 土壤栅格读取    | rasterio、rioxarray、GDAL        |
+| NetCDF 处理 | xarray、netCDF4                 |
+| 大规模时空计算   | dask                           |
+| 降雨数据下载    | cdsapi                         |
+| GEE 数据读取  | earthengine-api、geemap         |
+| 矢量处理      | geopandas、shapely              |
+| 数值计算      | numpy、scipy                    |
+| GIS 水文分析  | WhiteboxTools、pysheds、pyflwdir |
+| 模型评价      | hydroeval                      |
+| 结果输出      | xarray、rasterio                |
+
+对现有开源工具的定位需要区分：
+
+- WhiteboxTools：适合 DEM 水文分析、汇流路径、地形指标和栅格处理，不是现成的 SCS-CN/Green-Ampt 净雨计算系统。
+- PyGeoHydro / HyRiver：主要面向水文数据和水文服务访问，不适合直接作为广西区域土壤参数与净雨转换的完整解决方案。
+- PCR-GLOBWB：是完整的分布式水文模型，具有土壤水量平衡、入渗和土壤储水等机制，适合参考水量状态更新思路，不是直接导出 LISFLOOD-FP 8.1 净雨的即插即用组件。
+- hydroeval：主要用于 NSE、KGE、RMSE 等模型评价指标计算，不负责下渗模拟或栅格化产流。
+
+相关工具入口：
+
+- [WhiteboxTools](https://www.whiteboxgeo.com/?utm_source=chatgpt.com)
+- [PyGeoHydro](https://hyriver.readthedocs.io/?utm_source=chatgpt.com)
+- [PCR-GLOBWB](https://pcrglobwb.readthedocs.io/?utm_source=chatgpt.com)
+- [hydroeval](https://github.com/ThibHlln/hydroeval?utm_source=chatgpt.com)
+
+目前没有发现一个成熟、维护完善的 Python 包，能够直接完成“中国土壤数据 + 中国土地利用 + ERA5 降雨 → 网格化 Green-Ampt/CN 净雨 → LISFLOOD-FP 8.1 NetCDF”的完整流程。建议将核心产流计算实现为项目自有的 NumPy/xarray 模块，把栅格读取、重采样和数据下载交给成熟 GIS 工具。
+
+## 7.2 Green-Ampt 核心计算示例
+
+以下代码展示了逐网格、逐时间步维护累计入渗量的基本方法。输入数组约定：
+
+- `P_mm`：形状 `(time, y, x)`，每个时间步的毛雨深，mm。
+- `Ks_mm_h`：形状 `(y, x)`，饱和导水率，mm/h。
+- `psi_mm`：湿润锋吸力，mm。
+- `theta_s`、`theta_i`：体积含水量。
+- `dt_h`：降雨时间步长度，小时。
+
+```
+import numpy as npdef green_ampt_net_rain(    P_mm: np.ndarray,    Ks_mm_h: np.ndarray,    psi_mm: np.ndarray,    theta_s: np.ndarray,    theta_i: np.ndarray,    dt_h: float = 1.0,    substep_min: float = 1.0,) -> tuple[np.ndarray, np.ndarray]:    """    Grid-based Green-Ampt rainfall excess calculation.    Parameters    ----------    P_mm:        Rainfall depth per input interval, shape (time, y, x), mm.    Ks_mm_h:        Saturated hydraulic conductivity, shape (y, x), mm/hour.    psi_mm:        Wetting-front suction head, shape (y, x), mm.    theta_s:        Saturated volumetric water content, shape (y, x).    theta_i:        Initial volumetric water content, shape (y, x).    dt_h:        Input rainfall interval, hours.    substep_min:        Internal integration step, minutes.    Returns    -------    net_rain_mm:
+```
+
+这段代码是便于项目集成的显式子步积分示例，不是完整的多层土壤水动力模型。正式工程实现还应加入：
+
+- NoData 和水体掩膜。
+- 土层有效深度与有限土壤储水容量。
+- 分层 Ks 与土壤含水量。
+- 土壤湿润状态的事件间恢复或连续更新。
+- 降雨停止后土壤水分重新分布的处理。
+- 自适应时间步或更精确的湿润锋积分。
+
+特别是当降雨强度较大时，Green-Ampt 初始入渗能力可能很高，显式代码应做足够细的内部子步积分，并通过与解析解或 HEC-HMS/HEC-RAS 同类模型的测试对照验证数值误差。
+
+## 7.3 SCS-CN 核心计算示例
+
+如果想先快速建立一个可运行的对照版本，可以使用累计降雨—累计径流差分。
+
+```
+import numpy as npdef scs_cn_net_rain(    P_mm: np.ndarray,    CN: np.ndarray,    lam: float = 0.20,) -> np.ndarray:    """    SCS-CN cumulative event runoff converted to incremental net rain.    P_mm: (time, y, x), rainfall depth per time step, mm.    CN:   (y, x), curve-number grid.    """    P = np.asarray(P_mm, dtype=np.float32)    cn = np.clip(np.asarray(CN, dtype=np.float32), 1.0, 100.0)    if P.ndim != 3 or cn.shape != P.shape[1:]:        raise ValueError("Input shapes are inconsistent.")    if not (0.0 <= lam < 1.0):        raise ValueError("lam must be in [0, 1).")    S = 25400.0 / cn - 254.0    S3 = S[None, :, :]    Ia = lam * S3    P_cum = np.cumsum(P, axis=0)    denominator = P_cum + (1.0 - lam) * S3    Q_cum = np.zeros_like(P_cum)    valid = P_cum > Ia    np.divide(        (P_cum - Ia) ** 2,        denominator,
+```
+
+该实现假设输入时间序列已经按单场降雨事件组织。事件累计降雨不能在每小时重置；相邻降雨过程是否属于同一场降雨，需要由事件划分规则决定。
+
+## 7.4 建议的完整工程目录
+
+```
+rainfall_runoff_preprocessor/
+│
+├── config/
+│   ├── model_grid.yaml
+│   ├── rainfall_source.yaml
+│   ├── soil_parameter_source.yaml
+│   └── landcover_cn_lookup.yaml
+│
+├── data/
+│   ├── rainfall/
+│   ├── soil/
+│   ├── landcover/
+│   └── dem/
+│
+├── preprocessing/
+│   ├── rainfall_deaccumulation.py
+│   ├── soil_parameter_loader.py
+│   ├── landcover_fraction.py
+│   ├── soil_grid_alignment.py
+│   └── antecedent_moisture.py
+│
+├── infiltration/
+│   ├── green_ampt.py
+│   ├── scs_cn.py
+│   ├── horton.py
+│   └── soil_water_state.py
+│
+├── validation/
+│   ├── mass_balance.py
+│   ├── event_runoff_validation.py
+│   └── parameter_sensitivity.py
+│
+├── export/
+│   ├── lisflood_rain_nc.py
+│   └── raster_parameter_export.py
+│
+└── run_preprocessor.py
+```
+
+输出建议至少包括：
+
+```
+output/
+├── rainfall_gross.nc
+├── rainfall_net_green_ampt.nc
+├── rainfall_net_scs_cn.nc
+├── soil_ksat.tif
+├── soil_theta_s.tif
+├── soil_theta_fc.tif
+├── soil_theta_i.tif
+├── soil_hsg.tif
+├── landcover_fraction.nc
+└── rainfall_runoff_mass_balance.csv
+```
+
+最终输出 NetCDF 时，必须按照实际 LISFLOOD-FP 8.1 发行包中的示例文件及网格定义，确认变量名、时间坐标、坐标方向、空间参考和降雨率单位。不要仅凭文件扩展名为 `.nc` 就认为可以直接读取。8.1 文献确认空间—时间变化降雨采用 NetCDF 输入，但具体文件结构仍应与实际求解器发行版本的示例保持一致。
+
+[image](https://www.google.com/s2/favicons?domain=https://gmd.copernicus.org\&sz=32)
+
+GMD+1
+
+
+
+# 八、必须处理的几个工程问题
+
+## 8.1 如何避免重复扣水？
+
+建议采用以下规则：
+
+方案 A：完整净雨预处理，推荐。
+
+离线预处理已经计算：
+
+\\[ R\_{\mathrm{net}}=R\_{\mathrm{gross}}-I \\]
+
+那么进入 LISFLOOD-FP 的就是净雨，求解器原有的恒定下渗损失应该关闭或设为 0。
+
+否则会出现：
+
+\\[ R\_{\mathrm{effective}} = R\_{\mathrm{gross}}-I\_{\mathrm{preprocess}}-I\_{\mathrm{solver}} \\]
+
+造成重复扣水。
+
+方案 B：近似混合方案，仅在有再入渗需求时考虑。
+
+可以将部分稳渗过程留给求解器，离线预处理仅扣除额外的初期入渗：
+
+\\[ I\_{\mathrm{pre}} = \max(f\_{\mathrm{GA}}-f\_{\mathrm{solver}},0) \\]
+
+这种做法理论上可以保留求解器中已有地表水的再入渗扣水过程，但需要保证两个模型的入渗状态尽可能一致。否则仍可能发生重复扣水或不同步。
+
+因此，不建议一开始就使用混合方案。先用纯净雨预处理建立正确的事件水量平衡，再决定是否需要求解器中的地表水再入渗机制。
+
+## 8.2 初损、截留和地表洼地蓄水应如何处理？
+
+SCS-CN 的 \\(I_a\\) 是一个综合初期损失参数，通常包含植被截留、地表洼地蓄水和初期入渗等因素。
+
+Green-Ampt 本身已经通过土壤初始含水量和湿润锋吸力表达初期入渗，不应再机械叠加一个与 CN 的 \\(I_a\\) 相同的初损。
+
+对 Green-Ampt 来说，建议：
+
+- 土壤初期入渗由 Green-Ampt 计算。
+- 植被截留可独立设置为一个有限储水过程。
+- 如果二维 DEM 已经能够表达地表洼地和积水，避免再次把洼地蓄水全部当成永久损失。
+- 如果 DEM 未表达田埂、道路边缘等微地形，可单独评估微地形蓄水。
+
+## 8.3 钦州、贵港的平原区需要考虑饱和超渗产流
+
+Green-Ampt 的常规形式主要适合描述降雨驱动的入渗过程。
+
+但是，对于浅地下水位、排水不畅、水稻田、湿地和河漫滩，地表径流还可能由土壤可用储水空间不足引起。
+
+因此建议将地表网格划分为：
+
+1. 一般坡地和林地：Green-Ampt 为主。
+2. 普通旱地和农田：Green-Ampt 或 CN，结合土地利用状态。
+3. 低洼农田、湿地和河漫滩：Green-Ampt + 有效土层厚度/饱和储水约束。
+4. 常年水面：不参与普通土壤下渗计算。
+5. 城市不透水区域：按不透水比例直接产流。
+
+对于低洼区域，还应关注排水沟渠、塘坝、水库、闸门和地表排水通道。仅依靠土壤参数可能无法准确表达这些区域的洪水形成过程。
+
+# 九、参数校准和验证设计
+
+不建议只采用一组默认参数运行整个区域。应建立多组参数情景，并与实测或可获得的洪水观测对比。
+
+建议至少包括：
+
+| 试验方案       | 主要参数              | 目的              |
+| ---------- | ----------------- | --------------- |
+| Baseline   | 零损失               | 当前模型对照          |
+| CN-200     | CN-II，λ=0.20      | 传统 CN 基准        |
+| CN-050     | CN-II，λ=0.05，重新校准 | 初损敏感性           |
+| GA-Dry     | 较干初始土壤            | 干 antecedent 情景 |
+| GA-Mid     | 中等含水量             | 平均湿润条件          |
+| GA-Wet     | 高初始含水量            | 连续降雨情景          |
+| GA-Layered | 分层 Ks、θs、θi       | 土层限制效应          |
+| Horton     | HSG 分组的 f0、fc、k   | 经验型对照           |
+
+校准数据建议按优先级收集：
+
+1. 区域雨量站逐时降雨、河道水位、流量和洪水过程资料。
+2. 变电站、低洼路段、农田等区域的积水深度或淹没记录。
+3. 公开洪水淹没范围、卫星影像和遥感水体提取结果。
+4. 红壤林地、坡耕地和裸地的双环入渗试验数据。
+5. 不同土层深度的土壤质地、容重和含水量数据。
+
+建议建立以下评价指标：
+
+- 区域总降雨量。
+- 区域总净雨量。
+- 总入渗量。
+- 事件径流系数。
+- 洪峰出现时间。
+- 洪峰流量或水位。
+- 淹没范围 IoU。
+- 最大水深误差。
+- 淹没持续时间误差。
+
+其中，水量平衡是预处理器的基本质量门槛：
+
+\\[ P\_{\mathrm{gross}} = P\_{\mathrm{net}} + I\_{\mathrm{soil}} + I\_{\mathrm{interception}} \\]
+
+要求每个网格、每个时间步都能闭合，并检查整个区域的累计质量平衡。建议将预处理水量平衡误差控制在 \\(10^{-5}\\) 相对量级以内，再进入二维水动力模拟。
+
+# 十、建议的最终落地方案
+
+综合数据可用性、参数可解释性和工程工作量，建议按以下顺序实施。
+
+| 优先级 | 工作项      | 推荐方案              | 主要产物                |
+| --- | -------- | ----------------- | ------------------- |
+| P0  | 土壤水力数据   | HiHydroSoil v2.0  | Ks、θs、VG 参数、HSG     |
+| P0  | 中国土壤质地校核 | 中国 250 m 土壤质地数据   | 砂粒、粉粒、黏粒            |
+| P0  | 地表覆盖     | CLCD + WorldCover | 分类栅格、面积比例           |
+| P0  | 前期土壤湿度   | ERA5-Land         | θi 估计               |
+| P0  | 净雨算法     | Green-Ampt        | 逐时净雨 NetCDF         |
+| P1  | 独立对照     | SCS-CN / CN-China | CN 净雨结果             |
+| P1  | 入渗经验对照   | Horton            | Horton 净雨结果         |
+| P1  | 中国参数校核   | 中国土壤水文数据集         | Ks、θfc、θwp          |
+| P2  | 平原饱和产流   | 有效土层深度、地下水位等      | 饱和约束参数              |
+| P2  | 再入渗处理    | 求解器状态反馈或耦合        | run-on infiltration |
+
+## 最终推荐
+
+对目前这个 Rain-on-Grid / LISFLOOD-FP 8.1.0 项目，我建议先实现以下版本：
+
+V1：Green-Ampt 离线预处理 + 原生 LISFLOOD-FP 净雨输入。
+
+具体为：
+
+1. 使用 HiHydroSoil v2.0 获取 250 m Ks、θs、土壤水分特征参数和 HSG。
+2. 使用中国 250 m 土壤质地数据校核广西的土壤类别和空间差异。
+3. 使用中国土壤水文数据集对 Ks、θfc 和 θwp 进行独立校核。
+4. 使用 CLCD 构建年度土地利用图，以 WorldCover 辅助细化建设用地、湿地和红树林等区域。
+5. 使用 ERA5-Land 的 0–7 cm 和 7–28 cm 土壤水分估计事件初始土壤含水量。
+6. 使用 Green-Ampt 按网格、按小时计算净雨，并维护连续累计入渗量。
+7. 对不透水面、常年水体和湿地区域采用独立处理规则。
+8. 输出符合 LISFLOOD-FP 8.1 输入要求的空间—时间变化降雨 NetCDF。
+9. 关闭求解器原有恒定下渗扣水，避免重复扣水。
+10. 使用 SCS-CN / CN-China 计算另一套净雨结果，与 Green-Ampt 做事件水量和淹没范围对比。
+
+\*\*最重要的技术判断是：\*\*对华南湿润红壤丘陵区，Green-Ampt 比固定下渗率更能体现土壤初始湿润程度和暴雨强度的作用；对低洼平原、水稻田及浅地下水位区域，则必须补充土层有效储水容量和饱和产流机制。只把土壤质地转换成一个 Ks，再在所有网格上采用同一个 Green-Ampt 模型，并不能解决整个广西区域的产流机理差异。
+
+建议先完成 Green-Ampt 与 CN 两套独立净雨预处理器，并用同一场真实台风暴雨做零损失、CN、Green-Ampt 三组对照。这样可以直接量化当前零损失模型究竟高估了多少区域净雨量，以及净雨算法对最终水深和淹没范围的影响。

@@ -1,0 +1,21 @@
+# 根目录忽略规则：私人目录与本地工具产物不入库
+# 大体积数据集由 2d_hydro_project/.gitignore 与
+# 2d_hydro_project/flood_visualization/.gitignore 各自负责
+
+# ZCode 会话产物
+.zcode/
+
+# 演示与交流用分享物（体积大、非工程内容）
+ppt_share/
+
+# 私人往来文件
+教授交流/
+
+# Office 锁文件与系统杂项
+~$*.docx
+~$*.doc
+~$*.xlsx
+~$*.pptx
+Thumbs.db
+desktop.ini
+*.tmp

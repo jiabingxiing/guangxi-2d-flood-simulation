@@ -1,0 +1,80 @@
+{
+  "script": "scripts/stage3/build_guigang_drainage.py",
+  "generated_utc": "2026-11-07T15:07:53+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "matrix": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\catalog\\guigang_round3_drainage.json",
+      "exists": true,
+      "bytes": 4412,
+      "sha256": "56d8839c6c971b38370cf538b8f0d68ab77a8e7628df32f274fdac3452c20caf"
+    },
+    "base_recon_dem": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\channel_recon\\d14m\\dem_reconstructed_100m.asc",
+      "exists": true,
+      "bytes": 1796873,
+      "sha256": "a694c755d58cf51fc6dbb23f20835bf5b7389055da80e99972d3ef7c793d2ddf"
+    }
+  },
+  "parameters": {
+    "tier": "A",
+    "width_m": 100.0,
+    "depth_m": 2.0,
+    "acc_threshold": 200,
+    "min_len_cells": 20,
+    "spacing_m": 1000.0,
+    "max_total_km": 120.0,
+    "plain_max_m": 45.0
+  },
+  "steps": [
+    {
+      "name": "base_loaded",
+      "utc": "2026-11-07T15:07:53+00:00",
+      "shape": [
+        370,
+        669
+      ],
+      "res": 100.0,
+      "xll": 325737.9,
+      "yll": 2542315.3
+    },
+    {
+      "name": "flood_tree",
+      "utc": "2026-11-07T15:07:55+00:00",
+      "seeds": 3047,
+      "lifted_frac": 0.182,
+      "acc_p99": 3770.359999999986
+    },
+    {
+      "name": "drains_extracted",
+      "utc": "2026-11-07T15:07:55+00:00",
+      "n_network_cells": 7645,
+      "n_sources": 239,
+      "n_drains": 9,
+      "skipped_by_spacing": 3,
+      "skipped_short": 0,
+      "total_cells": 1581,
+      "total_length_km": 158.1,
+      "head_spacing_m": 1000.0,
+      "acc_threshold_cells": 200
+    },
+    {
+      "name": "carved",
+      "utc": "2026-11-07T15:08:07+00:00",
+      "drains": 5,
+      "rejected_canyon": 4,
+      "carved_px": 1425,
+      "dem_min": 3.8
+    },
+    {
+      "name": "done",
+      "utc": "2026-11-07T15:08:08+00:00",
+      "drains": 5,
+      "carved_px": 1425
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "finished_utc": "2026-11-07T15:08:08+00:00"
+}

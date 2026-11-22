@@ -1,0 +1,72 @@
+{
+  "generated_utc": "2026-11-07T03:42:15.943165+00:00",
+  "baseline_run": "scen_free_200m_sv6h_recession",
+  "new_run": "scen_free_200m_sv6h_recession_ga_v1",
+  "rainfall_driver": "Green-Ampt GA-Mid",
+  "mass_balance": {
+    "baseline": {
+      "v0_m3": 0.0,
+      "ve_m3": 234411986.6264,
+      "v_rain_m3": 268340800.0,
+      "v_in_m3": 0.0,
+      "v_out_m3": 33786599.4,
+      "residual_m3": -142213.9736000076,
+      "e_mass": 0.0005299752165902747,
+      "gate_pass": true
+    },
+    "new_run": {
+      "v0_m3": 0.0,
+      "ve_m3": 109961000.0196,
+      "v_rain_m3": 121354554.048,
+      "v_in_m3": 0.0,
+      "v_out_m3": 11248347.6,
+      "residual_m3": -145206.42839998938,
+      "e_mass": 0.0011965470067366003,
+      "gate_pass": false
+    }
+  },
+  "recession_area_dynamics_km2": {
+    "baseline_0910": 233.08,
+    "baseline_0917": 260.76,
+    "baseline_change": 27.68,
+    "new_0910": 149.92,
+    "new_0917": 199.6,
+    "new_change": 49.68,
+    "reversal_of_anomaly": false
+  },
+  "s1_0917_validation": {
+    "s1_obs_water_km2": 12.2,
+    "baseline": {
+      "hit_cells": 118,
+      "false_alarm_cells": 6401,
+      "miss_cells": 187,
+      "csi": 0.0176,
+      "pod": 0.3869,
+      "far": 0.9819,
+      "model_wet_km2": 260.76,
+      "s1_water_km2": 12.2
+    },
+    "new_run": {
+      "hit_cells": 95,
+      "false_alarm_cells": 4895,
+      "miss_cells": 210,
+      "csi": 0.0183,
+      "pod": 0.3115,
+      "far": 0.981,
+      "model_wet_km2": 199.6,
+      "s1_water_km2": 12.2
+    },
+    "metrics_delta": {
+      "d_model_wet_km2": -61.16,
+      "false_alarm_reduction_pct": 23.53,
+      "d_pod": -0.0754,
+      "d_far": -0.0009,
+      "d_csi": 0.0007
+    }
+  },
+  "max_extent_km2": {
+    "baseline": 294.36,
+    "new_run": 217.56,
+    "reduction_km2": 76.8
+  }
+}

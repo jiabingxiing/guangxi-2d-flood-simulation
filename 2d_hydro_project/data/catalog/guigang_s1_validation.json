@@ -1,0 +1,2060 @@
+{
+  "script": "scripts/stage6/validate_guigang_s1.py",
+  "generated_utc": "2026-11-07T17:11:17+00:00",
+  "read_only": true,
+  "not_a_gate": true,
+  "purpose": "对贵港基线 + 三个 Phase 2+4 新情景计算 S1 09-12 洪峰景重叠区 POD/FAR/CSI，如实判定计划 §4「FAR 压降 >20%、CSI 有效提升」是否达成",
+  "method": {
+    "reused_from": "scripts/stage5/guigang_scenario.py::verify()（S1 段，逐行复用口径）",
+    "t_model_h": 228.0,
+    "scene": "2024-09-12T10:42",
+    "frame_file": "res-0038.wd",
+    "wet_threshold_m": 0.05,
+    "connectivity": "不适用（单帧像元级比对，不做连通域）",
+    "reprojection": "rasterio.warp.reproject + Resampling.nearest → EPSG:32649 模型 100 m 网格",
+    "footprint_rule": "只在 S1 足迹内比对（valid = cover==1）；足迹外无观测，不计假警报",
+    "area_rule": "面积比较必须用 area_sim_in_footprint_km2，不得用全域 area_sim_km2",
+    "cell_area_source": "栅格头 cellsize**2（100 m → 10,000 m²），未写死",
+    "cellsize_m": 100.0,
+    "cell_area_m2": 10000.0,
+    "ncols": 669,
+    "nrows": 370
+  },
+  "s1_footprint": {
+    "source": "data/processed/s1_water/guigang_20240912T104222_water20m.tif",
+    "source_sha256": "573c32d25267bf07bd501c1865d78f8d39ac78dc03878594290ff921aeab18ab",
+    "scene": "2024-09-12T10:42",
+    "t_model_h": 228.0,
+    "frame_file": "res-0038.wd",
+    "obs_water_cells": 1129,
+    "valid_footprint_cells": 51095,
+    "area_obs_km2_in_footprint": 11.29,
+    "valid_footprint_km2": 510.95,
+    "footprint_frac_of_domain": 0.206,
+    "threshold_note": "S1 固定阈值 -17 dB；风浪/淹没植被偏保守（G17 降级）"
+  },
+  "scenarios": {
+    "baseline_realdem": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "rain_mode": "on（毛雨 135.50 mm，无损失）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 736,
+      "false_alarm_cells": 8527,
+      "misses_cells": 393,
+      "csi": 0.076,
+      "pod": 0.652,
+      "far": 0.921,
+      "area_sim_km2": 630.14,
+      "area_sim_in_footprint_km2": 92.63,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 63014,
+      "wd_sha256": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26"
+    },
+    "flow_only_v1": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+      "rain_mode": "off（无降雨输入）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 695,
+      "false_alarm_cells": 3107,
+      "misses_cells": 434,
+      "csi": 0.164,
+      "pod": 0.616,
+      "far": 0.817,
+      "area_sim_km2": 452.81,
+      "area_sim_in_footprint_km2": 38.02,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 45281,
+      "wd_sha256": "c607842f627f9a79675b3cd5d3491e1e0e8284826e8cd69d88bf082b8d9a78c4",
+      "res_max_sha256": "46766ebe126d52e5be99764b69ab288470ad2ed21a9ebc01d5751dafb3c42ebc"
+    },
+    "dualloss_v1": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+      "rain_mode": "loss_medium（Ia=30 mm, fc=2.0 mm/h → 净雨 45.40 mm）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 715,
+      "false_alarm_cells": 6522,
+      "misses_cells": 414,
+      "csi": 0.093,
+      "pod": 0.633,
+      "far": 0.901,
+      "area_sim_km2": 567.67,
+      "area_sim_in_footprint_km2": 72.37,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 56767,
+      "wd_sha256": "7bcae4da851e4bdddf682aee30e17fd689d32ddd61de3d80e02f726c9a847257",
+      "res_max_sha256": "5f10b9513c67b1930b4d5a088391518e37b829adc81e86559d02ec3a852a8119"
+    },
+    "rainloss_high_v1": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+      "rain_mode": "loss_high（Ia=50 mm, fc=3.0 mm/h → 净雨 36.10 mm）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 712,
+      "false_alarm_cells": 6363,
+      "misses_cells": 417,
+      "csi": 0.095,
+      "pod": 0.631,
+      "far": 0.899,
+      "area_sim_km2": 556.77,
+      "area_sim_in_footprint_km2": 70.75,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 55677,
+      "wd_sha256": "c7076c7bcab57ba0d09e1a7d4342baab3456b7dba9207d7940f01e6e65a2afd3",
+      "res_max_sha256": "a67d936b6824d109a7db38f3eac69a7ef405d5535a5cb95d6969886df17973d6"
+    },
+    "chhyd_d10": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+      "rain_mode": "on（同基线雨）+ hydraulic D=10 m（浅槽，α≈0.38）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 536,
+      "false_alarm_cells": 6121,
+      "misses_cells": 593,
+      "csi": 0.074,
+      "pod": 0.475,
+      "far": 0.919,
+      "area_sim_km2": 294.11,
+      "area_sim_in_footprint_km2": 66.57,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 29411,
+      "wd_sha256": "b959c81bae20cd0bc0e1ee4551c649f1dd126c56b5b03835e924cfef65c89bf7",
+      "res_max_sha256": "d759c1bb342660749b3c312be94917260013bb967734c98b0c8a1e4ce146200e"
+    },
+    "chhyd_d12": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+      "rain_mode": "on（同基线雨）+ hydraulic D=12 m（中浅槽，α≈0.51）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 519,
+      "false_alarm_cells": 6091,
+      "misses_cells": 610,
+      "csi": 0.072,
+      "pod": 0.46,
+      "far": 0.921,
+      "area_sim_km2": 292.69,
+      "area_sim_in_footprint_km2": 66.1,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 29269,
+      "wd_sha256": "3e43b5850847d3c0cef9cb616638916f293c2a713556a711ae73bd82a53ba703",
+      "res_max_sha256": "d32ffc22621151a9e2ed7a68e6eb711dfa1930134d325d2ff527a79db84eaebb"
+    },
+    "chhyd_d14": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+      "rain_mode": "on（同基线雨）+ hydraulic D=14 m（基准候选，α≈0.64）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 493,
+      "false_alarm_cells": 6075,
+      "misses_cells": 636,
+      "csi": 0.068,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_km2": 291.31,
+      "area_sim_in_footprint_km2": 65.68,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 29131,
+      "wd_sha256": "66f697b178b564817846c68bee65d4ad14a9db33ebba443edd73aab79fdab94e",
+      "res_max_sha256": "c96a543a10d2882a89ee2476f1a3d17d674261269f115fa5f5e5fb5e382e6b35"
+    },
+    "chhyd_d16": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+      "rain_mode": "on（同基线雨）+ hydraulic D=16 m（深槽，α≈0.78）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 474,
+      "false_alarm_cells": 6062,
+      "misses_cells": 655,
+      "csi": 0.066,
+      "pod": 0.42,
+      "far": 0.927,
+      "area_sim_km2": 290.3,
+      "area_sim_in_footprint_km2": 65.36,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 29030,
+      "wd_sha256": "c264fcce6d5b4276ae76abf97dd335be14c026d9d672d3e92fa60b4c55c9ed30",
+      "res_max_sha256": "d97bbbe97edb43e7d9c7b94e3faf8eaea758ae5bfc6b24310c87e0ffcec057dd"
+    },
+    "chhyd_d19": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+      "rain_mode": "on（同基线雨）+ hydraulic D=19 m（主槽极限输水，α≈0.99）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 455,
+      "false_alarm_cells": 6050,
+      "misses_cells": 674,
+      "csi": 0.063,
+      "pod": 0.403,
+      "far": 0.93,
+      "area_sim_km2": 289.22,
+      "area_sim_in_footprint_km2": 65.05,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 28922,
+      "wd_sha256": "048a40062d30ddee4d708c8c2a258341391d6bfdcf9de038b4c2663a9077eaf5",
+      "res_max_sha256": "160302baec4dab3580051dda48b2df151e24f01cd438caa4773118864ec3fdc4"
+    },
+    "chhyd_d14_r2_lossmed": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+      "rain_mode": "loss_medium（45.40 mm）+ hydraulic d14（补全 2×2）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 461,
+      "false_alarm_cells": 4014,
+      "misses_cells": 668,
+      "csi": 0.09,
+      "pod": 0.408,
+      "far": 0.897,
+      "area_sim_km2": 178.57,
+      "area_sim_in_footprint_km2": 44.75,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 17857,
+      "wd_sha256": "2cc0c2f34b7ba518cee40199fc56b4ad5c324c2a3afe9a73e96557835a35c710",
+      "res_max_sha256": "96ca35ead12a0c1eb05d01e39f8d34834764be9b479c7a82d81835781e60a3ad"
+    },
+    "chhyd_d14_r2_ga": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+      "rain_mode": "ga（GA-Mid 物理净雨 38.87 mm 模型窗）+ hydraulic d14（主方案）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 458,
+      "false_alarm_cells": 3892,
+      "misses_cells": 671,
+      "csi": 0.091,
+      "pod": 0.406,
+      "far": 0.895,
+      "area_sim_km2": 169.76,
+      "area_sim_in_footprint_km2": 43.5,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 16976,
+      "wd_sha256": "d98936b96eacdd370b74f89954764fcf8b4c43c13dc680fbc5dc0b74f17b91e3",
+      "res_max_sha256": "80819d28469c9af3fae7feed12eb0112b28a9757d0c0553156936862a602448a"
+    },
+    "chhyd_d10_r2_norain": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+      "rain_mode": "off（无降雨）+ hydraulic d10（补全无雨 2×2）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 480,
+      "false_alarm_cells": 302,
+      "misses_cells": 649,
+      "csi": 0.335,
+      "pod": 0.425,
+      "far": 0.386,
+      "area_sim_km2": 22.99,
+      "area_sim_in_footprint_km2": 7.82,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 2299,
+      "wd_sha256": "e8e735ebe4cb2848eb6db9b27d9c7e5ff5b549d489899ef3c396512543d25a33",
+      "res_max_sha256": "36f7d9b0106407c06ff8807fecd3d34a68ee05232560ee497b14ed29e08d5ce4"
+    },
+    "chhyd_d14_r3_infil2": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+      "rain_mode": "on（毛雨）+ hydraulic d14 + 求解器入渗 2.0 mm/h（垂直排水）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 455,
+      "false_alarm_cells": 2876,
+      "misses_cells": 674,
+      "csi": 0.114,
+      "pod": 0.403,
+      "far": 0.863,
+      "area_sim_km2": 124.9,
+      "area_sim_in_footprint_km2": 33.31,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 12490,
+      "wd_sha256": "1f14e5c62dfbf242de4abf9b7cc4e6a585ad454fa8867f580e108569553ff1b6",
+      "res_max_sha256": "56f82fdf0c7b0c24982f8ec13f4830667f4e598e762513aedee6408455e55705"
+    },
+    "chhyd_d14_r3_drA": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+      "rain_mode": "on（毛雨）+ hydraulic d14_drA（DEM 推导沟 A 档，水平排水）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 493,
+      "false_alarm_cells": 6075,
+      "misses_cells": 636,
+      "csi": 0.068,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_km2": 289.17,
+      "area_sim_in_footprint_km2": 65.68,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 28917,
+      "wd_sha256": "297f3e89dddad2077f726326d778596f8535e25fe04553224d7557e5a721dbaf",
+      "res_max_sha256": "6af272db90610134e6579d7c858f4af8bbe739adaed4a7f6f0cb4b863e004f1c"
+    },
+    "chhyd_d14_r3_combo": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+      "rain_mode": "on（毛雨）+ hydraulic d14_drA + 求解器入渗 2.0 mm/h（叠加）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 455,
+      "false_alarm_cells": 2875,
+      "misses_cells": 674,
+      "csi": 0.114,
+      "pod": 0.403,
+      "far": 0.863,
+      "area_sim_km2": 126.14,
+      "area_sim_in_footprint_km2": 33.3,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 12614,
+      "wd_sha256": "1c2a94c65c7f0c64fa2944b73ed61ee90cc571f9943d54475c139de6ed523ea9",
+      "res_max_sha256": "1eba3e1988563fbef0e74476c66f18c237dc5fb3aac80eccdbefe8f2f32ab07a"
+    },
+    "chhyd_d14_r4_infil3": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+      "rain_mode": "on（毛雨）+ hydraulic d14 + 求解器入渗 3.0 mm/h（垂直天花板）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 445,
+      "false_alarm_cells": 1145,
+      "misses_cells": 684,
+      "csi": 0.196,
+      "pod": 0.394,
+      "far": 0.72,
+      "area_sim_km2": 64.13,
+      "area_sim_in_footprint_km2": 15.9,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 6413,
+      "wd_sha256": "7af0d276772689a3e23dcf19b8eca83de6c29d6ee02ee2ceed97d50487628f1c",
+      "res_max_sha256": "ce80a2fe753fed409cbc1e73107c6a281522f64269811b77fb4f320fd4cd4a7f"
+    },
+    "chhyd_d14_r4_drB": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+      "rain_mode": "on（毛雨）+ hydraulic d14_drB（DEM 推导沟 B 档 27 条/402 km）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 493,
+      "false_alarm_cells": 6055,
+      "misses_cells": 636,
+      "csi": 0.069,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_km2": 284.88,
+      "area_sim_in_footprint_km2": 65.48,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 28488,
+      "wd_sha256": "6dba9a83ce337930c18f028b53f071c42955b2a0df2af598ab662222ad3b5534",
+      "res_max_sha256": "ea4264dea4f5fe97fef1bcdc00fd0ec206bffabefbb86832025a109911a9c2ab"
+    },
+    "chhyd_d14_r4_drB_infil3": {
+      "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+      "rain_mode": "on（毛雨）+ hydraulic d14_drB + 求解器入渗 3.0 mm/h（双轨天花板）",
+      "available": true,
+      "t_model_h": 228.0,
+      "scene": "2024-09-12T10:42",
+      "hits_cells": 445,
+      "false_alarm_cells": 1147,
+      "misses_cells": 684,
+      "csi": 0.196,
+      "pod": 0.394,
+      "far": 0.72,
+      "area_sim_km2": 64.23,
+      "area_sim_in_footprint_km2": 15.92,
+      "area_obs_km2_in_footprint": 11.29,
+      "valid_footprint_km2": 510.95,
+      "footprint_frac_of_domain": 0.206,
+      "wet_cells_frame": 6423,
+      "wd_sha256": "1e5a32e6676a140204da75b6554eec3e013027eca2484283aba5b36f1dadeb1e",
+      "res_max_sha256": "3da9ffb3d5b8b544faa3d76f24be1d55ac4ce67475011b6097c47ecde011683d"
+    }
+  },
+  "comparison_table": [
+    {
+      "scenario": "baseline_realdem",
+      "csi": 0.076,
+      "pod": 0.652,
+      "far": 0.921,
+      "area_sim_in_footprint_km2": 92.63,
+      "delta_csi": 0.0,
+      "delta_pod": 0.0,
+      "delta_far": 0.0,
+      "far_change_pct": 0.0,
+      "area_in_footprint_change_pct": 0.0,
+      "far_reduction_pct": -0.0,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "flow_only_v1",
+      "csi": 0.164,
+      "pod": 0.616,
+      "far": 0.817,
+      "area_sim_in_footprint_km2": 38.02,
+      "delta_csi": 0.088,
+      "delta_pod": -0.036,
+      "delta_far": -0.104,
+      "far_change_pct": -11.3,
+      "area_in_footprint_change_pct": -59.0,
+      "far_reduction_pct": 11.3,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "dualloss_v1",
+      "csi": 0.093,
+      "pod": 0.633,
+      "far": 0.901,
+      "area_sim_in_footprint_km2": 72.37,
+      "delta_csi": 0.017,
+      "delta_pod": -0.019,
+      "delta_far": -0.02,
+      "far_change_pct": -2.2,
+      "area_in_footprint_change_pct": -21.9,
+      "far_reduction_pct": 2.2,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "rainloss_high_v1",
+      "csi": 0.095,
+      "pod": 0.631,
+      "far": 0.899,
+      "area_sim_in_footprint_km2": 70.75,
+      "delta_csi": 0.019,
+      "delta_pod": -0.021,
+      "delta_far": -0.022,
+      "far_change_pct": -2.4,
+      "area_in_footprint_change_pct": -23.6,
+      "far_reduction_pct": 2.4,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d10",
+      "csi": 0.074,
+      "pod": 0.475,
+      "far": 0.919,
+      "area_sim_in_footprint_km2": 66.57,
+      "delta_csi": -0.002,
+      "delta_pod": -0.177,
+      "delta_far": -0.002,
+      "far_change_pct": -0.2,
+      "area_in_footprint_change_pct": -28.1,
+      "far_reduction_pct": 0.2,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d12",
+      "csi": 0.072,
+      "pod": 0.46,
+      "far": 0.921,
+      "area_sim_in_footprint_km2": 66.1,
+      "delta_csi": -0.004,
+      "delta_pod": -0.192,
+      "delta_far": 0.0,
+      "far_change_pct": 0.0,
+      "area_in_footprint_change_pct": -28.6,
+      "far_reduction_pct": -0.0,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d14",
+      "csi": 0.068,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_in_footprint_km2": 65.68,
+      "delta_csi": -0.008,
+      "delta_pod": -0.215,
+      "delta_far": 0.004,
+      "far_change_pct": 0.4,
+      "area_in_footprint_change_pct": -29.1,
+      "far_reduction_pct": -0.4,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d16",
+      "csi": 0.066,
+      "pod": 0.42,
+      "far": 0.927,
+      "area_sim_in_footprint_km2": 65.36,
+      "delta_csi": -0.01,
+      "delta_pod": -0.232,
+      "delta_far": 0.006,
+      "far_change_pct": 0.7,
+      "area_in_footprint_change_pct": -29.4,
+      "far_reduction_pct": -0.7,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d19",
+      "csi": 0.063,
+      "pod": 0.403,
+      "far": 0.93,
+      "area_sim_in_footprint_km2": 65.05,
+      "delta_csi": -0.013,
+      "delta_pod": -0.249,
+      "delta_far": 0.009,
+      "far_change_pct": 1.0,
+      "area_in_footprint_change_pct": -29.8,
+      "far_reduction_pct": -1.0,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d14_r2_lossmed",
+      "csi": 0.09,
+      "pod": 0.408,
+      "far": 0.897,
+      "area_sim_in_footprint_km2": 44.75,
+      "delta_csi": 0.014,
+      "delta_pod": -0.244,
+      "delta_far": -0.024,
+      "far_change_pct": -2.6,
+      "area_in_footprint_change_pct": -51.7,
+      "far_reduction_pct": 2.6,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d14_r2_ga",
+      "csi": 0.091,
+      "pod": 0.406,
+      "far": 0.895,
+      "area_sim_in_footprint_km2": 43.5,
+      "delta_csi": 0.015,
+      "delta_pod": -0.246,
+      "delta_far": -0.026,
+      "far_change_pct": -2.8,
+      "area_in_footprint_change_pct": -53.0,
+      "far_reduction_pct": 2.8,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d10_r2_norain",
+      "csi": 0.335,
+      "pod": 0.425,
+      "far": 0.386,
+      "area_sim_in_footprint_km2": 7.82,
+      "delta_csi": 0.259,
+      "delta_pod": -0.227,
+      "delta_far": -0.535,
+      "far_change_pct": -58.1,
+      "area_in_footprint_change_pct": -91.6,
+      "far_reduction_pct": 58.1,
+      "far_target_met": true,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d14_r3_infil2",
+      "csi": 0.114,
+      "pod": 0.403,
+      "far": 0.863,
+      "area_sim_in_footprint_km2": 33.31,
+      "delta_csi": 0.038,
+      "delta_pod": -0.249,
+      "delta_far": -0.058,
+      "far_change_pct": -6.3,
+      "area_in_footprint_change_pct": -64.0,
+      "far_reduction_pct": 6.3,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d14_r3_drA",
+      "csi": 0.068,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_in_footprint_km2": 65.68,
+      "delta_csi": -0.008,
+      "delta_pod": -0.215,
+      "delta_far": 0.004,
+      "far_change_pct": 0.4,
+      "area_in_footprint_change_pct": -29.1,
+      "far_reduction_pct": -0.4,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d14_r3_combo",
+      "csi": 0.114,
+      "pod": 0.403,
+      "far": 0.863,
+      "area_sim_in_footprint_km2": 33.3,
+      "delta_csi": 0.038,
+      "delta_pod": -0.249,
+      "delta_far": -0.058,
+      "far_change_pct": -6.3,
+      "area_in_footprint_change_pct": -64.1,
+      "far_reduction_pct": 6.3,
+      "far_target_met": false,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d14_r4_infil3",
+      "csi": 0.196,
+      "pod": 0.394,
+      "far": 0.72,
+      "area_sim_in_footprint_km2": 15.9,
+      "delta_csi": 0.12,
+      "delta_pod": -0.258,
+      "delta_far": -0.201,
+      "far_change_pct": -21.8,
+      "area_in_footprint_change_pct": -82.8,
+      "far_reduction_pct": 21.8,
+      "far_target_met": true,
+      "csi_improved": true
+    },
+    {
+      "scenario": "chhyd_d14_r4_drB",
+      "csi": 0.069,
+      "pod": 0.437,
+      "far": 0.925,
+      "area_sim_in_footprint_km2": 65.48,
+      "delta_csi": -0.007,
+      "delta_pod": -0.215,
+      "delta_far": 0.004,
+      "far_change_pct": 0.4,
+      "area_in_footprint_change_pct": -29.3,
+      "far_reduction_pct": -0.4,
+      "far_target_met": false,
+      "csi_improved": false
+    },
+    {
+      "scenario": "chhyd_d14_r4_drB_infil3",
+      "csi": 0.196,
+      "pod": 0.394,
+      "far": 0.72,
+      "area_sim_in_footprint_km2": 15.92,
+      "delta_csi": 0.12,
+      "delta_pod": -0.258,
+      "delta_far": -0.201,
+      "far_change_pct": -21.8,
+      "area_in_footprint_change_pct": -82.8,
+      "far_reduction_pct": 21.8,
+      "far_target_met": true,
+      "csi_improved": true
+    }
+  ],
+  "gauge_diagnostic": {
+    "plan_reference": "计划 §Phase5 第 2 条：与贵港站 09-12T14 洪峰水位（43.09 m）比对，记录垂直基准差异（G7 降级口径）",
+    "gauge_0912_m": 43.09,
+    "gauge_0914_m": 44.0,
+    "diagnostic_only": true,
+    "not_a_gate": true,
+    "per_scenario": {
+      "baseline_realdem": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 28.3,
+            "diff_gauge_minus_model_m": 14.79
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 28.16,
+            "diff_gauge_minus_model_m": 15.84
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": 28.25,
+            "wse_wet_max_m": 28.3,
+            "wet_cells": 41
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": 28.12,
+            "wse_wet_max_m": 28.16,
+            "wet_cells": 41
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 28.3,
+            "recomputed_model_wet_wse_m": 28.3,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 28.16,
+            "recomputed_model_wet_wse_m": 28.16,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "flow_only_v1": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 28.3,
+            "diff_gauge_minus_model_m": 14.79
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 28.15,
+            "diff_gauge_minus_model_m": 15.85
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": 28.25,
+            "wse_wet_max_m": 28.3,
+            "wet_cells": 41
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": 28.11,
+            "wse_wet_max_m": 28.15,
+            "wet_cells": 41
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 28.3,
+            "recomputed_model_wet_wse_m": 28.3,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 28.15,
+            "recomputed_model_wet_wse_m": 28.15,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "dualloss_v1": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 28.3,
+            "diff_gauge_minus_model_m": 14.79
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 28.15,
+            "diff_gauge_minus_model_m": 15.85
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": 28.25,
+            "wse_wet_max_m": 28.3,
+            "wet_cells": 41
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": 28.11,
+            "wse_wet_max_m": 28.15,
+            "wet_cells": 41
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 28.3,
+            "recomputed_model_wet_wse_m": 28.3,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 28.15,
+            "recomputed_model_wet_wse_m": 28.15,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "rainloss_high_v1": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 28.3,
+            "diff_gauge_minus_model_m": 14.79
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 28.15,
+            "diff_gauge_minus_model_m": 15.85
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": 28.25,
+            "wse_wet_max_m": 28.3,
+            "wet_cells": 41
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": 28.11,
+            "wse_wet_max_m": 28.15,
+            "wet_cells": 41
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 28.3,
+            "recomputed_model_wet_wse_m": 28.3,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 28.15,
+            "recomputed_model_wet_wse_m": 28.15,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d10": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d12": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d16": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d19": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r2_lossmed": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 23.79,
+            "diff_gauge_minus_model_m": 19.3
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 23.79,
+            "diff_gauge_minus_model_m": 20.21
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.79,
+            "wet_cells": 2
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.79,
+            "wet_cells": 2
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 23.79,
+            "recomputed_model_wet_wse_m": 23.79,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 23.79,
+            "recomputed_model_wet_wse_m": 23.79,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r2_ga": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 23.62,
+            "diff_gauge_minus_model_m": 19.47
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 23.62,
+            "diff_gauge_minus_model_m": 20.38
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.62,
+            "wet_cells": 2
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.62,
+            "wet_cells": 2
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 23.62,
+            "recomputed_model_wet_wse_m": 23.62,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 23.62,
+            "recomputed_model_wet_wse_m": 23.62,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d10_r2_norain": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r3_infil2": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 23.5,
+            "diff_gauge_minus_model_m": 19.59
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 23.42,
+            "diff_gauge_minus_model_m": 20.58
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.5,
+            "wet_cells": 2
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.42,
+            "wet_cells": 2
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 23.5,
+            "recomputed_model_wet_wse_m": 23.5,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 23.42,
+            "recomputed_model_wet_wse_m": 23.42,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r3_drA": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r3_combo": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 23.5,
+            "diff_gauge_minus_model_m": 19.59
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 23.42,
+            "diff_gauge_minus_model_m": 20.58
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.5,
+            "wet_cells": 2
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 23.42,
+            "wet_cells": 2
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 23.5,
+            "recomputed_model_wet_wse_m": 23.5,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 23.42,
+            "recomputed_model_wet_wse_m": 23.42,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r4_infil3": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r4_drB": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": 24.44,
+            "diff_gauge_minus_model_m": 18.65
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": 24.47,
+            "diff_gauge_minus_model_m": 19.53
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.44,
+            "wet_cells": 8
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": 24.47,
+            "wet_cells": 8
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": 24.44,
+            "recomputed_model_wet_wse_m": 24.44,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": 24.47,
+            "recomputed_model_wet_wse_m": 24.47,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      },
+      "chhyd_d14_r4_drB_infil3": {
+        "anchor": "贵港市区郁江段",
+        "anchor_lonlat": [
+          109.6,
+          23.11
+        ],
+        "anchor_row_col": [
+          229,
+          308
+        ],
+        "window": "7x7（verify() 原口径）",
+        "wse_definition": "窗口内湿格 (dem + wd) 的最大值；wet = wd > 0.05 m",
+        "recorded_in_verify_json": {
+          "0912T14": {
+            "t_h": 228.0,
+            "gauge_m": 43.09,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "0914T05": {
+            "t_h": 270.0,
+            "gauge_m": 44.0,
+            "model_wet_wse_m": null,
+            "diff_gauge_minus_model_m": null
+          },
+          "caveat": "G7 垂直基准未确认；两个时点/三个 Q 情景的 apparent offset 不一致，不得当作 datum_offset_m、率定值或同峰对齐依据",
+          "diagnostic_only": true
+        },
+        "recomputed_key_frames": {
+          "res-0038": {
+            "available": true,
+            "t_h": 228.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          },
+          "res-0045": {
+            "available": true,
+            "t_h": 270.0,
+            "wse_center_m": null,
+            "wse_wet_max_m": null,
+            "wet_cells": 0
+          }
+        },
+        "recompute_checks": [
+          {
+            "label": "0912T14",
+            "seq": 38,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          },
+          {
+            "label": "0914T05",
+            "seq": 45,
+            "verify_json_model_wet_wse_m": null,
+            "recomputed_model_wet_wse_m": null,
+            "match": true
+          }
+        ],
+        "recompute_all_match": true,
+        "note": "recorded_in_verify_json 由 verify() 本身产出，是权威值；recomputed_key_frames 是本文件按同一口径独立复算的核对样本。"
+      }
+    },
+    "shared_caveats": [
+      "G7 垂直基准未闭合：站点水位为站基面，模型 WSE 为 DEM 高程基准，二者差值不是 datum_offset_m。",
+      "两个时点的 apparent offset 彼此不一致，故不得用作率定值、不得用作同峰对齐依据。",
+      "本项仅诊断，不作闸门；未参与任何验收判定。",
+      "模型 WSE 取锚点 7×7 窗口内湿格最大值，属邻域包络口径，不是站点单点水位。"
+    ]
+  },
+  "plan_acceptance": {
+    "plan_reference": "plans/贵港水动力推演效果改进实施计划_从零散水点治理到上游来水与降雨双驱动重构.md §4「独立卫星观测检验」行：FAR 压降 > 20%，CSI 有效提升",
+    "far_reduction_target_pct": 20.0,
+    "per_scenario": {
+      "baseline_realdem": {
+        "is_reference": true,
+        "far_reduction_target_met": null,
+        "csi_improved": null,
+        "verdict": "参照基线，不参与验收判定"
+      },
+      "flow_only_v1": {
+        "is_reference": false,
+        "far_reduction_pct": 11.3,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.088,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "dualloss_v1": {
+        "is_reference": false,
+        "far_reduction_pct": 2.2,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.017,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "rainloss_high_v1": {
+        "is_reference": false,
+        "far_reduction_pct": 2.4,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.019,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "chhyd_d10": {
+        "is_reference": false,
+        "far_reduction_pct": 0.2,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.002,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d12": {
+        "is_reference": false,
+        "far_reduction_pct": -0.0,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.004,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d14": {
+        "is_reference": false,
+        "far_reduction_pct": -0.4,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.008,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d16": {
+        "is_reference": false,
+        "far_reduction_pct": -0.7,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.01,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d19": {
+        "is_reference": false,
+        "far_reduction_pct": -1.0,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.013,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d14_r2_lossmed": {
+        "is_reference": false,
+        "far_reduction_pct": 2.6,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.014,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "chhyd_d14_r2_ga": {
+        "is_reference": false,
+        "far_reduction_pct": 2.8,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.015,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "chhyd_d10_r2_norain": {
+        "is_reference": false,
+        "far_reduction_pct": 58.1,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": true,
+        "delta_csi": 0.259,
+        "csi_improved": true,
+        "verdict": "FAR 压降 >20% 且 CSI 提升：两项均达成"
+      },
+      "chhyd_d14_r3_infil2": {
+        "is_reference": false,
+        "far_reduction_pct": 6.3,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.038,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "chhyd_d14_r3_drA": {
+        "is_reference": false,
+        "far_reduction_pct": -0.4,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.008,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d14_r3_combo": {
+        "is_reference": false,
+        "far_reduction_pct": 6.3,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": 0.038,
+        "csi_improved": true,
+        "verdict": "CSI 提升达成；FAR 压降未达 >20%，FAR 项未达成"
+      },
+      "chhyd_d14_r4_infil3": {
+        "is_reference": false,
+        "far_reduction_pct": 21.8,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": true,
+        "delta_csi": 0.12,
+        "csi_improved": true,
+        "verdict": "FAR 压降 >20% 且 CSI 提升：两项均达成"
+      },
+      "chhyd_d14_r4_drB": {
+        "is_reference": false,
+        "far_reduction_pct": -0.4,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": false,
+        "delta_csi": -0.007,
+        "csi_improved": false,
+        "verdict": "两项均未达成"
+      },
+      "chhyd_d14_r4_drB_infil3": {
+        "is_reference": false,
+        "far_reduction_pct": 21.8,
+        "far_reduction_target_pct": 20.0,
+        "far_reduction_target_met": true,
+        "delta_csi": 0.12,
+        "csi_improved": true,
+        "verdict": "FAR 压降 >20% 且 CSI 提升：两项均达成"
+      }
+    },
+    "note": "「CSI 有效提升」计划未给数值门槛，本文件按 delta_csi > 0 判定，并在 caveats 说明该判定阈值属本项目自定，非计划原文"
+  },
+  "baseline_selfcheck": {
+    "compared_against": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem/verify.json::s1_0912_check",
+    "tolerance": "|abs_diff| <= 0.011（round 到 3/2 位小数的舍入容差）",
+    "fields": {
+      "csi": {
+        "computed": 0.076,
+        "verify_json_reference": 0.076,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "pod": {
+        "computed": 0.652,
+        "verify_json_reference": 0.652,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "far": {
+        "computed": 0.921,
+        "verify_json_reference": 0.921,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "area_sim_km2": {
+        "computed": 630.14,
+        "verify_json_reference": 630.14,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "area_sim_in_footprint_km2": {
+        "computed": 92.63,
+        "verify_json_reference": 92.63,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "area_obs_km2_in_footprint": {
+        "computed": 11.29,
+        "verify_json_reference": 11.29,
+        "abs_diff": 0.0,
+        "match": true
+      },
+      "valid_footprint_km2": {
+        "computed": 510.95,
+        "verify_json_reference": 510.95,
+        "abs_diff": 0.0,
+        "match": true
+      }
+    },
+    "all_match": true
+  },
+  "caveats": [
+    "S1 为单景固定阈值 -17 dB 二值水体，风浪与淹没植被致漏判偏多（G17 降级）。",
+    "足迹仅覆盖模型域约 20.6%，足迹外无观测；本文件所有 POD/FAR/CSI 只代表该足迹内。",
+    "CSI/POD/FAR 是重叠度指标，不是水深或水位精度指标；不得据此声称模型预测正确。",
+    "POD 上升与 FAR 下降可同时发生（只要模拟水体向观测水体收缩），故必须与面积一并读。",
+    "「CSI 有效提升」计划未给数值门槛，本文件采用 delta_csi > 0；该阈值属本项目自定。",
+    "本文件不是闸门：不得把任何一档 CSI 数值写成验收通过或精度证明。"
+  ]
+}

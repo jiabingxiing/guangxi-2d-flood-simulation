@@ -1,0 +1,260 @@
+{
+  "script": "scripts/stage6/attribute_guigang_combo.py",
+  "generated_utc": "2026-11-07T10:56:05+00:00",
+  "read_only": true,
+  "source": "data\\catalog\\guigang_s1_validation.json",
+  "conventions": {
+    "notation": "A0B0=基线(off,on)；A1B0=hydraulic(on)；A0B1=无河槽变体档；A1B1=组合",
+    "effects": "A@B0=A1B0−A0B0；A@B1=A1B1−A0B1；B@A0=A0B1−A0B0；B@A1=A1B1−A1B0；交互AB=B@A1−B@A0",
+    "metric_direction": "FAR/足迹内面积 越低越好；POD/CSI 越高越好",
+    "caveat": "S1 足迹内重叠度口径（覆盖 20.6%，-17 dB 固定阈值 G17）；不是模型精度"
+  },
+  "blocks": [
+    {
+      "block_id": "channel_x_loss_medium",
+      "factor_b": "rain: on → loss_medium",
+      "cells": {
+        "a0b0": {
+          "available": true,
+          "csi": 0.076,
+          "pod": 0.652,
+          "far": 0.921,
+          "area_sim_in_footprint_km2": 92.63,
+          "wet_cells_frame": 63014,
+          "tag": "baseline_realdem"
+        },
+        "a1b0": {
+          "available": true,
+          "csi": 0.068,
+          "pod": 0.437,
+          "far": 0.925,
+          "area_sim_in_footprint_km2": 65.68,
+          "wet_cells_frame": 29131,
+          "tag": "chhyd_d14"
+        },
+        "a0b1": {
+          "available": true,
+          "csi": 0.093,
+          "pod": 0.633,
+          "far": 0.901,
+          "area_sim_in_footprint_km2": 72.37,
+          "wet_cells_frame": 56767,
+          "tag": "dualloss_v1"
+        },
+        "a1b1": {
+          "available": true,
+          "csi": 0.09,
+          "pod": 0.408,
+          "far": 0.897,
+          "area_sim_in_footprint_km2": 44.75,
+          "wet_cells_frame": 17857,
+          "tag": "chhyd_d14_r2_lossmed"
+        }
+      },
+      "complete": true,
+      "metrics": {
+        "csi": {
+          "cells": {
+            "A0B0": 0.076,
+            "A1B0": 0.068,
+            "A0B1": 0.093,
+            "A1B1": 0.09
+          },
+          "A_at_B0": -0.008,
+          "A_at_B1": -0.003,
+          "B_at_A0": 0.017,
+          "B_at_A1": 0.022,
+          "interaction_AB": 0.005
+        },
+        "pod": {
+          "cells": {
+            "A0B0": 0.652,
+            "A1B0": 0.437,
+            "A0B1": 0.633,
+            "A1B1": 0.408
+          },
+          "A_at_B0": -0.215,
+          "A_at_B1": -0.225,
+          "B_at_A0": -0.019,
+          "B_at_A1": -0.029,
+          "interaction_AB": -0.01
+        },
+        "far": {
+          "cells": {
+            "A0B0": 0.921,
+            "A1B0": 0.925,
+            "A0B1": 0.901,
+            "A1B1": 0.897
+          },
+          "A_at_B0": 0.004,
+          "A_at_B1": -0.004,
+          "B_at_A0": -0.02,
+          "B_at_A1": -0.028,
+          "interaction_AB": -0.008
+        },
+        "area_sim_in_footprint_km2": {
+          "cells": {
+            "A0B0": 92.63,
+            "A1B0": 65.68,
+            "A0B1": 72.37,
+            "A1B1": 44.75
+          },
+          "A_at_B0": -26.95,
+          "A_at_B1": -27.62,
+          "B_at_A0": -20.26,
+          "B_at_A1": -20.93,
+          "interaction_AB": -0.67
+        },
+        "wet_cells_frame": {
+          "cells": {
+            "A0B0": 63014,
+            "A1B0": 29131,
+            "A0B1": 56767,
+            "A1B1": 17857
+          },
+          "A_at_B0": -33883,
+          "A_at_B1": -38910,
+          "B_at_A0": -6247,
+          "B_at_A1": -11274,
+          "interaction_AB": -5027
+        }
+      }
+    },
+    {
+      "block_id": "channel_x_norain",
+      "factor_b": "rain: on → off",
+      "cells": {
+        "a0b0": {
+          "available": true,
+          "csi": 0.076,
+          "pod": 0.652,
+          "far": 0.921,
+          "area_sim_in_footprint_km2": 92.63,
+          "wet_cells_frame": 63014,
+          "tag": "baseline_realdem"
+        },
+        "a1b0": {
+          "available": true,
+          "csi": 0.074,
+          "pod": 0.475,
+          "far": 0.919,
+          "area_sim_in_footprint_km2": 66.57,
+          "wet_cells_frame": 29411,
+          "tag": "chhyd_d10"
+        },
+        "a0b1": {
+          "available": true,
+          "csi": 0.164,
+          "pod": 0.616,
+          "far": 0.817,
+          "area_sim_in_footprint_km2": 38.02,
+          "wet_cells_frame": 45281,
+          "tag": "flow_only_v1"
+        },
+        "a1b1": {
+          "available": true,
+          "csi": 0.335,
+          "pod": 0.425,
+          "far": 0.386,
+          "area_sim_in_footprint_km2": 7.82,
+          "wet_cells_frame": 2299,
+          "tag": "chhyd_d10_r2_norain"
+        }
+      },
+      "complete": true,
+      "metrics": {
+        "csi": {
+          "cells": {
+            "A0B0": 0.076,
+            "A1B0": 0.074,
+            "A0B1": 0.164,
+            "A1B1": 0.335
+          },
+          "A_at_B0": -0.002,
+          "A_at_B1": 0.171,
+          "B_at_A0": 0.088,
+          "B_at_A1": 0.261,
+          "interaction_AB": 0.173
+        },
+        "pod": {
+          "cells": {
+            "A0B0": 0.652,
+            "A1B0": 0.475,
+            "A0B1": 0.616,
+            "A1B1": 0.425
+          },
+          "A_at_B0": -0.177,
+          "A_at_B1": -0.191,
+          "B_at_A0": -0.036,
+          "B_at_A1": -0.05,
+          "interaction_AB": -0.014
+        },
+        "far": {
+          "cells": {
+            "A0B0": 0.921,
+            "A1B0": 0.919,
+            "A0B1": 0.817,
+            "A1B1": 0.386
+          },
+          "A_at_B0": -0.002,
+          "A_at_B1": -0.431,
+          "B_at_A0": -0.104,
+          "B_at_A1": -0.533,
+          "interaction_AB": -0.429
+        },
+        "area_sim_in_footprint_km2": {
+          "cells": {
+            "A0B0": 92.63,
+            "A1B0": 66.57,
+            "A0B1": 38.02,
+            "A1B1": 7.82
+          },
+          "A_at_B0": -26.06,
+          "A_at_B1": -30.2,
+          "B_at_A0": -54.61,
+          "B_at_A1": -58.75,
+          "interaction_AB": -4.14
+        },
+        "wet_cells_frame": {
+          "cells": {
+            "A0B0": 63014,
+            "A1B0": 29411,
+            "A0B1": 45281,
+            "A1B1": 2299
+          },
+          "A_at_B0": -33603,
+          "A_at_B1": -42982,
+          "B_at_A0": -17733,
+          "B_at_A1": -27112,
+          "interaction_AB": -9379
+        }
+      }
+    }
+  ],
+  "ga_standalone": {
+    "tag": "chhyd_d14_r2_ga",
+    "metrics": {
+      "csi": 0.091,
+      "pod": 0.406,
+      "far": 0.895,
+      "area_sim_in_footprint_km2": 43.5,
+      "wet_cells_frame": 16976
+    },
+    "delta_vs_baseline": {
+      "csi": 0.015,
+      "pod": -0.246,
+      "far": -0.026,
+      "area_sim_in_footprint_km2": -49.13,
+      "wet_cells_frame": -46038
+    },
+    "delta_vs_chhyd_d14": {
+      "csi": 0.023,
+      "pod": -0.031,
+      "far": -0.03,
+      "area_sim_in_footprint_km2": -22.18,
+      "wet_cells_frame": -12155
+    },
+    "note": "GA-Mid 主方案对照：delta_vs_chhyd_d14 = 同河槽档物理净雨的净效应（B@A1）"
+  },
+  "warnings": []
+}

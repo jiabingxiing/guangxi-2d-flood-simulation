@@ -1,0 +1,473 @@
+{
+  "script": "scripts/stage3/build_guigang_channel_dem.py",
+  "generated_utc": "2026-11-07T04:51:30+00:00",
+  "priors_sha256": "1506050b344a157cfce305a98e45177b88447f9cbcf41d5d88fef880af57f2f9",
+  "tolerances": {
+    "conveyance_frac": 0.15,
+    "area_frac": 0.1,
+    "alpha_recheck": 0.001,
+    "note": "输水门 ±15% / 面积门 ±10%：100 m 格对亚格宽岸坡量化（计划原值 ±5% 的放宽已登记）"
+  },
+  "scenarios": {
+    "A_d10m": {
+      "dir": "data\\interim\\guigang\\channel_recon\\d10m",
+      "depth_m": 10.0,
+      "stats": {
+        "modified_pixel_count": 3047,
+        "mean_dem_change_m": 2.1678,
+        "max_dem_change_m": 13.3408,
+        "channel_length_m": 77574.2,
+        "carved_depth_max_m": 18.948,
+        "longitudinal_slope_max_per_m": 0.00196497
+      },
+      "validation_pass": true,
+      "conveyance": {
+        "pass": true,
+        "tolerance_q_median": 0.15,
+        "tolerance_q_min": 0.6,
+        "tolerance_area_median": 0.1,
+        "quantization_note": "100 m 格对亚格宽岸坡量化（.txt §5.4）；门限按中位偏差（单弯道断面不整体否决）；计划原值 ±5% 放宽已登记",
+        "target_q_m3s": 4410.2,
+        "area_design_m2": 2800.0,
+        "n_sections": 39,
+        "q_ratio_median": 0.9084,
+        "q_ratio_min": 0.7872,
+        "q_ratio_max": 1.0969,
+        "area_ratio_median": 0.9563,
+        "sections_sample": [
+          {
+            "area_m2": 1132.4,
+            "top_width_m": 130.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 1462.4,
+            "q_m3s": 1680.8,
+            "out_of_grid_frac": 0.581,
+            "node": 0,
+            "station_km": 0.0,
+            "excluded": "out_of_grid"
+          },
+          {
+            "area_m2": 2587.5,
+            "top_width_m": 310.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 3167.5,
+            "q_m3s": 3784.0,
+            "out_of_grid_frac": 0.0,
+            "node": 20,
+            "station_km": 1.9
+          },
+          {
+            "area_m2": 2469.3,
+            "top_width_m": 310.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 2919.3,
+            "q_m3s": 3500.4,
+            "out_of_grid_frac": 0.0,
+            "node": 40,
+            "station_km": 3.92
+          },
+          {
+            "area_m2": 2764.4,
+            "top_width_m": 310.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 2764.4,
+            "q_m3s": 4225.1,
+            "out_of_grid_frac": 0.0,
+            "node": 60,
+            "station_km": 5.91
+          },
+          {
+            "area_m2": 2584.3,
+            "top_width_m": 310.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 2834.3,
+            "q_m3s": 3776.2,
+            "out_of_grid_frac": 0.0,
+            "node": 80,
+            "station_km": 7.87
+          },
+          {
+            "area_m2": 2544.6,
+            "top_width_m": 310.0,
+            "max_depth_m": 10.0,
+            "carved_only_area_m2": 2784.6,
+            "q_m3s": 3680.0,
+            "out_of_grid_frac": 0.0,
+            "node": 100,
+            "station_km": 9.72
+          }
+        ]
+      },
+      "carve_statistics_sha256": "7da27881360b5be1f76d4977dc111b4b58f4e8e4c436ef84a0fda0a6f4cc50d8",
+      "dem_asc_sha256": "d1a41242b34e6bc7829ef4b4c00ce0db14561cd49655b147b2024a7d481b1f81"
+    },
+    "B_d12m": {
+      "dir": "data\\interim\\guigang\\channel_recon\\d12m",
+      "depth_m": 12.0,
+      "stats": {
+        "modified_pixel_count": 3047,
+        "mean_dem_change_m": 2.3832,
+        "max_dem_change_m": 13.3066,
+        "channel_length_m": 77574.2,
+        "carved_depth_max_m": 19.561,
+        "longitudinal_slope_max_per_m": 0.00196497
+      },
+      "validation_pass": true,
+      "conveyance": {
+        "pass": true,
+        "tolerance_q_median": 0.15,
+        "tolerance_q_min": 0.6,
+        "tolerance_area_median": 0.1,
+        "quantization_note": "100 m 格对亚格宽岸坡量化（.txt §5.4）；门限按中位偏差（单弯道断面不整体否决）；计划原值 ±5% 放宽已登记",
+        "target_q_m3s": 5822.4,
+        "area_design_m2": 3312.0,
+        "n_sections": 39,
+        "q_ratio_median": 0.9191,
+        "q_ratio_min": 0.7974,
+        "q_ratio_max": 1.0685,
+        "area_ratio_median": 0.963,
+        "sections_sample": [
+          {
+            "area_m2": 1341.8,
+            "top_width_m": 130.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 1671.8,
+            "q_m3s": 2219.6,
+            "out_of_grid_frac": 0.581,
+            "node": 0,
+            "station_km": 0.0,
+            "excluded": "out_of_grid"
+          },
+          {
+            "area_m2": 3077.1,
+            "top_width_m": 310.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 3657.1,
+            "q_m3s": 5041.2,
+            "out_of_grid_frac": 0.0,
+            "node": 20,
+            "station_km": 1.9
+          },
+          {
+            "area_m2": 2952.1,
+            "top_width_m": 310.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 3402.1,
+            "q_m3s": 4704.5,
+            "out_of_grid_frac": 0.0,
+            "node": 40,
+            "station_km": 3.92
+          },
+          {
+            "area_m2": 3271.1,
+            "top_width_m": 310.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 3271.1,
+            "q_m3s": 5581.8,
+            "out_of_grid_frac": 0.0,
+            "node": 60,
+            "station_km": 5.91
+          },
+          {
+            "area_m2": 3078.3,
+            "top_width_m": 310.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 3328.3,
+            "q_m3s": 5044.4,
+            "out_of_grid_frac": 0.0,
+            "node": 80,
+            "station_km": 7.87
+          },
+          {
+            "area_m2": 3017.2,
+            "top_width_m": 310.0,
+            "max_depth_m": 12.0,
+            "carved_only_area_m2": 3257.2,
+            "q_m3s": 4878.6,
+            "out_of_grid_frac": 0.0,
+            "node": 100,
+            "station_km": 9.72
+          }
+        ]
+      },
+      "carve_statistics_sha256": "e629ff02bb4b9ea8c0da39b1418b8edb3dbdc6d07662b3d026ad6c9517ae149b",
+      "dem_asc_sha256": "86ecf439ee713ef004725b1fe499dcff5196467a89d647b072c9ab13fa7f0f3c"
+    },
+    "C_d14m": {
+      "dir": "data\\interim\\guigang\\channel_recon\\d14m",
+      "depth_m": 14.0,
+      "stats": {
+        "modified_pixel_count": 3047,
+        "mean_dem_change_m": 2.5483,
+        "max_dem_change_m": 15.0997,
+        "channel_length_m": 77574.2,
+        "carved_depth_max_m": 20.41,
+        "longitudinal_slope_max_per_m": 0.00196497
+      },
+      "validation_pass": true,
+      "conveyance": {
+        "pass": true,
+        "tolerance_q_median": 0.15,
+        "tolerance_q_min": 0.6,
+        "tolerance_area_median": 0.1,
+        "quantization_note": "100 m 格对亚格宽岸坡量化（.txt §5.4）；门限按中位偏差（单弯道断面不整体否决）；计划原值 ±5% 放宽已登记",
+        "target_q_m3s": 7331.2,
+        "area_design_m2": 3808.0,
+        "n_sections": 39,
+        "q_ratio_median": 0.9194,
+        "q_ratio_min": 0.7957,
+        "q_ratio_max": 1.058,
+        "area_ratio_median": 0.9635,
+        "sections_sample": [
+          {
+            "area_m2": 1540.2,
+            "top_width_m": 130.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 1870.2,
+            "q_m3s": 2780.2,
+            "out_of_grid_frac": 0.581,
+            "node": 0,
+            "station_km": 0.0,
+            "excluded": "out_of_grid"
+          },
+          {
+            "area_m2": 3553.6,
+            "top_width_m": 310.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 4133.6,
+            "q_m3s": 6395.4,
+            "out_of_grid_frac": 0.0,
+            "node": 20,
+            "station_km": 1.9
+          },
+          {
+            "area_m2": 3425.5,
+            "top_width_m": 310.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 3875.5,
+            "q_m3s": 6015.9,
+            "out_of_grid_frac": 0.0,
+            "node": 40,
+            "station_km": 3.92
+          },
+          {
+            "area_m2": 3763.8,
+            "top_width_m": 310.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 3763.8,
+            "q_m3s": 7038.4,
+            "out_of_grid_frac": 0.0,
+            "node": 60,
+            "station_km": 5.91
+          },
+          {
+            "area_m2": 3567.3,
+            "top_width_m": 310.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 3817.3,
+            "q_m3s": 6436.6,
+            "out_of_grid_frac": 0.0,
+            "node": 80,
+            "station_km": 7.87
+          },
+          {
+            "area_m2": 3482.7,
+            "top_width_m": 310.0,
+            "max_depth_m": 14.0,
+            "carved_only_area_m2": 3722.7,
+            "q_m3s": 6184.3,
+            "out_of_grid_frac": 0.0,
+            "node": 100,
+            "station_km": 9.72
+          }
+        ]
+      },
+      "carve_statistics_sha256": "59bca70dd5c11b0c2cefe6adfe6c48e595425dc19a50ab1c7768b0a2aa155827",
+      "dem_asc_sha256": "a694c755d58cf51fc6dbb23f20835bf5b7389055da80e99972d3ef7c793d2ddf"
+    },
+    "D_d16m": {
+      "dir": "data\\interim\\guigang\\channel_recon\\d16m",
+      "depth_m": 16.0,
+      "stats": {
+        "modified_pixel_count": 3047,
+        "mean_dem_change_m": 2.7473,
+        "max_dem_change_m": 17.117,
+        "channel_length_m": 77574.2,
+        "carved_depth_max_m": 22.114,
+        "longitudinal_slope_max_per_m": 0.00196497
+      },
+      "validation_pass": true,
+      "conveyance": {
+        "pass": true,
+        "tolerance_q_median": 0.15,
+        "tolerance_q_min": 0.6,
+        "tolerance_area_median": 0.1,
+        "quantization_note": "100 m 格对亚格宽岸坡量化（.txt §5.4）；门限按中位偏差（单弯道断面不整体否决）；计划原值 ±5% 放宽已登记",
+        "target_q_m3s": 8917.1,
+        "area_design_m2": 4288.0,
+        "n_sections": 39,
+        "q_ratio_median": 0.9198,
+        "q_ratio_min": 0.7842,
+        "q_ratio_max": 1.0565,
+        "area_ratio_median": 0.9637,
+        "sections_sample": [
+          {
+            "area_m2": 1725.3,
+            "top_width_m": 130.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 2055.3,
+            "q_m3s": 3343.8,
+            "out_of_grid_frac": 0.581,
+            "node": 0,
+            "station_km": 0.0,
+            "excluded": "out_of_grid"
+          },
+          {
+            "area_m2": 4017.1,
+            "top_width_m": 310.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 4597.1,
+            "q_m3s": 7829.7,
+            "out_of_grid_frac": 0.0,
+            "node": 20,
+            "station_km": 1.9
+          },
+          {
+            "area_m2": 3883.8,
+            "top_width_m": 310.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 4333.8,
+            "q_m3s": 7401.6,
+            "out_of_grid_frac": 0.0,
+            "node": 40,
+            "station_km": 3.92
+          },
+          {
+            "area_m2": 4236.6,
+            "top_width_m": 310.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 4236.6,
+            "q_m3s": 8555.8,
+            "out_of_grid_frac": 0.0,
+            "node": 60,
+            "station_km": 5.91
+          },
+          {
+            "area_m2": 4047.3,
+            "top_width_m": 310.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 4297.3,
+            "q_m3s": 7928.2,
+            "out_of_grid_frac": 0.0,
+            "node": 80,
+            "station_km": 7.87
+          },
+          {
+            "area_m2": 3936.5,
+            "top_width_m": 310.0,
+            "max_depth_m": 16.0,
+            "carved_only_area_m2": 4176.5,
+            "q_m3s": 7569.7,
+            "out_of_grid_frac": 0.0,
+            "node": 100,
+            "station_km": 9.72
+          }
+        ]
+      },
+      "carve_statistics_sha256": "09223f245283e262e96a23ad8deb3db050e0e3458c71a9fab267569d6431b1af",
+      "dem_asc_sha256": "6e19a06c3f1b858d11ae235d1cf23ba311f29618ea9ec5fe6228b84477ba663c"
+    },
+    "E_d19m": {
+      "dir": "data\\interim\\guigang\\channel_recon\\d19m",
+      "depth_m": 19.0,
+      "stats": {
+        "modified_pixel_count": 3047,
+        "mean_dem_change_m": 3.0189,
+        "max_dem_change_m": 19.0,
+        "channel_length_m": 77574.2,
+        "carved_depth_max_m": 24.847,
+        "longitudinal_slope_max_per_m": 0.00196497
+      },
+      "validation_pass": true,
+      "conveyance": {
+        "pass": true,
+        "tolerance_q_median": 0.15,
+        "tolerance_q_min": 0.6,
+        "tolerance_area_median": 0.1,
+        "quantization_note": "100 m 格对亚格宽岸坡量化（.txt §5.4）；门限按中位偏差（单弯道断面不整体否决）；计划原值 ±5% 放宽已登记",
+        "target_q_m3s": 11399.9,
+        "area_design_m2": 4978.0,
+        "n_sections": 39,
+        "q_ratio_median": 0.9224,
+        "q_ratio_min": 0.7699,
+        "q_ratio_max": 1.0521,
+        "area_ratio_median": 0.9653,
+        "sections_sample": [
+          {
+            "area_m2": 1984.2,
+            "top_width_m": 130.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 2314.2,
+            "q_m3s": 4192.3,
+            "out_of_grid_frac": 0.581,
+            "node": 0,
+            "station_km": 0.0,
+            "excluded": "out_of_grid"
+          },
+          {
+            "area_m2": 4685.5,
+            "top_width_m": 310.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 5265.5,
+            "q_m3s": 10089.4,
+            "out_of_grid_frac": 0.0,
+            "node": 20,
+            "station_km": 1.9
+          },
+          {
+            "area_m2": 4541.2,
+            "top_width_m": 310.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 4991.2,
+            "q_m3s": 9576.8,
+            "out_of_grid_frac": 0.0,
+            "node": 40,
+            "station_km": 3.92
+          },
+          {
+            "area_m2": 4908.5,
+            "top_width_m": 310.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 4908.5,
+            "q_m3s": 10902.2,
+            "out_of_grid_frac": 0.0,
+            "node": 60,
+            "station_km": 5.91
+          },
+          {
+            "area_m2": 4749.1,
+            "top_width_m": 310.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 4999.1,
+            "q_m3s": 10318.7,
+            "out_of_grid_frac": 0.0,
+            "node": 80,
+            "station_km": 7.87
+          },
+          {
+            "area_m2": 4594.7,
+            "top_width_m": 310.0,
+            "max_depth_m": 19.0,
+            "carved_only_area_m2": 4834.7,
+            "q_m3s": 9765.8,
+            "out_of_grid_frac": 0.0,
+            "node": 100,
+            "station_km": 9.72
+          }
+        ]
+      },
+      "carve_statistics_sha256": "4ec9493d5538e6b506aaab926dd80e5c013fae18b9b0da2a7cd4a935d25bc1c8",
+      "dem_asc_sha256": "fb59a6972e69debee027ed518f0339a278a006daca03cb037158a2896a722f81"
+    }
+  }
+}

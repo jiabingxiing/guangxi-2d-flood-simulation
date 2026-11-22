@@ -1,0 +1,202 @@
+# Soil hydraulic parameter datasets, texture mappings, and South China red soil priors
+datasets:
+  hihydrosoil_v2:
+    resolution_m: 250
+    scale_factor: 0.0001
+    ksat_unit_conversion: 0.4166666666666667  # cm/day -> mm/hour (* 10.0 / 24.0)
+    layers:
+      - {name: "0-5cm", depth_m: 0.05}
+      - {name: "5-15cm", depth_m: 0.10}
+      - {name: "15-30cm", depth_m: 0.15}
+      - {name: "30-60cm", depth_m: 0.30}
+      - {name: "60-100cm", depth_m: 0.40}
+      - {name: "100-200cm", depth_m: 1.00}
+    description: "FutureWater HiHydroSoil v2.0 global 250m soil hydraulic properties"
+
+  china_soil_hydraulics_30s:
+    resolution_arcsec: 30
+    resolution_approx_km: 0.9
+    layers: 7
+    max_depth_m: 1.383
+    description: "A China Dataset of Soil Hydraulic Parameters Pedotransfer Functions (NCDC / TPDC)"
+
+  china_250m_soil_texture:
+    resolution_m: 250
+    layers: 6
+    survey_period: "2010-2018"
+    description: "China high-resolution 250m soil texture grid (CAS Soil Data Center)"
+
+# Hydrologic Soil Groups (HSG) USDA classification
+hsg_definitions:
+  A:
+    description: "High infiltration rate, low runoff potential (sand, loamy sand, sandy loam)"
+    ks_min_mm_h: 7.6
+    ks_typical_mm_h: 12.0
+    cn_baseline_forest: 30
+  B:
+    description: "Moderate infiltration rate (loam, silt loam)"
+    ks_min_mm_h: 3.8
+    ks_typical_mm_h: 5.5
+    cn_baseline_forest: 55
+  C:
+    description: "Slow infiltration rate (sandy clay loam, clay loam)"
+    ks_min_mm_h: 1.3
+    ks_typical_mm_h: 2.5
+    cn_baseline_forest: 70
+  D:
+    description: "Very slow infiltration rate, high runoff potential (clay, silty clay, shallow soil)"
+    ks_min_mm_h: 0.0
+    ks_typical_mm_h: 0.8
+    cn_baseline_forest: 77
+
+# Rawls et al. / HEC-RAS standard Green-Ampt reference parameters by texture class
+rawls_green_ampt_defaults:
+  sand:
+    ks_mm_h: 117.8
+    psi_mm: 49.5
+    theta_s: 0.417
+    theta_fc: 0.090
+    theta_wp: 0.033
+    hsg: "A"
+  loamy_sand:
+    ks_mm_h: 29.9
+    psi_mm: 61.3
+    theta_s: 0.401
+    theta_fc: 0.125
+    theta_wp: 0.055
+    hsg: "A"
+  sandy_loam:
+    ks_mm_h: 10.9
+    psi_mm: 110.1
+    theta_s: 0.453
+    theta_fc: 0.207
+    theta_wp: 0.095
+    hsg: "A"
+  loam:
+    ks_mm_h: 3.4
+    psi_mm: 88.9
+    theta_s: 0.463
+    theta_fc: 0.270
+    theta_wp: 0.117
+    hsg: "B"
+  silt_loam:
+    ks_mm_h: 6.5
+    psi_mm: 166.8
+    theta_s: 0.501
+    theta_fc: 0.330
+    theta_wp: 0.133
+    hsg: "B"
+  sandy_clay_loam:
+    ks_mm_h: 1.5
+    psi_mm: 218.5
+    theta_s: 0.398
+    theta_fc: 0.255
+    theta_wp: 0.148
+    hsg: "C"
+  clay_loam:
+    ks_mm_h: 1.0
+    psi_mm: 208.8
+    theta_s: 0.464
+    theta_fc: 0.318
+    theta_wp: 0.197
+    hsg: "C"
+  silty_clay_loam:
+    ks_mm_h: 1.0
+    psi_mm: 273.0
+    theta_s: 0.471
+    theta_fc: 0.366
+    theta_wp: 0.208
+    hsg: "C"
+  sandy_clay:
+    ks_mm_h: 0.6
+    psi_mm: 239.0
+    theta_s: 0.430
+    theta_fc: 0.339
+    theta_wp: 0.239
+    hsg: "D"
+  silty_clay:
+    ks_mm_h: 0.5
+    psi_mm: 292.2
+    theta_s: 0.479
+    theta_fc: 0.387
+    theta_wp: 0.250
+    hsg: "D"
+  clay:
+    ks_mm_h: 0.3
+    psi_mm: 316.3
+    theta_s: 0.475
+    theta_fc: 0.396
+    theta_wp: 0.272
+    hsg: "D"
+
+# South China Red Soil (华南湿润红壤丘陵区) regional calibrated priors (计划 §4.2.3)
+south_china_red_soil_priors:
+  forest_red_soil:
+    description: "林地红壤：植被丰富、根系发达、腐殖层透水好，表层稳渗率显著高于纯基质"
+    ks_mm_h: 6.0
+    psi_mm: 150.0
+    theta_s: 0.48
+    theta_fc: 0.32
+    theta_wp: 0.18
+    hsg: "B"
+    effective_depth_m: 1.2
+
+  cropland_red_soil:
+    description: "坡耕地/一般旱作红壤：表层有耕作松动但次表层偏黏，压实较易产生地表径流"
+    ks_mm_h: 2.2
+    psi_mm: 220.0
+    theta_s: 0.46
+    theta_fc: 0.33
+    theta_wp: 0.20
+    hsg: "C"
+    effective_depth_m: 0.8
+
+  compacted_bare_red_soil:
+    description: "压实裸露红壤/施工裸地：结皮硬化严重，入渗能力弱"
+    ks_mm_h: 0.8
+    psi_mm: 280.0
+    theta_s: 0.42
+    theta_fc: 0.32
+    theta_wp: 0.22
+    hsg: "D"
+    effective_depth_m: 0.5
+
+  alluvial_lowland_soil:
+    description: "河谷冲积壤土/贵港郁江平原区：成土母质为河流冲积物，土层较厚但地下水位较高"
+    ks_mm_h: 2.5
+    psi_mm: 180.0
+    theta_s: 0.47
+    theta_fc: 0.35
+    theta_wp: 0.19
+    hsg: "C"
+    effective_depth_m: 0.9
+
+  paddy_wetland:
+    description: "水稻田与洼地：犁底层阻水，汛期土壤近饱和，以蓄满产流与溢流为主"
+    ks_mm_h: 0.4
+    psi_mm: 300.0
+    theta_s: 0.50
+    theta_fc: 0.42
+    theta_wp: 0.26
+    hsg: "D"
+    effective_depth_m: 0.4
+
+  impervious_built:
+    description: "硬化建设用地：不透水面"
+    ks_mm_h: 0.0
+    psi_mm: 0.0
+    theta_s: 0.05
+    theta_fc: 0.05
+    theta_wp: 0.05
+    hsg: "D"
+    effective_depth_m: 0.01
+
+  water_body:
+    description: "常年水体：直接产流（R_net = P）"
+    ks_mm_h: 0.0
+    psi_mm: 0.0
+    theta_s: 1.00
+    theta_fc: 1.00
+    theta_wp: 1.00
+    hsg: "D"
+    effective_depth_m: 0.0

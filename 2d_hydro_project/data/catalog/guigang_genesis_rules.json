@@ -1,0 +1,23 @@
+{
+  "doc": "贵港成因归因规则（ADR-0015 §3 预注册冻结；先冻结后计算）",
+  "frozen": true,
+  "frozen_utc": "2026-11-22T02:47:53+00:00",
+  "source": "plans/广西二维水动力模拟_学术成果驱动改进实现计划.md §3.4 A4 + ADR-0015",
+  "wet_threshold_m": 0.05,
+  "basis": "event-max（results/res.max）",
+  "full_run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+  "rain_off_run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+  "classes": {
+    "0": "never-wet（两 run 皆干）",
+    "1": "river-origin（full 湿 ∧ rain_off 湿）",
+    "2": "pluvial-origin（full 湿 ∧ rain_off 干）",
+    "3": "edge-band（域边界 1 格环带内任一 run 湿；边界效应单独标记，优先于成因类）",
+    "4": "disagreement（full 干 ∧ rain_off 湿；水量再分配，单独统计，不计入任一成因）"
+  },
+  "confounder_note": "full=d14 河槽+求解器入渗 3.0 mm/h+毛雨；rain_off=d10 河槽无雨。河槽配置差异为已注册混淆项；结论只称有雨/无雨情景差分归因，不得称外洪/内涝精确分解。",
+  "prohibited_readings": [
+    "不得称 river-origin = 河流漫溢精确范围（d14/d10 河槽差异混淆）",
+    "不得把 pluvial-origin 用于资产级内涝判据（无排水网资料，ADR-0014）",
+    "edge-band 与 disagreement 不得并入任一成因统计口径"
+  ]
+}

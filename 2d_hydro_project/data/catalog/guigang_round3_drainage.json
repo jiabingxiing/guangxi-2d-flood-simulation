@@ -1,0 +1,51 @@
+{
+  "generated_utc": "2026-11-07（日期精度，手工预注册；run meta 另记精确时间戳）",
+  "phase": "Phase H 第三轮（贵港排水连通治理 · 诊断探针，ADR-0014）",
+  "mode": "公开数据降级 · 情景级（ADR-0004）；DEM 推导排水沟与求解器入渗都是情景假设，不是真实排水网",
+  "preregistration": {
+    "matrix_id": "guigang-round3-drainage-v1",
+    "frozen_utc": "2026-11-07",
+    "positioning": "诊断探针：在只有 DEM、无排水网资料的约束下，量化「多强的排水能力能解释残余 FAR」。沟位/沟距/沟深/入渗率全部是情景假设，成果必须随附诊断探针声明，不得当真实基础设施或资产判据（用户 2026-11-07 决策）。",
+    "anchors": {
+      "chhyd_d14": {"far": 0.925, "csi": 0.068, "footprint_km2": 65.68, "note": "同重构层同毛雨、无排水治理"},
+      "chhyd_d14_r2_ga": {"far": 0.895, "csi": 0.091, "footprint_km2": 43.5, "note": "同重构层 + GA-Mid 净雨（净雨预处理天花板参照）"}
+    },
+    "drain_tier_A": {
+      "width_m": 100.0,
+      "width_note": "100 m 格下沟必须 >=1 格宽才有格元平均水力意义；30 m 级沟在本分辨率等效深度仅 0.1-0.3 m",
+      "depth_m": 2.0,
+      "side_slope_z": 2.0,
+      "profile": "smooth_trapezoid（channel_engine 复用，supersample=8，smooth_win 调小）",
+      "accumulation_threshold_cells": 200,
+      "accumulation_note": "200 格 = 2 km² 汇流面积起沟（保守 A 档）",
+      "min_drain_length_m": 2000.0,
+      "min_spacing_m": 1000.0,
+      "max_total_length_km": 120.0,
+      "bed_rule": "床 = 沿线平滑地表 − 深度，顺流单调（bed_profile 复用）；主槽格为种子/全球汇，沟只向主槽排",
+      "circular_isolation": "沟位仅由已刻槽 DEM 推导；模型积水（res.max）只做诊断，不用于布沟"
+    },
+    "infiltration": {
+      "rate_mm_per_h": 2.0,
+      "prior_bound": "华南红壤稳渗 fc 2~3 mm/h 先验（loss_medium/loss_high 同源），恒定率无土壤库、后期可能过排——已登记限制",
+      "implementation": "run.par 标量 `infiltration <m/s>`（FPInfiltration，infevap.cpp:14-46，对 H>1e-3 m 湿格持续扣水）；路径 B 单用，**禁止与任何净雨预处理模式混用**（--rain 只允许 on，ADR-0011 决策 2）",
+      "channel_surface_note": "入渗作用于全部湿格含主槽水面：槽面 3.0e7 m² × 2 mm/h × 14 d ≈ 2.0e7 m³，约占入流 0.4%，量级登记"
+    },
+    "runs_new": [
+      {"tag": "chhyd_d14_r3_infil2", "dem": "d14m", "rain": "on（毛雨）", "infiltration_mm_h": 2.0, "drains": null, "purpose": "垂直排水：求解器入渗对积水的削减", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m --rain on --infiltration 2.0（RUN_TAG=r3_infil2）"},
+      {"tag": "chhyd_d14_r3_drA", "dem": "d14m_drA", "rain": "on（毛雨）", "infiltration_mm_h": null, "drains": "A 档", "purpose": "水平排水：DEM 推导排水沟的削减", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m_drA --rain on（RUN_TAG=r3_drA）"},
+      {"tag": "chhyd_d14_r3_combo", "dem": "d14m_drA", "rain": "on（毛雨）", "infiltration_mm_h": 2.0, "drains": "A 档", "purpose": "垂直 + 水平叠加", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m_drA --rain on --infiltration 2.0（RUN_TAG=r3_combo）"}
+    ],
+    "expectations_directional": [
+      "r3_infil2 与 r3_drA 的 FAR < chhyd_d14 的 0.925（方向性，无硬门）",
+      "r3_combo FAR 最低",
+      "若不达：如实登记并结论化为「滩地积水对排水不敏感，残余 FAR 另有主因（DEM 基准/堤防/S1 口径）」"
+    ]
+  },
+  "limitations": [
+    "100 m 格的沟是格元平均高程近似；1 格宽沟是本分辨率下限",
+    "入渗率恒定无土壤库限制，事件后期可能过排；速率受 fc 先验上限约束",
+    "沟网密度直接影响 FAR——A 档保守阈值起步，B 档（更密/更深）留待 A 档结论",
+    "诊断探针定位：DEM 推导沟 ≠ 真实排水网；不得用于资产级判据或业务预警",
+    "S1 足迹内重叠度口径（覆盖 20.6%，G17）；CSI/POD/FAR 不是精度"
+  ]
+}

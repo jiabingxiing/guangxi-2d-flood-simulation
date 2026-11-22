@@ -1,0 +1,48 @@
+# Rainfall data source configurations and processing rules
+rainfall_sources:
+  era5_hourly_probe:
+    type: "json_hourly"
+    unit: "mm"
+    temporal_resolution_h: 1.0
+    deaccumulation_required: false
+    description: "ERA5 or Open-Meteo hourly precipitation time series (already deaccumulated mm/h)"
+
+  era5_grib_total_precip:
+    type: "grib_accumulated"
+    unit: "m"
+    temporal_resolution_h: 1.0
+    deaccumulation_required: true
+    scale_factor_to_mm: 1000.0
+    description: "Raw ERA5 total_precipitation (accumulated from forecast cycle, requires difference)"
+
+  era5_land_hourly:
+    type: "netcdf_hourly"
+    unit: "m"
+    temporal_resolution_h: 1.0
+    deaccumulation_required: true
+    scale_factor_to_mm: 1000.0
+    native_resolution_deg: 0.1
+    description: "ERA5-Land high-resolution land reanalysis hourly precipitation"
+
+events:
+  jiulong_yagi_5d:
+    case: "jiulong"
+    start_time: "2024-09-05T00:00:00"
+    end_time: "2024-09-09T23:00:00"
+    file: "data/catalog/probes/jiulong_sep2024_era5_hourly.json"
+    expected_gross_mm: 227.7
+    peak_hourly_mm: 14.1
+
+  jiulong_yagi_ext:
+    case: "jiulong"
+    start_time: "2024-09-05T00:00:00"
+    end_time: "2024-09-17T23:00:00"
+    file: "data/catalog/probes/jiulong_sep2024_era5_hourly_ext.json"
+    description: "13-day extended window matching recession run"
+
+  guigang_yagi_14d:
+    case: "guigang"
+    start_time: "2024-09-03T00:00:00"
+    end_time: "2024-09-17T00:00:00"
+    file: "data/catalog/probes/guigang_sep2024_era5_hourly.json"
+    description: "Guigang September 2024 Yagi typhoon storm window"

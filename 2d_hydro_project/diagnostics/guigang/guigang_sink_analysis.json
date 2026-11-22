@@ -1,0 +1,1451 @@
+{
+  "generated_utc": "2026-11-02T04:00:16+00:00",
+  "script": "scripts/stage6/diagnose_guigang_artifacts.py",
+  "phase": "Phase 0 / T0.2（DEM 假洼地诊断）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "read_only_declaration": "本文件全部数值由脚本从 outputs/guigang/** 只读复算；未写入、移动或删除该目录下任何文件；未调用 lisflood.exe；models/ 未修改",
+  "source_run": {
+    "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "sha256_before": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "sha256_after": {
+      "res_max_sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26",
+      "res_mass_sha256": "9c2340385db6aca8f19748823f662a9cf314f34ec10a01b0d8a7737751992302",
+      "frame_count": 57,
+      "frame_list_sha256": "1e170d84aa1f940e3dbdb2bc4888f5ddc335812896c81c8496348ff5ac9aa067",
+      "frames": {
+        "res-0000.wd": "c7edcb2bddf5742ea937a52dd77ce20a04335ea8e16b9eafa6dd7028784a7f17",
+        "res-0001.wd": "aa0226489ca73d58dcd5db98a241e31b414021154f65112b21282d1fd70646fe",
+        "res-0002.wd": "1d4187f0fd5466b9102169999dcdc64ec01c5b96f37ce81c599d1387eaac6bc4",
+        "res-0003.wd": "bec9d6ac844e93f9c8fc10decc9d5a2003b2ddf9b5f717e4c726ab41ca4ea98d",
+        "res-0004.wd": "ec451680de2eb8c0e41b3add940f3e7d918eca74e90d1d39e75d080216a25edb",
+        "res-0005.wd": "b915988f0382104e4568202e3dcae220c6944c6e6197dbc439003e6a48ff2449",
+        "res-0006.wd": "e0478ffd6995f5506d380cff3cd7864b26f8de37b449ae44e33ffbf3599ef7b0",
+        "res-0007.wd": "4758d0bc094d77d97001f4da44b47bd338aaa13d22dc807d6bd25207979f943c",
+        "res-0008.wd": "767cd2b2b52ff51932c93c804f38e25d84529e1542ac6e3e36cecc15e84f717c",
+        "res-0009.wd": "2fb2578016f38716a32fe9b7a1c1d6219ea9adbd9cd1a8109c904bf17d6a81df",
+        "res-0010.wd": "469508b151546911eb778aa2fdc327f976916f777cbfdfb3609c9665b1cd7f99",
+        "res-0011.wd": "592d5776156039ea6d963697c439aa2f95895e9ee42c54da7c295c100e4e8bec",
+        "res-0012.wd": "3e24141996a41418d7443e12116a1741392b84382f0cd258943b451f73f95b07",
+        "res-0013.wd": "f1f8d3b5962674e143ee2dc473c7816a4af72611b036eae4a060a640abdda12f",
+        "res-0014.wd": "1ad54c3c971b4b7ddb9eab4743405ad827b2fc9d3e29a5269a3b7c31a6d96a2e",
+        "res-0015.wd": "e52f7e2fc1b10ffb2375d18253249e1de6a8f9c63aec812f3320a54fafbe14cf",
+        "res-0016.wd": "94813726bc307630637693eb11ca8fab97c37335c375e00b3b34d10a0741a595",
+        "res-0017.wd": "c858822e2adfd8000fe31124ccacd433e335560813b23d29fc2907174aa88915",
+        "res-0018.wd": "0fcdeb0f9eb63b78750a1bc15b01e9c16bb57ce23b114dc051425442c00a166d",
+        "res-0019.wd": "fb7120e1e228f6568e1e233eadcdd35a5ca3957bd140a9d802b895a0f00bda24",
+        "res-0020.wd": "a22cb896e5267a019d64dfdae897fe751c1cfdbbda258730dda15401404f1554",
+        "res-0021.wd": "32715cdd5932a07e56f581a829f412e72147e320766e0501f9fb83e9841dcccd",
+        "res-0022.wd": "f187cbe373aa68e42519d7f02862d5f169f7058a4b6f2818d05985a3a40b1ce3",
+        "res-0023.wd": "1e16dfd177e5c9c99614410d0557f01ce4b7561e54af54656cc0490e1a74bc44",
+        "res-0024.wd": "64119ad29e71a15b075a963e8ca590dc519375a56675c9066675e9fbe70cd497",
+        "res-0025.wd": "cf3e6de098002d8800a106e738d9303f032451ce5af604dab2afee2940508478",
+        "res-0026.wd": "de5c04cb2f42ac2d19d5b35394f1ee1860cb031609416ba4d998d7afcee144d5",
+        "res-0027.wd": "e68f405f380a4924bf3d4a9116ecb5cd873a9362fe11217ada3cb9fc322859af",
+        "res-0028.wd": "0169027d31ba65b57c07f6033ade330765263631b5f9134af4e4ffc27a6035d6",
+        "res-0029.wd": "952bcbdb16f6aa98417665241cbae845f3a0e0de54770bb22f879d2fa1b56d45",
+        "res-0030.wd": "cf0098fc5f3e445ef0b4f89582451ef88a7ec4367271a450ddbe74c26a42a466",
+        "res-0031.wd": "2d60a96729ce6edbb4a8f3d546492c92d105ddf41247ccbb6fc4c71800132cfd",
+        "res-0032.wd": "580b10dfa37f85c97ad67c2a56bf8d1d6f4cc62a75225b9b499a5930d6d1ad33",
+        "res-0033.wd": "3e6da8c34d2c4ed5a40374d52fc1126aa414c8363ac2bef0199448afbab7cef5",
+        "res-0034.wd": "915ce531eb590653986db766b0966e59bea2854b299e64b65cfb40f5b4587fc6",
+        "res-0035.wd": "9b33fa4464f4b8e974b0f30fdb463c864e42ee5acd93394b3c2f9bfab9265998",
+        "res-0036.wd": "8234ccef2f35b0652dd0f2931fbe5dd16c6dda268c8629ede0d027de035a9c34",
+        "res-0037.wd": "6225e26dae71605db3f0f3f94bb557a64e97466f33aa05a47f58640fb8bb984d",
+        "res-0038.wd": "030be44ab9dcbda1234c4d7b67b2c760613dd2dcb590e0c0c8add4a95505ff55",
+        "res-0039.wd": "aec2254a3a4ae1d3b505db559d48f81c1433ee60d9e2ba44909b19a4884e7d0a",
+        "res-0040.wd": "1234f9dad61f7ad01d37d8c7f2d6256889580cf685922b371bc39491e8b55c7e",
+        "res-0041.wd": "75fefb9132c5294ed9f4221e688e7f8c638c3a4637ae2d5a3555cb51ff4abfb4",
+        "res-0042.wd": "afa58e0deef1aff92e37a38be1d89e4fb44a2ec5306db16c730e945be4cdb1ee",
+        "res-0043.wd": "ad89a3edf855a619d92a34e79de5cf2baed1a71b221fa942804ec9c44ca51c6f",
+        "res-0044.wd": "4411d990ca9943b429b5c1eb9bcd21f80f52102422d7dd667c4fed0002175d37",
+        "res-0045.wd": "092da029a01c9f9d16b5898aca02117ac98ec0f9e7e56f44598897ea3fc40bcf",
+        "res-0046.wd": "c69b355c75c519b6bef08a07b85f757cf13ef437fe46c9a176a3d8c8e5e7e142",
+        "res-0047.wd": "1d64a4ec176d9325b08fb979ec151ad53dafcf1d887309a19d250b618d1a90f3",
+        "res-0048.wd": "16fda59dde4e72d487719fe6596ad04b30c165016c53b02203719aff1668f606",
+        "res-0049.wd": "401907497a58fb0dd96fb3a8a9ccf0edff38950105fec0dc3f15d9f632c0c47c",
+        "res-0050.wd": "e1250a54a612abf063bdc46706463b68488d6f18e90aec2ca5dab1c8a82aa9a2",
+        "res-0051.wd": "59d410f6b84a902bf01d6af5eac428c33b1006e1ab2aee0b136676f852b87bda",
+        "res-0052.wd": "b8c5b2fa98eceee9efc438e4bb1b106b44c3489aa4408a74624ab123f0aba3cc",
+        "res-0053.wd": "b085a4460542a0609f67b0d430ba81a4640ede202d2361e8ecf6b2d469e5cc89",
+        "res-0054.wd": "cb80f270f1fa5e0d01e8ab7a772311a0cf5dce2955ac9dbc415250d0a6758746",
+        "res-0055.wd": "388ef976de0ec2bf8ec1004661d3828fb093853f37643f7699032a7b864ddff4",
+        "res-0056.wd": "28b713846cc8d7656c8b8a00e135575142b0e3f8fed3bf5e732cb0cd2f8da1b7"
+      },
+      "control_files": {
+        "dem.asc": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986",
+        "run.par": "8e8b6200cf7686f4d59ab8e93e1651ce5a0f72481ac71e1948413410f75bae6a",
+        "rain.rain": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb",
+        "bci.bci": "a9ce18897da529ed7e6bf3a5ea654815b1dd852a14fc12487c702bb07f8a3447",
+        "yujiang.bdy": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f",
+        "meta.json": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      }
+    },
+    "integrity": {
+      "unchanged": true,
+      "differing_keys": [],
+      "changed_frames": [],
+      "changed_control_files": []
+    }
+  },
+  "hard_constraints": {
+    "wet_threshold_m": 0.05,
+    "wet_threshold_dtype": "float32（未升位；float32(0.05)=0.05000000074505806）",
+    "connectivity": 8,
+    "area_threshold_expression": "km²；像元数由栅格头 cellsize 经 cells_for_area 现算",
+    "no_lisflood_call": true,
+    "no_models_edit": true
+  },
+  "grid": {
+    "ncols": 669,
+    "nrows": 370,
+    "cellsize_m": 100.0,
+    "cell_area_m2": 10000.0,
+    "xllcorner": 325737.9,
+    "yllcorner": 2542315.3,
+    "nodata": -9999.0,
+    "cells": 247530,
+    "domain_area_km2": 2475.3
+  },
+  "population": {
+    "res_max_wet_cells": 85256,
+    "res_max_wet_area_km2": 852.56,
+    "res_max_patch_count": 4422,
+    "main_body_patch": {
+      "n_cells": 61496,
+      "area_km2": 614.96,
+      "share_of_wet_area_pct": 72.131,
+      "volume_m3": 2013680718.9
+    },
+    "discrete_patches": {
+      "max_cells_definition": 9,
+      "max_area_km2_equivalent": 0.09,
+      "patch_count": 4089,
+      "cells": 9685,
+      "area_km2": 96.85,
+      "note": "DISCRETE_MAX_CELLS=9 是**像元数**分组，只用于把离散与成片分开统计；面积阈值一律走 cells_for_area（见 grid.area_km2_to_cells）"
+    },
+    "non_main_wet": {
+      "cells": 23760,
+      "area_km2": 237.6
+    }
+  },
+  "terrain_hydraulics": {
+    "slope_m_per_m": {
+      "p50": 0.021213,
+      "p95": 0.342053,
+      "max": 1.467353
+    },
+    "pits": {
+      "cells_interior": 28532,
+      "area_km2": 285.32,
+      "frac_of_domain_pct": 11.527
+    },
+    "priority_flood": {
+      "changed_cells": 30721,
+      "changed_area_km2": 307.21,
+      "fill_volume_m3": 562130000.0,
+      "max_rise_m": 43.0,
+      "rise_gt_1m_cells": 14009,
+      "rise_gt_5m_cells": 514,
+      "rise_gt_20m_cells": 23,
+      "note": "fill_volume 是「把全 DEM 填到无洼」所需体积，属地形诊断量，不是模型蓄水量，不得与 res.mass 的 Vol 相加或比较闭合"
+    },
+    "d8": {
+      "sink_cells_no_downstream": 64690,
+      "sink_share_of_domain_pct": 26.134,
+      "max_accumulation_cells": 735,
+      "accumulation_p99": 51.0,
+      "evidence_level": "E4（出口位置未测）",
+      "note": "D8 只是候选线索，不是真实沟渠。本域 DEM 存在大片精确常值平地，D8 在这些像元上没有唯一下游；本文件**不给出任何出口位置或按边出流占比结论**，出口判定标 E4 未测，须由边界/排水审计单独完成"
+    }
+  },
+  "sink_variants": {
+    "S1_local_pit": {
+      "definition": "局部洼坑：8 邻域内不高于任一邻居（interior 口径，排除最外圈）",
+      "evidence_level": "E1（DEM 逐像元复算）",
+      "sink_cells": 28532,
+      "sink_area_km2": 285.32,
+      "sink_frac_of_domain_pct": 11.527,
+      "pixel_level_phi": {
+        "vs_discrete_patches": {
+          "phi": 0.262847,
+          "n11": 5145,
+          "n10": 23387,
+          "n01": 4540,
+          "n00": 214458,
+          "recall_sink_is_wet": 18.032,
+          "precision_wet_is_sink": 53.123
+        },
+        "vs_all_wet": {
+          "phi": 0.438633,
+          "n11": 26303,
+          "n10": 2229,
+          "n01": 58953,
+          "n00": 160045,
+          "recall_sink_is_wet": 92.188,
+          "precision_wet_is_sink": 30.852
+        },
+        "vs_non_main_wet": {
+          "phi": 0.365391,
+          "n11": 11247,
+          "n10": 17285,
+          "n01": 12513,
+          "n00": 206485,
+          "recall_sink_is_wet": 39.419,
+          "precision_wet_is_sink": 47.336
+        }
+      },
+      "block_level_pearson": {
+        "block_cells": 10,
+        "block_km2": 1.0,
+        "n_blocks": 2442,
+        "vs_discrete_patches": 0.573413,
+        "vs_non_main_wet": 0.573413,
+        "vs_all_wet": 0.573413
+      },
+      "patch_level_discrete": {
+        "available": true,
+        "patch_count": 4089,
+        "patches_touching_sink": 3064,
+        "touch_pct": 74.933,
+        "patches_fully_in_sink": 1623,
+        "fully_in_sink_pct": 39.692,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 75.0,
+          "expected_touch_pct": 21.07,
+          "lift_ratio": 3.56,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 57.804,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.537,
+            "analytic_independent_pct": 11.527,
+            "lift_ratio": 4.984
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 83.39,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 20.192,
+            "analytic_independent_pct": 21.725,
+            "lift_ratio": 4.168
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 90.632,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.258,
+            "analytic_independent_pct": 30.747,
+            "lift_ratio": 3.332
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 93.706,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 33.179,
+            "analytic_independent_pct": 38.73,
+            "lift_ratio": 2.687
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 98.876,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 38.446,
+            "analytic_independent_pct": 45.792,
+            "lift_ratio": 2.558
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 99.301,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 43.017,
+            "analytic_independent_pct": 52.041,
+            "lift_ratio": 2.305
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 98.947,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 47.326,
+            "analytic_independent_pct": 57.569,
+            "lift_ratio": 2.091
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 97.222,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 51.424,
+            "analytic_independent_pct": 62.46,
+            "lift_ratio": 1.891
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 98.182,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 54.018,
+            "analytic_independent_pct": 66.787,
+            "lift_ratio": 1.818
+          }
+        },
+        "sink_fraction_of_domain": 0.115267
+      },
+      "patch_level_all": {
+        "available": true,
+        "patch_count": 4422,
+        "patches_touching_sink": 3394,
+        "touch_pct": 76.753,
+        "patches_fully_in_sink": 1630,
+        "fully_in_sink_pct": 36.861,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 79.667,
+          "expected_touch_pct": 25.198,
+          "lift_ratio": 3.162,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 57.804,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.537,
+            "analytic_independent_pct": 11.527,
+            "lift_ratio": 4.984
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 83.39,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 20.192,
+            "analytic_independent_pct": 21.725,
+            "lift_ratio": 4.168
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 90.632,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.258,
+            "analytic_independent_pct": 30.747,
+            "lift_ratio": 3.332
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 93.706,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 33.179,
+            "analytic_independent_pct": 38.73,
+            "lift_ratio": 2.687
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 98.876,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 38.446,
+            "analytic_independent_pct": 45.792,
+            "lift_ratio": 2.558
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 99.301,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 43.017,
+            "analytic_independent_pct": 52.041,
+            "lift_ratio": 2.305
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 98.947,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 47.326,
+            "analytic_independent_pct": 57.569,
+            "lift_ratio": 2.091
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 97.222,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 51.424,
+            "analytic_independent_pct": 62.46,
+            "lift_ratio": 1.891
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 98.182,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 54.018,
+            "analytic_independent_pct": 66.787,
+            "lift_ratio": 1.818
+          }
+        },
+        "sink_fraction_of_domain": 0.115267
+      }
+    },
+    "S2_priority_flood_depression": {
+      "definition": "Priority-Flood 填洼时需要抬升的像元（rise > 0）",
+      "evidence_level": "E1",
+      "sink_cells": 30721,
+      "sink_area_km2": 307.21,
+      "sink_frac_of_domain_pct": 12.411,
+      "pixel_level_phi": {
+        "vs_discrete_patches": {
+          "phi": 0.175552,
+          "n11": 3980,
+          "n10": 26741,
+          "n01": 5705,
+          "n00": 211104,
+          "recall_sink_is_wet": 12.955,
+          "precision_wet_is_sink": 41.094
+        },
+        "vs_all_wet": {
+          "phi": 0.473892,
+          "n11": 28959,
+          "n10": 1762,
+          "n01": 56297,
+          "n00": 160512,
+          "recall_sink_is_wet": 94.265,
+          "precision_wet_is_sink": 33.967
+        },
+        "vs_non_main_wet": {
+          "phi": 0.243673,
+          "n11": 8807,
+          "n10": 21914,
+          "n01": 14953,
+          "n00": 201856,
+          "recall_sink_is_wet": 28.668,
+          "precision_wet_is_sink": 37.066
+        }
+      },
+      "block_level_pearson": {
+        "block_cells": 10,
+        "block_km2": 1.0,
+        "n_blocks": 2442,
+        "vs_discrete_patches": 0.338005,
+        "vs_non_main_wet": 0.338005,
+        "vs_all_wet": 0.338005
+      },
+      "patch_level_discrete": {
+        "available": true,
+        "patch_count": 4089,
+        "patches_touching_sink": 1892,
+        "touch_pct": 46.27,
+        "patches_fully_in_sink": 1231,
+        "fully_in_sink_pct": 30.105,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 51.0,
+          "expected_touch_pct": 17.977,
+          "lift_ratio": 2.837,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 30.593,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 12.796,
+            "analytic_independent_pct": 12.411,
+            "lift_ratio": 2.605
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 47.44,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 17.262,
+            "analytic_independent_pct": 23.282,
+            "lift_ratio": 3.09
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 59.041,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.367,
+            "analytic_independent_pct": 32.803,
+            "lift_ratio": 2.886
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 68.182,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 25.296,
+            "analytic_independent_pct": 41.143,
+            "lift_ratio": 2.635
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 78.09,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.621,
+            "analytic_independent_pct": 48.448,
+            "lift_ratio": 2.685
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 76.224,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 31.183,
+            "analytic_independent_pct": 54.846,
+            "lift_ratio": 2.378
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 77.895,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 33.968,
+            "analytic_independent_pct": 60.45,
+            "lift_ratio": 2.293
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 73.611,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 35.931,
+            "analytic_independent_pct": 65.359,
+            "lift_ratio": 2.049
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 83.636,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 38.382,
+            "analytic_independent_pct": 69.658,
+            "lift_ratio": 2.179
+          }
+        },
+        "sink_fraction_of_domain": 0.12411
+      },
+      "patch_level_all": {
+        "available": true,
+        "patch_count": 4422,
+        "patches_touching_sink": 2206,
+        "touch_pct": 49.887,
+        "patches_fully_in_sink": 1291,
+        "fully_in_sink_pct": 29.195,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 49.333,
+          "expected_touch_pct": 20.945,
+          "lift_ratio": 2.355,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 30.593,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 12.796,
+            "analytic_independent_pct": 12.411,
+            "lift_ratio": 2.605
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 47.44,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 17.262,
+            "analytic_independent_pct": 23.282,
+            "lift_ratio": 3.09
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 59.041,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.367,
+            "analytic_independent_pct": 32.803,
+            "lift_ratio": 2.886
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 68.182,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 25.296,
+            "analytic_independent_pct": 41.143,
+            "lift_ratio": 2.635
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 78.09,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.621,
+            "analytic_independent_pct": 48.448,
+            "lift_ratio": 2.685
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 76.224,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 31.183,
+            "analytic_independent_pct": 54.846,
+            "lift_ratio": 2.378
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 77.895,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 33.968,
+            "analytic_independent_pct": 60.45,
+            "lift_ratio": 2.293
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 73.611,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 35.931,
+            "analytic_independent_pct": 65.359,
+            "lift_ratio": 2.049
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 83.636,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 38.382,
+            "analytic_independent_pct": 69.658,
+            "lift_ratio": 2.179
+          }
+        },
+        "sink_fraction_of_domain": 0.12411
+      }
+    },
+    "S3_shallow_depression_rise_le_1m": {
+      "definition": "浅层填洼需求 <= 1 m 的洼地（对应「数字高程误差级」微坑）",
+      "evidence_level": "E3 候选假设（1 m 阈值为项目候选值，非外部规范）",
+      "sink_cells": 16712,
+      "sink_area_km2": 167.12,
+      "sink_frac_of_domain_pct": 6.752,
+      "pixel_level_phi": {
+        "vs_discrete_patches": {
+          "phi": 0.122326,
+          "n11": 2127,
+          "n10": 14585,
+          "n01": 7558,
+          "n00": 223260,
+          "recall_sink_is_wet": 12.727,
+          "precision_wet_is_sink": 21.962
+        },
+        "vs_all_wet": {
+          "phi": 0.333313,
+          "n11": 15593,
+          "n10": 1119,
+          "n01": 69663,
+          "n00": 161155,
+          "recall_sink_is_wet": 93.304,
+          "precision_wet_is_sink": 18.29
+        },
+        "vs_non_main_wet": {
+          "phi": 0.192989,
+          "n11": 5135,
+          "n10": 11577,
+          "n01": 18625,
+          "n00": 212193,
+          "recall_sink_is_wet": 30.726,
+          "precision_wet_is_sink": 21.612
+        }
+      },
+      "block_level_pearson": {
+        "block_cells": 10,
+        "block_km2": 1.0,
+        "n_blocks": 2442,
+        "vs_discrete_patches": 0.409179,
+        "vs_non_main_wet": 0.409179,
+        "vs_all_wet": 0.409179
+      },
+      "patch_level_discrete": {
+        "available": true,
+        "patch_count": 4089,
+        "patches_touching_sink": 1298,
+        "touch_pct": 31.744,
+        "patches_fully_in_sink": 555,
+        "fully_in_sink_pct": 13.573,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 35.667,
+          "expected_touch_pct": 12.22,
+          "lift_ratio": 2.919,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 19.667,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 6.946,
+            "analytic_independent_pct": 6.752,
+            "lift_ratio": 2.999
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 31.399,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.296,
+            "analytic_independent_pct": 13.047,
+            "lift_ratio": 3.32
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 40.523,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 15.438,
+            "analytic_independent_pct": 18.918,
+            "lift_ratio": 2.321
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 47.552,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 19.225,
+            "analytic_independent_pct": 24.392,
+            "lift_ratio": 2.471
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 58.989,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.671,
+            "analytic_independent_pct": 29.497,
+            "lift_ratio": 2.576
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 55.944,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 24.875,
+            "analytic_independent_pct": 34.257,
+            "lift_ratio": 2.144
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 60.0,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 27.474,
+            "analytic_independent_pct": 38.695,
+            "lift_ratio": 2.184
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 59.722,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 29.181,
+            "analytic_independent_pct": 42.834,
+            "lift_ratio": 2.047
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 67.273,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 32.136,
+            "analytic_independent_pct": 46.694,
+            "lift_ratio": 2.093
+          }
+        },
+        "sink_fraction_of_domain": 0.067515
+      },
+      "patch_level_all": {
+        "available": true,
+        "patch_count": 4422,
+        "patches_touching_sink": 1581,
+        "touch_pct": 35.753,
+        "patches_fully_in_sink": 557,
+        "fully_in_sink_pct": 12.596,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 35.333,
+          "expected_touch_pct": 15.173,
+          "lift_ratio": 2.329,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 19.667,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 6.946,
+            "analytic_independent_pct": 6.752,
+            "lift_ratio": 2.999
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 31.399,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.296,
+            "analytic_independent_pct": 13.047,
+            "lift_ratio": 3.32
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 40.523,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 15.438,
+            "analytic_independent_pct": 18.918,
+            "lift_ratio": 2.321
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 47.552,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 19.225,
+            "analytic_independent_pct": 24.392,
+            "lift_ratio": 2.471
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 58.989,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.671,
+            "analytic_independent_pct": 29.497,
+            "lift_ratio": 2.576
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 55.944,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 24.875,
+            "analytic_independent_pct": 34.257,
+            "lift_ratio": 2.144
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 60.0,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 27.474,
+            "analytic_independent_pct": 38.695,
+            "lift_ratio": 2.184
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 59.722,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 29.181,
+            "analytic_independent_pct": 42.834,
+            "lift_ratio": 2.047
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 67.273,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 32.136,
+            "analytic_independent_pct": 46.694,
+            "lift_ratio": 2.093
+          }
+        },
+        "sink_fraction_of_domain": 0.067515
+      }
+    },
+    "S4_depression_small_catchment_lt_500": {
+      "definition": "汇流累积 < 500 像元的填洼需求区（无成规模汇水通道）",
+      "evidence_level": "E3 候选假设（500 像元阈值为项目候选值）",
+      "sink_cells": 30720,
+      "sink_area_km2": 307.2,
+      "sink_frac_of_domain_pct": 12.411,
+      "pixel_level_phi": {
+        "vs_discrete_patches": {
+          "phi": 0.175557,
+          "n11": 3980,
+          "n10": 26740,
+          "n01": 5705,
+          "n00": 211105,
+          "recall_sink_is_wet": 12.956,
+          "precision_wet_is_sink": 41.094
+        },
+        "vs_all_wet": {
+          "phi": 0.473882,
+          "n11": 28958,
+          "n10": 1762,
+          "n01": 56298,
+          "n00": 160512,
+          "recall_sink_is_wet": 94.264,
+          "precision_wet_is_sink": 33.966
+        },
+        "vs_non_main_wet": {
+          "phi": 0.24368,
+          "n11": 8807,
+          "n10": 21913,
+          "n01": 14953,
+          "n00": 201857,
+          "recall_sink_is_wet": 28.669,
+          "precision_wet_is_sink": 37.066
+        }
+      },
+      "block_level_pearson": {
+        "block_cells": 10,
+        "block_km2": 1.0,
+        "n_blocks": 2442,
+        "vs_discrete_patches": 0.338005,
+        "vs_non_main_wet": 0.338005,
+        "vs_all_wet": 0.338005
+      },
+      "patch_level_discrete": {
+        "available": true,
+        "patch_count": 4089,
+        "patches_touching_sink": 1892,
+        "touch_pct": 46.27,
+        "patches_fully_in_sink": 1231,
+        "fully_in_sink_pct": 30.105,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 51.0,
+          "expected_touch_pct": 17.977,
+          "lift_ratio": 2.837,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 30.593,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 12.796,
+            "analytic_independent_pct": 12.411,
+            "lift_ratio": 2.605
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 47.44,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 17.258,
+            "analytic_independent_pct": 23.281,
+            "lift_ratio": 3.09
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 59.041,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.367,
+            "analytic_independent_pct": 32.802,
+            "lift_ratio": 2.886
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 68.182,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 25.296,
+            "analytic_independent_pct": 41.142,
+            "lift_ratio": 2.635
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 78.09,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.621,
+            "analytic_independent_pct": 48.447,
+            "lift_ratio": 2.685
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 76.224,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 31.183,
+            "analytic_independent_pct": 54.845,
+            "lift_ratio": 2.378
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 77.895,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 33.968,
+            "analytic_independent_pct": 60.449,
+            "lift_ratio": 2.293
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 73.611,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 35.931,
+            "analytic_independent_pct": 65.357,
+            "lift_ratio": 2.049
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 83.636,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 38.382,
+            "analytic_independent_pct": 69.657,
+            "lift_ratio": 2.179
+          }
+        },
+        "sink_fraction_of_domain": 0.124106
+      },
+      "patch_level_all": {
+        "available": true,
+        "patch_count": 4422,
+        "patches_touching_sink": 2206,
+        "touch_pct": 49.887,
+        "patches_fully_in_sink": 1291,
+        "fully_in_sink_pct": 29.195,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 49.333,
+          "expected_touch_pct": 20.945,
+          "lift_ratio": 2.355,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 30.593,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 12.796,
+            "analytic_independent_pct": 12.411,
+            "lift_ratio": 2.605
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 47.44,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 17.258,
+            "analytic_independent_pct": 23.281,
+            "lift_ratio": 3.09
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 59.041,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 21.367,
+            "analytic_independent_pct": 32.802,
+            "lift_ratio": 2.886
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 68.182,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 25.296,
+            "analytic_independent_pct": 41.142,
+            "lift_ratio": 2.635
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 78.09,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.621,
+            "analytic_independent_pct": 48.447,
+            "lift_ratio": 2.685
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 76.224,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 31.183,
+            "analytic_independent_pct": 54.845,
+            "lift_ratio": 2.378
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 77.895,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 33.968,
+            "analytic_independent_pct": 60.449,
+            "lift_ratio": 2.293
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 73.611,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 35.931,
+            "analytic_independent_pct": 65.357,
+            "lift_ratio": 2.049
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 83.636,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 38.382,
+            "analytic_independent_pct": 69.657,
+            "lift_ratio": 2.179
+          }
+        },
+        "sink_fraction_of_domain": 0.124106
+      }
+    },
+    "S5_pit_small_catchment_lt_500": {
+      "definition": "局部洼坑 且 汇流累积 < 500 像元（坑 + 无排水通道）",
+      "evidence_level": "E3 候选假设",
+      "sink_cells": 28531,
+      "sink_area_km2": 285.31,
+      "sink_frac_of_domain_pct": 11.526,
+      "pixel_level_phi": {
+        "vs_discrete_patches": {
+          "phi": 0.262854,
+          "n11": 5145,
+          "n10": 23386,
+          "n01": 4540,
+          "n00": 214459,
+          "recall_sink_is_wet": 18.033,
+          "precision_wet_is_sink": 53.123
+        },
+        "vs_all_wet": {
+          "phi": 0.438622,
+          "n11": 26302,
+          "n10": 2229,
+          "n01": 58954,
+          "n00": 160045,
+          "recall_sink_is_wet": 92.187,
+          "precision_wet_is_sink": 30.851
+        },
+        "vs_non_main_wet": {
+          "phi": 0.365358,
+          "n11": 11246,
+          "n10": 17285,
+          "n01": 12514,
+          "n00": 206485,
+          "recall_sink_is_wet": 39.417,
+          "precision_wet_is_sink": 47.332
+        }
+      },
+      "block_level_pearson": {
+        "block_cells": 10,
+        "block_km2": 1.0,
+        "n_blocks": 2442,
+        "vs_discrete_patches": 0.573413,
+        "vs_non_main_wet": 0.573413,
+        "vs_all_wet": 0.573413
+      },
+      "patch_level_discrete": {
+        "available": true,
+        "patch_count": 4089,
+        "patches_touching_sink": 3064,
+        "touch_pct": 74.933,
+        "patches_fully_in_sink": 1623,
+        "fully_in_sink_pct": 39.692,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 75.0,
+          "expected_touch_pct": 21.068,
+          "lift_ratio": 3.56,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 57.804,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.537,
+            "analytic_independent_pct": 11.526,
+            "lift_ratio": 4.984
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 83.39,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 20.192,
+            "analytic_independent_pct": 21.724,
+            "lift_ratio": 4.168
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 90.632,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.258,
+            "analytic_independent_pct": 30.746,
+            "lift_ratio": 3.332
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 93.706,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 33.179,
+            "analytic_independent_pct": 38.729,
+            "lift_ratio": 2.687
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 98.876,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 38.442,
+            "analytic_independent_pct": 45.791,
+            "lift_ratio": 2.558
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 99.301,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 43.012,
+            "analytic_independent_pct": 52.039,
+            "lift_ratio": 2.306
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 98.947,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 47.321,
+            "analytic_independent_pct": 57.567,
+            "lift_ratio": 2.091
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 97.222,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 51.41,
+            "analytic_independent_pct": 62.458,
+            "lift_ratio": 1.891
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 98.182,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 54.018,
+            "analytic_independent_pct": 66.785,
+            "lift_ratio": 1.818
+          }
+        },
+        "sink_fraction_of_domain": 0.115263
+      },
+      "patch_level_all": {
+        "available": true,
+        "patch_count": 4422,
+        "patches_touching_sink": 3394,
+        "touch_pct": 76.753,
+        "patches_fully_in_sink": 1630,
+        "fully_in_sink_pct": 36.861,
+        "null_model": {
+          "method": "把斑块整体平移到域内随机位置（保持形状），统计触碰洼地概率",
+          "draws_per_patch": 200,
+          "sample_size": 300,
+          "sampling": "均匀随机抽样（固定种子）；**不按面积降序取前 N**——summarize_frame 按面积降序返回，取前 N 会系统性偏向大斑块，把零假设基线抬高数倍",
+          "actual_touch_pct_on_sample": 79.667,
+          "expected_touch_pct": 25.197,
+          "lift_ratio": 3.162,
+          "note": "lift > 1 表示实际重合高于随机平移；≈1 表示与随机摆放无差别。零假设未控制地形可达性（积水只能出现在低地），故 lift 是保守下界，不是精确显著性检验。触碰概率随斑块像元数单调上升，故总体 lift 必须与 by_size 分组 lift 一起读。"
+        },
+        "by_n_cells": {
+          "1": {
+            "patch_count": 1922,
+            "touch_pct": 57.804,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 11.537,
+            "analytic_independent_pct": 11.526,
+            "lift_ratio": 4.984
+          },
+          "2": {
+            "patch_count": 879,
+            "touch_pct": 83.39,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 20.192,
+            "analytic_independent_pct": 21.724,
+            "lift_ratio": 4.168
+          },
+          "3": {
+            "patch_count": 459,
+            "touch_pct": 90.632,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 27.258,
+            "analytic_independent_pct": 30.746,
+            "lift_ratio": 3.332
+          },
+          "4": {
+            "patch_count": 286,
+            "touch_pct": 93.706,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 33.179,
+            "analytic_independent_pct": 38.729,
+            "lift_ratio": 2.687
+          },
+          "5": {
+            "patch_count": 178,
+            "touch_pct": 98.876,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 38.442,
+            "analytic_independent_pct": 45.791,
+            "lift_ratio": 2.558
+          },
+          "6": {
+            "patch_count": 143,
+            "touch_pct": 99.301,
+            "null_sample_patches": 120,
+            "null_expected_touch_pct": 43.012,
+            "analytic_independent_pct": 52.039,
+            "lift_ratio": 2.306
+          },
+          "7": {
+            "patch_count": 95,
+            "touch_pct": 98.947,
+            "null_sample_patches": 95,
+            "null_expected_touch_pct": 47.321,
+            "analytic_independent_pct": 57.567,
+            "lift_ratio": 2.091
+          },
+          "8": {
+            "patch_count": 72,
+            "touch_pct": 97.222,
+            "null_sample_patches": 72,
+            "null_expected_touch_pct": 51.41,
+            "analytic_independent_pct": 62.458,
+            "lift_ratio": 1.891
+          },
+          "9": {
+            "patch_count": 55,
+            "touch_pct": 98.182,
+            "null_sample_patches": 55,
+            "null_expected_touch_pct": 54.018,
+            "analytic_independent_pct": 66.785,
+            "lift_ratio": 1.818
+          }
+        },
+        "sink_fraction_of_domain": 0.115263
+      }
+    }
+  },
+  "plan_check_0p85": {
+    "plan_claim": "计划 §3 Phase 0 任务 2 预估：假洼地与 4,422 个离散积水斑块的重合率相关系数 > 0.85",
+    "plan_does_not_specify": "计划未定义相关系数的计算对象（像元级？分块级？斑块级？）与口径（Pearson？Phi？），也未说明是「全斑块」还是「仅离散斑块」",
+    "max_abs_phi_pixel_level": {
+      "value": 0.262854,
+      "variant": "S5_pit_small_catchment_lt_500"
+    },
+    "max_abs_block_pearson": {
+      "value": 0.573413,
+      "variant": "S5_pit_small_catchment_lt_500"
+    },
+    "max_patch_touch_pct": 74.933,
+    "max_patch_touch_lift": 3.56,
+    "patch_touch_detail_by_variant": {
+      "S1_local_pit": {
+        "touch_pct": 74.933,
+        "null_expected_touch_pct": 21.07,
+        "lift_ratio": 3.56
+      },
+      "S2_priority_flood_depression": {
+        "touch_pct": 46.27,
+        "null_expected_touch_pct": 17.977,
+        "lift_ratio": 2.837
+      },
+      "S3_shallow_depression_rise_le_1m": {
+        "touch_pct": 31.744,
+        "null_expected_touch_pct": 12.22,
+        "lift_ratio": 2.919
+      },
+      "S4_depression_small_catchment_lt_500": {
+        "touch_pct": 46.27,
+        "null_expected_touch_pct": 17.977,
+        "lift_ratio": 2.837
+      },
+      "S5_pit_small_catchment_lt_500": {
+        "touch_pct": 74.933,
+        "null_expected_touch_pct": 21.068,
+        "lift_ratio": 3.56
+      }
+    },
+    "verdict_0p85_met": false,
+    "verdict_0p85_met_by_any_pixel_or_block_metric": false,
+    "verdict_0p85_met_by_patch_touch_pct": false,
+    "conclusion": "计划预估的 0.85 **在任何口径下都不成立**：最大 |Phi|=0.263，最大 |分块 Pearson|=0.573，最大斑块命中率=74.9%（随机平移零假设基线下的 lift 最高 3.56×）。假洼地与离散积水斑块存在**可测但中等**的空间关联（显著高于随机零假设），但强度远低于 0.85。因此「离散斑块 = DEM 假洼地」只能标 E3 候选假设，不能当作已证结论，也不得作为 Phase 1 阈值选定的依据。",
+    "evidence_level": "E1（5 种洼地口径 × 3 类指标逐像元/逐斑块复算）",
+    "strongest_variant": "S5_pit_small_catchment_lt_500",
+    "interpretation_of_lift": "lift = 实际斑块触碰率 / 随机平移零假设触碰率。lift > 1 表示洼地确实「偏好」离散斑块所在位置；但斑块只能出现在能积水的低地，零假设未控制地形可达性，故 lift 是保守下界。lift 明显 > 1 与 |Phi| 明显 < 0.85 可以同时成立：前者说「洼地是离散积水的必要条件之一」，后者说「洼地远不是充分条件」——还有大量离散斑块不在洼地里，也有大量洼地不积水。"
+  },
+  "evidence_levels": {
+    "sink_masks_and_areas": "E1（DEM 逐像元复算）",
+    "pixel_and_block_correlations": "E1（可复算的确定量）",
+    "patch_level_touch_rate": "E1（逐斑块复算）",
+    "null_model": "E3（随机平移零假设，未控制地形可达性）",
+    "causal_link_sink_to_discrete_patch": "E3（空间重合是相关描述，非因果证明）",
+    "outlet_position": "E4 未测"
+  },
+  "caveats": [
+    "空间重合率是相关描述，不是因果证明；洼地与积水重合不等于积水由洼地造成。",
+    "计划未定义「相关系数」的计算口径；本文件给出 3 类指标 × 5 种洼地口径，不挑口径。",
+    "随机平移零假设未控制地形可达性，lift 是保守下界，不是精确显著性检验。",
+    "fill_volume 是地形诊断量，不是模型蓄水量，不得与 res.mass 的 Vol 比较闭合。",
+    "Priority-Flood 填洼只作诊断派生，不产出候选 DEM，不替代真实地形。",
+    "D8 出口位置 E4 未测；本文件不给出口位置或按边出流占比结论。"
+  ]
+}

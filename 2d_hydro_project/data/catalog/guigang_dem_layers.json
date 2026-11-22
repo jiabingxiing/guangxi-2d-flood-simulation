@@ -1,0 +1,79 @@
+{
+  "contract_version": "guigang_dem_layers_v1",
+  "generated_utc": "2026-11-07T04:51:30+00:00",
+  "script": "scripts/stage3/build_guigang_channel_dem.py",
+  "grid": {
+    "res_m": 100.0,
+    "ncols": 669,
+    "nrows": 370,
+    "xllcorner": 325737.8500584208,
+    "yllcorner_asc_header": 2542315.2737933993,
+    "yllcorner_note": "asc 头 yll = AOI 角点最小值（基线约定，与 WarpedVRT 实际底边差 18.5 m）；tif 用真实 transform"
+  },
+  "layers": {
+    "dem_raw": {
+      "files": [
+        "data\\interim\\guigang\\dem_layers\\dem_raw_corridor_100m.asc",
+        "data\\interim\\guigang\\dem_layers\\dem_raw_corridor_100m.tif"
+      ],
+      "sha256": {
+        "asc": "439e9fd89b9962098a274ed13582542691c50640f1e3a833505417c4145b09ac",
+        "tif": "6b1418ffa5c4c2da3bbe69bd8e13ce761225af2275d3314b2c8ddde196c16442"
+      },
+      "edited_cells": 0,
+      "note": "源走廊，未修改"
+    },
+    "dem_hydro": {
+      "files": [
+        "data\\interim\\guigang\\dem_layers\\dem_hydro_corridor_100m.asc",
+        "data\\interim\\guigang\\dem_layers\\dem_hydro_corridor_100m.tif"
+      ],
+      "sha256": {
+        "asc": "439e9fd89b9962098a274ed13582542691c50640f1e3a833505417c4145b09ac",
+        "tif": "6b1418ffa5c4c2da3bbe69bd8e13ce761225af2275d3314b2c8ddde196c16442"
+      },
+      "edited_cells": 0,
+      "note": "v1 零修改（ADR-0012 决策 1：LISFLOOD-FP 非 D8 求解器，真实洼地保留）"
+    },
+    "dem_hydraulic": {
+      "A_d10m": "data\\interim\\guigang\\channel_recon\\d10m",
+      "B_d12m": "data\\interim\\guigang\\channel_recon\\d12m",
+      "C_d14m": "data\\interim\\guigang\\channel_recon\\d14m",
+      "D_d16m": "data\\interim\\guigang\\channel_recon\\d16m",
+      "E_d19m": "data\\interim\\guigang\\channel_recon\\d19m"
+    }
+  },
+  "priors_sha256": "1506050b344a157cfce305a98e45177b88447f9cbcf41d5d88fef880af57f2f9",
+  "centerline": {
+    "file": "data\\interim\\guigang\\yujiang_centerline.geojson",
+    "sha256": "5131efc586061c1e7bfbb900ac1243c716b43fd464b9336637d66f1ab8f7f322",
+    "source": "osm_overpass"
+  },
+  "alpha_recheck": {
+    "A_d10m": {
+      "q_m3s": 4410.0,
+      "alpha": 0.3835,
+      "delta": 2.4e-05
+    },
+    "B_d12m": {
+      "q_m3s": 5822.3,
+      "alpha": 0.5063,
+      "delta": 1.4e-05
+    },
+    "C_d14m": {
+      "q_m3s": 7331.8,
+      "alpha": 0.6375,
+      "delta": 5e-05
+    },
+    "D_d16m": {
+      "q_m3s": 8917.7,
+      "alpha": 0.7754,
+      "delta": 4.9e-05
+    },
+    "E_d19m": {
+      "q_m3s": 11400.4,
+      "alpha": 0.9913,
+      "delta": 4.2e-05
+    }
+  }
+}

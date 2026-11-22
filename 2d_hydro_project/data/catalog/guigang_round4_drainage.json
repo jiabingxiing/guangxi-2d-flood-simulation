@@ -1,0 +1,55 @@
+{
+  "generated_utc": "2026-11-07（日期精度，手工预注册；run meta 另记精确时间戳）",
+  "phase": "Phase H 第四轮（排水天花板与密度敏感性 · 延续 ADR-0014 诊断探针定位）",
+  "mode": "公开数据降级 · 情景级（ADR-0004）；定位与 ADR-0014 相同：诊断探针，不是真实排水网",
+  "preregistration": {
+    "matrix_id": "guigang-round4-sensitivity-v1",
+    "frozen_utc": "2026-11-07",
+    "discipline": "用户 2026-11-07 批准三项后续：①入渗 3.0 mm/h 天花板；②B 档沟密度检验；③G7/S1 口径复核（只读）。参数在本 JSON 冻结后才跑；定位、纪律、禁止表述全部沿用 ADR-0014。",
+    "infiltration_ceiling": {
+      "rate_mm_per_h": 3.0,
+      "prior_note": "华南红壤稳渗 fc 先验上限（loss_high 同源 3.0 mm/h）；超过即超出先验界，不再外推",
+      "purpose": "量化垂直排水的天花板：r3_infil2（2.0）FAR 0.863 vs flow_only 无雨下限 0.817 之间的可收敛幅度"
+    },
+    "drain_tier_B": {
+      "width_m": 100.0,
+      "depth_m": 2.0,
+      "side_slope_z": 2.0,
+      "profile": "smooth_trapezoid（与 A 档同构）",
+      "accumulation_threshold_cells": 200,
+      "min_drain_length_m": 2000.0,
+      "min_spacing_m": 500.0,
+      "max_total_length_km": 400.0,
+      "plain_max_m": 45.0,
+      "delta_vs_A": "仅放宽间距（1000→500 m）与总长上限（120→400 km）；密度假设：A 档零效果 → 检验「密度不足」假说",
+      "canyon_guard": "沿用：单沟 max 下切 > 深度+3 m 整体弃用；平原约束 DEM≤45 m 沿用"
+    },
+    "runs_new": [
+      {"tag": "chhyd_d14_r4_infil3", "dem": "d14m", "rain": "on（毛雨）", "infiltration_mm_h": 3.0, "drains": null, "purpose": "垂直排水天花板", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m --rain on --infiltration 3.0（RUN_TAG=r4_infil3）"},
+      {"tag": "chhyd_d14_r4_drB", "dem": "d14m_drB", "rain": "on（毛雨）", "infiltration_mm_h": null, "drains": "B 档", "purpose": "水平排水密度检验（A 档零效果 → 密度不足假说）", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m_drB --rain on（RUN_TAG=r4_drB）"},
+      {"tag": "chhyd_d14_r4_drB_infil3", "dem": "d14m_drB", "rain": "on（毛雨）", "infiltration_mm_h": 3.0, "drains": "B 档", "purpose": "双轨天花板叠加", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m_drB --rain on --infiltration 3.0（RUN_TAG=r4_drB_infil3）"}
+    ],
+    "anchors": {
+      "chhyd_d14_r3_infil2": {"far": 0.863, "csi": 0.114, "footprint_km2": 33.31, "note": "入渗 2.0 参照"},
+      "flow_only_v1": {"far": 0.817, "note": "无雨下限"}
+    },
+    "expectations_directional": [
+      "r4_infil3 FAR < r3_infil2 的 0.863（入渗单调性）；收敛下界逼近 0.817",
+      "r4_drB FAR < 0.925（密度假说）：若仍 ≈0.925，则水平轨结论升级为「本口径下无效」而非「密度不足」",
+      "r4_drB_infil3 FAR 最低（双轨天花板）"
+    ],
+    "g7_s1_review_readonly": {
+      "tasks": [
+        "apparent offset 全样本表：全部贵港 run 的锚点 WSE vs 站值（更多情景样本下检验 offset 是否趋稳）",
+        "S1 阈值敏感性：sigma20m 在 -19/-17/-15 dB 下的观测水面积与全部情景 CSI/POD/FAR 重算（G17 保守度量化）",
+        "常水景第二时点：09-05 常水观测 vs 模型充槽期（t≈58 h）足迹内对比（河道位置独立验证）"
+      ],
+      "discipline": "只读；G7 只复核证据强度不闭合基准；结论登记不设门"
+    }
+  },
+  "limitations": [
+    "3.0 mm/h 为恒定率无土壤库，过排风险比 2.0 更高（天花板口径本身就是探针）",
+    "B 档沟密度仍是情景假设；若仍无效，水平轨结论升级（登记而非追加 C 档）",
+    "S1 阈值扫描只量化口径敏感性，不改变 -17 dB 主口径；全部结论仍为足迹内重叠度"
+  ]
+}

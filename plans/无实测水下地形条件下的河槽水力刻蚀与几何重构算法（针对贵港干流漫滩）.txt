@@ -1,0 +1,1211 @@
+# 无实测水下地形条件下的郁江贵港段河槽水力刻蚀与几何重构技术调研
+
+## 一、核心结论与技术路线
+
+针对郁江贵港段 11,500 m³/s 左右的洪峰模拟，建议采用“河道几何先验重构 + 水力约束反演 + DEM 梯形/抛物线刻蚀 + 主槽与滩地差异化阻力 + 洪水过程验证”的方案，而不是简单地对河流中心线统一降低若干米。
+
+首先明确一个重要的物理问题：洪峰流量不能单独决定河道宽度和水深。它必须与河床坡降、糙率、河床材料、河岸约束、特征流量频率以及河道输沙条件共同考虑。尤其是 11,500 m³/s 这样的洪峰流量，不应不加区分地当作河道的平滩流量（Bankfull Discharge）。洪峰可能由主槽与滩地共同输送，若直接要求主槽独立承载全部洪峰，反演出来的河槽可能过深。
+
+本次检索还发现了几项有价值的贵港当地资料：
+
+| 资料                         | 公开信息                                                        | 对建模的价值                    |
+| -------------------------- | ----------------------------------------------------------- | ------------------------- |
+| 2023 年贵港石卡郁水作业区泊位工程环评报告    | 评价河段平均河宽约 320 m、枯水期平均水深约 6.9 m、枯水流量约 84.8 m³/s、河流坡降取 0.116‰ | 可作为河宽、低水位水深与坡降的初始先验       |
+| 2018 年贵港定祥山矿山地质环境保护与土地复垦方案 | 引用区域水文资料，记载郁江河宽约 250～300 m、河床深约 25 m、最大流量 12,800 m³/s       | 可作为河槽深度的低置信度上限参考，不能当作实测断面 |
+| 2026 年贵港水文站侧扫雷达流量监测研究      | 披露 40 组比测资料，水位范围 33.16～43.98 m，侧扫雷达流速范围 0.73～2.25 m/s       | 可用于后续流速和水位量级核验            |
+
+上述信息分别见工程环评报告、矿山地质环境调查报告和贵港水文站的近期研究。需要注意，不同资料可能对应不同河段、时刻和水文条件，不能未经空间与高程基准核对就拼接成同一条实测横断面。
+
+[image](https://www.google.com/s2/favicons?domain=https://img.bc0771.com\&sz=32)
+
+img.bc0771.com+2
+
+
+
+由此可以形成一个比较清晰的判断：
+
+郁江贵港段已经有可用于工程先验的河宽、水深、坡降和流速线索，但目前检索到的公开资料不足以提供一套完整、连续、具有统一高程基准的水下地形。 因此，推荐将重构结果定义为“水力一致性河槽先验地形”，而非真实 Bathymetry。
+
+建议采用以下技术流程：
+
+输入数据
+
+DSM/DEM、河道中心线与水面边界、公开水文资料、洪峰流量、土地覆盖
+
+河道几何先验估算
+
+水力几何关系、河宽与水深范围、坡降和糙率约束
+
+水力约束断面反演
+
+Manning 公式、断面面积、流速、主槽输水能力与滩地分流
+
+DEM 河槽刻蚀
+
+河槽中心线定位、变宽变深、梯形/抛物线横断面、纵向平顺与岸坡过渡
+
+二维洪水模拟与阻力校准
+
+主槽与滩地差异化 Manning n、主槽输水能力及洪水漫滩过程
+
+验证与不确定性分析
+
+水位、流速、Sentinel-1 淹没范围、FAR、CSI、洪峰传播时间
+
+这套方案的核心不是“把河道挖深”，而是构造一个在给定洪水流量下，能够维持合理主槽输水能力、并在超过平滩能力后自然向滩地分流的地形和阻力组合。
+
+## 二、经验水力几何关系：能估算什么，不能估算什么
+
+### 2.1 Leopold–Maddock 公式及其适用边界
+
+Leopold 和 Maddock 在 1953 年的经典研究中，提出河道宽度、平均水深和流速与流量之间可以用幂函数描述：
+
+\\[ W=aQ^b,\qquad D=cQ^f,\qquad V=kQ^m \\]
+
+其中：
+
+- \\(W\\)：河道水面宽度或特征河宽，m；
+- \\(D\\)：平均水深，m；
+- \\(V\\)：断面平均流速，m/s；
+- \\(Q\\)：流量，m³/s；
+- \\(a,c,k\\)：经验系数；
+- \\(b,f,m\\)：经验指数。
+
+需要特别区分两类水力几何关系：
+
+1\. At-station hydraulic geometry（同站水力几何）
+
+研究同一河流断面在不同流量下，宽度、水深和流速如何变化。Leopold–Maddock 原始研究给出的平均指数为：
+
+\\[ b\approx 0.26,\quad f\approx 0.40,\quad m\approx 0.34 \\]
+
+2\. Downstream hydraulic geometry（沿程水力几何）
+
+研究同一条河流从上游到下游，在相同流量频率条件下，河宽、水深和流速如何随流量变化。经典平均指数为：
+
+\\[ b\approx 0.50,\quad f\approx 0.40,\quad m\approx 0.10 \\]
+
+这两组指数不能混用。对贵港同一水文站的洪水涨落过程，应优先考虑同站关系；如果研究沿郁江不同河段的河宽与水深变化，则才考虑沿程关系。Dodov 和 Foufoula-Georgiou 的研究进一步指出，同站水力几何指数会随流域尺度变化，且洪水超过平滩阶段后关系可能发生改变。
+
+[image](https://www.google.com/s2/favicons?domain=https://pubs.usgs.gov\&sz=32)
+
+pubs.usgs.gov+2
+
+
+
+### 2.2 为什么不能直接使用洪峰流量反推唯一河槽
+
+以宽浅河道为例，流量关系可以写为：
+
+\\[ Q=A V \\]
+
+而 \\(A\\) 和 \\(V\\) 又分别受到河宽、平均水深、河床坡降、糙率和断面形状影响。
+
+即使 \\(Q=11,500\ \mathrm{m^3/s}\\) 已知，也仍然可能存在多组不同的 \\(W,D,V,n,S\\) 组合，使它们的流量相同。
+
+例如，假设一条河道宽 300 m：
+
+- 深度 10 m，断面输水能力可能不足；
+- 深度 15 m，主槽输水能力显著增加；
+- 深度接近 20 m，在某些坡降及糙率条件下，主槽可能接近独立承载全部洪峰。
+
+因此，不能把一个流量值直接代入 \\(W=aQ^b\\)、\\(D=cQ^f\\)，然后把算出来的几何量视为真实河道尺寸。尤其是经验系数 \\(a,c\\) 不是普适常数，它们必须通过同一地貌区的水文站断面资料、遥感河宽及历史水位流量关系进行拟合。
+
+更稳妥的计算形式是：
+
+\\[ W=W_0\left(\frac{Q}{Q_0}\right)^b \\]
+
+\\[ D=D_0\left(\frac{Q}{Q_0}\right)^f \\]
+
+这种归一化表达可以明确显示：必须有参考流量 \\(Q_0\\) 及对应几何量 \\(W_0,D_0\\)，才能得到可用的估算值。
+
+### 2.3 西江、郁江流域经验系数调查
+
+对郁江贵港段的公开资料和相关文献进行交叉检索后，暂未找到能够直接用于贵港段的、经过公开发表和充分验证的完整水力几何系数：
+
+\\[ (a,b,c,f)\_{\text{郁江贵港段}} \\]
+
+这并不意味着当地没有相关研究数据，而是目前公开检索到的资料没有形成可直接迁移的区域水力几何回归模型。
+
+我建议将当前可以获得的资料分成三个等级。
+
+第一等级：郁江本地水文和工程资料。
+
+2023 年石卡郁水作业区工程环评报告提供了一个较有价值的参考：
+
+- 平均河面宽度约 320 m；
+- 枯水期平均水深约 6.9 m；
+- 枯水期流量约 84.8 m³/s；
+- 评价河段坡降约 0.116‰。
+
+报告明确说明这些数据结合现场调查和资料收集获得。它们可以帮助确定断面尺寸与坡降的初始范围，但 6.9 m 是枯水期平均水深，不是洪峰期间的主槽设计水深。
+
+[image](https://www.google.com/s2/favicons?domain=https://img.bc0771.com\&sz=32)
+
+img.bc0771.com
+
+
+
+另外，2018 年定祥山矿山地质环境保护与土地复垦方案记载，郁江河宽约 250～300 m、河床深约 25 m、最大流量 12,800 m³/s、平均流量 1,450 m³/s。
+
+这组数据对于当前项目尤其值得关注：12,800 m³/s 与模拟洪峰 11,500 m³/s 接近。但它属于矿山环境评价报告引用的区域水文资料，并非贵港模拟计算域内的连续实测河道断面，25 m 也不能直接解释为所有断面统一的设计水深。
+
+[image](https://www.google.com/s2/favicons?domain=https://gg.dnr.gxzf.gov.cn\&sz=32)
+
+gg.dnr.gxzf.gov.cn
+
+
+
+第二等级：同类冲积河流经验模型。
+
+Lee 和 Julien 在 2006 年发表了针对冲积河道的下游水力几何关系研究，使用了 1,485 组数据，其中 1,125 组用于标定，360 组用于验证。
+
+与简单 Leopold–Maddock 关系不同，该研究将粒径、坡降等参数纳入水力几何关系，适合用于进一步建立区域化回归模型。
+
+文献：
+
+Lee, J.-S., & Julien, P. Y. (2006). Downstream Hydraulic Geometry of Alluvial Channels. Journal of Hydraulic Engineering, 132(12), 1347–1352.
+
+DOI: [10.1061/(ASCE)0733-9429(2006)132:12(1347)](https://doi.org/10.1061/\(ASCE\)0733-9429\(2006\)132:12\(1347\)?utm_source=chatgpt.com)。
+
+[image](https://www.google.com/s2/favicons?domain=https://ascelibrary.org\&sz=32)
+
+ascelibrary.org+1
+
+
+
+第三等级：当地水文站反演。
+
+2026 年发表的贵港水文站侧扫雷达流量监测研究值得重点跟进。研究披露了 40 组水位和流速比测资料，并说明洪水涨落、洪水顶托和水库调蓄会使贵港水文站的水流形态较为复杂。
+
+这提示我们，不能简单认为郁江在不同洪水时刻都满足一个固定的水位—流量关系。应尽量取得水文站的流量、水位、实测断面面积及流速配套资料。
+
+[image](https://www.google.com/s2/favicons?domain=https://sxsn.cbpt.cnki.net\&sz=32)
+
+sxsn.cbpt.cnki.net
+
+
+
+建议后续向贵港水文中心或相关航道管理单位获取以下资料：
+
+| 数据     | 建议获取内容                        | 用途        |
+| ------ | ----------------------------- | --------- |
+| 水文断面   | 贵港水文站及上下游典型断面                 | 横断面形态     |
+| 水位流量关系 | 多年水位、流量、涨落水过程                 | 反演水力几何    |
+| 测深资料   | 航道测深图、疏浚前后测深                  | 河床高程控制    |
+| 流速资料   | 走航 ADCP、侧扫雷达比测                | 平均流速与流速分布 |
+| 水面遥感   | Sentinel-1、Sentinel-2、Landsat | 不同水位下的河宽  |
+| 河床材料   | 粒径、泥沙、底质资料                    | 糙率及冲淤特征   |
+
+特别是航道资料，需要区分通航维护水深、航道尺度和整条天然河槽的实际水深。广西航道主管部门公布的郁江维护水深 3.5 m，以及贵港至梧州航道设计尺度中的 4.1 m，是航道通航指标，并不等于郁江主槽只有 3.5～4.1 m 深。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.gxghj.cn\&sz=32)
+
+gxghj.cn+1
+
+
+
+### 2.4 郁江量级河流的河槽几何反演实例
+
+这里采用当地公开资料约束，加上 Manning 公式，进行一组可以复算的工程估算。
+
+注意：以下是模型初始化参数，不是贵港实测断面。
+
+（1）初始参数
+
+| 参数             | 取值          | 依据              |
+| -------------- | ----------- | --------------- |
+| 洪峰流量 \\(Q_p\\) | 11,500 m³/s | 当前模拟条件          |
+| 河槽顶宽 \\(W\\)   | 300 m       | 当地公开资料的初始值      |
+| 河床坡降 \\(S\\)   | 0.000116    | 2023 年环评报告      |
+| 主槽糙率 \\(n\\)   | 0.030       | 清洁、相对顺直天然河道的参考值 |
+| 边坡系数 \\(z\\)   | 2.0         | 假定 2H:1V        |
+| 横断面            | 梯形          | 参数化重建           |
+
+梯形断面：
+
+\\[ B_b=W-2zD \\]
+
+\\[ A=D(B_b+zD) \\]
+
+\\[ P=B_b+2D\sqrt{1+z^2} \\]
+
+\\[ R=\frac{A}{P} \\]
+
+其中 \\(B_b\\) 为槽底宽，\\(A\\) 为过水断面面积，\\(P\\) 为湿周，\\(R\\) 为水力半径。
+
+采用 Manning 公式：
+
+\\[ Q=\frac{1}{n}AR^{2/3}S^{1/2} \\]
+
+根据以上参数求解 \\(D\\)。
+
+（2）假设全部洪峰由主槽承担
+
+数值求解得到：
+
+# 19.12 m
+
+反演得到的主槽水深
+
+河槽顶宽
+
+# 300 m
+
+槽底宽
+
+# 223.5 m
+
+断面面积
+
+# 5,004 m²
+
+断面平均流速
+
+# 2.30 m/s
+
+以上结果以均匀流、固定坡降、固定糙率及梯形断面为前提。
+
+这个结果说明，在所设定的水力条件下，300 m 宽的主槽如果需要独立输送 11,500 m³/s，所需水深接近 19 m。
+
+这个结果与当地资料中约 25 m 的河床深度数量级并不矛盾，但不能据此认定实际河槽深度就是 19 m。
+
+（3）考虑主槽与滩地共同承担洪峰
+
+对于平原过境河流，这个方案更加值得作为初始模拟条件。
+
+主槽只需要承担洪峰中的一部分，其余流量由滩地和漫滩通道输送。
+
+仍固定：
+
+- 河槽顶宽 300 m；
+- \\(S=0.000116\\)；
+- \\(n=0.030\\)；
+- 边坡系数 2:1。
+
+计算不同主槽分流比例：
+
+| 主槽承担洪峰比例 | 主槽流量   | 反演水深    | 平均流速     |
+| -------- | ------ | ------- | -------- |
+| 50%      | 5,750  | 11.90 m | 1.75 m/s |
+| 60%      | 6,900  | 13.44 m | 1.88 m/s |
+| 70%      | 8,050  | 14.92 m | 2.00 m/s |
+| 100%     | 11,500 | 19.12 m | 2.30 m/s |
+
+主槽分流比例与反演水深
+
+固定顶宽300m、n=0.03、坡降0.116‰和2:1边坡的计算结果。
+
+0 m6 m12 m18 m24 m50%60%70%100%
+
+从工程角度，我建议先把 11～15 m 作为主槽水深敏感性分析的重点区间，19 m 左右作为主槽独立承载洪峰的上限情景。
+
+这不是说真实河槽水深必然落在 11～15 m，而是该范围可以用于测试主槽与滩地分流机制是否合理。
+
+（4）反推河床底高程
+
+河床底高程应沿河道中心线连续变化：
+
+\\[ Z_b(s)=Z\_{\mathrm{bank}}(s)-D(s) \\]
+
+其中：
+
+- \\(s\\)：沿河道中心线的里程；
+- \\(Z\_{\mathrm{bank}}(s)\\)：对应断面的参考平滩水位或主槽岸顶控制高程；
+- \\(D(s)\\)：估算的主槽设计水深；
+- \\(Z_b(s)\\)：重构河床底高程。
+
+举例，假设某断面的参考平滩高程为 40.00 m：
+
+- 水深 13.44 m 时，槽底高程为 26.56 m；
+- 水深 19.12 m 时，槽底高程为 20.88 m。
+
+这里的 40.00 m 只是高程换算示例，不是贵港该断面的实测水位。
+
+实际工程中，应从同一高程基准下的水文站水位、河岸高程或历史水面高程获取 \\(Z\_{\mathrm{bank}}\\)。不能直接将不同 DEM、不同测站的高程拼接。
+
+## 三、DEM 自动水动力调理与河槽刻蚀算法
+
+这里有一个必须先区分的概念：
+
+Hydro-conditioning 的目标是使 DEM 满足合理的水文连通性；Channel Carving 的目标是改变河床几何，使河道具备合理的水力输水能力。
+
+两者不能混为一谈。
+
+### 3.1 国际主流算法对比
+
+| 算法                 | 核心机制            | 优点          | 缺点          | 对贵港项目的适用性   |
+| ------------------ | --------------- | ----------- | ----------- | ----------- |
+| Depression Filling | 填平洼地            | 简单、稳定       | 可能消除真实蓄水洼地  | 仅用于非真实坑洼    |
+| DEM Breaching      | 寻找低成本路径切开洼地     | 修改范围较小      | 不负责恢复整个河槽   | 推荐用于障碍物处理   |
+| Stream Burning     | 对水系掩膜直接降低高程     | 简单、自动化      | 易产生陡坎和不自然断面 | 不适合直接作为最终河床 |
+| AGREE              | 河线深刻蚀+缓冲区线性高程过渡 | 具有平滑岸坡过渡    | 深度仍需人为设定    | 值得借鉴        |
+| Priority-Flood     | 优先队列搜索并处理洼地     | 高效、经典       | 不是河槽物理重建算法  | 推荐用于水文预处理   |
+| MERIT Hydro        | 水域概率约束高程，提取水系   | 全球水系数据质量较高  | 不等于真实水下地形   | 推荐作为水系先验    |
+| Channel Carving    | 根据断面几何直接重构河槽    | 能控制深度、宽度和形态 | 依赖先验参数      | 本项目的核心算法    |
+
+下面讨论它们的实际价值。
+
+### 3.2 DEM Breaching：优先开槽破洼
+
+经典文献：
+
+Wang, L., & Liu, H. (2006). An efficient method for identifying and filling surface depressions in digital elevation models for hydrologic analysis and modelling.
+
+International Journal of Geographical Information Science, 20(2), 193–213.
+
+DOI：[10.1080/13658810500433453](https://doi.org/10.1080/13658810500433453?utm_source=chatgpt.com)。
+
+这类算法通过计算洼地出口与内部最低点之间的路径代价，寻找成本较低的地形切割路径。
+
+基本原理：
+
+1. 识别 DEM 中的洼地。
+2. 确定洼地的最低出口。
+3. 通过邻域搜索确定能够连接下游的最低代价路径。
+4. 沿路径降低 DEM。
+5. 对剩余的伪洼地进行必要的填充或修正。
+
+与直接填洼相比，Breaching 的主要优势是尽可能保留原始地形，只在必要位置形成排水通道。
+
+随后 Lindsay 于 2016 年提出了高效的混合填洼与破洼方法。
+
+Lindsay, J. B. (2016). Efficient hybrid breaching-filling sink removal methods for flow path enforcement in digital elevation models.
+
+Hydrological Processes, 30, 846–857.
+
+DOI：[10.1002/hyp.10648](https://doi.org/10.1002/hyp.10648?utm_source=chatgpt.com)。
+
+[image](https://www.google.com/s2/favicons?domain=https://doi.org\&sz=32)
+
+DOI+1
+
+
+
+在贵港项目中的作用：
+
+适合处理：
+
+- DEM 中的道路阻断；
+- 堤防、围堰导致的伪洼地；
+- 河道连通路径上的高程错误；
+- 栅格插值形成的局部地形屏障。
+
+不适合直接解决：
+
+- 整条郁江没有河床的问题；
+- 主槽横断面过浅的问题；
+- 11,500 m³/s 洪峰下的河槽输水能力不足问题。
+
+原因是 Breaching 本质上只寻找排水路径，并不负责恢复整个河道的宽度、深度和断面面积。
+
+### 3.3 Stream Burning：河流栅格刻蚀
+
+Stream Burning 是最容易实现的河道刻蚀算法。
+
+其基本公式：
+
+\\[ Z\_{\mathrm{burn}}(x,y)= \begin{cases} Z\_{\mathrm{DEM}}(x,y)-d_b,&(x,y)\in R\\\ Z\_{\mathrm{DEM}}(x,y),&\text{otherwise} \end{cases} \\]
+
+其中 \\(R\\) 是河道栅格掩膜，\\(d_b\\) 是刻蚀深度。
+
+例如：
+
+- 将河道中心线栅格化；
+- 对河道内像元统一降低 5 m；
+- 得到一个水系连通的低地形通道。
+
+它适用于水文分析中的流向强制约束，但存在两个明显问题。
+
+第一，河道宽度取决于矢量线栅格化方式，容易出现 1～2 个像元的宽度误差。
+
+第二，河道横断面可能表现为平底矩形沟槽，甚至形成突变的垂直边界，不符合天然冲积河流的几何形态。
+
+对于郁江，不能直接采用：
+
+```
+dem[river_mask] -= 5.0
+```
+
+这样的单一深度刻蚀作为最终物理地形。
+
+更合适的是将它作为初级水系纠偏工具，而后再构造具有明确横断面结构的河槽。
+
+### 3.4 AGREE 算法：值得借鉴的缓坡重构思想
+
+AGREE 由 Ferdi Hellweger 提出，是经典 DEM Surface Reconditioning 技术。
+
+其主要步骤：
+
+1. 沿河流矢量降低高程；
+2. 对河道中心线进行缓冲区扩展；
+3. 根据缓冲区外侧的原始 DEM 高程，建立中心线到外部地形的过渡坡面；
+4. 通过锐降距离（Sharp Drop Distance）进一步控制河流中心线高程。
+
+AGREE 的主要思想是：
+
+河道中心线附近的高程强制降低，而缓冲区内部通过插值逐渐恢复到原始地形。
+
+原始资料：[AGREE – DEM Surface Reconditioning System](https://www.caee.utexas.edu/prof/maidment/GISHYDRO/ferdi/research/agree/agree.html?utm_source=chatgpt.com)。
+
+[image](https://www.google.com/s2/favicons?domain=https://caee.webhost.utexas.edu\&sz=32)
+
+DEM Surface Reconditioning System+1
+
+
+
+对于本项目，AGREE 最大的价值不在于它的固定刻蚀深度，而在于它的过渡函数设计。
+
+但需要改进：
+
+原始 AGREE 并不具备根据设计流量计算主槽水深的能力。它仍然需要人为确定刻蚀深度和河道缓冲宽度。
+
+我建议将其改造成：
+
+\\[ Z(x,y)=Z_b(s)+D(s)[1-F(d)] \\]
+
+其中：
+
+- \\(Z_b(s)\\)：沿程河床底高程；
+- \\(D(s)\\)：沿程最大刻蚀深度；
+- \\(d\\)：像元到河道中心线的横向距离；
+- \\(F(d)\\)：横断面几何函数。
+
+这样就把 AGREE 的平滑过渡思想和水力几何反演结合起来了。
+
+### 3.5 Priority-Flood 与河槽刻蚀的关系
+
+Barnes 等人在 2014 年发表了 Priority-Flood 算法。
+
+文献：
+
+Barnes, R., Lehman, C., & Mulla, D. (2014). Priority-flood: An optimal depression-filling and watershed-labeling algorithm for digital elevation models.
+
+Computers & Geosciences, 62, 117–127.
+
+DOI：[10.1016/j.cageo.2013.04.024](https://doi.org/10.1016/j.cageo.2013.04.024?utm_source=chatgpt.com)。
+
+Priority-Flood 通过优先队列搜索地形边界和内部洼地，确定合理的溢流高程和流向。
+
+它能够解决：
+
+- 假洼地；
+- 地形平坦区；
+- 流向中断；
+- 部分栅格高程噪声。
+
+但是必须强调：
+
+Priority-Flood 是洼地处理算法，不是河床生成算法。
+
+对于贵港的实际二维洪水模型，更合理的做法是将真实洪泛区洼地保留在物理 DEM 中，而不是全部填平。
+
+建议维护两套 DEM：
+
+| 数据          | 用途            | 是否全局填洼               |
+| ----------- | ------------- | -------------------- |
+| `DEM_flow`  | D8/D∞ 流向和汇流分析 | 可以采用有约束的 Fill/Breach |
+| `DEM_hydro` | 二维地表水动力计算     | 不应消除真实地形洼地           |
+
+另外，真实河槽刻蚀完成后，不应再对物理 DEM 执行一次不加约束的全局填洼，否则有可能把刚刚重建的河槽重新填掉。
+
+### 3.6 HydroSHEDS 和 MERIT Hydro
+
+这里特别推荐研究 MERIT Hydro。
+
+Yamazaki 等人在 2019 年发表：
+
+MERIT Hydro: A High-Resolution Global Hydrography Map Based on Latest Topography Dataset.
+
+Water Resources Research, 55(6), 5053–5073.
+
+DOI：[10.1029/2019WR024873](https://doi.org/10.1029/2019WR024873?utm_source=chatgpt.com)。
+
+MERIT Hydro 使用约 90 m 分辨率的基础数据，综合 DEM、水体概率、Landsat 水体数据和 OpenStreetMap 水系信息，建立全球水系和河道宽度数据。
+
+[image](https://www.google.com/s2/favicons?domain=https://agupubs.onlinelibrary.wiley.com\&sz=32)
+
+AGU Journals+1
+
+
+
+但要特别注意它的一个技术细节。
+
+MERIT Hydro 在水域像元上执行了 3～20 m 的高程降低，以便改善河网提取和流向确定。这个降低量与水体出现概率有关。
+
+它并没有声称这些降低量就是实际河床深度。
+
+论文还明确指出，即使经过水文调理，其水域高程仍然代表水面而不是河床，需要进一步研究水下地形反演。
+
+[image](https://www.google.com/s2/favicons?domain=https://agupubs.onlinelibrary.wiley.com\&sz=32)
+
+Wiley Online Library+1
+
+
+
+这对当前项目非常重要：
+
+- MERIT Hydro 可用于确定河道中心线；
+- MERIT Hydro 可用于辅助判断河道宽度；
+- MERIT Hydro 可提供水文连通性；
+- 不应该直接将其水域高程当作河床高程；
+- 不应该直接把 MERIT 的 3～20 m 降低量当成郁江真实水深。
+
+## 四、近年开源 Python 地理空间算法库调研
+
+截至 2026 年 11 月，比较推荐的组合是 WhiteboxTools + Rasterio + GeoPandas + Shapely + SciPy。RichDEM 和 PySheds 可以作为补充。
+
+### 4.1 开源算法库对比
+
+| 项目            | 主要能力                      | DEM 处理 | 是否直接支持本文所需的完整河槽几何重建 |
+| ------------- | ------------------------- | ------ | ------------------- |
+| WhiteboxTools | 水文地形分析、破洼、河网处理            | 强      | 需要自定义               |
+| RichDEM       | Priority-Flood、流向、汇流、地形分析 | 强      | 需要自定义               |
+| PySheds       | DEM 水文分析、流向、汇流、流域提取       | 强      | 需要自定义               |
+| PyOSP         | 地形剖面及地貌特征分析               | 辅助     | 不适合直接做河道刻蚀          |
+| Rasterio      | GeoTIFF 栅格读写、栅格化          | 基础     | 可作为实现基础             |
+| Shapely       | 河道距离、缓冲区、线性里程计算           | 基础     | 可作为实现基础             |
+
+有一个名称问题需要纠正：你提到的 PyOSP，公开文档中的全称是 Python Object-oriented Swath Profile，主要用于地形剖面和地貌特征的智能条带分析，不是 DEM 河网刻蚀或水文调理库。这里更可能需要的是 PySheds。
+
+[image](https://www.google.com/s2/favicons?domain=https://pyosp.readthedocs.io\&sz=32)
+
+pyosp 0.1.7 documentation+1
+
+
+
+### 4.2 WhiteboxTools：首选水文预处理工具
+
+WhiteboxTools 提供 Python 前端，相关工具包括：
+
+```
+from whitebox.whitebox_tools import WhiteboxToolswbt = WhiteboxTools()wbt.verbose = False# DEM 破洼wbt.breach_depressions(    dem="dem_raw.tif",    output="dem_breached.tif")# DEM 填洼wbt.fill_depressions(    dem="dem_raw.tif",    output="dem_filled.tif")# 流向wbt.d8_pointer(    dem="dem_breached.tif",    output="flow_direction.tif")
+```
+
+对于有明确河道矢量数据的情况，还可以研究其 Stream Burning 和 Topological Breach Burn 工具。
+
+WhiteboxTools Python 前端采用 MIT 许可证，WhiteboxTools 核心算法项目应单独核对其版本和许可证。当前公开文档也提供了基于最小代价的破洼及拓扑河网处理接口。
+
+[image](https://www.google.com/s2/favicons?domain=https://pypi.org\&sz=32)
+
+PyPI+2
+
+
+
+建议将 WhiteboxTools 用于：
+
+- 水文预处理；
+- 排除伪洼地；
+- 河道中心线与 DEM 对齐；
+- 河网流向和汇流计算。
+
+不要依赖它单独完成郁江复杂的水力几何重建。
+
+### 4.3 RichDEM：适合研究 Priority-Flood
+
+RichDEM 主要由 C++ 实现，并提供 Python 接口。
+
+项目地址：[RichDEM GitHub](https://github.com/r-barnes/richdem?utm_source=chatgpt.com)。
+
+适合研究：
+
+- Priority-Flood；
+- 填洼和破洼；
+- D8、D∞ 流向；
+- 流域分割；
+- 地形属性计算。
+
+不过它是较早期的研究型工具，建议在 2026 年的工程环境中检查其 Python、NumPy 和编译链的兼容性，不能只依据项目仍然可以访问就认为其适合直接作为长期维护的核心依赖。
+
+[image](https://www.google.com/s2/favicons?domain=https://github.com\&sz=32)
+
+GitHub
+
+
+
+### 4.4 PySheds：Python 原生水文分析
+
+PySheds 的基本流程如下：
+
+```
+from pysheds.grid import Gridgrid = Grid.from_raster("dem.tif")dem = grid.read_raster("dem.tif")pit_filled = grid.fill_pits(dem)dep_filled = grid.fill_depressions(pit_filled)flat_resolved = grid.resolve_flats(dep_filled)fdir = grid.flowdir(flat_resolved)acc = grid.accumulation(fdir)
+```
+
+PySheds 的主要优势是接口轻量、适合 Python 工程集成，可以方便地研究河道网络提取及其与 DEM 的对应关系。
+
+其官方仓库和 PyPI 均可查到相关项目资料，PyPI 于 2025 年发布了 0.5 版本。
+
+[image](https://www.google.com/s2/favicons?domain=https://github.com\&sz=32)
+
+GitHub+1
+
+
+
+### 4.5 最终开源技术栈建议
+
+贵港河槽重构推荐技术栈
+
+核心
+
+自研 Python Channel Carving
+
+河槽几何、横断面刻蚀、纵向高程控制与参数敏感性分析
+
+核心
+
+Rasterio + GeoPandas + Shapely + SciPy
+
+栅格处理、河道几何、空间索引与数值求解
+
+预处理
+
+WhiteboxTools
+
+DEM Breaching、Fill、流向和河道拓扑调理
+
+辅助
+
+PySheds / RichDEM
+
+流域分析、Priority-Flood、地形水文诊断
+
+数值验证
+
+LISFLOOD-FP / HEC-RAS 2D
+
+独立断面水力校核及二维洪水模拟
+
+## 五、河道糙率与 100 m 网格参数化
+
+### 5.1 Manning 糙率的建议范围
+
+用户提出的主槽 0.025～0.030、滩地 0.045～0.080，整体方向合理，但需要考虑河流实际状态。
+
+HEC-RAS Hydraulic Reference Manual 6.6 的 Manning 糙率参考表给出了以下天然河道范围：
+
+| 地形类型              | 糙率 n             | 推荐初始取值      |
+| ----------------- | ---------------- | ----------- |
+| 清洁、顺直、无明显深潭和浅滩的主槽 | 0.025～0.033      | 0.030       |
+| 有一定弯曲、局部浅滩和深潭     | 0.033～0.045      | 0.038～0.040 |
+| 有杂草、石块和明显不规则河床    | 0.035～0.050      | 0.042       |
+| 缓流、深潭、杂草较多        | 0.050～0.080      | 0.060～0.070 |
+| 植被较少的草地滩区         | 0.025～0.050      | 0.035～0.045 |
+| 灌木、林地及复杂植被滩区      | 0.070～0.150 甚至更高 | 由土地覆盖确定     |
+
+HEC-RAS 明确指出，糙率还受到植被、河床不规则性、障碍物、河道弯曲、流量和水位变化等因素影响，应该尽可能利用实际水位资料率定，而不是只根据地物类型赋值。
+
+[image](https://www.google.com/s2/favicons?domain=https://www.hec.usace.army.mil\&sz=32)
+
+水文工程中心+1
+
+
+
+针对郁江，推荐第一轮设置如下：
+
+| 区域        | 初始糙率  | 敏感性范围       |
+| --------- | ----- | ----------- |
+| 主槽核心区     | 0.030 | 0.025～0.035 |
+| 主槽边缘及岸坡   | 0.035 | 0.030～0.045 |
+| 开阔滩地区     | 0.045 | 0.035～0.055 |
+| 农田和草地     | 0.050 | 0.035～0.065 |
+| 灌木、密集植被区域 | 0.075 | 0.060～0.100 |
+| 建筑密集区     | 0.100 | 0.080～0.160 |
+
+实际赋值应以当地土地覆盖数据和洪水期植被状态为准。
+
+### 5.2 为什么主槽低糙率可以减少过早漫滩？
+
+Manning 公式：
+
+\\[ Q=\frac{1}{n}AR^{2/3}S^{1/2} \\]
+
+在断面几何、坡降和水力半径不变时：
+
+\\[ Q\propto\frac{1}{n} \\]
+
+假设主槽糙率由 0.045 降至 0.030：
+
+\\[ \frac{Q\_{0.030}}{Q\_{0.045}} =\frac{0.045}{0.030}=1.5 \\]
+
+也就是说，相同断面条件下，主槽输水能力提高约 50%。
+
+这确实有助于降低主槽水位、延缓向滩地漫流。
+
+但要注意两点：
+
+第一，糙率降低并不会增加河槽容积。河床过浅、过水面积不足时，降低 n 不能替代河槽几何重建。
+
+第二，不能为了避免漫滩而无限降低主槽糙率。否则会导致流速偏高、水位偏低，洪水传播时间和水动力过程出现偏差。
+
+推荐的调参顺序是先调整主槽断面，再校准糙率，最后调整主槽与滩地之间的流量分配。
+
+### 5.3 不要简单使用混合网格的算术平均糙率
+
+100 m 网格下，部分像元可能同时覆盖河道和河岸。
+
+假设一个像元：
+
+- 60% 为河道；
+- 40% 为草地滩地。
+
+不能简单计算：
+
+\\[ n\_{\mathrm{eq}}=0.6n\_{\mathrm{channel}}+ 0.4n\_{\mathrm{floodplain}} \\]
+
+更合理的方式是根据流动方向及断面分区的输水能力计算复合糙率。
+
+对于同一断面中并联输水的分区，可以采用：
+
+\\[ K\_{\mathrm{total}}= \sum_i\frac{A_iR_i^{2/3}}{n_i} \\]
+
+\\[ n\_{\mathrm{eq}}= \frac{A\_{\mathrm{total}}R\_{\mathrm{total}}^{2/3}} {\sum_i A_iR_i^{2/3}/n_i} \\]
+
+其中 \\(K\\) 为 Manning 输水能力。
+
+这是一种断面分区复合计算方法。对于二维网格的单元级阻力混合，还需要根据模型的离散形式确定等效阻力，不能不加区分地直接套用上述断面公式。
+
+### 5.4 100 m 网格下的河道表达问题
+
+郁江河宽约 200～400 m，而当前模拟网格分辨率为 100 m。
+
+这意味着：
+
+\\[ N\_{\mathrm{channel}}= \frac{W}{\Delta x}=2\sim4 \\]
+
+主槽只有 2～4 个网格宽度。
+
+这属于比较勉强的显式河槽分辨率。
+
+主要问题包括：
+
+1. 河道中心线与栅格中心不重合时，实际刻蚀宽度可能发生明显变化。
+2. 300 m 河道的边界可能因为栅格取整而变化 100 m。
+3. 主槽和滩地容易落在同一网格内，无法完整表达断面几何。
+4. 河道转弯处，栅格化河道可能出现局部宽窄跳变。
+5. 水位上涨时，单元高程的代表性会影响水面与河床之间的有效过水面积。
+
+这里推荐研究亚网格河道（Subgrid Channel）方案。
+
+一项针对河道空间分辨率和维度建模的研究，已经展示了将河道中心线作为亚网格结构，并为各网格单独指定河道宽度和床面高程的建模方法。
+
+[image](https://www.google.com/s2/favicons?domain=https://onlinelibrary.wiley.com\&sz=32)
+
+Wiley Online Library
+
+
+
+建议有两种实施路线。
+
+路线 A：提高河道区域 DEM 分辨率。
+
+主槽附近使用 20～30 m DEM，外围滩地区域仍然使用 100 m。
+
+这样可以得到：
+
+- 200 m 河宽：约 7～10 个像元；
+- 300 m 河宽：约 10～15 个像元；
+- 400 m 河宽：约 13～20 个像元。
+
+但这要求二维求解器支持非结构网格、局部网格细化或者嵌套计算。
+
+路线 B：100 m 网格维持不变，增加亚网格河道参数。
+
+每个主槽网格增加：
+
+```
+channel_widthchannel_bottom_widthchannel_bed_elevationchannel_depthchannel_roughnesschannel_fraction
+```
+
+水动力求解时，不只使用整个 100 m 单元的平均地形，而是考虑单元内部的河道过水面积和输水能力。
+
+我更倾向于路线 B 作为现有 100 m 模型的改造方案。如果目前的二维求解器无法支持亚网格河道，则至少需要采用高分辨率河槽几何聚合，而不是对 100 m DEM 做简单的中心线像元减高。
+
+## 六、Python 河槽水力刻蚀核心实现
+
+下面给出一份可集成进现有 DEM 洪涝推演项目的核心实现。
+
+设计目标：
+
+- 读取原始 DEM；
+- 读取郁江河道中心线；
+- 根据水力几何参数定义沿程河宽和水深；
+- 支持梯形、圆滑梯形和抛物线断面；
+- 根据纵向参考水位计算河床底高程；
+- 对河道像元执行地形刻蚀；
+- 保留河道外围的原始 DEM；
+- 输出新的 GeoTIFF。
+
+### 6.1 整体断面模型
+
+首先定义横断面。
+
+对于顶宽为 \\(W\\)、底宽为 \\(B\\)、最大水深为 \\(D\\) 的梯形河槽：
+
+\\[ B=\beta W \\]
+
+其中 \\(\beta\\) 为底宽比例。
+
+这里建议初始取：
+
+\\[ \beta=0.65 \\]
+
+以贵港河段顶宽 300 m 为例：
+
+\\[ B=0.65\times300=195\ \mathrm{m} \\]
+
+实际数值计算中，需要保证底宽、侧坡系数和水深之间的一致性。对于前面 Manning 反演实例中的 2:1 边坡，若水深为 13.44 m，则底宽约为 246.2 m，对应底宽比例约为 0.82，而不是 0.65。
+
+因此，代码将底宽比例作为可配置参数，实际工程中建议优先根据水力计算得到的梯形断面，而不是固定使用统一比例。
+
+横向距离：
+
+\\[ d=\operatorname{dist}((x,y),\text{Centerline}) \\]
+
+对于梯形断面：
+
+\\[ F(d)= \begin{cases} 1,&d\leq B/2\\\ 1-G(u),&B/2\<d\leq W/2\\\ 0,&d>W/2 \end{cases} \\]
+
+其中：
+
+\\[ u=\frac{d-B/2}{(W-B)/2} \\]
+
+使用平滑过渡函数：
+
+\\[ G(u)=3u^2-2u^3 \\]
+
+最终地形：
+
+\\[ \boxed{ Z\_{\mathrm{new}}(x,y) = Z\_{\mathrm{bank}}(s)-D(s)F(d) } \\]
+
+这里采用的是圆滑梯形剖面：底部保持平坦，边坡使用平滑曲线过渡到两岸。
+
+[Channel geometry - LISFLOOD](https://images.openai.com/static-rsc-4/vf1XUZfQB-HJmUCR_VMFCF3-g_tFrQBq0nkPO16ALqF28GceASIUvrLd6O1Odg6DFitjRZLlthWVnEU-Sbs_fVmkH4e0yfQrvIh_VCwMag8GVafRHcBB0YPjZDHjmQHI27-0PsPHf4REVD1IeCGPEQc_9jn9bcomnk0jefXwClE?purpose=inline)
+
+[ec-jrc.github.io](https://ec-jrc.github.io/lisflood-code/4_Static-Maps_channel-geometry/?utm_source=chatgpt.com)
+
+对于抛物线剖面：
+
+\\[ F(d)=\max\left(0,1-\left(\frac{2d}{W}\right)^2\right) \\]
+
+二者的区别：
+
+- 梯形：能够直接控制底宽，适合人工设定主槽底宽与边坡。
+- 抛物线：横向过渡连续，适合表达较圆滑的天然冲积河床。
+- 圆滑梯形：兼顾平底和边坡过渡，我建议作为第一版默认形状。
+
+### 6.2 Manning 断面水深反演代码
+
+首先实现断面输水能力计算。
+
+```
+import numpy as npfrom scipy.optimize import brentqdef manning_trapezoid(    width_top: float,    depth: float,    side_slope: float = 2.0,    roughness: float = 0.03,    slope: float = 0.000116,) -> dict:    """    计算梯形河槽的 Manning 输水能力。    side_slope: 水平:垂直，例如 2.0 表示 2H:1V    width_top: 断面顶宽（m）    depth: 水深（m）    """    if min(width_top, depth, roughness, slope) <= 0:        raise ValueError("河宽、水深、糙率和坡降必须为正数")    z = side_slope    bottom_width = width_top - 2.0 * z * depth    if bottom_width <= 0:        raise ValueError(            "槽底宽度小于等于零，请调整河宽、边坡或水深"        )    area = depth * (bottom_width + z * depth)    perimeter = (        bottom_width        + 2.0 * depth * np.sqrt(1.0 + z**2)    )
+```
+
+这部分负责根据不同流量和断面条件生成水深先验。
+
+后续可以让它批量生成：
+
+```
+channel_scenario_01.json
+channel_scenario_02.json
+channel_scenario_03.json
+```
+
+分别对应浅槽、中槽、深槽，供二维模拟开展参数敏感性分析。
+
+### 6.3 完整 DEM 河槽刻蚀实现
+
+下面实现真正的栅格刻蚀。
+
+依赖：
+
+```
+pip install numpy rasterio geopandas shapely scipy
+```
+
+建议 Shapely 使用 2.x，以使用矢量化几何运算。
+
+算法输入：
+
+```
+dem.tif
+yujiang_centerline.shp
+```
+
+同时提供沿河道里程变化的：
+
+```
+station_mwidth_mdepth_mbank_elevation_m
+```
+
+其中：
+
+- `station_m`：沿中心线里程；
+- `width_m`：河道顶宽；
+- `depth_m`：最大水深；
+- `bank_elevation_m`：参考平滩高程。
+
+完整核心代码：
+
+```
+from pathlib import Pathimport numpy as npimport geopandas as gpdimport rasteriofrom rasterio.features import rasterizefrom shapely.ops import linemergefrom shapely import (    points,    distance,    line_locate_point,)def smoothstep(x):    """三次平滑过渡函数。"""    x = np.clip(x, 0.0, 1.0)    return x * x * (3.0 - 2.0 * x)def channel_shape(    distance_m,    width_m,    bottom_ratio=0.65,    profile_type="trapezoid",):    """    根据横向距离计算断面归一化深度。    返回范围：[0, 1]    1：河槽底部
+```
+
+上面的最后一个返回字段只用于表示示例中的预留统计接口，不参与地形处理；实际工程中可删除该字段，或改为对 `out[r, c]` 求最小值。核心刻蚀逻辑不依赖它。
+
+调用示例：
+
+```
+# 例如，河道总长度约 10 kmstation_m = np.array([    0, 2000, 4000, 6000, 8000, 10000])# 沿程顶宽width_m = np.array([    280, 290, 300, 310, 300, 290])# 沿程最大深度depth_m = np.array([    12.0, 13.0, 13.5, 14.0, 13.5, 12.5])# 假设上游参考平滩高程 42.0 m# 采用 0.116‰ 的线性下降坡度bank_z = 42.0 - station_m * 0.000116result = carve_channel_dem(    dem_path="dem_raw.tif",    centerline_path="yujiang_centerline.shp",    output_path="yujiang_carved.tif",    station_m=station_m,    width_m=width_m,    depth_m=depth_m,    bank_elevation_m=bank_z,    bottom_ratio=0.80,    profile_type="trapezoid",)print(result)
+```
+
+这里的里程长度、宽度和水深数组均为演示数据。正式运行时必须以贵港实际河段长度和经过水力计算确定的参数替代。示例中的参考高程 42.0 m 也不是实测值。
+
+### 6.4 这个实现需要进一步强化的地方
+
+上面的算法是一个可以运行的像元中心刻蚀原型，但对于 100 m 网格的生产级模型，还需要完成四项增强。
+
+第一，横断面亚像元采样。
+
+100 m 网格下，建议对每个河槽像元采用 4×4 或 8×8 子像元采样，估计河道在像元内的占比和有效河床高程。
+
+否则 300 m 河道在横向上只有约 3 个像元，中心线轻微移动就可能造成明显的断面变化。
+
+第二，河道纵向平顺。
+
+不应简单地使用每个断面独立的深度值。要对沿程槽底高程执行平滑和单调性检查：
+
+\\[ Z_b(s+\Delta s)\leq Z_b(s) \\]
+
+这里的单调关系只针对正常顺流下降河段；遇到天然深潭、回水区、枢纽上下游或水位控制区，需要允许真实的水力变化，不能机械强制单调。
+
+第三，限制地形修改范围。
+
+不能为了得到连续主槽，随意穿过河岸高地、堤防、道路和自然高地。
+
+应当同时使用：
+
+- 主槽水面掩膜；
+- 河道中心线；
+- 河岸线或河槽边界；
+- 已知堤防和道路数据。
+
+第四，输出刻蚀质量报告。
+
+建议每次运行输出：
+
+```
+carve_statistics.json
+
+{
+    "channel_length_km": 10.0,
+    "channel_width_min_m": 280,
+    "channel_width_max_m": 310,
+    "depth_min_m": 12.0,
+    "depth_max_m": 14.0,
+    "modified_pixel_count": 0,
+    "mean_dem_change_m": 0,
+    "max_dem_change_m": 0,
+    "longitudinal_slope_min": 0,
+    "longitudinal_slope_max": 0
+}
+```
+
+其中示例中的统计数值需要由实际输出计算，不能直接使用示例中的零值。
+
+## 七、工程验证：怎样判断重构的河槽是否合理？
+
+这一环节实际上比刻蚀代码本身更加重要。
+
+由于缺乏实测水下地形，不能仅以刻蚀后的 DEM 看起来像不像河道来评价算法，需要通过水动力学一致性和遥感淹没结果两方面进行验证。
+
+### 7.1 第一层：河槽几何检查
+
+对重构后的河道进行以下检查：
+
+| 检查指标     | 检查内容                    |
+| -------- | ----------------------- |
+| 河道中心线连续性 | 是否出现断槽、跳跃和局部抬高          |
+| 河槽宽度     | 是否与 250～320 m 等当地资料量级相符 |
+| 河床纵向坡降   | 是否存在不合理的逆坡和突变           |
+| 横断面结构    | 是否出现尖锐坎、孤立深坑            |
+| 河槽与两岸衔接  | 是否产生过大的局部落差             |
+| 河槽高程变化   | 是否存在不合理的突然加深或变浅         |
+
+尤其需要检查河槽底部的纵向坡度。
+
+如果每个横断面独立设置水深，很容易产生：
+
+```
+上游       下游
+  \          /
+   \____    /
+        \__/
+```
+
+这类不合理的河床起伏可能形成数值上的局部蓄水区，甚至阻断实际水流。
+
+建议将沿程深度参数设为连续函数，并检查河床底高程、纵向坡降和局部曲率。
+
+### 7.2 第二层：水力输水能力检查
+
+对于重建后的断面，需要验证：
+
+\\[ Q\_{\mathrm{calculated}} \approx Q\_{\mathrm{target}} \\]
+
+并检查：
+
+- 主槽断面流速是否合理；
+- 洪峰到达时间是否合理；
+- 主槽水位是否连续；
+- 主槽是否能够承担预设比例的洪峰；
+- 超过主槽输水能力后，是否能够自然向滩地扩散。
+
+需要特别说明，前面的 0.116‰ 是当地工程报告采用的河流坡降参考值，不一定等于不同水位条件下的能量坡降 \\(S_f\\)。郁江存在洪水顶托和水库调蓄影响，因此不能把它固定当成所有洪水时刻的能量坡降。应通过水文站水位和流速资料进一步校准。
+
+[image](https://www.google.com/s2/favicons?domain=https://img.bc0771.com\&sz=32)
+
+img.bc0771.com+1
+
+
+
+### 7.3 第三层：Sentinel-1 洪水淹没验证
+
+针对当前 FAR 达到 82%～92% 的问题，建议采用多组地形和糙率组合开展实验。
+
+第一轮建议：
+
+| 方案 | 主槽宽度  | 最大水深 | 主槽糙率  | 定位       |
+| -- | ----- | ---- | ----- | -------- |
+| A  | 300 m | 10 m | 0.030 | 浅槽       |
+| B  | 300 m | 12 m | 0.030 | 中浅槽      |
+| C  | 300 m | 14 m | 0.030 | 基准候选     |
+| D  | 300 m | 16 m | 0.030 | 深槽       |
+| E  | 300 m | 19 m | 0.030 | 主槽极限输水情景 |
+
+然后对每种河槽几何，分别测试：
+
+\\[ n\_{\mathrm{channel}} \in\\{0.025,0.030,0.035\\} \\]
+
+\\[ n\_{\mathrm{floodplain}} \in\\{0.045,0.060,0.080\\} \\]
+
+第一轮不需要立刻做全部组合，可以先使用 15～25 组有代表性的参数组合进行筛选。
+
+重点评价：
+
+\\[ FAR=\frac{FP}{FP+TN} \\]
+
+\\[ CSI=\frac{TP}{TP+FP+FN} \\]
+
+还需要增加：
+
+- 水位 RMSE；
+- 洪峰传播时间误差；
+- 主槽平均流速误差；
+- 流量连续性误差；
+- 主槽与滩地的流量分配比例。
+
+这里有个非常重要的验证原则：
+
+Sentinel-1 的淹没范围必须与模型对应时刻的模拟水面进行比较，而不是拿卫星过境时刻的影像与整个洪峰过程中的最大淹没范围比较。
+
+否则，即使河槽几何合理，也可能因为观测时刻不一致而得到虚假的 FAR。
+
+此外，河槽重建只是目前一个重要的候选误差来源。上游入流边界、DEM 高程基准、河道两岸堤防、遥感水体分类以及洪水时刻对齐，都应纳入诊断。
+
+### 7.4 推荐的最终校准策略
+
+我建议采用以下顺序：
+
+1. 固定洪水流量边界，暂时不调整降雨和产流参数。
+2. 分别使用 10、12、14、16、19 m 的河槽深度进行计算。
+3. 通过水力约束筛掉明显不合理的几何组合。
+4. 调整主槽和滩地糙率，校准水位与速度。
+5. 使用 Sentinel-1 检查淹没范围及 FAR、CSI。
+6. 选取同时满足水力合理性和遥感精度要求的参数组合。
+7. 更换其他洪水事件进行独立验证。
+
+不能仅选择 CSI 最高的方案。一个过深的河槽也可能通过过度降低水位而暂时减少遥感假阳性，但并不代表河道几何正确。
+
+## 八、推荐阅读的经典文献与工程资料
+
+优先推荐以下三篇作为算法和理论的主要参考文献。
+
+| 文献                                                                                                                       | DOI / 标准编号                                                                                    | 重点阅读内容                |
+| ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | --------------------- |
+| Leopold & Maddock (1953), The Hydraulic Geometry of Stream Channels and Some Physiographic Implications                  | [10.3133/pp252](https://doi.org/10.3133/pp252?utm_source=chatgpt.com)                         | 水力几何关系的理论基础           |
+| Wang & Liu (2006), An Efficient Method for Identifying and Filling Surface Depressions in DEMs                           | [10.1080/13658810500433453](https://doi.org/10.1080/13658810500433453?utm_source=chatgpt.com) | Priority-Flood 和地形破洼  |
+| Lindsay & Creed (2005), Removal of Artifact Depressions from Digital Elevation Models: Towards a Minimum Impact Approach | [10.1002/hyp.5835](https://doi.org/10.1002/hyp.5835?utm_source=chatgpt.com)                   | 最小地形修改、Fill/Breach 比较 |
+
+另外建议重点补充两份资料：
+
+MERIT Hydro（2019）
+
+[10.1029/2019WR024873](https://doi.org/10.1029/2019WR024873?utm_source=chatgpt.com)
+
+理解全球水系提取、水域高程调理、水面高程与水下地形的差异。
+
+HEC-RAS Hydraulic Reference Manual 6.6（2024）
+
+[USACE 官方参考手册](https://www.hec.usace.army.mil/software/hec-ras/documentation/HEC-RAS_Hydraulic_Reference_Manual_v6.6.pdf?utm_source=chatgpt.com)
+
+重点阅读 Manning 糙率、断面水力计算及洪水过程阻力参数相关内容。
+
+[image](https://www.google.com/s2/favicons?domain=https://pubs.usgs.gov\&sz=32)
+
+美国地质调查局+4
+
+
+
+## 九、针对当前贵港 100 m 洪水模型的最终建议
+
+结合此次调研，我认为不应把当前任务定位成普通的 DEM Stream Burning，而应该独立开发一个：
+
+Hydraulic-Constrained Channel Reconstruction Engine（水力约束河槽重构引擎）。
+
+建议将其作为现有 C++20 + Python 洪涝模拟项目的独立地形预处理模块。
+
+推荐分成四个功能层：
+
+| 模块                         | 主要功能               | 关键技术                           |
+| -------------------------- | ------------------ | ------------------------------ |
+| Channel Geometry Estimator | 估算沿程河宽、槽底宽、水深和床面高程 | Hydraulic Geometry、Manning     |
+| Hydro-conditioning         | 水系连通和地形伪洼地处理       | Priority-Flood、Breaching、AGREE |
+| Channel Carving            | 将参数化断面转换为 DEM 河床   | Trapezoidal、Parabolic、Rasterio |
+| Hydraulic Validation       | 验证输水能力和地形合理性       | Manning、二维水动力、SAR              |
+
+建议最终使用三个层级的地形：
+
+- `DEM_original.tif`：原始地形，永久保留。
+- `DEM_conditioned.tif`：处理水系连通性及经确认的地形伪影。
+- `DEM_channel_reconstructed.tif`：在条件化地形基础上重构主槽，用于物理洪水模拟。
+
+### 我的具体推荐
+
+对目前的郁江贵港段，建议先采用以下参数开展基准实验：
+
+| 参数             | 建议起始值                   |
+| -------------- | ----------------------- |
+| 河道顶宽           | 300 m                   |
+| 河道水深           | 13.5 m                  |
+| 槽底宽            | 根据 Manning 反演确定，约 246 m |
+| 边坡             | 2H:1V                   |
+| 纵向参考坡降         | 0.116‰，待能量坡降校准          |
+| 主槽 Manning n   | 0.030                   |
+| 开阔滩地 Manning n | 0.045～0.060             |
+| 植被滩地 Manning n | 0.060～0.080             |
+| 横断面            | 圆滑梯形                    |
+| 主槽几何表达         | 尽可能采用亚网格河道              |
+| 深度敏感性          | 10、12、14、16、19 m        |
+
+其中 13.5 m 是根据主槽承担约 60% 洪峰流量的情景计算得到的初始假设，不能当作已知的真实断面深度。
+
+最值得投入研发的其实是两个环节：
+
+第一，利用当地水文站、航道资料和卫星河宽数据，建立贵港段可校准的水力几何先验。尤其要争取获取贵港水文站现有的水位—流量—断面面积资料。它们比直接使用国外河流的经验系数更有价值。
+
+第二，开发支持变宽、变深、沿程平滑、亚网格面积计算的河槽刻蚀算法。对于目前 100 m 网格的情况，单纯降低中心线像元高程仍然不够。
+
+最终需要解决的不是让 DEM 上出现一条低洼河沟，而是让模型在 11,500 m³/s 洪峰进入贵港计算域时，首先能够通过合理的主槽输水能力进行传播，再根据真实的河岸地形、滩地糙率和水位条件发生漫滩。
+
+这才是降低目前虚假淹没面积、改善 Sentinel-1 洪水范围 FAR 和 CSI 的正确物理方向。

@@ -1,0 +1,66 @@
+{
+  "script": "scripts/stage3/build_guigang_drainage.py",
+  "generated_utc": "2026-11-07T15:08:08+00:00",
+  "tier": "A",
+  "matrix_id": "guigang-round3-drainage-v1",
+  "outputs": {
+    "dir": "data\\interim\\guigang\\channel_recon\\d14m_drA",
+    "dem_asc_sha256": "7b88f033ddc0fa487a8b5ff08ed8b3bce3e0201c906183285376e4283b4840a6",
+    "drains_geojson": "data\\interim\\guigang\\channel_recon\\d14m_drA\\drains.geojson"
+  },
+  "extraction": {
+    "n_network_cells": 7645,
+    "n_sources": 239,
+    "n_drains": 9,
+    "skipped_by_spacing": 3,
+    "skipped_short": 0,
+    "total_cells": 1581,
+    "total_length_km": 158.1,
+    "head_spacing_m": 1000.0,
+    "acc_threshold_cells": 200
+  },
+  "carve": {
+    "modified_px": 1425,
+    "max_cut_m": 4.6
+  },
+  "validation": {
+    "all_pass": true,
+    "checks": {
+      "drains_reach_channel": {
+        "pass": true,
+        "detail": {
+          "note": "传播树构造保证：每条沟沿 parent 链入槽（汇入既有沟亦最终入槽）"
+        }
+      },
+      "plain_reachability": {
+        "pass": true,
+        "detail": {
+          "plain_cells_with_path_frac": 1.0
+        }
+      },
+      "carve_positive": {
+        "pass": true,
+        "detail": {
+          "carved_px": 1425,
+          "max_cut_m": 4.6
+        }
+      },
+      "bed_monotonic": {
+        "pass": true,
+        "detail": {
+          "note": "每条沟 bed_profile monotonic=True"
+        }
+      },
+      "dem_sane": {
+        "pass": true,
+        "detail": {
+          "dem_min_m": 3.8
+        }
+      }
+    },
+    "note": "排水沟层专用检查（非 300 m 主槽口径）；all_pass 作为 --channel-dem 门禁"
+  },
+  "warnings": [
+    "诊断探针：沟位/沟距/沟深为情景假设（ADR-0014），非真实排水网"
+  ]
+}

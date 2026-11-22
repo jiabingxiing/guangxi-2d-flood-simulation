@@ -1,0 +1,132 @@
+{
+  "purpose": "湿格判据扫描与斑块面积口径确认（复核悖论机制）",
+  "script": "scripts/stage6/scan_guigang_threshold.py",
+  "threshold_scan": [
+    {
+      "threshold_m": 0.02,
+      "baseline_patches": 3789,
+      "dualloss_patches": 6221,
+      "baseline_wet_km2": 1013.91,
+      "dualloss_wet_km2": 866.35,
+      "patch_diff": 2432,
+      "dualloss_below_baseline": false
+    },
+    {
+      "threshold_m": 0.03,
+      "baseline_patches": 4236,
+      "dualloss_patches": 6424,
+      "baseline_wet_km2": 934.16,
+      "dualloss_wet_km2": 789.39,
+      "patch_diff": 2188,
+      "dualloss_below_baseline": false
+    },
+    {
+      "threshold_m": 0.05,
+      "baseline_patches": 4422,
+      "dualloss_patches": 6041,
+      "baseline_wet_km2": 852.56,
+      "dualloss_wet_km2": 718.18,
+      "patch_diff": 1619,
+      "dualloss_below_baseline": false
+    },
+    {
+      "threshold_m": 0.1,
+      "baseline_patches": 4681,
+      "dualloss_patches": 5508,
+      "baseline_wet_km2": 759.26,
+      "dualloss_wet_km2": 656.72,
+      "patch_diff": 827,
+      "dualloss_below_baseline": false
+    },
+    {
+      "threshold_m": 0.15,
+      "baseline_patches": 4762,
+      "dualloss_patches": 5339,
+      "baseline_wet_km2": 714.63,
+      "dualloss_wet_km2": 631.72,
+      "patch_diff": 577,
+      "dualloss_below_baseline": false
+    },
+    {
+      "threshold_m": 0.3,
+      "baseline_patches": 4882,
+      "dualloss_patches": 4580,
+      "baseline_wet_km2": 667.3,
+      "dualloss_wet_km2": 593.21,
+      "patch_diff": -302,
+      "dualloss_below_baseline": true
+    }
+  ],
+  "subset_check": [
+    {
+      "threshold_m": 0.02,
+      "both": 86635,
+      "dualloss_only": 0,
+      "baseline_only": 14756,
+      "dualloss_strict_subset": true
+    },
+    {
+      "threshold_m": 0.05,
+      "both": 71818,
+      "dualloss_only": 0,
+      "baseline_only": 13438,
+      "dualloss_strict_subset": true
+    },
+    {
+      "threshold_m": 0.3,
+      "both": 59321,
+      "dualloss_only": 0,
+      "baseline_only": 7409,
+      "dualloss_strict_subset": true
+    }
+  ],
+  "area_convention_check": {
+    "run": "flow_only_v1",
+    "threshold_m": 0.05,
+    "wet_cells": 52952,
+    "wet_km2": 529.52,
+    "main_patch_cells": 52923,
+    "main_patch_km2": 529.23,
+    "non_main_patch_area_km2": 0.29,
+    "non_main_patch_cells": 29,
+    "le9_patch_area_km2": 0.29,
+    "le9_patch_count": 19,
+    "le4_patch_area_km2": 0.24,
+    "le4_patch_count": 18,
+    "conclusion": "0.29 km² 是「非主水体斑块面积总和」（总湿像元 − 最大斑块），不是「≤9 格斑块面积总和」"
+  },
+  "split_mechanism": {
+    "baseline_main_patch_cells": 61496,
+    "baseline_main_still_wet_in_dualloss": 57667,
+    "baseline_main_split_into_n_patches_in_dualloss": 527,
+    "dualloss_main_patch_cells": 54397,
+    "dualloss_main_from_n_baseline_patches": 1,
+    "baseline_patch_split_histogram": {
+      "0": 63,
+      "1": 1867,
+      "2": 357,
+      "3": 105,
+      "4": 42,
+      "5": 17,
+      "6": 14,
+      "7": 11,
+      "8": 4,
+      "9": 3,
+      "10": 4,
+      "11": 1,
+      "12": 1,
+      "14": 1,
+      "15": 1,
+      "17": 1,
+      "20": 1,
+      "21": 1,
+      "35": 1,
+      "60": 1,
+      "62": 1,
+      "83": 1,
+      "126": 1,
+      "527": 1
+    },
+    "total_dualloss_patches_derived_from_baseline": 4412
+  }
+}

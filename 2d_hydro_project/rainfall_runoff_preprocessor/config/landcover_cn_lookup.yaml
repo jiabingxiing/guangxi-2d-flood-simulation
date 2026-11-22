@@ -1,0 +1,39 @@
+# Land cover classes, CN-II parameter lookups by HSG, and impervious fractions
+# Matches USDA TR-55, CN-China (Lian et al., 2020), and Plan Section 4.1.2
+
+worldcover_classes:
+  10: {name: "tree_cover", zh: "林地", cn_hsg: {A: 36, B: 60, C: 73, D: 79}, impervious: 0.02, soil_type: "forest_red_soil"}
+  20: {name: "shrubland", zh: "灌木林", cn_hsg: {A: 40, B: 62, C: 75, D: 81}, impervious: 0.02, soil_type: "forest_red_soil"}
+  30: {name: "grassland", zh: "草地", cn_hsg: {A: 49, B: 69, C: 79, D: 84}, impervious: 0.05, soil_type: "cropland_red_soil"}
+  40: {name: "cropland", zh: "农田/耕地", cn_hsg: {A: 67, B: 78, C: 85, D: 89}, impervious: 0.08, soil_type: "cropland_red_soil"}
+  50: {name: "built_up", zh: "建设用地", cn_hsg: {A: 92, B: 94, C: 96, D: 98}, impervious: 0.85, soil_type: "impervious_built"}
+  60: {name: "bare_sparse", zh: "裸地", cn_hsg: {A: 77, B: 86, C: 91, D: 94}, impervious: 0.10, soil_type: "compacted_bare_red_soil"}
+  80: {name: "permanent_water", zh: "常年水体", cn_hsg: {A: 100, B: 100, C: 100, D: 100}, impervious: 1.00, soil_type: "water_body"}
+  90: {name: "herbaceous_wetland", zh: "草本湿地", cn_hsg: {A: 85, B: 89, C: 92, D: 95}, impervious: 0.10, soil_type: "paddy_wetland"}
+  95: {name: "mangroves", zh: "红树林/滩涂", cn_hsg: {A: 88, B: 91, C: 94, D: 96}, impervious: 0.10, soil_type: "paddy_wetland"}
+
+clcd_classes:
+  1: {name: "cropland", zh: "耕地", cn_hsg: {A: 67, B: 78, C: 85, D: 89}, impervious: 0.08, soil_type: "cropland_red_soil"}
+  2: {name: "forest", zh: "林地", cn_hsg: {A: 36, B: 60, C: 73, D: 79}, impervious: 0.02, soil_type: "forest_red_soil"}
+  3: {name: "shrub", zh: "灌木", cn_hsg: {A: 40, B: 62, C: 75, D: 81}, impervious: 0.02, soil_type: "forest_red_soil"}
+  4: {name: "grassland", zh: "草地", cn_hsg: {A: 49, B: 69, C: 79, D: 84}, impervious: 0.05, soil_type: "cropland_red_soil"}
+  5: {name: "water", zh: "水体", cn_hsg: {A: 100, B: 100, C: 100, D: 100}, impervious: 1.00, soil_type: "water_body"}
+  6: {name: "snow_ice", zh: "冰雪", cn_hsg: {A: 100, B: 100, C: 100, D: 100}, impervious: 1.00, soil_type: "water_body"}
+  7: {name: "barren", zh: "荒地/裸地", cn_hsg: {A: 77, B: 86, C: 91, D: 94}, impervious: 0.10, soil_type: "compacted_bare_red_soil"}
+  8: {name: "impervious", zh: "不透水面", cn_hsg: {A: 98, B: 98, C: 98, D: 98}, impervious: 0.95, soil_type: "impervious_built"}
+  9: {name: "wetland", zh: "湿地", cn_hsg: {A: 85, B: 89, C: 92, D: 95}, impervious: 0.10, soil_type: "paddy_wetland"}
+
+# CN-China regional adjustment factors (Lian et al., 2020)
+# South China subtropical humid red soil shows slightly lower initial loss ratio (lambda ~ 0.05-0.10)
+# and adjusted CN values under intense monsoon downpours.
+cn_china_adjustment:
+  default_lambda: 0.20
+  calibrated_lambda: 0.05
+  cn_scaling_factor_humid_south: 0.95  # Slightly adjusted retention for well-vegetated red soil hills
+
+# Horton model parameters by HSG (Plan Section 4.3.2)
+horton_defaults:
+  A: {f0_mm_h: 250.0, fc_mm_h: 25.4, k_h_inv: 2.0}
+  B: {f0_mm_h: 200.0, fc_mm_h: 12.7, k_h_inv: 2.0}
+  C: {f0_mm_h: 125.0, fc_mm_h: 6.3,  k_h_inv: 2.0}
+  D: {f0_mm_h: 76.0,  fc_mm_h: 2.5,  k_h_inv: 2.0}

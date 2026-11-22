@@ -1,0 +1,54 @@
+{
+  "generated_utc": "2026-11-07（日期精度，手工预注册；run meta 另记精确时间戳）",
+  "phase": "Phase H 第二轮（贵港组合驱动归因实验，ADR-0013）",
+  "mode": "公开数据降级 · 情景级（ADR-0004）；S1 指标是足迹内重叠度，不是精度",
+  "preregistration": {
+    "matrix_id": "guigang-round2-combo-v1",
+    "frozen_utc": "2026-11-07",
+    "discipline": "组合矩阵在跑任何 run 之前冻结；用户决策：①3 个组合 run（批准重跑 lisflood.exe）；②GA-Mid 物理净雨为主 + Ia/fc 标量对照。方向性预期不设硬门；结果无论正负均如实登记。分布式入渗 infilfile 在本构建 acceleration 路径不生效（configs/model_manifest.yaml known_limit），一律走路径 A（净雨 .rain 预处理），run.par 不写 infiltration/infilfile（ADR-0011 决策 2）。",
+    "factorial_design": {
+      "factors": {
+        "channel": ["off（基线源地形）", "hydraulic（ADR-0012 重构层，D=10/14 m，n_main=0.030 manningfile）"],
+        "rain": ["on（ERA5 毛雨 135.50 mm 模型窗内）", "off（无降雨）", "loss_medium（Ia=30 mm, fc=2.0 mm/h → 净雨 45.40 mm）", "ga（GA-Mid 物理净雨 38.87 mm 模型窗内）"]
+      },
+      "corners_existing": [
+        {"tag": "baseline_realdem", "channel": "off", "rain": "on", "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem", "far": 0.921, "csi": 0.076, "pod": 0.652, "footprint_km2": 92.63},
+        {"tag": "flow_only_v1", "channel": "off", "rain": "off", "run_id": "scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1", "far": 0.817, "csi": 0.164, "pod": 0.616, "footprint_km2": 38.02},
+        {"tag": "dualloss_v1", "channel": "off", "rain": "loss_medium", "run_id": "scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1", "far": 0.901, "csi": 0.093, "pod": 0.633, "footprint_km2": 72.37},
+        {"tag": "rainloss_high_v1", "channel": "off", "rain": "loss_high", "run_id": "scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1", "far": 0.899, "csi": 0.095, "pod": 0.631, "footprint_km2": 70.75},
+        {"tag": "chhyd_d10", "channel": "hydraulic d10", "rain": "on", "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d10", "far": 0.919, "csi": 0.074, "pod": 0.475, "footprint_km2": 66.57},
+        {"tag": "chhyd_d14", "channel": "hydraulic d14", "rain": "on", "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14", "far": 0.925, "csi": 0.068, "pod": 0.437, "footprint_km2": 65.68}
+      ],
+      "runs_new": [
+        {"tag": "chhyd_d14_r2_lossmed", "channel": "hydraulic d14", "rain": "loss_medium", "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed", "purpose": "补全「河槽 × 标量净雨」2×2：与 dualloss_v1 同雨对照 → 净雨下的河槽净效应", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m --rain loss_medium（RUN_TAG=r2_lossmed）"},
+        {"tag": "chhyd_d14_r2_ga", "channel": "hydraulic d14", "rain": "ga", "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga", "purpose": "主方案：GA-Mid 物理净雨 + 重构河槽", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d14m --rain ga（RUN_TAG=r2_ga）"},
+        {"tag": "chhyd_d10_r2_norain", "channel": "hydraulic d10", "rain": "off", "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain", "purpose": "补全「河槽 × 无雨」2×2：与 flow_only_v1 对照 → 河槽对上游来水漫溢的净效应（首轮遗漏角点）", "cli": "guigang_scenario.py all --res 100 --dt 2.5 --channel hydraulic --channel-dem data/interim/guigang/channel_recon/d10m --rain off（RUN_TAG=r2_norain）"}
+      ]
+    },
+    "expectations_directional": [
+      "组合情景（chhyd + 净雨）FAR < min(单机制 FAR) = 0.901（dualloss_v1）——方向性预期，不设硬门",
+      "chhyd_d10_r2_norain FAR < flow_only_v1 的 0.817（河槽减少上游来水漫溢）——方向性预期",
+      "若未达，如实登记并把下一误差源（DEM 高程基准 / 堤防 / S1 阈值与足迹口径）列入候选"
+    ],
+    "ga_net_rain_source": {
+      "file": "outputs/preprocessor/guigang/rainfall_net_green_ampt.rain",
+      "sha256_prefix": "c78a8788348e2b8f",
+      "scenario": "GA-Mid（Phase G 预处理器，outputs/preprocessor/guigang/preprocessor_summary.json sha256_prefix f4aa2cab8f1a189d）",
+      "params_snapshot": {"region_prior": "south_china_alluvial_red_soil", "net_total_mm": 38.93, "gross_total_mm": 137.1, "loss_mm": 98.17, "runoff_coefficient": 0.284, "peak_attenuation_ratio": 0.1909},
+      "time_base": "预处理器 t'=0..311 h 对应模型 t=48..359 h（probe 首键 2024-09-05T00，模型 T0=2024-09-03T00，**+48 h 显式移位**）；模拟窗 336 h 截断后净雨 38.87 mm，尾部裁掉 0.0606 mm",
+      "implementation": "scripts/common/net_rain.py::read_preprocessor_net_rain（逻辑镜像 scripts/stage3/run_jiulong_ga_rerun.py:88-108；久隆脚本已执行不回改）"
+    },
+    "g1_reconciliation": {
+      "status": "PASS（2026-11-07 实测）",
+      "detail": "outputs/preprocessor/guigang/rainfall_gross.rain（313 行含 t=0）与 ERA5 probe（312 值，起 2024-09-05T00）逐值一致，全序列和 137.1 mm；模型窗（t<=336 h）裁掉 2024-09-17T01..23 共 1.6 mm → E1 口径 135.50 mm。预处理器 summary 的 137.1 是全序列口径，与模型窗 135.50 之差 = 窗口裁剪，非数据缺陷。",
+      "conclusion": "预处理器产物无需重生成；GA 净雨按窗口裁剪后进入 run。"
+    }
+  },
+  "limitations": [
+    "组合情景 vs 基线是双变量（河槽 + 降雨），归因靠 2×2 因子差分而非单变量对照",
+    "GA 净雨为空间均匀时序（路径 A），无空间入渗差异入模；landcover 加权仅影响预处理器内部 2D 场（未入模）",
+    "GA-Mid 前期土壤水分取 mid 情景，未经实测核验（Phase G 已登记）",
+    "S1 足迹仅覆盖模型域 20.6%，固定阈值 -17 dB 偏保守（G17）；CSI/POD/FAR 是重叠度指标",
+    "depth 只取 d10/d14 两档；GA-Dry/Wet 前期水分情景与 d16/d19 留待后续"
+  ]
+}

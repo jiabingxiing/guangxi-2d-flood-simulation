@@ -1,0 +1,916 @@
+{
+  "schema_version": "1.0",
+  "audit": "guigang_channel_route",
+  "generated_utc": "2026-11-02T03:00:24+00:00",
+  "script": "scripts/stage6/audit_guigang_channel_route.py",
+  "script_sha256": "7e78d9f5944568839e5603759906754d90a1ac047443266b98cac2de034d0896",
+  "purpose": "Phase 3 河道调理路线可行性证据包（判定阻塞，不实施）",
+  "verdict": {
+    "code": "BLOCKED_ALTERNATIVE_REQUIRED",
+    "phase3_implemented": false,
+    "phase3_status": "NOT_IMPLEMENTED（未实施）",
+    "primary_reason": "S1 常水掩膜不可用作河道骨架来源（定量证据见 s1_* 与 endpoint_degeneracy）",
+    "not_an_execution_defect": true,
+    "not_an_execution_defect_reason": "三次失败尝试的成因已在 prep() 注释留痕并经本审计定量复算：掩膜在模型域上游边界完全无观测、域内常水碎裂为数百个互不连通小块、最大块尺寸远小于主水体量级。这是**输入数据固有缺陷**，换实现方式无法修复。",
+    "decision_evidence": {
+      "footprint_frac_0905": 0.2614,
+      "footprint_north_half_absent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "water_components_0905": 213,
+      "max_component_km2_0905": 4.35,
+      "main_water_body_km2": 614.96,
+      "size_ratio_main_over_s1": 141.4,
+      "upstream_boundary_observed_0905": false,
+      "spans_upstream_to_downstream_0905": false,
+      "spans_upstream_to_downstream_0912": false,
+      "d8_flat_frac_after_fill": 0.2613
+    },
+    "consequence": "Phase 3 河道调理维持阻塞；不生成任何骨架线、不施加任何刻蚀。"
+  },
+  "model_grid": {
+    "crs": "EPSG:32649",
+    "res_m": 100.0,
+    "shape": [
+      370,
+      669
+    ],
+    "cells": 247530,
+    "bounds_32649": [
+      325737.85,
+      2542315.27,
+      392645.57,
+      2579333.83
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      325737.8500584208,
+      0.0,
+      -100.0,
+      2579333.8268254283
+    ],
+    "source": "复算 guigang_scenario.prep() 的网格构造（AOI->32649, Affine(100,0,b0,0,-100,b3)）"
+  },
+  "cell_geometry": {
+    "cellsize_m": 100.0,
+    "cell_area_m2": 10000.0,
+    "note": "面积一律由栅格头 cellsize 换算，未写死像元面积"
+  },
+  "source_run": {
+    "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+    "meta_channel": {
+      "mode": "off",
+      "carved_px": 0,
+      "path_nodes": 729,
+      "note": "off: 真实DEM未施加任何人工河槽刻蚀与虚假下切，严格采用源地形"
+    },
+    "note": "基线 run；本审计只读该 run，不写入、不重跑"
+  },
+  "s1_common_water_20240905": {
+    "role": "灾前常水（Phase 3 原设计的骨架来源）",
+    "source": {
+      "path": "data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+      "crs": "EPSG:32649",
+      "res_m": [
+        20.0,
+        20.0
+      ],
+      "shape": [
+        2314,
+        5855
+      ],
+      "bounds": [
+        300340.0,
+        2514980.0,
+        417440.0,
+        2561260.0
+      ],
+      "value_counts": {
+        "0": 7589901,
+        "1": 158737,
+        "255": 5799832
+      }
+    },
+    "on_model_grid": {
+      "footprint_cells": 64701,
+      "footprint_frac_of_domain": 0.2614,
+      "footprint_km2": 647.01,
+      "water_cells": 1338,
+      "water_km2": 13.38,
+      "water_frac_of_footprint": 0.0207
+    },
+    "footprint_by_row_decile": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0051,
+      0.2168,
+      0.5365,
+      0.8555,
+      1.0
+    ],
+    "footprint_by_col_decile": [
+      0.1203,
+      0.1515,
+      0.1827,
+      0.2142,
+      0.2455,
+      0.2768,
+      0.3081,
+      0.3395,
+      0.3709,
+      0.4022
+    ],
+    "water_by_row_decile": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.012,
+      0.0137,
+      0.0095,
+      0.0189
+    ],
+    "components_8conn": {
+      "n_components": 213,
+      "cells": 1338,
+      "area_km2": 13.38,
+      "sizes_top10_cells": [
+        435,
+        161,
+        115,
+        71,
+        61,
+        45,
+        42,
+        41,
+        20,
+        14
+      ],
+      "sizes_top10_km2": [
+        4.35,
+        1.61,
+        1.15,
+        0.71,
+        0.61,
+        0.45,
+        0.42,
+        0.41,
+        0.2,
+        0.14
+      ],
+      "max_component_cells": 435,
+      "max_component_km2": 4.35,
+      "n_ge_100_cells": 3,
+      "n_ge_10_cells": 11,
+      "largest_label": 2
+    },
+    "edge_contacts_water": {
+      "west_col0_to_w": 0,
+      "east_col_last_w": 1,
+      "north_row0_to_w": 0,
+      "south_row_last_w": 44
+    },
+    "longest_run": {
+      "max_run_cells": 31,
+      "at_row": 271,
+      "max_run_km": 3.1
+    },
+    "largest_component_bbox": {
+      "row_min": 231,
+      "row_max": 273,
+      "col_min": 465,
+      "col_max": 583,
+      "width_km": 11.9,
+      "height_km": 4.3,
+      "touches_west": false,
+      "touches_east": false,
+      "touches_north": false,
+      "touches_south": false
+    }
+  },
+  "s1_flood_20240912": {
+    "role": "洪峰景（仅用于 verify 对比，不作骨架）",
+    "source": {
+      "path": "data\\processed\\s1_water\\guigang_20240912T104222_water20m.tif",
+      "crs": "EPSG:32649",
+      "res_m": [
+        20.0,
+        20.0
+      ],
+      "shape": [
+        4380,
+        2671
+      ],
+      "bounds": [
+        371560.0,
+        2517520.0,
+        424980.0,
+        2605120.0
+      ],
+      "value_counts": {
+        "0": 7703801,
+        "1": 139058,
+        "255": 3856121
+      }
+    },
+    "on_model_grid": {
+      "footprint_cells": 51110,
+      "footprint_frac_of_domain": 0.2065,
+      "footprint_km2": 511.1,
+      "water_cells": 1101,
+      "water_km2": 11.01,
+      "water_frac_of_footprint": 0.0215
+    },
+    "footprint_by_row_decile": [
+      0.2527,
+      0.2424,
+      0.2321,
+      0.2219,
+      0.2117,
+      0.2014,
+      0.1911,
+      0.1808,
+      0.1705,
+      0.1603
+    ],
+    "footprint_by_col_decile": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1608,
+      0.9009,
+      1.0
+    ],
+    "water_by_row_decile": [
+      0.0012,
+      0.0021,
+      0.003,
+      0.0065,
+      0.0096,
+      0.0087,
+      0.011,
+      0.0015,
+      0.0004,
+      0.0003
+    ],
+    "components_8conn": {
+      "n_components": 167,
+      "cells": 1101,
+      "area_km2": 11.01,
+      "sizes_top10_cells": [
+        537,
+        209,
+        16,
+        13,
+        10,
+        9,
+        9,
+        8,
+        7,
+        7
+      ],
+      "sizes_top10_km2": [
+        5.37,
+        2.09,
+        0.16,
+        0.13,
+        0.1,
+        0.09,
+        0.09,
+        0.08,
+        0.07,
+        0.07
+      ],
+      "max_component_cells": 537,
+      "max_component_km2": 5.37,
+      "n_ge_100_cells": 2,
+      "n_ge_10_cells": 5,
+      "largest_label": 85
+    },
+    "edge_contacts_water": {
+      "west_col0_to_w": 0,
+      "east_col_last_w": 5,
+      "north_row0_to_w": 2,
+      "south_row_last_w": 0
+    },
+    "longest_run": {
+      "max_run_cells": 22,
+      "at_row": 125,
+      "max_run_km": 2.2
+    },
+    "largest_component_bbox": {
+      "row_min": 123,
+      "row_max": 230,
+      "col_min": 583,
+      "col_max": 668,
+      "width_km": 8.6,
+      "height_km": 10.8,
+      "touches_west": false,
+      "touches_east": true,
+      "touches_north": false,
+      "touches_south": false
+    }
+  },
+  "endpoint_degeneracy": {
+    "s1_common_water_20240905": {
+      "upstream_is_west_edge": true,
+      "downstream_is_east_edge": true,
+      "reason": "上游 Q 点源在 meta.point_source_32649，落于 col0；东边界 bci.bci 设 FREE 坡度 0.00015",
+      "injection_row_band": [
+        170,
+        180
+      ],
+      "injection_band_footprint_frac": 0.0,
+      "injection_band_water_cells": 0,
+      "upstream_boundary_observed": false,
+      "largest_component_spans_upstream_to_downstream": false,
+      "upstream_edge_water_cells": 0,
+      "upstream_edge_width_cols": 5,
+      "upstream_continuous_reach_exists": false,
+      "west_edge_water_cells": 0,
+      "east_edge_water_cells": 1,
+      "degenerate": true,
+      "note": "「端点退化」定义：上游注入行带内、贴西边界 5 列内无可续接的常水段，或最大块不能同时触及西、东边界，则无法从掩膜生成一条贯穿域的河道骨架线。"
+    },
+    "s1_flood_20240912": {
+      "upstream_is_west_edge": true,
+      "downstream_is_east_edge": true,
+      "reason": "上游 Q 点源在 meta.point_source_32649，落于 col0；东边界 bci.bci 设 FREE 坡度 0.00015",
+      "injection_row_band": [
+        170,
+        180
+      ],
+      "injection_band_footprint_frac": 0.2091,
+      "injection_band_water_cells": 40,
+      "upstream_boundary_observed": true,
+      "largest_component_spans_upstream_to_downstream": false,
+      "upstream_edge_water_cells": 0,
+      "upstream_edge_width_cols": 5,
+      "upstream_continuous_reach_exists": false,
+      "west_edge_water_cells": 0,
+      "east_edge_water_cells": 5,
+      "degenerate": true,
+      "note": "「端点退化」定义：上游注入行带内、贴西边界 5 列内无可续接的常水段，或最大块不能同时触及西、东边界，则无法从掩膜生成一条贯穿域的河道骨架线。"
+    }
+  },
+  "model_main_water_body": {
+    "wet_cells": 85256,
+    "wet_km2": 852.56,
+    "patches_8conn": 4422,
+    "largest_component_cells": 61496,
+    "largest_component_km2": 614.96,
+    "largest_component_share_of_wet": 0.7213,
+    "largest_component_bbox": {
+      "row_min": 37,
+      "row_max": 369,
+      "col_min": 0,
+      "col_max": 668
+    },
+    "touches_west": true,
+    "touches_east": true,
+    "depth_p50_m": 3.032,
+    "dem_p50_m": 24.0,
+    "note": "主水体来自 res.max（模型结果），仅作**参照尺度**，不用于反推地形"
+  },
+  "dem_corridor": {
+    "min_m": 14.0,
+    "max_m": 1110.0,
+    "p1_m": 19.0,
+    "p50_m": 37.0,
+    "p99_m": 515.0,
+    "edge_profiles": {
+      "west_col0_p50_m": 173.5,
+      "north_row0_p50_m": 108.0,
+      "south_row_last_p50_m": 37.0,
+      "east_col_last_p50_m": 30.0,
+      "note": "西缘 p50 远高于域内 p50 -> 西缘为山地，不是河道出山口"
+    },
+    "injection_neighbourhood": {
+      "window": "row165-185, col0-19",
+      "min_m": 38.0,
+      "max_m": 135.0,
+      "p50_m": 56.0,
+      "injection_cell_dem_m": 70.0
+    }
+  },
+  "dem_flatness": {
+    "plain_band_definition_m": 40.0,
+    "plain_band": {
+      "cells": 135639,
+      "frac_of_domain": 0.548,
+      "area_km2": 1356.39,
+      "dem_min_m": 14.0,
+      "dem_p50_m": 27.0,
+      "dem_max_m": 40.0
+    },
+    "slope_m_per_m": {
+      "domain_p50": 0.02121,
+      "domain_p90": 0.23943,
+      "plain_p50": 0.01118,
+      "plain_p90": 0.0364,
+      "domain_frac_below_flat_threshold": 0.0331,
+      "domain_frac_below_near_flat_threshold": 0.4554,
+      "flat_threshold": 0.005,
+      "near_flat_threshold": 0.02,
+      "note": "坡度量化受 DEM 整米精度限制：100 m 网格上 1 m 落差即 0.01 m/m。"
+    },
+    "priority_flood": {
+      "raised_cells": 30721,
+      "raised_frac_of_domain": 0.1241,
+      "raised_gt_1m_cells": 14009,
+      "raised_gt_5m_cells": 514,
+      "raised_max_m": 43.0,
+      "plain_raised_frac": 0.2009,
+      "note": "抬升>0 = 该像元无外泄路径，须填洼后才可汇流；比例越高说明洼地越多、地形越不单调。"
+    },
+    "d8_resolvability_after_fill": {
+      "domain_cells_with_strict_lower_neighbour": 182840,
+      "domain_frac": 0.7387,
+      "plain_frac": 0.5907,
+      "domain_frac_flat_no_direction": 0.2613,
+      "plain_frac_flat_no_direction": 0.4093,
+      "note": "填洼后仍无严格更低邻居的像元 = D8 无梯度可用，汇流方向不可定。"
+    },
+    "plain_band_connectivity": {
+      "n_components": 71,
+      "largest_component_cells": 135443,
+      "largest_component_km2": 1354.43,
+      "note": "平原带若为**单一**巨块，说明内部没有分隔性河谷，只有孤立高地。"
+    },
+    "thalweg_wander": {
+      "row_range": [
+        148,
+        369
+      ],
+      "thalweg_col_per_row": [
+        638,
+        651,
+        651,
+        652,
+        655,
+        655,
+        651,
+        658,
+        654,
+        654,
+        604,
+        602,
+        597,
+        596,
+        595,
+        593,
+        624,
+        623,
+        621,
+        620,
+        620,
+        620,
+        591,
+        591,
+        590,
+        441,
+        417,
+        580,
+        580,
+        591,
+        591,
+        434,
+        580,
+        579,
+        388,
+        396,
+        389,
+        593,
+        597,
+        597,
+        596,
+        596,
+        596,
+        596,
+        593,
+        595,
+        586,
+        586,
+        586,
+        584,
+        374,
+        395,
+        403,
+        402,
+        608,
+        608,
+        399,
+        419,
+        419,
+        618,
+        420,
+        617,
+        614,
+        614,
+        611,
+        608,
+        608,
+        572,
+        571,
+        620,
+        570,
+        570,
+        570,
+        570,
+        571,
+        571,
+        567,
+        566,
+        316,
+        438,
+        571,
+        571,
+        571,
+        570,
+        570,
+        570,
+        570,
+        569,
+        568,
+        565,
+        565,
+        565,
+        427,
+        427,
+        426,
+        425,
+        425,
+        463,
+        474,
+        463,
+        475,
+        474,
+        579,
+        475,
+        521,
+        522,
+        474,
+        523,
+        584,
+        525,
+        347,
+        455,
+        447,
+        447,
+        503,
+        579,
+        511,
+        585,
+        334,
+        554,
+        561,
+        583,
+        560,
+        468,
+        271,
+        269,
+        269,
+        466,
+        335,
+        334,
+        465,
+        551,
+        551,
+        511,
+        258,
+        510,
+        511,
+        463,
+        461,
+        554,
+        554,
+        458,
+        548,
+        547,
+        586,
+        552,
+        553,
+        553,
+        549,
+        556,
+        556,
+        258,
+        539,
+        257,
+        257,
+        257,
+        255,
+        249,
+        561,
+        561,
+        563,
+        240,
+        558,
+        558,
+        527,
+        234,
+        229,
+        233,
+        553,
+        283,
+        241,
+        552,
+        281,
+        279,
+        276,
+        273,
+        271,
+        269,
+        268,
+        267,
+        267,
+        266,
+        266,
+        266,
+        265,
+        265,
+        265,
+        267,
+        268,
+        270,
+        277,
+        280,
+        280,
+        281,
+        281,
+        281,
+        281,
+        281,
+        280,
+        280,
+        280,
+        279,
+        278,
+        277,
+        277,
+        276,
+        276,
+        275,
+        275,
+        275,
+        275,
+        275,
+        275,
+        275,
+        276,
+        276,
+        277,
+        279,
+        314,
+        313,
+        313,
+        312
+      ],
+      "jump_abs_col_p50": 2.0,
+      "jump_abs_col_p90": 197.0,
+      "jump_abs_col_max": 323,
+      "n_rows_jump_gt_threshold": 71,
+      "threshold_cols": 20,
+      "note": "谷底列=该行 DEM 最小列；跳变按相邻行计。阈值 20 列=2 km。"
+    }
+  },
+  "source_cross_reference": {
+    "source_script": "scripts\\stage5\\guigang_scenario.py",
+    "line_range": [
+      96,
+      105
+    ],
+    "excerpt": [
+      "96:     # S1 09-05 常水水体 -> 河道定位",
+      "97:     # 河道定位：D8 山谷追踪（锚点吸附谷底，上下游各走）。S1 掩膜路线三版皆败",
+      "98:     # （足印覆盖 58%/74% 截断致分量碎裂、端点退化，2026-10-25），改用 DEM 山谷本身；",
+      "99:     # S1 掩膜仅用于验证（verify），不再参与河槽几何",
+      "100:     # 走廊 DEM 实测为宽平底平原（平滑面低带 16~27m 遍布全域，200m 下无河谷可循；",
+      "101:     # 城区江段未被 S1 检出，D8 无梯度可走，2026-10-25 三版追踪皆败）——按终稿 六.5",
+      "102:     # 参数化河槽：过锚点沿郁江过境走向直线河槽，宽 3 格（600m），",
+      "103:     # 床 = 沿线地表 polyfit 线性 - 12m。几何为情景假设，成果必须标注。",
+      "104:     # 走向取 100°（东偏南 ~10°）：低带实测在南半部（行 130~154），70° 走向北漂进山（首版 bed 98m 已废弃）",
+      "105:     # 另：城区平原 DEM ~21m vs 贵港站洪峰 43.09m -> 垂直基准差约 -20m（G7 实证，对照仅诊断）"
+    ],
+    "sha256": "cc71c00d805ffca580e7cdd3a211e24052e1b149e80bc884cf69aa25f7162662",
+    "current_channel_mode": "off",
+    "current_channel_note": "off: 真实DEM未施加任何人工河槽刻蚀与虚假下切，严格采用源地形",
+    "finding": "prep() 注释记载 S1 掩膜路线三版皆败（足印覆盖 58%/74% 截断致分量碎裂、端点退化，2026-10-25），改走 DEM 山谷 D8 追踪亦因走廊为宽平底平原无梯度可用而三版皆败；最终退回计划明确要否定的参数化直线河槽。当前基线 run 为 channel=off。"
+  },
+  "readonly_evidence": {
+    "wrote_into_outputs": false,
+    "generated_rasters": 0,
+    "carving_applied": false,
+    "lisflood_invoked": false,
+    "models_modified": false,
+    "source_hashes_unchanged": true,
+    "checked_files": [
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240912T104222_water20m.tif",
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\dem.asc",
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\meta.json",
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\results\\res.max",
+      "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\scripts\\stage5\\guigang_scenario.py"
+    ]
+  },
+  "alternatives": [
+    {
+      "id": "alt_a",
+      "name": "用模型主水体反推主槽走廊",
+      "description": "取 res.max 最大连通块（614.96 km²，占湿面积 72.1%）作走廊掩膜，对其骨架化后下切 2~3 m。",
+      "feasibility": "技术可行（几何可提取），但结论可用性低",
+      "physical_basis_strength": "弱",
+      "physical_basis_detail": "主水体确实占据真实河道位置（其 DEM p50 与常水像元 DEM p50 同量级），但走廊边界由**模型自身**的淹没结果决定，不是独立观测。",
+      "circular_reasoning_risk": "高",
+      "circular_reasoning_detail": "刻蚀后重跑必然让主水体更集中在走廊内，等于用结果定义地形再用地形复现结果；验证指标（斑块数、主水体面积、S1 CSI/FAR）全部会被人为改善，无法与「物理正确」区分。",
+      "required_extra_data": [
+        "独立于模型的河道中心线（实测断面、航道图、或高分辨率光学影像）",
+        "河道断面的床高程实测值，用于标定下切深度而非凭 2~3 m 假定"
+      ],
+      "verdict": "不推荐作为物理改进；若仅作展示层对照，必须标注 derived_from=模型结果 且不得用于物理结论"
+    },
+    {
+      "id": "alt_b",
+      "name": "DEM 低带 + Priority-Flood 汇流做骨架",
+      "description": "在 DEM 低带上做 Priority-Flood 填洼后按 D8/汇流累积量提取高汇流骨架线，作为河道中心线。",
+      "feasibility": "技术可行，但本域地形不提供可分辨的河谷信号",
+      "physical_basis_strength": "中（纯地形驱动，不依赖模型结果）",
+      "physical_basis_detail": "Priority-Flood 抬升>0 的像元占全域 12.4%；填洼后仍有 26.1% 的像元无严格更低邻居（平原带内 40.9%）；平原带为单一连通块 1354.43 km²，内部无分隔性河谷。",
+      "circular_reasoning_risk": "低",
+      "circular_reasoning_detail": "输入只有 DEM，与模型结果无关，不存在循环论证。",
+      "required_extra_data": [
+        "更高垂直精度 DEM（当前 DEM 为整米级，100 m 网格上 1 m 即 0.01 m/m，量化噪声与真实纵坡同量级）",
+        "郁江该河段实测纵坡与断面，用于判断提取出的骨架线是否物理合理",
+        "（可选）光学影像或航道图作为独立中心线校核"
+      ],
+      "verdict": "理论最优但受数据精度限制，此前 D8 三版已失败；在获得高精度 DEM 前不应重试"
+    },
+    {
+      "id": "alt_c",
+      "name": "保持 channel=off 现状（不调理）",
+      "description": "不施加任何人工河槽，严格使用源 DEM，接受「干流传导受阻」这一已知限制。",
+      "feasibility": "立即可行（已是现状）",
+      "physical_basis_strength": "强（不引入任何虚构地形）",
+      "physical_basis_detail": "地形完全忠实于输入 DEM，不存在任何人为刻蚀；缺点是无河道时上游来水在平原上扩散，干流输运能力被低估。",
+      "circular_reasoning_risk": "无",
+      "circular_reasoning_detail": "不修改地形，不存在用结果反推地形的通路。",
+      "required_extra_data": [
+        "无（若日后要解除该限制，需先取得上表独立河道资料）"
+      ],
+      "verdict": "推荐维持；已知限制必须在成果与 ADR 中显式声明",
+      "recommended": true
+    }
+  ],
+  "phase4_impact": {
+    "affects_phase4": true,
+    "statement": "Phase 4 的三个新情景（flow_only_v1 / dualloss_v1 / rainloss_high_v1）全部沿用 channel=off，即**未做任何河道调理**。它们与基线在河道几何上完全一致，差异只来自降雨损失与上游来水，因此情景间可比。",
+    "known_limitation": "「干流传导受阻」限制未被消除：上游 11500 m³/s 三角来水在无河槽的宽平底平原上扩散，干流输运能力可能被低估。任何基于绝对淹没面积的结论都必须带此限制声明。",
+    "what_is_safe_to_conclude": "情景**之间**的差值与相对变化（斑块数、湿面积、S1 CSI/FAR 的相对变化）不受河道几何影响，可用于判断降雨损失假设的方向性。",
+    "what_is_not_safe_to_conclude": "绝对淹没面积、干流洪峰传播时间、河道内水位绝对值——均受未调理河道影响，不得作为物理结论或资产判据。"
+  },
+  "caveats": [
+    "本审计只判定路线可行性，不评价模型物理正确性。",
+    "S1 固定阈值 -17 dB，风浪与淹没植被会导致漏检（G17 降级）；漏检只会让掩膜更碎，不会让「骨架不可用」的结论偏乐观。",
+    "「上游」定义为西边界：上游 Q 点源 meta.point_source_32649 落于 col0；「下游」为东边界（bci.bci 设 FREE 坡度 0.00015）。",
+    "DEM 为整米级精度，100 m 网格上 1 m 落差即 0.01 m/m；坡度统计的分辨率下限受此限制。",
+    "Priority-Flood 与 D8 派生量仅用于诊断，不产出任何 DEM 文件，也不替代 DEM_HYDRAULIC。",
+    "Phase 3 状态为 NOT_IMPLEMENTED（未实施）；本文件不是实施报告。"
+  ],
+  "audit_trail": {
+    "script": "scripts/stage6/audit_guigang_channel_route.py",
+    "generated_utc": "2026-11-02T03:00:22+00:00",
+    "run_tag": null,
+    "dry_run": false,
+    "inputs": {
+      "dem.asc": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\dem.asc",
+        "exists": true,
+        "bytes": 1799128,
+        "sha256": "71fe4f81aad57d5750756b0a84688e36c66651afb238d8edd608a3c3a5ec9986"
+      },
+      "res.max": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\results\\res.max",
+        "exists": true,
+        "bytes": 1485790,
+        "sha256": "e00f9f9c19dca39f70b3806538ea2a3c9449fb573b5fc515898052d1e3016a26"
+      },
+      "meta.json": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_choff_realdem\\meta.json",
+        "exists": true,
+        "bytes": 863,
+        "sha256": "ede13a4a205b163a9397bdde18c5453412429de4bd77651569fcfb958b38f707"
+      },
+      "guigang_20240905T105022_water20m.tif": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+        "exists": true,
+        "bytes": 175636,
+        "sha256": "791369d96623a660847d25eb57236e0dba9287f472bbae732d6924466e303391"
+      },
+      "guigang_20240912T104222_water20m.tif": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240912T104222_water20m.tif",
+        "exists": true,
+        "bytes": 150182,
+        "sha256": "573c32d25267bf07bd501c1865d78f8d39ac78dc03878594290ff921aeab18ab"
+      },
+      "guigang_scenario.py": {
+        "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\scripts\\stage5\\guigang_scenario.py",
+        "exists": true,
+        "bytes": 21986,
+        "sha256": "cc71c00d805ffca580e7cdd3a211e24052e1b149e80bc884cf69aa25f7162662"
+      }
+    },
+    "parameters": {
+      "aoi": [
+        109.3,
+        22.98,
+        109.95,
+        23.32
+      ],
+      "res_m": 100.0,
+      "wet_thr": 0.05,
+      "plain_band_m": 40.0,
+      "slope_flat": 0.005,
+      "slope_near_flat": 0.02,
+      "thalweg_jump_cols": 20
+    },
+    "steps": [
+      {
+        "name": "model_grid",
+        "utc": "2026-11-02T03:00:22+00:00",
+        "shape": [
+          370,
+          669
+        ]
+      },
+      {
+        "name": "read_rasters",
+        "utc": "2026-11-02T03:00:22+00:00",
+        "cell_area_m2": 10000.0
+      },
+      {
+        "name": "locate_injection",
+        "utc": "2026-11-02T03:00:22+00:00",
+        "row": 175,
+        "col": 0,
+        "band": [
+          170,
+          180
+        ]
+      },
+      {
+        "name": "s1_s1_common_water_20240905",
+        "utc": "2026-11-02T03:00:22+00:00",
+        "footprint_frac": 0.2614,
+        "n_components": 213
+      },
+      {
+        "name": "s1_s1_flood_20240912",
+        "utc": "2026-11-02T03:00:23+00:00",
+        "footprint_frac": 0.2065,
+        "n_components": 167
+      },
+      {
+        "name": "endpoint_s1_common_water_20240905",
+        "utc": "2026-11-02T03:00:23+00:00",
+        "degenerate": true
+      },
+      {
+        "name": "endpoint_s1_flood_20240912",
+        "utc": "2026-11-02T03:00:23+00:00",
+        "degenerate": true
+      },
+      {
+        "name": "main_water_body",
+        "utc": "2026-11-02T03:00:23+00:00",
+        "km2": 614.96
+      },
+      {
+        "name": "dem_flatness",
+        "utc": "2026-11-02T03:00:24+00:00",
+        "plain_frac": 0.548,
+        "d8_flat_frac": 0.2613
+      },
+      {
+        "name": "write_products",
+        "utc": "2026-11-02T03:00:24+00:00",
+        "out": "data\\catalog\\guigang_channel_route_audit.json"
+      }
+    ],
+    "warnings": [],
+    "errors": []
+  }
+}

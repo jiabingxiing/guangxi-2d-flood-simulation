@@ -1,0 +1,39 @@
+# Model grid definitions for 2D hydrodynamic domains
+cases:
+  jiulong:
+    name: "钦州久隆"
+    crs: "EPSG:32649"
+    dem_path: "data/interim/jiulong/dem_12p5m_32649.tif"
+    resolution_m: 200.0
+    aoi_wgs84: [108.55, 21.92, 108.90, 22.20]
+    default_event: "2024-09-yagi"
+    rainfall_probe: "data/catalog/probes/jiulong_sep2024_era5_hourly_13d.json"
+    rainfall_probe_5d: "data/catalog/probes/jiulong_sep2024_era5_hourly.json"
+    rainfall_probe_ext: "data/catalog/probes/jiulong_sep2024_era5_hourly_ext.json"
+    worldcover_tif: "data/raw/worldcover/N21E108.tif"
+    soil_region: "south_china_red_soil"
+    effective_soil_depth_m: 0.8
+
+  guigang:
+    name: "贵港郁江段"
+    crs: "EPSG:32649"
+    dem_path: "data/interim/guigang/dem_12p5m_32649.tif"
+    resolution_m: 200.0
+    aoi_wgs84: [109.30, 22.98, 109.95, 23.32]
+    default_event: "2024-09-yagi"
+    rainfall_probe: "data/catalog/probes/guigang_sep2024_era5_hourly.json"
+    worldcover_tif: "data/raw/worldcover/N21E108.tif"
+    soil_region: "south_china_alluvial_red_soil"
+    effective_soil_depth_m: 1.0
+
+  ningming:
+    name: "宁明明江段"
+    crs: "EPSG:32648"
+    dem_path: "data/interim/ningming/dem_12p5m_32648.tif"
+    resolution_m: 100.0
+    aoi_wgs84: [106.90, 22.05, 107.25, 22.25]
+    default_event: "2026-08-zitan"
+    rainfall_probe: "data/catalog/probes/ningming_aug2026_era5.json"
+    worldcover_tif: "data/raw/worldcover/N21E105.tif"
+    soil_region: "karst_limestone_soil"
+    effective_soil_depth_m: 0.6

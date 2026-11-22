@@ -1,0 +1,84 @@
+{
+  "script": "scripts/stage3/build_guigang_centerline.py",
+  "generated_utc": "2026-11-07T04:29:05+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "s1_water_pre": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\processed\\s1_water\\guigang_20240905T105022_water20m.tif",
+      "exists": true,
+      "bytes": 175636,
+      "sha256": "791369d96623a660847d25eb57236e0dba9287f472bbae732d6924466e303391"
+    },
+    "osm_raw": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\raw\\osm_guigang\\rivers_aoi_20261107.json",
+      "exists": true,
+      "bytes": 543085,
+      "sha256": "a6a76f223929061a48d1e8dfe9c60a549addcd432aaf3d7cf2b8f77f0d1806b5"
+    },
+    "output_geojson": {
+      "path": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\yujiang_centerline.geojson",
+      "exists": true,
+      "bytes": 45106,
+      "sha256": "5131efc586061c1e7bfbb900ac1243c716b43fd464b9336637d66f1ab8f7f322"
+    }
+  },
+  "parameters": {
+    "source": "osm_overpass",
+    "fallbacks": [],
+    "nodes": 790,
+    "length_m": 77574.2,
+    "anchor_distance_m": 2512.7,
+    "injection_32649": [
+      357174.93,
+      2542761.91
+    ],
+    "boundary_crossings": {
+      "first_point_edge": "S",
+      "last_point_edge": "E"
+    },
+    "s1_qa": {
+      "s1_water_px_in_corridor": 33723,
+      "s1_water_area_km2": 13.489,
+      "median_dist_m": 168.9,
+      "p90_dist_m": 7502.0,
+      "share_within_300m": 0.606,
+      "px_beyond_500m": 12988,
+      "note": ">500m 像元为坑塘等非河道水体（ADR-0011 决策 3 碎块结论一致）"
+    }
+  },
+  "steps": [
+    {
+      "name": "osm_chain",
+      "utc": "2026-11-07T04:29:05+00:00",
+      "ways": 10,
+      "nodes": 216,
+      "unused_named_ways": []
+    },
+    {
+      "name": "centerline_built",
+      "utc": "2026-11-07T04:29:05+00:00",
+      "nodes": 790,
+      "length_km": 77.574
+    },
+    {
+      "name": "s1_qa",
+      "utc": "2026-11-07T04:29:08+00:00",
+      "s1_water_px_in_corridor": 33723,
+      "s1_water_area_km2": 13.489,
+      "median_dist_m": 168.9,
+      "p90_dist_m": 7502.0,
+      "share_within_300m": 0.606,
+      "px_beyond_500m": 12988,
+      "note": ">500m 像元为坑塘等非河道水体（ADR-0011 决策 3 碎块结论一致）"
+    },
+    {
+      "name": "done",
+      "utc": "2026-11-07T04:29:08+00:00",
+      "geojson": "F:\\NWKYYSJZX\\2026年工作\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\interim\\guigang\\yujiang_centerline.geojson"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "finished_utc": "2026-11-07T04:29:08+00:00"
+}
