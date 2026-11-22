@@ -1,0 +1,116 @@
+{
+  "script": "make_genesis_attribution.py",
+  "generated_utc": "2026-11-22T02:51:04+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "rules": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\catalog\\guigang_genesis_rules.json",
+      "exists": true,
+      "bytes": 1447,
+      "sha256": "85e532e3bff3514f5053845c74fd57010925683e11e109c7c40ad8fa2f4f8b00"
+    },
+    "full_resmax": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\results\\res.max",
+      "exists": true,
+      "bytes": 1485696,
+      "sha256": "ce80a2fe753fed409cbc1e73107c6a281522f64269811b77fb4f320fd4cd4a7f"
+    },
+    "rain_off_resmax": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain\\results\\res.max",
+      "exists": true,
+      "bytes": 1485695,
+      "sha256": "36f7d9b0106407c06ff8807fecd3d34a68ee05232560ee497b14ed29e08d5ce4"
+    }
+  },
+  "parameters": {
+    "rules_sha256": "85e532e3bff3514f5053845c74fd57010925683e11e109c7c40ad8fa2f4f8b00",
+    "wet_thr": 0.05
+  },
+  "steps": [
+    {
+      "name": "classified",
+      "utc": "2026-11-22T02:51:04+00:00",
+      "stats": {
+        "never_wet": {
+          "code": 0,
+          "cells": 226650,
+          "area_km2": 2266.5
+        },
+        "river_origin": {
+          "code": 1,
+          "cells": 2037,
+          "area_km2": 20.37
+        },
+        "pluvial_origin": {
+          "code": 2,
+          "cells": 18544,
+          "area_km2": 185.44
+        },
+        "edge_band": {
+          "code": 3,
+          "cells": 33,
+          "area_km2": 0.33
+        },
+        "disagreement": {
+          "code": 4,
+          "cells": 266,
+          "area_km2": 2.66
+        }
+      }
+    },
+    {
+      "name": "written",
+      "utc": "2026-11-22T02:51:05+00:00",
+      "output_dir": "outputs/products/guigang/genesis/85e532e3"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "evidence_level": "E2（情景差分派生，非实测；含已注册混淆项）",
+  "rules_path": "data/catalog/guigang_genesis_rules.json",
+  "rules_sha256": "85e532e3bff3514f5053845c74fd57010925683e11e109c7c40ad8fa2f4f8b00",
+  "full_run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+  "rain_off_run": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+  "wet_threshold_m": 0.05,
+  "basis": "event-max（results/res.max）",
+  "confounder_note": "full=d14 河槽+求解器入渗 3.0 mm/h+毛雨；rain_off=d10 河槽无雨。河槽配置差异为已注册混淆项；结论只称有雨/无雨情景差分归因，不得称外洪/内涝精确分解。",
+  "prohibited_readings": [
+    "不得称 river-origin = 河流漫溢精确范围（d14/d10 河槽差异混淆）",
+    "不得把 pluvial-origin 用于资产级内涝判据（无排水网资料，ADR-0014）",
+    "edge-band 与 disagreement 不得并入任一成因统计口径"
+  ],
+  "class_stats": {
+    "never_wet": {
+      "code": 0,
+      "cells": 226650,
+      "area_km2": 2266.5
+    },
+    "river_origin": {
+      "code": 1,
+      "cells": 2037,
+      "area_km2": 20.37
+    },
+    "pluvial_origin": {
+      "code": 2,
+      "cells": 18544,
+      "area_km2": 185.44
+    },
+    "edge_band": {
+      "code": 3,
+      "cells": 33,
+      "area_km2": 0.33
+    },
+    "disagreement": {
+      "code": 4,
+      "cells": 266,
+      "area_km2": 2.66
+    }
+  },
+  "output_dir": "outputs/products/guigang/genesis/85e532e3",
+  "outputs": [
+    "outputs/products/guigang/genesis/85e532e3/origin_class.tif",
+    "outputs/products/guigang/genesis/85e532e3/origin_class.tif.meta.json"
+  ],
+  "finished_utc": "2026-11-22T02:51:05+00:00"
+}

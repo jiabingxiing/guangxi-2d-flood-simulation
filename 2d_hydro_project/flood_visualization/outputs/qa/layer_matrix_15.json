@@ -46,13 +46,11 @@
   {
     "case": "jiulong",
     "preset": "terrain_edit_only",
-    "visible": [
+    "visible": [],
+    "expected_visible": [],
+    "disabled_layers": [
       "terrain_edit"
-    ],
-    "expected_visible": [
-      "terrain_edit"
-    ],
-    "disabled_layers": []
+    ]
   },
   {
     "case": "jiulong",
@@ -75,7 +73,6 @@
       "optical",
       "sar",
       "sites",
-      "terrain_edit",
       "terrain_source"
     ],
     "expected_visible": [

@@ -1,0 +1,25 @@
+{
+  "script": "icesat2_datum_probe.py",
+  "generated_utc": "2026-11-22T03:21:35+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {},
+  "parameters": {},
+  "steps": [],
+  "warnings": [],
+  "errors": [],
+  "probe": {
+    "script": "icesat2_datum_probe.py",
+    "generated_utc": "2026-11-22T03:21:35+00:00",
+    "adr": "ADR-0017",
+    "data_available": false,
+    "s5_status": "未验证（ATL13 数据不可得：无 Earthdata 凭证且无本地沿轨文件）",
+    "evidence_level": "E2/E3（水面高程实测分量 + 格网落点近似）",
+    "next_steps": [
+      "配置 Earthdata 凭证（~/.netrc：urs.earthdata.nasa.gov）",
+      "用 icepyx 检索 bbox 内 ATL13（2019–2026）导出沿轨 CSV（track_id,lat,lon,wse_m,quality）",
+      "重跑本脚本 --input tracks.csv --dem <dem.asc> [--gsw occurrence.tif]"
+    ]
+  },
+  "finished_utc": "2026-11-22T03:21:35+00:00"
+}

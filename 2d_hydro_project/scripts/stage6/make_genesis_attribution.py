@@ -145,11 +145,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--rules", type=Path, default=DEFAULT_RULES,
                         help="已冻结规则 JSON（默认 data/catalog/guigang_genesis_rules.json）")
-    parser.add_argument("--run-tag", default=None,
-                        help="输出子目录后缀（默认取规则文件的 sha256 前 8 位）")
     from scripts.common.grid_io import add_common_args
 
-    add_common_args(parser)
+    add_common_args(parser)  # 提供 --dry-run/--run-tag/--out-dir/--log-json
     args = parser.parse_args()
 
     rules = load_rules(args.rules)

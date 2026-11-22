@@ -1,0 +1,36 @@
+{
+  "script": "prep_imerg_rain.py",
+  "generated_utc": "2026-11-22T03:19:41+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {},
+  "parameters": {
+    "site": "guigang",
+    "input": "None"
+  },
+  "steps": [],
+  "warnings": [],
+  "errors": [],
+  "imerg": {
+    "script": "prep_imerg_rain.py",
+    "generated_utc": "2026-11-22T03:19:41+00:00",
+    "site": "guigang",
+    "aoi_bbox": [
+      109.3,
+      22.98,
+      109.95,
+      23.32
+    ],
+    "event_t0_local": "2024-09-03T00:00",
+    "n_hours": 336,
+    "data_available": false,
+    "mmf_status": "未验证（IMERG 数据不可得：无 Earthdata 凭证且无本地文件）",
+    "evidence_level": "E3（情景级）",
+    "next_steps": [
+      "配置 Earthdata 凭证（~/.netrc：urs.earthdata.nasa.gov）后从 GES DISC 下载 GPM_3IMERGHH.07 事件窗文件（2024-09 或 2026-08）",
+      "重跑本脚本 --input <HDF5>；产出经同一 GA 净雨链生成净雨 .rain",
+      "净雨件就位后按 ADR-0016 §2 协议组装 scen_imerg_ga_100m（5.3 已授权）"
+    ]
+  },
+  "finished_utc": "2026-11-22T03:19:41+00:00"
+}

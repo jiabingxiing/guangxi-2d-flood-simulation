@@ -277,9 +277,9 @@ def full_bundle(integration_config) -> Path:
 # + scripts/build_web.py 复制的 assets），绝不写入 outputs/web_bundle/**。
 
 #: 正式发布包 id（SPEC §4 示例）；存在且含 index.html 时 e2e 用它
-E2E_RELEASE_BUNDLE = "v6-20261029"
-#: 最近几个发布包：e2e 只要其中一个可服务即可（优先最新 v6-20261029）
-E2E_KNOWN_BUNDLES = ("v6-20261029", "v3-20261028", "v2-20261027")
+E2E_RELEASE_BUNDLE = "v9-20261122"
+#: 最近几个发布包：e2e 只要其中一个可服务即可（优先最新 v9-20261122）
+E2E_KNOWN_BUNDLES = ("v9-20261122", "v8-20261102", "v6-20261029")
 #: qa 自建 mock 包（web 组 mock 数据 + 真实 build_web 产物）
 E2E_MOCK_BUNDLE = "qa_e2e_mock"
 E2E_MOCK_SOURCE = PROJECT_ROOT / "web" / ".dev" / "mock_bundle"

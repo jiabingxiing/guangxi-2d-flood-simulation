@@ -111,6 +111,38 @@ runs:
     optional: false
     notes: "净雨预处理：初损 Ia=50 mm、持续入渗 fc=3.0 mm/h，ERA5 毛雨 135.50 mm 下净雨 36.10 mm。res.max 口径湿像元 69,538、湿面积 695.38 km²、斑块数 6,167。否证性事实：斑块数相对基线 4,422 反升 39.5%，湿面积 −18.4%；加大初损与入渗后斑块数不降反升，与「碎斑由降雨量驱动」的假设不符。E_mass 6.241e-05 PASS。channel=off，未做河道调理（已知限制）"
 
+# ---- Phase H 研究性产品图层（ADR-0015~0018；单帧伪 run，role=product）----
+# 来源 outputs/products/**；统计契约与水深一致但阈值作用于产品值（小时/类别码），
+# 语义由 statistics.product 声明；不改 default_run_id；禁业务告警。
+product_layers:
+  - product_id: product_fat_firstwet_choff_realdem
+    label: "研究性产品：首湿时刻 FAT（T+h，wd>0.05 m）"
+    kind: fat_first_wet_h
+    source: "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_realdem/first_wet_h.tif"
+    source_run: scen_yagi_q11500_100m_dt2p5_choff_realdem
+    save_interval_s: 21600
+    audit: "data/catalog/fat_products_audit.json"
+    adr: "ADR-0015 §2（钟鸣 FAT 思想降级）"
+    notes: "首湿时刻=像元首次 wd>0.05 m 的 6 h 快照时刻；NaN=全程未湿（透明）。研究性产品，非实测到达时间，禁业务告警"
+  - product_id: product_fat_exceed03_choff_realdem
+    label: "研究性产品：首达 0.3 m 情景阈值时刻（T+h）"
+    kind: fat_exceed_h
+    threshold_m: 0.3
+    source: "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_realdem/exceed_h_thr0p3.tif"
+    source_run: scen_yagi_q11500_100m_dt2p5_choff_realdem
+    save_interval_s: 21600
+    audit: "data/catalog/fat_products_audit.json"
+    adr: "ADR-0015 §2（情景阈值，非设备安全值）"
+    notes: "首达 0.3 m 情景阈值时刻；NaN=全程未达（透明）。0.3/0.5/1.0 为情景假设阈值，禁止称设备安全值"
+  - product_id: product_genesis_origin
+    label: "研究性产品：有雨/无雨情景差分归因（origin_class）"
+    kind: class_map
+    source: "outputs/products/guigang/genesis/85e532e3/origin_class.tif"
+    mass_gate_run_path: "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3"
+    audit: "data/catalog/guigang_genesis_products.json"
+    adr: "ADR-0015 §3（吴欢 DRIVE-Urban 思想降级）"
+    notes: "full=chhyd_d14_r4_infil3 × rain_off=chhyd_d10_r2_norain 差分：1 river-origin / 2 pluvial-origin / 3 edge-band / 4 disagreement；d14/d10 河槽差异为已注册混淆项，不得称外洪/内涝精确分解"
+
 layers:
   dem: {status: ready, label: "DEM 高程", kind: raster, summary: "模型输入 DEM（100 m 真实重采样，彻底清除人工刻蚀与下切）", note: "原始地貌完好保持，垂直基准未闭合"}
   flood: {status: ready, label: "模型水深（逐帧）", kind: frame}

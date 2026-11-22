@@ -44,9 +44,9 @@ scripts\start_local.cmd            # 服务最新包
 scripts\start_local.cmd v6-20261029
 ```
 
-> 包版本现状（2026-11-02）：交付 `v8-20261102`（3 案例 / 11 run，9/9 校验组通过）；构建级回滚 `v7-20261031`；
-> 上一交付 `v6-20261029`；数据级回滚 `v4-20261028`（在 `outputs/_archive_bundles/`，需先移回 `outputs/web_bundle/`）。
-> 详见 `docs/runbook.md` §4、§6。
+> 包版本现状（2026-11-22）：交付 `v9-20261122`（3 案例 / 12 run + 6 研究性产品图层；validate --full 与 30 分钟播放门通过）；
+> 构建级回滚 `v8-20261102`；上一交付 `v6-20261029`；数据级回滚 `v4-20261028`（在 `outputs/_archive_bundles/`）。
+> 研究性产品图层=ADR-0015~0018 的 FAT/归因/概率单帧伪 run（role=product），详见 `docs/runbook.md` §4、§6。
 
 ## 4. 事实纪律
 

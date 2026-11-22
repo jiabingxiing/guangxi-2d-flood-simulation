@@ -1,0 +1,30 @@
+{
+  "script": "make_mmf_report (T14 骨架；协议见 ADR-0016 §2)",
+  "generated_utc": "2026-11-22T03:26:55+00:00",
+  "adr": "ADR-0016 §2（MMF 降雨多源评估协议）",
+  "protocol": "同一模型、同一 GA 净雨链、同一验证景，仅替换降雨驱动；评洪水响应差异",
+  "status": "未验证（IMERG 数据不可得：无 Earthdata 凭证且无本地文件）",
+  "evidence_level": "E3（情景级）",
+  "era5_baseline": {
+    "run": "chhyd_d14_r4_infil3",
+    "csi": 0.196,
+    "pod": 0.394,
+    "far": 0.72,
+    "scene": "2024-09-12T10:42",
+    "t_model_h": 228.0,
+    "note": "同口径 S1（validate_guigang_s1.py 足迹内）"
+  },
+  "imerg_side": {
+    "status": "待凭证/待下载",
+    "prep_audit": "data/catalog/imerg_prep_audit.json",
+    "next_steps": [
+      "配置 Earthdata 凭证后下载 GPM_3IMERGHH.07 2024-09 事件窗（约 480 文件）",
+      "prep_imerg_rain.py --input 批量解析 → 时基归一 → GA 净雨链",
+      "组装并执行授权 run scen_imerg_ga_100m（计划 5.3）",
+      "validate_guigang_s1.py 同口径复算 → 回填本报告差异表"
+    ]
+  },
+  "difference_table": null,
+  "note": "差异数仅在 IMERG run 入库并复算后回填；本文件为骨架登记（不留半成品结论）",
+  "not_physical_recalculation": true
+}

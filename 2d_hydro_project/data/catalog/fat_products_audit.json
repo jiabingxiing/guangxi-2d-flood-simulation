@@ -1,0 +1,5218 @@
+{
+  "script": "make_fat_products.py",
+  "generated_utc": "2026-11-22T02:47:20+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "mass_recheck_g15": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\data\\catalog\\mass_recheck_g15.json",
+      "exists": true,
+      "bytes": 35053,
+      "sha256": "651b0c0bce022a43de5968b67f91c3d28d9535929ad113668a6922dee6f38606"
+    }
+  },
+  "parameters": {
+    "site": "all",
+    "thresholds": [
+      0.3,
+      0.5,
+      1.0
+    ],
+    "run_filter": null,
+    "nearest_cap_cells": 100,
+    "wet_thr": 0.05,
+    "dry_run": false,
+    "out_root": "outputs/products"
+  },
+  "steps": [
+    {
+      "name": "guigang/scen_yagi_q11500_100m_b1",
+      "utc": "2026-11-22T02:47:26+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+      "utc": "2026-11-22T02:47:31+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+      "utc": "2026-11-22T02:47:38+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+      "utc": "2026-11-22T02:47:43+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+      "utc": "2026-11-22T02:47:48+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+      "utc": "2026-11-22T02:47:55+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+      "utc": "2026-11-22T02:48:00+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+      "utc": "2026-11-22T02:48:05+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+      "utc": "2026-11-22T02:48:11+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+      "utc": "2026-11-22T02:48:17+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+      "utc": "2026-11-22T02:48:23+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+      "utc": "2026-11-22T02:48:28+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+      "utc": "2026-11-22T02:48:31+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+      "utc": "2026-11-22T02:48:36+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+      "utc": "2026-11-22T02:48:41+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+      "utc": "2026-11-22T02:48:46+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+      "utc": "2026-11-22T02:48:52+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+      "utc": "2026-11-22T02:48:57+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+      "utc": "2026-11-22T02:49:02+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_100m_wfix",
+      "utc": "2026-11-22T02:49:07+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_200m",
+      "utc": "2026-11-22T02:49:10+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_200m_dt2p5_b1",
+      "utc": "2026-11-22T02:49:13+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_200m_repro",
+      "utc": "2026-11-22T02:49:16+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q11500_30m_b5",
+      "utc": "2026-11-22T02:49:56+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q15000_200m",
+      "utc": "2026-11-22T02:49:59+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "guigang/scen_yagi_q8000_200m",
+      "utc": "2026-11-22T02:50:02+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_b1",
+      "utc": "2026-11-22T02:50:02+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+      "utc": "2026-11-22T02:50:06+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+      "utc": "2026-11-22T02:50:07+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_dt2p5_sv6h_r13d_allfree",
+      "utc": "2026-11-22T02:50:11+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_dt2p5_sv6h_r5d_allfree",
+      "utc": "2026-11-22T02:50:12+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_100m_dt2p5_sv6h_realdem",
+      "utc": "2026-11-22T02:50:13+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_200m",
+      "utc": "2026-11-22T02:50:14+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_200m_dt2p5_b1",
+      "utc": "2026-11-22T02:50:14+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_200m_dt2p5_sv6h_recession_ga_v1",
+      "utc": "2026-11-22T02:50:16+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_200m_sv6h",
+      "utc": "2026-11-22T02:50:17+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_free_200m_sv6h_recession",
+      "utc": "2026-11-22T02:50:19+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "jiulong/scen_z0_200m",
+      "utc": "2026-11-22T02:50:20+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/_diag_eclosed",
+      "utc": "2026-11-22T02:50:21+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q2500_n100_100m",
+      "utc": "2026-11-22T02:50:22+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q2500_n35_100m",
+      "utc": "2026-11-22T02:50:23+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q2500_n60_100m",
+      "utc": "2026-11-22T02:50:24+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q4000_100m",
+      "utc": "2026-11-22T02:50:25+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q4000_n100_100m",
+      "utc": "2026-11-22T02:50:27+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q4000_n35_100m",
+      "utc": "2026-11-22T02:50:28+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q4000_n35_100m_choff",
+      "utc": "2026-11-22T02:50:29+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q4000_n60_100m",
+      "utc": "2026-11-22T02:50:30+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m",
+      "utc": "2026-11-22T02:50:31+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_choff_eclosed",
+      "utc": "2026-11-22T02:50:32+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_choff_nocut-v1",
+      "utc": "2026-11-22T02:50:33+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_dt3p0_b1",
+      "utc": "2026-11-22T02:50:34+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_inf1e-6_karst",
+      "utc": "2026-11-22T02:50:36+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_inf5e-6_karst",
+      "utc": "2026-11-22T02:50:37+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_nsp_b0",
+      "utc": "2026-11-22T02:50:38+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_r50",
+      "utc": "2026-11-22T02:50:39+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_r70",
+      "utc": "2026-11-22T02:50:40+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_r85",
+      "utc": "2026-11-22T02:50:41+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_100m_repro",
+      "utc": "2026-11-22T02:50:42+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n100_50m_b1",
+      "utc": "2026-11-22T02:50:44+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n35_100m",
+      "utc": "2026-11-22T02:50:45+00:00",
+      "status": "ok"
+    },
+    {
+      "name": "ningming/scen_q6000_n60_100m",
+      "utc": "2026-11-22T02:50:47+00:00",
+      "status": "ok"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "evidence_level": "E2（模拟情景派生，非实测）",
+  "notes": [
+    "超阈阈值为情景假设，禁止称设备安全值",
+    "三级窗为研究性分组，非应急等级",
+    "覆盖=mass_recheck_g15.json 全部 PASS run；FAIL-EXPLAINED 不产出"
+  ],
+  "coverage": {
+    "sites": {
+      "guigang": {
+        "gate_pass_total": 26,
+        "processed": 26,
+        "skipped": 0,
+        "anchor_run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+        "anchor_ok": true,
+        "records": [
+          {
+            "run": "scen_yagi_q11500_100m_b1",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_b1",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 57076,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_b1",
+            "window_counts_thr0p3": {
+              "never": 207475,
+              "w1_lt6h": 1,
+              "w2_6to24h": 1828,
+              "w3_gt24h": 38226
+            },
+            "window_counts_thr0p5": {
+              "never": 210547,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1823,
+              "w3_gt24h": 35160
+            },
+            "window_counts_thr1": {
+              "never": 216556,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1763,
+              "w3_gt24h": 29211
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_b1",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 15.829,
+              "depth_max_r2_m": 15.926,
+              "center_first_wet_h": 12.0,
+              "r2_first_wet_h": 12.0,
+              "center_exceed_0p3_h": 12.0,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 330.0,
+              "r2_duration_0p3_max_h": 330.0,
+              "r2_exceed_0p3_cells": 20,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 12.0,
+              "r2_exceed_0p5_h": 12.0,
+              "center_duration_0p5_h": 330.0,
+              "r2_duration_0p5_max_h": 330.0,
+              "r2_exceed_0p5_cells": 20,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 12.0,
+              "r2_exceed_1_h": 12.0,
+              "center_duration_1_h": 330.0,
+              "r2_duration_1_max_h": 330.0,
+              "r2_exceed_1_cells": 20,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 46869,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+            "window_counts_thr0p3": {
+              "never": 220003,
+              "w1_lt6h": 0,
+              "w2_6to24h": 656,
+              "w3_gt24h": 26871
+            },
+            "window_counts_thr0p5": {
+              "never": 223475,
+              "w1_lt6h": 0,
+              "w2_6to24h": 633,
+              "w3_gt24h": 23422
+            },
+            "window_counts_thr1": {
+              "never": 228412,
+              "w1_lt6h": 0,
+              "w2_6to24h": 563,
+              "w3_gt24h": 18555
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d10",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 2309,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+            "window_counts_thr0p3": {
+              "never": 245249,
+              "w1_lt6h": 0,
+              "w2_6to24h": 656,
+              "w3_gt24h": 1625
+            },
+            "window_counts_thr0p5": {
+              "never": 245270,
+              "w1_lt6h": 0,
+              "w2_6to24h": 633,
+              "w3_gt24h": 1627
+            },
+            "window_counts_thr1": {
+              "never": 245341,
+              "w1_lt6h": 0,
+              "w2_6to24h": 563,
+              "w3_gt24h": 1626
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d10_r2_norain",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.0,
+              "depth_max_r2_m": 0.0,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": null,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": null,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 0.0,
+              "r2_exceed_0p3_cells": 0,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": null,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 0.0,
+              "r2_exceed_0p5_cells": 0,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 23,
+                "row": 252,
+                "col": 316,
+                "first_wet_h": 156.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 46725,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+            "window_counts_thr0p3": {
+              "never": 220146,
+              "w1_lt6h": 0,
+              "w2_6to24h": 616,
+              "w3_gt24h": 26768
+            },
+            "window_counts_thr0p5": {
+              "never": 223643,
+              "w1_lt6h": 0,
+              "w2_6to24h": 606,
+              "w3_gt24h": 23281
+            },
+            "window_counts_thr1": {
+              "never": 228559,
+              "w1_lt6h": 0,
+              "w2_6to24h": 532,
+              "w3_gt24h": 18439
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d12",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 46593,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+            "window_counts_thr0p3": {
+              "never": 220282,
+              "w1_lt6h": 0,
+              "w2_6to24h": 589,
+              "w3_gt24h": 26659
+            },
+            "window_counts_thr0p5": {
+              "never": 223750,
+              "w1_lt6h": 0,
+              "w2_6to24h": 567,
+              "w3_gt24h": 23213
+            },
+            "window_counts_thr1": {
+              "never": 228671,
+              "w1_lt6h": 0,
+              "w2_6to24h": 509,
+              "w3_gt24h": 18350
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 23101,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+            "window_counts_thr0p3": {
+              "never": 235627,
+              "w1_lt6h": 0,
+              "w2_6to24h": 589,
+              "w3_gt24h": 11314
+            },
+            "window_counts_thr0p5": {
+              "never": 239097,
+              "w1_lt6h": 0,
+              "w2_6to24h": 567,
+              "w3_gt24h": 7866
+            },
+            "window_counts_thr1": {
+              "never": 242510,
+              "w1_lt6h": 0,
+              "w2_6to24h": 509,
+              "w3_gt24h": 4511
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.01,
+              "depth_max_r2_m": 1.035,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 174.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 168.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 192.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 150.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 282.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 60.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 2,
+                "row": 227,
+                "col": 308,
+                "first_wet_h": 120.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 24910,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+            "window_counts_thr0p3": {
+              "never": 233980,
+              "w1_lt6h": 0,
+              "w2_6to24h": 589,
+              "w3_gt24h": 12961
+            },
+            "window_counts_thr0p5": {
+              "never": 237674,
+              "w1_lt6h": 0,
+              "w2_6to24h": 567,
+              "w3_gt24h": 9289
+            },
+            "window_counts_thr1": {
+              "never": 241583,
+              "w1_lt6h": 0,
+              "w2_6to24h": 509,
+              "w3_gt24h": 5438
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_lossmed",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.011,
+              "depth_max_r2_m": 1.078,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 144.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 198.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 186.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 156.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 282.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 60.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 282.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 20498,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+            "window_counts_thr0p3": {
+              "never": 238303,
+              "w1_lt6h": 0,
+              "w2_6to24h": 585,
+              "w3_gt24h": 8642
+            },
+            "window_counts_thr0p5": {
+              "never": 240364,
+              "w1_lt6h": 0,
+              "w2_6to24h": 565,
+              "w3_gt24h": 6601
+            },
+            "window_counts_thr1": {
+              "never": 243023,
+              "w1_lt6h": 0,
+              "w2_6to24h": 507,
+              "w3_gt24h": 4000
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_combo",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.011,
+              "depth_max_r2_m": 0.829,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 222.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 186.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 102.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 2,
+                "row": 227,
+                "col": 308,
+                "first_wet_h": 84.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 45771,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+            "window_counts_thr0p3": {
+              "never": 220123,
+              "w1_lt6h": 0,
+              "w2_6to24h": 589,
+              "w3_gt24h": 26818
+            },
+            "window_counts_thr0p5": {
+              "never": 223957,
+              "w1_lt6h": 0,
+              "w2_6to24h": 567,
+              "w3_gt24h": 23006
+            },
+            "window_counts_thr1": {
+              "never": 228804,
+              "w1_lt6h": 0,
+              "w2_6to24h": 509,
+              "w3_gt24h": 18217
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_drA",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 20399,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+            "window_counts_thr0p3": {
+              "never": 238298,
+              "w1_lt6h": 0,
+              "w2_6to24h": 585,
+              "w3_gt24h": 8647
+            },
+            "window_counts_thr0p5": {
+              "never": 240339,
+              "w1_lt6h": 0,
+              "w2_6to24h": 565,
+              "w3_gt24h": 6626
+            },
+            "window_counts_thr1": {
+              "never": 243005,
+              "w1_lt6h": 0,
+              "w2_6to24h": 507,
+              "w3_gt24h": 4018
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r3_infil2",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.011,
+              "depth_max_r2_m": 0.83,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 222.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 186.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 102.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 2,
+                "row": 227,
+                "col": 308,
+                "first_wet_h": 84.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 44532,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+            "window_counts_thr0p3": {
+              "never": 220347,
+              "w1_lt6h": 0,
+              "w2_6to24h": 589,
+              "w3_gt24h": 26594
+            },
+            "window_counts_thr0p5": {
+              "never": 223793,
+              "w1_lt6h": 0,
+              "w2_6to24h": 567,
+              "w3_gt24h": 23170
+            },
+            "window_counts_thr1": {
+              "never": 229053,
+              "w1_lt6h": 0,
+              "w2_6to24h": 509,
+              "w3_gt24h": 17968
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 17103,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+            "window_counts_thr0p3": {
+              "never": 242109,
+              "w1_lt6h": 0,
+              "w2_6to24h": 584,
+              "w3_gt24h": 4837
+            },
+            "window_counts_thr0p5": {
+              "never": 243319,
+              "w1_lt6h": 0,
+              "w2_6to24h": 563,
+              "w3_gt24h": 3648
+            },
+            "window_counts_thr1": {
+              "never": 244528,
+              "w1_lt6h": 0,
+              "w2_6to24h": 507,
+              "w3_gt24h": 2495
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_drB_infil3",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.009,
+              "depth_max_r2_m": 0.329,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 108.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 282.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 18.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": null,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 0.0,
+              "r2_exceed_0p5_cells": 0,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 2,
+                "row": 227,
+                "col": 308,
+                "first_wet_h": 108.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 16678,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+            "window_counts_thr0p3": {
+              "never": 242051,
+              "w1_lt6h": 0,
+              "w2_6to24h": 584,
+              "w3_gt24h": 4895
+            },
+            "window_counts_thr0p5": {
+              "never": 243306,
+              "w1_lt6h": 0,
+              "w2_6to24h": 563,
+              "w3_gt24h": 3661
+            },
+            "window_counts_thr1": {
+              "never": 244521,
+              "w1_lt6h": 0,
+              "w2_6to24h": 507,
+              "w3_gt24h": 2502
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.009,
+              "depth_max_r2_m": 0.329,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 108.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 282.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 18.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": null,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 0.0,
+              "r2_exceed_0p5_cells": 0,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 2,
+                "row": 227,
+                "col": 308,
+                "first_wet_h": 108.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 46490,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+            "window_counts_thr0p3": {
+              "never": 220376,
+              "w1_lt6h": 0,
+              "w2_6to24h": 572,
+              "w3_gt24h": 26582
+            },
+            "window_counts_thr0p5": {
+              "never": 223851,
+              "w1_lt6h": 0,
+              "w2_6to24h": 548,
+              "w3_gt24h": 23131
+            },
+            "window_counts_thr1": {
+              "never": 228761,
+              "w1_lt6h": 0,
+              "w2_6to24h": 486,
+              "w3_gt24h": 18283
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d16",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 46374,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+            "window_counts_thr0p3": {
+              "never": 220486,
+              "w1_lt6h": 0,
+              "w2_6to24h": 550,
+              "w3_gt24h": 26494
+            },
+            "window_counts_thr0p5": {
+              "never": 223951,
+              "w1_lt6h": 0,
+              "w2_6to24h": 536,
+              "w3_gt24h": 23043
+            },
+            "window_counts_thr1": {
+              "never": 228869,
+              "w1_lt6h": 0,
+              "w2_6to24h": 468,
+              "w3_gt24h": 18193
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_chhyd_d19",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 1.773,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 5,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 5,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 1,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 228,
+                "col": 307,
+                "first_wet_h": 114.0
+              }
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 68517,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+            "window_counts_thr0p3": {
+              "never": 188277,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2982,
+              "w3_gt24h": 56271
+            },
+            "window_counts_thr0p5": {
+              "never": 191440,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2802,
+              "w3_gt24h": 53288
+            },
+            "window_counts_thr1": {
+              "never": 198034,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2096,
+              "w3_gt24h": 47400
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 2.286,
+              "depth_max_r2_m": 5.281,
+              "center_first_wet_h": 156.0,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": 156.0,
+              "r2_exceed_0p3_h": 144.0,
+              "center_duration_0p3_h": 186.0,
+              "r2_duration_0p3_max_h": 198.0,
+              "r2_exceed_0p3_cells": 22,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 156.0,
+              "r2_exceed_0p5_h": 156.0,
+              "center_duration_0p5_h": 186.0,
+              "r2_duration_0p5_max_h": 186.0,
+              "r2_exceed_0p5_cells": 21,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 162.0,
+              "r2_exceed_1_h": 156.0,
+              "center_duration_1_h": 180.0,
+              "r2_duration_1_max_h": 186.0,
+              "r2_exceed_1_cells": 21,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 52942,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+            "window_counts_thr0p3": {
+              "never": 196267,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2982,
+              "w3_gt24h": 48281
+            },
+            "window_counts_thr0p5": {
+              "never": 196910,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2802,
+              "w3_gt24h": 47818
+            },
+            "window_counts_thr1": {
+              "never": 201130,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2096,
+              "w3_gt24h": 44304
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_choff_flow_only_v1",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 2.285,
+              "depth_max_r2_m": 5.28,
+              "center_first_wet_h": 156.0,
+              "r2_first_wet_h": 156.0,
+              "center_exceed_0p3_h": 156.0,
+              "r2_exceed_0p3_h": 156.0,
+              "center_duration_0p3_h": 186.0,
+              "r2_duration_0p3_max_h": 186.0,
+              "r2_exceed_0p3_cells": 22,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 156.0,
+              "r2_exceed_0p5_h": 156.0,
+              "center_duration_0p5_h": 186.0,
+              "r2_duration_0p5_max_h": 186.0,
+              "r2_exceed_0p5_cells": 21,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 162.0,
+              "r2_exceed_1_h": 156.0,
+              "center_duration_1_h": 180.0,
+              "r2_duration_1_max_h": 186.0,
+              "r2_exceed_1_cells": 21,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 66923,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+            "window_counts_thr0p3": {
+              "never": 189991,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2982,
+              "w3_gt24h": 54557
+            },
+            "window_counts_thr0p5": {
+              "never": 192652,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2802,
+              "w3_gt24h": 52076
+            },
+            "window_counts_thr1": {
+              "never": 198954,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2096,
+              "w3_gt24h": 46480
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 2.286,
+              "depth_max_r2_m": 5.281,
+              "center_first_wet_h": 156.0,
+              "r2_first_wet_h": 126.0,
+              "center_exceed_0p3_h": 156.0,
+              "r2_exceed_0p3_h": 156.0,
+              "center_duration_0p3_h": 186.0,
+              "r2_duration_0p3_max_h": 186.0,
+              "r2_exceed_0p3_cells": 22,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 156.0,
+              "r2_exceed_0p5_h": 156.0,
+              "center_duration_0p5_h": 186.0,
+              "r2_duration_0p5_max_h": 186.0,
+              "r2_exceed_0p5_cells": 21,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 162.0,
+              "r2_exceed_1_h": 156.0,
+              "center_duration_1_h": 180.0,
+              "r2_duration_1_max_h": 186.0,
+              "r2_exceed_1_cells": 21,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 80329,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+            "window_counts_thr0p3": {
+              "never": 181000,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2982,
+              "w3_gt24h": 63548
+            },
+            "window_counts_thr0p5": {
+              "never": 183940,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2802,
+              "w3_gt24h": 60788
+            },
+            "window_counts_thr1": {
+              "never": 189057,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2096,
+              "w3_gt24h": 56377
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 2.29,
+              "depth_max_r2_m": 5.285,
+              "center_first_wet_h": 156.0,
+              "r2_first_wet_h": 84.0,
+              "center_exceed_0p3_h": 156.0,
+              "r2_exceed_0p3_h": 90.0,
+              "center_duration_0p3_h": 186.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 23,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 156.0,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 186.0,
+              "r2_duration_0p5_max_h": 246.0,
+              "r2_exceed_0p5_cells": 21,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 162.0,
+              "r2_exceed_1_h": 108.0,
+              "center_duration_1_h": 180.0,
+              "r2_duration_1_max_h": 234.0,
+              "r2_exceed_1_cells": 21,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_100m_wfix",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_wfix",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 48283,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_100m_wfix",
+            "window_counts_thr0p3": {
+              "never": 219345,
+              "w1_lt6h": 1,
+              "w2_6to24h": 3102,
+              "w3_gt24h": 25082
+            },
+            "window_counts_thr0p5": {
+              "never": 222078,
+              "w1_lt6h": 0,
+              "w2_6to24h": 3039,
+              "w3_gt24h": 22413
+            },
+            "window_counts_thr1": {
+              "never": 226589,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2487,
+              "w3_gt24h": 18454
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_100m_wfix",
+              "center_row": 229,
+              "center_col": 308,
+              "radius_cells": 2,
+              "depth_max_center_m": 9.059,
+              "depth_max_r2_m": 9.091,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 25,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 25,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 25,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_200m",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 12086,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_200m",
+            "window_counts_thr0p3": {
+              "never": 54701,
+              "w1_lt6h": 0,
+              "w2_6to24h": 710,
+              "w3_gt24h": 6379
+            },
+            "window_counts_thr0p5": {
+              "never": 55881,
+              "w1_lt6h": 0,
+              "w2_6to24h": 703,
+              "w3_gt24h": 5206
+            },
+            "window_counts_thr1": {
+              "never": 57273,
+              "w1_lt6h": 0,
+              "w2_6to24h": 622,
+              "w3_gt24h": 3895
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_200m",
+              "center_row": 114,
+              "center_col": 154,
+              "radius_cells": 2,
+              "depth_max_center_m": 10.462,
+              "depth_max_r2_m": 10.561,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 17,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 17,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_200m_dt2p5_b1",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_dt2p5_b1",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 12087,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_200m_dt2p5_b1",
+            "window_counts_thr0p3": {
+              "never": 54701,
+              "w1_lt6h": 0,
+              "w2_6to24h": 710,
+              "w3_gt24h": 6379
+            },
+            "window_counts_thr0p5": {
+              "never": 55881,
+              "w1_lt6h": 0,
+              "w2_6to24h": 703,
+              "w3_gt24h": 5206
+            },
+            "window_counts_thr1": {
+              "never": 57270,
+              "w1_lt6h": 0,
+              "w2_6to24h": 622,
+              "w3_gt24h": 3898
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_200m_dt2p5_b1",
+              "center_row": 114,
+              "center_col": 154,
+              "radius_cells": 2,
+              "depth_max_center_m": 10.462,
+              "depth_max_r2_m": 10.561,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 17,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 17,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_200m_repro",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m_repro",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 12086,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_200m_repro",
+            "window_counts_thr0p3": {
+              "never": 54701,
+              "w1_lt6h": 0,
+              "w2_6to24h": 710,
+              "w3_gt24h": 6379
+            },
+            "window_counts_thr0p5": {
+              "never": 55881,
+              "w1_lt6h": 0,
+              "w2_6to24h": 703,
+              "w3_gt24h": 5206
+            },
+            "window_counts_thr1": {
+              "never": 57273,
+              "w1_lt6h": 0,
+              "w2_6to24h": 622,
+              "w3_gt24h": 3895
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_200m_repro",
+              "center_row": 114,
+              "center_col": 154,
+              "radius_cells": 2,
+              "depth_max_center_m": 10.462,
+              "depth_max_r2_m": 10.561,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 17,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 17,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q11500_30m_b5",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_30m_b5",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 481205,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q11500_30m_b5",
+            "window_counts_thr0p3": {
+              "never": 2426765,
+              "w1_lt6h": 1,
+              "w2_6to24h": 31088,
+              "w3_gt24h": 291736
+            },
+            "window_counts_thr0p5": {
+              "never": 2459224,
+              "w1_lt6h": 1,
+              "w2_6to24h": 30535,
+              "w3_gt24h": 259830
+            },
+            "window_counts_thr1": {
+              "never": 2510565,
+              "w1_lt6h": 1,
+              "w2_6to24h": 26297,
+              "w3_gt24h": 212727
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q11500_30m_b5",
+              "center_row": 764,
+              "center_col": 1029,
+              "radius_cells": 2,
+              "depth_max_center_m": 9.074,
+              "depth_max_r2_m": 9.084,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 25,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 25,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 25,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q15000_200m",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q15000_200m",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 12919,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q15000_200m",
+            "window_counts_thr0p3": {
+              "never": 53439,
+              "w1_lt6h": 0,
+              "w2_6to24h": 710,
+              "w3_gt24h": 7641
+            },
+            "window_counts_thr0p5": {
+              "never": 54422,
+              "w1_lt6h": 0,
+              "w2_6to24h": 703,
+              "w3_gt24h": 6665
+            },
+            "window_counts_thr1": {
+              "never": 56315,
+              "w1_lt6h": 0,
+              "w2_6to24h": 622,
+              "w3_gt24h": 4853
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q15000_200m",
+              "center_row": 114,
+              "center_col": 154,
+              "radius_cells": 2,
+              "depth_max_center_m": 13.617,
+              "depth_max_r2_m": 13.764,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 18,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 18,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 18,
+              "center_window_1": "w2_6to24h"
+            }
+          },
+          {
+            "run": "scen_yagi_q8000_200m",
+            "path": "outputs/guigang/2024-09-yagi/scen_yagi_q8000_200m",
+            "site": "guigang",
+            "status": "ok",
+            "n_frames": 57,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              336.0
+            ],
+            "wet_cells_event_max": 12065,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/guigang/fat/scen_yagi_q8000_200m",
+            "window_counts_thr0p3": {
+              "never": 54709,
+              "w1_lt6h": 0,
+              "w2_6to24h": 710,
+              "w3_gt24h": 6371
+            },
+            "window_counts_thr0p5": {
+              "never": 55883,
+              "w1_lt6h": 0,
+              "w2_6to24h": 703,
+              "w3_gt24h": 5204
+            },
+            "window_counts_thr1": {
+              "never": 57273,
+              "w1_lt6h": 0,
+              "w2_6to24h": 622,
+              "w3_gt24h": 3895
+            },
+            "station": {
+              "site": "guigang",
+              "site_name": "贵港市区",
+              "run": "scen_yagi_q8000_200m",
+              "center_row": 114,
+              "center_col": 154,
+              "radius_cells": 2,
+              "depth_max_center_m": 8.302,
+              "depth_max_r2_m": 8.391,
+              "center_first_wet_h": 18.0,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": 18.0,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 324.0,
+              "r2_duration_0p3_max_h": 324.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w2_6to24h",
+              "center_exceed_0p5_h": 18.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 324.0,
+              "r2_duration_0p5_max_h": 324.0,
+              "r2_exceed_0p5_cells": 17,
+              "center_window_0p5": "w2_6to24h",
+              "center_exceed_1_h": 18.0,
+              "r2_exceed_1_h": 18.0,
+              "center_duration_1_h": 324.0,
+              "r2_duration_1_max_h": 324.0,
+              "r2_exceed_1_cells": 17,
+              "center_window_1": "w2_6to24h"
+            }
+          }
+        ]
+      },
+      "jiulong": {
+        "gate_pass_total": 12,
+        "processed": 12,
+        "skipped": 0,
+        "anchor_run": "scen_free_200m_sv6h",
+        "anchor_ok": true,
+        "records": [
+          {
+            "run": "scen_free_100m_b1",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_b1",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 2,
+            "saveint_h": 120.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 24300,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_b1",
+            "window_counts_thr0p3": {
+              "never": 94280,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 16680
+            },
+            "window_counts_thr0p5": {
+              "never": 99028,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 11932
+            },
+            "window_counts_thr1": {
+              "never": 106069,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 4891
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_b1",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.37,
+              "depth_max_r2_m": 0.511,
+              "center_first_wet_h": 120.0,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": 120.0,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 120.0,
+              "r2_duration_0p3_max_h": 120.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 120.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 120.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 53,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              312.0
+            ],
+            "wet_cells_event_max": 30967,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+            "window_counts_thr0p3": {
+              "never": 89545,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 21415
+            },
+            "window_counts_thr0p5": {
+              "never": 93354,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 17606
+            },
+            "window_counts_thr1": {
+              "never": 101961,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 8999
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_dt2p5_sv6h_bdsouthonly_r13d_southonly",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.429,
+              "depth_max_r2_m": 0.571,
+              "center_first_wet_h": 60.0,
+              "r2_first_wet_h": 48.0,
+              "center_exceed_0p3_h": 84.0,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 234.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 114.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 204.0,
+              "r2_exceed_0p5_cells": 2,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 21,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 26965,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+            "window_counts_thr0p3": {
+              "never": 93763,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 17197
+            },
+            "window_counts_thr0p5": {
+              "never": 98720,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 12240
+            },
+            "window_counts_thr1": {
+              "never": 105892,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 5068
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_dt2p5_sv6h_bdsouthonly_r5d_southonly",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.37,
+              "depth_max_r2_m": 0.512,
+              "center_first_wet_h": 60.0,
+              "r2_first_wet_h": 48.0,
+              "center_exceed_0p3_h": 84.0,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 42.0,
+              "r2_duration_0p3_max_h": 60.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 114.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 12.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_100m_dt2p5_sv6h_r13d_allfree",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_r13d_allfree",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 53,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              312.0
+            ],
+            "wet_cells_event_max": 30404,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_dt2p5_sv6h_r13d_allfree",
+            "window_counts_thr0p3": {
+              "never": 90021,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 20939
+            },
+            "window_counts_thr0p5": {
+              "never": 93791,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 17169
+            },
+            "window_counts_thr1": {
+              "never": 102242,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 8718
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_dt2p5_sv6h_r13d_allfree",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.429,
+              "depth_max_r2_m": 0.571,
+              "center_first_wet_h": 60.0,
+              "r2_first_wet_h": 48.0,
+              "center_exceed_0p3_h": 84.0,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 234.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 114.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 204.0,
+              "r2_exceed_0p5_cells": 2,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_100m_dt2p5_sv6h_r5d_allfree",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_r5d_allfree",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 21,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 26533,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_dt2p5_sv6h_r5d_allfree",
+            "window_counts_thr0p3": {
+              "never": 94061,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 16899
+            },
+            "window_counts_thr0p5": {
+              "never": 98982,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 11978
+            },
+            "window_counts_thr1": {
+              "never": 106021,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 4939
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_dt2p5_sv6h_r5d_allfree",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.37,
+              "depth_max_r2_m": 0.512,
+              "center_first_wet_h": 60.0,
+              "r2_first_wet_h": 48.0,
+              "center_exceed_0p3_h": 84.0,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 42.0,
+              "r2_duration_0p3_max_h": 60.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 114.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 12.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_100m_dt2p5_sv6h_realdem",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 21,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 26533,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_100m_dt2p5_sv6h_realdem",
+            "window_counts_thr0p3": {
+              "never": 94061,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 16899
+            },
+            "window_counts_thr0p5": {
+              "never": 98982,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 11978
+            },
+            "window_counts_thr1": {
+              "never": 106021,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 4939
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_100m_dt2p5_sv6h_realdem",
+              "center_row": 147,
+              "center_col": 174,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.37,
+              "depth_max_r2_m": 0.512,
+              "center_first_wet_h": 60.0,
+              "r2_first_wet_h": 48.0,
+              "center_exceed_0p3_h": 84.0,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 42.0,
+              "r2_duration_0p3_max_h": 60.0,
+              "r2_exceed_0p3_cells": 17,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 114.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 12.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0
+            }
+          },
+          {
+            "run": "scen_free_200m",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_200m",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 2,
+            "saveint_h": 120.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 5814,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_200m",
+            "window_counts_thr0p3": {
+              "never": 23845,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3819
+            },
+            "window_counts_thr0p5": {
+              "never": 24703,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2961
+            },
+            "window_counts_thr1": {
+              "never": 26469,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 1195
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_200m",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.008,
+              "depth_max_r2_m": 0.547,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 120.0,
+              "r2_exceed_0p3_cells": 2,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 120.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 120.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 120.0
+              }
+            }
+          },
+          {
+            "run": "scen_free_200m_dt2p5_b1",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_b1",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 2,
+            "saveint_h": 120.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 5816,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_200m_dt2p5_b1",
+            "window_counts_thr0p3": {
+              "never": 23846,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3818
+            },
+            "window_counts_thr0p5": {
+              "never": 24706,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2958
+            },
+            "window_counts_thr1": {
+              "never": 26467,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 1197
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_200m_dt2p5_b1",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.008,
+              "depth_max_r2_m": 0.545,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 120.0,
+              "r2_exceed_0p3_cells": 2,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 120.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 120.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 120.0
+              }
+            }
+          },
+          {
+            "run": "scen_free_200m_dt2p5_sv6h_recession_ga_v1",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_dt2p5_sv6h_recession_ga_v1",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 53,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              312.0
+            ],
+            "wet_cells_event_max": 5274,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_200m_dt2p5_sv6h_recession_ga_v1",
+            "window_counts_thr0p3": {
+              "never": 24487,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3177
+            },
+            "window_counts_thr0p5": {
+              "never": 25662,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2002
+            },
+            "window_counts_thr1": {
+              "never": 26986,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 678
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_200m_dt2p5_sv6h_recession_ga_v1",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.005,
+              "depth_max_r2_m": 0.373,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 66.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 288.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 30.0,
+              "r2_exceed_0p3_cells": 1,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": null,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 0.0,
+              "r2_exceed_0p5_cells": 0,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 66.0
+              }
+            }
+          },
+          {
+            "run": "scen_free_200m_sv6h",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 21,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 6403,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_200m_sv6h",
+            "window_counts_thr0p3": {
+              "never": 23705,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3959
+            },
+            "window_counts_thr0p5": {
+              "never": 24676,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2988
+            },
+            "window_counts_thr1": {
+              "never": 26459,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 1205
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_200m_sv6h",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.008,
+              "depth_max_r2_m": 0.547,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 54.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 60.0,
+              "r2_exceed_0p3_cells": 2,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 30.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 54.0
+              }
+            }
+          },
+          {
+            "run": "scen_free_200m_sv6h_recession",
+            "path": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 53,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              312.0
+            ],
+            "wet_cells_event_max": 7168,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_free_200m_sv6h_recession",
+            "window_counts_thr0p3": {
+              "never": 22698,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 4966
+            },
+            "window_counts_thr0p5": {
+              "never": 23666,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3998
+            },
+            "window_counts_thr1": {
+              "never": 25536,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2128
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_free_200m_sv6h_recession",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.008,
+              "depth_max_r2_m": 0.818,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 54.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 66.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 252.0,
+              "r2_exceed_0p3_cells": 8,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 96.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 222.0,
+              "r2_exceed_0p5_cells": 2,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 54.0
+              }
+            }
+          },
+          {
+            "run": "scen_z0_200m",
+            "path": "outputs/jiulong/2024-09-yagi/scen_z0_200m",
+            "site": "jiulong",
+            "status": "ok",
+            "n_frames": 2,
+            "saveint_h": 120.0,
+            "frame_t_range_h": [
+              0.0,
+              120.0
+            ],
+            "wet_cells_event_max": 5837,
+            "sea_masked": true,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/jiulong/fat/scen_z0_200m",
+            "window_counts_thr0p3": {
+              "never": 23845,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 3819
+            },
+            "window_counts_thr0p5": {
+              "never": 24708,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 2956
+            },
+            "window_counts_thr1": {
+              "never": 26473,
+              "w1_lt6h": 0,
+              "w2_6to24h": 0,
+              "w3_gt24h": 1191
+            },
+            "station": {
+              "site": "jiulong",
+              "site_name": "久隆500kV站",
+              "run": "scen_z0_200m",
+              "center_row": 73,
+              "center_col": 87,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.008,
+              "depth_max_r2_m": 0.547,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 120.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 120.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 120.0,
+              "r2_exceed_0p3_cells": 2,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 120.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 120.0,
+              "r2_exceed_0p5_cells": 1,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": null,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 0.0,
+              "r2_exceed_1_cells": 0,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 73,
+                "col": 86,
+                "first_wet_h": 120.0
+              }
+            }
+          }
+        ]
+      },
+      "ningming": {
+        "gate_pass_total": 23,
+        "processed": 23,
+        "skipped": 0,
+        "anchor_run": "scen_q6000_n100_100m",
+        "anchor_ok": true,
+        "records": [
+          {
+            "run": "_diag_eclosed",
+            "path": "outputs/ningming/2026-08-zitan/_diag_eclosed",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 14798,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/_diag_eclosed",
+            "window_counts_thr0p3": {
+              "never": 41167,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2933,
+              "w3_gt24h": 10556
+            },
+            "window_counts_thr0p5": {
+              "never": 41533,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1998,
+              "w3_gt24h": 11125
+            },
+            "window_counts_thr1": {
+              "never": 42341,
+              "w1_lt6h": 0,
+              "w2_6to24h": 758,
+              "w3_gt24h": 11557
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "_diag_eclosed",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 3.71,
+              "depth_max_r2_m": 18.032,
+              "center_first_wet_h": 72.0,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": 78.0,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 36.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 22,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 84.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 30.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 20,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 84.0,
+              "r2_exceed_1_h": 30.0,
+              "center_duration_1_h": 30.0,
+              "r2_duration_1_max_h": 84.0,
+              "r2_exceed_1_cells": 18,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_q2500_n100_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q2500_n100_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11533,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q2500_n100_100m",
+            "window_counts_thr0p3": {
+              "never": 44875,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2820,
+              "w3_gt24h": 6961
+            },
+            "window_counts_thr0p5": {
+              "never": 45458,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1910,
+              "w3_gt24h": 7288
+            },
+            "window_counts_thr1": {
+              "never": 46646,
+              "w1_lt6h": 0,
+              "w2_6to24h": 654,
+              "w3_gt24h": 7356
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q2500_n100_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.02,
+              "depth_max_r2_m": 10.325,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q2500_n35_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q2500_n35_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10050,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q2500_n35_100m",
+            "window_counts_thr0p3": {
+              "never": 45804,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2912,
+              "w3_gt24h": 5940
+            },
+            "window_counts_thr0p5": {
+              "never": 46379,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1944,
+              "w3_gt24h": 6333
+            },
+            "window_counts_thr1": {
+              "never": 47567,
+              "w1_lt6h": 0,
+              "w2_6to24h": 716,
+              "w3_gt24h": 6373
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q2500_n35_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.012,
+              "depth_max_r2_m": 9.555,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q2500_n60_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q2500_n60_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10799,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q2500_n60_100m",
+            "window_counts_thr0p3": {
+              "never": 45304,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2854,
+              "w3_gt24h": 6498
+            },
+            "window_counts_thr0p5": {
+              "never": 45882,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1957,
+              "w3_gt24h": 6817
+            },
+            "window_counts_thr1": {
+              "never": 47045,
+              "w1_lt6h": 0,
+              "w2_6to24h": 696,
+              "w3_gt24h": 6915
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q2500_n60_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.016,
+              "depth_max_r2_m": 10.05,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q4000_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q4000_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10633,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q4000_100m",
+            "window_counts_thr0p3": {
+              "never": 45230,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2912,
+              "w3_gt24h": 6514
+            },
+            "window_counts_thr0p5": {
+              "never": 45794,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1944,
+              "w3_gt24h": 6918
+            },
+            "window_counts_thr1": {
+              "never": 46947,
+              "w1_lt6h": 0,
+              "w2_6to24h": 716,
+              "w3_gt24h": 6993
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q4000_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 10.283,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q4000_n100_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q4000_n100_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12126,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q4000_n100_100m",
+            "window_counts_thr0p3": {
+              "never": 44206,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2820,
+              "w3_gt24h": 7630
+            },
+            "window_counts_thr0p5": {
+              "never": 44749,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1910,
+              "w3_gt24h": 7997
+            },
+            "window_counts_thr1": {
+              "never": 45938,
+              "w1_lt6h": 0,
+              "w2_6to24h": 654,
+              "w3_gt24h": 8064
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q4000_n100_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.024,
+              "depth_max_r2_m": 11.118,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q4000_n35_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q4000_n35_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10633,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q4000_n35_100m",
+            "window_counts_thr0p3": {
+              "never": 45230,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2912,
+              "w3_gt24h": 6514
+            },
+            "window_counts_thr0p5": {
+              "never": 45794,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1944,
+              "w3_gt24h": 6918
+            },
+            "window_counts_thr1": {
+              "never": 46947,
+              "w1_lt6h": 0,
+              "w2_6to24h": 716,
+              "w3_gt24h": 6993
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q4000_n35_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.014,
+              "depth_max_r2_m": 10.283,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q4000_n35_100m_choff",
+            "path": "outputs/ningming/2026-08-zitan/scen_q4000_n35_100m_choff",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10072,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q4000_n35_100m_choff",
+            "window_counts_thr0p3": {
+              "never": 45809,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2888,
+              "w3_gt24h": 5959
+            },
+            "window_counts_thr0p5": {
+              "never": 46390,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1979,
+              "w3_gt24h": 6287
+            },
+            "window_counts_thr1": {
+              "never": 47593,
+              "w1_lt6h": 0,
+              "w2_6to24h": 735,
+              "w3_gt24h": 6328
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q4000_n35_100m_choff",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.012,
+              "depth_max_r2_m": 10.212,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 30.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 84.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q4000_n60_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q4000_n60_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11432,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q4000_n60_100m",
+            "window_counts_thr0p3": {
+              "never": 44595,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2854,
+              "w3_gt24h": 7207
+            },
+            "window_counts_thr0p5": {
+              "never": 45158,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1957,
+              "w3_gt24h": 7541
+            },
+            "window_counts_thr1": {
+              "never": 46362,
+              "w1_lt6h": 0,
+              "w2_6to24h": 696,
+              "w3_gt24h": 7598
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q4000_n60_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.019,
+              "depth_max_r2_m": 10.833,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12604,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m",
+            "window_counts_thr0p3": {
+              "never": 43645,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2820,
+              "w3_gt24h": 8191
+            },
+            "window_counts_thr0p5": {
+              "never": 44140,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1910,
+              "w3_gt24h": 8606
+            },
+            "window_counts_thr1": {
+              "never": 45242,
+              "w1_lt6h": 0,
+              "w2_6to24h": 654,
+              "w3_gt24h": 8760
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.027,
+              "depth_max_r2_m": 11.883,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_choff_eclosed",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_eclosed",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 14798,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_choff_eclosed",
+            "window_counts_thr0p3": {
+              "never": 41167,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2933,
+              "w3_gt24h": 10556
+            },
+            "window_counts_thr0p5": {
+              "never": 41533,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1998,
+              "w3_gt24h": 11125
+            },
+            "window_counts_thr1": {
+              "never": 42341,
+              "w1_lt6h": 0,
+              "w2_6to24h": 758,
+              "w3_gt24h": 11557
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_choff_eclosed",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 3.71,
+              "depth_max_r2_m": 18.032,
+              "center_first_wet_h": 72.0,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": 78.0,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 36.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 22,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 84.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 30.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 20,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": 84.0,
+              "r2_exceed_1_h": 30.0,
+              "center_duration_1_h": 30.0,
+              "r2_duration_1_max_h": 84.0,
+              "r2_exceed_1_cells": 18,
+              "center_window_1": "w3_gt24h"
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_choff_nocut-v1",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_nocut-v1",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11903,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_choff_nocut-v1",
+            "window_counts_thr0p3": {
+              "never": 44434,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2843,
+              "w3_gt24h": 7379
+            },
+            "window_counts_thr0p5": {
+              "never": 44993,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1913,
+              "w3_gt24h": 7750
+            },
+            "window_counts_thr1": {
+              "never": 46200,
+              "w1_lt6h": 0,
+              "w2_6to24h": 696,
+              "w3_gt24h": 7760
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_choff_nocut-v1",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.022,
+              "depth_max_r2_m": 11.278,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 30.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 84.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_dt3p0_b1",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_dt3p0_b1",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12599,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_dt3p0_b1",
+            "window_counts_thr0p3": {
+              "never": 43647,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2824,
+              "w3_gt24h": 8185
+            },
+            "window_counts_thr0p5": {
+              "never": 44139,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1909,
+              "w3_gt24h": 8608
+            },
+            "window_counts_thr1": {
+              "never": 45245,
+              "w1_lt6h": 0,
+              "w2_6to24h": 653,
+              "w3_gt24h": 8758
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_dt3p0_b1",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.027,
+              "depth_max_r2_m": 11.883,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_inf1e-6_karst",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_inf1e-6_karst",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 10170,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_inf1e-6_karst",
+            "window_counts_thr0p3": {
+              "never": 45325,
+              "w1_lt6h": 0,
+              "w2_6to24h": 269,
+              "w3_gt24h": 9062
+            },
+            "window_counts_thr0p5": {
+              "never": 46018,
+              "w1_lt6h": 0,
+              "w2_6to24h": 168,
+              "w3_gt24h": 8470
+            },
+            "window_counts_thr1": {
+              "never": 47407,
+              "w1_lt6h": 0,
+              "w2_6to24h": 76,
+              "w3_gt24h": 7173
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_inf1e-6_karst",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.013,
+              "depth_max_r2_m": 11.436,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 18.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 48.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 66.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 48.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 66.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 48.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 66.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 18.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_inf5e-6_karst",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_inf5e-6_karst",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 7232,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_inf5e-6_karst",
+            "window_counts_thr0p3": {
+              "never": 47786,
+              "w1_lt6h": 0,
+              "w2_6to24h": 150,
+              "w3_gt24h": 6720
+            },
+            "window_counts_thr0p5": {
+              "never": 47994,
+              "w1_lt6h": 0,
+              "w2_6to24h": 138,
+              "w3_gt24h": 6524
+            },
+            "window_counts_thr1": {
+              "never": 48526,
+              "w1_lt6h": 0,
+              "w2_6to24h": 67,
+              "w3_gt24h": 6063
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_inf5e-6_karst",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.001,
+              "depth_max_r2_m": 10.922,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 54.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 54.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 60.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 54.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 60.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 54.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 60.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 114,
+                "first_wet_h": 54.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_nsp_b0",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_nsp_b0",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12055,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_nsp_b0",
+            "window_counts_thr0p3": {
+              "never": 43975,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2841,
+              "w3_gt24h": 7840
+            },
+            "window_counts_thr0p5": {
+              "never": 44500,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1918,
+              "w3_gt24h": 8238
+            },
+            "window_counts_thr1": {
+              "never": 45660,
+              "w1_lt6h": 0,
+              "w2_6to24h": 684,
+              "w3_gt24h": 8312
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_nsp_b0",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.037,
+              "depth_max_r2_m": 11.606,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 96.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 24.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 90.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_r50",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r50",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11312,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_r50",
+            "window_counts_thr0p3": {
+              "never": 44428,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1546,
+              "w3_gt24h": 8682
+            },
+            "window_counts_thr0p5": {
+              "never": 44957,
+              "w1_lt6h": 0,
+              "w2_6to24h": 779,
+              "w3_gt24h": 8920
+            },
+            "window_counts_thr1": {
+              "never": 46221,
+              "w1_lt6h": 0,
+              "w2_6to24h": 179,
+              "w3_gt24h": 8256
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_r50",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.021,
+              "depth_max_r2_m": 11.671,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 24.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 90.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 36.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 78.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 48.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 66.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_r70",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r70",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11886,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_r70",
+            "window_counts_thr0p3": {
+              "never": 44097,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2190,
+              "w3_gt24h": 8369
+            },
+            "window_counts_thr0p5": {
+              "never": 44593,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1257,
+              "w3_gt24h": 8806
+            },
+            "window_counts_thr1": {
+              "never": 45776,
+              "w1_lt6h": 0,
+              "w2_6to24h": 328,
+              "w3_gt24h": 8552
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_r70",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.024,
+              "depth_max_r2_m": 11.757,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 96.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 30.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 84.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 42.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 72.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_r85",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_r85",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12255,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_r85",
+            "window_counts_thr0p3": {
+              "never": 43840,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2539,
+              "w3_gt24h": 8277
+            },
+            "window_counts_thr0p5": {
+              "never": 44338,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1597,
+              "w3_gt24h": 8721
+            },
+            "window_counts_thr1": {
+              "never": 45487,
+              "w1_lt6h": 0,
+              "w2_6to24h": 490,
+              "w3_gt24h": 8679
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_r85",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.025,
+              "depth_max_r2_m": 11.82,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 18.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 96.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 24.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 90.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_100m_repro",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_repro",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 12604,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_100m_repro",
+            "window_counts_thr0p3": {
+              "never": 43645,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2820,
+              "w3_gt24h": 8191
+            },
+            "window_counts_thr0p5": {
+              "never": 44140,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1910,
+              "w3_gt24h": 8606
+            },
+            "window_counts_thr1": {
+              "never": 45242,
+              "w1_lt6h": 0,
+              "w2_6to24h": 654,
+              "w3_gt24h": 8760
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_100m_repro",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.027,
+              "depth_max_r2_m": 11.883,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n100_50m_b1",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n100_50m_b1",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 46564,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n100_50m_b1",
+            "window_counts_thr0p3": {
+              "never": 178757,
+              "w1_lt6h": 0,
+              "w2_6to24h": 10257,
+              "w3_gt24h": 30547
+            },
+            "window_counts_thr0p5": {
+              "never": 181040,
+              "w1_lt6h": 0,
+              "w2_6to24h": 7229,
+              "w3_gt24h": 31292
+            },
+            "window_counts_thr1": {
+              "never": 186194,
+              "w1_lt6h": 0,
+              "w2_6to24h": 3457,
+              "w3_gt24h": 29910
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n100_50m_b1",
+              "center_row": 268,
+              "center_col": 228,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.921,
+              "depth_max_r2_m": 11.495,
+              "center_first_wet_h": 90.0,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": 96.0,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 18.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 12,
+              "center_window_0p3": "w3_gt24h",
+              "center_exceed_0p5_h": 96.0,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 18.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 11,
+              "center_window_0p5": "w3_gt24h",
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10
+            }
+          },
+          {
+            "run": "scen_q6000_n35_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n35_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11209,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n35_100m",
+            "window_counts_thr0p3": {
+              "never": 44595,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2912,
+              "w3_gt24h": 7149
+            },
+            "window_counts_thr0p5": {
+              "never": 45138,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1944,
+              "w3_gt24h": 7574
+            },
+            "window_counts_thr1": {
+              "never": 46338,
+              "w1_lt6h": 0,
+              "w2_6to24h": 716,
+              "w3_gt24h": 7602
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n35_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.017,
+              "depth_max_r2_m": 10.978,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          },
+          {
+            "run": "scen_q6000_n60_100m",
+            "path": "outputs/ningming/2026-08-zitan/scen_q6000_n60_100m",
+            "site": "ningming",
+            "status": "ok",
+            "n_frames": 19,
+            "saveint_h": 6.0,
+            "frame_t_range_h": [
+              0.0,
+              108.0
+            ],
+            "wet_cells_event_max": 11947,
+            "sea_masked": false,
+            "thresholds_m": [
+              0.3,
+              0.5,
+              1.0
+            ],
+            "outputs": [
+              "first_wet_h.tif",
+              "exceed_h_thr0p3.tif",
+              "duration_h_thr0p3.tif",
+              "exceed_h_thr0p5.tif",
+              "duration_h_thr0p5.tif",
+              "exceed_h_thr1.tif",
+              "duration_h_thr1.tif"
+            ],
+            "output_dir": "outputs/products/ningming/fat/scen_q6000_n60_100m",
+            "window_counts_thr0p3": {
+              "never": 44013,
+              "w1_lt6h": 0,
+              "w2_6to24h": 2854,
+              "w3_gt24h": 7789
+            },
+            "window_counts_thr0p5": {
+              "never": 44534,
+              "w1_lt6h": 0,
+              "w2_6to24h": 1957,
+              "w3_gt24h": 8165
+            },
+            "window_counts_thr1": {
+              "never": 45668,
+              "w1_lt6h": 0,
+              "w2_6to24h": 696,
+              "w3_gt24h": 8292
+            },
+            "station": {
+              "site": "ningming",
+              "site_name": "宁明县城站",
+              "run": "scen_q6000_n60_100m",
+              "center_row": 133,
+              "center_col": 114,
+              "radius_cells": 2,
+              "depth_max_center_m": 0.022,
+              "depth_max_r2_m": 11.558,
+              "center_first_wet_h": null,
+              "r2_first_wet_h": 6.0,
+              "center_exceed_0p3_h": null,
+              "r2_exceed_0p3_h": 12.0,
+              "center_duration_0p3_h": 0.0,
+              "r2_duration_0p3_max_h": 102.0,
+              "r2_exceed_0p3_cells": 10,
+              "center_exceed_0p5_h": null,
+              "r2_exceed_0p5_h": 18.0,
+              "center_duration_0p5_h": 0.0,
+              "r2_duration_0p5_max_h": 96.0,
+              "r2_exceed_0p5_cells": 10,
+              "center_exceed_1_h": null,
+              "r2_exceed_1_h": 36.0,
+              "center_duration_1_h": 0.0,
+              "r2_duration_1_max_h": 78.0,
+              "r2_exceed_1_cells": 10,
+              "nearest_wet": {
+                "found": true,
+                "distance_cells": 1,
+                "row": 134,
+                "col": 115,
+                "first_wet_h": 6.0
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "finished_utc": "2026-11-22T02:50:47+00:00"
+}

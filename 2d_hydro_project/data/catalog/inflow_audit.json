@@ -1,0 +1,608 @@
+{
+  "script": "build_inflow_hydrology.py",
+  "generated_utc": "2026-11-22T03:28:33+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "inputs": {
+    "anchor_yujiang_bdy": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\yujiang.bdy",
+      "exists": true,
+      "bytes": 188,
+      "sha256": "51fc15d35d613c49b0a5e85b4cd44f3f730eaa599166cd5b7d3afb01fd3f2e4f"
+    },
+    "zdown_bdy": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_zdown_b_100m\\yujiang_zdown_b.bdy",
+      "exists": true,
+      "bytes": 330,
+      "sha256": "1a8e31da16329c21264669e043b517213d77ac20f0978b36803f0fdb2fc338aa"
+    },
+    "anchor_dem.asc": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\dem.asc",
+      "exists": true,
+      "bytes": 1797249,
+      "sha256": "4f4958dfd72990fc89d9899c42238463d787ff736847c45bb91094034f585ccc"
+    },
+    "anchor_bci.bci": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\bci.bci",
+      "exists": true,
+      "bytes": 153,
+      "sha256": "ce1e25c8421a45419051e52163cb7dbb743f1b15c5b82ea9f07c4c8baa457853"
+    },
+    "anchor_rain.rain": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\rain.rain",
+      "exists": true,
+      "bytes": 4181,
+      "sha256": "7a3ecb5792ffdef4be04afd5d781c0a423518596db8abe1b87b4665d789824cb"
+    },
+    "anchor_manning.map": {
+      "path": "E:\\NWKYYSJZX\\2026\\1023 久隆 贵港 宁明 二维水动力模拟\\2d_hydro_project\\outputs\\guigang\\2024-09-yagi\\scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3\\manning.map",
+      "exists": true,
+      "bytes": 2711113,
+      "sha256": "7bcc2e72302d9180f8d3bf2cba983bfc0a04c4adbff4e3cd5d516bc6264d5395"
+    }
+  },
+  "parameters": {
+    "site": null,
+    "kind": "zdown_b",
+    "warmup_days": 35,
+    "params_base": {
+      "x1": 350.0,
+      "x2": 0.0,
+      "x3": 90.0,
+      "x4": 1.7
+    }
+  },
+  "steps": [],
+  "warnings": [],
+  "errors": [],
+  "runs": {
+    "gr4j_q:guigang": {
+      "site": "guigang",
+      "window": {
+        "warmup_days": 35,
+        "warm_start": "2024-07-30",
+        "t0_local": "2024-09-03",
+        "sim_seconds": 1209600,
+        "fetch_end": "2024-09-16"
+      },
+      "sample_points": [
+        {
+          "lon": 104.75,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 104.75,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 104.75,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.25,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.25,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.25,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.75,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.75,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 105.75,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 23.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 23.75,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 24.25,
+          "basin": "youjiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 21.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 22.25,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 106.25,
+          "lat": 22.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 21.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 22.25,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 106.75,
+          "lat": 22.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 21.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 22.25,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 22.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 21.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 22.25,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 22.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 21.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 22.25,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 22.75,
+          "basin": "zuojiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 23.25,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 108.25,
+          "lat": 23.25,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 108.75,
+          "lat": 22.75,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 108.75,
+          "lat": 23.25,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 109.25,
+          "lat": 22.75,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 109.25,
+          "lat": 23.25,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 109.75,
+          "lat": 22.75,
+          "basin": "ganliu_corridor"
+        },
+        {
+          "lon": 109.75,
+          "lat": 23.25,
+          "basin": "ganliu_corridor"
+        }
+      ],
+      "basin_rain": {
+        "total_mm": 237.2,
+        "max_daily_mm": 67.5,
+        "warmup_total_mm": 310.0
+      },
+      "gr4j_params": {
+        "x1": 350.0,
+        "x2": 0.0,
+        "x3": 90.0,
+        "x4": 1.7
+      },
+      "ihc": {
+        "warmup_end_s_mm": 254.22,
+        "warmup_end_r_mm": 54.94,
+        "ga_mapping": {
+          "available": true,
+          "theta_i_mean": 0.33,
+          "theta_s_mean": 0.47,
+          "s_init_over_x1": 0.7021,
+          "note": "E3 映射：AOI 网格均值代理流域前期湿度；不作率定"
+        }
+      },
+      "balance_residual_mm": 0.0,
+      "q_summary": {
+        "peak_m3s": 34934.0,
+        "peak_date": "2024-09-09",
+        "volume_m3": 12386959318.0
+      },
+      "sensitivity_oat": [
+        {
+          "param": "x1",
+          "value": 175.0,
+          "peak_q_m3s": 70019.2,
+          "volume_m3": 23981201115.0
+        },
+        {
+          "param": "x1",
+          "value": 350.0,
+          "peak_q_m3s": 34934.0,
+          "volume_m3": 12386959318.0
+        },
+        {
+          "param": "x1",
+          "value": 700.0,
+          "peak_q_m3s": 7486.5,
+          "volume_m3": 4229838218.0
+        },
+        {
+          "param": "x3",
+          "value": 45.0,
+          "peak_q_m3s": 40150.1,
+          "volume_m3": 14853573420.0
+        },
+        {
+          "param": "x3",
+          "value": 90.0,
+          "peak_q_m3s": 34934.0,
+          "volume_m3": 12386959318.0
+        },
+        {
+          "param": "x3",
+          "value": 180.0,
+          "peak_q_m3s": 16511.9,
+          "volume_m3": 7819094279.0
+        },
+        {
+          "param": "x4",
+          "value": 1.0,
+          "peak_q_m3s": 36182.0,
+          "volume_m3": 12626928609.0
+        },
+        {
+          "param": "x4",
+          "value": 1.7,
+          "peak_q_m3s": 34934.0,
+          "volume_m3": 12386959318.0
+        },
+        {
+          "param": "x4",
+          "value": 3.0,
+          "peak_q_m3s": 33186.1,
+          "volume_m3": 12095624591.0
+        }
+      ],
+      "evidence_level": "E3（文献参数 + 公开面积推算，情景级；未率定）",
+      "area_km2_prior": 87780.0,
+      "area_pending_user_review": [
+        "郁江贵港以上集水面积 87,780 km²（径流深反推）是否采信；如有水文年鉴/站网资料请提供精确值",
+        "明江宁明以上集水面积按全流域 6,379 km² 上限口径是否采信",
+        "GR4J 参数取文献中值、X2=0 的情景级口径是否接受"
+      ],
+      "run_dir": "outputs/guigang/2024-09-yagi/scen_gr4j_q_100m",
+      "inflow_bdy": "outputs/guigang/2024-09-yagi/scen_gr4j_q_100m/inflow_guigang.bdy"
+    },
+    "gr4j_q:ningming": {
+      "site": "ningming",
+      "window": {
+        "warmup_days": 35,
+        "warm_start": "2026-07-17",
+        "t0_local": "2026-08-21",
+        "sim_seconds": 388800,
+        "fetch_end": "2026-08-25"
+      },
+      "sample_points": [
+        {
+          "lon": 107.0,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.0,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.0,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.25,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.5,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.5,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.5,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 107.75,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.0,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.0,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.0,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.25,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.5,
+          "lat": 21.75,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.5,
+          "lat": 22.0,
+          "basin": "mingjiang"
+        },
+        {
+          "lon": 108.5,
+          "lat": 22.25,
+          "basin": "mingjiang"
+        }
+      ],
+      "basin_rain": {
+        "total_mm": 229.7,
+        "max_daily_mm": 106.5,
+        "warmup_total_mm": 282.9
+      },
+      "gr4j_params": {
+        "x1": 350.0,
+        "x2": 0.0,
+        "x3": 90.0,
+        "x4": 1.7
+      },
+      "ihc": {
+        "warmup_end_s_mm": 241.22,
+        "warmup_end_r_mm": 53.96,
+        "ga_mapping": {
+          "available": false,
+          "note": "该站无预处理器输出；仅暖启动口径"
+        }
+      },
+      "balance_residual_mm": -0.0,
+      "q_summary": {
+        "peak_m3s": 4147.1,
+        "peak_date": "2026-08-23",
+        "volume_m3": 832590722.0
+      },
+      "sensitivity_oat": [
+        {
+          "param": "x1",
+          "value": 175.0,
+          "peak_q_m3s": 7732.0,
+          "volume_m3": 1685262962.0
+        },
+        {
+          "param": "x1",
+          "value": 350.0,
+          "peak_q_m3s": 4147.1,
+          "volume_m3": 832590722.0
+        },
+        {
+          "param": "x1",
+          "value": 700.0,
+          "peak_q_m3s": 899.3,
+          "volume_m3": 242102856.0
+        },
+        {
+          "param": "x3",
+          "value": 45.0,
+          "peak_q_m3s": 4600.6,
+          "volume_m3": 1057550796.0
+        },
+        {
+          "param": "x3",
+          "value": 90.0,
+          "peak_q_m3s": 4147.1,
+          "volume_m3": 832590722.0
+        },
+        {
+          "param": "x3",
+          "value": 180.0,
+          "peak_q_m3s": 1860.1,
+          "volume_m3": 443427360.0
+        },
+        {
+          "param": "x4",
+          "value": 1.0,
+          "peak_q_m3s": 4370.1,
+          "volume_m3": 873381149.0
+        },
+        {
+          "param": "x4",
+          "value": 1.7,
+          "peak_q_m3s": 4147.1,
+          "volume_m3": 832590722.0
+        },
+        {
+          "param": "x4",
+          "value": 3.0,
+          "peak_q_m3s": 3787.2,
+          "volume_m3": 742667398.0
+        }
+      ],
+      "evidence_level": "E3（文献参数 + 公开面积推算，情景级；未率定）",
+      "area_km2_prior": 6379.0,
+      "area_pending_user_review": [
+        "郁江贵港以上集水面积 87,780 km²（径流深反推）是否采信；如有水文年鉴/站网资料请提供精确值",
+        "明江宁明以上集水面积按全流域 6,379 km² 上限口径是否采信",
+        "GR4J 参数取文献中值、X2=0 的情景级口径是否接受"
+      ],
+      "run_dir": "outputs/ningming/2026-08-zitan/scen_gr4j_q6000_100m",
+      "inflow_bdy": "outputs/ningming/2026-08-zitan/scen_gr4j_q6000_100m/inflow_ningming.bdy"
+    },
+    "zdown_a:guigang": {
+      "site": "guigang",
+      "kind": "zdown_a",
+      "z_rule": {
+        "bed_ref_m": 18.0,
+        "bed_ref_method": "E 边界列 dem.asc 第 10 百分位（ADR-0016）",
+        "offset_m": 4.0,
+        "label": "强顶托档",
+        "z_const_m": 22.0
+      },
+      "evidence_level": "E3（文献参数 + 公开面积推算，情景级；未率定）",
+      "quality_gate_expectation": "FAIL-EXPLAINED 预注册（HVAR 边界通量口径，G13 先例）",
+      "run_dir": "outputs/guigang/2024-09-yagi/scen_zdown_a_100m",
+      "bdy_file": "outputs/guigang/2024-09-yagi/scen_zdown_a_100m/yujiang_zdown_a.bdy"
+    },
+    "zdown_b:guigang": {
+      "site": "guigang",
+      "kind": "zdown_b",
+      "z_rule": {
+        "bed_ref_m": 18.0,
+        "bed_ref_method": "E 边界列 dem.asc 第 10 百分位（ADR-0016）",
+        "offset_m": 1.0,
+        "label": "弱顶托档",
+        "z_const_m": 19.0
+      },
+      "evidence_level": "E3（文献参数 + 公开面积推算，情景级；未率定）",
+      "quality_gate_expectation": "FAIL-EXPLAINED 预注册（HVAR 边界通量口径，G13 先例）",
+      "run_dir": "outputs/guigang/2024-09-yagi/scen_zdown_b_100m",
+      "bdy_file": "outputs/guigang/2024-09-yagi/scen_zdown_b_100m/yujiang_zdown_b.bdy"
+    }
+  },
+  "finished_utc": "2026-11-22T03:28:33+00:00"
+}

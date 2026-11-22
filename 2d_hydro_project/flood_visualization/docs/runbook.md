@@ -13,7 +13,7 @@
 3. 浏览器会自动打开 `http://127.0.0.1:8765/index.html`。
 4. 关闭命令窗口即可停止服务。
 
-目录已包含 **v6-20261029** 发布包的全部资源（104.2 MB、714 文件 + 4 启动器）。不要双击 `index.html`。直接使用 `file://` 会被浏览器的安全策略阻止 `fetch catalog.json`，页面会显示加载失败。
+目录已包含 **v9-20261122** 发布包的全部资源（450 MB、3289 文件 + 4 启动器；3 案例 / 12 run + 6 研究性产品图层）。不要双击 `index.html`。直接使用 `file://` 会被浏览器的安全策略阻止 `fetch catalog.json`，页面会显示加载失败。
 启动器使用 Windows 自带 PowerShell `HttpListener`。不需要管理员权限。端口 8765 被占用时，会自动尝试 8766–8775。
 
 > 备用启动：`powershell.exe -NoProfile -ExecutionPolicy Bypass -File server.ps1 -Port 8766`。
@@ -43,7 +43,7 @@ uv run python scripts/sync_standalone.py --bundle-id v6-20261029
 5. 重复执行幂等（第二次复制 0 个文件、清理 0 个文件）。
 
 > 清理后应满足：standalone 文件数 = 发布包文件数 + 4 个启动器文件。
-> 以 v6 为例：714 + 4 = **718**。
+> 以 v9 为例：3289 + 4 = **3293**。
 > 若数字不符，说明同步未完成或源包不完整。
 
 ## 2. 开发与重新构建的前置条件
@@ -68,12 +68,16 @@ uv run python scripts/fetch_vendor.py    # 抓固定版本 MapLibre 5.24.0 / Pro
 
 > vendor 缓存留在 `data/external/vendor-cache/`；断网重建时用 `--offline`。
 
-## 4. 发布包版本现状（2026-11-02 更新）
+## 4. 发布包版本现状（2026-11-22 更新）
 
-**当前交付包**：`v8-20261102`（3 案例 / 11 run，461.5 MB、3113 文件，9/9 校验组通过、0 失败）。
-　新增贵港 6 个可选层：`display_qc` A/B/C 三档 + `flow_only_v1` / `dualloss_v1` / `rainloss_high_v1` 三个物理情景。
-　贵港默认层仍为 raw `scen_yagi_q11500_100m_dt2p5_choff_realdem`；6 个新增层均可在网页下拉中切换（`runSelect`）。
-**构建级回滚包**：`v7-20261031`。
+**当前交付包**：`v9-20261122`（3 案例 / 12 run + 6 研究性产品图层，450 MB、3289 文件；validate --full 全组通过、30 分钟连续播放发布门通过）。
+　新增 1：配置齐平——久隆 GA 净雨重跑 `scen_free_200m_dt2p5_sv6h_recession_ga_v1` 入包（v8 仅 1 个久隆 run）。
+　新增 2：Phase H 研究性产品图层（ADR-0015~0018，role=product 单帧伪 run）——
+　　贵港：FAT 首湿时刻 / 首达 0.3 m 情景阈值时刻 / 有雨/无雨差分归因（origin_class）；
+　　宁明：集合超越概率 P(wd>0.05) / P(wd>0.3)（9 run 全 PASS 成员）；
+　　久隆：FAT 首湿时刻。产品统计契约与水深一致，阈值语义由 `statistics.product.value_semantics` 声明（小时/概率/类别码，非水深）；全部带 research_product 标注，禁业务告警。
+　各案例默认层不变；产品图层可在网页 runSelect 下拉切换。
+**构建级回滚包**：`v8-20261102`。
 **上一交付包**：`v6-20261029`（100 m 真实DEM，104.2 MB、714 文件）。
 **数据级回滚包**：`v4-20261028`（200 m 旧代，已归档）。
 **历史归档**：`v2-20261027`、`v3-20261028`、`v4-20261028`。

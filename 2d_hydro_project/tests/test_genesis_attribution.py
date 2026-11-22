@@ -63,7 +63,7 @@ def test_classify_edge_band_priority_over_all():
     cls = classify(full, off, wet_thr=0.05, edge_band_cells=1)
     assert cls[0, 0] == 3  # 环带上 river-origin 优先标 edge_band
     inner = classify(full, off, wet_thr=0.05, edge_band_cells=0)
-    assert inner[0, 0] == 1  # 关闭环带后回到成因类
+    assert inner[0, 0] == 2  # 关闭环带后回到成因类（full 湿 ∧ off 干 → pluvial）
 
 
 def test_classify_shape_mismatch():
@@ -137,7 +137,10 @@ def test_end_to_end_origin_tif(tmp_path, monkeypatch):
     assert out_tif.is_file()
     assert (tmp_path / "genesis_out" / "origin_class.tif.meta.json").is_file()
     audit = json.loads((tmp_path / "genesis_audit.json").read_text(encoding="utf-8"))
-    assert audit["class_stats"]["edge_band"]["cells"] >= 20  # 6×6 一格环带 = 20 格
+    # 环带只标记湿像元：测试数据只有 (0,0) 在环带上湿 → edge_band=1
+    assert audit["class_stats"]["edge_band"]["cells"] == 1
+    # 湿像元共 5：(1,1) river、(1,2) pluvial、(1,3) disagreement、(0,0) edge_band、(3,3) river
+    assert audit["class_stats"]["never_wet"]["cells"] == 31
     assert audit["confounder_note"] == "测试"
     assert audit["rules_sha256"]
     import rasterio

@@ -57,6 +57,30 @@ class RunConfig:
 
 
 @dataclass(frozen=True)
+class ProductLayerConfig:
+    """Phase H 研究性产品图层（单帧伪 run，role=product；ADR-0015~0018）。
+
+    source 指向 `outputs/products/**` 的 GeoTIFF；kind 决定配色与值语义
+    （fat_first_wet_h / fat_exceed_h / fat_duration_h / ensemble_probability /
+    class_map）。source_run/mass_gate_run_path 用于质量门引用；audit 指向
+    `data/catalog/**` 审计件（项目相对），作为产品证据链。
+    """
+
+    product_id: str
+    label: str
+    kind: str
+    source_tif: Path
+    save_interval_s: float = 3600.0
+    threshold_m: float | None = None
+    source_run: str | None = None
+    mass_gate_run_path: str | None = None
+    audit: str | None = None
+    adr: str | None = None
+    notes: str = ""
+    optional: bool = False
+
+
+@dataclass(frozen=True)
 class LayerConfig:
     layer_id: str
     status: str
@@ -93,6 +117,8 @@ class CaseConfig:
     time_zone: str = "Asia/Shanghai"
     # 源地形（未修改）与地形修改证据；缺省表示该案例不提供分层
     terrain: dict[str, Any] = field(default_factory=dict)
+    # Phase H 研究性产品图层（FAT/归因/概率）；缺省为空
+    product_layers: tuple[ProductLayerConfig, ...] = field(default_factory=tuple)
 
     def run(self, run_id: str | None = None) -> RunConfig:
         rid = run_id or self.default_run_id
@@ -235,6 +261,32 @@ def _load_case(path: Path, parent_root: Path) -> CaseConfig:
     default_run_id = str(_require(raw, "default_run_id", where))
     if default_run_id not in runs:
         raise ConfigError(f"{where}.default_run_id={default_run_id!r} 不在 runs 中")
+    product_layers: list[ProductLayerConfig] = []
+    known_kinds = {"fat_first_wet_h", "fat_exceed_h", "fat_duration_h",
+                   "ensemble_probability", "class_map"}
+    for pl_raw in raw.get("product_layers") or []:
+        pid = str(_require(pl_raw, "product_id", f"{where}.product_layers"))
+        kind = str(_require(pl_raw, "kind", f"{where}.product_layers.{pid}"))
+        if kind not in known_kinds:
+            raise ConfigError(
+                f"{where}.product_layers.{pid}.kind={kind!r} 非法；允许 {sorted(known_kinds)}")
+        if kind in ("fat_exceed_h", "fat_duration_h") and pl_raw.get("threshold_m") is None:
+            raise ConfigError(f"{where}.product_layers.{pid}: kind={kind} 必须给 threshold_m")
+        psource = Path(str(_require(pl_raw, "source", f"{where}.product_layers.{pid}")))
+        product_layers.append(ProductLayerConfig(
+            product_id=pid,
+            label=str(pl_raw.get("label", pid)),
+            kind=kind,
+            source_tif=psource if psource.is_absolute() else (parent_root / psource),
+            save_interval_s=float(pl_raw.get("save_interval_s", 3600.0)),
+            threshold_m=(float(pl_raw["threshold_m"]) if pl_raw.get("threshold_m") is not None else None),
+            source_run=(str(pl_raw["source_run"]) if pl_raw.get("source_run") else None),
+            mass_gate_run_path=(str(pl_raw["mass_gate_run_path"]) if pl_raw.get("mass_gate_run_path") else None),
+            audit=(str(pl_raw["audit"]) if pl_raw.get("audit") else None),
+            adr=(str(pl_raw["adr"]) if pl_raw.get("adr") else None),
+            notes=str(pl_raw.get("notes", "")),
+            optional=bool(pl_raw.get("optional", False)),
+        ))
     layers: dict[str, LayerConfig] = {}
     for layer_id, layer_raw in (raw.get("layers") or {}).items():
         layers[str(layer_id)] = _load_layer(str(layer_id), layer_raw, where)
@@ -256,6 +308,7 @@ def _load_case(path: Path, parent_root: Path) -> CaseConfig:
         sources=dict(raw.get("sources") or {}),
         time_zone=str(raw.get("time_zone", "Asia/Shanghai")),
         terrain=_load_terrain(raw.get("terrain"), where, parent_root),
+        product_layers=tuple(product_layers),
     )
 
 

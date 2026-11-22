@@ -39,6 +39,27 @@ runs:
     simulation_duration_s: 388800
     notes: "100 m 走廊；真实 DEM（--channel off）；关闭东缘 FREE（阻断注入点源直接泄出）"
 
+# ---- Phase H 研究性产品图层（ADR-0015~0018；单帧伪 run，role=product）----
+product_layers:
+  - product_id: product_ensemble_prob_thr005
+    label: "研究性产品：集合超越概率 P(wd>0.05 m)（9 run）"
+    kind: ensemble_probability
+    source: "outputs/products/ningming/probability/exceedance_probability_thr0p05.tif"
+    mass_gate_run_path: "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m"
+    save_interval_s: 21600
+    audit: "data/catalog/ningming_probability.json"
+    adr: "ADR-0015 §4 / ADR-0018 §1"
+    notes: "成员=3Q×3n 矩阵 9 个质量门 PASS run（清单强制入审计）；P=成员超阈占比，情景集合枚举，非年超越概率/预报概率，禁业务告警"
+  - product_id: product_ensemble_prob_thr03
+    label: "研究性产品：集合超越概率 P(wd>0.3 m)（9 run）"
+    kind: ensemble_probability
+    source: "outputs/products/ningming/probability/exceedance_probability_thr0p3.tif"
+    mass_gate_run_path: "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m"
+    save_interval_s: 21600
+    audit: "data/catalog/ningming_probability.json"
+    adr: "ADR-0015 §4 / ADR-0018 §1"
+    notes: "同上；阈值 0.3 m 为情景假设值，禁止称设备安全值"
+
 layers:
   dem: {status: ready, label: "DEM 高程", kind: raster, summary: "模型输入 DEM（真实地形重采样）", note: "真实 DEM Bilinear 重采样，未施加任何人工河槽刻蚀与虚假下切"}
   flood: {status: ready, label: "模型水深（逐帧）", kind: frame}

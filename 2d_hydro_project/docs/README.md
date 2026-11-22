@@ -54,9 +54,15 @@ scope: project
 - `stage4_karst.md` —— 宁明喀斯特标量入渗有界损失情景（Phase B3）
 - `s1_validation.md` —— S1 水体提取验证链（阶段 3/5）
 
-## 学术成果驱动改进（ADR-0015 口径，计划 `plans/广西二维水动力模拟_学术成果驱动改进实现计划.md`）
+## 学术成果驱动改进（Phase H，2026-11-22；ADR-0015~0018，计划 `plans/广西二维水动力模拟_学术成果驱动改进实现计划.md`）
 
 - `adr/ADR-0015-学术借鉴与改进产品口径.md` —— 学术映射矩阵冻结 + FAT/成因归因/概率产品口径预注册（产品落盘目录决议、FAT 三档情景阈值、归因四分支规则、集合概率成员清单强制项、数据不可得降级纪律）
+- `adr/ADR-0016-上游来水产汇流与降雨多源评估.md` —— GR4J 型集总产汇流预注册（文献中值参数 + OAT 敏感性 + IHC 暖启动/GA 映射双口径、bdy 格式源码实证、GloFAS 先验对照通道、MMF 协议、复合矩阵与授权 run 纪律、HVAR 顶托 Z_a/Z_b 定值规则）
+- `adr/ADR-0017-垂直基准独立核证.md` —— ATL13/GSW 探针口径（offset 有界估计中位数±IQR、不写死 datum_offset、覆盖门 ≥10 轨、留出复核集）
+- `adr/ADR-0018-概率化与联合阈值探索.md` —— 集合超越概率（质量门强制过滤成员）+ Copula 联合阈值（三族 AIC、信息扩散边缘、Bootstrap CI；探索性红线、禁业务告警）
+- 新脚本：`stage6/{make_fat_products,make_genesis_attribution,ensemble_probability,copula_thresholds}.py`、`stage3/{build_inflow_hydrology,verify_inflow_vs_glofas,prep_imerg_rain,icesat2_datum_probe}.py`、run 队列 `stage3/queue_phase_h_runs.sh`
+- 产品：`outputs/products/<site>/fat/`（61 PASS run 全覆盖 + 站址暴露三元组表）、`outputs/products/guigang/genesis/`（origin_class.tif）、`outputs/products/ningming/probability/`（集合超越概率）
+- 证据：`data/catalog/{fat_products_audit,guigang_genesis_rules,guigang_genesis_products,guigang_inflow_priors,inflow_audit,inflow_glofas_check,imerg_prep_audit,gx_datum_probe,ningming_probability,copula_thresholds_report,mmf_rainfall_evaluation}.json`
 
 ## 决策记录（`adr/`，ADR-0001~0018）
 

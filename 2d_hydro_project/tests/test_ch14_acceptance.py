@@ -34,14 +34,57 @@ def read_asc(p: Path):
     return np.loadtxt(p, skiprows=6), read_hdr(p)
 
 
-def read_series(p: Path):
-    """读 .rain/.bdy：返回 (values, times) 列。"""
+def _is_count_line(parts: list[str]) -> bool:
+    """计数行判定：首词为整数且次词非数值（如 "5 seconds"、"3 hours"）。"""
+    if not parts:
+        return False
+    try:
+        int(parts[0])
+    except ValueError:
+        return False
+    return len(parts) == 1 or not parts[1].lstrip("-").replace(".", "", 1).isdigit()
+
+
+def read_series_blocks(p: Path):
+    """读 .rain/.bdy 全部时序块 → [(name, [(value, time), ...]), ...]。
+
+    模型格式（input.cpp::LoadTimeSeries）：可选名称行 → "<count> <units>" →
+    count 行 "<value> <time>"；.rain 无名称行，.bdy 可含多个命名系列块
+    （如 ADR-0016 顶托 run 的 yujiang QVAR + zdown HVAR 共文件）。
+    """
     lines = [l for l in p.read_text().splitlines() if l.strip() and not l.startswith("#")]
-    pts = []
-    for ln in lines[2:]:  # 跳过名称行与计数行
-        a, b = ln.split()
-        pts.append((float(a), float(b)))
-    return pts
+    blocks = []
+    i = 0
+    while i < len(lines):
+        parts = lines[i].split()
+        name = ""
+        if not _is_count_line(parts):  # .bdy 名称行
+            name = lines[i].strip()
+            i += 1
+            if i >= len(lines):
+                break
+            parts = lines[i].split()
+            if not _is_count_line(parts):
+                i += 1
+                continue
+        count = int(parts[0])
+        i += 1
+        pts = []
+        while len(pts) < count and i < len(lines):
+            toks = lines[i].split()
+            if len(toks) >= 2:
+                try:
+                    pts.append((float(toks[0]), float(toks[1])))
+                except ValueError:
+                    break
+            i += 1
+        blocks.append((name or "(anon)", pts))
+    return blocks
+
+
+def read_series(p: Path):
+    """读时序文件的第一个块（原口径；点源标度律等单系列用法）。"""
+    return read_series_blocks(p)[0][1]
 
 
 # --- #11 test_run_manifest：冻结清单存在且小文件哈希可复验 ---
@@ -68,11 +111,15 @@ def test_rainfall_time_alignment():
     files = [f for f in files if "_v1invalid" not in str(f) and "_polyfitbed" not in str(f) and "_repro" not in str(f)]
     assert len(files) >= 8
     for f in files:
-        pts = read_series(f)
-        ts = [t for _, t in pts]
-        assert all(b > a for a, b in zip(ts, ts[1:])), f"{f} 时刻非严格递增（列互换/重号）"
+        blocks = read_series_blocks(f)
+        assert blocks, f"{f} 无时序块"
+        for name, pts in blocks:  # 多系列块（.bdy 命名系列）逐块检查
+            assert len(pts) >= 2, f"{f}:{name} 时序块点数 < 2"
+            ts = [t for _, t in pts]
+            assert all(b > a for a, b in zip(ts, ts[1:])), \
+                f"{f}:{name} 时刻非严格递增（列互换/重号）"
         if f.suffix == ".rain":  # 雨强非负；.bdy（潮位）允许负值
-            vs = [v for v, _ in pts]
+            vs = [v for _, pts in blocks for v, _ in pts]
             assert min(vs) >= 0, f"{f} 雨强为负（疑似列互换：值列应是时刻）"
 
 

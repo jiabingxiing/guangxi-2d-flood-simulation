@@ -83,6 +83,18 @@ runs:
 #   实测改动量：res.max 湿面积 −36.56%（271.07→171.97 km²）、水量 −53.16%（168.43→78.90 Mm³）。
 #   目录保留为历史证据，但不得作为默认层或对外成果展示。
 
+# ---- Phase H 研究性产品图层（ADR-0015~0018；单帧伪 run，role=product）----
+product_layers:
+  - product_id: product_fat_firstwet_free200
+    label: "研究性产品：首湿时刻 FAT（T+h，wd>0.05 m）"
+    kind: fat_first_wet_h
+    source: "outputs/products/jiulong/fat/scen_free_200m_sv6h/first_wet_h.tif"
+    source_run: scen_free_200m_sv6h
+    save_interval_s: 21600
+    audit: "data/catalog/fat_products_audit.json"
+    adr: "ADR-0015 §2（钟鸣 FAT 思想降级）"
+    notes: "首湿时刻=像元首次 wd>0.05 m 的 6 h 快照时刻；NaN=全程未湿（透明）。站址像元实测 0.008 m 未湿（先例在案），最近湿像元见站表。研究性产品，禁业务告警"
+
 layers:
   dem: {status: ready, label: "DEM 高程", kind: raster, summary: "父项目 12.5 m DEM 重采样到 200 m 模型网格（海面钳0+内陆空洞填补，无人工河槽刻蚀）", note: "原始地貌完好保持，垂直基准未闭合（G7）"}
   flood: {status: ready, label: "模型水深（逐帧）", kind: frame}

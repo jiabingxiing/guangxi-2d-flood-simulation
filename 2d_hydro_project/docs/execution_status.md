@@ -378,7 +378,20 @@ scope: project
 4. **S1 口径敏感性量化（G17）**：-17 dB 与原始掩膜一致率 0.9998（校验通过）；阈值 ±2 dB 使观测水面积在 6.68~15.88 km² 间摆 2.4 倍——**口径不确定性与情景间差异同量级**，任何 CSI/FAR 结论都须在「-17 dB 固定阈值」限定下表述。
 5. **常水第二时点交叉验证（决定性物理证据）**：09-05 常水观测 vs 模型充槽期（t=60 h）足迹内对比——无河槽 run（基线族）CSI 仅 **0.01**（模型漫灌平原 105 km²，S1 常水仅 ~2 km² 级）；**全部 chhyd run CSI 0.276~0.305、FAR ~0.31-0.34、模拟 13~16 km²**——重构河槽在纯基流充槽下复现 S1 常水水体。**这是河槽位置正确性的独立验证**（不依赖洪水时刻、不依赖降雨/入渗口径），且对降雨/净雨/排水机制不敏感（各 chhyd 变体一致）。
 
+## 1j. Phase H：学术成果驱动改进（2026-11-22，ADR-0015~0018；计划即授权）
 
+计划：`plans/广西二维水动力模拟_学术成果驱动改进实现计划.md`（用户 2026-11-22 批准，§5.3 五 run 授权）。
+
+**已完成（零重跑部分）**：
+1. **M0**：ADR-0015 学术映射冻结 + FAT/归因/概率产品口径预注册。
+2. **M1（T02–T04）**：FAT/超阈时间产品 **61/61 PASS run 全覆盖**（贵港 26 + 久隆 12 + 宁明 23，S1 达成）——首湿/超阈（0.3/0.5/1.0 m 情景阈值）/历时 GeoTIFF + 三级窗分布 + 站址暴露三元组表（`outputs/products/<site>/fat/`，审计 `data/catalog/fat_products_audit.json`）。**贵港成因归因产品**（S2 达成）：规则先冻结（`guigang_genesis_rules.json`）后计算——pluvial 185.44 km² / river 20.37 km² / disagreement 2.66 km²（定量证实滩地降雨积水主导；d14/d10 河槽差异为已注册混淆项）。
+3. **M2（T05–T09）**：`guigang_inflow_priors.json`（郁江 87,780 km² 径流深反推 + 明江 6,379 km² 全流域上限，**待用户复核**）；**GR4J 型集总产汇流**（ADR-0016，纯 numpy，守恒残差 0；IHC 暖启动 0.726 vs GA 映射 0.702 一致）→ 贵港/宁明 inflow bdy + 3 个授权 run 目录已组装（`scen_gr4j_q_100m`/`scen_gr4j_q6000_100m`/`scen_zdown_a_100m`/`scen_zdown_b_100m`）；**GloFAS 先验对照（T07/S3）**：贵港事件窗 **r<0.5 → 按预注册退回三角情景线**（全窗 r=0.538）、宁明事件窗 r=0.255（仅 5 日，记未验证）；GR4J 峰值早 1–2 天、量级偏大（集总模型无传播时滞，已登记）；**IMERG（T08）与 ATL13（T09）无凭证** → 按计划 §6.4 记「数据不可得」，S4/S5 **未验证**，脚本+合成单测落地。
+4. **M3（T12–T14，可先行部分）**：ADR-0018；**宁明 9 run 集合超越概率图**（S6 前半达成；成员全部质量门 PASS 强制清单，thr0.05 面 126.27 km² / thr0.3 面 110.35 km²，审计 `ningming_probability.json`）；**Copula 联合阈值探索**（48 年 AM3D×P30，三族 AIC：t-copula 最优 ν=2 ρ=0.344，AIC −21.5；Bootstrap CI [0.09, 0.62]——探索性，禁业务告警）；MMF 差异表骨架（`mmf_rainfall_evaluation.json`，S4 未验证待 IMERG）。
+5. **测试**：新增 6 个测试文件 46 项（FAT 11 + 归因 7 + GR4J/入流 11 + IMERG 5 + 概率 5 + 基准探针 7）；全量回归见 §2 门禁矩阵更新。
+
+**待执行（机时，run 已组装待启动）**：5.3 授权清单 5 run（贵港 4 + 宁明 1，各 ≤24 h）。注意：`scen_gr4j_q_*` 建议降级为敏感性执行（T07 r<0.5 预注册结论：三角情景线仍为生产线）；`scen_zdown_a/b`（HVAR 顶托）与 `scen_imerg_ga`（待 IMERG 凭证）不受影响。run 落 FAIL 即停线（zdown 系列 FAIL-EXPLAINED 已预注册）。
+
+**新增文件**：`scripts/stage6/{make_fat_products,make_genesis_attribution,ensemble_probability,copula_thresholds}.py`、`scripts/stage3/{build_inflow_hydrology,verify_inflow_vs_glofas,prep_imerg_rain,icesat2_datum_probe}.py`、审计件 `data/catalog/{fat_products_audit,guigang_genesis_rules,guigang_genesis_products,guigang_inflow_priors,inflow_audit,inflow_glofas_check,imerg_prep_audit,gx_datum_probe,ningming_probability,copula_thresholds_report,mmf_rainfall_evaluation}.json`。产品根：`outputs/products/{guigang,jiulong,ningming}/`（fat/genesis/probability）。
 
 ## 2. 门禁矩阵
 
@@ -395,7 +408,8 @@ scope: project
 | 13.2 质量守恒 | **61 PASS / 3 FAIL-EXPLAINED（z05/z10/ztide）/ 0 FAIL**（64 run，2026-11-08 实跑重算；含贵港 ADR-0012 五深度 + ADR-0013 三组合 + ADR-0014/第四轮六治理探针 run + 久隆 GA 净雨重跑） | **部分（有明示不合格）** |
 | 13.3 水文/空间验证 | 无连续水位/流量过程；宁明时刻切片 CSI 0.357；贵港 S1 足迹 CSI 0.043；久隆退水 S1 WEAK（基线 0.018 vs GA 重跑 0.018，S1 假警报压降 23.5%）；**贵港 09-12 单景 S1 四情景 CSI 0.076~0.164、FAR 0.817~0.921（仅足迹内，非硬门）** | **未满足** |
 | 13.4 性能/复现/站区安全 | **三案例冻结重跑逐位一致（2026-10-27）**；run_manifest 模块部分接入；无站区业务阈值 | **部分（复现项已闭合）** |
-| 十四章测试 | **267 passed，0 failed**（2026-11-07 实跑 `run python -m pytest`，全量测试通过；含 ADR-0012 引擎 25 项 + ADR-0013 组合 10 项 + ADR-0014 排水 8 项） | **部分（覆盖仍有限）** |
+| 十四章测试 | **267 passed，0 failed**（2026-11-07 实跑）；2026-11-22 Phase H 新增 5 测试文件 46 项（FAT/归因/GR4J/IMERG/概率/基准探针） | **部分（覆盖仍有限）** |
+| 十六章 ADR | ADR-0001~0018（**0015 学术借鉴与改进产品口径、0016 上游来水产汇流与降雨多源、0017 垂直基准独立核证、0018 概率化与联合阈值探索已补**，2026-11-22 Phase H） | **部分** |
 | 十六章 ADR | ADR-0001~0014（**0012 水力约束河槽重构、0013 组合驱动归因、0014 排水连通治理（诊断探针）已补**）；DEM 校正/验证指标 ADR 仍可细化 | **部分** |
 
 ## 3. 前轮已完成（Phase A/B 摘要，详见 git 历史/前版）

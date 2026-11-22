@@ -49,7 +49,8 @@ from .catalog.catalog import (
 )
 from .catalog.quality import load_mass_gate
 from .catalog.timeline import build_timeline, format_timestamp
-from .config import CaseConfig, Config, RunConfig
+from .config import CaseConfig, Config, ProductLayerConfig, RunConfig
+from .publishing import products as products_mod
 from .quality import stats as stats_mod
 from .quality.frames import RunAudit, audit_run, sha256_file
 from .raster import blocks as blocks_mod
@@ -768,6 +769,289 @@ def _process_run(
         grid_hash=grid_hash(grid),
         repro=envelope_reproducibility_crosscheck(config, case, statistics),
     )
+
+
+# --------------------------------------------------------------------------- #
+# Phase H 研究性产品图层（FAT/归因/概率）：单帧伪 run，role=product
+# --------------------------------------------------------------------------- #
+
+FRAME_ID = "f0000"  # schema 契约 frame_id 须 ^f[0-9]{4,}$；单帧静态占位
+
+
+def _grid_header_dict(grid: Grid) -> dict[str, float]:
+    """Grid → ESRI ASCII 6 行头 dict（FrameInfo.header 口径）。"""
+    _a, _b, c, _d, e, f = (float(v) for v in grid.transform)
+    return {
+        "ncols": float(grid.cols),
+        "nrows": float(grid.rows),
+        "xllcorner": c,
+        "yllcorner": f + e * grid.rows,  # f=顶边 y；yll = 顶 - rows*cell（e 为负）
+        "cellsize": float(grid.cell_size_m),
+        "nodata_value": -9999.0,
+    }
+
+
+def _process_product_layer(
+    config: Config,
+    case: CaseConfig,
+    product: ProductLayerConfig,
+    grid: Grid,
+    tr: Transformer,
+    split_rows: int,
+    split_cols: int,
+    bundle: Path,
+    *,
+    skip_tiles: bool,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """把 `outputs/products/**` 的研究性产品 GeoTIFF 发布为单帧伪 run。
+
+    返回 (catalog run_entry, BuildStats.per_run 记录)。复用深度管线的数值块、
+    分幅 PNG、timeline/statistics/images 契约；产品语义由 statistics.product
+    与 run_entry.product 声明（research_product=true，禁业务告警）。
+    """
+    from types import SimpleNamespace
+
+
+    t0 = time.perf_counter()
+    warnings: list[str] = []
+    style = products_mod.style_for(product.kind, threshold_m=product.threshold_m)
+    if not product.source_tif.is_file():
+        raise PipelineError(
+            f"{case.case_id}/{product.product_id}: 产品 GeoTIFF 不存在 {product.source_tif}；"
+            "先运行父项目 make_fat_products.py / make_genesis_attribution.py / ensemble_probability.py"
+        )
+    arr = products_mod.read_product_array(product.source_tif, grid)
+    if arr.shape != (grid.rows, grid.cols):
+        raise PipelineError(f"{product.product_id}: 产品重投影后形状 {arr.shape} 与网格不符")
+
+    case_id, product_id = case.case_id, product.product_id
+    image_prefix = f"frames/{case_id}/{product_id}"
+    frames_dir = bundle / image_prefix
+    frames_dir.mkdir(parents=True, exist_ok=True)
+    numeric_dir = bundle / "numeric" / case_id / product_id
+    numeric_dir.mkdir(parents=True, exist_ok=True)
+
+    block_size = config.block_size
+    block_info = blocks_mod.write_blocks(arr, numeric_dir / FRAME_ID, block_size=block_size)
+    mask_valid = np.isfinite(arr)
+    mask_rel = f"numeric/{case_id}/{product_id}/mask.png"
+    mask_bytes = blocks_mod.write_mask_png(mask_valid, bundle / mask_rel)
+
+    windows = paint_mod.part_windows(grid.rows, grid.cols, split_rows, split_cols)
+    # 渲染值：小时类把精确 0 h 平移进 0–6 h 分级（schema transparent_below_m ≥ 0）；
+    # 数值块保真原值，点查不受影响
+    render_arr = (
+        np.where(arr == 0.0, np.float32(1e-4), arr) if style.render_zero_epsilon else arr
+    )
+    png_bytes: list[int] = []
+    if skip_tiles:
+        parts: list[dict[str, Any]] = []
+        summary = paint_mod.depth_frame_summary(
+            render_arr, transparent_below_m=style.transparent_below)
+        frame_entry = {
+            "frame_id": FRAME_ID,
+            "max_depth_m": summary["max_depth_m"],
+            "wet_pixels": summary["wet_pixels"],
+            "parts": [],
+        }
+        max_entry = None
+    else:
+        rgba = paint_mod.colorize_depth(
+            render_arr, style.depth_classes, transparent_below_m=style.transparent_below)
+        parts, _part_bytes = _render_parts(
+            rgba, windows, out_dir=frames_dir, stem=FRAME_ID, image_prefix=image_prefix,
+            grid=grid, tr_fn=tr.transform, depth=render_arr,
+            transparent_below_m=style.transparent_below)
+        png_bytes = [p["bytes"] for p in parts]
+        frame_entry = {
+            "frame_id": FRAME_ID,
+            "max_depth_m": max((p["max_depth_m"] for p in parts), default=0.0),
+            "wet_pixels": int(sum(p["wet_pixels"] for p in parts)),
+            "parts": parts,
+        }
+        # 单帧静态产品：max 分幅 = 同一幅图（schema 要求 images.json 必有 max）
+        max_parts, _max_bytes = _render_parts(
+            rgba, windows, out_dir=frames_dir, stem="max", image_prefix=image_prefix,
+            grid=grid, tr_fn=tr.transform, depth=render_arr,
+            transparent_below_m=style.transparent_below)
+        max_entry = {
+            "max_depth_m": max((p["max_depth_m"] for p in max_parts), default=0.0),
+            "wet_pixels": int(sum(p["wet_pixels"] for p in max_parts)),
+            "parts": max_parts,
+        }
+        png_bytes.extend(p["bytes"] for p in max_parts)
+        del rgba
+
+    split = paint_mod.choose_split(grid, tr.transform, tol_px=paint_mod.DEFAULT_TOL_PX)
+    if (split["split_rows"], split["split_cols"]) != (split_rows, split_cols):
+        warnings.append("产品层 split 与案例主 run 不一致（同网格应一致）")
+    images_doc = paint_mod.build_images_doc(
+        case_id=case_id, run_id=product_id, grid=grid,
+        classes=style.depth_classes, transparent_below_m=style.transparent_below,
+        split_rows=split_rows, split_cols=split_cols, frames=[frame_entry],
+        max_entry=max_entry, kind="depth_frames",
+    )
+    images_doc["color_scale"]["note"] = (
+        f"研究性产品固定分级（单位 {style.unit}）；{style.not_depth_note}"
+        + ("；精确 0 h 渲染进 0–6 h 分级（渲染值 1e-4），数值块保真 0"
+           if style.render_zero_epsilon else "")
+    )
+    images_doc["spatial_validation"] = {
+        "gate_px": split["tol_px"],
+        "max_px": round(split["max_px"], 6),
+        "max_m": round(split["max_m"], 4),
+        "samples_per_part": split["samples_per_part"],
+        "method": "像元中心 → EPSG:4326 → Web Mercator → part 四角双线性反算 → 回原生像元坐标",
+        "parts": [
+            {"id": f"r{p['part_row']}c{p['part_col']}", "max_px": round(p["max_px"], 6),
+             "max_m": round(p["max_m"], 4)}
+            for p in split["parts"]
+        ],
+        "attempts": split["attempts"],
+        "passed": True,
+    }
+    images_doc["product"] = {
+        "kind": product.kind,
+        "unit": style.unit,
+        "value_semantics": style.value_semantics,
+        "not_depth_note": style.not_depth_note,
+    }
+
+    tif_sha = sha256_file(product.source_tif)
+    frame_info = SimpleNamespace(
+        seq=0, frame_id=FRAME_ID, sha256=tif_sha,
+        header=_grid_header_dict(grid), size_bytes=product.source_tif.stat().st_size,
+    )
+    product_run = RunConfig(
+        run_id=product_id, label=product.label, role="product",
+        source_dir=product.source_tif.parent,
+        save_interval_s=float(product.save_interval_s),
+        simulation_duration_s=float(product.save_interval_s),
+        time_origin=None,
+        origin_status="relative_only",
+        origin_note="研究性产品图层：相对时刻 T+h；单帧静态派生，无绝对时轴",
+        notes=product.notes,
+    )
+    timeline = build_timeline(
+        case, product_run, [frame_info],
+        images_prefix=image_prefix,
+        blocks_prefix=f"numeric/{case_id}/{product_id}",
+        statistics_path=f"cases/{case_id}/{product_id}/statistics.json",
+        numeric_manifest_path=f"numeric/{case_id}/{product_id}/manifest.json",
+    )
+    timeline["product"] = {
+        "kind": product.kind,
+        "unit": style.unit,
+        "value_semantics": style.value_semantics,
+        "single_frame_static": True,
+        "note": "单帧静态产品：frame sim_seconds=0 仅作契约占位；产品无时间轴",
+    }
+
+    audit_rel = product.audit
+    derivation: dict[str, Any] = {
+        "research_product": True,
+        "not_business_warning": True,
+        "adr": product.adr,
+        "audit": audit_rel,
+        "source_sha256": tif_sha,
+        "source_run": product.source_run,
+    }
+    statistics = products_mod.product_stats_doc(
+        case_id=case_id, product_id=product_id, arr=arr,
+        cell_area_m2=grid.cell_area_m2,
+        thresholds=[float(t) for t in config.thresholds_m],
+        style=style, derivation=derivation,
+    )
+    numeric_manifest = blocks_mod.build_numeric_manifest(
+        case_id=case_id, run_id=product_id, grid=grid, block_size=block_size,
+        frames=[frame_info], mask_png_rel=mask_rel, sea_cell_count=0, has_max=False,
+    )
+    numeric_manifest["product"] = {
+        "kind": product.kind,
+        "note": "数值块保存产品真值（" + style.unit + "）；点查直接读块，不走 PNG 颜色",
+    }
+
+    # 质量门引用：优先配置的源 run（须是案例配置 run），否则显式 mass_gate_run_path
+    mass: dict[str, Any] = {}
+    if product.source_run and product.source_run in case.runs:
+        mass = load_mass_gate(config.parent_root, _run_rel(config, case.runs[product.source_run]))
+    elif product.mass_gate_run_path:
+        mass = load_mass_gate(config.parent_root, product.mass_gate_run_path)
+
+    run_entry: dict[str, Any] = {
+        "run_id": product_id,
+        "label": product.label,
+        "role": "product",
+        "frame_count": 1,
+        "save_interval_s": float(product.save_interval_s),
+        "simulation_duration_s": float(product.save_interval_s),
+        "timeline": f"cases/{case_id}/{product_id}/timeline.json",
+        "statistics": f"cases/{case_id}/{product_id}/statistics.json",
+        "numeric_manifest": f"numeric/{case_id}/{product_id}/manifest.json",
+        "optional": product.optional,
+        "notes": product.notes,
+        "quality": {
+            "mass_gate": mass.get("mass_gate", "unrecorded"),
+            "e_mass": mass.get("e_mass"),
+            "validation_status": case.quality.get("validation_status", ""),
+            "vertical_datum_status": case.quality.get("vertical_datum_status", ""),
+            "warnings": list(case.quality.get("warnings") or []),
+            "mass_gate_cause": mass.get("cause"),
+            "research_product": True,
+            "not_business_warning": True,
+        },
+        "product": {
+            "kind": product.kind,
+            "unit": style.unit,
+            "value_semantics": style.value_semantics,
+            "not_depth_note": style.not_depth_note,
+            "source_sha256": tif_sha,
+            "source_bytes": int(product.source_tif.stat().st_size),
+            "audit": audit_rel,
+            "adr": product.adr,
+            "source_run": product.source_run,
+            "derivation": derivation,
+        },
+        "grid_hash": grid_hash(grid),
+    }
+
+    per_run = {
+        "frame_count": 1,
+        "split": {"rows": split_rows, "cols": split_cols},
+        "spatial": {
+            "split": {"rows": split_rows, "cols": split_cols},
+            "parts": [
+                {"id": f"r{w.part_row}c{w.part_col}", "max_px": round(split["max_px"], 6),
+                 "max_m": round(split["max_m"], 4)}
+                for w in windows
+            ],
+            "max_px": round(split["max_px"], 6),
+            "max_m": round(split["max_m"], 4),
+            "samples": int(split["samples_per_part"]) * len(windows),
+            "gate_px": split["tol_px"],
+            "passed": bool(split["max_px"] <= split["tol_px"]),
+            "attempts": split["attempts"],
+        },
+        "png_count": len(png_bytes),
+        "png_bytes_total": sum(png_bytes),
+        "png_bytes_min": min(png_bytes) if png_bytes else 0,
+        "png_bytes_median": int(np.median(png_bytes)) if png_bytes else 0,
+        "png_bytes_max": max(png_bytes) if png_bytes else 0,
+        "numeric_bytes": int(block_info["bytes"]),
+        "numeric_files": int(block_info["block_files"]),
+        "mask_bytes": mask_bytes,
+        "max_crosscheck": {},
+        "sea_cell_count": 0,
+        "seconds": round(time.perf_counter() - t0, 3),
+        "warnings": warnings,
+    }
+
+    _write_json(bundle / run_entry["timeline"], timeline)
+    _write_json(bundle / run_entry["statistics"], statistics)
+    _write_json(bundle / run_entry["numeric_manifest"], numeric_manifest)
+    if not skip_tiles:
+        _write_json(bundle / image_prefix / "images.json", images_doc)
+    return run_entry, per_run
 
 
 # --------------------------------------------------------------------------- #
@@ -1724,6 +2008,22 @@ def _build_case(
 
     if first_result is None or grid is None or tr is None or geom is None:  # pragma: no cover
         raise PipelineError(f"{case.case_id}: 未构建任何 run")
+
+    # ---- Phase H 研究性产品图层（单帧伪 run，role=product；ADR-0015~0018）----
+    for product in case.product_layers:
+        if product.optional:
+            continue
+        entry, per_run_doc = _process_product_layer(
+            config, case, product, grid, tr,
+            first_result.split_rows, first_result.split_cols,
+            bundle, skip_tiles=skip_tiles,
+        )
+        run_entries.append(entry)
+        stats.per_run[f"{case.case_id}/{product.product_id}"] = per_run_doc
+        stats.frames_total += 1
+        stats.png_total += per_run_doc["png_count"]
+        stats.png_bytes_total += per_run_doc["png_bytes_total"]
+        stats.numeric_bytes_total += per_run_doc["numeric_bytes"]
 
     assets_doc = load_assets_manifest(config)
     stashed = _stash_assets(config, bundle, assets_doc)
