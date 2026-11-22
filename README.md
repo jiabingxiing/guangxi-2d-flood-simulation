@@ -58,5 +58,5 @@ uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not
 
 - 执行状态：`2d_hydro_project/docs/execution_status.md`
 - docs 总索引：`2d_hydro_project/docs/README.md`
-- 决策记录 ADR-0001~0014：`2d_hydro_project/docs/adr/`（0010 = 久隆直接降雨治理规范；0011~0014 = 贵港伪影/河槽/组合驱动/排水连通治理）
+- 决策记录 ADR-0001~0018：`2d_hydro_project/docs/adr/`（0010 = 久隆直接降雨治理规范；0011~0014 = 贵港伪影/河槽/组合驱动/排水连通治理；0015~0018 = 学术借鉴口径、上游来水与降雨多源、垂直基准核证、概率化与联合阈值）
 - 降雨下渗预处理器：`2d_hydro_project/docs/rainfall_runoff_preprocessor.md`
