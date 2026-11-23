@@ -1,0 +1,115 @@
+{
+  "site": "jiulong",
+  "generated_utc": "2026-11-22T13:29:22+00:00",
+  "evidence_level": "E3（Open-Meteo ERA5 逐时 + GA/SCS-UH 文献参数 + GLO-30 面积，未率定）",
+  "window": {
+    "fetch": [
+      "2024-08-01",
+      "2024-09-18"
+    ],
+    "warmup_days": 35,
+    "t0_local": "2024-09-05",
+    "event_days": 5,
+    "recession_days": 13
+  },
+  "a1_area_km2": 1775.3600000000001,
+  "luwu_prior_km2": 1400.0,
+  "sample_points": [
+    {
+      "lon": 109.5,
+      "lat": 22.5
+    },
+    {
+      "lon": 109.0,
+      "lat": 22.5
+    },
+    {
+      "lon": 109.25,
+      "lat": 22.5
+    },
+    {
+      "lon": 108.75,
+      "lat": 22.5
+    },
+    {
+      "lon": 108.75,
+      "lat": 22.25
+    },
+    {
+      "lon": 109.0,
+      "lat": 22.25
+    },
+    {
+      "lon": 109.25,
+      "lat": 22.25
+    },
+    {
+      "lon": 109.0,
+      "lat": 22.0
+    }
+  ],
+  "basin_rain": {
+    "event_total_mm": 122.64999999999999,
+    "max_1h_mm": 10.7875,
+    "max_24h_mm": 74.9375
+  },
+  "event_model": {
+    "kind": "green_ampt + scs_uh shape, volume scaled to GR4J prior (ADR-0019)",
+    "ga_params": {
+      "ks_mm_h": 3.5,
+      "psi_mm": 300.0,
+      "theta_s": 0.45,
+      "theta_i": 0.32,
+      "f_max_mm": 120.0,
+      "drainage_mm_h": 0.0
+    },
+    "tp_h": 5.0,
+    "volume_scale_factor": 0.45008795780109845,
+    "scale_applied": true,
+    "peak_m3s_event_window": 1398.2343600183779,
+    "peak_t_h_event_window": 69,
+    "volume_m3_event_window": 96995048.69790214,
+    "runoff_coeff": 0.330911976035575,
+    "sensitivity": [
+      {
+        "factor": 0.7,
+        "peak_m3s": 978.7640520128645,
+        "volume_m3": 67896534.0885315
+      },
+      {
+        "factor": 1.0,
+        "peak_m3s": 1398.2343600183779,
+        "volume_m3": 96995048.69790214
+      },
+      {
+        "factor": 1.4,
+        "peak_m3s": 1957.528104025729,
+        "volume_m3": 135793068.177063
+      }
+    ]
+  },
+  "gr4j_crosscheck": {
+    "params": {
+      "x1": 350.0,
+      "x2": 0.0,
+      "x3": 90.0,
+      "x4": 1.7
+    },
+    "peak_m3s": 468.37358725773953,
+    "peak_date": "2024-09-08",
+    "event_volume_m3": 96995048.69790211,
+    "volume_ratio_event_vs_gr4j": 2.221787947594717,
+    "role": "水量先验对照；禁止日均分 24 h 作为洪峰驱动"
+  },
+  "no_double_counting": {
+    "a1_to_qvar_only": true
+  },
+  "outputs": {
+    "bdy_event": "data/interim/jiulong/hydrology/qinjiang_event_5d.bdy",
+    "bdy_recession": "data/interim/jiulong/hydrology/qinjiang_recession_13d.bdy",
+    "hourly_q": "data/interim/jiulong/hydrology/qinjiang_hourly_q.json"
+  },
+  "source_sha256": {
+    "baseline_dem": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10"
+  }
+}

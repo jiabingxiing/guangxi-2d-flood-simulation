@@ -1,0 +1,85 @@
+{
+  "generated_utc": "2026-11-22T13:29:23+00:00",
+  "t0_local": "2024-09-05",
+  "cellsize_m": 200.0,
+  "series": [
+    {
+      "tag": "event_5d",
+      "checks": {
+        "count": {
+          "pass": true,
+          "n": 120,
+          "expected": 120
+        },
+        "timestep_3600": {
+          "pass": true,
+          "min_dt": 3600.0
+        },
+        "times_strictly_increasing": {
+          "pass": true
+        },
+        "nonnegative_finite": {
+          "pass": true,
+          "min": 0.0,
+          "max": 1398.2344
+        },
+        "t0_zero": {
+          "pass": true,
+          "t0": 0.0
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "tag": "recession_13d",
+      "checks": {
+        "count": {
+          "pass": true,
+          "n": 312,
+          "expected": 312
+        },
+        "timestep_3600": {
+          "pass": true,
+          "min_dt": 3600.0
+        },
+        "times_strictly_increasing": {
+          "pass": true
+        },
+        "nonnegative_finite": {
+          "pass": true,
+          "min": 0.0,
+          "max": 1398.2344
+        },
+        "t0_zero": {
+          "pass": true,
+          "t0": 0.0
+        }
+      },
+      "all_pass": true
+    }
+  ],
+  "bdy_matches_hourly": {
+    "pass": true,
+    "n_bdy": 120,
+    "max_abs_dev_m3s": 0.009900000000016007,
+    "quantization_step_m3s": 0.02
+  },
+  "peak": {
+    "pass": true,
+    "peak_qvar_value": 6.9912,
+    "peak_m3s": 1398.24,
+    "peak_time_s": 248400.0
+  },
+  "volume_conservation": {
+    "pass": true,
+    "volume_m3": 96995049.12,
+    "expected_m3": 96995048.69790214,
+    "rel_dev": 4.351746480188576e-09,
+    "threshold": 0.01
+  },
+  "gr4j_reference": {
+    "volume_ratio_event_vs_gr4j": 2.221787947594717,
+    "note": "仅水量先验对照，非门禁（ADR-0019）"
+  },
+  "all_pass": true
+}

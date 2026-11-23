@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-11-22T14:37:11+00:00",
+  "evidence_level": "E3（ERA5 单锚点逐时 + GA 华南红壤先验；IMERG/CDS 凭证缺记降级）",
+  "t0_local": "2024-09-05",
+  "event_days": 5,
+  "gross_total_mm": 158.5,
+  "net_total_mm": 50.69999999999999,
+  "max_1h_net_mm": 10.59999999999999,
+  "ga_params": {
+    "ks_mm_h": 3.5,
+    "psi_mm": 300.0,
+    "theta_s": 0.45,
+    "theta_i": 0.32,
+    "f_max_mm": 120.0,
+    "drainage_mm_h": 0.0
+  },
+  "double_counting_lock": {
+    "net_rain_in_dot_rain": true,
+    "solver_infiltration_forbidden": true,
+    "a1_qvar_separate": true
+  },
+  "outputs": {
+    "rain_net_5d": "data/interim/jiulong/rainfall/rain_net_ga_5d.rain",
+    "rain_net_13d": "data/interim/jiulong/rainfall/rain_net_ga_13d.rain"
+  }
+}
