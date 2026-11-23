@@ -393,6 +393,24 @@ scope: project
 
 **新增文件**：`scripts/stage6/{make_fat_products,make_genesis_attribution,ensemble_probability,copula_thresholds}.py`、`scripts/stage3/{build_inflow_hydrology,verify_inflow_vs_glofas,prep_imerg_rain,icesat2_datum_probe}.py`、审计件 `data/catalog/{fat_products_audit,guigang_genesis_rules,guigang_genesis_products,guigang_inflow_priors,inflow_audit,inflow_glofas_check,imerg_prep_audit,gx_datum_probe,ningming_probability,copula_thresholds_report,mmf_rainfall_evaluation}.json`。产品根：`outputs/products/{guigang,jiulong,ningming}/`（fat/genesis/probability）。
 
+## 1k. Phase I：久隆钦江双驱动重构与离散水点全链条治理（2026-11-22，ADR-0019~0022；计划即授权）
+
+计划：`plans/code_artifact.md`（用户 2026-11-22 批准执行五项前置任务 + 任务 4/5 lisflood.exe 运行）。
+
+**任务 1（斑块归因）——已完成**：`diagnose_jiulong_patch_attribution.py` 对 R0 基线 1,107 个湿斑块完成 P01–P08 全分类（P04=882 / P02=123 / P01=60 / P08=18 / P07=12 / P06=10 / P03=2 / P05=0），15 项指标含 HAND（PF+ε）/距河距离（OSM 干流 BFS）/轨迹匹配（1085/1107）；产物 `diagnostics/jiulong/patch_attribution/`，20 项单测过。
+2. **任务 2（水系建库）——已完成**：A1=1,775 km²（GLO-30 派生，与陆屋 1,400 km² 先验自洽；`jiulong_catchments.json`）；钦江干流 = OSM 本地 PBF（用户当日提供 china-261121.osm.pbf，12 段）+ HydroRIVERS NEXT_DOWN 链双源，S1 常水核验 0.31；入域断面 (0,156)（N 缔）/出海 (151,26)，8 邻域 0 断裂；SGC 输入 sgc_width/sgc_bank 落盘；拓扑审计：纵向局部倒坡（200 m 格固有，max 8.4 m）如实登记；支流 CATCH_SKM≥20 无相交命中（v1 限制）。
+3. **任务 3（小时级 Q(t)）——已完成**：GA+SCS-UH 形态 + GR4J 日尺度体积先验缩放（限幅 [0.4,2.5]，实际 0.63）；定版峰值 **1,398 m³/s @ t0+69 h**、体积 97 Mm³（系数 0.44=GR4J 先验）；`validate_jiulong_hydrograph.py` 全项 PASS；A2 净雨 50.7 mm（暖启动+饱和后 drainage=Ks 口径）。防重复计量：QVAR/`.rain` 分账 + par 禁 infiltration 断言。
+4. **任务 4（SGC 核验 + §4.5 八项合成电池）——已通过（7/8）**：SGC 三项小算例（输水/漫溢/退水）全 PASS；§4.5 八项电池 s2/s3/s4/s5/s6/s7/s8 PASS（含同边双 QVAR 实测可行、HVAR 缓升 G13 门通过、干湿转换排空），**s1 蓄水按判据如实 FAIL**（给定雨量下示例洼地物理上不可达 1.0 m，薄层汇入约 131 m³/总雨 2400 m³，1 h 内蓄水仍在进行）——overall_pass=false 如实登记，未调参掩盖；单测 24 项过；`diagnostics/synthetic/sgc_report.json`。
+5. **任务 5（R0–R4 对照）——已完成 5 run**（R0=只读基线；r1_v3/r2a_v4/r2/r3 PASS，r4 FAIL-EXPLAINED 感潮口径）：R1 净雨单变量湿 187.5 km²；R2a 来水摊散 58.8 km²；R2 SGC 河道 55.0 km²；**R3 双驱动主情景 217.5 km²**（∫Qin 97.3 Mm³ 与 bdy 理论值闭合 9e-6）；R4 感潮 260.1 km²（E_mass 7.8e-2，HVAR 政策 FAIL-EXPLAINED，G13 同病）。
+6. **因子差分（`compare_jiulong_scenarios.v2`）**：来水效应（R3−R1）= +30.0 km² 且碎斑 −74（沿河集中）；净雨效应（R3−R2）= +162.6 km²（面状积水）；河道 SGC 效应（R2−R2a）= −3.8 km²（集中于槽）；合计（R3−R0）= −45.7 km²（GA 损失压掉粗雨高估）。
+7. **S1 验证（`validate_jiulong_inundation.v1`）**：R3 CSI 0.043 / POD 0.373 / FAR 0.954（基线 0.018/0.387/0.982）；5 d 窗内 R3 退水方向检验不适用；**R3 13 d 退水窗（r3rec，09-05..09-17）已跑**：E_mass 7.6e-6 PASS、res.max 233.8 km²、峰值帧 204.3 km²@294 h；退水方向检验 **未达成**（09-10→09-17 模型 +17.5 km² vs S1 −5.84 km²），较旧基线同期 +27.7 km² 改善 37%；剩余主因 = 无显式排水网 + 退水期净雨 25.7 mm 持续补给。v1 因 13 d 净雨切片 bug 作废留痕（`*_v1invalid`）。
+8. **质量门 SSOT 刷新**：**PASS 66 / FAIL-EXPLAINED 4 / FAIL 0（70 run）**（+4 PASS：R1/R2a/R2/R3；+1 PASS：R3 13d 退水窗；+1 FE：R4）；g15 公式与政策未改。
+9. **工程**：新增脚本 12 个（stage3×8 + stage6×4）、共用底座 2 个、测试 6 文件 76 项、ADR-0019~0022、`configs/cases/jiulong_hydro.yaml`；全量回归 512+ 过（见门禁矩阵）。作废 run 留痕：`*_v1invalid/_v1invalid_v2/_v1invalid_v3`（rain 首行缺换行 / QVAR 三格段口径 / 中途换强迫），均被 g15 EXCLUDE_MARKERS 排除。
+10a. **DEM_REPAIRED v2（§4.4/M1 后续项已落地，2026-11-23）**：`prepare_jiulong_dem_layers_v2.py` —— 负值区 7,838 格（313.52 km²）弃 BFS 平推、改 GLO-30 基准对齐融合（offset −22.766 m，G7 未闭合的量化体现）；LAND/SEA/NODATA 三掩膜独立落盘；融合体积 −3,011 m³（洪峰蓄量 2.36 亿 m³ 的 1.3e-5，3% 上限内）；7,498 格近岸负值按 GLO-30 证据保留不钳零（reason=3）；契约检查（S1 保护/HYDRAULIC=REPAIRED/融合仅限未解析负值）全过；单测 3 项 + v1 契约 43 项全过；catalog `jiulong_dem_layers_v2.json`。本层为候选输入，未用于任何 run 重算。
+10b. **发布包 v10**：floodviz `v10-20261122` 已构建并通过 validate --full（3 案例 / 17 run + 6 产品图层）；新增 5 个久隆 run 入包（R1/R2a/R2/R3 + R3 13d 退水窗），R4 感潮 FAIL-EXPLAINED 不入包；`configs/cases/jiulong.yaml` 同步 5 条目；`_select_runs` 口径：`optional: true` 的 run 不进包（recession/100 m 维持该设计）。成因分层视图已入 v10：`patch_class` 新 kind（8 类离散色带+类名图例，修复产品 run 误用深度色带的既有缺陷）、4 项新单测（floodviz 263 passed）、审计件 `flood_visualization/data/catalog/jiulong_patch_attribution_layer.json`（逐类像元数 P01=196/P02=3542/P03=32/P04=2698/P05=0/P06=15/P07=74/P08=24，与父项目 class_summary 吻合）。
+10. **环境记录（2026-11-22）**：E 盘出现会话级大写限流（>64 KB 逐级收紧至 <8 KB 后部分恢复），R2/R3/R4 改在 D 盘临时工作根执行后按 ≤24 KB 分块回拷；r4 需单一 bdyfile（qinjiang+qztide 并入 inflow_tide.bdy）。
+11. **待办**：IMERG 凭证已配（.netrc+GES DISC 应用已批准），2026-11-22 当晚网络 TLS 间歇未通，通后按 ADR-0019 换 run tag 升级 R1/R3 降雨；陆屋站实测资料获取（方案 A）；display_qc 双门控修订（ADR-0021 §5）。
+
 ## 2. 门禁矩阵
 
 | 终稿要求 | 当前证据 | 状态 |
