@@ -1,0 +1,205 @@
+{
+  "script": "scripts/stage6/audit_jiulong_coupling.py",
+  "generated_utc": "2026-11-22T14:08:17+00:00",
+  "purpose": "河道—洪泛区交换与退水对账（R2a/R2/R3/R4，只读诊断）",
+  "evidence_level": "E3（情景级模拟诊断，非实测；质量门 PASS ≠ 预测正确）",
+  "not_independent_validation": true,
+  "method": {
+    "qin_reconciliation": "res.mass 梯形 ∫Qin vs run 局部 inflow.bdy 理论积分；源码口径 Q=值×dx×n_edges（boundary.cpp QVAR5 每边 ×dx，input.cpp BCi1..BCi2 段展开），门 ≤1% 对照 segment 口径；design 口径（值×dx 单格，任务书参照）并列记录",
+    "entry_spread": "前 3 帧 wet(depth>0.05) 自入口 [0, 156] 的 8 邻域 BFS 最远距离（只在湿格内传播）",
+    "floodplain_exchange": "dilate1(sgc_width>0) 之外湿面积：峰值帧 vs 末帧",
+    "volume_check": "∫Qin vs (V_end − V0 − V_rain)；residual ≈ ∫Qout"
+  },
+  "bdy": {
+    "source": "data/interim/jiulong/hydrology/qinjiang_event_5d.bdy",
+    "sha256": "2773098eac3fe32276f0b3cbb4442c92bd79fd5251d4630a3d928f777f27c01a",
+    "n_points": 120,
+    "t_span_s": [
+      0.0,
+      428400.0
+    ],
+    "provenance_note": "理论积分优先用 run 目录内 inflow.bdy 副本；data/interim 源文件曾在执行期间重排（2026-11-22），run 副本与源可能不一致"
+  },
+  "runs": {
+    "r2a": {
+      "run": "r2a",
+      "name": "scen_r2a_inflow_nocut_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2a_inflow_nocut_200m_sv6h",
+      "status": "missing"
+    },
+    "r2": {
+      "run": "r2",
+      "name": "scen_r2_inflow_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2_inflow_sgc_200m_sv6h",
+      "status": "ok",
+      "n_frames": 21,
+      "qin_reconciliation": {
+        "int_qin_res_mass_m3": 97285858.835,
+        "bdy_source": "run_local",
+        "bdy_path": "outputs/jiulong/2024-09-yagi/scen_r2_inflow_sgc_200m_sv6h/inflow.bdy",
+        "n_edges_qvar": 1,
+        "int_qin_bdy_design_m3": 97286688.0,
+        "int_qin_bdy_segment_m3": 97286688.0,
+        "rel_dev_vs_segment": 9e-06,
+        "gate_1pct": "PASS",
+        "empirical_multiplier_vs_design": 1.0
+      },
+      "entry_spread_first3": [
+        {
+          "seq": 0,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 1,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 2,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        }
+      ],
+      "entry_spread_max_m": 0.0,
+      "floodplain_exchange": {
+        "region": "dilate1(sgc_width>0) 之外（全 run 同一几何，r2a 作对照参照区）",
+        "peak_seq": 20,
+        "outside_wet_km2_peak": 42.08,
+        "end_seq": 20,
+        "outside_wet_km2_end": 42.08,
+        "delta_km2_end_minus_peak": 0.0
+      },
+      "volume_check": {
+        "delivered_int_qin_m3": 97285858.835,
+        "stored_delta_v_m3": 97285962.4,
+        "residual_m3": -103.565,
+        "stored_frac_of_delivered": 1.0,
+        "note": "residual ≈ ∫Qout（含南缘 FREE 出流），只记数不作门"
+      }
+    },
+    "r3": {
+      "run": "r3",
+      "name": "scen_r3_dual_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h",
+      "status": "ok",
+      "n_frames": 21,
+      "qin_reconciliation": {
+        "int_qin_res_mass_m3": 97285858.835,
+        "bdy_source": "run_local",
+        "bdy_path": "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h/inflow.bdy",
+        "n_edges_qvar": 1,
+        "int_qin_bdy_design_m3": 97286688.0,
+        "int_qin_bdy_segment_m3": 97286688.0,
+        "rel_dev_vs_segment": 9e-06,
+        "gate_1pct": "PASS",
+        "empirical_multiplier_vs_design": 1.0
+      },
+      "entry_spread_first3": [
+        {
+          "seq": 0,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 1,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 2,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        }
+      ],
+      "entry_spread_max_m": 0.0,
+      "floodplain_exchange": {
+        "region": "dilate1(sgc_width>0) 之外（全 run 同一几何，r2a 作对照参照区）",
+        "peak_seq": 20,
+        "outside_wet_km2_peak": 167.64,
+        "end_seq": 20,
+        "outside_wet_km2_end": 167.64,
+        "delta_km2_end_minus_peak": 0.0
+      },
+      "volume_check": {
+        "delivered_int_qin_m3": 97285858.835,
+        "stored_delta_v_m3": 95106962.4,
+        "residual_m3": 2178896.435,
+        "stored_frac_of_delivered": 0.9776,
+        "note": "residual ≈ ∫Qout（含南缘 FREE 出流），只记数不作门"
+      }
+    },
+    "r4": {
+      "run": "r4",
+      "name": "scen_r4_dual_sgc_tide_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r4_dual_sgc_tide_200m_sv6h",
+      "status": "ok",
+      "n_frames": 21,
+      "qin_reconciliation": {
+        "int_qin_res_mass_m3": 269319031.835,
+        "bdy_source": "run_local",
+        "bdy_path": "outputs/jiulong/2024-09-yagi/scen_r4_dual_sgc_tide_200m_sv6h/inflow.bdy",
+        "n_edges_qvar": 1,
+        "int_qin_bdy_design_m3": 97286688.0,
+        "int_qin_bdy_segment_m3": 97286688.0,
+        "rel_dev_vs_segment": 1.768303,
+        "gate_1pct": "FAIL",
+        "empirical_multiplier_vs_design": 2.7683
+      },
+      "entry_spread_first3": [
+        {
+          "seq": 0,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 1,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        },
+        {
+          "seq": 2,
+          "entry_wet": false,
+          "max_dist_cells": 0,
+          "max_dist_m": 0.0
+        }
+      ],
+      "entry_spread_max_m": 0.0,
+      "floodplain_exchange": {
+        "region": "dilate1(sgc_width>0) 之外（全 run 同一几何，r2a 作对照参照区）",
+        "peak_seq": 17,
+        "outside_wet_km2_peak": 210.32,
+        "end_seq": 20,
+        "outside_wet_km2_end": 197.04,
+        "delta_km2_end_minus_peak": -13.28
+      },
+      "volume_check": {
+        "delivered_int_qin_m3": 269319031.835,
+        "stored_delta_v_m3": 109146962.4,
+        "residual_m3": 160172069.435,
+        "stored_frac_of_delivered": 0.4053,
+        "note": "residual ≈ ∫Qout（含南缘 FREE 出流），只记数不作门"
+      }
+    }
+  },
+  "entry_spread_comparison": {
+    "r2a_vs_r2": "无刻槽对照 vs SGC：前 3 帧入口湿距最大值对比",
+    "r2a_max_m": null,
+    "r2_max_m": 0.0
+  },
+  "caveats": [
+    "∫Qin 对账门 ≤1% 只验证边界驱动被模型如量摄入，不代表淹没结果正确。",
+    "对账以 run 局部 inflow.bdy 为准；若 run 间局部副本版本不同，其 ∫Qin 差异含驱动力差异，不全是地形/河道效应。",
+    "入口扩散只在湿格连通体内传播；入口格未湿时记 entry_wet=false、距离 0。",
+    "洪泛区交换用同一河道参照区几何（含无刻槽 r2a），仅作 run 间可比证据。",
+    "本审计不是独立验证；S1 仅灾前/退水两景趋势参照（ADR-0010）。"
+  ]
+}

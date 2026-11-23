@@ -1,0 +1,175 @@
+{
+  "script": "scripts/stage6/validate_jiulong_inundation.py",
+  "generated_utc": "2026-11-22T14:08:23+00:00",
+  "purpose": "久隆淹没 S1 遥感验证（灾前常水 CSI/POD/FAR + 退水方向趋势对照）",
+  "evidence_level": "E2/WEAK（S1 两景趋势参照；G17 下限；非独立验证通过门）",
+  "not_a_gate": true,
+  "flood_obs_available": false,
+  "flood_obs_note": "洪峰期无 S1 过境：仅 09-05（灾前）与 09-17（退水后）两景，均为趋势参照，无洪中事件观测（ADR-0010）",
+  "grid": {
+    "shape": [
+      152,
+      182
+    ],
+    "cellsize_m": 200.0,
+    "transform_source": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h/results/res.max"
+  },
+  "method": {
+    "reprojection": "rasterio reproject + Resampling.average，src_nodata=255 → 水体占比",
+    "obs_constwater": "占比 > 0.12 且 cover > 0.5 且非海",
+    "model_wet": "res.max depth > 0.05 m，剔除海面",
+    "recession": "模型 frame_series 末 3 帧湿面积差符号 vs S1 常水面积变化方向；同向 = PASS"
+  },
+  "s1_scenes": {
+    "pre": {
+      "path": "data/processed/s1_water/jiulong_20240905T105022_water20m.tif",
+      "sha256": "76d0ce69bf70b615fa8070ba1554fd983cb9780b850bf1f68471797f08790cc9",
+      "scene_utc": "2024-09-05T10:50:22",
+      "role": "灾前常水（CSI/POD/FAR 观测侧）",
+      "constwater_km2": 27.04
+    },
+    "post": {
+      "path": "data/processed/s1_water/jiulong_20240917T105023_water20m.tif",
+      "sha256": "3ce3abfb25216ba6eb079992ab4c5b5ae01a17d571d61ecf94b3272e3f4c76b2",
+      "scene_utc": "2024-09-17T10:50:23",
+      "role": "退水后（趋势参照）",
+      "constwater_km2": 20.04
+    },
+    "constwater_delta_km2": -7.0,
+    "direction": "receding"
+  },
+  "baseline_reference": {
+    "csi": 0.018,
+    "pod": 0.387,
+    "far": 0.982,
+    "source": "diagnostics/jiulong/root_cause_report.md §3.4（S1 对照复用，未重算）"
+  },
+  "runs": {
+    "r0": {
+      "run": "r0",
+      "name": "scen_free_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+      "status": "ok",
+      "model": {
+        "wet_area_km2_res_max": 264.44,
+        "wet_cells": 6611
+      },
+      "vs_s1_prevent_constwater": {
+        "hits": 272,
+        "false_alarm_cells": 6339,
+        "misses": 404,
+        "csi": 0.0388,
+        "pod": 0.4024,
+        "far": 0.9589
+      },
+      "recession": {
+        "n_frames": 21,
+        "tail_delta_km2": 2.6,
+        "direction": "expanding",
+        "s1_constwater_delta_km2": -7.0,
+        "s1_direction": "receding",
+        "direction_match": false,
+        "pass_same_direction": false
+      }
+    },
+    "r1": {
+      "run": "r1",
+      "name": "scen_r1_netrain_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r1_netrain_200m_sv6h",
+      "status": "missing"
+    },
+    "r2a": {
+      "run": "r2a",
+      "name": "scen_r2a_inflow_nocut_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2a_inflow_nocut_200m_sv6h",
+      "status": "missing"
+    },
+    "r2": {
+      "run": "r2",
+      "name": "scen_r2_inflow_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2_inflow_sgc_200m_sv6h",
+      "status": "ok",
+      "model": {
+        "wet_area_km2_res_max": 54.96,
+        "wet_cells": 1374
+      },
+      "vs_s1_prevent_constwater": {
+        "hits": 103,
+        "false_alarm_cells": 1271,
+        "misses": 573,
+        "csi": 0.0529,
+        "pod": 0.1524,
+        "far": 0.925
+      },
+      "recession": {
+        "n_frames": 21,
+        "tail_delta_km2": 1.24,
+        "direction": "expanding",
+        "s1_constwater_delta_km2": -7.0,
+        "s1_direction": "receding",
+        "direction_match": false,
+        "pass_same_direction": false
+      }
+    },
+    "r3": {
+      "run": "r3",
+      "name": "scen_r3_dual_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h",
+      "status": "ok",
+      "model": {
+        "wet_area_km2_res_max": 217.52,
+        "wet_cells": 5438
+      },
+      "vs_s1_prevent_constwater": {
+        "hits": 252,
+        "false_alarm_cells": 5186,
+        "misses": 424,
+        "csi": 0.043,
+        "pod": 0.3728,
+        "far": 0.9537
+      },
+      "recession": {
+        "n_frames": 21,
+        "tail_delta_km2": 2.08,
+        "direction": "expanding",
+        "s1_constwater_delta_km2": -7.0,
+        "s1_direction": "receding",
+        "direction_match": false,
+        "pass_same_direction": false
+      }
+    },
+    "r4": {
+      "run": "r4",
+      "name": "scen_r4_dual_sgc_tide_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r4_dual_sgc_tide_200m_sv6h",
+      "status": "ok",
+      "model": {
+        "wet_area_km2_res_max": 260.08,
+        "wet_cells": 6502
+      },
+      "vs_s1_prevent_constwater": {
+        "hits": 305,
+        "false_alarm_cells": 6197,
+        "misses": 371,
+        "csi": 0.0444,
+        "pod": 0.4512,
+        "far": 0.9531
+      },
+      "recession": {
+        "n_frames": 21,
+        "tail_delta_km2": -3.64,
+        "direction": "receding",
+        "s1_constwater_delta_km2": -7.0,
+        "s1_direction": "receding",
+        "direction_match": true,
+        "pass_same_direction": true
+      }
+    }
+  },
+  "caveats": [
+    "洪峰期无 S1 过境：仅 09-05（灾前）与 09-17（退水后）两景，均为趋势参照，无洪中事件观测（ADR-0010）",
+    "CSI/POD/FAR 对灾前常水掩膜计算：模型未编码常水（河/塘/海已剔海面但河塘仍在），FAR 系统性偏高。",
+    "S1 固定阈值检出为下限（风浪/入射角/植被漏提，G17）；09-17 检出低于 09-05 常水。",
+    "退水方向同向仅是趋势一致性参照，不是验证通过门；质量门 PASS ≠ 预测正确（ADR-0006）。"
+  ]
+}

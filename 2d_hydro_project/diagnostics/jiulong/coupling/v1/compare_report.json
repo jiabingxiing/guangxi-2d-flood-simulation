@@ -1,0 +1,239 @@
+{
+  "script": "scripts/stage6/compare_jiulong_scenarios.py",
+  "generated_utc": "2026-11-22T14:08:15+00:00",
+  "purpose": "R0–R4 双驱动对照因子差分与归因（只读诊断）",
+  "evidence_level": "E3（情景级模拟对照，非实测；质量门 PASS ≠ 预测正确）",
+  "not_independent_validation": true,
+  "grid": {
+    "ncols": 182,
+    "nrows": 152,
+    "cellsize_m": 200.0,
+    "cell_area_m2": 40000.0,
+    "xllcorner": 246911.3,
+    "yllcorner": 2425993.0,
+    "nodata": -9999.0,
+    "source": "r0 res.max 头"
+  },
+  "method": {
+    "wet_threshold_m": 0.05,
+    "patches": "8 邻域连通域（patch_analysis.connected_components），计数全部",
+    "river_adjacent": "湿格 ∧ dilate1(sgc_width>0) 占湿格比例（numpy 平移膨胀）",
+    "recession": "frame_series 末 3 帧湿面积差符号（同 wet_metrics）",
+    "mass_parse": "scripts/stage3/run_jiulong_dual_forcing.parse_res_mass（trapezoid ∫Qin/∫Qout）"
+  },
+  "s1_recession_reference": {
+    "delta_km2": -5.84,
+    "window": "09-10→09-17",
+    "direction": "receding",
+    "source": "ADR-0010 诊断（diagnostics/jiulong/root_cause_report.md §3.4 降级口径）"
+  },
+  "runs": {
+    "r0": {
+      "run": "r0",
+      "name": "scen_free_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+      "desc": "既有基线（四边 FREE，毛雨，只读引用）",
+      "inflow_on": false,
+      "status": "ok",
+      "verify_schema": "v1_legacy",
+      "recomputed_fields": [
+        "frame_series",
+        "mass"
+      ],
+      "wet_area_km2": 263.24,
+      "n_patches": 1102,
+      "largest_patch_km2": 39.6,
+      "n_frames": 21,
+      "recession_tail_delta_km2": 2.6,
+      "recession_direction": "expanding",
+      "river_adjacent_wet_frac": 0.0637,
+      "mass": {
+        "v0_m3": 0.0,
+        "v_end_m3": 158115603.2123,
+        "v_rain_m3": 175389760.0,
+        "v_in_integrated_m3": 0.0,
+        "v_out_integrated_m3": 17188340.4,
+        "e_mass": 0.0004892896124608354
+      },
+      "gate_1e-3": "PASS"
+    },
+    "r1": {
+      "run": "r1",
+      "name": "scen_r1_netrain_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r1_netrain_200m_sv6h",
+      "desc": "A2 净雨（ERA5+GA 离线降级，35d 暖启动 + 饱和深渗 Ks）无来水；v1 因 rain 文件首行缺换行作废",
+      "inflow_on": false,
+      "status": "missing"
+    },
+    "r2a": {
+      "run": "r2a",
+      "name": "scen_r2a_inflow_nocut_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2a_inflow_nocut_200m_sv6h",
+      "desc": "原地形无刻槽 + 纯河道来水对照（护栏 1）；v4 = QVAR 单格段口径（v1-v3 作废）",
+      "inflow_on": true,
+      "status": "missing"
+    },
+    "r2": {
+      "run": "r2",
+      "name": "scen_r2_inflow_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r2_inflow_sgc_200m_sv6h",
+      "desc": "河道来水 + SGC 亚网格河道",
+      "inflow_on": true,
+      "status": "ok",
+      "verify_schema": "absent",
+      "recomputed_fields": [
+        "wet_area",
+        "frame_series",
+        "mass"
+      ],
+      "wet_area_km2": 54.96,
+      "n_patches": 1,
+      "largest_patch_km2": 54.96,
+      "n_frames": 21,
+      "recession_tail_delta_km2": 1.24,
+      "recession_direction": "expanding",
+      "river_adjacent_wet_frac": 0.2147,
+      "mass": {
+        "v0_m3": 37.6,
+        "v_end_m3": 97286000.0,
+        "v_rain_m3": 0.0,
+        "v_in_integrated_m3": 97285858.835,
+        "v_out_integrated_m3": 0.0,
+        "e_mass": 1.0645427940494156e-06
+      },
+      "gate_1e-3": "PASS"
+    },
+    "r3": {
+      "run": "r3",
+      "name": "scen_r3_dual_sgc_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h",
+      "desc": "净雨 + 河道来水复合主情景",
+      "inflow_on": true,
+      "status": "ok",
+      "verify_schema": "v2",
+      "recomputed_fields": [],
+      "wet_area_km2": 217.52,
+      "n_patches": 1366,
+      "largest_patch_km2": 57.56,
+      "n_frames": 21,
+      "recession_tail_delta_km2": 2.08,
+      "recession_direction": "expanding",
+      "river_adjacent_wet_frac": 0.0844,
+      "mass": {
+        "v0_m3": 37.6,
+        "v_end_m3": 151210000.0,
+        "v_rain_m3": 56103000.0,
+        "v_in_integrated_m3": 97285858.835,
+        "v_out_integrated_m3": 2180068.2,
+        "e_mass": 7.639177458402562e-06
+      },
+      "gate_1e-3": "PASS"
+    },
+    "r4": {
+      "run": "r4",
+      "name": "scen_r4_dual_sgc_tide_200m_sv6h",
+      "run_dir": "outputs/jiulong/2024-09-yagi/scen_r4_dual_sgc_tide_200m_sv6h",
+      "desc": "R3 + 感潮 HVAR（合成潮包络零相位口径）",
+      "inflow_on": true,
+      "status": "ok",
+      "verify_schema": "v2",
+      "recomputed_fields": [],
+      "wet_area_km2": 260.08,
+      "n_patches": 1337,
+      "largest_patch_km2": 60.04,
+      "n_frames": 21,
+      "recession_tail_delta_km2": -3.64,
+      "recession_direction": "receding",
+      "river_adjacent_wet_frac": 0.0887,
+      "mass": {
+        "v0_m3": 37.6,
+        "v_end_m3": 165250000.0,
+        "v_rain_m3": 56103000.0,
+        "v_in_integrated_m3": 269319031.835,
+        "v_out_integrated_m3": 134918681.39999998,
+        "e_mass": 0.0776019526851547
+      },
+      "gate_1e-3": "FAIL"
+    }
+  },
+  "factor_table": [
+    {
+      "pair": "r1_vs_r0",
+      "factor": "r1 相对基线 R0",
+      "available": false,
+      "delta_wet_area_km2": null,
+      "delta_n_patches": null,
+      "delta_v_in_integrated_m3": null
+    },
+    {
+      "pair": "r2a_vs_r0",
+      "factor": "r2a 相对基线 R0",
+      "available": false,
+      "delta_wet_area_km2": null,
+      "delta_n_patches": null,
+      "delta_v_in_integrated_m3": null
+    },
+    {
+      "pair": "r2_vs_r0",
+      "factor": "r2 相对基线 R0",
+      "available": true,
+      "delta_wet_area_km2": -208.28,
+      "delta_n_patches": -1101.0,
+      "delta_v_in_integrated_m3": 97285858.835
+    },
+    {
+      "pair": "r3_vs_r0",
+      "factor": "r3 相对基线 R0",
+      "available": true,
+      "delta_wet_area_km2": -45.72,
+      "delta_n_patches": 264.0,
+      "delta_v_in_integrated_m3": 97285858.835
+    },
+    {
+      "pair": "r4_vs_r0",
+      "factor": "r4 相对基线 R0",
+      "available": true,
+      "delta_wet_area_km2": -3.16,
+      "delta_n_patches": 235.0,
+      "delta_v_in_integrated_m3": 269319031.835
+    },
+    {
+      "pair": "r3_vs_r1",
+      "factor": "inflow 效应（含 SGC；r1 无刻槽）",
+      "available": false,
+      "delta_wet_area_km2": null,
+      "delta_n_patches": null,
+      "delta_v_in_integrated_m3": null
+    },
+    {
+      "pair": "r3_vs_r2",
+      "factor": "rain 效应（净雨）",
+      "available": true,
+      "delta_wet_area_km2": 162.56,
+      "delta_n_patches": 1365.0,
+      "delta_v_in_integrated_m3": 0.0
+    },
+    {
+      "pair": "r2_vs_r2a",
+      "factor": "channel(SGC) 效应（纯河道刻槽）",
+      "available": false,
+      "delta_wet_area_km2": null,
+      "delta_n_patches": null,
+      "delta_v_in_integrated_m3": null
+    },
+    {
+      "pair": "r3_vs_r0",
+      "factor": "total（复合主情景 vs 基线）",
+      "available": true,
+      "delta_wet_area_km2": -45.72,
+      "delta_n_patches": 264.0,
+      "delta_v_in_integrated_m3": 97285858.835
+    }
+  ],
+  "caveats": [
+    "本报表是情景间差分归因，不是独立验证；S1 仅灾前（09-05）与退水后（09-17）两景，无洪峰过境（ADR-0010）。",
+    "r3−r1 同时引入来水与 SGC 河道（r1 无刻槽），纯河道效应用 r2−r2a 读数。",
+    "R0 verify.json 为旧 schema，缺 mass/frame_series 时由 res.mass/res.max 按同口径复算并标注。",
+    "退水方向只判符号（末 3 帧湿面积差），不判速率；与 S1 参照 −5.84 km² 同向仅作趋势一致性参照。"
+  ]
+}
