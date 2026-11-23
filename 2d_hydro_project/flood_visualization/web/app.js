@@ -1549,15 +1549,31 @@
     var legends = catalog.legends || {};
     clearNode(dom.legendBody);
 
+    // 研究性产品 run（role=product）：图例用产品自身 color_scale（离散分级/类名），
+    // 不套水深色带；非水深语义由 statistics.product.not_depth_note 声明
+    var runObj = state.runObj || {};
+    var productClasses = (runObj.role === 'product' && state.images &&
+      state.images.color_scale && state.images.color_scale.classes) || null;
+    if (productClasses && productClasses.length) {
+      var prodDoc = (state.statistics && state.statistics.product) || {};
+      var prodNote = prodDoc.not_depth_note || '';
+      if (state.images.color_scale.note) {
+        prodNote += (prodNote ? '；' : '') + state.images.color_scale.note;
+      }
+      dom.legendBody.appendChild(legendClasses(
+        runObj.label || '研究性产品', productClasses, prodNote));
+    }
+
     var depthClasses = (catalog.display && catalog.display.depth_classes) ||
       (state.images && state.images.color_scale && state.images.color_scale.classes) || [];
-    if (state.maxMode) {
+    if (state.maxMode && !runObj.role) {
       // 包络模式：时间帧层被隐藏，图例只显示“全程最大包络”，不与“当前帧”混称
       if (depthClasses.length) {
         dom.legendBody.appendChild(legendClasses('全程最大水深包络（m）', depthClasses,
           '模型自带 res.max 的全程最大值，含 6 h 采样间隙的子步瞬时峰值；非某一时刻，不能当作任一帧的深度'));
       }
-    } else if (state.layerState.flood && state.layerState.flood.visible && depthClasses.length) {
+    } else if (!runObj.role && state.layerState.flood && state.layerState.flood.visible &&
+      depthClasses.length) {
       dom.legendBody.appendChild(legendClasses('模拟水深（m）', depthClasses,
         (legends.depth && legends.depth.note) || ''));
     }
