@@ -1,0 +1,156 @@
+{
+  "generated_utc": "2026-11-22T13:21:03+00:00",
+  "script": "scripts/stage6/diagnose_jiulong_patch_attribution.py",
+  "run_tag": null,
+  "run_id": "scen_free_200m_sv6h",
+  "phase": "久隆斑块物理归因（计划 §4.1/§4.2 任务 1）",
+  "mode": "ADR-0004 公开数据降级、情景级、非业务预警",
+  "evidence_level": "E1（基于冻结的诊断快照与 run 产物派生）",
+  "no_double_counting": "派生层不含 res.mass，不进入 g15 质量门",
+  "read_only_declaration": "outputs/jiulong/** 只读；未调用 lisflood.exe；未修改 models/",
+  "patch_count": 1107,
+  "wet_cells": 6581,
+  "wet_area_km2": 263.24,
+  "largest_patch_area_km2": 37.4,
+  "matched_track_count": 1085,
+  "class_counts": {
+    "P01": 60,
+    "P02": 123,
+    "P03": 2,
+    "P04": 882,
+    "P05": 0,
+    "P06": 10,
+    "P07": 12,
+    "P08": 18
+  },
+  "class_area_km2": {
+    "P01": 7.84,
+    "P02": 141.68,
+    "P03": 1.28,
+    "P04": 107.92,
+    "P05": 0.0,
+    "P06": 0.6,
+    "P07": 2.96,
+    "P08": 0.96
+  },
+  "class_legend": {
+    "1": {
+      "class": "P01",
+      "name": "自然洼地蓄水",
+      "verdict": "preserve"
+    },
+    "2": {
+      "class": "P02",
+      "name": "地形数据异常",
+      "verdict": "repair_first"
+    },
+    "3": {
+      "class": "P03",
+      "name": "河网断裂积水",
+      "verdict": "preserve"
+    },
+    "4": {
+      "class": "P04",
+      "name": "局地降雨积水",
+      "verdict": "preserve"
+    },
+    "5": {
+      "class": "P05",
+      "name": "海面钳零",
+      "verdict": "preserve"
+    },
+    "6": {
+      "class": "P06",
+      "name": "数值薄水",
+      "verdict": "filter_eligible"
+    },
+    "7": {
+      "class": "P07",
+      "name": "边界异常",
+      "verdict": "preserve"
+    },
+    "8": {
+      "class": "P08",
+      "name": "地表排水受阻",
+      "verdict": "preserve"
+    }
+  },
+  "class_map_note": "0=非湿地；类别码 1..8=P01..P08；nodata 声明 255（数据中不出现）",
+  "class_support_conditions": {
+    "P01": [
+      "median_depth_m ≥ 0.10",
+      "terrain_edit_overlap == 0",
+      "HAND_m ≤ 5",
+      "flow_acc_cells ≥ 100"
+    ],
+    "P02": [
+      "dem_edit_frac ≥ 0.5",
+      "HAND_m ≤ 5",
+      "flow_acc_cells ≥ 100"
+    ],
+    "P03": [
+      "distance_to_river_m ≤ 1000",
+      "HAND_m ≤ 3",
+      "patch_area_km2 < 0.5×最大斑块"
+    ],
+    "P04": [
+      "median_depth_m ≥ 0.10",
+      "terrain_edit_overlap == 0",
+      "distance_to_river_m > 1000",
+      "flow_acc_cells < 100"
+    ],
+    "P05": [
+      "sea_frac ≥ 0.5",
+      "sea_frac ≥ 0.9",
+      "median_depth_m < 0.10",
+      "HAND_m ≤ 3"
+    ],
+    "P06": [
+      "median_depth_m < 0.10",
+      "persistence_frames < 3",
+      "terrain_edit_overlap == 0",
+      "distance_to_river_m > 1000"
+    ],
+    "P07": [
+      "touches_edge",
+      "terrain_edit_overlap == 0",
+      "flow_acc_cells < 100",
+      "distance_to_river_m > 1000"
+    ],
+    "P08": [
+      "terrain_edit_overlap == 0",
+      "flow_acc_cells < 100",
+      "distance_to_river_m > 1000",
+      "distance_to_drainage_m > 500"
+    ]
+  },
+  "thresholds": {
+    "wet_threshold_m": 0.05,
+    "saveint_s_actual": 21600.0,
+    "sea_frac_min": 0.5,
+    "dem_edit_frac_min": 0.5,
+    "p06_median_max_m": 0.1,
+    "p06_persistence_max_frames": 3,
+    "p03_dist_river_max_m": 1000.0,
+    "p03_hand_max_m": 3.0,
+    "p03_isolation_frac": 0.5,
+    "p01_hand_max_m": 5.0,
+    "p01_acc_min_cells": 100,
+    "drainage_acc_min_cells": 1250,
+    "p08_dist_drain_min_m": 500.0,
+    "river_densify_step_m": 50.0
+  },
+  "inputs_sha256": {
+    "dem.asc": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10",
+    "results/res.max": "ee46cf7b296d6754bb38b224397b2170f6f737b6f01c69d2b8b8058f1f32b57b",
+    "dem_artifact_map.tif": "390f2820189b85748edcf1af27d1627961e4149861879794133d0fe093b51171",
+    "patch_tracks.csv": "fec2c826169fe624c2645a93f85f4356e13f07e7dcf1352eaee5e5a83b3030f3",
+    "river_centerline.geojson": "d084721fdff689e82e0cfea36be96a7bb3fde77bde4ed9fa96992d6928f126dc"
+  },
+  "notes": [
+    "时间指标来自 patch_tracks.csv 的空间近似匹配（逐帧斑块质心 ≤1 格作桥梁）；未匹配记 -1、persistence=1，是诚实降级不是观测值",
+    "distance_to_drainage 为 drainage_mask（汇流累积 ≥1250 格或河道像元）的 BFS 距离派生值；S1 派生排水数据不可得",
+    "HAND/汇流累积为 Priority-Flood(+ε) 填洼后的派生诊断量，只用于归因",
+    "分类规则与置信度条件为预注册确定性规则；质量门 PASS 不等于预测正确"
+  ]
+}
