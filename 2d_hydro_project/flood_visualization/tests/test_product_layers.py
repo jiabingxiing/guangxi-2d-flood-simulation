@@ -54,6 +54,18 @@ def _write_product_tif(path: Path, arr: np.ndarray, nodata: float = -9999.0) -> 
         ds.write(data, 1)
 
 
+def _write_uint8_class_tif(path: Path, arr: np.ndarray, nodata: int = 255) -> None:
+    """uint8 类别码 GeoTIFF（patch_class 源数据口径：0 未归因 / 1..8 类 / 255 nodata）。"""
+    transform = Affine(100.0, 0, HEADER["xllcorner"], 0, -100.0,
+                       HEADER["yllcorner"] + HEADER["nrows"] * 100.0)
+    with rasterio.open(
+        path, "w", driver="GTiff", height=arr.shape[0], width=arr.shape[1],
+        count=1, dtype="uint8", crs=CRS, transform=transform,
+        compress="deflate", nodata=nodata,
+    ) as ds:
+        ds.write(arr.astype("uint8"), 1)
+
+
 def _product(tmp_path: Path, **overrides) -> ProductLayerConfig:
     tif = tmp_path / "first_wet_h.tif"
     arr = np.full((6, 6), np.nan, dtype="float32")
@@ -75,7 +87,7 @@ def _product(tmp_path: Path, **overrides) -> ProductLayerConfig:
 
 def test_style_for_kinds_and_reject():
     for kind in ("fat_first_wet_h", "fat_exceed_h", "fat_duration_h",
-                 "ensemble_probability", "class_map"):
+                 "ensemble_probability", "class_map", "patch_class"):
         style = style_for(kind, threshold_m=0.3)
         assert style.depth_classes and style.value_semantics
         assert style.not_depth_note
@@ -83,6 +95,72 @@ def test_style_for_kinds_and_reject():
 
     with pytest.raises(PaintError):
         style_for("no_such_kind")
+
+
+def test_style_for_patch_class_discrete_palette():
+    """patch_class：8 类离散色带，类名 P01–P08 与 ADR-0021/class_legend 一致。"""
+    style = style_for("patch_class")
+    assert len(style.depth_classes) == 8
+    assert style.unit == "class"
+    assert style.transparent_below == pytest.approx(0.5)
+    expected = ("P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08")
+    for cls, code in zip(style.depth_classes, expected, strict=True):
+        assert cls.label.startswith(code)
+        assert cls.color.startswith("#") and len(cls.color) == 7
+        assert len(cls.rgb) == 3
+    # 类别码互斥无缝：0.5–1.5…7.5–8.5
+    assert style.depth_classes[0].min_m == pytest.approx(0.5)
+    assert style.depth_classes[-1].max_m == pytest.approx(8.5)
+    assert "不是水深" in style.not_depth_note
+    colors = {c.color for c in style.depth_classes}
+    assert len(colors) == 8  # 每类独立颜色
+
+
+def test_read_product_array_uint8_class_codes(tmp_path):
+    """uint8 类别码源：码值 1..8 与 0 保真；255 nodata → NaN（透明）。"""
+    grid = _grid()
+    tif = tmp_path / "patch_class.tif"
+    arr = np.zeros((6, 6), dtype="uint8")
+    arr[0, 0] = 255  # nodata
+    arr[1, 1] = 2
+    arr[2, 2] = 8
+    arr[3, 3] = 0  # 未归因（合法码，靠 transparent_below 透明）
+    _write_uint8_class_tif(tif, arr)
+    out = read_product_array(tif, grid)
+    assert out.shape == (6, 6)
+    assert np.isnan(out[0, 0])  # 255 → NaN → 透明
+    assert out[1, 1] == pytest.approx(2.0)  # 类别码保真
+    assert out[2, 2] == pytest.approx(8.0)
+    assert out[3, 3] == pytest.approx(0.0)  # 0 保真，渲染时透明
+
+
+def test_product_stats_doc_patch_class_breakdown(tmp_path):
+    """patch_class 统计：class_breakdown 逐类计数/面积，code 0 不进分级。"""
+    grid = _grid()
+    tif = tmp_path / "patch_class.tif"
+    arr = np.zeros((6, 6), dtype="uint8")
+    arr[0:2, :] = 2  # 12 格 P02
+    arr[2:4, 0:3] = 1  # 6 格 P01
+    arr[4:6, 3:6] = 8  # 6 格 P08
+    arr[0, 0] = 255  # nodata → NaN
+    _write_uint8_class_tif(tif, arr)
+    arr = read_product_array(tif, grid)  # 与管线一致：255 → NaN
+    style = style_for("patch_class")
+    doc = product_stats_doc(
+        case_id="jiulong", product_id="product_jiulong_patch_class", arr=arr,
+        cell_area_m2=grid.cell_area_m2, thresholds=[0.05, 0.3, 0.5, 1.0], style=style,
+    )
+    breakdown = {c["label"].split()[0]: c for c in doc["product"]["class_breakdown"]}
+    assert breakdown["P01"]["cells"] == 6
+    assert breakdown["P02"]["cells"] == 11  # 12 格中 1 格被 arr[0,0]=255 覆盖
+    assert breakdown["P08"]["cells"] == 6
+    assert breakdown["P05"]["cells"] == 0
+    assert breakdown["P01"]["area_km2"] == pytest.approx(6 * grid.cell_area_m2 / 1e6)
+    assert sum(c["cells"] for c in breakdown.values()) == 23
+    vs = doc["product"]["value_summary"]
+    assert vs["valid_cells"] == 35  # 36 - 1 nodata
+    assert vs["rendered_cells"] == 23  # 类别码 1..8；0（12 格）不进分级
+    assert "不是水深" in doc["product"]["not_depth_note"]
 
 
 def test_read_product_array_identity_and_nodata(tmp_path):
@@ -230,3 +308,53 @@ def test_process_product_layer_class_map(tmp_path):
     assert stats_doc["product"]["value_summary"]["valid_cells"] == 36
     rendered = sum(c["cells"] for c in stats_doc["product"]["class_breakdown"])
     assert rendered == 24  # code 1/2/4 像元；code 0 不进分级
+
+
+def test_process_product_layer_patch_class(tmp_path):
+    """久隆成因分类图层：uint8 源端到端 → 单帧伪 run + 8 类离散图例/逐类计数。"""
+    tif = tmp_path / "patch_class_map.tif"
+    arr = np.zeros((6, 6), dtype="uint8")  # 0 = 未归因（合法码）
+    arr[0:3, :] = 4  # P04：18 格
+    arr[3:6, 0:2] = 2  # P02：6 格
+    arr[3:6, 5] = 1  # P01：3 格
+    arr[3, 3] = 255  # nodata：1 格
+    _write_uint8_class_tif(tif, arr)
+    product = ProductLayerConfig(
+        product_id="product_jiulong_patch_class", label="成因分类", kind="patch_class",
+        source_tif=tif, save_interval_s=21600.0,
+        audit="data/catalog/jiulong_patch_attribution_layer.json", adr="ADR-0021 §3",
+        notes="仅供成因查询，不是水深",
+    )
+    config, case = _mini_config(tmp_path, product)
+    grid = _grid()
+    tr = Transformer.from_crs(grid.crs, "EPSG:4326", always_xy=True)
+    split = paint_mod.choose_split(grid, tr.transform, tol_px=paint_mod.DEFAULT_TOL_PX)
+    bundle = tmp_path / "bundle_pc"
+    bundle.mkdir()
+    entry, _per = _process_product_layer(
+        config, case, product, grid, tr,
+        split["split_rows"], split["split_cols"], bundle, skip_tiles=False,
+    )
+    assert entry["role"] == "product" and entry["frame_count"] == 1
+    assert entry["product"]["kind"] == "patch_class"
+    assert entry["product"]["adr"] == "ADR-0021 §3"
+    stats_doc = __import__("json").loads(
+        (bundle / entry["statistics"]).read_text(encoding="utf-8"))
+    counts = {c["label"].split()[0]: c["cells"]
+              for c in stats_doc["product"]["class_breakdown"]}
+    assert counts == {
+        "P01": 3, "P02": 6, "P03": 0, "P04": 18, "P05": 0,
+        "P06": 0, "P07": 0, "P08": 0,
+    }
+    # nodata（255）→ NaN：有效像元 = 36 - 1；code 0（8 格）有效但不进分级
+    assert stats_doc["product"]["value_summary"]["valid_cells"] == 35
+    assert stats_doc["product"]["value_summary"]["rendered_cells"] == 27
+    # images.json 图例：8 个离散类别条目（类名 + 独立颜色），transparent_below 0.5
+    images_doc = __import__("json").loads(
+        (bundle / "frames" / "guigang" / entry["run_id"] / "images.json").read_text(encoding="utf-8"))
+    classes = images_doc["color_scale"]["classes"]
+    assert len(classes) == 8
+    assert [c["label"].split()[0] for c in classes] == [f"P{i:02d}" for i in range(1, 9)]
+    assert len({c["color"] for c in classes}) == 8
+    assert images_doc["color_scale"]["transparent_below_m"] == pytest.approx(0.5)
+    assert images_doc["product"]["kind"] == "patch_class"

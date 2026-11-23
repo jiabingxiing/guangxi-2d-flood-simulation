@@ -42,6 +42,17 @@ _CLASS_MAP_CLASSES = (
     (2.5, 3.5, "#b0b0b0", "3 edge-band（边界环带）"),
     (3.5, 4.5, "#7a0177", "4 disagreement（水量再分配）"),
 )
+# 久隆斑块成因 8 类离散色（ADR-0021 §1；类别名与 class_summary.json class_legend 一字不差）
+_PATCH_CLASS_CLASSES = (
+    (0.5, 1.5, "#2c7fb8", "P01 自然洼地蓄水"),
+    (1.5, 2.5, "#d73027", "P02 地形数据异常"),
+    (2.5, 3.5, "#238b45", "P03 河网断裂积水"),
+    (3.5, 4.5, "#f9a648", "P04 局地降雨积水"),
+    (4.5, 5.5, "#969696", "P05 海面钳零"),
+    (5.5, 6.5, "#a6cee3", "P06 数值薄水"),
+    (6.5, 7.5, "#8c510a", "P07 边界异常"),
+    (7.5, 8.5, "#dd3497", "P08 地表排水受阻"),
+)
 
 VALUE_SEMANTICS = {
     "fat_first_wet_h": "值=首湿时刻（自模拟起点小时；wd>0.05 m 首次超过的 6 h 快照）；NaN=事件全程未湿",
@@ -50,6 +61,9 @@ VALUE_SEMANTICS = {
     "ensemble_probability": "值=集合成员超阈占比 P∈[0,1]（成员=PASS run 清单）；"
     "情景集合枚举，非年超越概率/预报概率",
     "class_map": "值=差分归类码：0 未湿 / 1 river-origin / 2 pluvial-origin / 3 edge-band / 4 disagreement",
+    "patch_class": "值=久隆斑块成因类别码 1..8（P01 自然洼地蓄水 / P02 地形数据异常 / "
+    "P03 河网断裂积水 / P04 局地降雨积水 / P05 海面钳零 / P06 数值薄水 / P07 边界异常 / "
+    "P08 地表排水受阻）；0 未湿/未归因、255 nodata → 透明",
 }
 
 
@@ -106,6 +120,13 @@ def style_for(kind: str, *, threshold_m: float | None = None) -> ProductStyle:
             transparent_below=0.5,  # 类别码 0（未湿）透明
             depth_classes=_classes_from(_CLASS_MAP_CLASSES, ""),
             not_depth_note="阈值为类别码边界，不是水深；差分归因不得称精确成因分解",
+        )
+    if kind == "patch_class":
+        return ProductStyle(
+            kind=kind, unit="class", value_semantics=VALUE_SEMANTICS[kind],
+            transparent_below=0.5,  # 类别码 0（未归因）透明；255 nodata 读取时已转 NaN
+            depth_classes=_classes_from(_PATCH_CLASS_CLASSES, ""),
+            not_depth_note="阈值为类别码边界，不是水深；成因分类仅供查询（ADR-0021），不得用于资产判据",
         )
     raise PaintError(f"未知产品图层类型：{kind!r}；允许 {sorted(VALUE_SEMANTICS)}")
 

@@ -1,0 +1,113 @@
+{
+  "generated_utc": "2026-11-22T15:02:40+00:00",
+  "adr": "ADR-0021 §3",
+  "product_id": "product_jiulong_patch_class",
+  "case_id": "jiulong",
+  "source_tif": "diagnostics/jiulong/patch_attribution/patch_class_map.tif",
+  "source_sha256": "2d83f840f3562f46f020ed00bf48f4b7434a44d4096b41d86622887381d55da3",
+  "source_bytes": 5175,
+  "source_run": "scen_free_200m_sv6h",
+  "evidence": {
+    "class_summary": "diagnostics/jiulong/patch_attribution/class_summary.json（父项目，只读）",
+    "script": "scripts/stage6/diagnose_jiulong_patch_attribution.py（父项目）",
+    "evidence_level": "E1（基于冻结的诊断快照与 run 产物派生）",
+    "mode": "ADR-0004 公开数据降级、情景级、非业务预警"
+  },
+  "grid": {
+    "rows": 152,
+    "cols": 182,
+    "crs": "EPSG:32649",
+    "transform": [
+      200.0,
+      0.0,
+      246911.3,
+      0.0,
+      -200.0,
+      2456393.0
+    ],
+    "cell_size_m": 200.0,
+    "grid_alignment_note": "与 jiulong 案例 200 m 模型网格逐像元一致（transform 相同）"
+  },
+  "class_legend": {
+    "1": {
+      "class": "P01",
+      "name": "自然洼地蓄水",
+      "verdict": "preserve"
+    },
+    "2": {
+      "class": "P02",
+      "name": "地形数据异常",
+      "verdict": "repair_first"
+    },
+    "3": {
+      "class": "P03",
+      "name": "河网断裂积水",
+      "verdict": "preserve"
+    },
+    "4": {
+      "class": "P04",
+      "name": "局地降雨积水",
+      "verdict": "preserve"
+    },
+    "5": {
+      "class": "P05",
+      "name": "海面钳零",
+      "verdict": "preserve"
+    },
+    "6": {
+      "class": "P06",
+      "name": "数值薄水",
+      "verdict": "filter_eligible"
+    },
+    "7": {
+      "class": "P07",
+      "name": "边界异常",
+      "verdict": "preserve"
+    },
+    "8": {
+      "class": "P08",
+      "name": "地表排水受阻",
+      "verdict": "preserve"
+    }
+  },
+  "class_counts_cells": {
+    "P01": 196,
+    "P02": 3542,
+    "P03": 32,
+    "P04": 2698,
+    "P05": 0,
+    "P06": 15,
+    "P07": 74,
+    "P08": 24
+  },
+  "class_area_km2": {
+    "P01": 7.84,
+    "P02": 141.68,
+    "P03": 1.28,
+    "P04": 107.92,
+    "P05": 0.0,
+    "P06": 0.6,
+    "P07": 2.96,
+    "P08": 0.96
+  },
+  "class_counts_patches": {
+    "P01": 60,
+    "P02": 123,
+    "P03": 2,
+    "P04": 882,
+    "P05": 0,
+    "P06": 10,
+    "P07": 12,
+    "P08": 18
+  },
+  "wet_cells": 6581,
+  "unattributed_cells_code0": 21083,
+  "nodata_code": 255,
+  "nodata_cells": 0,
+  "notes": [
+    "0=未归因像元（理论应为 0：全湿像元须分类）；255=nodata（非湿像元声明码，数据中不出现）",
+    "wet_cells 6,581 与 class_summary.json wet_cells 一致；P05 海面钳零 0 像元为预期（海钳零格水深恒 0）",
+    "分类为 E1 诊断快照派生（diagnose_jiulong_patch_attribution），仅供成因查询，不是水深，不得用于资产判据",
+    "本审计件落盘于 floodviz 子项目 data/catalog/（父项目 data/catalog/ 按只读约定不写入）"
+  ]
+}

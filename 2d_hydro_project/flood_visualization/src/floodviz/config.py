@@ -58,12 +58,12 @@ class RunConfig:
 
 @dataclass(frozen=True)
 class ProductLayerConfig:
-    """Phase H 研究性产品图层（单帧伪 run，role=product；ADR-0015~0018）。
+    """Phase H 研究性产品图层（单帧伪 run，role=product；ADR-0015~0018/0021）。
 
-    source 指向 `outputs/products/**` 的 GeoTIFF；kind 决定配色与值语义
-    （fat_first_wet_h / fat_exceed_h / fat_duration_h / ensemble_probability /
-    class_map）。source_run/mass_gate_run_path 用于质量门引用；audit 指向
-    `data/catalog/**` 审计件（项目相对），作为产品证据链。
+    source 指向 `outputs/products/**` 或父项目 `diagnostics/**` 的 GeoTIFF；kind 决定
+    配色与值语义（fat_first_wet_h / fat_exceed_h / fat_duration_h /
+    ensemble_probability / class_map / patch_class）。source_run/mass_gate_run_path
+    用于质量门引用；audit 指向 `data/catalog/**` 审计件（项目相对），作为产品证据链。
     """
 
     product_id: str
@@ -263,7 +263,7 @@ def _load_case(path: Path, parent_root: Path) -> CaseConfig:
         raise ConfigError(f"{where}.default_run_id={default_run_id!r} 不在 runs 中")
     product_layers: list[ProductLayerConfig] = []
     known_kinds = {"fat_first_wet_h", "fat_exceed_h", "fat_duration_h",
-                   "ensemble_probability", "class_map"}
+                   "ensemble_probability", "class_map", "patch_class"}
     for pl_raw in raw.get("product_layers") or []:
         pid = str(_require(pl_raw, "product_id", f"{where}.product_layers"))
         kind = str(_require(pl_raw, "kind", f"{where}.product_layers.{pid}"))

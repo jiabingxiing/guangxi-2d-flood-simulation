@@ -818,7 +818,8 @@ def _process_product_layer(
     if not product.source_tif.is_file():
         raise PipelineError(
             f"{case.case_id}/{product.product_id}: 产品 GeoTIFF 不存在 {product.source_tif}；"
-            "先运行父项目 make_fat_products.py / make_genesis_attribution.py / ensemble_probability.py"
+            "先运行父项目 make_fat_products.py / make_genesis_attribution.py / "
+            "ensemble_probability.py / diagnose_jiulong_patch_attribution.py"
         )
     arr = products_mod.read_product_array(product.source_tif, grid)
     if arr.shape != (grid.rows, grid.cols):
