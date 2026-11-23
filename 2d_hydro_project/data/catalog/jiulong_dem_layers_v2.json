@@ -1,0 +1,79 @@
+{
+  "case": "jiulong",
+  "contract_version": "jiulong_dem_layers_v2",
+  "parent_contract": "jiulong_dem_layers_v1",
+  "generated_utc": "2026-11-22T18:06:51+00:00",
+  "run_tag": null,
+  "dry_run": false,
+  "grid": {
+    "ncols": 182.0,
+    "nrows": 152.0,
+    "xllcorner": 246911.32191043225,
+    "north": 2456463.9495928804,
+    "cellsize": 200.0
+  },
+  "negative_repair": {
+    "mode": "glo30",
+    "reason_code": 3,
+    "reason_name": "glo30_datum_aligned_fusion",
+    "glo30_source": "data/raw/dem_source/glo30",
+    "datum_offset": {
+      "offset_m": -22.766258239746094,
+      "n_overlap_cells": 19368,
+      "mad_m": 1.9564990997314453,
+      "p10_m": -27.767991065979004,
+      "p90_m": -19.359520149230956
+    },
+    "ledger": {
+      "fused_cells": 7838,
+      "fill_volume_m3": -3011.0658281445503,
+      "dig_volume_m3": -6566.734057366848,
+      "max_raise_m": 8.526845932006836,
+      "still_negative_cells": 7498,
+      "method": "replace with datum-aligned GLO-30 (median offset, land overlap)",
+      "fused_area_km2": 313.52,
+      "cap_reference": {
+        "peak_storage_m3": 235525323.5822,
+        "source": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/results/res.mass",
+        "cap_fraction": 0.03
+      },
+      "cap_fraction_used": 1.3e-05,
+      "cap_ok": true
+    },
+    "bfs_superseded": true,
+    "note": "计划 §4.4：弃「纯 BFS 邻域平推」，改 GLO-30 基准对齐融合；体积记账并受 3% 上限约束"
+  },
+  "residual_unresolved_negatives": {
+    "cells": 0,
+    "area_km2": 0.0
+  },
+  "masks": {
+    "land_cells": 27637,
+    "sea_cells": 27,
+    "nodata_cells": 0,
+    "sea_rule": "S1 常水 ∩ 域边 4 连通（G16 口径，与 v1 sea_msl_anchor 同源）",
+    "note": "三掩膜独立落盘；海面负值锚 0 为 ADR-0004 模型内部基准约定（显式携带，非隐式钳零）"
+  },
+  "hydro_policy": {
+    "name": "micro_depression_only",
+    "max_raise_m": 1.0,
+    "max_cells": 9,
+    "max_raise_evidence": "dem_artifact_qa_jiulong.json axis_profiles.*.adjacent_jump.p95 = 1.0 m",
+    "max_cells_evidence": "200 m 网格 9 格 = 0.36 km²；局部性上限，非物理阈值",
+    "registered_before_processing": true
+  },
+  "contract_checks": {
+    "s1_water_never_raised_in_hydro": true,
+    "hydraulic_equals_repaired": true,
+    "fusion_only_on_unresolved_negatives": true
+  },
+  "outputs": {
+    "DEM_RAW": "data/interim/jiulong/dem_layers_v2/dem_raw/dem_raw.tif",
+    "DEM_REPAIRED": "data/interim/jiulong/dem_layers_v2/dem_repaired/dem_repaired.tif",
+    "DEM_HYDRO": "data/interim/jiulong/dem_layers_v2/dem_hydro/dem_hydro.tif",
+    "DEM_HYDRAULIC": "data/interim/jiulong/dem_layers_v2/dem_hydraulic/dem_hydraulic.tif",
+    "mask_land": "data/interim/jiulong/dem_layers_v2/masks/land_mask.tif",
+    "mask_sea": "data/interim/jiulong/dem_layers_v2/masks/sea_mask.tif",
+    "mask_nodata": "data/interim/jiulong/dem_layers_v2/masks/nodata_mask.tif"
+  }
+}
