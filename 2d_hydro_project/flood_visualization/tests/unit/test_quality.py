@@ -42,7 +42,7 @@ def test_real_overall_counts(parent_root: Path) -> None:
     """质量复核表通过数随真实 DEM run 注册更新。"""
     result = load_mass_gate(parent_root, PASS_RUN)
     assert result["counts"]["FAIL"] == 0
-    assert result["counts"]["FAIL-EXPLAINED"] == 3
+    assert result["counts"]["FAIL-EXPLAINED"] == 4  # r4 感潮 HVAR 入表（2026-11-22，g15 政策 FE）
     assert result["counts"]["PASS"] >= 36
 
 
@@ -158,6 +158,6 @@ def test_merge_quality_keeps_case_fields_and_counts(parent_root: Path) -> None:
     assert merged["mass_gate"] == "PASS"
     assert merged["e_mass"] == pytest.approx(0.0004893)
     assert merged["mass_counts_overall"]["FAIL"] == 0
-    assert merged["mass_counts_overall"]["FAIL-EXPLAINED"] == 3
+    assert merged["mass_counts_overall"]["FAIL-EXPLAINED"] == 4  # r4 感潮 HVAR 入表（2026-11-22）
     assert merged["mass_counts_overall"]["PASS"] >= 36
     assert merged["validation_status"] == "x"
