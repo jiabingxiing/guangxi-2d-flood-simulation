@@ -1,0 +1,315 @@
+{
+  "generated_utc": "2026-11-22T14:58:52+00:00",
+  "dry_run": false,
+  "case_count": 8,
+  "cases": {
+    "s1": {
+      "case": "s1",
+      "e_mass": 0.00029562559934395244,
+      "v_in_m3": 0.0,
+      "v_out_m3": 172.2,
+      "v_end_m3": 2227.4,
+      "qout_last": 0.047,
+      "wet": {
+        "pit_volume_frame40_m3": 93.7,
+        "pit_volume_end_m3": 131.4,
+        "end_frame_seq": 60
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 0.00029562559934395244,
+          "limit": 0.001,
+          "pass": true
+        },
+        "pit_depth_min_ge_1m": {
+          "value": 0.14000000059604645,
+          "limit": 1.0,
+          "pass": false
+        },
+        "pit_volume_drift_le_5pct": {
+          "value": 0.402347888798702,
+          "limit": 0.05,
+          "pass": false
+        }
+      },
+      "run": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": false
+    },
+    "s2": {
+      "case": "s2",
+      "e_mass": 0.00022346896264405962,
+      "v_in_m3": 0.0,
+      "v_out_m3": 1947.3,
+      "v_end_m3": 1652.4,
+      "qout_last": 1.0,
+      "wet": {
+        "wet_thresh_m": 0.001,
+        "wet_total_end": 2400,
+        "wet_total_end_005m": 0
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 0.00022346896264405962,
+          "limit": 0.001,
+          "pass": true
+        },
+        "wet_fraction_ge_80pct": {
+          "value": 1.0,
+          "limit": 0.8,
+          "pass": true
+        },
+        "upper_dry_blocks_le_20": {
+          "value": 0,
+          "limit": 20,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": 0,
+        "timed_out": false
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true
+    },
+    "s3": {
+      "case": "s3",
+      "e_mass": 6.499999999990299e-05,
+      "v_in_m3": 17997.5,
+      "v_out_m3": 16693.8,
+      "v_end_m3": 1305.0,
+      "qout_last": 5.0,
+      "wet": {
+        "wet_total": 40,
+        "off_channel": 0
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 6.499999999990299e-05,
+          "limit": 0.001,
+          "pass": true
+        },
+        "qout_within_20pct_of_qin": {
+          "value": 5.0,
+          "limit": 5.0,
+          "pass": true
+        },
+        "off_channel_wet_le_2": {
+          "value": 0,
+          "limit": 2,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    },
+    "s4": {
+      "case": "s4",
+      "e_mass": 6.760416666673387e-05,
+      "v_in_m3": 143980.0,
+      "v_out_m3": 136195.9,
+      "v_end_m3": 7794.4,
+      "qout_last": 39.995,
+      "wet": {
+        "wet_total": 274,
+        "off_channel": 234
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 6.760416666673387e-05,
+          "limit": 0.001,
+          "pass": true
+        },
+        "off_channel_wet_gt_100": {
+          "value": 234,
+          "limit": 100,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    },
+    "s5": {
+      "case": "s5",
+      "e_mass": 6.916666666671113e-05,
+      "v_in_m3": 35995.0,
+      "v_out_m3": 30866.5,
+      "v_end_m3": 5131.0,
+      "qout_last": 10.0,
+      "wet": {
+        "wet_total": 140,
+        "off_channel": 22
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 6.916666666671113e-05,
+          "limit": 0.001,
+          "pass": true
+        },
+        "qout_within_10pct_of_qin": {
+          "value": 10.0,
+          "limit": 10.0,
+          "pass": true
+        },
+        "stem_no_dry_break": {
+          "value": 0,
+          "limit": 0,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    },
+    "s6": {
+      "case": "s6",
+      "e_mass": 0.00014070883931098656,
+      "v_in_m3": 70800.0,
+      "v_out_m3": 70556.1,
+      "v_end_m3": 253.9,
+      "qout_last": 0.155,
+      "wet": {
+        "first": {
+          "seq": 0,
+          "t_s": 0.0,
+          "wet_total": 1,
+          "off_channel": 0
+        },
+        "peak": 160,
+        "end": 0
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 0.00014070883931098656,
+          "limit": 0.001,
+          "pass": true
+        },
+        "end_wet_le_20pct_of_peak": {
+          "value": 0.0,
+          "limit": 0.2,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    },
+    "s7": {
+      "case": "s7",
+      "e_mass": 0.00043821209465381246,
+      "v_in_m3": 1140.0,
+      "v_out_m3": 0.0,
+      "v_end_m3": 1140.5,
+      "qout_last": 0.0,
+      "wet": {
+        "frames": 61,
+        "end_wet_total": 0,
+        "max_depth_m": 0.141
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 0.00043821209465381246,
+          "limit": 0.001,
+          "pass": true
+        },
+        "res_max_finite": {
+          "value": true,
+          "limit": true,
+          "pass": true
+        },
+        "end_wet_le_5": {
+          "value": 0,
+          "limit": 5,
+          "pass": true
+        },
+        "max_depth_le_1p5m": {
+          "value": 0.14100000262260437,
+          "limit": 1.5,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    },
+    "s8": {
+      "case": "s8",
+      "e_mass": 2.795424778407936e-05,
+      "v_in_m3": 341077.0,
+      "v_out_m3": 58145.7,
+      "v_end_m3": 282921.7,
+      "qout_last": 2.749,
+      "wet": {
+        "band_wet_resmax": 300,
+        "band_wet_end": 300,
+        "wet_total_end": 2400
+      },
+      "criteria": {
+        "e_mass_le_1e-3": {
+          "value": 2.795424778407936e-05,
+          "limit": 0.001,
+          "pass": true
+        },
+        "south_band_wet_ge_50": {
+          "value": 300,
+          "limit": 50,
+          "pass": true
+        },
+        "res_max_finite": {
+          "value": true,
+          "limit": true,
+          "pass": true
+        }
+      },
+      "run": {
+        "exit": null,
+        "timed_out": false,
+        "reused": true
+      },
+      "fatal": [],
+      "sgc_ran_ok": true,
+      "pass": true,
+      "reused": true
+    }
+  },
+  "sgc_supported": true,
+  "overall_pass": false,
+  "note": "8 算例：s1 蓄水/s2 坡面/s3 输水/s4 漫溢/s5 汇合/s6 退水/s7 干湿/s8 边界水位；已有 results/res.mass 的 run 目录复用解析（reused=true），不重跑不覆盖；s5 先双 QVAR 序列（两条 N 行各 5 m³/s）试跑，被拒则回退单条全缘 QVAR（10 m³/s，inflow_mode=combined_fallback）；写盘 OSError 22 重试一次仍失败记 write_blocked；sgc_supported = 各 run 产出 res.mass 且 run.log 无致命错误；overall_pass = 8 算例判据全过；E_mass 口径同 g15；s8 HVAR 序列值为水面高程（DEM+水深）；判据按计划 §4.5 原样评估，如实记录不为过门调参"
+}
