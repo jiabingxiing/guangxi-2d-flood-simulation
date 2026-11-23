@@ -1,0 +1,112 @@
+{
+  "case": "jiulong",
+  "generated_utc": "2026-11-22T13:15:58+00:00",
+  "evidence_level": "E3（HydroRIVERS 公开河网 + S1 常水核验 + 水力几何先验，无实测断面）",
+  "main_riv_id": 41134077,
+  "centerline_source": "osm",
+  "osm_pbf_note": "OSM 本地全量抽取 china-261121.osm.pbf（用户提供），AOI 缓冲框 318 条水系",
+  "aoi_wgs84": [
+    108.55,
+    21.92,
+    108.9,
+    22.2
+  ],
+  "levels": {
+    "main_channel": "钦江干流（HydroRIVERS MAIN_RIV=41134077）",
+    "tributaries": "CATCH_SKM ≥ 20 km² 且与 AOI 相交（含排埠江/高塘江等候选，以相交结果为准）",
+    "drainage_ditches": "未纳入（无资料）",
+    "structures": "未纳入（无堤防/桥涵矢量；P08 归因时按缺资料限制处理）"
+  },
+  "centerline_nodes": 389,
+  "channel_cells_200m": 284,
+  "gaps_filled": 0,
+  "width": {
+    "samples": 130,
+    "measured_n": 54,
+    "width_mean_m": 112.5925925925926,
+    "width_median_m": 100.0,
+    "p90_m": 214.00000000000006
+  },
+  "width_used_m": 140.0,
+  "sgc": {
+    "chan_type": 1,
+    "n_manning": 0.03,
+    "r": 0.6233921074203601,
+    "p": 0.4,
+    "depth_at_ref_m": 4.5
+  },
+  "entry_cell": [
+    0,
+    156
+  ],
+  "dual_check": {
+    "method": "干流中心线 cell 与 S1 常水（2024-09-05）重合率；OSM 与 HydroRIVERS 干流 cell Jaccard",
+    "note": "见 audit；S1 仅灾前/退水后两景，作趋势核验",
+    "centerline_source": "osm",
+    "osm_hydrorivers_cell_jaccard": 0.17429193899782136,
+    "overlap_fraction": 0.3125,
+    "overlap_fraction_strict_0p5": 0.028846153846153848,
+    "threshold_water_fraction": 0.12,
+    "inland_channel_cells": 208
+  },
+  "topology_checks": {
+    "continuity": {
+      "segments": 283,
+      "breaks": 0,
+      "pass": true
+    },
+    "longitudinal_monotonic": {
+      "max_upstream_rise_m": 8.357000350952148,
+      "rise_gt_0p5_fraction": 0.22968197879858657,
+      "pass": false,
+      "note": "0.5 m 内视为 DEM 噪声；pass 阈值 3 m"
+    },
+    "tributary_junctions": {
+      "tributary_cells": 0,
+      "adjacent_cells": 0,
+      "pass": true
+    },
+    "artificial_cutoffs": {
+      "pass": true,
+      "verified": false,
+      "note": "无道路/工程矢量资料，未验证；留待水利资料或影像复核"
+    },
+    "inflow_alignment": {
+      "first_cell": [
+        0,
+        156
+      ],
+      "on_edge": true,
+      "entry_rc": [
+        0,
+        156
+      ],
+      "pass": true
+    },
+    "outlet_continuity": {
+      "last_cell": [
+        151,
+        24
+      ],
+      "reaches_edge_or_sea": true,
+      "pass": true
+    }
+  },
+  "uncertainties": [
+    "无实测水下地形/大断面：SGC 河床为水力几何先验（E3）",
+    "无堤防/桥涵结构层：P08 类斑块按缺资料限制处理",
+    "200 m 网格内河槽亚像元：中心线 cell 沿线地形存在局部倒坡（审计见 checks.longitudinal_monotonic）"
+  ],
+  "outputs": {
+    "river_centerline": "data/interim/jiulong/channel/river_centerline.geojson",
+    "tributaries": "data/interim/jiulong/channel/tributaries.geojson",
+    "river_network": "data/interim/jiulong/channel/river_network.geojson",
+    "sgc_width": "data/interim/jiulong/channel/sgc_width.asc",
+    "sgc_bank": "data/interim/jiulong/channel/sgc_bank.asc",
+    "river_topology": "data/interim/jiulong/channel/river_topology.json"
+  },
+  "source_sha256": {
+    "s1_water": "76d0ce69bf70b615fa8070ba1554fd983cb9780b850bf1f68471797f08790cc9",
+    "baseline_dem": "a6e05a793a31e85f9ba06826d6b376be399d986ed01fcbb8cccb75e835f0dd10"
+  }
+}

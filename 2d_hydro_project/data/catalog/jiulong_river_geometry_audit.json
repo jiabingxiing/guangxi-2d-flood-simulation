@@ -1,0 +1,61 @@
+{
+  "generated_utc": "2026-11-22T13:15:58+00:00",
+  "checks": {
+    "continuity": {
+      "segments": 283,
+      "breaks": 0,
+      "pass": true
+    },
+    "longitudinal_monotonic": {
+      "max_upstream_rise_m": 8.357000350952148,
+      "rise_gt_0p5_fraction": 0.22968197879858657,
+      "pass": false,
+      "note": "0.5 m 内视为 DEM 噪声；pass 阈值 3 m"
+    },
+    "tributary_junctions": {
+      "tributary_cells": 0,
+      "adjacent_cells": 0,
+      "pass": true
+    },
+    "artificial_cutoffs": {
+      "pass": true,
+      "verified": false,
+      "note": "无道路/工程矢量资料，未验证；留待水利资料或影像复核"
+    },
+    "inflow_alignment": {
+      "first_cell": [
+        0,
+        156
+      ],
+      "on_edge": true,
+      "entry_rc": [
+        0,
+        156
+      ],
+      "pass": true
+    },
+    "outlet_continuity": {
+      "last_cell": [
+        151,
+        24
+      ],
+      "reaches_edge_or_sea": true,
+      "pass": true
+    }
+  },
+  "width": {
+    "samples": 130,
+    "measured_n": 54,
+    "width_mean_m": 112.5925925925926,
+    "width_median_m": 100.0,
+    "p90_m": 214.00000000000006
+  },
+  "sgc_params": {
+    "chan_type": 1,
+    "n_manning": 0.03,
+    "r": 0.6233921074203601,
+    "p": 0.4,
+    "depth_at_ref_m": 4.5
+  },
+  "pass_all": false
+}

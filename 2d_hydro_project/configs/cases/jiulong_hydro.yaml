@@ -1,0 +1,62 @@
+# 久隆双驱动与耦合治理主配置（计划 §9.3；ADR-0019~0022）
+# 现状口径：公开数据降级链（2026-11-22 实测）——IMERG/CDS 凭证缺记 → ERA5 降级；
+# OSM 本地 PBF 可用（护栏 2 OSM+S1 双核验达成）；SGC 待 3 项小算例核验后启用。
+scenario:
+  name: jiulong_202409
+  event: typhoon_yagi_2024
+  resolution: 200                # SGC 核验通过则维持 200 m；失败才另启浅槽（ADR-0020）
+  historical_epoch: "2024-09"    # 严禁混入 2026 平陆运河通航后水位/地形
+  baseline_run: outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h  # R0 只读锚点
+
+rainfall:
+  source: era5_anchor_hourly     # 降级：IMERG V07 凭证缺记（恢复后切 imerg_v07）
+  reference_source: era5_land
+  temporal_resolution: 1h
+  infiltration: green_ampt_offline  # 离线 GA 净雨；饱和后深渗 Ks=3.5 mm/h
+  prevent_double_counting: true  # 净雨进 .rain 时 par 禁含 solver infiltration（组装断言）
+
+hydrology:
+  model: event_hydro_ga_scs      # 方案 B 降级实现：GA 产流 + SCS-UH 汇流（1 h）
+  volume_prior: gr4j_daily       # 事件体积缩放到 GR4J 日尺度先验（禁日均分 24 h 驱动）
+  timestep: 1h
+  initial_condition: green_ampt_warm_start_35d
+  output: q_timeseries           # qinjiang_event_5d.bdy（QVAR，值=Q/cellsize）
+
+river:
+  main_channel: qinjiang         # OSM 干流（china-261121 PBF）+ HydroRIVERS 链双源
+  channel_model: subgrid_channel # SGC_enable + SGCwidth/SGCbank（chan 1, n 0.03, p 0.4）
+  geometry_source: osm_s1_dual_check  # S1 2024-09-05 常水核验；无实测断面（E3 先验）
+  include_tributaries: true      # AOI 相交结果：CATCH_SKM≥20 km² 无命中（v1 记录限制）
+  width_used_m: 140              # S1 常水中位 100 m × 满槽因子 1.4（先验）
+  anti_distortion_guardrails:
+    require_nocut_control: true  # R2a 已列（原地形无刻槽对照）
+    max_shallow_cut_m: 5.0       # 仅 SGC 核验失败后才允许，另建浅槽流程
+    require_baseflow_s1_check: true
+
+boundary:
+  upstream: qvar                 # N 缘入域断面 cell（col≈156），段宽 3 格
+  downstream: free_slope         # S 缘 FREE 0.0005；R4 切 HVAR 合成潮（零相位口径）
+  coastal_tide: scenario_based   # tide.bdy 沿用 ztide 包络；TPXO/FES 待授权数据
+  lateral_boundary: closed_unless_physical_outflow  # E/W 闭合（分水岭）
+
+experiments:                     # 冻结同一 2024-09 窗/DEM/数值参数，单变量切换
+  r0: {rain: era5_raw, inflow: 0, channel: none, tide: none, ref: "基线 scen_free_200m_sv6h"}
+  r1: {rain: net_ga, inflow: 0, channel: none, tide: none}
+  r2a: {rain: off, inflow: qvar, channel: none, tide: none}
+  r2: {rain: off, inflow: qvar, channel: sgc, tide: none}
+  r3: {rain: net_ga, inflow: qvar, channel: sgc, tide: none}
+  r4: {rain: net_ga, inflow: qvar, channel: sgc, tide: hvar_ztide}
+
+numerics:
+  solver: acceleration
+  dt_s: 5.0
+  saveint_s: 21600               # 6 h 帧（诊断口径）
+  mass_check: true               # E_mass ≤ 1e-3（g15 口径）
+
+governance:
+  preserve_existing_runs: true
+  unique_run_tag: true
+  audit_all_inputs: true
+  patches:
+    attribution: P01-P08         # diagnostics/jiulong/patch_attribution/
+    display_qc: only_derived_layers  # 派生层禁 res.mass；不进 g15
