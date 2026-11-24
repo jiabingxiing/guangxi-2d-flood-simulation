@@ -61,12 +61,44 @@ scope: project
 - `adr/ADR-0017-垂直基准独立核证.md` —— ATL13/GSW 探针口径（offset 有界估计中位数±IQR、不写死 datum_offset、覆盖门 ≥10 轨、留出复核集）
 - `adr/ADR-0018-概率化与联合阈值探索.md` —— 集合超越概率（质量门强制过滤成员）+ Copula 联合阈值（三族 AIC、信息扩散边缘、Bootstrap CI；探索性红线、禁业务告警）
 - 新脚本：`stage6/{make_fat_products,make_genesis_attribution,ensemble_probability,copula_thresholds}.py`、`stage3/{build_inflow_hydrology,verify_inflow_vs_glofas,prep_imerg_rain,icesat2_datum_probe}.py`、run 队列 `stage3/queue_phase_h_runs.sh`
-- 产品：`outputs/products/<site>/fat/`（61 PASS run 全覆盖 + 站址暴露三元组表）、`outputs/products/guigang/genesis/`（origin_class.tif）、`outputs/products/ningming/probability/`（集合超越概率）
+- 产品：`outputs/products/<site>/fat/`（66 PASS run 全覆盖 + 站址暴露三元组表）、`outputs/products/guigang/genesis/`（origin_class.tif）、`outputs/products/ningming/probability/`（集合超越概率）
 - 证据：`data/catalog/{fat_products_audit,guigang_genesis_rules,guigang_genesis_products,guigang_inflow_priors,inflow_audit,inflow_glofas_check,imerg_prep_audit,gx_datum_probe,ningming_probability,copula_thresholds_report,mmf_rainfall_evaluation}.json`
 
-## 决策记录（`adr/`，ADR-0001~0018）
+## 久隆双驱动重构与耦合治理（Phase I，2026-11-22~23；ADR-0019~0022，计划 `plans/code_artifact.md`）
 
-0001 工程结构与 Python 环境 ｜ 0002 三案例 CRS 基线 ｜ 0003 模型获取路径 ｜ 0004 公开数据降级模式与垂直基准 ｜ 0005 变电站整体化范围调整 ｜ 0006 结果完整性更正与质量门口径 ｜ 0007 执行状态与降级边界 ｜ 0008 模型定版与桥涵结构使用限制 ｜ 0009 宁明河槽刻蚀停用与地形分层显示 ｜ 0010 久隆直接降雨模型治理规范 ｜ 0011 贵港水动力推演零散伪影治理与驱动重构 ｜ 0012 贵港水力约束河槽重构 ｜ 0013 贵港组合驱动归因实验 ｜ 0014 贵港排水连通治理（诊断探针） ｜ 0015 学术借鉴与改进产品口径 ｜ 0016 上游来水产汇流与降雨多源评估 ｜ 0017 垂直基准独立核证 ｜ 0018 概率化与联合阈值探索
+- `adr/ADR-0019-久隆钦江上游来水与水文驱动.md` —— 小时级 Q(t) 与防重复计量分账（A1 外集水区入 QVAR，A2 域内 GA 净雨入 .rain，杜绝双重计算）
+- `adr/ADR-0020-久隆河道亚网格与洪泛区耦合.md` —— SGC 亚网格河道表达（矩形全格/亚格，水力几何先验，四道护栏，免除人工刻蚀破坏地形）
+- `adr/ADR-0021-久隆斑块物理归因与展示质控.md` —— P01–P08 八类成因逐斑块物理判定与连通性门控（打破一刀切滤波天花板）
+- `adr/ADR-0022-久隆历史工况与边界重建.md` —— 2024 历史时空一致性、海陆/潮位边界闭合与 GLO-30 负值区融合
+- 新脚本：`stage3/{build_jiulong_catchments,build_jiulong_inflow,prepare_jiulong_channel,prepare_jiulong_dem_layers_v2,prepare_jiulong_rainfall,run_jiulong_dual_forcing,validate_jiulong_hydrograph}.py`、`stage6/{audit_jiulong_coupling,compare_jiulong_scenarios,diagnose_jiulong_patch_attribution,validate_jiulong_inundation}.py`
+- 产品与主情景：`outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h/`（生产主情景，floodviz 默认）、`data/catalog/{jiulong_inflow_audit,channel_geometry_audit,jiulong_coupling_audit,jiulong_dem_layers_v2,jiulong_patch_attribution}.json`
+
+## 决策记录（`adr/`，ADR-0001~0022 全量索引）
+
+| ADR | 标题 | 核心决策要点 |
+|---|---|---|
+| [ADR-0001](adr/ADR-0001-工程结构与Python环境.md) | 工程结构与 Python 环境 | uv 包管理、阿里云镜像、平级 docs/scripts/tests 目录 |
+| [ADR-0002](adr/ADR-0002-三案例CRS基线.md) | 三案例 CRS 基线 | 宁明/贵港 EPSG:32649、久隆 EPSG:32649（统一 UTM Zone 49N） |
+| [ADR-0003](adr/ADR-0003-模型获取路径.md) | 模型获取路径 | LISFLOOD-FP 8.1.0 官方源码 Windows 本地构建 |
+| [ADR-0004](adr/ADR-0004-公开数据降级模式与垂直基准策略.md) | 公开数据降级模式与垂直基准 | 情景级模拟定位，禁作资产级告警，垂直基准未闭合 |
+| [ADR-0005](adr/ADR-0005-变电站整体化范围调整.md) | 变电站整体化范围调整 | AOI 包含站址与周边汇水拓扑，禁局部小切块 |
+| [ADR-0006](adr/ADR-0006-结果完整性更正与质量门口径.md) | 结果完整性更正与质量门口径 | 质量门 PASS 仅代表水量闭合，FAIL-EXPLAINED 明示 |
+| [ADR-0007](adr/ADR-0007-执行状态与降级边界.md) | 执行状态与降级边界 | 统一执行状态 SSOT，标注降级限制 |
+| [ADR-0008](adr/ADR-0008-模型定版与桥涵结构使用限制.md) | 模型定版与桥涵结构限制 | LISFLOOD-FP 8.1.0 SHA-256 冻结，禁未独立验证的桥涵 |
+| [ADR-0009](adr/ADR-0009-宁明河槽刻蚀停用与地形分层显示.md) | 宁明河槽刻蚀停用与地形分层 | 停用 244 m 下切人工刻蚀，真实 DEM 输入 |
+| [ADR-0010](adr/ADR-0010-久隆直接降雨模型治理规范.md) | 久隆直接降雨模型治理规范 | 200 m 生产基线、四层 DEM 契约、display_qc 派生标记 |
+| [ADR-0011](adr/ADR-0011-贵港水动力推演零散伪影治理与驱动重构.md) | 贵港零散伪影治理与驱动重构 | 识别离散积水根因，明确常水与外洪界限 |
+| [ADR-0012](adr/ADR-0012-贵港水力约束河槽重构.md) | 贵港水力约束河槽重构 | 水力几何先验 + 圆滑梯形刻蚀，三层验证 |
+| [ADR-0013](adr/ADR-0013-贵港组合驱动归因实验.md) | 贵港组合驱动归因实验 | 2×2 因子归因设计、GA 物理净雨 +48 h 时基口径 |
+| [ADR-0014](adr/ADR-0014-贵港排水连通治理.md) | 贵港排水连通治理 | DEM 约束下垂直/水平双轨诊断探针、priority-flood 种子传播树 |
+| [ADR-0015](adr/ADR-0015-学术借鉴与改进产品口径.md) | 学术借鉴与改进产品口径 | FAT 三档情景阈值、成因归因四分支规则、集合概率成员过滤 |
+| [ADR-0016](adr/ADR-0016-上游来水产汇流与降雨多源评估.md) | 上游来水产汇流与降雨评估 | GR4J 产汇流预注册、GloFAS 对照通道、MMF 协议 |
+| [ADR-0017](adr/ADR-0017-垂直基准独立核证.md) | 垂直基准独立核证 | ICESat-2 ATL13 / GSW 水面高程探针与有界偏差评估 |
+| [ADR-0018](adr/ADR-0018-概率化与联合阈值探索.md) | 概率化与联合阈值探索 | 集合超越概率、Copula 联合阈值、学术探索红线 |
+| [ADR-0019](adr/ADR-0019-久隆钦江上游来水与水文驱动.md) | 久隆钦江上游来水与驱动 | A1/A2 防重复计量分账、GA+SCS-UH 事件水文模型、小时级 Q(t) |
+| [ADR-0020](adr/ADR-0020-久隆河道亚网格与洪泛区耦合.md) | 久隆河道亚网格与洪泛区耦合 | SGC 亚网格河槽表达、四道护栏、常水基流体检、免除人工刻蚀 |
+| [ADR-0021](adr/ADR-0021-久隆斑块物理归因与展示质控.md) | 久隆斑块物理归因与展示质控 | P01–P08 八类成因逐斑块物理归因、连通性/深坑双门控 |
+| [ADR-0022](adr/ADR-0022-久隆历史工况与边界重建.md) | 久隆历史工况与边界重建 | 2024 历史时空一致性、E/W 分水岭闭合、GLO-30 负值区基准融合 |
 
 ## 相关文档（不在本目录）
 

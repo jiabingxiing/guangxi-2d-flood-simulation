@@ -1,8 +1,15 @@
+---
+doc_type: explanation
+status: active
+topic: jiulong-dual-forcing-implementation-plan
+canonical: true
+scope: project
+---
+
 # 广西二维洪涝模拟项目详细改进计划（久隆钦江双驱动重构与离散水点全链条治理）
 
-
 > **编制日期**：2026-11-22
-、不覆盖已有 `res.mass`、独立 `RUN_TAG`、通过 `run_manifest` 全链路追溯）。
+> **执行约束**：已获批实施；遵循 ADR-0010/0019~0022 口径（不覆盖已有 `res.mass`、独立 `RUN_TAG`、通过 `run_manifest` 全链路追溯）。
 
 ---
 
