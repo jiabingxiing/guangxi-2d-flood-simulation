@@ -11,24 +11,23 @@ time_zone: "Asia/Shanghai"
 time_origin: "2024-09-05T00:00:00+08:00"
 origin_status: relative_only_candidate
 origin_note: "旧 meta 无规范 t0；该起点来自父项目脚本构造（2024-09-05 00:00 北京时间），仅作显示用；核对冻结雨量/边界/代码哈希前不写入正式时间基准"
-default_run_id: scen_free_200m_sv6h
+default_run_id: scen_r3_dual_sgc_200m_sv6h
 
 sites:
   - {name: "久隆500kV站", lon: 108.7161, lat: 22.0638, label: "站址（精确坐标待业务确认）"}
 
-# 分层口径（ADR-0010）：
+# 分层口径（ADR-0010 / ADR-0020）：
 #   raw 层   = 模型原始输出，可一键切回，是唯一有物理意义的层；
 #   display_qc 层 = 只读展示派生层，带 not_physical_recalculation=true，不具物理意义。
-# 默认层按 ADR-0010 第 2 条取 200 m 生产基线 raw（方案 A）。
-# display_qc 待用户确认（计划 §9.3 第 3 条）后才会成为默认层。
+# 默认层已升级为 R3 净雨 + 钦江来水双驱动主情景（ADR-0020，用户批准实施计划）。
 runs:
   - run_id: scen_free_200m_sv6h
-    label: "200 m 生产基线（T+0–120 h，默认）"
-    role: default
+    label: "200 m 旧生产基线（纯雨驱动对照，T+0–120 h）"
+    role: baseline
     source: "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h"
     save_interval_s: 21600
     simulation_duration_s: 432000
-    notes: "200 m 网格自由出流；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）。ADR-0010 方案 A 生产治理基线；湿面积 263.24 km²"
+    notes: "200 m 网格自由出流；雨驱动；海域像元已从淹没统计剔除；河槽未刻蚀（钦江亚像元）。ADR-0010 方案 A 历史基线对照；湿面积 263.24 km²"
   - run_id: scen_free_200m_sv6h_recession
     label: "扩展退水情景（T+0–312 h）"
     role: scenario
@@ -66,12 +65,12 @@ runs:
     simulation_duration_s: 432000
     notes: "SGC_enable 亚网格河道（宽 140 m=S1 常水中位×1.4 先验，满槽深 4.5 m 水力几何先验，不改写地形）；rain off + QVAR。三项小算例核验通过（输水/漫溢/退水）。质量门 PASS（E_mass 1.1e-6）；湿面积 54.96 km²；与 R2a 差 −3.8 km²（河槽集中输水）。床面为先验（E3，无实测断面）"
   - run_id: scen_r3_dual_sgc_200m_sv6h
-    label: "R3 净雨 + 河道来水双驱动（主情景，T+0–120 h）"
-    role: scenario
+    label: "R3 净雨 + 河道来水双驱动（生产主情景，T+0–120 h，默认）"
+    role: default
     source: "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h"
     save_interval_s: 21600
     simulation_duration_s: 432000
-    notes: "双驱动主情景：A2 GA 净雨 50.7 mm + A1 钦江 QVAR（97 Mm³）+ SGC 河道；E/W 缘闭合分水岭。质量门 PASS（E_mass 7.6e-6）；湿面积 217.52 km²；∫Qin 97.3 Mm³ 与 bdy 理论值闭合 9e-6。因子差分（compare v2）：来水 +30.0 km²/碎斑 −74（沿河集中）、净雨 +162.6 km²。R4 感潮变体 FAIL-EXPLAINED（HVAR 边界质量增益，G13 同病）不入包"
+    notes: "双驱动主情景（默认）：A2 GA 净雨 50.7 mm + A1 钦江 QVAR（97 Mm³）+ SGC 河道；E/W 缘闭合分水岭。质量门 PASS（E_mass 7.6e-6）；湿面积 217.52 km²；∫Qin 97.3 Mm³ 与 bdy 理论值闭合 9e-6。因子差分（compare v2）：来水 +30.0 km²/碎斑 −74（沿河集中）、净雨 +162.6 km²。R4 感潮变体 FAIL-EXPLAINED（HVAR 边界质量增益，G13 同病）不入包"
   - run_id: scen_r3_dual_sgc_rec13d_200m_sv6h
     label: "R3 双驱动 13 d 退水窗（M6 验证，T+0–312 h）"
     role: scenario

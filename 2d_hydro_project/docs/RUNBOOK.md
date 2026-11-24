@@ -8,7 +8,7 @@ scope: project
 
 # RUNBOOK：二维水动力情景回算操作手册（降级模式，阶段 6 雏形）
 
-更新：2026-10-27 ｜ 适用：`2d_hydro_project`（LISFLOOD-FP 8.1 MinGW 构建，公开数据降级模式 ADR-0004；模型/结构使用边界见 ADR-0008）
+更新：2026-11-24 ｜ 适用：`2d_hydro_project`（LISFLOOD-FP 8.1 MinGW 构建，公开数据降级模式 ADR-0004；模型/结构使用边界见 ADR-0008）
 
 ## 0. 前置条件
 
@@ -71,13 +71,31 @@ uv run python scripts/stage3/grid_sensitivity.py --case guigang --res 30 --tag b
 
 注意：`grid_sensitivity.py` 自动注入 `RUN_TAG`（目录后缀 `_<tag>`），不触碰首轮基线；被中断的目录须改名 `_interrupted` 隔离后才能重跑（`prep()` 拒绝覆盖）。
 
+### 1.3 久隆双驱动与学术成果驱动工具（Phase H/I 新增）
+
+```bash
+# 久隆双驱动驱动链与实跑（ADR-0019/0020）：
+uv run python scripts/stage3/build_jiulong_catchments.py         # A1 汇水区与面雨量
+uv run python scripts/stage3/build_jiulong_inflow.py             # 小时级 Q(t) 与 A1/A2 分账
+uv run python scripts/stage3/prepare_jiulong_channel.py          # SGC 亚网格河槽与拓扑核验
+uv run python scripts/stage3/run_jiulong_dual_forcing.py --case r3 # R3 主情景实跑
+uv run python scripts/stage6/audit_jiulong_coupling.py           # 耦合守恒与退水审计
+uv run python scripts/stage6/diagnose_jiulong_patch_attribution.py # P01–P08 斑块成因归因
+
+# 学术成果驱动产品生成（Phase H，ADR-0015~0018）：
+uv run python scripts/stage6/make_fat_products.py                # 全量 66 PASS run FAT/历时 GeoTIFF
+uv run python scripts/stage6/make_genesis_attribution.py         # 贵港成因空间归因图
+uv run python scripts/stage6/ensemble_probability.py             # 宁明集合超越概率
+uv run python scripts/stage6/copula_thresholds.py               # Copula 联合阈值与 Bootstrap CI
+```
+
 ## 2. 质量门（每个 run 必查）
 
 - **河槽模式（2026-10-28 起）**：宁明 `--channel {off,watermask,centerline}` 默认 `off`；非 off 模式在 prep 末尾过 `dem_channel_audit` 门（距常水>250 m >20% 或最大下切>30 m 即 FAIL）。既有 19 个 run 全判 FAIL，见 `data/catalog/dem_channel_audit.json` 与 ADR-0009。
 - **E_mass（终稿 13.2）**= |Ve−V0−Vrain−(∫Qin−∫Qout)dt| / max(V0+Vrain+∫Qin,1) ≤ 1e-3；
   工具 `scripts/stage3/g15_mass_recheck.py`（自动扫描全部有效 run）。
 - HFIX/HVAR 海（潮）边界情景超 1e-3 记 **FAIL-EXPLAINED**（G13 常湿激波质量增益），**不计入通过数**；不再使用 N/A-HFIX。
-- 当前全表：**43 PASS、3 FAIL-EXPLAINED（久隆 z05/z10/ztide）、0 FAIL**（46 run，含复现/延长/等宽/30 m/100 m 重跑 run）。权威值以 `data/catalog/mass_recheck_g15.json` 为准。
+- 当前全表：**66 PASS、4 FAIL-EXPLAINED（久隆 z05/z10/ztide/r4）、0 FAIL**（70 个 run）。权威值以 `data/catalog/mass_recheck_g15.json` 为准。
 - 运行秒退（exit −1）优先查 run.log：多为时刻序列非递增（雨/潮写入已加断言防护）。
 
 ## 3. 已固化的三个坑（勿回退）

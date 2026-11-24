@@ -8,8 +8,10 @@
   fig4_jiulong_robust.png  久隆五情景稳健性（面积条形 + 站址水深恒定线）
   fig5_ningming_heatmap.png 宁明 CSI 敏感性热力图（Q×糙率）
   fig6_summary_table.png   三案例成效汇总表
+  fig7_jiulong_dual_forcing.png 久隆 R0–R3 双驱动对照四联图
   anim_ningming.gif        宁明淹没演化（6h/帧）
   anim_guigang.gif         贵港淹没演化（12h/帧）
+  anim_jiulong.gif         久隆双驱动淹没演化（6h/帧）
 运行：uv run --with matplotlib python scripts/stage6/make_viz.py
 """
 from __future__ import annotations
@@ -55,7 +57,7 @@ def site_xy(lon, lat, epsg):
 RUNS = {
     "ningming": {"dir": PROJ / "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
                  "epsg": 32648, "site": ("宁明县城站", 107.0719, 22.1403)},
-    "jiulong": {"dir": PROJ / "outputs/jiulong/2024-09-yagi/scen_free_200m",
+    "jiulong": {"dir": PROJ / "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h",
                 "epsg": 32649, "site": ("久隆500kV站", 108.7161, 22.0638),
                 "sea_mask": PROJ / "outputs/jiulong/2024-09-yagi/scen_free_200m/sea_mask.npy"},
     "guigang": {"dir": PROJ / "outputs/guigang/2024-09-yagi/scen_yagi_q11500_200m",
@@ -63,10 +65,10 @@ RUNS = {
 }
 SITE_INFO = {
     "ningming": "站址±2格最大水深 10.3 m\n(约100m邻域口径, ADR-0006)",
-    "jiulong": "站址±2格最大水深 0.55 m\n(像元中心 0.008 m 基本不积水)",
+    "jiulong": "R3双驱动 站址±2格 0.55 m\n(像元中心 0.008 m 基本不积水)",
     "guigang": "市区站址像元最大水深 10.5 m\n(±200m 口径 r200)",
 }
-TITLES = {"ningming": "宁明 · 2026-08 台风紫檀", "jiulong": "久隆 · 2024-09 台风摩羯",
+TITLES = {"ningming": "宁明 · 2026-08 台风紫檀", "jiulong": "久隆 · 2024-09 双驱动主情景(R3)",
           "guigang": "贵港 · 2024-09 郁江洪水"}
 
 
@@ -252,13 +254,13 @@ def fig6_table():
     rows = [
         ["案例 / 事件", "与独立证据对照", "关键结论（情景级）"],
         ["宁明 · 2026-08 紫檀", "卫星新增淹没命中 POD 0.77\nCSI 0.36（主阈值 0.15 m）",
-         "空间型态可用；面积约 1.9× 偏大\n（保守上界解读，非率定值）"],
-        ["久隆 · 2024-09 摩羯", "5 种潮位情景结果一致",
-         "站址±2格 0.55 m 基本不积水\n（1.68 m 为 1.28 km 外洼地）"],
-        ["贵港 · 2024-09 郁江", "面积对上游 Q ±30% 仅 +7%\n公开洪峰时点作诊断对照",
-         "湿像元水位仅诊断（G7 基准未确认）\n网格敏感：200 m 只作粗筛查"],
-        ["质量保障", "E_mass：36 PASS + 3 FAIL-EXPLAINED\n（HFIX/HVAR 明示，门禁 1e-3）",
-         "冻结重跑逐位一致\n42 项自动化测试全过"],
+         "空间型态可用；面积约 1.9× 偏大\n（彻底停用 244m 人工刻蚀，真实 DEM）"],
+        ["久隆 · 2024-09 摩羯", "R3 双驱动（GA净雨+钦江来水+SGC）\nS1 CSI 0.043；退水回弹改善 37%",
+         "淹没 217.5 km²（净压降 45.7 km²）\n站址±2格 0.55 m；P01–P08 物理归因"],
+        ["贵港 · 2024-09 郁江", "水力河槽+入渗3.0探针\nS1 CSI 0.196 / FAR 0.720",
+         "100m 真实 DEM（清除 12m 刻蚀）\n外洪 20.4 km² vs 降雨积水 185.4 km²"],
+        ["质量保障", "E_mass：66 PASS + 4 FAIL-EXPLAINED\n（门禁 1e-3，70 个 run 全表）",
+         "冻结重跑逐位一致\n全量自动化测试通过"],
     ]
     fig, ax = plt.subplots(figsize=(12.6, 5.6), dpi=150)
     ax.axis("off")
@@ -278,6 +280,48 @@ def fig6_table():
     ax.set_title("三案例模拟成效汇总", fontsize=15, fontweight="bold", pad=28)
     fig.tight_layout()
     fig.savefig(VIZ / "fig6_summary_table.png", bbox_inches="tight")
+    plt.close(fig)
+
+
+def fig7_jiulong_dual_forcing():
+    r_cfgs = [
+        ("r0", "R0 既有基线（毛雨，无河道来水）\n湿面积 263.2 km² · 斑块 1102 个",
+         PROJ / "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h"),
+        ("r1", "R1 净雨无来水（GA 离线净雨 50.7mm）\n湿面积 187.5 km²（单变量 −75.8 km²）",
+         PROJ / "outputs/jiulong/2024-09-yagi/scen_r1_netrain_200m_sv6h_v3"),
+        ("r2", "R2 钦江来水 + SGC 亚网格河道（纯来水 97 Mm³）\n湿面积 55.0 km²（沿主河槽集中输水）",
+         PROJ / "outputs/jiulong/2024-09-yagi/scen_r2_inflow_sgc_200m_sv6h"),
+        ("r3", "R3 净雨 + 钦江来水双驱动主情景\n湿面积 217.5 km²（沿江漫滩合理成片）",
+         PROJ / "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h"),
+    ]
+    sea_mask_path = PROJ / "outputs/jiulong/2024-09-yagi/scen_free_200m/sea_mask.npy"
+    sea = np.load(sea_mask_path) if sea_mask_path.exists() else None
+
+    fig, axes = plt.subplots(1, 4, figsize=(18.0, 5.0), dpi=150)
+    site_x, site_y = site_xy(*RUNS["jiulong"]["site"][1:], RUNS["jiulong"]["epsg"])
+
+    for ax, (tag, title, rdir) in zip(axes, r_cfgs):
+        rmax, hdr = read_asc(rdir / "results" / "res.max")
+        rmax_use = np.where(sea, np.nan, rmax) if sea is not None and sea.shape == rmax.shape else rmax
+        ext = extent_of(hdr)
+        wet = np.isfinite(rmax_use) & (rmax_use > WET_THR)
+        im = ax.imshow(np.ma.masked_where(~wet, rmax_use), cmap="YlGnBu",
+                       vmin=0, vmax=3.0, extent=ext, origin="upper", interpolation="nearest")
+        ax.imshow(np.ma.masked_where(wet, np.zeros_like(rmax_use)),
+                  cmap="Greys", vmin=0, vmax=6, alpha=0.25, extent=ext, origin="upper",
+                  interpolation="nearest")
+        ax.plot(site_x, site_y, marker="*", color="#d32f2f", ms=16, mec="white", mew=1.2, zorder=5)
+        ax.set_title(title, fontsize=10.5, fontweight="bold")
+        ax.set_xticks([])
+        ax.set_yticks([])
+        cb = fig.colorbar(im, ax=ax, fraction=0.04, pad=0.02)
+        cb.set_label("最大水深 (m)", fontsize=9)
+        cb.ax.tick_params(labelsize=8)
+
+    fig.suptitle("久隆：双驱动重构与因子差分对照（plans/code_artifact.md 治理核心成果）",
+                 fontsize=15, fontweight="bold")
+    fig.tight_layout(rect=(0, 0, 1, 0.94))
+    fig.savefig(VIZ / "fig7_jiulong_dual_forcing.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -322,7 +366,9 @@ if __name__ == "__main__":
     fig4_jiulong_robust()
     fig5_heatmap()
     fig6_table()
+    fig7_jiulong_dual_forcing()
     if "--gif" in sys.argv:  # GIF 几何未变时无需重制（省 CPU）
         make_gif("ningming", step=1, fps=2)
         make_gif("guigang", step=2, fps=2)
+        make_gif("jiulong", step=1, fps=2)
     print("全部资产 ->", VIZ)
