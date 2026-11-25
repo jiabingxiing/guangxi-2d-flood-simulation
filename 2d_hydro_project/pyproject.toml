@@ -16,6 +16,9 @@ dependencies = [
     "rasterio>=1.3",
     "psutil>=7.2.2",
     "pyshp>=3.1.6",
+    "networkx>=3.2",
+    "pyswmm>=2.0",
+    "swmmio>=0.8",
 ]
 
 # 开发依赖用 [dependency-groups]（uv 默认安装，与 floodviz 一致）。
