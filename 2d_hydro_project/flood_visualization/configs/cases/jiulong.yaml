@@ -169,7 +169,7 @@ quality:
     - "情景级成果，不得用于业务告警或资产安全判据"
     - "下游边界为常数位面情景带（free/z0/z05/z10），天文潮时变未引入"
     - "河槽未刻蚀，退水期面积不降反增（无排水网限制）"
-    - "久隆 10 个有效 run 中 7 PASS / 3 FAIL-EXPLAINED；FAIL-EXPLAINED 不计通过，不得表述为全量通过"
+    - "久隆在质量门全表共 21 个 run：17 PASS / 4 FAIL-EXPLAINED（z05/z10/ztide/r4 感潮）；FAIL-EXPLAINED 不计通过，不得表述为全量通过。本包内 7 个久隆情景 run 全部 PASS"
 
 sources:
   model: "LISFLOOD-FP 8.1.0 (double, _CALCULATE_Q_MODE 1)"

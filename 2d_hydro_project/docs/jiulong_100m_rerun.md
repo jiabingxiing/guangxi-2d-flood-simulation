@@ -157,7 +157,7 @@ scope: project
 | `bdsouthonly_r13d_southonly` | 13 天 | 三边闭合 | 1.494e-5 | PASS | 314.74 km² | 14.40 Mm³ |
 
 全部 4 个 run 已并入质量门表：`mass_recheck_g15.json` 由 **39 PASS / 3 FAIL-EXPLAINED / 0 FAIL（42 run）**
-变为 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run）**。新增 4 个均为 PASS。
+变为 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run）**。新增 4 个均为 PASS。（2026-10-31 当次口径；现役全表见 `data/catalog/mass_recheck_g15.json`。）
 
 ---
 

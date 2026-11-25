@@ -17,7 +17,7 @@ scope: project
 
 ### 1.1 问题定性：不只是可视化伪影，而是水文驱动与水动力过程不完整
 
-经核查仓库 `README.md`、`docs/execution_status.md`、`diagnostics/{jiulong,guigang}/root_cause_report.md` 及核心脚本，项目目前已建成覆盖久隆、贵港、宁明三案例的模型工程、诊断分析、质量门（当前 **61 PASS / 3 FAIL-EXPLAINED / 0 FAIL**，64 run）及 `floodviz` 发布体系。但必须明确：
+经核查仓库 `README.md`、`docs/execution_status.md`、`diagnostics/{jiulong,guigang}/root_cause_report.md` 及核心脚本，项目目前已建成覆盖久隆、贵港、宁明三案例的模型工程、诊断分析、质量门（立计划时为 **61 PASS / 3 FAIL-EXPLAINED / 0 FAIL**，64 run；R 系列落地后为 66 PASS / 4 FAIL-EXPLAINED / 0 FAIL，70 run）及 `floodviz` 发布体系。但必须明确：
 
 - **质量门通过（`E_mass ≤ 1e-3`）仅证明水量账目闭合，不等于洪水预测物理正确。**
 - 当前三案例基线约束分别为：
@@ -542,5 +542,5 @@ governance:
 
 1. 维基百科：[钦江流域概况](https://zh.wikipedia.org/zh-cn/%E9%92%A6%E6%B1%9F)（河长 195 km、比降 0.32‰、流域面积 2,391 km²、年均径流 21.11 亿 m³，流经灵山、陆屋、久隆、钦州市区注入钦州湾）。
 2. 水利水电技术（2022）：[《广西钦江流域水沙年际变化规律分析》](https://sjwj.cbpt.cnki.net/portal/journal/portal//client/paper/preview?cache=false&filePath=history%2FEditor%2F2022%2F0815%2Fsjwj%2Fe0e4ee25-55f8-45a4-a67f-df3574412efb.pdf)（陆屋水文站坐标 108°57'E、22°17'N，1953 年设站，钦江中上游国家基本水文站）。
-3. 项目仓库实测文档与诊断证据：`2d_hydro_project/README.md`、`2d_hydro_project/configs/cases/{jiulong,guigang,ningming}.yaml`、`2d_hydro_project/scripts/stage3/{jiulong_scenarios.py,build_inflow_hydrology.py}`、`2d_hydro_project/diagnostics/{jiulong,guigang}/root_cause_report.md`、`2d_hydro_project/docs/{execution_status.md,jiulong_phase34_candidates.md}`、`2d_hydro_project/docs/adr/ADR-0001~0018`。
+3. 项目仓库实测文档与诊断证据：`2d_hydro_project/README.md`、`2d_hydro_project/configs/cases/{jiulong,guigang,ningming}.yaml`、`2d_hydro_project/scripts/stage3/{jiulong_scenarios.py,build_inflow_hydrology.py}`、`2d_hydro_project/diagnostics/{jiulong,guigang}/root_cause_report.md`、`2d_hydro_project/docs/{execution_status.md,jiulong_phase34_candidates.md}`、`2d_hydro_project/docs/adr/`（立计划时索引至 ADR-0018；现为 ADR-0001~0025）。
 4. 前期调研补充资料（引自本轮用户提供材料，实施 M2/M6 前须按来源逐项建档核验）：广西水利厅《广西中小河流治理总体方案》（2025-01）、《基于耦合模型的钦江流域水土流失模拟研究》（2025，SWAT–HEC-RAS 陆屋站以上 12 km 河段模拟）、平陆运河 2026-06 全线通水 / 2026-09 通航与久隆水文站 2026-09-10 迁改建交付及 2026-11-22 水位记录（8.98 m，85 高程）。

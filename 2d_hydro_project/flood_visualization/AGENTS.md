@@ -30,9 +30,9 @@ flood_visualization/
 ```powershell
 $env:PYTHONUTF8 = '1'
 uv run python -m floodviz inventory --config configs/default.yaml
-uv run python -m floodviz prepare   --config configs/default.yaml --bundle-id v6-20261029
-uv run python scripts/build_web.py  --bundle-id v6-20261029
-uv run python -m floodviz validate  --bundle outputs/web_bundle/v6-20261029 --full
+uv run python -m floodviz prepare   --config configs/default.yaml --bundle-id <new-id>
+uv run python scripts/build_web.py  --bundle-id <new-id>
+uv run python -m floodviz validate  --bundle outputs/web_bundle/<new-id> --full
 uv run python scripts/check_schemas.py
 uv run ruff check src tests scripts
 uv run python -m pytest -m "not slow and not e2e" -q
@@ -40,12 +40,12 @@ uv run python -m pytest -m "not slow and not e2e" -q
 
 启动（仅回环）：
 ```powershell
-scripts\start_local.cmd            # 服务最新包
-scripts\start_local.cmd v6-20261029
+scripts\start_local.cmd                 # 服务最新包（当前 v10-20261122）
+scripts\start_local.cmd v10-20261122
 ```
 
-> 包版本现状（2026-11-22）：交付 `v10-20261122`（3 案例 / 17 run + 7 研究性产品图层；新增久隆 R1/R2a/R2/R3 双驱动系列、R3 13 d 退水窗与久隆斑块成因分类 P01–P08 成因分层视图；validate --full 通过，30 分钟播放门于 v10 首建通过）；上一交付 `v9-20261122`；
-> 构建级回滚 `v8-20261102`；上一交付 `v6-20261029`；数据级回滚 `v4-20261028`（在 `outputs/_archive_bundles/`）。
+> 包版本现状（2026-11-25 核实）：交付 `v10-20261122`（3 案例 / 24 个 run 条目 = 17 个情景 run + 7 个研究性产品图层；新增久隆 R1/R2a/R2/R3 双驱动系列、R3 13 d 退水窗与久隆斑块成因分类 P01–P08 成因分层视图；validate --full 通过）；上一交付 `v9-20261122`（12 情景 run + 6 产品图层）；
+> 构建级回滚 `v8-20261102`；数据级回滚 `v4-20261028`（在 `outputs/_archive_bundles/`）。
 > 研究性产品图层=ADR-0015~0018/0021 的 FAT/归因/概率/成因分类单帧伪 run（role=product），详见 `docs/runbook.md` §4、§6。
 
 ## 4. 事实纪律

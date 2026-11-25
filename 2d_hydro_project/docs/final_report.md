@@ -8,7 +8,7 @@ scope: project
 
 # 广西久隆/宁明/贵港二维水动力模拟阶段成果报告（降级模式首轮，修订版）
 
-日期：2026-10-26（2026-10-27 增补 §9）｜ 模式：公开数据降级（ADR-0004/0005）｜ **全部结论为情景级，不是业务预警系统**
+日期：2026-10-26（2026-10-27 增补 §9；2026-11-25 更新质量门与测试计数）｜ 模式：公开数据降级（ADR-0004/0005）｜ **全部结论为情景级，不是业务预警系统**
 
 > **修订说明（2026-10-26）**：本版修正了首版中的贵港 WSE 干像元伪值、久隆站址远邻域伪值、宁明 `res.max` 时刻错配、质量门/基准表述、产品到达时间口径。首版数字（30.01 m、+13.08 m、1.68 m 站址、11.88 m 站址、CSI 0.387、108 评估点、B1–B7 全部通过）已作废。执行状态与剩余项见 `docs/execution_status.md`。
 
@@ -78,11 +78,11 @@ scope: project
 
 ## 3. 验证与质量体系
 
-- 质量门（终稿 13.2）：全 run 自动复核（`data/catalog/mass_recheck_g15.json`）——19 PASS、3 FAIL-EXPLAINED（久隆 z05/z10/ztide，G13/HFIX-HVAR）、0 FAIL。**FAIL-EXPLAINED 不计入通过数**；不再使用 N/A-HFIX。
-- 宁明全部 run E_mass 5e-5~2e-4；贵港三轮 1.6e-5~3.7e-5；久隆 free/z0 1.8e-4~4.9e-4。
+- 质量门（终稿 13.2）：全 run 自动复核（`data/catalog/mass_recheck_g15.json`）——**66 PASS、4 FAIL-EXPLAINED、0 FAIL（70 run）**。4 项 FAIL-EXPLAINED 全在久隆潮位情景（`scen_z05_200m`、`scen_z10_200m`、`scen_ztide_200m`、`scen_r4_dual_sgc_tide_200m_sv6h`，G13/HFIX-HVAR）。**FAIL-EXPLAINED 不计入通过数**；不再使用 N/A-HFIX。
+- 首轮各 run 的 E_mass 实测范围：宁明 5e-5~2e-4；贵港三轮 1.6e-5~3.7e-5；久隆 free/z0 1.8e-4~4.9e-4。
 - 数值基准：B1 PASS；B2 对称性 PASS、**质量增益 +0.82%（基准目标 1e-4）→ 质量门 FAIL**；B3 PASS（仅波前速度）；B4 PASS；B5 性能标定；B6/B7 仅诊断；**B8 PASS_PARTIAL（Phase B2）**——合成堤防四组全过（封闭零越堤/零出流、开口 0.86×、堰 0.53×、E_mass<1e-3），但 T016c 桥洞算例 8.1.0 与仓库自带 5.7.0 参考结果不一致（chan 系统偏差 −0.181 m；bridge 组下游全干），8.1.0 桥涵路径未获独立验证。**不能称“B1–B8 全部通过”或“阶段 2 已过门”**。
 - S1 链 v2（定标 + 固定阈值 −17 dB + σ⁰ 网格）与 GF-3 掩膜留档；G17 限制（无地形校正、风浪/植被漏提、足迹小）随成果标注。
-- 测试：**42 passed**（原 21 → 33 → 40+2 → 42；2026-10-27 复测全过；此前 2 项 skip 为产物未生成时的显式跳过，产品重生成后已实跑）。
+- 测试：**587 passed + 3 条件 skipped**（2026-11-25 全量实跑；首轮时为 42 passed，此后随 Phase E–K 扩充）。
 
 ## 4. 重大发现与修复
 
@@ -114,7 +114,7 @@ scope: project
 ## 8. 验收补遗（2026-10-26 修订）
 
 1. **输入/代码冻结**：`data/catalog/input_manifest.json`（含贵港 DEM、S1/GF-3、配置、模型）与 `code_manifest.json`（48+ 文件树哈希；代码未入 git，以哈希留痕）。
-2. **测试**：**42 passed**（`tests/`，2026-10-27 复测）。
+2. **测试**：**587 passed + 3 条件 skipped**（`tests/`，2026-11-25 全量实跑；首轮为 42 passed）。
 3. **可复现（13.4）**：三案例冻结重跑 `res.max` **全部逐位一致**（jiulong/ningming/guigang，`data/catalog/reproducibility_test.json`，2026-10-27）。
 4. **产品包**（`outputs/products/`）：
    - 宁明：像元 0.027 m / ±2 格 11.883 m（约 100 m 邻域，不是站址点）；峰值时刻 106.9 h；历时 107.6 h；到达 6.0 h（6h 快照）。
@@ -143,8 +143,7 @@ scope: project
    - 30 m 全域仍未通过「站区 5 m 局部」要求（ADR-0005 推迟），且垂直基准 G7 未确认，站址水深只能作量级参考。
 6. **ADR-0008 模型定版**：生产锁定 8.1.0（exe SHA-256 冻结）；禁止 bridge/orifice 型链接（B8b 未获独立验证），结构只用 DEM 加高 + weirfile；chan −0.181 m 系统偏差登记；不触发历史 run 重跑。
 7. **汇报可视化修订**：`make_viz.py` 六处旧口径（res.max 验证、事后阈值 0.30、+13.08 率定、1.68 m 站址、86%/CSI 0.39、"质量门全过"）按 ADR-0006 重制 fig1–6 与使用说明（GIF 几何未变未重制）。
-8. **质量门全表刷新**：36 PASS + 3 FAIL-EXPLAINED（HFIX/HVAR）+ 0 FAIL（`mass_recheck_g15.json`，含全部复现/延长/等宽 run）。
+8. **质量门全表刷新**：首轮为 36 PASS + 3 FAIL-EXPLAINED（HFIX/HVAR）+ 0 FAIL；**现役（2026-11-25）为 66 PASS + 4 FAIL-EXPLAINED + 0 FAIL（70 run）**，权威值见 `mass_recheck_g15.json`。
 
-> **口径时效**：本节为 2026-10-27 阶段成果快照，36 PASS 是当时口径。当前权威值见
-> `data/catalog/mass_recheck_g15.json`（2026-10-31 起为 43 PASS / 3 FAIL-EXPLAINED / 0 FAIL，46 run，
-> 因新增 4 个 100 m 重跑 run）。本文其余数字同样为历史快照，不作滚动更新。
+> **口径时效**：本节 §9 的物理成果（30 m 收敛、站址水深、WSE offset、B4/B5 结论）是 2026-10-27 实测快照，只对表中所指 run 成立。
+> 质量门与测试计数已按 2026-11-25 实测更新（66-4-0 / 70 run；587 passed + 3 skipped）；执行状态与剩余项以 `docs/execution_status.md` 为准。

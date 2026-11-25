@@ -39,12 +39,14 @@
     "production_recession_200m": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession",
     "sensitivity_100m": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem",
     "non_physical_derived": "outputs/jiulong/2024-09-yagi/scen_free_100m_dt2p5_sv6h_realdem_cleaned",
+    "non_physical_derived_status": "已删除（2026-11-25，用户授权，走回收站）。该目录按 ADR-0010 决策项 8 退役，物理删除后不再是可读路径；保留本键仅为记录历史位置。",
     "excluded": [
       "scen_free_200m_v1invalid",
       "scen_z0_200m_v1invalid",
       "scen_z05_200m_v1invalid",
       "scen_z10_200m_v1invalid"
-    ]
+    ],
+    "excluded_status": "以上 _v1invalid 目录已于 2026-11-25 用户授权删除（走回收站），保留名称仅为记录历史作废原因。"
   },
   "key_facts": {
     "production_wet_area_km2": 263.24,

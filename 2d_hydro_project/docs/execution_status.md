@@ -50,7 +50,7 @@ scope: project
 | E0 | 基线事实冻结：200 m 生产基线 `scen_free_200m_sv6h`（21 帧、`sim_time=432000`、湿面积 263.24 km²、`E_mass=4.893e-4` PASS） | **已验证**（本次实测复核 `res.max` 与栅格头） |
 | E0 | 退水延长基线 `scen_free_200m_sv6h_recession`（53 帧、`sim_time=1123200`、`E_mass=5.3e-4` PASS） | **已验证** |
 | E0 | 100 m 敏感性基线 `scen_free_100m_dt2p5_sv6h_realdem`（21 帧、湿面积 271.07 km²、`E_mass=3.089e-4` PASS） | **已验证** |
-| E0 | Phase 0 诊断包 `diagnostics/jiulong/`（基线快照、斑块持续性 CSV、DEM 异常分类栅格、根因报告） | **已完成**：`diagnostics/jiulong/phase0-v1/` 已落 `baseline_snapshot.json`、`resolution_comparison.json`、`dem_artifact_map.tif`、`patch_persistence.csv`、`patch_frame_summary.csv`、`patch_tracks.csv`、`patch_summary.json`、`root_cause_report.md` 八件，`data/catalog/jiulong_improvement_manifest.json` 已落盘（含 `evidence_levels`、`inputs`、`code`、`artifacts`、`open_blockers`、`known_doc_discrepancies`） |
+| E0 | Phase 0 诊断包 `diagnostics/jiulong/`（基线快照、斑块持续性 CSV、DEM 异常分类栅格、根因报告） | **已完成**：`diagnostics/jiulong/` 根目录已落 `baseline_snapshot.json`、`resolution_comparison.json`、`dem_artifact_map.tif`、`patch_persistence.csv`、`patch_frame_summary.csv`、`patch_tracks.csv`、`patch_summary.json`、`root_cause_report.md` 八件（`--run-tag phase0-v1` 只写审计日志到 `logs/diagnostics/`，不是子目录），`data/catalog/jiulong_improvement_manifest.json` 已落盘（含 `evidence_levels`、`inputs`、`code`、`artifacts`、`open_blockers`、`known_doc_discrepancies`） |
 | E1 | `display_qc` 只读展示质控层（A/B/C 三档预注册、逐帧审计、派生标记） | **已完成（产出）**：`outputs/display_qc/scen_free_200m_sv6h_recession/{A,B,C}/` 三档已产出（含 `meta.json`+`results/`+`audit/`），`data/catalog/jiulong_display_qc_audit.json` 已落盘；raw 前后哈希 `unchanged=true`，三档 `blocked_for_default_publish` 均为 `false`，派生目录内 `res.mass` 计数为 0，派生标记字段齐全。`tests/test_display_qc.py` 已落盘（52 项） |
 | E1 | 旧展示层 `scen_free_100m_dt2p5_sv6h_realdem_cleaned` 退役（写死 4/9 像元、写死 100 m 面积、声称「ARR 2019 规定」） | **已完成（口径）**：ADR-0010 决策项 8 判定不合规并明令不得作默认生产层；**该目录物理保留未删**，前端口径切换见 E5 |
 | E2 | 四层 DEM 契约（`DEM_RAW`/`DEM_REPAIRED`/`DEM_HYDRO`/`DEM_HYDRAULIC`） | **已完成（口径）**：ADR-0010 决策项 1 定版 |
@@ -60,7 +60,7 @@ scope: project
 | E5 | ADR-0010 定版 | **已完成**：`docs/adr/ADR-0010-久隆直接降雨模型治理规范.md`（8 条决策 + 后果 + 替代方案） |
 | E5 | `docs/README.md` ADR 索引更新至 0010 | **已完成** |
 | E5 | `execution_status.md` 本段更新 | **已完成** |
-| E5 | floodviz 接入（默认层与退役标注） | **已完成（默认层回退 raw）**：`flood_visualization/configs/cases/jiulong.yaml` 已按 ADR-0010 第 2/8 条改为 `default_run_id: scen_free_200m_sv6h`（200 m 生产基线 raw），`_cleaned` 已从 `runs` 移除并加退役注释（含实测改动量 −36.56%/−53.16%），100 m 标 `role: legacy` 并注明「不得升级为生产基线」，`quality.warnings` 已写「7 PASS / 3 FAIL-EXPLAINED，FAIL-EXPLAINED 不计通过」。**`role=derived` 的 `display_qc` 条目仍未写入**——按计划 §9.3 第 3 条，`display_qc` 是否作默认层需用户确认；配置内已留注释说明 |
+| E5 | floodviz 接入（默认层与退役标注） | **已完成（默认层回退 raw）**：`flood_visualization/configs/cases/jiulong.yaml` 已按 ADR-0010 第 2/8 条改为 `default_run_id: scen_free_200m_sv6h`（200 m 生产基线 raw；**该默认值已于 2026-11-22 改为双驱动主情景 `scen_r3_dual_sgc_200m_sv6h`，见 ADR-0019~0022**），`_cleaned` 已从 `runs` 移除并加退役注释（含实测改动量 −36.56%/−53.16%），100 m 标 `role: legacy` 并注明「不得升级为生产基线」，`quality.warnings` 已写「7 PASS / 3 FAIL-EXPLAINED，FAIL-EXPLAINED 不计通过」。**`role=derived` 的 `display_qc` 条目当时未写入，后已作为可选层接入**；`display_qc` 是否作默认层仍需用户确认 |
 | E5 | 契约测试 `tests/test_governance_contract.py` | **已验证**：2026-10-31 21:34 全量实跑 **`152 passed`，0 failed，0 skipped**。此前 21:26 的 96 passed 为 Phase 1 独立测试落盘前的口径。两处测试缺陷已修（均属测试自身数据设置错误，非实现缺陷）：① `test_classify_cells_distinguishes_categories` 把海面标记混在数值行内，导致 `wet_cells` 期望值错算；② `test_classify_track_filter_requires_all_conditions` 未越过 A 档 `shallow_max_area_km2=0.16` 与 `deep_depth_m=0.30` 就断言「不再小/不再浅」，实际仍命中 `FILTER_SHALLOW` / `FILTER_SUBRESOLUTION` |
 
 ### 0c-2 久隆逐 run 质量门状态（`data/catalog/mass_recheck_g15.json`，2026-10-31 21:15 重算）
@@ -78,7 +78,7 @@ scope: project
 | `scen_z10_200m` | HFIX | 3.705e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
 | `scen_ztide_200m` | HVAR | 4.060e-2 | **FAIL-EXPLAINED**（同上；不计通过） |
 
-久隆合计：**14 个有效 run → 11 PASS / 3 FAIL-EXPLAINED / 0 FAIL**。全表（三案例）：**43 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（共 46 run）。
+久隆合计：**14 个有效 run → 11 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（2026-10-31 快照）。全表（三案例）当时为 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（共 46 run）；现役全表见 §2 门禁矩阵。
 （2026-10-31 新增 4 个 100 m 重跑 run 后由 39 PASS / 42 run 更新；权威值以 `data/catalog/mass_recheck_g15.json` 为准。）
 **不得表述为「质量门全量通过」**；`PASS` 只证明水量账目闭合，不证明预测正确。
 
@@ -86,13 +86,13 @@ scope: project
 
 - 200 m 与 100 m 同一情景湿面积差 **+7.83 km²（+2.97%）**（271.07 vs 263.24 km²），站址邻域水深对分辨率敏感；200 m 能力上限未解除。
 - 旧展示层 `scen_free_100m_dt2p5_sv6h_realdem_cleaned` 在 `res.max` 上把湿面积从 271.07 压到 **171.97 km²（−36.56%）**、水量从 168.43 压到 **78.90 Mm³（−53.16%）**，且未登记体积变化率——属「滤波误删真实积水」风险的实际发生，已由 ADR-0010 决策项 8 退役。
-- 该目录含 `results/res.mass`（SHA-256 前 16 位 `6fc7b11c61aa6acc`，与源 run 逐位相同）且含 `run.log`，会被 `g15_mass_recheck.py` 的扫描条件计为独立 run。**已按 ADR-0010 第 8 条修复**：`g15_mass_recheck.py` 增加派生层判定（`meta.json` 的 `not_physical_recalculation`/`derived_from`，或存在 `clean_audit.json`/`display_qc_audit.json`），并把该目录登记进 `excluded_variants`（理由「展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数」）。当前重算为 **43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run）**，久隆 14 个有效 run，计数不再需要人工排除。
+- 该目录含 `results/res.mass`（SHA-256 前 16 位 `6fc7b11c61aa6acc`，与源 run 逐位相同）且含 `run.log`，会被 `g15_mass_recheck.py` 的扫描条件计为独立 run。**已按 ADR-0010 第 8 条修复**：`g15_mass_recheck.py` 增加派生层判定（`meta.json` 的 `not_physical_recalculation`/`derived_from`，或存在 `clean_audit.json`/`display_qc_audit.json`），并把该目录登记进 `excluded_variants`（理由「展示派生层（非独立模型 run）；含复制自源 run 的 res.mass，按 ADR-0010 第 8 条不参与质量门计数」）。**2026-10-31 当次重算**为 43 PASS / 3 FAIL-EXPLAINED / 0 FAIL（46 run），久隆 14 个有效 run，计数不再需要人工排除；此后历轮新增 run 的计数见 §1j/§1k/§1m 与权威 JSON。
 - 退水异常未消除：模型 09-10→09-17 湿面积 **+27.68 km² 不降反增**，S1 09-17 水体约 12.2 km²，方向相反（`jiulong_recession_s1.json` 判 `WEAK`）。无排水网络与 FREE 缓排是主因，不得以滤波掩盖。
 - `display_qc` 三档实测改动量（`jiulong_display_qc_audit.json`，源 run `scen_free_200m_sv6h_recession`）：`res.max` 面积/水量变化 A 档 −0.37%/−0.03%、B 档 −0.48%/−0.05%、C 档 −0.56%/−0.06%；单帧最大变化 A 1.43%/1.02%、B 2.49%/1.81%、C 3.06%/2.28%。三档均未触发预注册 10% 告警（`blocked_for_default_publish=false`）。**这组数字只说明展示层改动量可控，不证明模型正确，也不能当精度证据。**
 - 旧 4/9 像元规则在 200 m 网格上的实测后果（`legacy_pixel_rule_diagnostic`）：峰值帧删除 764 个斑块 / 1348 像元 / 53.92 km²（占该帧 20.17%），其中 205 个斑块在 90% 以上帧次持续存在——属模型长期维持的浅水像元，不是瞬时渲染噪点。
 - 久隆独立验证状态仍为 **`WEAK/未测`**：CSI、POD、FAR、NSE、R²、水深误差**未测**，不构成硬门。
-- 本节 §2 门禁矩阵「13.2 质量守恒」行已同步为当前口径（43 PASS / 46 run）；**权威值以 `data/catalog/mass_recheck_g15.json` 为准**，本节任何数字与之冲突时以该 JSON 为正确。
-- 本节 §2 门禁矩阵「十四章测试」行已同步为当前口径；2026-10-31 实测为 **`152 passed`，0 failed，0 skipped**，**全量测试通过**。
+- 本节 §2 门禁矩阵「13.2 质量守恒」行已随每轮刷新；**权威值以 `data/catalog/mass_recheck_g15.json` 为准**，本节任何数字与之冲突时以该 JSON 为正确。
+- 本节 §2 门禁矩阵「十三章测试」行已随每轮刷新；2026-10-31 当时实测为 152 passed（0 failed，0 skipped），现役计数见该行与 `AGENTS.md`「验证入口」。
 - 截至 2026-10-31 21:34，Phase 0/1/2/3-4/5 的脚本与产物均已落盘，无「应落盘而未落盘」的交付物。本段所有状态判定基于该时点的文件存在性与实跑结果，不基于任何口头进度。
 
 ### 0c-4 本轮明确未完成项（不得当作已完成）
@@ -108,7 +108,7 @@ scope: project
 | Phase 3 降雨损失真算例 | **仍未做**：`real_run.executed=false`。C 档（初损+持续损失）在本构建无初损参数，只能作雨量序列预处理候选 | 需单独授权跑 A/B 档；C 档不得写成「已跑初损模型」 |
 | Phase 4 排水网络与边界治理 | **仍阻塞**：用户 2026-10-31 明确表示**无法提供**站址坐标、排水网络、潮位/水位资料。D1–D5 五项全部保持阻塞；退水异常（+27.68 km²）在现有资料下不可消除，只登记原因，不以滤波掩盖 | 业务部门资料到位前不实施 |
 | 100 m 完整物理重跑 | **已获批准并执行**：4 个 run（5 天窗 / 13 天窗 × 四边 FREE / 三边闭合），结果见 `docs/jiulong_100m_rerun.md`。`allfree` 与既有 100 m run 逐位一致（可复现 E1）；边界闭合使湿面积 +1.32%、出流 −35.6%（E2） | ~~无~~；100 m 升级为生产基线仍需质量门 + 分辨率收敛，ADR-0010 决策项 2 保持有效 |
-| 前端默认层切换到 `display_qc` | **用户未表态**：默认层维持 200 m raw（`scen_free_200m_sv6h`）。`display_qc` A/B/C 三档**已作为 `role: derived` 可选层接入** floodviz，质量门显示 `unrecorded`（不得显示 PASS），raw 可一键切回 | 用户确认是否允许 `display_qc` 作默认展示层 |
+| 前端默认层切换到 `display_qc` | **用户未表态**：`display_qc` A/B/C 三档**已作为 `role: derived` 可选层接入** floodviz，质量门显示 `unrecorded`（不得显示 PASS）。久隆默认 run 此后已改为双驱动主情景 `scen_r3_dual_sgc_200m_sv6h`（ADR-0019~0022），raw 仍可一键切回 | 用户确认是否允许 `display_qc` 作默认展示层 |
 | 久隆独立验证（CSI/POD/FAR/NSE/R²/水深误差） | **用户已接受 `WEAK/未测`**：不设 NSE、R²、水深误差硬门；相关指标一律记「未测」。`PASS` 仅表示水量账目闭合 | ~~无~~ |
 
 ## 0d. Phase F 增量（2026-11-02，贵港治理）
@@ -134,7 +134,7 @@ scope: project
 | F3 | 河道调理（S1 常水骨架 + 刻蚀） | **阻塞，未实施**：`verdict=BLOCKED_ALTERNATIVE_REQUIRED`，`phase3_implemented=false`。定量证据：S1 常水掩膜足印占模型域 **26.19%**，北半域（行 0-184）覆盖率 **0%**，域内常水像元 **1,338（13.38 km²）**碎成 **213 块**，最大块 **4.33 km²**（20 m）/ **3.38 km²**（100 m），而郁江主水体 **614.96 km²**（尺寸比 **141:1**）；上游 Q 点源在 col0 西边界，注入行带覆盖率 **0.0**；**无任何常水块同时触及西、东边界**（端点退化）。**三个新情景全部沿用 `channel=off`，未做河道调理** |
 | F5 | S1 09-12 洪峰景验证 | **已完成**：`data/catalog/guigang_s1_validation.json`（逐行复用 `verify()` 口径；基线自校验 `all_match=true`）。见 0d-3 |
 | F5 | 站点水位诊断 | **已完成（仅诊断）**：贵港站 09-12T14 洪峰 **43.09 m** vs 模型锚点 7×7 包络 WSE **28.30 m**，apparent offset **14.79 m**；09-14T05 offset 15.85 m。**G7 垂直基准未闭合，两时点 offset 不一致，不得当作 `datum_offset_m`、率定值或同峰对齐依据**。未参与任何验收判定 |
-| F5 | 质量门全表实测确认 | **已完成（实跑）**：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL（49 run）**。较基线 43 PASS / 46 run，新增 3 个 run 全部 PASS。`display_qc` 零条目被计入 |
+| F5 | 质量门全表实测确认 | **已完成（当次实跑）**：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL（49 run）**。较基线 43 PASS / 46 run，新增 3 个 run 全部 PASS。`display_qc` 零条目被计入 |
 | F5 | ADR-0011 定版 | **已完成**：`docs/adr/ADR-0011-贵港水动力推演零散伪影治理与驱动重构.md`（9 条决策 + 后果 + 替代方案 + 计划三处错误更正登记） |
 | F5 | `docs/README.md` ADR 索引更新至 0011 | **已完成** |
 | F5 | `execution_status.md` 本段更新 | **已完成** |
@@ -148,7 +148,7 @@ scope: project
 | `scen_yagi_q11500_100m_dt2p5_choff_dualloss_v1` | FREE | 7.290e-05 | **PASS** |
 | `scen_yagi_q11500_100m_dt2p5_choff_rainloss_high_v1` | FREE | 6.241e-05 | **PASS** |
 
-全表（三案例）：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL（共 49 run）**。三案例分布：久隆 14 run、宁明 23 run、贵港 12 run。
+全表（三案例，2026-11-02 快照）：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL（共 49 run）**。三案例分布：久隆 14 run、宁明 23 run、贵港 12 run。
 `FAIL-EXPLAINED` 三项仍为久隆 `scen_z05_200m`（1.223e-2）、`scen_z10_200m`（3.705e-2）、`scen_ztide_200m`（4.06e-2），**不计通过**。
 **不得表述为「质量门全量通过」**；`PASS` 只证明水量账目闭合，不证明预测正确。
 
@@ -184,7 +184,7 @@ scope: project
 - **降雨损失参数标 E3 候选假设，未经本地率定。** Ia=30/50 mm、fc=2.0/3.0 mm/h 是项目候选参数，**不归因于 ARR 2019、UK EA 或任何国际规范**。换一组参数会得到不同的净雨与斑块数；不得把本次三档结果当作贵港下渗特性的结论。
 - **贵港独立验证仍不足以构成硬门。** 仅单景 S1（足迹 20.6%、固定阈值 −17 dB）；**NSE、R²、水深误差未测**；水位诊断受 G7 阻塞。CSI/POD/FAR 只代表足迹内重叠度。
 - **时钟基准**：`rain.rain` 时刻列以模型 **t=0 = 2024-09-03T00 Asia/Shanghai** 为基准（`T0_DAY=3`）。误用 09-04T00 或 09-05T00 会使全部累计雨量整体偏移 24 h 或 48 h。本节数值统一按 09-03T00 对齐。
-- 本节 §2 门禁矩阵「13.2 质量守恒」行已同步为当前口径（46 PASS / 49 run）；**权威值以 `data/catalog/mass_recheck_g15.json` 为准**，本节任何数字与之冲突时以该 JSON 为正确。
+- 本节 §2 门禁矩阵「13.2 质量守恒」行已随每轮刷新（2026-11-02 当次为 46 PASS / 49 run）；**权威值以 `data/catalog/mass_recheck_g15.json` 为准**，本节任何数字与之冲突时以该 JSON 为正确。
 
 ### 0d-5 本轮明确未完成项（不得当作已完成）
 
@@ -284,7 +284,7 @@ scope: project
 | Phase | 内容 | 状态 |
 |---|---|---|
 | G1 | 预跑对账 | **已完成（PASS，实测）**：`rainfall_gross.rain`（313 行含 t=0）与 ERA5 probe 逐值一致，全序列和 137.1 mm；模型窗（t≤336 h）裁掉 09-17T01..23 的 1.6 mm → E1 口径 135.50 mm。summary 的 137.1 = 全序列口径，**非数据缺陷**，预处理器产物无需重生成。GA 净雨窗内 38.87 mm（尾裁 0.0606 mm） |
-| G2 | 净雨接线代码 | **已完成（全量 259 passed）**：`scripts/common/net_rain.py`（`read_preprocessor_net_rain`：hours/seconds 解析、**+48 h 显式时基移位**（由 probe 首键与 T0_DAY 推导）、窗口裁剪、端点补零、单调/非负校验；逻辑镜像 `run_jiulong_ga_rerun.py:88-108`，久隆脚本不回改）；`guigang_scenario.py` 新增 `--rain ga`（rain_meta 登记 GA 源 sha/参数快照/移位/尾裁；`baseline_comparison` 双变量清单）；`scripts/stage6/attribute_guigang_combo.py`（只读 2×2 因子归因）；`tests/test_guigang_combo.py` 10 项。off 模式逐字节回归维持（0f 已证） |
+| G2 | 净雨接线代码 | **已完成（当次全量 259 passed；现役计数见 §2 门禁矩阵）**：`scripts/common/net_rain.py`（`read_preprocessor_net_rain`：hours/seconds 解析、**+48 h 显式时基移位**（由 probe 首键与 T0_DAY 推导）、窗口裁剪、端点补零、单调/非负校验；逻辑镜像 `run_jiulong_ga_rerun.py:88-108`，久隆脚本不回改）；`guigang_scenario.py` 新增 `--rain ga`（rain_meta 登记 GA 源 sha/参数快照/移位/尾裁；`baseline_comparison` 双变量清单）；`scripts/stage6/attribute_guigang_combo.py`（只读 2×2 因子归因）；`tests/test_guigang_combo.py` 10 项。off 模式逐字节回归维持（0f 已证） |
 | G2 | 已修缺陷登记 | ①轮 1 的 hydraulic meta 块无条件覆盖 `baseline_comparison`（轮 1 RAIN 恒 on 未触发；组合下冲突）→ 改为仅 RAIN=on 时设置；②ga 分支补 `gross_total_mm` 与独立打印分支 |
 | G3 | 3 个组合 run | **已完成（exit 0，E_mass 全 PASS）**：`chhyd_d14_r2_lossmed`（求解 2,125 s）、`chhyd_d14_r2_ga`、`chhyd_d10_r2_norain`。质量门全表刷新 **55 PASS / 3 FAIL-EXPLAINED / 0 FAIL（58 run）**；`validate_guigang_s1.py` 12 情景出表（基线自校验 all_match=true）；`attribute_guigang_combo.py` 归因落盘。结果见 0g-3 |
 
@@ -384,7 +384,7 @@ scope: project
 
 **已完成（零重跑部分）**：
 1. **M0**：ADR-0015 学术映射冻结 + FAT/归因/概率产品口径预注册。
-2. **M1（T02–T04）**：FAT/超阈时间产品 **61/61 PASS run 全覆盖**（贵港 26 + 久隆 12 + 宁明 23，S1 达成）——首湿/超阈（0.3/0.5/1.0 m 情景阈值）/历时 GeoTIFF + 三级窗分布 + 站址暴露三元组表（`outputs/products/<site>/fat/`，审计 `data/catalog/fat_products_audit.json`）。**贵港成因归因产品**（S2 达成）：规则先冻结（`guigang_genesis_rules.json`）后计算——pluvial 185.44 km² / river 20.37 km² / disagreement 2.66 km²（定量证实滩地降雨积水主导；d14/d10 河槽差异为已注册混淆项）。
+2. **M1（T02–T04）**：FAT/超阈时间产品 **61/61 PASS run 全覆盖（2026-11-22 当次口径）**（贵港 26 + 久隆 12 + 宁明 23，S1 达成）——首湿/超阈（0.3/0.5/1.0 m 情景阈值）/历时 GeoTIFF + 三级窗分布 + 站址暴露三元组表（`outputs/products/<site>/fat/`，审计 `data/catalog/fat_products_audit.json`）。**该覆盖未包含其后新增的久隆 R1/R2a/R2/R3/R3rec 5 个 run**，需重跑 `make_fat_products.py` 才能对齐「66 PASS run」。**贵港成因归因产品**（S2 达成）：规则先冻结（`guigang_genesis_rules.json`）后计算——pluvial 185.44 km² / river 20.37 km² / disagreement 2.66 km²（定量证实滩地降雨积水主导；d14/d10 河槽差异为已注册混淆项）。
 3. **M2（T05–T09）**：`guigang_inflow_priors.json`（郁江 87,780 km² 径流深反推 + 明江 6,379 km² 全流域上限，**待用户复核**）；**GR4J 型集总产汇流**（ADR-0016，纯 numpy，守恒残差 0；IHC 暖启动 0.726 vs GA 映射 0.702 一致）→ 贵港/宁明 inflow bdy + 3 个授权 run 目录已组装（`scen_gr4j_q_100m`/`scen_gr4j_q6000_100m`/`scen_zdown_a_100m`/`scen_zdown_b_100m`）；**GloFAS 先验对照（T07/S3）**：贵港事件窗 **r<0.5 → 按预注册退回三角情景线**（全窗 r=0.538）、宁明事件窗 r=0.255（仅 5 日，记未验证）；GR4J 峰值早 1–2 天、量级偏大（集总模型无传播时滞，已登记）；**IMERG（T08）与 ATL13（T09）无凭证** → 按计划 §6.4 记「数据不可得」，S4/S5 **未验证**，脚本+合成单测落地。
 4. **M3（T12–T14，可先行部分）**：ADR-0018；**宁明 9 run 集合超越概率图**（S6 前半达成；成员全部质量门 PASS 强制清单，thr0.05 面 126.27 km² / thr0.3 面 110.35 km²，审计 `ningming_probability.json`）；**Copula 联合阈值探索**（48 年 AM3D×P30，三族 AIC：t-copula 最优 ν=2 ρ=0.344，AIC −21.5；Bootstrap CI [0.09, 0.62]——探索性，禁业务告警）；MMF 差异表骨架（`mmf_rainfall_evaluation.json`，S4 未验证待 IMERG）。
 5. **测试**：新增 6 个测试文件 46 项（FAT 11 + 归因 7 + GR4J/入流 11 + IMERG 5 + 概率 5 + 基准探针 7）；全量回归见 §2 门禁矩阵更新。
@@ -405,9 +405,9 @@ scope: project
 6. **因子差分（`compare_jiulong_scenarios.v2`）**：来水效应（R3−R1）= +30.0 km² 且碎斑 −74（沿河集中）；净雨效应（R3−R2）= +162.6 km²（面状积水）；河道 SGC 效应（R2−R2a）= −3.8 km²（集中于槽）；合计（R3−R0）= −45.7 km²（GA 损失压掉粗雨高估）。
 7. **S1 验证（`validate_jiulong_inundation.v1`）**：R3 CSI 0.043 / POD 0.373 / FAR 0.954（基线 0.018/0.387/0.982）；5 d 窗内 R3 退水方向检验不适用；**R3 13 d 退水窗（r3rec，09-05..09-17）已跑**：E_mass 7.6e-6 PASS、res.max 233.8 km²、峰值帧 204.3 km²@294 h；退水方向检验 **未达成**（09-10→09-17 模型 +17.5 km² vs S1 −5.84 km²），较旧基线同期 +27.7 km² 改善 37%；剩余主因 = 无显式排水网 + 退水期净雨 25.7 mm 持续补给。v1 因 13 d 净雨切片 bug 作废留痕（`*_v1invalid`）。
 8. **质量门 SSOT 刷新**：**PASS 66 / FAIL-EXPLAINED 4 / FAIL 0（70 run）**（+4 PASS：R1/R2a/R2/R3；+1 PASS：R3 13d 退水窗；+1 FE：R4）；g15 公式与政策未改。
-9. **工程**：新增脚本 12 个（stage3×8 + stage6×4）、共用底座 2 个、测试 6 文件 76 项、ADR-0019~0022、`configs/cases/jiulong_hydro.yaml`；全量回归 512+ 过（见门禁矩阵）。作废 run 留痕：`*_v1invalid/_v1invalid_v2/_v1invalid_v3`（rain 首行缺换行 / QVAR 三格段口径 / 中途换强迫），均被 g15 EXCLUDE_MARKERS 排除。
+9. **工程**：新增脚本 12 个（stage3×8 + stage6×4）、共用底座 2 个、测试 6 文件 76 项、ADR-0019~0022、`configs/cases/jiulong_hydro.yaml`；当次全量回归 512+ 过（现役计数见 §2 门禁矩阵）。作废 run 留痕：`*_v1invalid/_v1invalid_v2/_v1invalid_v3`（rain 首行缺换行 / QVAR 三格段口径 / 中途换强迫），均被 g15 EXCLUDE_MARKERS 排除。
 10a. **DEM_REPAIRED v2（§4.4/M1 后续项已落地，2026-11-23）**：`prepare_jiulong_dem_layers_v2.py` —— 负值区 7,838 格（313.52 km²）弃 BFS 平推、改 GLO-30 基准对齐融合（offset −22.766 m，G7 未闭合的量化体现）；LAND/SEA/NODATA 三掩膜独立落盘；融合体积 −3,011 m³（洪峰蓄量 2.36 亿 m³ 的 1.3e-5，3% 上限内）；7,498 格近岸负值按 GLO-30 证据保留不钳零（reason=3）；契约检查（S1 保护/HYDRAULIC=REPAIRED/融合仅限未解析负值）全过；单测 3 项 + v1 契约 43 项全过；catalog `jiulong_dem_layers_v2.json`。本层为候选输入，未用于任何 run 重算。
-10b. **发布包 v10**：floodviz `v10-20261122` 已构建并通过 validate --full（3 案例 / 17 run + 6 产品图层）；新增 5 个久隆 run 入包（R1/R2a/R2/R3 + R3 13d 退水窗），R4 感潮 FAIL-EXPLAINED 不入包；`configs/cases/jiulong.yaml` 同步 5 条目；`_select_runs` 口径：`optional: true` 的 run 不进包（recession/100 m 维持该设计）。成因分层视图已入 v10：`patch_class` 新 kind（8 类离散色带+类名图例，修复产品 run 误用深度色带的既有缺陷）、4 项新单测（floodviz 263 passed）、审计件 `flood_visualization/data/catalog/jiulong_patch_attribution_layer.json`（逐类像元数 P01=196/P02=3542/P03=32/P04=2698/P05=0/P06=15/P07=74/P08=24，与父项目 class_summary 吻合）。
+10b. **发布包 v10**：floodviz `v10-20261122` 已构建并通过 validate --full（3 案例 / 24 个 run 条目 = 17 个情景 run + 7 个产品图层）；新增 5 个久隆 run 入包（R1/R2a/R2/R3 + R3 13d 退水窗），R4 感潮 FAIL-EXPLAINED 不入包；`configs/cases/jiulong.yaml` 同步 5 条目；`_select_runs` 口径：`optional: true` 的 run 不进包（recession/100 m 维持该设计）。成因分层视图已入 v10：`patch_class` 新 kind（8 类离散色带+类名图例，修复产品 run 误用深度色带的既有缺陷）、4 项新单测（floodviz 263 passed）、审计件 `flood_visualization/data/catalog/jiulong_patch_attribution_layer.json`（逐类像元数 P01=196/P02=3542/P03=32/P04=2698/P05=0/P06=15/P07=74/P08=24，与父项目 class_summary 吻合）。
 10. **环境记录（2026-11-22）**：E 盘出现会话级大写限流（>64 KB 逐级收紧至 <8 KB 后部分恢复），R2/R3/R4 改在 D 盘临时工作根执行后按 ≤24 KB 分块回拷；r4 需单一 bdyfile（qinjiang+qztide 并入 inflow_tide.bdy）。
 11. **待办**：IMERG 凭证已配（.netrc+GES DISC 应用已批准），2026-11-22 当晚网络 TLS 间歇未通，通后按 ADR-0019 换 run tag 升级 R1/R3 降雨；陆屋站实测资料获取（方案 A）；display_qc 双门控修订（ADR-0021 §5）。
 
@@ -486,15 +486,15 @@ scope: project
 | 阶段 0 授权数据/地形/独立观测/RACI | G7/G12/许可/RACI 未闭合；ADR-0004 降级 | **未满足（降级接受）** |
 | 阶段 1 久隆基线（结构/河槽/边界账目） | DEM/ERA5/糙率先验；无堤防/桥涵/站门资料；实际 200 m | **部分** |
 | 阶段 2 七项基准 + 结构定量 | B1 PASS；B2 质量 FAIL；B3 部分；B4 PASS；B5 性能；B6/B7 诊断；B8 PASS_PARTIAL（B8a PASS / B8b 不一致→ADR-0008 定版约束） | **未过门（B2 明示）** |
-| 阶段 3 久隆率定/独立验证 | 5 情景 + ztide；无近洪峰观测；**退水期 S1 弱验证已做（WEAK，方向相反证据已登记）**；网格/时间步敏感性已补 | **部分/未过门** |
+| 阶段 3 久隆率定/独立验证 | 5 情景 + ztide + 双驱动 R0–R4；无近洪峰观测；**退水期 S1 弱验证已做（WEAK，方向相反证据已登记）**；网格/时间步敏感性已补 | **部分/未过门** |
 | 阶段 4 宁明河道—漫滩/喀斯特/验证 | 12 独立配置；时刻切片 CSI 0.357；喀斯特有界情景（B3 强杠杆）；空间 Manning（B0 弱杠杆）；单事件 | **部分/未过门** |
 | 阶段 5 贵港区域 30 m + 局部 5 m + 单向接口 | 200 m 走廊基线 + **30 m 全域已完成（493.36 km²）** + 等宽 100 m 对照；站区局部 5 m/接口未执行 | **部分（区域 30 m 已达成，局部降级）** |
 | 阶段 6 业务化 | run_case/RUNBOOK 雏形（入口缺陷已修）；无在线源/滚动/容错/SLA | **未执行** |
 | 13.1 数据门禁 | input_manifest 已扩至贵港/S1/GF-3/配置/ERA5 延长段；许可/G7/G12 仍开放 | **部分** |
-| 13.2 质量守恒 | **66 PASS / 4 FAIL-EXPLAINED（z05/z10/ztide/r4）/ 0 FAIL**（70 个 run，2026-11-24 权威 SSOT `data/catalog/mass_recheck_g15.json`；含久隆双驱动 R0–R3、SGC 亚网格河道、贵港水力河槽与排水探针、学术 Phase H 产品 run） | **部分（有明示不合格）** |
+| 13.2 质量守恒 | **66 PASS / 4 FAIL-EXPLAINED / 0 FAIL**（70 个 run，SSOT `data/catalog/mass_recheck_g15.json`，`computed_utc=2026-11-25T04:59:28Z`；含久隆双驱动 R0–R3、SGC 亚网格河道、贵港水力河槽与排水探针、学术 Phase H 产品 run）。四项不合格全在久隆：`scen_z05_200m` / `scen_z10_200m` / `scen_ztide_200m` / `scen_r4_dual_sgc_tide_200m_sv6h`（感潮 HVAR，G13 同病），**不计通过** | **部分（有明示不合格）** |
 | 13.3 水文/空间验证 | 无连续水位/流量过程；宁明时刻切片 CSI 0.357；贵港 S1 足迹 CSI 0.043；久隆退水 S1 WEAK（基线 0.018 vs GA 重跑 0.018 vs R3 双驱动 0.043，S1 假警报压降 23.5%）；**贵港 09-12 单景 S1 四情景 CSI 0.076~0.164、FAR 0.817~0.921（仅足迹内，非硬门）** | **未满足** |
 | 13.4 性能/复现/站区安全 | **三案例冻结重跑逐位一致（2026-10-27）**；run_manifest 模块全接入；无站区业务阈值 | **部分（复现项已闭合）** |
-| 十三章测试 | **593 passed + 3 skipped，0 failed**（2026-11-25 全量 `pytest` 实跑通过；含 Phase K 新增 4 项耦合测试与 4 项 g15 白名单回归） | **达标** |
+| 十三章测试 | **587 passed + 3 skipped，0 failed**（2026-11-25 全量 `pytest` 实跑通过；含 Phase K 新增 4 项耦合测试与 4 项 g15 白名单回归。删除 6 个根级遗留生成器后由 593 降至 587，减少项即 `test_no_host_paths` 按文件参数化的那 6 个用例） | **达标** |
 | 十六章 ADR | **ADR-0001~0025 全量落盘（新增 0023 官方水位核验、0024 PipeNetGen 虚拟管网耦合、0025 三案例耦合物理重跑隔离算例口径）**，SSOT 与 README/MASTER 索引全同步 | **达标** |
 
 ## 3. 前轮已完成（Phase A/B 摘要，详见 git 历史/前版）
@@ -520,11 +520,11 @@ scope: project
 
 当前可交付："降级模式情景级成果 + Phase A/B/C/D 完整性与敏感性补课 + Phase E 久隆治理 + Phase F/G 贵港水力河槽与排水治理 + Phase H 学术成果驱动改进（FAT/成因归因/集合概率） + Phase I 久隆钦江双驱动重构与耦合治理（ADR-0019~0022） + 明示的门禁状态"。
 
-**当前最新证据链（2026-11-24 快照）**：
+**当前最新证据链（2026-11-25 快照，含 Phase J/K）**：
 1. **久隆钦江双驱动重构与河道耦合**：实现小时级 $Q(t)$（洪峰 1,398 m³/s、注入 97 Mm³）与 GA 净雨（50.7 mm）A1/A2 分账防重复计量；SGC 亚网格河道（宽 140 m、满槽深 4.5 m）免除人工刻蚀，四道护栏通过；主情景 R3 湿面积 217.52 km²，较粗雨基线净压降 45.7 km²；S1 CSI 提升至 0.043；P01–P08 对 1,107 个斑块实现 100% 物理成因归因。
 2. **贵港水力约束河槽与排水连通**：基于水力几何 Manning 反演构建五套重构 DEM，输水核验全过；实施入渗 3.0 mm/h 探针，S1 CSI 提升至 0.196；明确外洪（20.4 km²）与降雨积水（185.4 km²）归因分界。
-3. **学术驱动产品体系**：FAT 淹没历时产品覆盖全量 66 PASS run；建立贵港成因空间归因图与宁明集合超越概率图；Copula 联合阈值与 GR4J/ATL13 探针已完成基线分析。
-4. **质量门与自动化测试**：质量门全表权威 SSOT 为 **66 PASS / 4 FAIL-EXPLAINED / 0 FAIL（70 run，全量闭合）**，派生层 `display_qc` 零污染；全量自动化测试 **593 passed + 3 条件 skipped，0 failed**（实跑验证）。在业务授权数据到位前，全部结果严格维持降级模式情景级定位，不得用于确定性业务预警或资产级安全判据。
+3. **学术驱动产品体系**：FAT 淹没历时产品当前覆盖 61 个 PASS run（2026-11-22 生成，尚未覆盖其后新增的 5 个久隆双驱动 run）；建立贵港成因空间归因图与宁明集合超越概率图；Copula 联合阈值与 GR4J/ATL13 探针已完成基线分析。
+4. **质量门与自动化测试**：质量门全表权威 SSOT 为 **66 PASS / 4 FAIL-EXPLAINED / 0 FAIL（70 run，全量闭合）**，派生层 `display_qc` 零污染；全量自动化测试 **587 passed + 3 条件 skipped，0 failed**（实跑验证）。在业务授权数据到位前，全部结果严格维持降级模式情景级定位，不得用于确定性业务预警或资产级安全判据。
 5. **三案例管网耦合物理重跑（Phase K，ADR-0025）**：贵港/久隆/宁明在 `outputs/pipenet/<case>/run_{baseline,coupled}_*/` 下真实调用 `lisflood.exe` 完成 1D-2D 管网耦合重跑，六个算例全部通过 `E_mass ≤ 1e-3`（耦合值与基线同量级）。四维评估显示贵港城区湿面积 −12.62%、久隆 −9.00%、宁明 −0.19%（宁明为外来顶托主导，属物理机制而非失效）。**`outputs/pipenet` 下 6 个 `res.mass` 未污染质量门 SSOT**（`g15` 白名单机制实测确认）。
 
 ### 三案例管网耦合重跑的关键限度（必须随结论披露）

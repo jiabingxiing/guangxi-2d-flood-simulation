@@ -20,11 +20,12 @@
 > 不要直接双击 `index.html`。浏览器会阻止 `file://` 页面读取 `catalog.json`。
 > 启动器使用 Windows 自带 PowerShell。本地服务只绑定 `127.0.0.1`。
 > 端口 8765 被占用时，启动器会自动尝试 8766–8775。
+> 该目录内容为 `v10-20261122`（3 案例 / 24 run，其中 17 个情景 run + 7 个研究性产品图层）。
 
 ## 2. 从源数据重新构建
 
-> **已有发布包也可用**：`scripts\start_local.cmd` 会服务最新的 `v3-20261028`，
-> 浏览器打开 <http://127.0.0.1:8765/index.html> 即可。下面是从零重建的完整流程。
+> **已有发布包也可用**：`scripts\start_local.cmd` 会服务最新的 `outputs/web_bundle/` 包（当前为 `v10-20261122`），
+> 浏览器打开 <http://127.0.0.1:8765/index.html> 即可。下面是从零重建的完整流程（`<id>` 换成新包名）。
 
 ```powershell
 cd 2d_hydro_project\flood_visualization
@@ -32,17 +33,19 @@ $env:PYTHONUTF8 = '1'
 
 uv sync --frozen                                  # 安装/校验锁定依赖（含 dev）
 uv run python scripts/fetch_vendor.py             # 首次：抓固定版本前端资源
-uv run python -m floodviz prepare --config configs/default.yaml --bundle-id v3-20261028
-uv run python scripts/build_web.py --bundle-id v3-20261028
-uv run python scripts/sync_standalone.py --bundle-id v3-20261028   # 同步双击版（保留启动器）
-uv run python -m floodviz validate --bundle outputs/web_bundle/v3-20261028 --full
+uv run python -m floodviz inventory --config configs/default.yaml          # 先确认源 run 全部 OK
+uv run python -m floodviz prepare --config configs/default.yaml --bundle-id <id>
+uv run python scripts/build_web.py --bundle-id <id>
+uv run python scripts/sync_standalone.py --bundle-id <id>   # 同步双击版（保留启动器）
+uv run python -m floodviz validate --bundle outputs/web_bundle/<id> --full
 ```
 
 然后双击或在终端运行：
 
 ```powershell
-scripts\start_local.cmd              # 服务最新包（v3-20261028）
-scripts\start_local.cmd v2-20261027  # 回滚到上一版
+scripts\start_local.cmd              # 服务最新包
+scripts\start_local.cmd v10-20261122 # 指定包
+scripts\start_local.cmd v9-20261122  # 回滚到上一交付版
 ```
 
 浏览器打开 **<http://127.0.0.1:8765/index.html>**（只绑回环，不对局域网开放）。
@@ -79,7 +82,7 @@ flood_visualization/
 ├── web/                 # 静态前端（无构建链，vendor 固定版本，禁 CDN）
 ├── scripts/             # 抓 vendor、构建页面、schema 自检、独立复核、启动器
 ├── schemas/             # 发布包 JSON Schema
-├── tests/               # 单元 210 / 集成 38 / e2e 29（共 277 passed）
+├── tests/               # 共 295 项（单元 210 / 集成 45 / e2e 30 / 根级产品图层测试）
 ├── data/                # 只读引用、裁剪产物、外部条款（二进制不入库）
 ├── docs/                # 数据契约、许可、实施台账、构建与验收报告、运行手册
 └── outputs/web_bundle/  # 发布包（不入库；v1 基线 + v2 交付版并存以支持回滚）
@@ -123,14 +126,16 @@ manifest.json                          # 内容哈希、构建参数、质量与
 
 ---
 
-## 7. 交付状态（2026-10-27）
+## 7. 交付状态
 
-| 项 | 结果 |
+> 下表是 **2026-10-27 `v2-20261027` 首交付**的历史实测快照，不是当前状态。当前交付包为 `v10-20261122`（3 案例 / 24 run，466 MB / 3,606 文件，`validate --full` 通过），当前测试为 `263 passed, 32 deselected`（`-m "not slow and not e2e"`）。
+
+| 项 | 结果（2026-10-27，`v2-20261027`） |
 |---|---|
 | 发布包 `v2-20261027` | 683.9 MB，2 912 文件，三地 116 帧（久隆 21 / 宁明 19+19 / 贵港 57） |
 | 发布门禁 `validate --full` | **ok=True，16 945 项检查 0 失败** |
 | 数值/统计/空间 | 抽样 3 364 点误差 **0.0 m**；116 帧面积复算相对差 **0.0**；贴图残差 ≤**0.338 源像元** |
-| 自动化测试 | **277 passed**（单元 210 + 集成 38 + e2e 29） |
+| 自动化测试 | **277 passed**（单元 210 + 集成 38 + e2e 29；当前 295 项，见 §4） |
 | 浏览器 e2e | **29 条**：SPEC §10 的 18 条、图层矩阵 3 条、性能/资源/稳定性 8 条，全通过 |
 | 性能（真实核显，无头+GPU） | 首帧可交互 1.58 s ≤5 s；点查 p95 10.6 ms ≤200 ms；切帧 p95 81.2 ms ≤300 ms；播放 1.81 帧/s |
 | 回滚 | `v2-20261027` 与 `v3-20261028` 并存，启动器切换已验证；`v1-20261027` 已于 2026-10-28 按用户要求删除 |

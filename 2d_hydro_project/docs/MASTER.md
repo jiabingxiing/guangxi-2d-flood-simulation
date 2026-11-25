@@ -38,7 +38,7 @@ scope: project
 - **情景回算操作手册**：[RUNBOOK.md](RUNBOOK.md)
   - 覆盖宁明、久隆、贵港三地的情景组装、边界条件（BCI）、雨量驱动与运行调用。
 - **降雨产流与土壤下渗预处理**：[rainfall_runoff_preprocessor.md](rainfall_runoff_preprocessor.md)
-  - 运行 `scripts/stage3/run_rainfall_preprocessor.py` 生成物理净雨序列。
+  - 运行 `uv --directory 2d_hydro_project run python -m rainfall_runoff_preprocessor.run_preprocessor --case <jiulong|guigang|ningming>` 生成物理净雨序列（模块在工程根 `rainfall_runoff_preprocessor/`，不在 `scripts/` 下）。
 - **展示质控层生产与审计（Phase 1）**：
   - 久隆展示质控：`scripts/stage6/clean_jiulong_display.py`
   - 贵港展示质控：`scripts/stage6/clean_guigang_display.py`
@@ -46,7 +46,10 @@ scope: project
 - **质量门全量验证**：
   - `uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py`
 - **全量自动化测试**：
-  - `uv --directory 2d_hydro_project run python -m pytest`（实测 527 passed + 3 skipped）
+  - `uv --directory 2d_hydro_project run python -m pytest`（实测 587 passed + 3 条件 skipped，2026-11-25）
+- **官方水位核验与管网耦合（Phase J/K）**：
+  - `scripts/stage6/{validate_water_levels,compare_pipenet_inundation,evaluate_coupled_reruns,verify_five_province_algorithms}.py`
+  - 耦合算例落在 `outputs/pipenet/<case>/run_{baseline,coupled}_*/`，在质量门白名单外，不并入三案例 outputs（ADR-0025）
 
 ---
 

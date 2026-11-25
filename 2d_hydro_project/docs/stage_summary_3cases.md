@@ -18,8 +18,8 @@ scope: project
 全 run 自动复核（`data/catalog/mass_recheck_g15.json`）：**36 PASS、3 FAIL-EXPLAINED、0 FAIL**（2026-10-27 阶段快照，含复现/延长/等宽 run）。
 FAIL-EXPLAINED 为久隆 z05/z10/ztide（HFIX/HVAR 常湿激波 + G13 质量增益），**不计入通过数**；不再使用 N/A。
 
-> **口径时效**：本节数字为 2026-10-27 快照。当前权威值见 `data/catalog/mass_recheck_g15.json`
-> （2026-10-31 起为 43 PASS / 3 FAIL-EXPLAINED / 0 FAIL，46 run）。
+> **口径时效**：本节数字为 2026-10-27 快照。当前权威值只以 `data/catalog/mass_recheck_g15.json` 为准
+> （截至 2026-11-25 为 66 PASS / 4 FAIL-EXPLAINED / 0 FAIL，70 run）。
 
 | 算例 | E_mass | 判定 |
 |---|---|---|

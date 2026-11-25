@@ -1,8 +1,9 @@
 # 光学与 SAR 显示资产登记（flood_visualization）
 
 > 生成时间 UTC：2026-10-27T09:24:37+00:00 ｜ 生成命令：`uv run python scripts/prepare_optical.py --layer optical --case jiulong --force`
-> 机器可读清单：[data/processed/assets/manifest.json](data/processed/assets/manifest.json)；契约见 [SPEC.md §9](../SPEC.md)。
+> 机器可读清单：[data/processed/assets/manifest.json](../data/processed/assets/manifest.json)；契约见 [SPEC.md §9](../SPEC.md)。
 > 本文件由 `scripts/prepare_optical.py` 按实测结果生成；数字为本次运行实测值。
+> 下文各资产的「来源 / 本地栅格」路径是 **2026-10-27 生成时的登记值**；存储随后迁到 `E:\NWKYYSJZX\2026\` 且上级目录改名，`D:/.../2026年工作/...` 已不存在。现役位置以 `GX_OPTICAL_ROOT` 与父项目 `scripts/common/paths.py` 解析为准，不要照抄这些字符串。
 
 ## 1. 资产总表
 
@@ -260,7 +261,7 @@
 ## 6. 许可与署名
 
 - Sentinel（S2 光学、S1 SAR）：Copernicus Sentinel Data Legal Notice，免费开放，允许复制/传播/修改/组合。
-  - 条款 PDF：[Sentinel_Data_Legal_Notice.pdf](data/external/optical/licenses/Sentinel_Data_Legal_Notice.pdf)（sha256 `fa2955ff48a1d82e…`）。
+  - 条款 PDF：[Sentinel_Data_Legal_Notice.pdf](../data/external/optical/licenses/Sentinel_Data_Legal_Notice.pdf)（sha256 `fa2955ff48a1d82e…`）。
 - 原始数据公开传播署名：`Copernicus Sentinel data [Year]`；
 - 本子项目产物为裁剪/重采样/遮罩后的修改版，署名：`Contains modified Copernicus Sentinel data [Year]`（宁明 2026，贵港/久隆 2024）。
 - GF-3（宁明 SAR）与本地 RGB（久隆光学）：授权未核实，仅限内部研究展示；公开再分发前必须补齐授权确认。

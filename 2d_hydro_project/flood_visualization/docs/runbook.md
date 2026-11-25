@@ -13,7 +13,7 @@
 3. 浏览器会自动打开 `http://127.0.0.1:8765/index.html`。
 4. 关闭命令窗口即可停止服务。
 
-目录已包含 **v9-20261122** 发布包的全部资源（450 MB、3289 文件 + 4 启动器；3 案例 / 12 run + 6 研究性产品图层）。不要双击 `index.html`。直接使用 `file://` 会被浏览器的安全策略阻止 `fetch catalog.json`，页面会显示加载失败。
+目录已包含 **v10-20261122** 发布包的全部资源（466 MB、3,610 文件含 4 个启动器；3 案例 / 24 run，其中 17 个情景 run + 7 个研究性产品图层）。不要双击 `index.html`。直接使用 `file://` 会被浏览器的安全策略阻止 `fetch catalog.json`，页面会显示加载失败。
 启动器使用 Windows 自带 PowerShell `HttpListener`。不需要管理员权限。端口 8765 被占用时，会自动尝试 8766–8775。
 
 > 备用启动：`powershell.exe -NoProfile -ExecutionPolicy Bypass -File server.ps1 -Port 8766`。
@@ -28,8 +28,8 @@
 正确做法：
 
 ```powershell
-uv run python scripts/sync_standalone.py --bundle-id v6-20261029 --dry-run
-uv run python scripts/sync_standalone.py --bundle-id v6-20261029
+uv run python scripts/sync_standalone.py --bundle-id v10-20261122 --dry-run
+uv run python scripts/sync_standalone.py --bundle-id v10-20261122
 ```
 
 脚本行为：
@@ -68,17 +68,15 @@ uv run python scripts/fetch_vendor.py    # 抓固定版本 MapLibre 5.24.0 / Pro
 
 > vendor 缓存留在 `data/external/vendor-cache/`；断网重建时用 `--offline`。
 
-## 4. 发布包版本现状（2026-11-22 更新）
+## 4. 发布包版本现状（2026-11-25 更新）
 
-**当前交付包**：`v9-20261122`（3 案例 / 12 run + 6 研究性产品图层，450 MB、3289 文件；validate --full 全组通过、30 分钟连续播放发布门通过）。
-　新增 1：配置齐平——久隆 GA 净雨重跑 `scen_free_200m_dt2p5_sv6h_recession_ga_v1` 入包（v8 仅 1 个久隆 run）。
-　新增 2：Phase H 研究性产品图层（ADR-0015~0018，role=product 单帧伪 run）——
-　　贵港：FAT 首湿时刻 / 首达 0.3 m 情景阈值时刻 / 有雨/无雨差分归因（origin_class）；
-　　宁明：集合超越概率 P(wd>0.05) / P(wd>0.3)（9 run 全 PASS 成员）；
-　　久隆：FAT 首湿时刻。产品统计契约与水深一致，阈值语义由 `statistics.product.value_semantics` 声明（小时/概率/类别码，非水深）；全部带 research_product 标注，禁业务告警。
-　各案例默认层不变；产品图层可在网页 runSelect 下拉切换。
+**当前交付包**：`v10-20261122`（3 案例 / 24 个 run 条目 = 17 个情景 run + 7 个研究性产品图层，466 MB、3,606 文件；`validate --full` 全组通过）。
+　新增 1：久隆双驱动系列入包——`scen_r1_netrain_200m_sv6h_v3`、`scen_r2a_inflow_nocut_200m_sv6h_v4`、`scen_r2_inflow_sgc_200m_sv6h`、`scen_r3_dual_sgc_200m_sv6h`（现为久隆默认层）与 13 d 退水窗 `scen_r3_dual_sgc_rec13d_200m_sv6h`；R4 感潮 run 为 FAIL-EXPLAINED，不入包。
+　新增 2：久隆斑块成因分层视图 `product_jiulong_patch_class`（`patch_class` 新 kind，P01–P08 离散色带 + 类名图例；修复产品 run 误用深度色带的既有缺陷）。
+　既有产品图层（ADR-0015~0018，role=product 单帧伪 run）：贵港 FAT 首湿 / 首达 0.3 m 情景阈值 / 有雨无雨差分归因（origin_class）；宁明集合超越概率 P(wd>0.05) / P(wd>0.3)（9 run 全 PASS 成员）；久隆 FAT 首湿。
+　产品统计契约与水深一致，阈值语义由 `statistics.product.value_semantics` 声明（小时/概率/类别码，非水深）；全部带 research_product 标注，禁业务告警。产品图层可在网页 runSelect 下拉切换。
+**上一交付包**：`v9-20261122`（3 案例 / 18 个 run 条目 = 12 个情景 run + 6 个研究性产品图层，450 MB、3,289 文件）。
 **构建级回滚包**：`v8-20261102`。
-**上一交付包**：`v6-20261029`（100 m 真实DEM，104.2 MB、714 文件）。
 **数据级回滚包**：`v4-20261028`（200 m 旧代，已归档）。
 **历史归档**：`v2-20261027`、`v3-20261028`、`v4-20261028`。
 
@@ -90,25 +88,26 @@ uv run python scripts/fetch_vendor.py    # 抓固定版本 MapLibre 5.24.0 / Pro
 
 | 目录 | 内容 | 由谁读取 |
 |---|---|---|
-| `outputs/web_bundle/` | 当前可服务包：`v5-20261028`、`v6-20261029` | `start_local.cmd`、`prune_bundles.py` |
+| `outputs/web_bundle/` | 当前可服务包：`v10-20261122`、`v9-20261121`、`v9-20261122`、`v8-20261102`、`v7-20261031`、`v6-20261029`、`v5-20261028` | `start_local.cmd`、`prune_bundles.py` |
 | `outputs/_archive_bundles/` | 历史 200 m 包：`v2-20261027`、`v3-20261028`、`v4-20261028` | 仅人工回滚时使用 |
 
-`prune_bundles.py` **只扫描 `outputs/web_bundle/`**，归档目录不会被它删除。
+`prune_bundles.py` **只扫描 `outputs/web_bundle/`**，归档目录不会被它删除；最近两个 `bundle_id` 是硬下限。
 
 ### 4.2 交付包与回滚包不能混用
 
 | 包 | 数据代 | 用途 | 能恢复什么 |
 |---|---|---|---|
-| `v6-20261029` | 100 m 真实DEM | 交付 | — |
-| `v5-20261028` | 100 m 真实DEM | 构建级回滚 | 页面、资源、构建产物 |
+| `v10-20261122` | 久隆双驱动 + 成因分层 | 交付 | — |
+| `v9-20261122` | 100 m 真实DEM 族 | 上一交付 / 回滚 | 页面、资源、构建产物与同代数据 |
+| `v8-20261102` | 100 m 真实DEM 族 | 构建级回滚 | 页面、资源、构建产物 |
 | `v4-20261028` | 200 m 旧代 | 数据级回滚 | 200 m 旧模型数据与结果 |
 
-**关键事实（2026-10-30 实测）**：v5 与 v6 的 `numeric/` 共 506 个数值块**逐位一致，0 个不同**。v6 只比 v5 多 8 张品牌图片。
+**历史事实（2026-10-30 实测）**：v5 与 v6 的 `numeric/` 共 506 个数值块**逐位一致，0 个不同**。v6 只比 v5 多 8 张品牌图片。
 
 因此：
 
-- 页面或资源出错 → 退回 `v5`，有效。
-- **数据或成果出错 → 退回 `v5` 无效**，看到的仍是同一份模型数据。必须退回 `v4`。
+- 页面或资源出错 → 退回上一同代包，有效。
+- **数据或成果出错 → 退回同代包无效**，看到的仍是同一份模型数据。必须退回 `v4`。
 
 ### 4.3 构建发布包（**顺序不可颠倒**）
 
@@ -128,7 +127,7 @@ uv run python scripts/build_web.py --bundle-id <NEW_BUNDLE_ID>
 uv run python -m floodviz validate --bundle outputs/web_bundle/<NEW_BUNDLE_ID> --full
 ```
 
-> 历史示例：v6 的构建命令与上面一致，仅把 `<NEW_BUNDLE_ID>` 换成 `v6-20261029`。
+> 历史示例：v10 的构建命令与上面一致，仅把 `<NEW_BUNDLE_ID>` 换成 `v10-20261122`。
 
 **为什么顺序不能变**：`validate` 要求 `manifest.web.ready=true`（否则告警"页面未就绪"）；
 `build_web` 要求包内已有 `manifest.json`（由 `prepare` 写出）。
@@ -149,9 +148,9 @@ uv run python -m floodviz validate --bundle outputs/web_bundle/dev1
 ## 5. 启动与访问
 
 ```powershell
-scripts\start_local.cmd                 # 服务最新版包（当前为 v8-20261102）
-scripts\start_local.cmd v8-20261102     # 服务指定包
-scripts\start_local.cmd v5-20261028     # 构建级回滚
+scripts\start_local.cmd                 # 服务最新版包（当前为 v10-20261122）
+scripts\start_local.cmd v10-20261122    # 服务指定包
+scripts\start_local.cmd v9-20261122     # 回滚到上一交付
 $env:PORT=8766; scripts\start_local.cmd # 换回环端口
 ```
 
@@ -184,12 +183,12 @@ Get-ChildItem outputs\_archive_bundles -Directory | Sort-Object Name
 只改启动器目标，不删新包、不改旧包。
 
 ```powershell
-scripts\start_local.cmd v5-20261028
+scripts\start_local.cmd v9-20261122
 ```
 
-适用场景：v6 页面报错、资源 404、样式错乱、JS 异常。
+适用场景：v10 页面报错、资源 404、样式错乱、JS 异常。
 
-**不适用**：数据或模型结果错误。因为 v5 与 v6 的数值块逐位相同。
+**不适用**：数据或模型结果错误时需要回到 200 m 旧代时，见 §6.3。
 
 ### 6.3 数据级回滚（数据/成果问题）
 
@@ -207,9 +206,9 @@ scripts\start_local.cmd v4-20261028
 
 **回滚后注意**：
 
-- `v4` 是 200 m 旧代，run 集合与 v6 不同（`scen_free_200m_sv6h`、`scen_yagi_q11500_30m_b5` 等）。
+- `v4` 是 200 m 旧代，run 集合与 v10 不同（`scen_free_200m_sv6h`、`scen_yagi_q11500_30m_b5` 等）。
 - `v4` 的验证记录只有基础校验，无 `gate_summary`；不得把它当"已通过全量门"引用。
-- 完成对照后，把 `v4` 移回归档目录，保持 `web_bundle/` 只有 v5/v6。
+- 完成对照后，把 `v4` 移回归档目录，保持 `web_bundle/` 只含 v5 及以上的交付代。
 
 ### 6.4 归档包清单
 
@@ -220,6 +219,8 @@ scripts\start_local.cmd v4-20261028
 | `v4-20261028` | 200 m | 2 960 | 660.4 MB | `outputs/_archive_bundles/` |
 | `v5-20261028` | 100 m 真实DEM | 706 | 94.5 MB | `outputs/web_bundle/` |
 | `v6-20261029` | 100 m 真实DEM | 714 | 104.2 MB | `outputs/web_bundle/` |
+| `v9-20261122` | 100 m 真实DEM 族 | 3 289 | 450 MB | `outputs/web_bundle/` |
+| `v10-20261122` | 久隆双驱动 + 成因分层 | 3 606 | 466 MB | `outputs/web_bundle/` |
 
 归档验证记录（2026-10-30 实测）：
 
@@ -270,7 +271,7 @@ uv run python -m pytest -m "not slow and not e2e" -q   # 单元 + 集成（约 5
 uv run python -m pytest tests/e2e -m e2e -q            # 浏览器 e2e（约 60 s，自动起 8790 端口服务）
 uv run python -m pytest tests/e2e -m slow -q           # 性能与资源完整性（约 2–3 min）
 uv run python scripts/check_schemas.py                 # 契约示例对 schema 自检
-uv run python scripts/verify_bundle.py outputs/web_bundle/v6-20261029 --samples 40   # 独立验收（Lead 侧）
+uv run python scripts/verify_bundle.py outputs/web_bundle/v10-20261122 --samples 40   # 独立验收（Lead 侧）
 ```
 
 e2e 端口约定：**8765 交付启动器、8790 e2e、8788 web 组开发**。占用会直接报错。

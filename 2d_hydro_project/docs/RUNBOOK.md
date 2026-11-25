@@ -13,10 +13,10 @@ scope: project
 ## 0. 前置条件
 
 - 模型可执行：`models/lisflood-fp-8.1/LISFLOOD-FP-trunk/lisflood.exe`（w64devkit 构建，含 _WIN32 对齐补丁）。
-- 地形：`D:\NWKYYSJZX\2026年工作\0731 五省区DEM\广西\广西.tif`（公开类数据；**沿海平原负值=垃圾值 G16**，宁明/贵港走廊实测零负值）。
+- 地形：源 DEM 由 `scripts/common/paths.py` 解析，顺序 `GX_DEM_SOURCE` → `configs/paths.local.yaml` → 项目内 `data/raw/dem_source/广西.tif`（本机为目录联接，指向 `E:\NWKYYSJZX\2026\0101 五省区DEM\广西`）。公开类数据；**沿海平原负值=垃圾值 G16**，宁明/贵港走廊实测零负值。旧文档里的 `D:\NWKYYSJZX\2026年工作\0731 五省区DEM\...` 是迁移前登记路径，已不存在。
 - 降雨：Open-Meteo ERA5（≤8 天分段；缓存于 `data/catalog/probes/`）。
-- 验证数据：宁明 GF-3 水体（`data/interim/ningming/water_*.tif`）+ 4 站月水位；贵港站公开洪峰；S1 六景（`E:\S1_gxhydro\`）。
-- 凭证：Copernicus Dataspace 在 `2d_hydro_project/.env`（gitignored，勿入库）。
+- 验证数据：宁明 `data/interim/ningming/water_*.tif` + 4 站月水位；贵港站公开洪峰；S1 水体见 `data/processed/s1_water/`（外部原始景在 `E:\S1_gxhydro\`）。
+- 凭证：Copernicus Dataspace 在 `2d_hydro_project/.env`（gitignored，勿入库）；IMERG 另需 `.netrc`。
 
 ## 1. 标准命令（统一入口）
 
@@ -83,10 +83,16 @@ uv run python scripts/stage6/audit_jiulong_coupling.py           # 耦合守恒�
 uv run python scripts/stage6/diagnose_jiulong_patch_attribution.py # P01–P08 斑块成因归因
 
 # 学术成果驱动产品生成（Phase H，ADR-0015~0018）：
-uv run python scripts/stage6/make_fat_products.py                # 全量 66 PASS run FAT/历时 GeoTIFF
+uv run python scripts/stage6/make_fat_products.py                # FAT/历时 GeoTIFF（当前覆盖 61 run，重跑可补齐新 run）
 uv run python scripts/stage6/make_genesis_attribution.py         # 贵港成因空间归因图
 uv run python scripts/stage6/ensemble_probability.py             # 宁明集合超越概率
 uv run python scripts/stage6/copula_thresholds.py               # Copula 联合阈值与 Bootstrap CI
+
+# 官方水位核验与管网耦合（Phase J/K，ADR-0023~0025）：
+uv run python scripts/stage6/validate_water_levels.py            # ΔH / 相对涨水核验
+uv run python scripts/stage3/build_synthetic_pipenet.py          # 虚拟管网构建（合成资产）
+uv run python scripts/stage3/run_pipenet_coupled_lisflood.py     # 1D-2D 耦合实跑（写入 outputs/pipenet/）
+uv run python scripts/stage6/evaluate_coupled_reruns.py          # 四维评估（削减/斑块/体积/机制判读）
 ```
 
 ## 2. 质量门（每个 run 必查）
@@ -95,7 +101,7 @@ uv run python scripts/stage6/copula_thresholds.py               # Copula 联合�
 - **E_mass（终稿 13.2）**= |Ve−V0−Vrain−(∫Qin−∫Qout)dt| / max(V0+Vrain+∫Qin,1) ≤ 1e-3；
   工具 `scripts/stage3/g15_mass_recheck.py`（自动扫描全部有效 run）。
 - HFIX/HVAR 海（潮）边界情景超 1e-3 记 **FAIL-EXPLAINED**（G13 常湿激波质量增益），**不计入通过数**；不再使用 N/A-HFIX。
-- 当前全表：**66 PASS、4 FAIL-EXPLAINED（久隆 z05/z10/ztide/r4）、0 FAIL**（70 个 run）。权威值以 `data/catalog/mass_recheck_g15.json` 为准。
+- 当前全表：**66 PASS、4 FAIL-EXPLAINED、0 FAIL**（70 个 run）。四个不合格项全在久隆：`scen_z05_200m`、`scen_z10_200m`、`scen_ztide_200m`、`scen_r4_dual_sgc_tide_200m_sv6h`（感潮 HVAR，G13 同病）。贵港 `chhyd_d14_r4_*` 是排水第四轮，属 PASS，勿与该 r4 混淆。权威值以 `data/catalog/mass_recheck_g15.json` 为准。
 - 运行秒退（exit −1）优先查 run.log：多为时刻序列非递增（雨/潮写入已加断言防护）。
 
 ## 3. 已固化的三个坑（勿回退）
@@ -117,12 +123,12 @@ uv run python scripts/stage6/copula_thresholds.py               # Copula 联合�
 | 内容 | 位置 |
 |---|---|
 | 三案例汇总 | `docs/stage_summary_3cases.md` |
-| 终稿报告（Word） | `docs/final_report.md` / `final_report.docx` |
+| 终稿报告（Word） | `docs/final_report.md` / `final_report.docx`（md 是真源；改完跑 `python rebuild_final_report_docx.py` 重生成 docx） |
 | 情景产品包（水深/首次到达/峰值时刻/历时） | `outputs/products/<site>/*.tif` + `products_summary.json`（`scripts/stage6/make_products.py`；到达=首个 `wd>0.05` 快照，历时=`res.totaltm`） |
 | 冻结输入哈希清单 | `data/catalog/input_manifest.json`（`scripts/stage0/make_input_manifest.py`；输入变更后重算并评估重跑范围） |
 | 可复现测试 | `data/catalog/reproducibility_test.json`（三案例冻结重跑逐位一致，`scripts/stage3/repro_recheck.py`） |
 | 久隆退水期 S1 弱验证 | `data/catalog/jiulong_recession_s1.json` + `outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h_recession/` |
-| 自动化测试 | `tests/`（42 项，`uv run pytest tests/ -q`；2026-10-26 实测） |
+| 自动化测试 | `tests/`（全量 `uv run python -m pytest`，2026-11-25 实测 587 passed + 3 条件 skipped） |
 | 宁明敏感性/收敛 | `docs/stage3_ningming_ensemble.md` / `stage3_ningming_convergence.md` + `data/catalog/ningming_*.json` |
 | Phase B0 空间糙率 | `docs/stage3_manning.md` + `data/catalog/manning_sensitivity.json` |
 | Phase B2 结构连通性 | `docs/stage2_benchmarks.md` §6.1 + `outputs/bench/B8_levee/summary.json` |

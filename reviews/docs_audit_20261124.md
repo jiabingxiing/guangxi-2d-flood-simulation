@@ -8,6 +8,10 @@ scope: project
 
 # 项目文档只读审计与健康度检查报告（2026-11-24）
 
+> **处理状态（2026-11-25 复核）**：本报告是 2026-11-24 的只读审计快照，正文保持原样。
+> 其 D1（质量门计数漂移）与 D2（ADR 索引只到 0018）已在 2026-11-24/25 的 normalize + maintain 提交中修复；当前状态以 `AGENTS.md`、`2d_hydro_project/docs/README.md` 与 `data/catalog/mass_recheck_g15.json` 为准。
+> 本报告未覆盖其后新增的 ADR-0023~0025 与 Phase J/K。
+
 - **审计对象**：项目根目录、`plans/`、`2d_hydro_project/docs/`（含 `adr/`）、`2d_hydro_project/data/catalog/`、`2d_hydro_project/flood_visualization/docs/`、`reviews/`
 - **审计基准**：`documentation-standard` skill、Diátaxis 架构、SSOT 原则、质量门（G15）
 - **审计日期**：2026-11-24

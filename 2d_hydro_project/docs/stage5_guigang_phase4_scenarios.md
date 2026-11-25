@@ -38,7 +38,7 @@ scope: project
 | dualloss_v1 | 0 | 4,294.5 s（71.6 min） | 4,293 s | 42.4 MB | 7.290e-05 | PASS |
 | rainloss_high_v1 | 0 | 4,280.5 s（71.3 min） | 4,277 s | 42.4 MB | 6.241e-05 | PASS |
 
-g15 质量门全表：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（原 43 PASS，新增 3 个 PASS）。
+g15 质量门全表（2026-11-02 当次）：**46 PASS / 3 FAIL-EXPLAINED / 0 FAIL**（原 43 PASS，新增 3 个 PASS）。现役全表以 `data/catalog/mass_recheck_g15.json` 为准。
 
 ## 3. res.max 汇总（全时段最大值场）
 

@@ -14,7 +14,7 @@ scope: project
 
 ## 导航索引（Diátaxis 架构）
 
-项目详细文档全景导航详见 **[2d_hydro_project/docs/MASTER.md](file:///e:/NWKYYSJZX/2026/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/2d_hydro_project/docs/MASTER.md)** 与 **[docs/MASTER.md](file:///e:/NWKYYSJZX/2026/1023%20%E4%B9%85%E9%9A%86%20%E8%B4%B5%E6%B8%AF%20%E5%AE%81%E6%98%8E%20%E4%BA%8C%E7%BB%B4%E6%B0%B4%E5%8A%A8%E5%8A%9B%E6%A8%A1%E6%8B%9F/docs/MASTER.md)**。
+项目详细文档全景导航详见 **[2d_hydro_project/docs/MASTER.md](2d_hydro_project/docs/MASTER.md)** 与 **[docs/MASTER.md](docs/MASTER.md)**。
 
 ## 三地情景
 
@@ -36,8 +36,10 @@ scope: project
 │   ├── configs/               # 情景配置；paths.example.yaml 为外部资源模板
 │   ├── data/catalog/          # 质量门 SSOT（mass_recheck_g15.json 等）
 │   ├── diagnostics/           # 久隆/贵港 诊断派生物（只读证据）
-│   ├── docs/                  # 文档总纲 MASTER.md、执行状态、ADR-0001~0022
+│   ├── docs/                  # 文档总纲 MASTER.md、执行状态、ADR-0001~0025
+│   ├── src/hydro_refine/      # 水位核验 / PipeNetGen 虚拟管网 / 1D-2D 耦合（ADR-0023~0025）
 │   ├── outputs/display_qc/    # 展示质控派生层（非物理重算）
+│   ├── outputs/pipenet/       # 三案例管网耦合物理重跑算例（质量门白名单外，ADR-0025）
 │   └── flood_visualization/   # 发布子工程 floodviz（只读父项目）
 ├── plans/                     # 技术路线与实施计划文档
 └── reviews/                   # 评审材料与审计报告
@@ -49,14 +51,17 @@ scope: project
 
 **66 PASS / 4 FAIL-EXPLAINED / 0 FAIL**（70 个 run，全量闭合）
 
+分布：久隆 21 run（17 PASS / 4 FAIL-EXPLAINED：z05、z10、ztide、r4 感潮）、贵港 26 run 全 PASS、宁明 23 run 全 PASS。`FAIL-EXPLAINED` 不计通过，**不得表述为「质量门全量通过」**。
+
 ## 验证入口
 
 ```bash
 # Python 运行前设 PYTHONUTF8=1（Windows 中文控制台）
-uv --directory 2d_hydro_project run python -m pytest                    # 主工程全量测试（527 passed + 3 skipped）
-uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py   # 质量门全表（66 PASS / 4 FAIL-EXPLAINED）
+uv --directory 2d_hydro_project run python -m pytest                    # 主工程全量测试（587 passed + 3 条件 skipped）
+uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py   # 质量门全表（66 PASS / 4 FAIL-EXPLAINED，70 run）
 uv --directory 2d_hydro_project run python scripts/stage6/validate_guigang_s1.py  # 贵港 S1 校验
-uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not slow and not e2e"  # floodviz 测试（259 passed）
+uv --directory 2d_hydro_project run python scripts/stage6/validate_water_levels.py  # 官方水位核验（ADR-0023）
+uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not slow and not e2e"  # floodviz 测试（263 passed）
 ```
 
 > 注意：`uv --directory 2d_hydro_project run pytest` 会因 trampoline 报错，必须用 `run python -m pytest`。
@@ -71,5 +76,5 @@ uv --directory 2d_hydro_project/flood_visualization run python -m pytest -m "not
 
 - 执行状态：`2d_hydro_project/docs/execution_status.md`
 - docs 总索引：`2d_hydro_project/docs/README.md`
-- 决策记录 ADR-0001~0018：`2d_hydro_project/docs/adr/`（0010 = 久隆直接降雨治理规范；0011~0014 = 贵港伪影/河槽/组合驱动/排水连通治理；0015~0018 = 学术借鉴口径、上游来水与降雨多源、垂直基准核证、概率化与联合阈值）
+- 决策记录 ADR-0001~0025：`2d_hydro_project/docs/adr/`（0010 = 久隆直接降雨治理规范；0011~0014 = 贵港伪影/河槽/组合驱动/排水连通治理；0015~0018 = 学术借鉴口径、上游来水与降雨多源、垂直基准核证、概率化与联合阈值；0019~0022 = 久隆双驱动重构；0023~0025 = 官方水位核验、PipeNetGen 虚拟管网、三案例管网耦合物理重跑口径）
 - 降雨下渗预处理器：`2d_hydro_project/docs/rainfall_runoff_preprocessor.md`

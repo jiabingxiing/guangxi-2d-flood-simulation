@@ -1,15 +1,15 @@
 {
   "meta": {
     "project": "广西久隆、贵港、宁明二维水动力推演模拟",
-    "updated_utc": "2026-10-29T03:45:00Z",
-    "status": "纠错后最终定版（Phase A~D完整成果）",
+    "updated_utc": "2026-11-25T09:00:00Z",
+    "status": "Phase A~K 成果（质量门与测试计数已按 2026-11-25 实测刷新）",
     "solver": "LISFLOOD-FP 8.1.0 (acceleration)",
     "mode": "公开数据降级模式 (ADR-0004/0005/0008)",
     "nature": "情景级推演成果，非确定性工程预警",
     "quality_gates": {
       "mass_conservation_gate": "E_mass <= 1.0e-3",
-      "mass_check_summary": "36 PASS / 3 FAIL-EXPLAINED / 0 FAIL",
-      "regression_tests": "42 passed",
+      "mass_check_summary": "66 PASS / 4 FAIL-EXPLAINED / 0 FAIL（70 run，权威值 data/catalog/mass_recheck_g15.json）",
+      "regression_tests": "587 passed + 3 skipped",
       "reproducibility_13_4": "三案例重跑 res.max 逐位一致 (BITWISE_IDENTICAL)"
     }
   },

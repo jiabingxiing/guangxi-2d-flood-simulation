@@ -1846,9 +1846,11 @@ def render_docs(manifest: dict, licenses: dict) -> None:
         "# 光学与 SAR 显示资产登记（flood_visualization）",
         "",
         f"> 生成时间 UTC：{manifest['generated_utc']} ｜ 生成命令：`{manifest['generator']['command']}`",
-        "> 机器可读清单：[data/processed/assets/manifest.json](data/processed/assets/manifest.json)；"
+        "> 机器可读清单：[data/processed/assets/manifest.json](../data/processed/assets/manifest.json)；"
         "契约见 [SPEC.md §9](../SPEC.md)。",
         "> 本文件由 `scripts/prepare_optical.py` 按实测结果生成；数字为本次运行实测值。",
+        "> 下文各资产的「来源 / 本地栅格」路径是生成本文件时的登记值；若文件早于存储迁移，"
+        "这些绝对路径可能已失效，现役位置以 `GX_OPTICAL_ROOT` 解析与父项目 `scripts/common/paths.py` 为准。",
         "",
         "## 1. 资产总表",
         "",
@@ -1919,7 +1921,7 @@ def render_docs(manifest: dict, licenses: dict) -> None:
             "- Sentinel（S2 光学、S1 SAR）：Copernicus Sentinel Data Legal Notice，免费开放，"
             "允许复制/传播/修改/组合。",
             "  - 条款 PDF：[Sentinel_Data_Legal_Notice.pdf]"
-            "(data/external/optical/licenses/Sentinel_Data_Legal_Notice.pdf)"
+            "(../data/external/optical/licenses/Sentinel_Data_Legal_Notice.pdf)"
             f"（sha256 `{(licenses.get('pdf_sha256') or '')[:16]}…`）。",
             "- 原始数据公开传播署名：`Copernicus Sentinel data [Year]`；",
             "- 本子项目产物为裁剪/重采样/遮罩后的修改版，署名："

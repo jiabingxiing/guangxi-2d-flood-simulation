@@ -48,7 +48,7 @@
 
 ### 耦合内核扩展（全像元分档与拓扑排口映射）
 
-#### [MODIFY] [drainage_kernel.py](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/src/hydro_refine/coupling/drainage_kernel.py)
+#### [MODIFY] [drainage_kernel.py](../2d_hydro_project/src/hydro_refine/coupling/drainage_kernel.py)
 - 扩展 `build_lisflood_drainage_bdy_and_bci(...)` 支持全量城区像元耦合边界构建（保留向后兼容默认签名）：
   1. **SGC / 排口冲突清洗**：支持传入可选 `exclude_mask_asc`（久隆 `sgc_width.asc > 0`）与 `(row, col)` 排口占位集合，保证同一个格网像元至多出现 1 个点源/点汇，且绝不把负汇落在河槽/排放口像元上。
   2. **拓扑对应排口分账（替换原硬编码前 4 个排口均分）**：利用 PipeNetGen `*_pipes.geojson` 中节点到所属 `outfall` 的连通映射（或空间最近排放口归属），计算每个下游排放口对应的实际汇水能力占比 $w_k$（$\sum_k w_k = 1$），并可选注入 PySWMM 1D 演算求得的单位脉冲滞后核（默认或直排严格满足 $\sum Q_{\text{sink}}(t) + \sum Q_{\text{outfall}}(t) = 0$）。
@@ -76,14 +76,14 @@ def build_fullgrid_coupled_forcing(
 
 ### 隔离重跑编排与质量/物理四维评估脚本
 
-#### [NEW] [run_pipenet_coupled_lisflood.py](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/scripts/stage3/run_pipenet_coupled_lisflood.py)
+#### [NEW] [run_pipenet_coupled_lisflood.py](../2d_hydro_project/scripts/stage3/run_pipenet_coupled_lisflood.py)
 - 负责在隔离目录 `outputs/pipenet/<case>/run_coupled_*/` 下安全组装并执行 `lisflood.exe`：
   1. **防覆盖门卫**：逐案调用 `guard_no_overwrite(out_run_dir)`；若目标已含 `results/res.mass` 立即阻断，要求切换 `--run-tag`；
   2. **零宿主绝对路径输入装配**：复制/硬链接或按相对目录生成 `dem.asc`、`manning.map`、`sgc_width.asc`、`sgc_bank.asc`（久隆），合并基准 `.bdy` 与管网 `.bdy` 为 `coupled.bdy`，写入含 `SYNTHETIC_DATA_NOT_REAL_ASSET=true` 与 `isolated_from_g15_ssot=true` 的 `meta.json` 和 `run_manifest.json`；
   3. **运行与守恒门控**：调用 `lisflood.exe -v run.par`（记录标准输出至 `run.log`），计算与 `g15_mass_recheck.py` 同口径的 `E_mass`，若超过 `1e-3` 即停机诊断（如微调 `safety_factor`）。
   4. 支持 `--dry-run`（仅生成耦合输入不启求解器，供自动化集成测试）与 `--case {guigang,jiulong,ningming,all}`。
 
-#### [NEW] [evaluate_coupled_reruns.py](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/scripts/stage6/evaluate_coupled_reruns.py)
+#### [NEW] [evaluate_coupled_reruns.py](../2d_hydro_project/scripts/stage6/evaluate_coupled_reruns.py)
 - 对三案例物理重跑结果 `run_coupled_*/results/res.max` 与逐帧 `res.XXXX` 进行全面对比（不依赖任何 `not_physical_recalculation` 假设）：
   1. **真实物理重算内涝对比**：对比耦合前后**城区内涝掩膜内**与**全域范围内**的湿面积（km²）、湿格数、最大/平均水深、总积水体积与 8 邻域孤立斑块数（重点核查久隆 13d 退水或 5d 末帧滞水斑块变化、宁明县城滞水削减、贵港城区内涝消退）；
   2. **河道受纳顶托检验**：检验将城区排涝水注入受纳河道排口后，主槽洪峰水位与河道淹没是否引发显著下游/河岸抬水；
@@ -96,15 +96,15 @@ def build_fullgrid_coupled_forcing(
 
 ### 回归隔离保障与文档更新
 
-#### [MODIFY] [test_coupling_pipeline.py](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/tests/integration/test_coupling_pipeline.py)
+#### [MODIFY] [test_coupling_pipeline.py](../2d_hydro_project/tests/integration/test_coupling_pipeline.py)
 - 增加两条集成测试：
   1. `dry-run` 测试 `run_pipenet_coupled_lisflood.py` 对贵港（多格分档）与久隆（`unique_series_per_cell` + SGC 掩膜剔除 `overlap_sgc=7`）的输入合并与水量闭合 $\sum Q_{\text{sink}} + \sum Q_{\text{outfall}} = 0$ 断言；
   2. 带小型 SGC 网格的 `lisflood.exe` 冒烟测试，验证 `SGC + P x y QVAR` 并行安全且 $E_{\text{mass}} \le 10^{-3}$。
 
-#### [MODIFY] [test_mass_recheck_g15.py](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/tests/regression/test_mass_recheck_g15.py)
+#### [MODIFY] [test_mass_recheck_g15.py](../2d_hydro_project/tests/regression/test_mass_recheck_g15.py)
 - 确保新增 `outputs/pipenet/*/run_coupled_*/results/res.mass` 后，主项目 `g15_mass_recheck.py` 仍严格保持 **`66 PASS / 4 FAIL-EXPLAINED / 0 FAIL`**，零污染既有 SSOT。
 
-#### [MODIFY] [ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/docs/adr/ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md) / [execution_status.md](file:///e:/NWKYYSJZX/2026/1023%20久隆%20贵港%20宁明%20二维水动力模拟/2d_hydro_project/docs/execution_status.md)
+#### [MODIFY] [ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md](../2d_hydro_project/docs/adr/ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md) / [execution_status.md](../2d_hydro_project/docs/execution_status.md)
 - 待实跑完成后登记三案例物理耦合重跑结论与前后对比表（继续保持非真实管网资产声明）。
 
 ---

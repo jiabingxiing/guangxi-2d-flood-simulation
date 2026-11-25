@@ -22,7 +22,7 @@ scope: project
 2. **质量门全量验证（SSOT）**：
    - 权威文件：`2d_hydro_project/data/catalog/mass_recheck_g15.json`（**66 PASS / 4 FAIL-EXPLAINED / 0 FAIL，共 70 个 run**）
    - 检验脚本：`uv --directory 2d_hydro_project run python scripts/stage3/g15_mass_recheck.py`
-3. **架构决策链（ADR-0001 至 ADR-0022）**：
+3. **架构决策链（ADR-0001 至 ADR-0025，共 25 篇）**：
    - [2d_hydro_project/docs/adr/](../2d_hydro_project/docs/adr/)
 4. **工作区硬约束与导航**：
    - [AGENTS.md](../AGENTS.md)
