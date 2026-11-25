@@ -73,7 +73,15 @@ scope: project
 - 新脚本：`stage3/{build_jiulong_catchments,build_jiulong_inflow,prepare_jiulong_channel,prepare_jiulong_dem_layers_v2,prepare_jiulong_rainfall,run_jiulong_dual_forcing,validate_jiulong_hydrograph}.py`、`stage6/{audit_jiulong_coupling,compare_jiulong_scenarios,diagnose_jiulong_patch_attribution,validate_jiulong_inundation}.py`
 - 产品与主情景：`outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h/`（生产主情景，floodviz 默认）、`data/catalog/{jiulong_inflow_audit,channel_geometry_audit,jiulong_coupling_audit,jiulong_dem_layers_v2,jiulong_patch_attribution}.json`
 
-## 决策记录（`adr/`，ADR-0001~0022 全量索引）
+## 官方水位核验与 PipeNetGen 虚拟管网（Phase J，2026-11-25；ADR-0023~0024）
+
+- `adr/ADR-0023-官方水位监测接入与连续水文核验.md` —— 三通道合法水位接入（YAML/CSV、SHP 档案、无加密 HTTP JSON；遇到 `#FontTag`/WAF 严格 fail-closed）、G7 基准保护与基准无关相对涨水 $\Delta H$ 评估、raw/snapped 双锚点虚拟水尺、2024/2026 工况隔离、`HVAR`/`QVAR` 边界同化骨架
+- `adr/ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md` —— 零 GPLv3 开源合规栈（`networkx` + `swmmio` + `pyswmm`）、OSM 道路+DEM 逆向 Dijkstra 汇水树与 GB 50014 零逆坡管径定径、EPA-SWMM5 动态波与 LISFLOOD-FP `QVAR` 点汇/排口闭合耦合、合成资产强制隔离（`outputs/pipenet/` 与 `outputs/synthetic/`）
+- `adr/ADR-0025-三案例管网耦合物理重跑的隔离算例与对照基线口径.md` —— 三案例真实 `lisflood.exe` 耦合重跑口径：全网格耦合内核分层（粗聚合诊断版 vs 全网格物理版）、自产基线承担对照（宁明原参照带 `diagnostic_only`）、质量门靠 `CASE_ROOTS` 白名单隔离、SGC 模式非零 `QVAR` 体积残差限制
+- 新包与脚本：`src/hydro_refine/{core,monitors,pipenet,coupling}/`、`stage3/{ingest_official_gauges,fetch_five_province_hydro,extract_osm_urban_inputs,build_synthetic_pipenet}.py`、`stage6/{validate_water_levels,compare_pipenet_inundation,verify_five_province_algorithms}.py`
+- 证据与清单：`data/catalog/gauges/{guigang,ningming,jiulong}_gauges_normalized.json`、`data/catalog/{gauge_validation_results,synthetic_pipe_catalogs,pipenet_coupling_evaluation,five_provinces_hydro_snapshot,five_provinces_algorithm_verification}.json`
+
+## 决策记录（`adr/`，ADR-0001~0025 全量索引）
 
 | ADR | 标题 | 核心决策要点 |
 |---|---|---|
@@ -99,8 +107,13 @@ scope: project
 | [ADR-0020](adr/ADR-0020-久隆河道亚网格与洪泛区耦合.md) | 久隆河道亚网格与洪泛区耦合 | SGC 亚网格河槽表达、四道护栏、常水基流体检、免除人工刻蚀 |
 | [ADR-0021](adr/ADR-0021-久隆斑块物理归因与展示质控.md) | 久隆斑块物理归因与展示质控 | P01–P08 八类成因逐斑块物理归因、连通性/深坑双门控 |
 | [ADR-0022](adr/ADR-0022-久隆历史工况与边界重建.md) | 久隆历史工况与边界重建 | 2024 历史时空一致性、E/W 分水岭闭合、GLO-30 负值区基准融合 |
+| [ADR-0023](adr/ADR-0023-官方水位监测接入与连续水文核验.md) | 官方水位监测接入与连续水文核验 | 三通道合法接入、反加密 fail-closed、相对涨水 $\Delta H$、双锚点虚拟水尺 |
+| [ADR-0024](adr/ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md) | PipeNetGen 虚拟排水管网与协同排涝耦合 | OSM+DEM 重力 DAG、GB 50014 定径、PySWMM 1D 与 LISFLOOD-FP `QVAR` 耦合 |
+| [ADR-0025](adr/ADR-0025-三案例管网耦合物理重跑的隔离算例与对照基线口径.md) | 三案例管网耦合物理重跑的隔离算例与对照基线口径 | 全网格耦合内核、自产基线、白名单隔离、SGC `QVAR` 残差限制 |
 
 ## 相关文档（不在本目录）
+
+- 水位核验与管网耦合清单：`../data/catalog/{gauge_validation_results,synthetic_pipe_catalogs,pipenet_coupling_evaluation}.json`、`../configs/{gauges,pipenet}/`
 
 - 久隆诊断包：`../diagnostics/jiulong/`（Phase 0：`root_cause_report.md`、`baseline_snapshot.json`、`patch_persistence.csv`、`dem_artifact_map.tif`、`resolution_comparison.json`）
 - 贵港诊断包：`../diagnostics/guigang/`（Phase 0：`root_cause_report.md`、`baseline_snapshot.json`、`patch_persistence.csv`、`patch_tracks.csv`、`patch_summary.json`、`guigang_sink_analysis.json`）

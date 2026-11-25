@@ -59,12 +59,13 @@ scope: project
   - [aoi_crs_baseline.md](../data/catalog/aoi_crs_baseline.md)（三案例坐标系：EPSG:32649）
   - [compliance_checklist.md](../data/catalog/compliance_checklist.md)（合规清单）
   - [gaps_risks.md](../data/catalog/gaps_risks.md)（公开数据降级缺口与风险）
-- **架构决策链（ADR-0001 至 ADR-0022）**：
+- **架构决策链（ADR-0001 至 ADR-0025）**：
   - **基础架构与环境**：[ADR-0001](adr/ADR-0001-工程结构与Python环境.md)、[ADR-0002](adr/ADR-0002-三案例CRS基线.md)、[ADR-0003](adr/ADR-0003-模型获取路径.md)、[ADR-0004](adr/ADR-0004-公开数据降级模式与垂直基准策略.md)、[ADR-0005](adr/ADR-0005-变电站整体化范围调整.md)、[ADR-0006](adr/ADR-0006-结果完整性更正与质量门口径.md)、[ADR-0007](adr/ADR-0007-执行状态与降级边界.md)、[ADR-0008](adr/ADR-0008-模型定版与桥涵结构使用限制.md)。
   - **宁明与早期治理**：[ADR-0009](adr/ADR-0009-宁明河槽刻蚀停用与地形分层显示.md)。
   - **久隆治理体系**：[ADR-0010](adr/ADR-0010-久隆直接降雨模型治理规范.md)、[ADR-0019](adr/ADR-0019-久隆钦江上游来水与水文驱动.md)、[ADR-0020](adr/ADR-0020-久隆河道亚网格与洪泛区耦合.md)、[ADR-0021](adr/ADR-0021-久隆斑块物理归因与展示质控.md)、[ADR-0022](adr/ADR-0022-久隆历史工况与边界重建.md)。
   - **贵港治理体系**：[ADR-0011](adr/ADR-0011-贵港水动力推演零散伪影治理与驱动重构.md)、[ADR-0012](adr/ADR-0012-贵港水力约束河槽重构.md)、[ADR-0013](adr/ADR-0013-贵港组合驱动归因实验.md)、[ADR-0014](adr/ADR-0014-贵港排水连通治理.md)。
   - **学术驱动与概率产品**：[ADR-0015](adr/ADR-0015-学术借鉴与改进产品口径.md)、[ADR-0016](adr/ADR-0016-上游来水产汇流与降雨多源评估.md)、[ADR-0017](adr/ADR-0017-垂直基准独立核证.md)、[ADR-0018](adr/ADR-0018-概率化与联合阈值探索.md)。
+  - **监测核验与城市管网**：[ADR-0023](adr/ADR-0023-官方水位监测接入与连续水文核验.md)、[ADR-0024](adr/ADR-0024-PipeNetGen虚拟排水管网与协同排涝耦合.md)、[ADR-0025](adr/ADR-0025-三案例管网耦合物理重跑的隔离算例与对照基线口径.md)。
 
 ---
 
