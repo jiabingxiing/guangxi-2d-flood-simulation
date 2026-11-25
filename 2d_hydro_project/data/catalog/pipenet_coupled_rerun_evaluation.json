@@ -1,0 +1,1218 @@
+{
+  "script": "scripts/stage6/evaluate_coupled_reruns.py",
+  "generated_utc": "2026-11-25T04:58:59+00:00",
+  "physical_recalculation": true,
+  "SYNTHETIC_DATA_NOT_REAL_ASSET": true,
+  "not_physical_recalculation": false,
+  "isolated_from_g15_ssot": true,
+  "wet_threshold_m": 0.05,
+  "method": {
+    "controlled_differential": "基线与耦合共享同一 DEM/降雨/时间轴/时步，唯一变量为管网点源项",
+    "urban_mask": "管网 junction 投影像元，剔除 sgc_width>0 河道像元",
+    "patch": "8 邻域连通域，水深 > 0.05 m"
+  },
+  "cases": {
+    "jiulong": {
+      "case": "jiulong",
+      "SYNTHETIC_DATA_NOT_REAL_ASSET": true,
+      "physical_recalculation": true,
+      "not_physical_recalculation": false,
+      "baseline_run": "outputs/pipenet/jiulong/run_baseline_c200m",
+      "coupled_run": "outputs/pipenet/jiulong/run_coupled_c200m",
+      "urban_mask": {
+        "urban_cells": 388,
+        "sgc_cells_excluded": 7,
+        "source": "outputs/pipenet/jiulong/jiulong_pipes.geojson (junction 投影)"
+      },
+      "frame_alignment": {
+        "baseline_n": 21,
+        "coupled_n": 21,
+        "used_n": 21,
+        "aligned": true
+      },
+      "dim1_inundation": {
+        "urban.wet_cells": {
+          "baseline": {
+            "max": 100.0,
+            "mean": 40.5714,
+            "final": 75.0
+          },
+          "coupled": {
+            "max": 91.0,
+            "mean": 36.619,
+            "final": 68.0
+          },
+          "delta_max": -9.0,
+          "reduction_pct_max": 9.0,
+          "delta_mean": -3.9524,
+          "reduction_pct_mean": 9.74,
+          "delta_final": -7.0,
+          "reduction_pct_final": 9.33
+        },
+        "urban.wet_area_km2": {
+          "baseline": {
+            "max": 4.0,
+            "mean": 1.6229,
+            "final": 3.0
+          },
+          "coupled": {
+            "max": 3.64,
+            "mean": 1.4648,
+            "final": 2.72
+          },
+          "delta_max": -0.36,
+          "reduction_pct_max": 9.0,
+          "delta_mean": -0.1581,
+          "reduction_pct_mean": 9.74,
+          "delta_final": -0.28,
+          "reduction_pct_final": 9.33
+        },
+        "urban.volume_m3": {
+          "baseline": {
+            "max": 1041120.0,
+            "mean": 413154.2857,
+            "final": 1041120.0
+          },
+          "coupled": {
+            "max": 931680.0,
+            "mean": 360563.8095,
+            "final": 931680.0
+          },
+          "delta_max": -109440.0,
+          "reduction_pct_max": 10.51,
+          "delta_mean": -52590.4762,
+          "reduction_pct_mean": 12.73,
+          "delta_final": -109440.0,
+          "reduction_pct_final": 10.51
+        },
+        "urban.max_depth_m": {
+          "baseline": {
+            "max": 2.253,
+            "mean": 0.8014,
+            "final": 2.253
+          },
+          "coupled": {
+            "max": 2.253,
+            "mean": 0.7965,
+            "final": 2.253
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": -0.0049,
+          "reduction_pct_mean": 0.61,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "urban.n_patches": {
+          "baseline": {
+            "max": 38.0,
+            "mean": 17.7619,
+            "final": 35.0
+          },
+          "coupled": {
+            "max": 32.0,
+            "mean": 15.4286,
+            "final": 31.0
+          },
+          "delta_max": -6.0,
+          "reduction_pct_max": 15.79,
+          "delta_mean": -2.3333,
+          "reduction_pct_mean": 13.14,
+          "delta_final": -4.0,
+          "reduction_pct_final": 11.43
+        },
+        "domain.wet_cells": {
+          "baseline": {
+            "max": 4644.0,
+            "mean": 2313.0476,
+            "final": 4644.0
+          },
+          "coupled": {
+            "max": 4630.0,
+            "mean": 2305.8095,
+            "final": 4630.0
+          },
+          "delta_max": -14.0,
+          "reduction_pct_max": 0.3,
+          "delta_mean": -7.2381,
+          "reduction_pct_mean": 0.31,
+          "delta_final": -14.0,
+          "reduction_pct_final": 0.3
+        },
+        "domain.wet_area_km2": {
+          "baseline": {
+            "max": 185.76,
+            "mean": 92.5219,
+            "final": 185.76
+          },
+          "coupled": {
+            "max": 185.2,
+            "mean": 92.2324,
+            "final": 185.2
+          },
+          "delta_max": -0.56,
+          "reduction_pct_max": 0.3,
+          "delta_mean": -0.2895,
+          "reduction_pct_mean": 0.31,
+          "delta_final": -0.56,
+          "reduction_pct_final": 0.3
+        },
+        "domain.volume_m3": {
+          "baseline": {
+            "max": 156773120.2,
+            "mean": 66803234.2667,
+            "final": 156773120.2
+          },
+          "coupled": {
+            "max": 156890000.0,
+            "mean": 66859592.3857,
+            "final": 156890000.0
+          },
+          "delta_max": 116879.8,
+          "reduction_pct_max": -0.07,
+          "delta_mean": 56358.119,
+          "reduction_pct_mean": -0.08,
+          "delta_final": 116879.8,
+          "reduction_pct_final": -0.07
+        },
+        "domain.max_depth_m": {
+          "baseline": {
+            "max": 10.078,
+            "mean": 7.0881,
+            "final": 9.306
+          },
+          "coupled": {
+            "max": 10.078,
+            "mean": 7.0881,
+            "final": 9.306
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": 0.0,
+          "reduction_pct_mean": 0.0,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "domain.n_patches": {
+          "baseline": {
+            "max": 1442.0,
+            "mean": 719.6667,
+            "final": 1337.0
+          },
+          "coupled": {
+            "max": 1441.0,
+            "mean": 720.0952,
+            "final": 1337.0
+          },
+          "delta_max": -1.0,
+          "reduction_pct_max": 0.07,
+          "delta_mean": 0.4285,
+          "reduction_pct_mean": -0.06,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        }
+      },
+      "dim2_river_backwater": {
+        "domain_max_depth": {
+          "baseline": {
+            "max": 10.078,
+            "mean": 7.0881,
+            "final": 9.306
+          },
+          "coupled": {
+            "max": 10.078,
+            "mean": 7.0881,
+            "final": 9.306
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": 0.0,
+          "reduction_pct_mean": 0.0,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "domain_volume": {
+          "baseline": {
+            "max": 156773120.2,
+            "mean": 66803234.2667,
+            "final": 156773120.2
+          },
+          "coupled": {
+            "max": 156890000.0,
+            "mean": 66859592.3857,
+            "final": 156890000.0
+          },
+          "delta_max": 116879.8,
+          "reduction_pct_max": -0.07,
+          "delta_mean": 56358.119,
+          "reduction_pct_mean": -0.08,
+          "delta_final": 116879.8,
+          "reduction_pct_final": -0.07
+        },
+        "note": "回注水量进入受纳河道；若全域体积增量明显大于城镇削减量，说明存在异常抬水或边界滞留"
+      },
+      "dim1_interpretation": {
+        "urban_area_km2": 15.52,
+        "baseline_urban_peak_volume_m3": 1041120.0,
+        "baseline_urban_peak_max_depth_m": 2.253,
+        "baseline_urban_volume_as_equivalent_uniform_depth_m": 0.067,
+        "regime": "local_rainfall_ponding_dominated",
+        "explanation": "城区积水以本地降雨产流为主，管网抽排能显著削减。"
+      },
+      "dim3_s1_footprint": {
+        "baseline": {
+          "available": true,
+          "scene": "2024-09-05T10:50(灾前常水)",
+          "t_model_h": null,
+          "frame": "res.max",
+          "hits": 252,
+          "false_alarm_cells": 5186,
+          "misses": 448,
+          "csi": 0.0428,
+          "pod": 0.36,
+          "far": 0.9537,
+          "area_sim_in_footprint_km2": 217.52,
+          "area_obs_in_footprint_km2": 28.0,
+          "valid_footprint_km2": 1106.56,
+          "urban_hits": 3,
+          "urban_wet_cells": 109,
+          "caveat": "S1 固定阈值 -17 dB，风浪/淹没植被漏提为下限（G17）；仅足迹内比对，足迹外不计虚警；非精度结论"
+        },
+        "coupled": {
+          "available": true,
+          "scene": "2024-09-05T10:50(灾前常水)",
+          "t_model_h": null,
+          "frame": "res.max",
+          "hits": 253,
+          "false_alarm_cells": 5163,
+          "misses": 447,
+          "csi": 0.0432,
+          "pod": 0.3614,
+          "far": 0.9533,
+          "area_sim_in_footprint_km2": 216.64,
+          "area_obs_in_footprint_km2": 28.0,
+          "valid_footprint_km2": 1106.56,
+          "urban_hits": 2,
+          "urban_wet_cells": 103,
+          "caveat": "S1 固定阈值 -17 dB，风浪/淹没植被漏提为下限（G17）；仅足迹内比对，足迹外不计虚警；非精度结论"
+        },
+        "delta": {
+          "csi": 0.0004,
+          "pod": 0.0014,
+          "far": -0.0004
+        }
+      },
+      "dim4_gauges": {
+        "baseline": {
+          "available": true,
+          "cellsize_m": 200.0,
+          "saveint_s": 21600.0,
+          "n_frames": 21,
+          "probes": {
+            "jiulong_k88_2026_excluded__raw_anchor": {
+              "station_id": "jiulong_k88_2026_excluded",
+              "status": "no_valid_observations"
+            }
+          }
+        },
+        "coupled": {
+          "available": true,
+          "cellsize_m": 200.0,
+          "saveint_s": 21600.0,
+          "n_frames": 21,
+          "probes": {
+            "jiulong_k88_2026_excluded__raw_anchor": {
+              "station_id": "jiulong_k88_2026_excluded",
+              "status": "no_valid_observations"
+            }
+          }
+        },
+        "delta_wse": {},
+        "delta_wse_unavailable_reason": "无可用站点：该案例站点档案无有效观测（qc_flag>1 或 2024/2026 工况隔离），故无法计算 ΔH；已取到的探针状态见 probes"
+      },
+      "available": true,
+      "mass_gate": {
+        "baseline": {
+          "available": true,
+          "e_mass_132": 7.639e-06,
+          "gate": "PASS"
+        },
+        "coupled": {
+          "available": true,
+          "e_mass_132": 7.746e-06,
+          "gate": "PASS"
+        }
+      }
+    },
+    "ningming": {
+      "case": "ningming",
+      "SYNTHETIC_DATA_NOT_REAL_ASSET": true,
+      "physical_recalculation": true,
+      "not_physical_recalculation": false,
+      "baseline_run": "outputs/pipenet/ningming/run_baseline_c100m",
+      "coupled_run": "outputs/pipenet/ningming/run_coupled_c100m",
+      "urban_mask": {
+        "urban_cells": 1206,
+        "sgc_cells_excluded": 0,
+        "source": "outputs/pipenet/ningming/ningming_pipes.geojson (junction 投影)"
+      },
+      "frame_alignment": {
+        "baseline_n": 19,
+        "coupled_n": 19,
+        "used_n": 19,
+        "aligned": true
+      },
+      "dim1_inundation": {
+        "urban.wet_cells": {
+          "baseline": {
+            "max": 530.0,
+            "mean": 276.0,
+            "final": 527.0
+          },
+          "coupled": {
+            "max": 529.0,
+            "mean": 263.5789,
+            "final": 526.0
+          },
+          "delta_max": -1.0,
+          "reduction_pct_max": 0.19,
+          "delta_mean": -12.4211,
+          "reduction_pct_mean": 4.5,
+          "delta_final": -1.0,
+          "reduction_pct_final": 0.19
+        },
+        "urban.wet_area_km2": {
+          "baseline": {
+            "max": 5.3,
+            "mean": 2.76,
+            "final": 5.27
+          },
+          "coupled": {
+            "max": 5.29,
+            "mean": 2.6358,
+            "final": 5.26
+          },
+          "delta_max": -0.01,
+          "reduction_pct_max": 0.19,
+          "delta_mean": -0.1242,
+          "reduction_pct_mean": 4.5,
+          "delta_final": -0.01,
+          "reduction_pct_final": 0.19
+        },
+        "urban.volume_m3": {
+          "baseline": {
+            "max": 36040410.0,
+            "mean": 11867560.0,
+            "final": 34739800.0
+          },
+          "coupled": {
+            "max": 36023910.0,
+            "mean": 11815583.6789,
+            "final": 34723570.0
+          },
+          "delta_max": -16500.0,
+          "reduction_pct_max": 0.05,
+          "delta_mean": -51976.3211,
+          "reduction_pct_mean": 0.44,
+          "delta_final": -16230.0,
+          "reduction_pct_final": 0.05
+        },
+        "urban.max_depth_m": {
+          "baseline": {
+            "max": 18.032,
+            "mean": 9.101,
+            "final": 17.769
+          },
+          "coupled": {
+            "max": 18.032,
+            "mean": 9.0532,
+            "final": 17.769
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": -0.0478,
+          "reduction_pct_mean": 0.53,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "urban.n_patches": {
+          "baseline": {
+            "max": 68.0,
+            "mean": 45.1579,
+            "final": 31.0
+          },
+          "coupled": {
+            "max": 67.0,
+            "mean": 42.2105,
+            "final": 30.0
+          },
+          "delta_max": -1.0,
+          "reduction_pct_max": 1.47,
+          "delta_mean": -2.9474,
+          "reduction_pct_mean": 6.53,
+          "delta_final": -1.0,
+          "reduction_pct_final": 3.23
+        },
+        "domain.wet_cells": {
+          "baseline": {
+            "max": 13941.0,
+            "mean": 9361.4737,
+            "final": 13710.0
+          },
+          "coupled": {
+            "max": 13937.0,
+            "mean": 9336.9474,
+            "final": 13709.0
+          },
+          "delta_max": -4.0,
+          "reduction_pct_max": 0.03,
+          "delta_mean": -24.5263,
+          "reduction_pct_mean": 0.26,
+          "delta_final": -1.0,
+          "reduction_pct_final": 0.01
+        },
+        "domain.wet_area_km2": {
+          "baseline": {
+            "max": 139.41,
+            "mean": 93.6147,
+            "final": 137.1
+          },
+          "coupled": {
+            "max": 139.37,
+            "mean": 93.3695,
+            "final": 137.09
+          },
+          "delta_max": -0.04,
+          "reduction_pct_max": 0.03,
+          "delta_mean": -0.2452,
+          "reduction_pct_mean": 0.26,
+          "delta_final": -0.01,
+          "reduction_pct_final": 0.01
+        },
+        "domain.volume_m3": {
+          "baseline": {
+            "max": 861915299.9,
+            "mean": 354594359.4579,
+            "final": 827400479.9
+          },
+          "coupled": {
+            "max": 861856410.0,
+            "mean": 354596868.3842,
+            "final": 827341819.9
+          },
+          "delta_max": -58889.9,
+          "reduction_pct_max": 0.01,
+          "delta_mean": 2508.9263,
+          "reduction_pct_mean": -0.0,
+          "delta_final": -58660.0,
+          "reduction_pct_final": 0.01
+        },
+        "domain.max_depth_m": {
+          "baseline": {
+            "max": 19.437,
+            "mean": 12.7134,
+            "final": 19.198
+          },
+          "coupled": {
+            "max": 19.437,
+            "mean": 12.7123,
+            "final": 19.198
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": -0.0011,
+          "reduction_pct_mean": 0.01,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "domain.n_patches": {
+          "baseline": {
+            "max": 2226.0,
+            "mean": 1397.9474,
+            "final": 1230.0
+          },
+          "coupled": {
+            "max": 2205.0,
+            "mean": 1401.2632,
+            "final": 1230.0
+          },
+          "delta_max": -21.0,
+          "reduction_pct_max": 0.94,
+          "delta_mean": 3.3158,
+          "reduction_pct_mean": -0.24,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        }
+      },
+      "dim2_river_backwater": {
+        "domain_max_depth": {
+          "baseline": {
+            "max": 19.437,
+            "mean": 12.7134,
+            "final": 19.198
+          },
+          "coupled": {
+            "max": 19.437,
+            "mean": 12.7123,
+            "final": 19.198
+          },
+          "delta_max": 0.0,
+          "reduction_pct_max": 0.0,
+          "delta_mean": -0.0011,
+          "reduction_pct_mean": 0.01,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "domain_volume": {
+          "baseline": {
+            "max": 861915299.9,
+            "mean": 354594359.4579,
+            "final": 827400479.9
+          },
+          "coupled": {
+            "max": 861856410.0,
+            "mean": 354596868.3842,
+            "final": 827341819.9
+          },
+          "delta_max": -58889.9,
+          "reduction_pct_max": 0.01,
+          "delta_mean": 2508.9263,
+          "reduction_pct_mean": -0.0,
+          "delta_final": -58660.0,
+          "reduction_pct_final": 0.01
+        },
+        "note": "回注水量进入受纳河道；若全域体积增量明显大于城镇削减量，说明存在异常抬水或边界滞留"
+      },
+      "dim1_interpretation": {
+        "urban_area_km2": 12.06,
+        "baseline_urban_peak_volume_m3": 36040410.0,
+        "baseline_urban_peak_max_depth_m": 18.032,
+        "baseline_urban_volume_as_equivalent_uniform_depth_m": 2.988,
+        "regime": "external_backwater_dominated",
+        "explanation": "城区峰时体积换算为均匀水深 >1 m 时，积水主要来自外来（上游来水/河道顶托），而管网只按本地瞬时净雨限幅抽排，故削减幅度必然很小——这是物理机制，不是耦合失效。若接近 0，应读作「该案例的内涝不是管网能解决的类型」。"
+      },
+      "dim3_s1_footprint": {
+        "baseline": {
+          "available": false,
+          "reason": "宁明事件为 2026-08 紫檀，现有 S1 水体层仅 2024-09-10/09-12 两景，与事件不同期，不得用于耦合前后精度对照（ADR-0004 降级口径）"
+        },
+        "coupled": {
+          "available": false,
+          "reason": "宁明事件为 2026-08 紫檀，现有 S1 水体层仅 2024-09-10/09-12 两景，与事件不同期，不得用于耦合前后精度对照（ADR-0004 降级口径）"
+        },
+        "delta": null
+      },
+      "dim4_gauges": {
+        "baseline": {
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 19,
+          "probes": {
+            "ningming_county__raw_anchor": {
+              "station_id": "ningming_county",
+              "station_name": "宁明县城",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 3,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 101.515,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.43,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "peak_error_m": null,
+              "sim_base_m": 84.122,
+              "obs_base_m": 109.24,
+              "sim_rise_m": 17.393,
+              "obs_rise_m": 14.19,
+              "rise_error_m": 3.203,
+              "apparent_offset_obs_minus_sim_mean_m": 23.864,
+              "apparent_offset_spread_m": 3.008,
+              "datum_closed": false
+            },
+            "shp_2_板祝__raw_anchor": {
+              "station_id": "shp_2_板祝",
+              "station_name": "板祝",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 101.527,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.66,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "peak_error_m": null,
+              "sim_base_m": 94.263,
+              "obs_base_m": 109.7,
+              "sim_rise_m": 7.264,
+              "obs_rise_m": 13.96,
+              "rise_error_m": -6.696,
+              "apparent_offset_obs_minus_sim_mean_m": 18.879,
+              "apparent_offset_spread_m": 6.883,
+              "datum_closed": false
+            }
+          }
+        },
+        "coupled": {
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 19,
+          "probes": {
+            "ningming_county__raw_anchor": {
+              "station_id": "ningming_county",
+              "station_name": "宁明县城",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 3,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 101.514,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.43,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "peak_error_m": null,
+              "sim_base_m": 84.364,
+              "obs_base_m": 109.24,
+              "sim_rise_m": 17.15,
+              "obs_rise_m": 14.19,
+              "rise_error_m": 2.96,
+              "apparent_offset_obs_minus_sim_mean_m": 23.783,
+              "apparent_offset_spread_m": 2.766,
+              "datum_closed": false
+            },
+            "shp_2_板祝__raw_anchor": {
+              "station_id": "shp_2_板祝",
+              "station_name": "板祝",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 101.527,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.66,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "peak_error_m": null,
+              "sim_base_m": 94.263,
+              "obs_base_m": 109.7,
+              "sim_rise_m": 7.264,
+              "obs_rise_m": 13.96,
+              "rise_error_m": -6.696,
+              "apparent_offset_obs_minus_sim_mean_m": 18.879,
+              "apparent_offset_spread_m": 6.883,
+              "datum_closed": false
+            }
+          }
+        },
+        "delta_wse": {
+          "ningming_county__raw_anchor": {
+            "station_id": "ningming_county",
+            "station_name": "宁明县城",
+            "sim_peak_wse_baseline_m": 101.515,
+            "sim_peak_wse_coupled_m": 101.514,
+            "delta_sim_peak_wse_m": -0.001,
+            "delta_sim_peak_t_h": 0.0,
+            "peak_timing_error_baseline_h": 4.0,
+            "peak_timing_error_coupled_h": 4.0,
+            "n_matched_baseline": 3,
+            "n_matched_coupled": 3
+          },
+          "shp_2_板祝__raw_anchor": {
+            "station_id": "shp_2_板祝",
+            "station_name": "板祝",
+            "sim_peak_wse_baseline_m": 101.527,
+            "sim_peak_wse_coupled_m": 101.527,
+            "delta_sim_peak_wse_m": 0.0,
+            "delta_sim_peak_t_h": 0.0,
+            "peak_timing_error_baseline_h": 4.0,
+            "peak_timing_error_coupled_h": 4.0,
+            "n_matched_baseline": 2,
+            "n_matched_coupled": 2
+          }
+        }
+      },
+      "available": true,
+      "mass_gate": {
+        "baseline": {
+          "available": true,
+          "e_mass_132": 0.0001032,
+          "gate": "PASS"
+        },
+        "coupled": {
+          "available": true,
+          "e_mass_132": 0.0001057,
+          "gate": "PASS"
+        }
+      }
+    },
+    "guigang": {
+      "case": "guigang",
+      "SYNTHETIC_DATA_NOT_REAL_ASSET": true,
+      "physical_recalculation": true,
+      "not_physical_recalculation": false,
+      "baseline_run": "outputs/pipenet/guigang/run_baseline_c100m",
+      "coupled_run": "outputs/pipenet/guigang/run_coupled_c100m",
+      "urban_mask": {
+        "urban_cells": 4032,
+        "sgc_cells_excluded": 0,
+        "source": "outputs/pipenet/guigang/guigang_pipes.geojson (junction 投影)"
+      },
+      "frame_alignment": {
+        "baseline_n": 57,
+        "coupled_n": 57,
+        "used_n": 57,
+        "aligned": true
+      },
+      "dim1_inundation": {
+        "urban.wet_cells": {
+          "baseline": {
+            "max": 840.0,
+            "mean": 432.0351,
+            "final": 808.0
+          },
+          "coupled": {
+            "max": 734.0,
+            "mean": 372.2632,
+            "final": 734.0
+          },
+          "delta_max": -106.0,
+          "reduction_pct_max": 12.62,
+          "delta_mean": -59.7719,
+          "reduction_pct_mean": 13.83,
+          "delta_final": -74.0,
+          "reduction_pct_final": 9.16
+        },
+        "urban.wet_area_km2": {
+          "baseline": {
+            "max": 8.4,
+            "mean": 4.3204,
+            "final": 8.08
+          },
+          "coupled": {
+            "max": 7.34,
+            "mean": 3.7226,
+            "final": 7.34
+          },
+          "delta_max": -1.06,
+          "reduction_pct_max": 12.62,
+          "delta_mean": -0.5978,
+          "reduction_pct_mean": 13.84,
+          "delta_final": -0.74,
+          "reduction_pct_final": 9.16
+        },
+        "urban.volume_m3": {
+          "baseline": {
+            "max": 6555810.0,
+            "mean": 2888596.8421,
+            "final": 6555810.0
+          },
+          "coupled": {
+            "max": 5278250.0,
+            "mean": 2132557.8947,
+            "final": 5278250.0
+          },
+          "delta_max": -1277560.0,
+          "reduction_pct_max": 19.49,
+          "delta_mean": -756038.9474,
+          "reduction_pct_mean": 26.17,
+          "delta_final": -1277560.0,
+          "reduction_pct_final": 19.49
+        },
+        "urban.max_depth_m": {
+          "baseline": {
+            "max": 6.095,
+            "mean": 3.2408,
+            "final": 4.214
+          },
+          "coupled": {
+            "max": 6.096,
+            "mean": 3.2377,
+            "final": 4.171
+          },
+          "delta_max": 0.001,
+          "reduction_pct_max": -0.02,
+          "delta_mean": -0.0031,
+          "reduction_pct_mean": 0.1,
+          "delta_final": -0.043,
+          "reduction_pct_final": 1.02
+        },
+        "urban.n_patches": {
+          "baseline": {
+            "max": 292.0,
+            "mean": 188.8772,
+            "final": 261.0
+          },
+          "coupled": {
+            "max": 272.0,
+            "mean": 179.7719,
+            "final": 261.0
+          },
+          "delta_max": -20.0,
+          "reduction_pct_max": 6.85,
+          "delta_mean": -9.1053,
+          "reduction_pct_mean": 4.82,
+          "delta_final": 0.0,
+          "reduction_pct_final": 0.0
+        },
+        "domain.wet_cells": {
+          "baseline": {
+            "max": 43636.0,
+            "mean": 22382.5263,
+            "final": 34772.0
+          },
+          "coupled": {
+            "max": 43187.0,
+            "mean": 22223.4561,
+            "final": 34568.0
+          },
+          "delta_max": -449.0,
+          "reduction_pct_max": 1.03,
+          "delta_mean": -159.0702,
+          "reduction_pct_mean": 0.71,
+          "delta_final": -204.0,
+          "reduction_pct_final": 0.59
+        },
+        "domain.wet_area_km2": {
+          "baseline": {
+            "max": 436.36,
+            "mean": 223.8253,
+            "final": 347.72
+          },
+          "coupled": {
+            "max": 431.87,
+            "mean": 222.2346,
+            "final": 345.68
+          },
+          "delta_max": -4.49,
+          "reduction_pct_max": 1.03,
+          "delta_mean": -1.5907,
+          "reduction_pct_mean": 0.71,
+          "delta_final": -2.04,
+          "reduction_pct_final": 0.59
+        },
+        "domain.volume_m3": {
+          "baseline": {
+            "max": 385004820.1,
+            "mean": 216017230.3596,
+            "final": 364379179.9
+          },
+          "coupled": {
+            "max": 381868830.2,
+            "mean": 214306328.786,
+            "final": 360705689.9
+          },
+          "delta_max": -3135989.9,
+          "reduction_pct_max": 0.81,
+          "delta_mean": -1710901.5736,
+          "reduction_pct_mean": 0.79,
+          "delta_final": -3673490.0,
+          "reduction_pct_final": 1.01
+        },
+        "domain.max_depth_m": {
+          "baseline": {
+            "max": 15.396,
+            "mean": 10.1697,
+            "final": 15.396
+          },
+          "coupled": {
+            "max": 15.395,
+            "mean": 10.1684,
+            "final": 15.395
+          },
+          "delta_max": -0.001,
+          "reduction_pct_max": 0.01,
+          "delta_mean": -0.0013,
+          "reduction_pct_mean": 0.01,
+          "delta_final": -0.001,
+          "reduction_pct_final": 0.01
+        },
+        "domain.n_patches": {
+          "baseline": {
+            "max": 8204.0,
+            "mean": 5184.7719,
+            "final": 6158.0
+          },
+          "coupled": {
+            "max": 8191.0,
+            "mean": 5196.3158,
+            "final": 6178.0
+          },
+          "delta_max": -13.0,
+          "reduction_pct_max": 0.16,
+          "delta_mean": 11.5439,
+          "reduction_pct_mean": -0.22,
+          "delta_final": 20.0,
+          "reduction_pct_final": -0.32
+        }
+      },
+      "dim2_river_backwater": {
+        "domain_max_depth": {
+          "baseline": {
+            "max": 15.396,
+            "mean": 10.1697,
+            "final": 15.396
+          },
+          "coupled": {
+            "max": 15.395,
+            "mean": 10.1684,
+            "final": 15.395
+          },
+          "delta_max": -0.001,
+          "reduction_pct_max": 0.01,
+          "delta_mean": -0.0013,
+          "reduction_pct_mean": 0.01,
+          "delta_final": -0.001,
+          "reduction_pct_final": 0.01
+        },
+        "domain_volume": {
+          "baseline": {
+            "max": 385004820.1,
+            "mean": 216017230.3596,
+            "final": 364379179.9
+          },
+          "coupled": {
+            "max": 381868830.2,
+            "mean": 214306328.786,
+            "final": 360705689.9
+          },
+          "delta_max": -3135989.9,
+          "reduction_pct_max": 0.81,
+          "delta_mean": -1710901.5736,
+          "reduction_pct_mean": 0.79,
+          "delta_final": -3673490.0,
+          "reduction_pct_final": 1.01
+        },
+        "note": "回注水量进入受纳河道；若全域体积增量明显大于城镇削减量，说明存在异常抬水或边界滞留"
+      },
+      "dim1_interpretation": {
+        "urban_area_km2": 40.32,
+        "baseline_urban_peak_volume_m3": 6555810.0,
+        "baseline_urban_peak_max_depth_m": 6.095,
+        "baseline_urban_volume_as_equivalent_uniform_depth_m": 0.163,
+        "regime": "local_rainfall_ponding_dominated",
+        "explanation": "城区积水以本地降雨产流为主，管网抽排能显著削减。"
+      },
+      "dim3_s1_footprint": {
+        "baseline": {
+          "available": true,
+          "scene": "2024-09-12T10:42",
+          "t_model_h": 228.0,
+          "frame": "res-0038.wd",
+          "hits": 472,
+          "false_alarm_cells": 6127,
+          "misses": 500,
+          "csi": 0.0665,
+          "pod": 0.4856,
+          "far": 0.9285,
+          "area_sim_in_footprint_km2": 65.99,
+          "area_obs_in_footprint_km2": 9.72,
+          "valid_footprint_km2": 512.72,
+          "urban_hits": 0,
+          "urban_wet_cells": 0,
+          "caveat": "S1 固定阈值 -17 dB，风浪/淹没植被漏提为下限（G17）；仅足迹内比对，足迹外不计虚警；非精度结论"
+        },
+        "coupled": {
+          "available": true,
+          "scene": "2024-09-12T10:42",
+          "t_model_h": 228.0,
+          "frame": "res-0038.wd",
+          "hits": 472,
+          "false_alarm_cells": 6126,
+          "misses": 500,
+          "csi": 0.0665,
+          "pod": 0.4856,
+          "far": 0.9285,
+          "area_sim_in_footprint_km2": 65.98,
+          "area_obs_in_footprint_km2": 9.72,
+          "valid_footprint_km2": 512.72,
+          "urban_hits": 0,
+          "urban_wet_cells": 0,
+          "caveat": "S1 固定阈值 -17 dB，风浪/淹没植被漏提为下限（G17）；仅足迹内比对，足迹外不计虚警；非精度结论"
+        },
+        "delta": {
+          "csi": 0.0,
+          "pod": 0.0,
+          "far": 0.0
+        }
+      },
+      "dim4_gauges": {
+        "baseline": {
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 24.773,
+              "sim_peak_t_h": 336.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": 67.0,
+              "peak_error_m": null,
+              "sim_base_m": 23.244,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 1.529,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -5.971,
+              "apparent_offset_obs_minus_sim_mean_m": 19.09,
+              "apparent_offset_spread_m": 0.889,
+              "datum_closed": false
+            },
+            "guigang_yujiang__snapped_channel": {
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 12.614,
+              "sim_peak_t_h": 228.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -41.0,
+              "peak_error_m": null,
+              "sim_base_m": 6.8,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.814,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.686,
+              "apparent_offset_obs_minus_sim_mean_m": 31.322,
+              "apparent_offset_spread_m": 1.691,
+              "datum_closed": false
+            }
+          }
+        },
+        "coupled": {
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 24.175,
+              "sim_peak_t_h": 336.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": 67.0,
+              "peak_error_m": null,
+              "sim_base_m": 23.069,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 1.106,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -6.394,
+              "apparent_offset_obs_minus_sim_mean_m": 19.465,
+              "apparent_offset_spread_m": 0.901,
+              "datum_closed": false
+            },
+            "guigang_yujiang__snapped_channel": {
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "status": "evaluated",
+              "n_matched": 2,
+              "rmse_m": null,
+              "nse": null,
+              "kge": null,
+              "sim_peak_wse_m": 12.614,
+              "sim_peak_t_h": 228.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -41.0,
+              "peak_error_m": null,
+              "sim_base_m": 6.8,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.814,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.686,
+              "apparent_offset_obs_minus_sim_mean_m": 31.322,
+              "apparent_offset_spread_m": 1.692,
+              "datum_closed": false
+            }
+          }
+        },
+        "delta_wse": {
+          "guigang_yujiang__raw_anchor": {
+            "station_id": "guigang_yujiang",
+            "station_name": "贵港水文站",
+            "sim_peak_wse_baseline_m": 24.773,
+            "sim_peak_wse_coupled_m": 24.175,
+            "delta_sim_peak_wse_m": -0.598,
+            "delta_sim_peak_t_h": 0.0,
+            "peak_timing_error_baseline_h": 67.0,
+            "peak_timing_error_coupled_h": 67.0,
+            "n_matched_baseline": 2,
+            "n_matched_coupled": 2
+          },
+          "guigang_yujiang__snapped_channel": {
+            "station_id": "guigang_yujiang",
+            "station_name": "贵港水文站",
+            "sim_peak_wse_baseline_m": 12.614,
+            "sim_peak_wse_coupled_m": 12.614,
+            "delta_sim_peak_wse_m": 0.0,
+            "delta_sim_peak_t_h": 0.0,
+            "peak_timing_error_baseline_h": -41.0,
+            "peak_timing_error_coupled_h": -41.0,
+            "n_matched_baseline": 2,
+            "n_matched_coupled": 2
+          }
+        }
+      },
+      "available": true,
+      "mass_gate": {
+        "baseline": {
+          "available": true,
+          "e_mass_132": 0.0001593,
+          "gate": "PASS"
+        },
+        "coupled": {
+          "available": true,
+          "e_mass_132": 0.0001577,
+          "gate": "PASS"
+        }
+      }
+    }
+  },
+  "limitations": [
+    "safety_factor 为保证零负水深的数值安全系数，非管径水力标定值；削减百分比是该假设下的排涝上限效应，不是管网真实潜力",
+    "80 mm/h 逐格能力上限在三个案例均未生效（见各案例 forcing.capacity_cap_effective）",
+    "S1 固定阈值 -17 dB 为检出下限；足迹外不计虚警；非精度结论",
+    "站点水位受 G7 垂直基准未闭合约束，仅作同构差分对照"
+  ]
+}

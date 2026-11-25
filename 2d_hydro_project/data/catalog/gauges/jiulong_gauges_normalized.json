@@ -1,0 +1,71 @@
+{
+  "script": "scripts/stage3/ingest_official_gauges.py",
+  "generated_utc": "2026-11-25T00:29:05+00:00",
+  "case": "jiulong",
+  "event_id": "2024-09-yagi",
+  "t0_local": "2024-09-05T00:00:00+08:00",
+  "crs_epsg": 32649,
+  "source_files": [
+    "configs/gauges/jiulong_stations.yaml"
+  ],
+  "http_status": {},
+  "stations": [
+    {
+      "station_id": "luwu_qinjiang",
+      "name": "陆屋水文站",
+      "river": "钦江",
+      "lon": 108.92,
+      "lat": 22.275,
+      "in_model_domain": false,
+      "station_datum": "1985_national",
+      "warning_level_m": null,
+      "baseflow_level_est_m": null,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "historical_matched",
+      "alignment": {
+        "source_datum": "1985_national",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": []
+    },
+    {
+      "station_id": "jiulong_k88_2026_excluded",
+      "name": "久隆站（K88+000）",
+      "river": "平陆运河/钦江",
+      "lon": 108.7161,
+      "lat": 22.0638,
+      "in_model_domain": true,
+      "station_datum": "station_local",
+      "warning_level_m": null,
+      "baseflow_level_est_m": null,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "post_2026_canal_excluded",
+      "alignment": {
+        "source_datum": "station_local",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": [
+        {
+          "timestamp": "2026-11-22T00:00:00+08:00",
+          "t_h": 19392.0,
+          "water_level_m": 8.98,
+          "discharge_m3s": null,
+          "qc_flag": 9,
+          "source": "ADR-0022 触发记录（2026-09 平陆运河通航后工况，严禁混入 2024-09 摩羯验证）"
+        }
+      ]
+    }
+  ]
+}

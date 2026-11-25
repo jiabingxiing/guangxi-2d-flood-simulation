@@ -1,0 +1,801 @@
+{
+  "script": "scripts/stage6/validate_water_levels.py",
+  "generated_utc": "2026-11-25T00:29:40+00:00",
+  "read_only": true,
+  "cases": {
+    "guigang": {
+      "case": "guigang",
+      "event_id": "2024-09-yagi",
+      "crs_epsg": 32649,
+      "n_runs": 4,
+      "runs": [
+        {
+          "run_id": "scen_yagi_q11500_100m_dt2p5_choff_realdem",
+          "run_dir": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_choff_realdem",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 28.312,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 28.166,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 28.336,
+              "sim_peak_t_h": 234.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -35.0,
+              "sim_base_m": 23.244,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.092,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -2.408,
+              "apparent_offset_obs_minus_sim_mean_m": 15.306,
+              "apparent_offset_spread_m": 1.056,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -20.6503,
+              "rmse_relative_rise_m": 2.1171,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 26.0,
+              "adjustment_hint": {
+                "rise_error_m": -2.408,
+                "peak_timing_error_h": -35.0,
+                "suggestions": [
+                  "模拟涨水偏低 -2.41 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 35.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            },
+            "guigang_yujiang__snapped_channel": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 26.937,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 27.153,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 27.166,
+              "sim_peak_t_h": 246.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -23.0,
+              "sim_base_m": 20.773,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 6.393,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.107,
+              "apparent_offset_obs_minus_sim_mean_m": 16.5,
+              "apparent_offset_spread_m": 0.693,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -2.4668,
+              "rmse_relative_rise_m": 0.8472,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "ground_dem_m": 20.0,
+              "adjustment_hint": {
+                "rise_error_m": -1.107,
+                "peak_timing_error_h": -23.0,
+                "suggestions": [
+                  "模拟涨水偏低 -1.11 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 23.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+          "run_dir": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 24.445,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 24.466,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 24.773,
+              "sim_peak_t_h": 336.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": 67.0,
+              "sim_base_m": 23.244,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 1.529,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -5.971,
+              "apparent_offset_obs_minus_sim_mean_m": 19.09,
+              "apparent_offset_spread_m": 0.889,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -164.3431,
+              "rmse_relative_rise_m": 5.8507,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 26.0,
+              "adjustment_hint": {
+                "rise_error_m": -5.971,
+                "peak_timing_error_h": 67.0,
+                "suggestions": [
+                  "模拟涨水偏低 -5.97 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻滞后 67.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            },
+            "guigang_yujiang__snapped_channel": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 12.613,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 11.832,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 12.614,
+              "sim_peak_t_h": 228.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -41.0,
+              "sim_base_m": 6.8,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.814,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.686,
+              "apparent_offset_obs_minus_sim_mean_m": 31.322,
+              "apparent_offset_spread_m": 1.691,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -15.1637,
+              "rmse_relative_rise_m": 1.8293,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "ground_dem_m": 5.733,
+              "adjustment_hint": {
+                "rise_error_m": -1.686,
+                "peak_timing_error_h": -41.0,
+                "suggestions": [
+                  "模拟涨水偏低 -1.69 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 41.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+          "run_dir": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r2_ga",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 23.619,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 23.625,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 24.035,
+              "sim_peak_t_h": 324.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": 55.0,
+              "sim_base_m": 23.059,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 0.976,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -6.524,
+              "apparent_offset_obs_minus_sim_mean_m": 19.923,
+              "apparent_offset_spread_m": 0.904,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -202.93,
+              "rmse_relative_rise_m": 6.4976,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 26.0,
+              "adjustment_hint": {
+                "rise_error_m": -6.524,
+                "peak_timing_error_h": 55.0,
+                "suggestions": [
+                  "模拟涨水偏低 -6.52 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻滞后 55.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            },
+            "guigang_yujiang__snapped_channel": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 12.612,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 11.832,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 12.613,
+              "sim_peak_t_h": 228.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -41.0,
+              "sim_base_m": 6.8,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.813,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.687,
+              "apparent_offset_obs_minus_sim_mean_m": 31.323,
+              "apparent_offset_spread_m": 1.69,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -15.1695,
+              "rmse_relative_rise_m": 1.8296,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "ground_dem_m": 5.733,
+              "adjustment_hint": {
+                "rise_error_m": -1.687,
+                "peak_timing_error_h": -41.0,
+                "suggestions": [
+                  "模拟涨水偏低 -1.69 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 41.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "run_id": "scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+          "run_dir": "outputs/guigang/2024-09-yagi/scen_yagi_q11500_100m_dt2p5_chhyd_d14_r4_infil3",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 57,
+          "probes": {
+            "guigang_yujiang__raw_anchor": {
+              "status": "no_overlap_within_gap",
+              "n_matched": 0,
+              "datum_closed": false,
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 26.0,
+              "adjustment_hint": {
+                "rise_error_m": null,
+                "peak_timing_error_h": null,
+                "suggestions": []
+              }
+            },
+            "guigang_yujiang__snapped_channel": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 230.0,
+                  "sim_wse_m": 12.6,
+                  "obs_wse_m": 43.09
+                },
+                {
+                  "t_h": 269.0,
+                  "sim_wse_m": 11.821,
+                  "obs_wse_m": 44.0
+                }
+              ],
+              "sim_peak_wse_m": 12.6,
+              "sim_peak_t_h": 228.0,
+              "obs_peak_wse_m": 44.0,
+              "obs_peak_t_h": 269.0,
+              "peak_timing_error_h": -41.0,
+              "sim_base_m": 6.774,
+              "obs_base_m": 36.5,
+              "sim_rise_m": 5.826,
+              "obs_rise_m": 7.5,
+              "rise_error_m": -1.674,
+              "apparent_offset_obs_minus_sim_mean_m": 31.335,
+              "apparent_offset_spread_m": 1.688,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -14.9415,
+              "rmse_relative_rise_m": 1.8167,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "guigang_yujiang",
+              "station_name": "贵港水文站",
+              "probe_kind": "snapped_channel",
+              "snap_dist_m": 2512.7,
+              "ground_dem_m": 5.733,
+              "adjustment_hint": {
+                "rise_error_m": -1.674,
+                "peak_timing_error_h": -41.0,
+                "suggestions": [
+                  "模拟涨水偏低 -1.67 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 41.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ningming": {
+      "case": "ningming",
+      "event_id": "2026-08-zitan",
+      "crs_epsg": 32648,
+      "n_runs": 3,
+      "runs": [
+        {
+          "run_id": "scen_q4000_100m",
+          "run_dir": "outputs/ningming/2026-08-zitan/scen_q4000_100m",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 19,
+          "probes": {
+            "ningming_county__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 3,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 84.131,
+                  "obs_wse_m": 109.24
+                },
+                {
+                  "t_h": 80.0,
+                  "sim_wse_m": 93.201,
+                  "obs_wse_m": 122.96
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 93.753,
+                  "obs_wse_m": 123.43
+                }
+              ],
+              "sim_peak_wse_m": 93.76,
+              "sim_peak_t_h": 96.0,
+              "obs_peak_wse_m": 123.43,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": -2.0,
+              "sim_base_m": 84.131,
+              "obs_base_m": 109.24,
+              "sim_rise_m": 9.629,
+              "obs_rise_m": 14.19,
+              "rise_error_m": -4.561,
+              "apparent_offset_obs_minus_sim_mean_m": 28.182,
+              "apparent_offset_spread_m": 4.65,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": 0.673,
+              "rmse_relative_rise_m": 3.7637,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "ningming_county",
+              "station_name": "宁明县城",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 97.802,
+              "adjustment_hint": {
+                "rise_error_m": -4.561,
+                "peak_timing_error_h": -2.0,
+                "suggestions": [
+                  "模拟涨水偏低 -4.56 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。"
+                ]
+              }
+            },
+            "shp_2_板祝__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 94.269,
+                  "obs_wse_m": 109.7
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 94.795,
+                  "obs_wse_m": 123.66
+                }
+              ],
+              "sim_peak_wse_m": 95.11,
+              "sim_peak_t_h": 54.0,
+              "obs_peak_wse_m": 123.66,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": -44.0,
+              "sim_base_m": 94.269,
+              "obs_base_m": 109.7,
+              "sim_rise_m": 0.841,
+              "obs_rise_m": 13.96,
+              "rise_error_m": -13.119,
+              "apparent_offset_obs_minus_sim_mean_m": 22.148,
+              "apparent_offset_spread_m": 13.434,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -0.852,
+              "rmse_relative_rise_m": 9.499,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "shp_2_板祝",
+              "station_name": "板祝",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 94.487,
+              "adjustment_hint": {
+                "rise_error_m": -13.119,
+                "peak_timing_error_h": -44.0,
+                "suggestions": [
+                  "模拟涨水偏低 -13.12 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻偏早 44.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "run_id": "scen_q6000_n100_100m",
+          "run_dir": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 19,
+          "probes": {
+            "ningming_county__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 3,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 84.122,
+                  "obs_wse_m": 109.24
+                },
+                {
+                  "t_h": 80.0,
+                  "sim_wse_m": 94.006,
+                  "obs_wse_m": 122.96
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 95.153,
+                  "obs_wse_m": 123.43
+                }
+              ],
+              "sim_peak_wse_m": 95.378,
+              "sim_peak_t_h": 108.0,
+              "obs_peak_wse_m": 123.43,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 10.0,
+              "sim_base_m": 84.122,
+              "obs_base_m": 109.24,
+              "sim_rise_m": 11.256,
+              "obs_rise_m": 14.19,
+              "rise_error_m": -2.934,
+              "apparent_offset_obs_minus_sim_mean_m": 27.45,
+              "apparent_offset_spread_m": 3.836,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": 0.81,
+              "rmse_relative_rise_m": 2.8689,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "ningming_county",
+              "station_name": "宁明县城",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 97.802,
+              "adjustment_hint": {
+                "rise_error_m": -2.934,
+                "peak_timing_error_h": 10.0,
+                "suggestions": [
+                  "模拟涨水偏低 -2.93 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻滞后 10.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            },
+            "shp_2_板祝__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 94.263,
+                  "obs_wse_m": 109.7
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 95.328,
+                  "obs_wse_m": 123.66
+                }
+              ],
+              "sim_peak_wse_m": 95.487,
+              "sim_peak_t_h": 108.0,
+              "obs_peak_wse_m": 123.66,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 10.0,
+              "sim_base_m": 94.263,
+              "obs_base_m": 109.7,
+              "sim_rise_m": 1.224,
+              "obs_rise_m": 13.96,
+              "rise_error_m": -12.736,
+              "apparent_offset_obs_minus_sim_mean_m": 21.884,
+              "apparent_offset_spread_m": 12.895,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": -0.7064,
+              "rmse_relative_rise_m": 9.1179,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "shp_2_板祝",
+              "station_name": "板祝",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 94.487,
+              "adjustment_hint": {
+                "rise_error_m": -12.736,
+                "peak_timing_error_h": 10.0,
+                "suggestions": [
+                  "模拟涨水偏低 -12.74 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻滞后 10.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "run_id": "scen_q6000_n100_100m_choff_eclosed",
+          "run_dir": "outputs/ningming/2026-08-zitan/scen_q6000_n100_100m_choff_eclosed",
+          "available": true,
+          "cellsize_m": 100.0,
+          "saveint_s": 21600.0,
+          "n_frames": 19,
+          "probes": {
+            "ningming_county__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 3,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 84.122,
+                  "obs_wse_m": 109.24
+                },
+                {
+                  "t_h": 80.0,
+                  "sim_wse_m": 98.597,
+                  "obs_wse_m": 122.96
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 101.32,
+                  "obs_wse_m": 123.43
+                }
+              ],
+              "sim_peak_wse_m": 101.515,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.43,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "sim_base_m": 84.122,
+              "obs_base_m": 109.24,
+              "sim_rise_m": 17.393,
+              "obs_rise_m": 14.19,
+              "rise_error_m": 3.203,
+              "apparent_offset_obs_minus_sim_mean_m": 23.864,
+              "apparent_offset_spread_m": 3.008,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": 0.926,
+              "rmse_relative_rise_m": 1.7907,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "ningming_county",
+              "station_name": "宁明县城",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 97.802,
+              "adjustment_hint": {
+                "rise_error_m": 3.203,
+                "peak_timing_error_h": 4.0,
+                "suggestions": [
+                  "模拟涨水偏高 +3.20 m：建议降低主槽糙率 n 或增大河槽过水断面，或核查下游 FREE 顶托/坡降。",
+                  "洪峰时刻滞后 4.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            },
+            "shp_2_板祝__raw_anchor": {
+              "status": "evaluated",
+              "n_matched": 2,
+              "datum_closed": false,
+              "matched_pairs": [
+                {
+                  "t_h": 0.0,
+                  "sim_wse_m": 94.263,
+                  "obs_wse_m": 109.7
+                },
+                {
+                  "t_h": 98.0,
+                  "sim_wse_m": 101.34,
+                  "obs_wse_m": 123.66
+                }
+              ],
+              "sim_peak_wse_m": 101.527,
+              "sim_peak_t_h": 102.0,
+              "obs_peak_wse_m": 123.66,
+              "obs_peak_t_h": 98.0,
+              "peak_timing_error_h": 4.0,
+              "sim_base_m": 94.263,
+              "obs_base_m": 109.7,
+              "sim_rise_m": 7.264,
+              "obs_rise_m": 13.96,
+              "rise_error_m": -6.696,
+              "apparent_offset_obs_minus_sim_mean_m": 18.879,
+              "apparent_offset_spread_m": 6.883,
+              "nse": null,
+              "kge": null,
+              "rmse_m": null,
+              "peak_error_m": null,
+              "nse_relative_rise": 0.5138,
+              "rmse_relative_rise_m": 4.8673,
+              "caveat": "G7 垂直基准未闭合，绝对 NSE/RMSE 保留为 null；以相对涨水幅度 ΔH 与峰现时差评估。",
+              "station_id": "shp_2_板祝",
+              "station_name": "板祝",
+              "probe_kind": "raw_anchor",
+              "snap_dist_m": 0.0,
+              "ground_dem_m": 94.487,
+              "adjustment_hint": {
+                "rise_error_m": -6.696,
+                "peak_timing_error_h": 4.0,
+                "suggestions": [
+                  "模拟涨水偏低 -6.70 m：建议核查上游入流峰值是否偏低、或存在漫滩分流过快（提高滩地糙率）。",
+                  "洪峰时刻滞后 4.0 h：建议检查上游入流洪峰时基或调整河床坡降/SGC 糙率。"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "jiulong": {
+      "case": "jiulong",
+      "event_id": "2024-09-yagi",
+      "crs_epsg": 32649,
+      "n_runs": 2,
+      "runs": [
+        {
+          "run_id": "scen_free_200m_sv6h",
+          "run_dir": "outputs/jiulong/2024-09-yagi/scen_free_200m_sv6h",
+          "available": true,
+          "cellsize_m": 200.0,
+          "saveint_s": 21600.0,
+          "n_frames": 21,
+          "probes": {
+            "jiulong_k88_2026_excluded__raw_anchor": {
+              "station_id": "jiulong_k88_2026_excluded",
+              "station_name": "久隆站（K88+000）",
+              "probe_kind": "raw_anchor",
+              "status": "no_valid_observations",
+              "sim_frames_wet": 12
+            }
+          }
+        },
+        {
+          "run_id": "scen_r3_dual_sgc_200m_sv6h",
+          "run_dir": "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h",
+          "available": true,
+          "cellsize_m": 200.0,
+          "saveint_s": 21600.0,
+          "n_frames": 21,
+          "probes": {
+            "jiulong_k88_2026_excluded__raw_anchor": {
+              "station_id": "jiulong_k88_2026_excluded",
+              "station_name": "久隆站（K88+000）",
+              "probe_kind": "raw_anchor",
+              "status": "no_valid_observations",
+              "sim_frames_wet": 11
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "script": "scripts/stage3/ingest_official_gauges.py",
+  "generated_utc": "2026-11-25T00:29:05+00:00",
+  "case": "ningming",
+  "event_id": "2026-08-zitan",
+  "t0_local": "2026-08-21T00:00:00+08:00",
+  "crs_epsg": 32648,
+  "source_files": [
+    "configs/gauges/ningming_stations.yaml",
+    "data/raw/ningming_validation/淹没深度验证数据-崇左宁明县/宁明县水位站点信息.shp"
+  ],
+  "http_status": {},
+  "stations": [
+    {
+      "station_id": "ningming_county",
+      "name": "宁明县城",
+      "river": "明江",
+      "lon": 107.0719,
+      "lat": 22.1403,
+      "in_model_domain": true,
+      "station_datum": "station_local",
+      "warning_level_m": 116.0,
+      "baseflow_level_est_m": 109.24,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "historical_matched",
+      "alignment": {
+        "source_datum": "station_local",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": [
+        {
+          "timestamp": "2026-08-21T00:00:00+08:00",
+          "t_h": 0.0,
+          "water_level_m": 109.24,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（7月基期）"
+        },
+        {
+          "timestamp": "2026-08-24T08:00:00+08:00",
+          "t_h": 80.0,
+          "water_level_m": 122.96,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "央视/新华社公开报道（超警6.96m）"
+        },
+        {
+          "timestamp": "2026-08-25T02:00:00+08:00",
+          "t_h": 98.0,
+          "water_level_m": 123.43,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（8月洪峰，抬升14.19m）"
+        }
+      ]
+    },
+    {
+      "station_id": "shp_2_板祝",
+      "name": "板祝",
+      "river": "派连河",
+      "lon": 107.059332,
+      "lat": 22.093138,
+      "in_model_domain": true,
+      "station_datum": "station_local",
+      "warning_level_m": null,
+      "baseflow_level_est_m": 109.7,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "historical_matched",
+      "alignment": {
+        "source_datum": "station_local",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": [
+        {
+          "timestamp": "2026-08-21T00:00:00+08:00",
+          "t_h": 0.0,
+          "water_level_m": 109.7,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（基期）"
+        },
+        {
+          "timestamp": "2026-08-25T02:00:00+08:00",
+          "t_h": 98.0,
+          "water_level_m": 123.66,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（峰值）"
+        }
+      ]
+    },
+    {
+      "station_id": "shp_3_宁明",
+      "name": "宁明",
+      "river": "明江",
+      "lon": 107.2,
+      "lat": 22.116667,
+      "in_model_domain": true,
+      "station_datum": "station_local",
+      "warning_level_m": null,
+      "baseflow_level_est_m": 110.69,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "historical_matched",
+      "alignment": {
+        "source_datum": "station_local",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": [
+        {
+          "timestamp": "2026-08-21T00:00:00+08:00",
+          "t_h": 0.0,
+          "water_level_m": 110.69,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（基期）"
+        },
+        {
+          "timestamp": "2026-08-25T02:00:00+08:00",
+          "t_h": 98.0,
+          "water_level_m": 124.55,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（峰值）"
+        }
+      ]
+    },
+    {
+      "station_id": "shp_4_那堪",
+      "name": "那堪",
+      "river": "明江",
+      "lon": 107.6,
+      "lat": 22.1,
+      "in_model_domain": true,
+      "station_datum": "station_local",
+      "warning_level_m": null,
+      "baseflow_level_est_m": 126.3,
+      "snap_centerline": null,
+      "max_snap_m": 5000.0,
+      "exclude_from_validation": false,
+      "regime": "historical_matched",
+      "alignment": {
+        "source_datum": "station_local",
+        "target_datum": "dem_local",
+        "offset_applied_m": 0.0,
+        "uncertainty_iqr_m": null,
+        "datum_closed": false,
+        "method": "unclosed_g7_use_stage_rise_delta_h"
+      },
+      "observations": [
+        {
+          "timestamp": "2026-08-21T00:00:00+08:00",
+          "t_h": 0.0,
+          "water_level_m": 126.3,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（基期）"
+        },
+        {
+          "timestamp": "2026-08-25T02:00:00+08:00",
+          "t_h": 98.0,
+          "water_level_m": 133.2,
+          "discharge_m3s": null,
+          "qc_flag": 0,
+          "source": "宁明县水位站点信息.shp（峰值）"
+        }
+      ]
+    }
+  ]
+}
