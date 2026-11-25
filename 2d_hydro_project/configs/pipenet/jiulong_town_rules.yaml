@@ -1,0 +1,50 @@
+# 久隆镇区 PipeNetGen 虚拟雨水管网生成与水力设计配置（遵循 GB 50014 规范）
+case: jiulong
+crs_epsg: 32649
+synthetic_disclaimer: "SYNTHETIC_DATA_NOT_REAL_ASSET=true（由 OSM 路网与 DEM 算法推导，非真实市政地下管网资产）"
+
+aoi_wgs84: [108.66, 22.02, 108.77, 22.11]  # 久隆镇核心区与变电站周边走廊
+dem_path: "outputs/jiulong/2024-09-yagi/scen_r3_dual_sgc_200m_sv6h/dem.asc"
+waterway_path: "data/interim/jiulong/channel/river_centerline.geojson"
+
+road_extraction:
+  include_highways: ["trunk", "primary", "secondary", "tertiary", "residential", "unclassified"]
+  exclude_highways: ["footway", "cycleway", "path", "steps", "track"]
+  inlet_spacing_m:
+    trunk: 60.0
+    primary: 55.0
+    secondary: 60.0
+    tertiary: 70.0
+    residential: 80.0
+    unclassified: 90.0
+  default_spacing_m: 75.0
+  snap_tolerance_m: 20.0
+
+topology:
+  outfall_buffer_m: 250.0
+  uphill_penalty_weight: 200.0
+  min_component_nodes: 3
+
+hydraulics:
+  # 钦州沿海暴雨强度经验参数
+  storm_formula:
+    a1: 16.8
+    c: 0.74
+    b: 12.0
+    n: 0.74
+    return_period_yr: 5.0
+  inlet_tc_min: 10.0
+  assumed_flow_velocity_ms: 1.0
+  runoff_coeff_by_highway:
+    primary: 0.75
+    secondary: 0.70
+    tertiary: 0.62
+    residential: 0.58
+    unclassified: 0.45
+  default_runoff_coeff: 0.55
+  tributary_width_m: 100.0
+  pipe_manning_n: 0.013
+  min_slope: 0.002
+  min_cover_m: 0.9
+  max_depth_m: 5.5
+  nominal_diameters_m: [0.3, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8]

@@ -1,0 +1,230 @@
+# 南方五省区（粤、桂、黔、滇、琼）及流域/部委公开水情门户与核验基准配置
+version: "1.0"
+policy:
+  strict_fail_closed: true
+  forbid_waf_or_font_bypass: true
+  open_glofas_api: "https://flood-api.open-meteo.com/v1/flood"
+
+portals:
+  - province: "海南"
+    province_code: "hainan"
+    endpoints:
+      - id: "hainan_swt_daily"
+        url: "https://swt.hainan.gov.cn/"
+        kind: "html_daily_bulletin"
+        parser: "hainan_daily_homepage"
+        note: "海南省水务厅首页明文【每日水雨情】，公开10座大型水库与3条主要江河水位"
+      - id: "hainan_xqfb_sqmap"
+        url: "http://36.101.208.40/xqfb/sq_map.asp"
+        kind: "asp_marker_table"
+        parser: "hainan_sqmap_thresholds"
+        note: "省水务厅官网直链三防实时水情网，内嵌全岛测站警戒/保证水位及超限表"
+      - id: "hainan_sqjb_list"
+        url: "https://swt.hainan.gov.cn/sswt/sqjb/slist.shtml?ddtab=true"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "海南水情简报历史发布列表（含台风过程简报）"
+
+  - province: "广西"
+    province_code: "guangxi"
+    endpoints:
+      - id: "guangxi_slt_emergency"
+        url: "http://slt.gxzf.gov.cn/fxkh_40990/lsyjxx/yjxy/"
+        kind: "html_emergency_timeline"
+        parser: "guangxi_emergency_responses"
+        note: "广西水利厅洪水防御应急响应通报，记录2026-08台风紫檀/郁江超警与退警起止时间窗"
+      - id: "guangxi_slt_jbgb"
+        url: "http://slt.gxzf.gov.cn/zfxxgk/xxgknr/jbgb/"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "广西水利厅数据发布（水资源公报、水旱灾害公报）"
+      - id: "guangxi_opendata_portal"
+        url: "https://data.gxzf.gov.cn/"
+        kind: "login_gated_opendata"
+        parser: "status_only"
+        note: "重定向至 gxsjkf.dsjfzj.gxzf.gov.cn:8183，需账号登录并申请AppKey方可下载水库/玉林河道水情"
+
+  - province: "广东"
+    province_code: "guangdong"
+    endpoints:
+      - id: "guangdong_slt_http"
+        url: "http://slt.gd.gov.cn/"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "广东省水利厅HTTP门户（HTTPS同址当前返回500）；含水文局动态与防汛新闻"
+      - id: "guangdong_gdsswj"
+        url: "http://slt.gd.gov.cn/zsdw_2021/gdsswj/"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "广东省水文局专栏"
+      - id: "guangdong_opendata_portal"
+        url: "https://gddata.gd.gov.cn/"
+        kind: "login_gated_opendata"
+        parser: "status_only"
+        note: "开放广东平台，水利/水文数据集需注册申请授权后下载"
+
+  - province: "贵州"
+    province_code: "guizhou"
+    endpoints:
+      - id: "guizhou_opendata_portal"
+        url: "https://data.guizhou.gov.cn/"
+        kind: "login_gated_opendata"
+        parser: "status_only"
+        note: "贵州省政府数据开放平台，含无条件开放类【水情信息数据】接口（需账号申请调用）"
+      - id: "guizhou_slt_portal"
+        url: "https://sl.gz.gov.cn/"
+        kind: "tls_or_gateway_restricted"
+        parser: "status_only"
+        note: "贵州省水利厅官网（TLS握手外部直连常受限）"
+
+  - province: "云南"
+    province_code: "yunnan"
+    endpoints:
+      - id: "yunnan_swj_portal"
+        url: "http://www.ynswj.cn/"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "云南省水文水资源局官网（公开水文新闻、中小河流预警动态）"
+      - id: "yunnan_wcb_portal"
+        url: "https://wcb.yn.gov.cn/"
+        kind: "html_bulletin_index"
+        parser: "generic_link_index"
+        note: "云南省水利厅官网（水资源公报、水文业务动态）"
+      - id: "yunnan_opendata_portal"
+        url: "https://data.yn.gov.cn/"
+        kind: "login_gated_opendata"
+        parser: "status_only"
+        note: "云南省一体化公共数据平台（需账号授权）"
+
+  - province: "部委与流域（参考）"
+    province_code: "basin_national"
+    endpoints:
+      - id: "mwr_xxfb"
+        url: "http://xxfb.mwr.cn/hydroSearch/greatRiver"
+        kind: "obfuscated_fonttag"
+        parser: "status_only"
+        note: "水利部全国水雨情网启用 #FontTag 字体加密，严禁绕过"
+      - id: "prwrc_zwswj"
+        url: "http://www.zwswj.com/"
+        kind: "waf_js_challenge"
+        parser: "status_only"
+        note: "珠江委水情网返回 HTTP 412 JS 防护，严禁绕过"
+
+# 跨五省代表性河道/水库控制断面（用于公开通报与 GloFAS 日流量连续序列对照核验）
+benchmark_stations:
+  - station_id: "gd_shijiao"
+    province: "广东"
+    name: "石角水文站"
+    river: "北江"
+    lon: 112.97
+    lat: 23.56
+    crs_epsg: 32649
+    warning_level_m: 8.60
+    published_events:
+      - event: "2024-04 北江1号洪水"
+        peak_date: "2024-04-08"
+        peak_wse_m: 8.61
+        peak_q_m3s: 12800.0
+        source: "水利部/广东省水文局公开通报"
+      - event: "2024-04 北江2号洪水"
+        peak_date: "2024-04-21"
+        peak_q_m3s: 18000.0
+        source: "广东省水文局2024年4月下旬公报区间(18000-19500)"
+
+  - station_id: "gd_sanheba"
+    province: "广东"
+    name: "三河坝水文站"
+    river: "韩江"
+    lon: 116.57
+    lat: 24.39
+    crs_epsg: 32650
+    warning_level_m: 42.00
+    published_events:
+      - event: "2024-04 韩江1号洪水"
+        peak_date: "2024-04-08"
+        peak_wse_m: 42.97
+        peak_q_m3s: 5700.0
+        source: "水利部/广东省水文局公开通报"
+
+  - station_id: "gd_gaoyao"
+    province: "广东"
+    name: "高要水文站"
+    river: "西江"
+    lon: 112.45
+    lat: 23.03
+    crs_epsg: 32649
+    published_events:
+      - event: "2024-07 西江干流控制对照"
+        peak_date: "2024-07-03"
+        source: "珠江流域西江下游干流控制站"
+
+  - station_id: "gx_wuzhou"
+    province: "广西"
+    name: "梧州水文站"
+    river: "西江"
+    lon: 111.30
+    lat: 23.48
+    crs_epsg: 32649
+    warning_level_m: 18.50
+    published_events:
+      - event: "2024-07 西江4号洪水"
+        peak_date: "2024-07-03"
+        peak_wse_m: 18.50
+        peak_q_m3s: 29500.0
+        source: "水利部/广西水文中心公开通报"
+
+  - station_id: "gx_guigang"
+    province: "广西"
+    name: "贵港水文站"
+    river: "郁江"
+    lon: 109.60
+    lat: 23.11
+    crs_epsg: 32649
+    warning_level_m: 41.20
+    published_events:
+      - event: "2024-09 摩羯郁江1号洪水"
+        peak_date: "2024-09-14"
+        peak_wse_m: 44.00
+        peak_q_m3s: 10500.0
+        source: "广西水文中心公开通报"
+
+  - station_id: "gx_ningming"
+    province: "广西"
+    name: "宁明县城"
+    river: "明江"
+    lon: 107.0719
+    lat: 22.1403
+    crs_epsg: 32648
+    warning_level_m: 116.00
+    published_events:
+      - event: "2026-08 紫檀明江洪水"
+        peak_date: "2026-08-25"
+        peak_wse_m: 123.43
+        source: "宁明县水位站点信息.shp / 央视公开报道"
+
+  - station_id: "gz_yanhe_wujiang"
+    province: "贵州"
+    name: "沿河断面（乌江出黔）"
+    river: "乌江"
+    lon: 108.50
+    lat: 28.56
+    crs_epsg: 32649
+    published_events: []
+
+  - station_id: "yn_jinghong"
+    province: "云南"
+    name: "景洪断面"
+    river: "澜沧江"
+    lon: 100.80
+    lat: 22.01
+    crs_epsg: 32647
+    published_events: []
+
+  - station_id: "hi_longtang"
+    province: "海南"
+    name: "龙塘水文站"
+    river: "南渡江"
+    lon: 110.42
+    lat: 19.89
+    crs_epsg: 32649
+    published_events: []

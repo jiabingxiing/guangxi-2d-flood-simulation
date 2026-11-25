@@ -1,0 +1,35 @@
+# 久隆案例官方水位监测站点配置（2024-09 摩羯钦江洪水，遵循 ADR-0022 工况隔离）
+case: jiulong
+event_id: 2024-09-yagi
+t0_local: "2024-09-05T00:00:00+08:00"
+crs_epsg: 32649
+datum_policy:
+  dem_datum: "200m 生产基线 DEM（ADR-0022 历史工况，海面零锚定）"
+  require_datum_closure_for_absolute_gate: true
+  fallback_relative_metric: "stage_rise_m"
+
+stations:
+  - station_id: luwu_qinjiang
+    name: "陆屋水文站"
+    river: "钦江"
+    lon: 108.9200
+    lat: 22.2750
+    in_model_domain: false
+    role: "upstream_reference"
+    station_datum: "1985_national"
+    observations: []
+    note: "钦江上游控制站（集水面积约 1400 km² 先验）；2024-09 逐时实测待水利部门授权补录（ADR-0019/0022）"
+
+  - station_id: jiulong_k88_2026_excluded
+    name: "久隆站（K88+000）"
+    river: "平陆运河/钦江"
+    lon: 108.7161
+    lat: 22.0638
+    in_model_domain: true
+    regime: "post_2026_canal_excluded"
+    exclude_from_2024_validation: true
+    observations:
+      - timestamp: "2026-11-22T00:00:00+08:00"
+        water_level_m: 8.98
+        qc_flag: 9
+        source: "ADR-0022 触发记录（2026-09 平陆运河通航后工况，严禁混入 2024-09 摩羯验证）"

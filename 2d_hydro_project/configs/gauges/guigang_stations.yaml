@@ -1,0 +1,55 @@
+# 贵港案例官方水位监测站点配置（2024-09 摩羯郁江洪水）
+case: guigang
+event_id: 2024-09-yagi
+t0_local: "2024-09-03T00:00:00+08:00"
+crs_epsg: 32649
+datum_policy:
+  dem_datum: "EGM2008 / 本地 12.5m 工作 DEM（G7 垂直基准未闭合，ADR-0004/0017）"
+  require_datum_closure_for_absolute_gate: true
+  fallback_relative_metric: "stage_rise_m"
+
+stations:
+  - station_id: guigang_yujiang
+    name: "贵港水文站"
+    river: "郁江"
+    lon: 109.6000
+    lat: 23.1100
+    snap_centerline: "data/interim/guigang/yujiang_centerline.geojson"
+    max_snap_m: 6000.0
+    in_model_domain: true
+    station_datum: "station_local"
+    datum_offset_to_dem_m: null
+    warning_level_m: 41.20
+    guarantee_level_m: 43.30
+    baseflow_level_est_m: 36.50
+    official_sources:
+      - type: "bulletin_archive"
+        note: "广西水文中心 2024 年郁江 1 号洪水公开报道与站点档案（configs/cases/guigang.yaml）"
+    observations:
+      - timestamp: "2024-09-12T14:00:00+08:00"
+        water_level_m: 43.09
+        discharge_m3s: 10500.0
+        qc_flag: 0
+        source: "广西水文中心公开报道"
+      - timestamp: "2024-09-14T05:00:00+08:00"
+        water_level_m: 44.00
+        discharge_m3s: null
+        qc_flag: 0
+        source: "广西水文中心公开报道（洪峰）"
+
+  - station_id: nanning_yujiang
+    name: "南宁水文站"
+    river: "郁江"
+    lon: 108.3200
+    lat: 22.8050
+    in_model_domain: false
+    station_datum: "station_local"
+    datum_offset_to_dem_m: null
+    warning_level_m: 73.00
+    role: "upstream_reference"
+    observations:
+      - timestamp: "2024-09-12T19:30:00+08:00"
+        water_level_m: 76.28
+        discharge_m3s: 11900.0
+        qc_flag: 0
+        source: "广西水文中心公开报道（上游参考站，域外）"

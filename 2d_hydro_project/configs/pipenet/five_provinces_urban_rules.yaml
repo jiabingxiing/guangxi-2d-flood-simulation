@@ -1,0 +1,76 @@
+# 南方五省区（粤、桂、黔、滇、琼）多地貌跨省 PipeNetGen 算法泛化核验试验区配置
+version: "1.0"
+synthetic_disclaimer: "SYNTHETIC_DATA_NOT_REAL_ASSET=true（跨五省 OSM 实测路网 + Copernicus GLO-30 地形算法验证样本）"
+
+road_extraction:
+  include_highways: ["trunk", "primary", "secondary", "tertiary", "residential", "unclassified"]
+  exclude_highways: ["footway", "cycleway", "path", "steps", "track", "pedestrian"]
+  default_spacing_m: 90.0
+  snap_tolerance_m: 18.0
+
+topology:
+  outfall_buffer_m: 180.0
+  uphill_penalty_weight: 200.0
+  min_component_nodes: 3
+
+hydraulics:
+  storm_formula:
+    a1: 15.2
+    c: 0.72
+    b: 11.0
+    n: 0.75
+    return_period_yr: 5.0
+  inlet_tc_min: 10.0
+  assumed_flow_velocity_ms: 1.0
+  default_runoff_coeff: 0.68
+  tributary_width_m: 90.0
+  pipe_manning_n: 0.013
+  min_slope: 0.002
+  min_cover_m: 1.0
+  max_depth_m: 6.0
+  nominal_diameters_m: [0.3, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.4]
+
+sites:
+  - site_id: "gd_guangzhou"
+    province: "广东"
+    city: "广州（荔湾-越秀珠江北岸）"
+    terrain_regime: "珠三角低平感潮高密度城市区"
+    crs_epsg: 32649
+    aoi_wgs84: [113.235, 23.108, 113.255, 23.128]
+    glo30_tile_url: "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N23_00_E113_00_DEM/Copernicus_DSM_COG_10_N23_00_E113_00_DEM.tif"
+    glo30_cache_rel: "data/raw/dem/glo30_five_provinces/N23_E113.tif"
+
+  - site_id: "gx_guigang_core"
+    province: "广西"
+    city: "贵港（郁江南岸城区核验段）"
+    terrain_regime: "西江流域冲积阶地与内涝区"
+    crs_epsg: 32649
+    aoi_wgs84: [109.595, 23.078, 109.615, 23.098]
+    local_dem_rel: "data/interim/guigang/dem_12p5m_32649.tif"
+
+  - site_id: "gz_guiyang"
+    province: "贵州"
+    city: "贵阳（南明河城区段）"
+    terrain_regime: "喀斯特溶蚀山地高落差陡坡城区"
+    crs_epsg: 32648
+    aoi_wgs84: [106.705, 26.565, 106.725, 26.585]
+    glo30_tile_url: "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N26_00_E106_00_DEM/Copernicus_DSM_COG_10_N26_00_E106_00_DEM.tif"
+    glo30_cache_rel: "data/raw/dem/glo30_five_provinces/N26_E106.tif"
+
+  - site_id: "yn_kunming"
+    province: "云南"
+    city: "昆明（盘龙江主城区段）"
+    terrain_regime: "云贵高原断陷盆地缓坡城区"
+    crs_epsg: 32648
+    aoi_wgs84: [102.705, 25.028, 102.725, 25.048]
+    glo30_tile_url: "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N25_00_E102_00_DEM/Copernicus_DSM_COG_10_N25_00_E102_00_DEM.tif"
+    glo30_cache_rel: "data/raw/dem/glo30_five_provinces/N25_E102.tif"
+
+  - site_id: "hi_haikou"
+    province: "海南"
+    city: "海口（美兰-南渡江西岸）"
+    terrain_regime: "热带海岛低洼滨海平缓城区"
+    crs_epsg: 32649
+    aoi_wgs84: [110.330, 20.022, 110.350, 20.042]
+    glo30_tile_url: "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N20_00_E110_00_DEM/Copernicus_DSM_COG_10_N20_00_E110_00_DEM.tif"
+    glo30_cache_rel: "data/raw/dem/glo30_five_provinces/N20_E110.tif"

@@ -1,0 +1,52 @@
+# 贵港城区 PipeNetGen 虚拟雨水管网生成与水力设计配置（遵循 GB 50014 规范）
+case: guigang
+crs_epsg: 32649
+synthetic_disclaimer: "SYNTHETIC_DATA_NOT_REAL_ASSET=true（由 OSM 路网与 DEM 算法推导，非真实市政地下管网资产）"
+
+aoi_wgs84: [109.53, 23.04, 109.68, 23.14]  # 贵港主城区及郁江沿岸核心区
+dem_path: "data/interim/guigang/dem_12p5m_32649.tif"
+waterway_path: "data/interim/guigang/yujiang_centerline.geojson"
+
+road_extraction:
+  include_highways: ["trunk", "primary", "secondary", "tertiary", "residential", "unclassified", "living_street"]
+  exclude_highways: ["footway", "cycleway", "path", "steps", "track", "pedestrian"]
+  inlet_spacing_m:
+    trunk: 50.0
+    primary: 45.0
+    secondary: 50.0
+    tertiary: 60.0
+    residential: 75.0
+    unclassified: 80.0
+    living_street: 75.0
+  default_spacing_m: 65.0
+  snap_tolerance_m: 15.0
+
+topology:
+  outfall_buffer_m: 180.0
+  uphill_penalty_weight: 200.0
+  min_component_nodes: 3
+
+hydraulics:
+  # 广西/贵港经验暴雨强度公式 q = 167 * A1 * (1 + C * lg P) / (t + b)^n [L/(s·ha)]
+  storm_formula:
+    a1: 15.2
+    c: 0.72
+    b: 11.0
+    n: 0.75
+    return_period_yr: 5.0
+  inlet_tc_min: 10.0
+  assumed_flow_velocity_ms: 1.0
+  runoff_coeff_by_highway:
+    trunk: 0.85
+    primary: 0.82
+    secondary: 0.75
+    tertiary: 0.68
+    residential: 0.65
+    unclassified: 0.55
+  default_runoff_coeff: 0.65
+  tributary_width_m: 90.0          # 每条道路两侧等效汇水宽度（m）
+  pipe_manning_n: 0.013
+  min_slope: 0.002
+  min_cover_m: 1.0
+  max_depth_m: 6.0
+  nominal_diameters_m: [0.3, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.4]

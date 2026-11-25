@@ -1,0 +1,47 @@
+# 宁明案例官方水位监测站点配置（2026-08 紫檀明江洪水）
+case: ningming
+event_id: 2026-08-zitan
+t0_local: "2026-08-21T00:00:00+08:00"
+crs_epsg: 32648
+datum_policy:
+  dem_datum: "本地 12.5m 工作 DEM（G7 垂直基准未闭合，以相对涨水幅度为主评估指标）"
+  require_datum_closure_for_absolute_gate: true
+  fallback_relative_metric: "stage_rise_m"
+
+archives:
+  - type: "shapefile"
+    path: "data/raw/ningming_validation/淹没深度验证数据-崇左宁明县/宁明县水位站点信息.shp"
+    field_map:
+      name: "站名"
+      river: "河名"
+      county: "县_区_"
+      base_level: "F2026年7"
+      peak_level: "F2026年8"
+      lon: "站点经"
+      lat: "站点纬"
+    base_timestamp: "2026-08-21T00:00:00+08:00"
+    peak_timestamp: "2026-08-25T02:00:00+08:00"
+
+stations:
+  - station_id: ningming_county
+    name: "宁明县城"
+    river: "明江"
+    lon: 107.0719
+    lat: 22.1403
+    in_model_domain: true
+    station_datum: "station_local"
+    warning_level_m: 116.00
+    baseflow_level_est_m: 109.24
+    observations:
+      - timestamp: "2026-08-21T00:00:00+08:00"
+        water_level_m: 109.24
+        qc_flag: 0
+        source: "宁明县水位站点信息.shp（7月基期）"
+      - timestamp: "2026-08-24T08:00:00+08:00"
+        water_level_m: 122.96
+        qc_flag: 0
+        source: "央视/新华社公开报道（超警6.96m）"
+      - timestamp: "2026-08-25T02:00:00+08:00"
+        water_level_m: 123.43
+        qc_flag: 0
+        source: "宁明县水位站点信息.shp（8月洪峰，抬升14.19m）"
